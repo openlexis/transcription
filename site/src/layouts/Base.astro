@@ -15,6 +15,7 @@ const groups = Object.entries(SECTIONS).map(([k, name]) => ({ name, items: list.
   <title>{title} · Open Lexis</title>
   <meta name="description" content={description} />
   <meta name="theme-color" content="#f7f3ea" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -30,7 +31,8 @@ const groups = Object.entries(SECTIONS).map(([k, name]) => ({ name, items: list.
         <a href="/about/" class={tab === "about" ? "on" : ""}>About</a>
       </nav>
     </div>
-    <div class="wrap switch-row">
+  </header>
+  <div class="switchbar"><div class="wrap switch-row">
       <label class="switch">
         <span class="sr">Switch compilation</span>
         <select id="switch" aria-label="Switch compilation">
@@ -51,8 +53,7 @@ const groups = Object.entries(SECTIONS).map(([k, name]) => ({ name, items: list.
           <a href={`/c/${cur.id}/rules/`} class={tab === "rules" ? "on" : ""}>Rules</a>
         </nav>
       )}
-    </div>
-  </header>
+    </div></div>
   <main class="wrap"><slot /></main>
   <footer class="foot wrap">
     <p>Built only from ancient manuscripts in the original language. No printed edition, translation or image is used. Page images stay with their holders; we link to them.</p>

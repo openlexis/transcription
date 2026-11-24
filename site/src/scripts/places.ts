@@ -6,7 +6,7 @@ const listEl = document.getElementById("list")!, countEl = document.getElementBy
 const cache = new Map<string, P[]>();
 let index: { id: string; name: string }[] = [];
 let shown = 0, rows: { id: string; name: string; p: P }[] = [];
-const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
+const esc = (s: unknown) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
 const pct = (x: number) => `${Math.round(x * 1000) / 10}%`;
 const WHY: Record<string, string> = { singular: "one manuscript alone, no vote", "eye-skip": "eye-skip, no vote" };
 const strip = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().replace(/ς/g, "σ");

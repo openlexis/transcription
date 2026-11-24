@@ -8,7 +8,7 @@ const REPO = "https://github.com/openlexis/transcription/blob/main/";
 let MS: Ms[] | null = null;
 const getMs = async () => (MS ??= await (await fetch(`/data/${D.id}/witnesses.json`)).json());
 const sheet = document.getElementById("sheet")!, body = document.getElementById("sheet-body")!;
-const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
+const esc = (s: unknown) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
 const pct = (x: number) => `${Math.round(x * 1000) / 10}%`;
 const WHY: Record<string, string> = { singular: "one manuscript alone: no vote", "eye-skip": "a copying slip (eye-skip): no vote" };
 

@@ -119,3 +119,18 @@ body.marks-off .w { border-bottom-color: transparent !important; }
 .rules li { margin: 6px 0; }
 .rules h2 { font-size: 1.15rem; }
 .foot { color: var(--faint); font-size: .85rem; padding-top: 30px; padding-bottom: 40px; }
+@media (max-width: 640px) {
+  .top { position: static; }
+  .brand em { display: none; }
+  .top-row { padding-top: 8px; }
+  .nav a, .subnav a { padding: 5px 9px; font-size: .88rem; }
+  .switch-row { position: sticky; top: 0; }
+  .greek { font-size: 1.22rem; line-height: 1.85; }
+  .text { padding: 4px 12px 12px; }
+  .ln { grid-template-columns: 2em 1fr; }
+  h1 { margin-top: 18px; }
+}
+.w.v-low { border-bottom-style: dotted; }
+.switchbar { position: sticky; top: 0; z-index: 19; background: rgba(247, 243, 234, .96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-top: 8px; }
+@media (min-width: 641px) { .top { position: static; border-bottom: 0; } }
+@media (max-width: 640px) { .switch-row { position: static; } }
