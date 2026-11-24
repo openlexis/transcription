@@ -7,18 +7,22 @@ const c = compilations().find((x) => x.id === id)!;
 const s = c.stats, t = full(id);
 const early = t.witnesses.filter((w) => w.early).sort((a, b) => a.year - b.year);
 const sev = ["high", "medium", "low", "settled"];
+const origin = +(c.rules.match(/\*\*Origin year:\*\* (-?\d+)/)?.[1] ?? 100), lateYear = origin + 400;
+const era = (y: number) => (y < 0 ? `${-y} BC` : y === 0 ? "the year 0" : `${y}`);
 ---
 <Base title={s.name} current={id} tab="overview">
   <h1>{s.name}</h1>
   <p class="lede">The compiled transcription of {s.name}, from {num(s.manuscripts)} {s.language ?? "Greek"} manuscripts. Made by {s.model} following this folder's <a href={`/c/${id}/rules/`}>rule file</a>.</p>
   <div class="rulebox"><p><strong>How this text was made:</strong> {s.model} followed one rule file in one pass: {s.manuscripts} manuscripts lined up word by word, older copies counting more, the strongest reading printed.</p><a class="go" href={`/c/${id}/rules/`}>Read the rules →</a></div>
   <div class="kpis">
-    <div class="kpi"><b>{num(s.manuscripts)}</b><span>manuscripts ({s.early} copied by 500)</span></div>
+    <div class="kpi"><b>{num(s.manuscripts)}</b><span>manuscripts ({s.early} copied by {era(lateYear)})</span></div>
     <div class="kpi"><b>{num(s.lines - s.uncoveredLines)}</b><span>lines covered of {num(s.lines)}</span></div>
     <div class="kpi"><b>{num(s.words)}</b><span>words printed</span></div>
     <div class="kpi"><b>{num(s.places)}</b><span>places of disagreement</span></div>
     <div class="kpi"><b>{pct(s.meanWordConfidence)}</b><span>mean word confidence</span></div>
     <div class="kpi"><b>{s.meanManuscriptsPerLine}</b><span>manuscripts per line, on average</span></div>
+    {s.aramaicWords !== undefined && s.aramaicWords > 0 && <div class="kpi"><b>{num(s.aramaicWords)}</b><span>words in Aramaic ({num(s.aramaicLines ?? 0)} lines)</span></div>}
+    {s.translationWords !== undefined && <div class="kpi"><b>{num(s.translationWords)}</b><span>words from the Greek translation ({num(s.translationLines ?? 0)} lines)</span></div>}
   </div>
   <h2>Read</h2>
   <div class="chapters">{c.chapters.map((ch) => <a href={`/c/${id}/${ch}/`}>{ch}</a>)}</div>

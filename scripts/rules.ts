@@ -1,8 +1,8 @@
-// Writes the rule file of each compilation: compilations/<corpus>-<nn>-<book>/RULES.md, for the Greek New Testament (nt),
-// the Hebrew Bible (heb) and the Greek Old Testament (lxx). The rules are the same for every book of a corpus; the inputs are
-// the transcriptions of that corpus's folder that hold the book. Run it after a new import.
+// Writes the rule file of each compilation: compilations/<corpus>-<nn>-<book>/RULES.md, for the New Testament (nt, Greek)
+// and the Old Testament (ot, Hebrew and Aramaic). The rules are the same for every book of a corpus; the inputs are the
+// transcriptions in that corpus's folders that hold the book. Run it after a new import.
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { HEB_BOOKS, LXX_BOOKS, NT_BOOKS } from "../src/text";
+import { HEB_BOOKS, NT_BOOKS } from "../src/text";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const MODEL = "Grok Bot";
@@ -17,39 +17,43 @@ for (const f of files) {
 const order = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
 
 type Corpus = {
-  prefix: string; folder: string; language: string; origin: number; books: { id: string; name: string; n: number }[];
-  what: string; dates: string; holders: string; spelling: string; extra: string;
+  prefix: string; folders: string[]; language: string; origin: number; books: { id: string; name: string; n: number }[];
+  what: string; dates: string; holders: string; spelling: string; extra: string; more: string;
 };
 const CORPORA: Corpus[] = [
   {
-    prefix: "nt", folder: "greek", language: "Greek", origin: 100, books: NT_BOOKS,
+    prefix: "nt", folders: ["greek"], language: "Greek", origin: 100, books: NT_BOOKS,
     what: "ancient manuscripts in Greek, the language the book was written in: continuous-text manuscripts, lectionaries (the book read in lessons) and the biblical text of catena manuscripts (the book cut into pieces between comments)",
     dates: "the middle of the date range in the INTF catalogue",
     holders: "Codex Sinaiticus Project, Codex Zacynthius project, IGNTP and ITSEE files, INTF, CNTR",
     spelling: "Spellings that copyists used for the same word count as one word: ει written for ι, doubled letters, a movable\n   ν, and the final σ of ουτως, αχρις, μεχρις. Accents and breathings are not compared (the manuscripts have none).\n   Sacred names written short are written out, and so are numbers written as letters.",
     extra: "Leaves of one manuscript that carry separate numbers are one manuscript (P64 with P67,\n   P77 with P103).",
+    more: "",
   },
   {
-    prefix: "heb", folder: "hebrew", language: "Hebrew", origin: -400, books: HEB_BOOKS.map((b) => ({ id: b.id, name: b.name, n: b.n })),
-    what: "ancient manuscripts in Hebrew (and the Aramaic parts written in it): the Leningrad Codex, the Samaritan Pentateuch\n   manuscripts and the Dead Sea Scrolls. The Leningrad Codex is read as written in its lines (the ketiv), not as its margin\n   says to read (the qere); its accent marks are not read, its vowel points are kept for display",
-    dates: "the date its holder or catalogue states (Leningrad Codex: 1008, from its colophon; Chester Beatty Library MS 751: 1225;\n   the Dead Sea Scrolls: 100 BC, the middle of the span stated for them, since no date for each scroll is held)",
-    holders: "UXLC, the Samaritan Pentateuch data, the Dead Sea Scrolls data",
-    spelling: "Only the consonants are compared. Final letter forms count as the plain letters, and a ו or י inside a word\n   (not its first or last letter), which copyists added or left out to mark a vowel, is not compared. Vowel points\n   and accents are not compared (most of the manuscripts have none).",
+    prefix: "ot", folders: ["hebrew", "greek-translation"], language: "Hebrew and Aramaic", origin: -400, books: HEB_BOOKS.map((b) => ({ id: b.id, name: b.name, n: b.n })),
+    what: "ancient manuscripts in Hebrew and Aramaic, the languages the book was written in: the Leningrad Codex, the\n   Samaritan Pentateuch manuscripts and the Dead Sea Scrolls. The Leningrad Codex is read as written in its lines (the ketiv),\n   not as its margin says to read (the qere); its accent marks are not read, its vowel points are kept for display.\n   Manuscripts of the Greek translation are listed too, but are read only as rule 15 says",
+    dates: "the date its holder or catalogue states (Leningrad Codex: 1008, from its colophon; Chester Beatty Library MS 751: 1225;\n   the Dead Sea Scrolls: 100 BC, the middle of the span stated for them, since no date for each scroll is held; Greek translation:\n   Codex Sinaiticus 350, Codex Coislinianus 1 650)",
+    holders: "UXLC, the Samaritan Pentateuch data, the Dead Sea Scrolls data, Codex Sinaiticus Project, INTF",
+    spelling: "Only the consonants are compared. Final letter forms count as the plain letters, and a ו or י inside a word\n   (not its first or last letter), which copyists added or left out to mark a vowel, is not compared. Vowel points\n   and accents are not compared (most of the manuscripts have none). Lines taken from the Greek translation (rule 15) are\n   compared as Greek: ει written for ι, doubled letters and a movable ν count as one spelling.",
     extra: "",
-  },
-  {
-    prefix: "lxx", folder: "greek-ot", language: "Greek", origin: -150, books: LXX_BOOKS.map((b) => ({ id: b.id, name: b.name, n: b.i })),
-    what: "ancient manuscripts of the Greek translation (Codex Sinaiticus, Codex Coislinianus 1, Rahlfs 46)",
-    dates: "the date its holder or catalogue states (Codex Sinaiticus: 350; Codex Coislinianus 1: 650)",
-    holders: "Codex Sinaiticus Project, INTF",
-    spelling: "Spellings that copyists used for the same word count as one word: ει written for ι, doubled letters, a movable\n   ν, and the final σ of ουτως, αχρις, μεχρις. Accents and breathings are not compared (the manuscripts have none).\n   Sacred names written short are written out, and so are numbers written as letters.",
-    extra: "",
+    more: `
+14. **Aramaic.** These parts were written in Aramaic and are compiled by the same rules, with each of their words marked as
+    Aramaic: Daniel 2:4 after the word ארמית ("in Aramaic") to 7:28; Ezra 4:8 to 6:18 and 7:12 to 7:26; Jeremiah 10:11;
+    and the two words יגר שהדותא in Genesis 31:47.
+15. **The Greek translation, only where the original is missing.** The lines of the book are the lines the Hebrew and Aramaic
+    manuscripts have. A line where no Hebrew or Aramaic manuscript has any word is taken from the Greek manuscripts listed
+    under Inputs, compiled among themselves by rules 1 to 13 and weighted by proximity in the same way, and every word of it
+    is marked as from a translation. Greek is never compared or mixed with Hebrew or Aramaic in one line. The Greek lines are
+    filed under the Hebrew line numbers they stand for (2 Kingdoms is 2 Samuel; 2 Esdras 1 to 10 is Ezra, 11 to 23 is
+    Nehemiah); books where the Greek numbers or orders the lines differently (Psalms, Proverbs, Jeremiah, Joel, Malachi,
+    Esther) have no Greek inputs.`,
   },
 ];
 
 const written = new Set<string>();
 for (const C of CORPORA) for (const B of C.books) {
-  const inputs = [...(has.get(`${C.folder}/${B.id}`) ?? [])].sort(order);
+  const inputs = C.folders.flatMap((f) => [...(has.get(`${f}/${B.id}`) ?? [])].sort(order));
   if (!inputs.length) continue;
   const id = `${C.prefix}-${String(B.n).padStart(2, "0")}-${B.id.toLowerCase()}`;
   written.add(id);
@@ -74,7 +78,7 @@ transcription, and who does the work. The output is saved in this folder, next t
 ## How the model does the work
 
 1. Read this file from top to bottom. Read nothing that is not listed under Inputs.
-2. Run \`bun run compile compilations/${id}\`. It carries out rules 1 to 13 below exactly as written, in that
+2. Run \`bun run compile compilations/${id}\`. It carries out rules 1 to ${C.more ? 15 : 13} below exactly as written, in that
    order, with every tie broken as stated, so the same inputs always give the same output. Nothing in it is random.
 3. Run \`bun run check\` (it reads the output only and takes about a second). If it fails, report what failed and change nothing by hand.
 4. Save the output in this folder: \`transcription.json\`, \`transcription.md\`, \`disagreements.json\` and \`stats.json\`.
@@ -119,7 +123,7 @@ transcription, and who does the work. The output is saved in this folder, next t
     A line that no manuscript covers is listed as not covered and is not filled from any other source.
 13. **Pieces of a line.** A lectionary, a catena or a scroll may give only part of a line (a lesson can start or stop
     inside it; a catena quotes a piece before each comment; a scroll is mostly fragments). Such a manuscript never reads that a
-    word is absent: a word it does not have counts as lost, and rule 6 decides whether it votes.
+    word is absent: a word it does not have counts as lost, and rule 6 decides whether it votes.${C.more}
 
 ## Citations
 

@@ -1,0 +1,38 @@
+{
+ "name": "Leviticus",
+ "book": "Lev",
+ "language": "Hebrew and Aramaic",
+ "model": "Grok Bot",
+ "manuscripts": 20,
+ "early": 17,
+ "lines": 859,
+ "uncoveredLines": 0,
+ "words": 11975,
+ "columns": 12140,
+ "unanimousColumns": 7359,
+ "places": 396,
+ "settled": 14,
+ "contested": 3,
+ "meanPlaceConfidence": 0.8222,
+ "meanWordConfidence": 0.9945,
+ "singularReadingsWithoutVote": 0,
+ "eyeSkipsWithoutVote": 5,
+ "byType": {
+  "addition": 66,
+  "substitution": 263,
+  "omission": 32,
+  "mixed": 27,
+  "word order": 8
+ },
+ "bySeverity": {
+  "medium": 379,
+  "settled": 14,
+  "high": 3
+ },
+ "meanManuscriptsPerLine": 2.5681,
+ "translationLines": 0,
+ "translationWords": 0,
+ "aramaicLines": 0,
+ "aramaicWords": 0,
+ "sha256": "54896a319d5ef89fb384f40dff1f8e75da3633c8a8a035c2deca0278ddf9919f"
+}

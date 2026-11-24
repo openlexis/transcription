@@ -12,7 +12,7 @@
 //  - a page that starts a fresh unit after a page break is read as if a lacuna stood between the pages, because a page that
 //    was not transcribed would otherwise look like text the manuscript does not have; titles and subscriptions (verse 0) are left out.
 export type TeiWord = { w: string; gap: boolean };
-/** book: the New Testament book (1 Matthew to 27 Revelation), or 0 for a book of the Septuagint, whose key (scripts/ot.ts LXX) is `lxx`. */
+/** book: the New Testament book (1 Matthew to 27 Revelation), or 0 for a book of the Greek translation of the Old Testament, whose First1KGreek work number is `lxx`. */
 export type TeiUnit = { book: number; lxx?: string; ref: string; words: TeiWord[]; gapEnd: boolean };
 const OSIS = ["Matt", "Mark", "Luke", "John", "Acts", "Rom", "1Cor", "2Cor", "Gal", "Eph", "Phil", "Col", "1Thess", "2Thess", "1Tim", "2Tim", "Titus", "Phlm", "Heb", "Jas", "1Pet", "2Pet", "1John", "2John", "3John", "Jude", "Rev"];
 type Node = { t: string; a: Record<string, string>; c: (Node | string)[] };

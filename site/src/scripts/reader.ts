@@ -2,7 +2,7 @@
 type Ms = [string, string, string, number, number, number, number, { name: string; url: string }[], [string, string, string, string][]];
 type Rd = { x: string; s: number; w: number[]; p?: number[]; v: number; f?: string[] };
 type Pl = { c: number; w: number; t: string; s: string; l?: number[]; r: Rd[] };
-type Data = { id: string; lang?: string; lines: { r: string; u: number; m: number[]; s?: string[]; w: [string, number, number, number[] | 0, number[] | 0][] }[]; places: Record<string, Pl> };
+type Data = { id: string; lang?: string; lines: { r: string; u: number; m: number[]; s?: string[]; w: [string, number, number, number[] | 0, number[] | 0, string][] }[]; places: Record<string, Pl> };
 const D: Data = JSON.parse(document.getElementById("data")!.textContent!);
 const REPO = "https://github.com/openlexis/transcription/blob/main/";
 let MS: Ms[] | null = null;
@@ -20,16 +20,18 @@ function chips(ids: number[], li: number, cap = 24) {
 function msCard(i: number, li: number) {
   const m = MS![i], line = D.lines[li], k = line.m.indexOf(i), src = k >= 0 && line.s ? line.s[k].split(":").map(Number) : null;
   const file = src ? m[8][src[0]] : m[8][0];
-  return `<div class="ms"><b>${esc(m[0])}</b> ${esc(m[1])}<br><span class="meta">${esc(m[2] || "date not stated")}${m[4] ? ` · about ${m[3]}` : ""} · ${m[5] ? "early copy" : "late copy"} · proximity ${m[6]}</span><br>
+  return `<div class="ms"><b>${esc(m[0])}</b> ${esc(m[1])}<br><span class="meta">${esc(m[2] || "date not stated")}${m[4] ? ` · about ${m[3] < 0 ? `${-m[3]} BC` : m[3]}` : ""} · ${m[5] ? "early copy" : "late copy"} · proximity ${m[6]}</span><br>
     ${file ? `<a href="${REPO}${file[0].split("/").map(encodeURIComponent).join("/")}${src ? `#L${src[1]}` : ""}" target="_blank" rel="noopener">transcription, line ${esc(line.r)}</a><a href="${esc(file[1])}" target="_blank" rel="noopener">holder's file (${esc(file[2])})</a>` : ""}
     ${m[7].map((v) => `<a href="${esc(v.url)}" target="_blank" rel="noopener">page images: ${esc(v.name)}</a>`).join("")}
     <a href="/c/${D.id}/inputs/#ms-${encodeURIComponent(m[0])}">all about ${esc(m[0])}</a></div>`;
 }
 async function open(li: number, wi: number) {
   await getMs();
-  const line = D.lines[li], [t, c, p, lost, diff] = line.w[wi];
+  const line = D.lines[li], [t, c, p, lost, diff, tongue] = line.w[wi];
   document.querySelectorAll(".w.sel").forEach((e) => e.classList.remove("sel"));
-  let html = `<h3 lang="grc">${esc(t)}</h3><div class="sub">${esc(line.r)}, word ${wi + 1} · confidence ${pct(c)}</div>`;
+  let html = `<h3 dir="auto">${esc(t)}</h3><div class="sub">${esc(line.r)}, word ${wi + 1} · confidence ${pct(c)}</div>`;
+  if (tongue === "Aramaic") html += `<div class="sub"><b class="tag ar">Aramaic</b> This word is in Aramaic (rule 14).</div>`;
+  if (tongue === "Greek translation") html += `<div class="sub"><b class="tag tr">Greek</b> From a translation: no Hebrew or Aramaic manuscript has this line (rule 15).</div>`;
   if (p >= 0) {
     const pl = D.places[p];
     document.querySelectorAll(`.w[data-l="${li}"]`).forEach((e) => { const x = line.w[+(e as HTMLElement).dataset.w!]; if (x[2] === p) e.classList.add("sel"); });

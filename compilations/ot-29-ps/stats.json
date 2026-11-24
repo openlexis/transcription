@@ -1,0 +1,36 @@
+{
+ "name": "Psalms",
+ "book": "Ps",
+ "language": "Hebrew and Aramaic",
+ "model": "Grok Bot",
+ "manuscripts": 39,
+ "early": 38,
+ "lines": 2527,
+ "uncoveredLines": 0,
+ "words": 19785,
+ "columns": 19785,
+ "unanimousColumns": 14560,
+ "places": 559,
+ "settled": 549,
+ "contested": 9,
+ "meanPlaceConfidence": 0.9909,
+ "meanWordConfidence": 0.9997,
+ "singularReadingsWithoutVote": 0,
+ "eyeSkipsWithoutVote": 1,
+ "byType": {
+  "substitution": 482,
+  "mixed": 30,
+  "omission": 47
+ },
+ "bySeverity": {
+  "high": 9,
+  "settled": 549,
+  "medium": 1
+ },
+ "meanManuscriptsPerLine": 1.4943,
+ "translationLines": 0,
+ "translationWords": 0,
+ "aramaicLines": 0,
+ "aramaicWords": 0,
+ "sha256": "b8c3983fd015f5165543ef973686c42365f595c083e48d7321511e33cf6802d9"
+}

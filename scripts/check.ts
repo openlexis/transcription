@@ -1,7 +1,8 @@
 // Quick check of every compilation's output (reads the output only, plus an input line where a doubled word needs one).
 //   bun run check
 // 1. every printed word is read by at least one manuscript;  2. no doubled word that no manuscript has;
-// 3. the shares of each place add up to 1;  4. the output's hash matches the one in stats.json.
+// 3. the shares of each place add up to 1;  4. the output's hash matches the one in stats.json;
+// 5. in the Old Testament, a word from the Greek translation stands only in a line no Hebrew or Aramaic manuscript has words in.
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { greekKey, hebrewSpell } from "../src/text";
@@ -9,7 +10,7 @@ import { greekKey, hebrewSpell } from "../src/text";
 const t0 = performance.now();
 const ROOT = new URL("..", import.meta.url).pathname;
 type Word = { t: string; k: string; c?: number; p?: number; l?: number[]; d?: number[] };
-type Line = { ref: string; uncovered?: boolean; witnesses: number[]; words?: Word[] };
+type Line = { ref: string; translation?: string; uncovered?: boolean; witnesses: number[]; words?: Word[] };
 type Place = { id: number; ref: string; at: number; n: number; readings: { keys: string; witnesses: number[]; share: number }[] };
 const fails: string[] = [];
 const cache = new Map<string, string[]>();
@@ -23,7 +24,7 @@ for (const d of readdirSync(`${ROOT}compilations`).sort()) {
   const stats = JSON.parse(readFileSync(`${dir}/stats.json`, "utf8"));
   if (createHash("sha256").update(tj).update(dj).digest("hex") !== stats.sha256) fails.push(`${d}: hash differs from stats.json`);
   const T = JSON.parse(tj) as { book: string; language?: string; witnesses: { siglum: string; files: string[] }[]; lines: Line[] };
-  const KEY = T.language === "Hebrew" ? hebrewSpell : greekKey;
+  const HEB = (T.language ?? "").startsWith("Hebrew");
   const P = (JSON.parse(dj) as { places: Place[] }).places;
   for (const p of P) {
     places++;
@@ -33,6 +34,11 @@ for (const d of readdirSync(`${ROOT}compilations`).sort()) {
   for (const l of T.lines) {
     if (l.uncovered) continue;
     const ws = l.words!;
+    if (HEB) {
+      const tr = l.witnesses.map((x) => T.witnesses[x] as { translation?: string });
+      if (l.translation ? tr.some((w) => !w.translation) : tr.some((w) => w.translation)) fails.push(`${d} ${l.ref}: Greek and Hebrew or Aramaic witnesses mixed`);
+      if (ws.some((w) => (w as { tr?: number }).tr) !== !!l.translation) fails.push(`${d} ${l.ref}: translation marks do not match the line`);
+    }
     ws.forEach((w, i) => {
       words++;
       if (w.p !== undefined) {
@@ -46,7 +52,7 @@ for (const d of readdirSync(`${ROOT}compilations`).sort()) {
         // a doubled word across places: some manuscript of the line must have it doubled
         const has = l.witnesses.some((x) => T.witnesses[x].files.some((f) => lines(f).some((ln) => {
           if (!ln.startsWith(`${T.book} ${l.ref}\t`)) return false;
-          const ks = ln.split("\t")[1].split(" ").filter((q) => q !== "…").map(KEY);
+          const ks = ln.split("\t")[1].split(" ").filter((q) => q !== "…").map(HEB && !l.translation ? hebrewSpell : greekKey);
           return ks.some((k, j) => j && k === w.k && ks[j - 1] === w.k);
         })));
         if (!has) fails.push(`${d} ${l.ref}: doubled word ${w.t} that no manuscript has`);

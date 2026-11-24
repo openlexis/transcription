@@ -1,10 +1,10 @@
 # Open Lexis: compiled transcriptions
 
-One compiled transcription per book of the Greek New Testament (`nt-`), the Hebrew Bible (`heb-`) and the Greek Old Testament (`lxx-`), built only from ancient manuscripts in the original language, with every word cited.
+One compiled transcription per book of the Old Testament in Hebrew and Aramaic (`ot-`) and the New Testament in Greek (`nt-`), built only from ancient manuscripts in the original language, with every word cited. In the Old Testament, a line no Hebrew or Aramaic manuscript has would be taken from Greek manuscripts of the translation, with every word marked as such; the Aramaic parts are marked as Aramaic.
 
 - **No printed editions, recent reconstructions, translations or images are used.** A line that no manuscript covers is marked as not covered.
 - **Each compilation is one folder** in `compilations/`, with one rule file, `RULES.md`. The rule file lists the files to read, gives the rules in numbered steps, and names the model that does the work. The output is saved in the same folder: `transcription.json`, `transcription.md`, `disagreements.json` and `stats.json`.
-- **The inputs** are in `transcriptions/greek/` (New Testament: continuous-text manuscripts, lectionaries, catena manuscripts), `transcriptions/hebrew/` (the Leningrad Codex, Samaritan Pentateuch manuscripts, Dead Sea Scrolls) and `transcriptions/greek-ot/`, one plain text file per manuscript transcription. `transcriptions/manuscripts.json` gives each manuscript's date, its holders, the license of each transcription, and links to page images held elsewhere.
+- **The inputs** are in `transcriptions/greek/` (New Testament: continuous-text manuscripts, lectionaries, catena manuscripts), `transcriptions/hebrew/` (Old Testament: the Leningrad Codex, Samaritan Pentateuch manuscripts, Dead Sea Scrolls) and `transcriptions/greek-translation/` (Greek manuscripts of the Old Testament, read only where no Hebrew or Aramaic manuscript has a line), one plain text file per manuscript transcription. `transcriptions/manuscripts.json` gives each manuscript's date, its holders, the license of each transcription, and links to page images held elsewhere.
 
 ## Commands (Bun)
 

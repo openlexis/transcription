@@ -13,7 +13,8 @@ const sections = Object.entries(SECTIONS).map(([k, name]) => {
   <h1>The rules</h1>
   <p class="lede">Every compiled transcription is made from one rule file, <code>RULES.md</code>, kept in its folder next to the output. The rule file names the model that does the work, lists the manuscript transcriptions to read, and gives the numbered rules. The model follows it in one pass, and the same inputs always give the same text.</p>
   <div class="rulebox">
-    <p><strong>In short:</strong> line up the words of every ancient manuscript of the book that we hold, in Hebrew or Greek; where they differ, each manuscript votes for its reading, older copies counting more (proximity halves every 100 years after the original); readings found in one manuscript alone and copying slips get no vote; the strongest reading is printed, and every word lists the manuscripts that read it.</p>
+    <p><strong>In short:</strong> line up the words of every ancient manuscript of the book that we hold, in the language it was written in (Hebrew and Aramaic for the Old Testament, Greek for the New); where they differ, each manuscript votes for its reading, older copies counting more (proximity halves every 100 years after the original); readings found in one manuscript alone and copying slips get no vote; the strongest reading is printed, and every word lists the manuscripts that read it.</p>
+    <p>In the Old Testament, Greek manuscripts of the translation are read only for a line that no Hebrew or Aramaic manuscript has, and every such word is marked as from a translation. The Aramaic parts are marked as Aramaic.</p>
     <p>The rules are the same for every book in a section. Only the book's name and its inputs differ. Pick a section below, or open any book's own rule file.</p>
   </div>
   <nav class="chapters" aria-label="Sections">{sections.map((s) => <a href={`#${s.k}`}>{s.name}</a>)}</nav>

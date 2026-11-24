@@ -12,7 +12,7 @@ import { HEB_BOOKS, LXX_BOOKS, NT_BOOKS, numeral, sacred, skel } from "../src/te
 const SRC = process.argv[2];
 if (!SRC || !existsSync(SRC)) throw new Error("usage: bun scripts/import.ts <folder with the holders' files>");
 const ROOT = new URL("..", import.meta.url).pathname;
-for (const d of ["greek", "greek-ot", "hebrew"]) { rmSync(`${ROOT}transcriptions/${d}`, { recursive: true, force: true }); mkdirSync(`${ROOT}transcriptions/${d}`, { recursive: true }); }
+for (const d of ["greek", "greek-translation", "hebrew"]) { rmSync(`${ROOT}transcriptions/${d}`, { recursive: true, force: true }); mkdirSync(`${ROOT}transcriptions/${d}`, { recursive: true }); }
 
 const snap = (p: string) => { const d = readdirSync(`${SRC}/${p}`).filter((x) => /^\d{4}-\d\d-\d\d$/.test(x)).sort().pop()!; return `${SRC}/${p}/${d}`; };
 const zipList = (zip: string) => spawnSync("unzip", ["-Z1", zip], { maxBuffer: 1 << 26 }).stdout.toString().split("\n").filter(Boolean).sort();
@@ -90,7 +90,7 @@ function save(siglum: string, holder: string, source: string, license: string, u
   writeFileSync(`${ROOT}${file}`, text.join("\n") + "\n");
   let m = MSS.get(siglum);
   if (!m) {
-    const c = o.language && o.language !== "Greek" || o.dir === "greek-ot" ? undefined : CAT.get(docOf(siglum));
+    const c = o.language && o.language !== "Greek" || o.dir === "greek-translation" ? undefined : CAT.get(docOf(siglum));
     const f = (faxKey && FAX[faxKey]) || FAX[`intf-ntvmr/${siglum}`] || FAX[`cntr-mss/${siglum}`];
     const viewer: { name: string; url: string }[] = [];
     if (!o.dir && IMAGES.has(docOf(siglum))) viewer.push({ name: "INTF New Testament Virtual Manuscript Room", url: `https://ntvmr.uni-muenster.de/manuscript-workspace?docID=${docOf(siglum)}` });
@@ -239,7 +239,7 @@ teiZip("family-pi-mark", "transcriptions.zip", nn, "https://edata.bham.ac.uk/983
   console.log(`catena: ${n} files`);
 }
 
-// ---------- Hebrew Bible ----------
+// ---------- Old Testament: Hebrew and Aramaic ----------
 const HEB = HEB_BOOKS.map((b) => b.id);
 const tf = (path: string) => {
   const lines = readFileSync(path, "utf8").replace(/\n$/, "").split(/\r?\n/), out = new Map<number, string>();
@@ -328,18 +328,29 @@ const hebWords = (raw: string) => raw.normalize("NFD").replace(/[\u0591-\u05AF\u
   console.log(`dss: ${out.size} scrolls`);
 }
 
-// ---------- Greek Old Testament ----------
-const LXX = LXX_BOOKS.map((b) => b.id);
+// ---------- the Greek translation of the Old Testament: read only where no Hebrew or Aramaic manuscript has a line ----------
+// Each Greek line is filed under the Hebrew book and number it stands for. Books are left out where the Greek numbers or
+// orders the lines differently from the Hebrew (Psalms, Proverbs, Jeremiah, Joel, Malachi, Esther), and so are books
+// that have no Hebrew text held (Judith, Tobit, 1 and 4 Maccabees, Wisdom, Sirach).
+const SAME = new Set(["Gen", "Lev", "Num", "Deut", "Josh", "Judg", "1Chr", "Eccl", "Song", "Job", "Obad", "Jonah", "Nah", "Hab", "Zeph", "Hag", "Zech", "Isa", "Lam"]);
+const toHebrew = (u: Unit): Unit | undefined => {
+  const [c, l] = u.ref.split(":").map(Number);
+  if (SAME.has(u.book)) return u;
+  if (u.book === "2Kgdms") return { ...u, book: "2Sam" };
+  if (u.book === "2Esd") return c <= 10 ? { ...u, book: "Ezra" } : { ...u, book: "Neh", ref: `${c - 10}:${l}` };
+  return undefined;
+};
+const heb = (us: Unit[]) => us.map(toHebrew).filter((u): u is Unit => !!u);
 {
   const H = HOLDERS["sinaiticus-project"], zip = `${snap("sinaiticus-project")}/FINAL_TRANSCRIPTION_version105.xml.zip`;
   const byNum = new Map(LXX_BOOKS.map((b) => [b.n, b.id]));
-  const units = teiUnits(member(zip, "FINAL_TRANSCRIPTION_version105.xml"), SP).filter((u) => u.lxx && byNum.has(u.lxx)).map((u) => ({ book: byNum.get(u.lxx!)!, ref: u.ref, words: u.words, gapEnd: u.gapEnd }));
-  save("01", H.id, "https://epapers.bham.ac.uk/id/eprint/3306/1/FINAL_TRANSCRIPTION_version105.xml.zip", H.license, units, "sinaiticus-project/lxx", { dir: "greek-ot", order: LXX, date: { century: "IV", year: 350, source: "INTF catalogue (catalogue.json in the holder's metadata)" } });
+  const units = heb(teiUnits(member(zip, "FINAL_TRANSCRIPTION_version105.xml"), SP).filter((u) => u.lxx && byNum.has(u.lxx)).map((u) => ({ book: byNum.get(u.lxx!)!, ref: u.ref, words: u.words, gapEnd: u.gapEnd })));
+  save("01", H.id, "https://epapers.bham.ac.uk/id/eprint/3306/1/FINAL_TRANSCRIPTION_version105.xml.zip", H.license, units, "sinaiticus-project/lxx", { dir: "greek-translation", order: HEB, date: { century: "IV", year: 350, source: "INTF catalogue (catalogue.json in the holder's metadata)" } });
   // INTF's Septuagint transcriptions: 2 Kingdoms 1 to 5 in two manuscripts (book 10 in the room's numbering)
   for (const [d, siglum, o] of [[8100004, "M", { name: "Codex Coislinianus 1 (M)", shelfmark: "Paris, Bibliothèque nationale de France, Coislin 1", date: { century: "VII (601-700)", year: 650, source: "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc25169m (BnF Archives et manuscrits)" }, viewer: [{ name: "Gallica, Bibliothèque nationale de France", url: "https://gallica.bnf.fr/ark:/12148/btv1b84683074" }] }], [8000046, "46", { name: "Septuagint manuscript 46 (Rahlfs)" }]] as const) {
     const xml = readFileSync(`${intf}/transcriptions/${d}.xml`, "utf8");
-    const us = teiUnits(xml, SP).filter((u) => u.book === 10).map((u) => ({ book: "2Kgdms", ref: u.ref, words: u.words, gapEnd: u.gapEnd }));
-    save(siglum, "intf", `https://ntvmr.uni-muenster.de/community/api/transcript/get/?docID=${d}&pageID=ALL&format=teiraw`, /creativecommons\.org\/licenses\/by\/4\.0/.test(xml.slice(0, 20000)) ? "CC BY 4.0 (the file's header)" : "the file's header states no license", us, undefined, { dir: "greek-ot", order: LXX, ...o });
+    const us = teiUnits(xml, SP).filter((u) => u.book === 10).map((u) => ({ book: "2Sam", ref: u.ref, words: u.words, gapEnd: u.gapEnd }));
+    save(siglum, "intf", `https://ntvmr.uni-muenster.de/community/api/transcript/get/?docID=${d}&pageID=ALL&format=teiraw`, /creativecommons\.org\/licenses\/by\/4\.0/.test(xml.slice(0, 20000)) ? "CC BY 4.0 (the file's header)" : "the file's header states no license", us, undefined, { dir: "greek-translation", order: HEB, ...o });
   }
 }
 

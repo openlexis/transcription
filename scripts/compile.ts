@@ -5,7 +5,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { align } from "../src/align";
-import { greekKey, hebrewSpell, showGreek } from "../src/text";
+import { aramaic, greekKey, hebrewSpell, showGreek } from "../src/text";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const r4 = (x: number) => Math.round(x * 10000) / 10000;
@@ -31,7 +31,10 @@ type LineText = { absent: boolean; words: Tok[]; gapEnd: boolean; file: string; 
 
 export function compile(dir: string) {
   const R = readRules(dir);
-  const KEY = R.language === "Hebrew" ? hebrewSpell : greekKey, SHOW = R.language === "Hebrew" ? (w: string) => w : showGreek;
+  const HEB = R.language.startsWith("Hebrew");
+  /** rule 15: a Greek manuscript in a Hebrew and Aramaic compilation is a translation, read only where no original-language manuscript has the line */
+  const isTr = (s: string) => HEB && INFO.get(s)?.language === "Greek";
+  let SHOW = HEB ? (w: string) => w : showGreek;
   /** rule 13: only a continuous-text manuscript can show that a word is absent */
   const partialKind = (s: string) => (INFO.get(s)?.kind ?? "continuous") !== "continuous";
   // rule 1: read every listed transcription; group them by manuscript
@@ -39,6 +42,7 @@ export function compile(dir: string) {
   for (const file of R.inputs) {
     const siglum0 = file.replace(/^.*\//, "").replace(/\.[^.]+\.txt$/, ""), siglum = SAME_MANUSCRIPT[siglum0] ?? siglum0;
     const ms = byMs.get(siglum) ?? { files: [], lines: new Map() }; byMs.set(siglum, ms); ms.files.push(file);
+    const KEY = HEB && !isTr(siglum) ? hebrewSpell : greekKey;
     readFileSync(`${ROOT}${file}`, "utf8").split("\n").forEach((l, i) => {
       const m = l.match(/^(\S+) (\d+:\d+)\t(.*)$/); if (!m || m[1] !== R.book) return;
       const words: Tok[] = []; let gap = false, gapEnd = false;
@@ -58,13 +62,13 @@ export function compile(dir: string) {
   const witnesses = sigla.map((s) => {
     const i = INFO.get(SAME_MANUSCRIPT[s] ?? s) ?? INFO.get(s);
     const leaves = Object.entries(SAME_MANUSCRIPT).filter(([, v]) => v === s).map(([k]) => k);
-    return { siglum: s, ...(leaves.length ? { leaves } : {}), kind: i?.kind ?? "continuous", name: i?.name, century: i?.century, dateSource: i?.dateSource, year: year(s), dated: INFO.get(s)?.year !== undefined, early: early(s), proximity: r4(T(s)), viewer: i?.viewer ?? [], files: byMs.get(s)!.files };
+    return { siglum: s, ...(leaves.length ? { leaves } : {}), kind: i?.kind ?? "continuous", ...(isTr(s) ? { translation: "Greek" } : {}), name: i?.name, century: i?.century, dateSource: i?.dateSource, year: year(s), dated: INFO.get(s)?.year !== undefined, early: early(s), proximity: r4(T(s)), viewer: i?.viewer ?? [], files: byMs.get(s)!.files };
   });
   // the lines: every line any manuscript has, in chapter and line order
-  const refs = [...new Set(sigla.flatMap((s) => [...byMs.get(s)!.lines.keys()]))].sort((a, b) => { const [x, y] = [a, b].map((r) => r.split(":").map(Number)); return x[0] - y[0] || x[1] - y[1]; });
+  const refs = [...new Set(sigla.filter((s) => !isTr(s)).flatMap((s) => [...byMs.get(s)!.lines.keys()]))].sort((a, b) => { const [x, y] = [a, b].map((r) => r.split(":").map(Number)); return x[0] - y[0] || x[1] - y[1]; });
 
   const lines: unknown[] = [], places: unknown[] = [];
-  const st = { lines: 0, uncovered: 0, words: 0, columns: 0, unanimous: 0, places: 0, settled: 0, contested: 0, singularNoVote: 0, eyeSkipNoVote: 0, byType: {} as Record<string, number>, bySeverity: {} as Record<string, number>, confidenceSum: 0, witnessesPerLine: 0 };
+  const st = { lines: 0, uncovered: 0, words: 0, columns: 0, unanimous: 0, places: 0, settled: 0, contested: 0, singularNoVote: 0, eyeSkipNoVote: 0, byType: {} as Record<string, number>, bySeverity: {} as Record<string, number>, confidenceSum: 0, witnessesPerLine: 0, trLines: 0, trWords: 0, arLines: 0, arWords: 0 };
   for (const ref of refs) {
     // rule 4: of several transcriptions of one manuscript, the one with the most words in the line; a tie goes to the one listed first
     const present: { s: string; x: LineText }[] = [];
@@ -76,6 +80,10 @@ export function compile(dir: string) {
       present.push({ s, x });
     }
     st.lines++;
+    // rule 15: the translation only where no Hebrew or Aramaic manuscript has words in the line
+    const orig = present.filter((p) => !isTr(p.s)), fallback = !orig.some((p) => p.x.words.length) && present.some((p) => isTr(p.s) && p.x.words.length);
+    present.splice(0, present.length, ...(fallback ? present.filter((p) => isTr(p.s)) : orig));
+    SHOW = HEB && !fallback ? (w: string) => w : showGreek;
     if (!present.some((p) => p.x.words.length)) { st.uncovered++; lines.push({ ref, uncovered: true, witnesses: present.map((p) => WIDX.get(p.s)) }); continue; }
     st.witnessesPerLine += present.length;
     // rule 5: line up the words
@@ -247,10 +255,18 @@ export function compile(dir: string) {
     }
     st.columns += nC;
     for (const w of res.words) if (w.p === undefined && !w.d && !w.l) st.unanimous++;
-    const words = res.words.map(({ col, span, ...w }) => (w.p !== undefined ? { ...w, p: w.p + base } : w));
+    const words: Record<string, unknown>[] = res.words.map(({ col, span, ...w }) => (w.p !== undefined ? { ...w, p: w.p + base } : w));
     st.words += words.length;
+    const extra: Record<string, string> = {};
+    if (fallback) { for (const w of words) w.tr = 1; extra.translation = "Greek"; st.trLines++; st.trWords += words.length; }
+    else if (HEB) {
+      const mask = aramaic(R.book, ref, words.map((w) => w.k as string));
+      mask.forEach((a, i) => { if (a) words[i].a = 1; });
+      const n = mask.filter(Boolean).length;
+      if (n) { extra.aramaic = n === words.length ? "all" : "part"; st.arLines++; st.arWords += n; }
+    }
     // where each manuscript's words come from: its transcription (index in its files) and the line number in that file
-    lines.push({ ref, witnesses: present.map((p) => WIDX.get(p.s)), src: present.map((p) => `${byMs.get(p.s)!.files.indexOf(p.x.file)}:${p.x.lineNo}`), words });
+    lines.push({ ref, witnesses: present.map((p) => WIDX.get(p.s)), src: present.map((p) => `${byMs.get(p.s)!.files.indexOf(p.x.file)}:${p.x.lineNo}`), ...extra, words });
   }
   const stats = {
     name: R.name, book: R.book, language: R.language, model: R.model, manuscripts: witnesses.length, early: witnesses.filter((w) => w.early).length,
@@ -258,6 +274,7 @@ export function compile(dir: string) {
     places: st.places, settled: st.settled, contested: st.contested, meanPlaceConfidence: r4(st.places ? st.confidenceSum / st.places : 1),
     meanWordConfidence: 0, singularReadingsWithoutVote: st.singularNoVote, eyeSkipsWithoutVote: st.eyeSkipNoVote, byType: st.byType, bySeverity: st.bySeverity,
     meanManuscriptsPerLine: r4(st.witnessesPerLine / Math.max(1, st.lines - st.uncovered)),
+    ...(HEB ? { translationLines: st.trLines, translationWords: st.trWords, aramaicLines: st.arLines, aramaicWords: st.arWords } : {}),
   };
   let cs = 0, cn = 0; for (const l of lines as { words?: { c?: number }[] }[]) for (const w of l.words ?? []) { cs += w.c ?? 1; cn++; }
   stats.meanWordConfidence = r4(cn ? cs / cn : 1);

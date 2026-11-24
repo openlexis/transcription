@@ -9,8 +9,9 @@ const S = script(c.stats.language);
 const lines = t.lines.filter((l) => l.ref.split(":")[0] === chapter);
 const used = new Set<number>(); for (const l of lines) for (const w of l.words ?? []) if (w.p !== undefined) used.add(w.p);
 const places = Object.fromEntries([...used].map((p) => { const x = P[p]; return [p, { c: x.confidence, w: x.weight, t: x.type, s: x.severity, l: x.partlyLost, r: x.readings.map((r) => ({ x: r.text, s: r.share, w: r.witnesses, p: r.partly, v: r.votes, f: r.flags })) }]; }));
-const data = { id, lang: S.lang, book: t.book ?? "", lines: lines.map((l) => ({ r: l.ref, u: l.uncovered ? 1 : 0, m: l.witnesses, s: l.src, w: (l.words ?? []).map((w) => [w.t, w.c ?? 1, w.p ?? -1, w.l ?? 0, w.d ?? 0]) })), places };
+const data = { id, lang: S.lang, book: t.book ?? "", lines: lines.map((l) => ({ r: l.ref, u: l.uncovered ? 1 : 0, m: l.witnesses, s: l.src, w: (l.words ?? []).map((w) => [w.t, w.c ?? 1, w.p ?? -1, w.l ?? 0, w.d ?? 0, w.a ? "Aramaic" : w.tr ? "Greek translation" : ""]) })), places };
 const i = c.chapters.indexOf(chapter), prev = c.chapters[i - 1], next = c.chapters[i + 1];
+const hasAr = lines.some((l) => l.aramaic), hasTr = lines.some((l) => l.translation);
 const sevOf = (p?: number) => (p === undefined ? "" : `v-${P[p].severity}`);
 ---
 <Base title={`${c.stats.name} ${chapter}`} current={id} tab="read" description={`${c.stats.name} chapter ${chapter}, compiled from the ancient ${c.stats.language ?? "Greek"} manuscripts, every word cited.`}>
@@ -21,6 +22,8 @@ const sevOf = (p?: number) => (p === undefined ? "" : `v-${P[p].severity}`);
       <span><i style="border-color:var(--high);border-bottom-style:double"></i>contested</span>
       <span><i style="border-color:var(--medium)"></i>real disagreement</span>
       <span><i style="border-color:var(--settled)"></i>minor</span>
+      {hasAr && <span><b class="tag ar">Aramaic</b> words in Aramaic</span>}
+      {hasTr && <span><b class="tag tr">Greek</b> from a translation</span>}
     </div>
     <label><input type="checkbox" id="marks" checked /> show marks</label>
     {S.cls === "hebrew" && <label><input type="checkbox" id="points" /> consonants only</label>}
@@ -29,9 +32,9 @@ const sevOf = (p?: number) => (p === undefined ? "" : `v-${P[p].severity}`);
   <article class={`text ${S.cls}-text`} lang={S.lang} dir={S.dir}>
     {lines.map((l, li) => (
       <div class="ln" id={`l${l.ref.replace(":", "-")}`}>
-        <a class="no" href={`#l${l.ref.replace(":", "-")}`}>{l.ref.split(":")[1]}</a>
+        <a class="no" href={`#l${l.ref.replace(":", "-")}`}>{l.ref.split(":")[1]}{l.aramaic && <b class="tag ar" title={l.aramaic === "all" ? "This line is in Aramaic" : "Part of this line is in Aramaic"}>Aram.</b>}{l.translation && <b class="tag tr" title="No Hebrew or Aramaic manuscript has this line: it is from the Greek translation">Greek</b>}</a>
         {l.uncovered ? <div class="uncovered">No manuscript we hold covers this line.</div> : (
-          <div class={S.cls}>{(l.words ?? []).map((w, wi) => <><button class={`w ${sevOf(w.p)}`} data-l={li} data-w={wi}>{w.t}</button>{" "}</>)}</div>
+          <div class={l.translation ? "greek translated" : `${S.cls}${l.aramaic === "part" ? " ar-part" : ""}`} lang={l.translation ? "grc" : undefined} dir={l.translation ? "ltr" : undefined}>{(l.words ?? []).map((w, wi) => <><button class={`w ${sevOf(w.p)}${w.a ? " ar" : ""}${w.tr ? " tr" : ""}`} lang={w.a ? "arc" : undefined} data-l={li} data-w={wi}>{w.t}</button>{" "}</>)}</div>
         )}
       </div>
     ))}

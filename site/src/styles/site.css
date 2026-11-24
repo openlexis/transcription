@@ -74,6 +74,11 @@ th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color:
 .greek { font-family: var(--greek); font-size: 1.32rem; line-height: 1.9; }
 .hebrew { font-family: var(--hebrew); font-size: 1.5rem; line-height: 2; }
 .hebrew-text .no { text-align: left; }
+.tag { display: inline-block; font: 700 .62rem var(--ui); letter-spacing: .03em; text-transform: uppercase; padding: 1px 5px; border-radius: 5px; margin-inline-start: 4px; vertical-align: middle; }
+.tag.ar { background: #e7e0f3; color: #4b3a78; } .tag.tr { background: #f6e3d4; color: #8a4a1c; }
+.ln .no .tag { display: block; margin: 4px 0 0; width: max-content; }
+.ar-part .w.ar { background: rgba(110, 85, 170, .09); }
+#sheet-body h3 { padding-right: 44px; } .w.tr { background: rgba(200, 120, 50, .10); font-style: italic; }
 .w { cursor: pointer; border: 0; background: none; font: inherit; color: inherit; padding: 0 1px; margin: 0; border-radius: 4px; border-bottom: 2px solid transparent; }
 .w:hover, .w:focus-visible { background: var(--accent-soft); outline: none; }
 .w.sel { background: #ffe8a3; }

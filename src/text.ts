@@ -50,7 +50,7 @@ export const NT_BOOKS = [
   ["Titus", "Titus"], ["Phlm", "Philemon"], ["Heb", "Hebrews"], ["Jas", "James"], ["1Pet", "1 Peter"], ["2Pet", "2 Peter"], ["1John", "1 John"], ["2John", "2 John"], ["3John", "3 John"], ["Jude", "Jude"], ["Rev", "Revelation"],
 ].map(([id, name], i) => ({ id, name, n: i + 1 }));
 
-/** The books of the Hebrew Bible, in the order of the Leningrad Codex transcription (UXLC); uxlc is its file name. */
+/** The books of the Old Testament, in the order of the Leningrad Codex transcription (UXLC); uxlc is its file name. */
 export const HEB_BOOKS = [
   ["Gen", "Genesis", "Genesis"], ["Exod", "Exodus", "Exodus"], ["Lev", "Leviticus", "Leviticus"], ["Num", "Numbers", "Numbers"], ["Deut", "Deuteronomy", "Deuteronomy"],
   ["Josh", "Joshua", "Joshua"], ["Judg", "Judges", "Judges"], ["1Sam", "1 Samuel", "Samuel_1"], ["2Sam", "2 Samuel", "Samuel_2"], ["1Kgs", "1 Kings", "Kings_1"], ["2Kgs", "2 Kings", "Kings_2"],
@@ -61,7 +61,7 @@ export const HEB_BOOKS = [
   ["Lam", "Lamentations", "Lamentations"], ["Esth", "Esther", "Esther"], ["Dan", "Daniel", "Daniel"], ["Ezra", "Ezra", "Ezra"], ["Neh", "Nehemiah", "Nehemiah"],
 ].map(([id, name, uxlc], i) => ({ id, name, uxlc, n: i + 1 }));
 
-/** The books of the Greek Old Testament held in a manuscript transcription, in the order of their First1KGreek work numbers. */
+/** The books of the Greek translation of the Old Testament in the Codex Sinaiticus transcription, by First1KGreek work number. */
 export const LXX_BOOKS = [
   ["001", "Gen", "Genesis"], ["003", "Lev", "Leviticus"], ["004", "Num", "Numbers"], ["005", "Deut", "Deuteronomy"], ["006", "Josh", "Joshua"], ["008", "Judg", "Judges"],
   ["012", "2Kgdms", "2 Kingdoms"], ["015", "1Chr", "1 Chronicles"], ["018", "2Esd", "2 Esdras"], ["019", "Esth", "Esther"], ["020", "Jdt", "Judith"], ["021", "Tob", "Tobit"],
@@ -76,3 +76,15 @@ export const hebrewSpell = (w: string) => {
   const c = w.replace(/[^\u05D0-\u05EA]/g, "").replace(/ך/g, "כ").replace(/ם/g, "מ").replace(/ן/g, "נ").replace(/ף/g, "פ").replace(/ץ/g, "צ");
   return c.length > 2 ? c[0] + c.slice(1, -1).replace(/[וי]/g, "") + c[c.length - 1] : c;
 };
+
+/** The parts of the Old Testament written in Aramaic (RULES.md, rule 14): whole stretches of lines, the rest of Daniel 2:4
+ * after the word ארמית ("in Aramaic"), and the two words יגר שהדותא of Genesis 31:47. */
+const ARAMAIC: Record<string, [string, string][]> = { Dan: [["2:5", "7:28"]], Ezra: [["4:8", "6:18"], ["7:12", "7:26"]], Jer: [["10:11", "10:11"]] };
+const cl = (r: string) => r.split(":").map(Number) as [number, number];
+const le = (a: string, b: string) => { const [x, y] = [cl(a), cl(b)]; return x[0] < y[0] || (x[0] === y[0] && x[1] <= y[1]); };
+export function aramaic(book: string, ref: string, keys: string[]): boolean[] {
+  if ((ARAMAIC[book] ?? []).some(([a, b]) => le(a, ref) && le(ref, b))) return keys.map(() => true);
+  if (book === "Dan" && ref === "2:4") { const i = keys.indexOf(hebrewSpell("ארמית")); return keys.map((_, j) => i >= 0 && j > i); }
+  if (book === "Gen" && ref === "31:47") { const two = new Set([hebrewSpell("יגר"), hebrewSpell("שהדותא")]); return keys.map((k) => two.has(k)); }
+  return keys.map(() => false);
+}

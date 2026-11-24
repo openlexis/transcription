@@ -8,18 +8,18 @@ export const blob = (file: string, line?: number) => `${REPO}/blob/main/${file.s
 export type Stats = {
   name: string; book: string; language?: string; model: string; manuscripts: number; early: number; lines: number; uncoveredLines: number; words: number;
   columns: number; unanimousColumns: number; places: number; settled: number; contested: number; meanPlaceConfidence: number; meanWordConfidence: number;
-  singularReadingsWithoutVote: number; eyeSkipsWithoutVote: number; byType: Record<string, number>; bySeverity: Record<string, number>; meanManuscriptsPerLine: number; sha256: string;
+  singularReadingsWithoutVote: number; translationLines?: number; translationWords?: number; aramaicLines?: number; aramaicWords?: number; eyeSkipsWithoutVote: number; byType: Record<string, number>; bySeverity: Record<string, number>; meanManuscriptsPerLine: number; sha256: string;
 };
 export type Witness = { siglum: string; leaves?: string[]; name?: string; century?: string; year: number; dated: boolean; early: boolean; proximity: number; viewer: { name: string; url: string }[]; files: string[] };
-export type Word = { t: string; k: string; c?: number; p?: number; l?: number[]; d?: number[] };
-export type Line = { ref: string; uncovered?: boolean; witnesses: number[]; src?: string[]; words?: Word[] };
+export type Word = { t: string; k: string; c?: number; p?: number; l?: number[]; d?: number[]; a?: number; tr?: number };
+export type Line = { ref: string; aramaic?: string; translation?: string; uncovered?: boolean; witnesses: number[]; src?: string[]; words?: Word[] };
 export type Reading = { text: string; keys: string; witnesses: number[]; partly?: number[]; votes: number; score: number; share: number; flags?: string[] };
 export type Place = { id: number; ref: string; at: number; n: number; confidence: number; weight: number; type: string; severity: string; readings: Reading[]; partlyLost?: number[] };
 export type Compilation = { id: string; stats: Stats; rules: string; chapters: string[] };
 
-export const SECTIONS: Record<string, string> = { nt: "Greek New Testament", heb: "Hebrew Bible", lxx: "Greek Old Testament" };
+export const SECTIONS: Record<string, string> = { ot: "Old Testament (Hebrew and Aramaic)", nt: "New Testament (Greek)" };
 /** How a compilation's text is written: Hebrew runs right to left. */
-export const script = (language?: string) => (language === "Hebrew" ? { lang: "hbo", dir: "rtl", cls: "hebrew" } : { lang: "grc", dir: "ltr", cls: "greek" });
+export const script = (language?: string) => (language?.startsWith("Hebrew") ? { lang: "hbo", dir: "rtl", cls: "hebrew" } : { lang: "grc", dir: "ltr", cls: "greek" });
 
 let LIST: Compilation[] | undefined;
 export function compilations(): Compilation[] {
