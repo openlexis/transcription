@@ -25,7 +25,7 @@ const sevOf = (p?: number) => (p === undefined ? "" : `v-${P[p].severity}`);
     <label><input type="checkbox" id="marks" checked /> show marks</label>
     {S.cls === "hebrew" && <label><input type="checkbox" id="points" /> consonants only</label>}
   </div>
-  <p class="meta" style="margin-top:0">Tap any word to see which manuscripts read it.</p>
+  <p class="meta" style="margin-top:0">Tap any word to see which manuscripts read it. This text was made by {c.stats.model} following <a href={`/c/${id}/rules/`}>these rules</a>.</p>
   <article class={`text ${S.cls}-text`} lang={S.lang} dir={S.dir}>
     {lines.map((l, li) => (
       <div class="ln" id={`l${l.ref.replace(":", "-")}`}>

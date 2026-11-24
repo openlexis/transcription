@@ -75,3 +75,14 @@ export function md(src: string): string {
   flush(); close();
   return out.join("\n");
 }
+
+/** The front fields of a rule file (Name, Book, Model, Language, ...), its numbered rules, and its inputs. */
+export function ruleParts(src: string) {
+  const front = [...src.matchAll(/^- \*\*([^:*]+):\*\* (.*)$/gm)].map((m) => [m[1], m[2]] as [string, string]);
+  const at = (h: string) => { const i = src.indexOf(h); return i < 0 ? src.length : i; };
+  const how = src.slice(at("## How the model does the work"), at("## Rules"));
+  const rules = src.slice(at("## Rules"), at("## Inputs"));
+  const inputs = [...src.slice(at("## Inputs")).matchAll(/^- `([^`]+)`$/gm)].map((m) => m[1]);
+  const title = (src.match(/^# (.*)$/m)?.[1] ?? "");
+  return { title, front, how, rules, inputs };
+}
