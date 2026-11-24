@@ -1,5 +1,5 @@
 // Reader for manuscript transcriptions in the IGNTP/INTF TEI XML encoding (the Birmingham IGNTP files and the INTF
-// transcriptions of the Münster room share it). One verse unit is an <ab n="B04K1V1"> (book, chapter, verse in the INTF
+// transcriptions of the Münster room share it). One line unit is an <ab n="B04K1V1"> (book, chapter, line in the INTF
 // book numbers, Matthew 1 to Revelation 27) or <ab n="John.1.1">; a unit split by a page break continues in an <ab part="F">.
 // The reader keeps the first hand, the letters as written, and where the text is lost:
 //  - the first hand of a correction (<app><rdg type="orig" hand="firsthand">) is read, always;
@@ -10,7 +10,7 @@
 //  - running titles, notes, marginal material outside a correction (<fw>, <note>, <seg>) and punctuation are set aside;
 //  - a word split over a line or page (<w part="I"> ... <w part="F">) is joined;
 //  - a page that starts a fresh unit after a page break is read as if a lacuna stood between the pages, because a page that
-//    was not transcribed would otherwise look like text the manuscript does not have; titles and subscriptions (verse 0) are left out.
+//    was not transcribed would otherwise look like text the manuscript does not have; titles and subscriptions (line 0) are left out.
 export type TeiWord = { w: string; gap: boolean };
 /** book: the New Testament book (1 Matthew to 27 Revelation), or 0 for a book of the Greek translation of the Old Testament, whose First1KGreek work number is `lxx`. */
 export type TeiUnit = { book: number; lxx?: string; ref: string; words: TeiWord[]; gapEnd: boolean };
@@ -40,7 +40,7 @@ const skel = (w: string) => w.normalize("NFD").replace(/\p{M}/gu, "").toLowerCas
 /** The Septuagint books of Codex Sinaiticus, by the project's name, as the keys of scripts/ot.ts (First1KGreek work numbers). */
 const CSP_LXX: Record<string, string> = { GEN: "001", LEV: "003", NUM: "004", DEUT: "005", JOSH: "006", JUDG: "008", "1CHR": "015", "2ESD": "018", EST: "019", TOB: "021", JDT: "020", "1MACC": "023", "4MACC": "026", ISA: "048", JER: "049", LAM: "051", JOEL: "039", OBAD: "040", JONAH: "041", NAH: "042", HAB: "043", ZEPH: "044", HAG: "045", ZECH: "046", MAL: "047", PS: "027", PROV: "029", ECCL: "030", CANT: "031", WIS: "033", SIR: "034", JOB: "032" };
 const CSP: Record<string, string> = { MATT: "Matt", MARK: "Mark", LUKE: "Luke", JOHN: "John", ACTS: "Acts", ROM: "Rom", "1COR": "1Cor", "2COR": "2Cor", GAL: "Gal", EPH: "Eph", PHIL: "Phil", COL: "Col", "1THESS": "1Thess", "2THESS": "2Thess", "1TIM": "1Tim", "2TIM": "2Tim", TITUS: "Titus", PHLM: "Phlm", HEB: "Heb", JAS: "Jas", "1PET": "1Pet", "2PET": "2Pet", "1JOHN": "1John", "2JOHN": "2John", "3JOHN": "3John", JUDE: "Jude", REV: "Rev" };
-/** Book number (1 to 27) and chapter:verse of a unit name, or undefined for a title, subscription or unknown name. */
+/** Book number (1 to 27) and chapter:line of a unit name, or undefined for a title, subscription or unknown name. */
 export function unitRef(n: string): { book: number; lxx?: string; ref: string } | undefined {
   let m = n.match(/^V-B\d+K(\d+)V(\d+)-\d+-([0-9A-Z]+)$/);
   if (m) {
