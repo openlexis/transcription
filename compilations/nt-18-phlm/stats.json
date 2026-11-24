@@ -1,0 +1,32 @@
+{
+ "name": "Philemon",
+ "book": "Phlm",
+ "model": "Grok Bot",
+ "manuscripts": 9,
+ "early": 5,
+ "lines": 25,
+ "uncoveredLines": 0,
+ "words": 336,
+ "columns": 345,
+ "unanimousColumns": 167,
+ "places": 9,
+ "settled": 2,
+ "contested": 4,
+ "meanPlaceConfidence": 0.6879,
+ "meanWordConfidence": 0.9946,
+ "singularReadingsWithoutVote": 0,
+ "eyeSkipsWithoutVote": 0,
+ "byType": {
+  "omission": 2,
+  "substitution": 3,
+  "addition": 3,
+  "word order": 1
+ },
+ "bySeverity": {
+  "high": 4,
+  "medium": 3,
+  "settled": 2
+ },
+ "meanManuscriptsPerLine": 5.8,
+ "sha256": "471298686b6c780408115e72091fc77d9c33d7c4b90cb5cdfe6abb14214d45f5"
+}

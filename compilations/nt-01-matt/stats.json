@@ -1,0 +1,34 @@
+{
+ "name": "Matthew",
+ "book": "Matt",
+ "model": "Grok Bot",
+ "manuscripts": 182,
+ "early": 33,
+ "lines": 1071,
+ "uncoveredLines": 0,
+ "words": 18357,
+ "columns": 23821,
+ "unanimousColumns": 1471,
+ "places": 4215,
+ "settled": 1651,
+ "contested": 510,
+ "meanPlaceConfidence": 0.8555,
+ "meanWordConfidence": 0.8919,
+ "singularReadingsWithoutVote": 13418,
+ "eyeSkipsWithoutVote": 567,
+ "byType": {
+  "substitution": 2579,
+  "addition": 684,
+  "omission": 667,
+  "mixed": 155,
+  "word order": 130
+ },
+ "bySeverity": {
+  "settled": 1651,
+  "medium": 1269,
+  "high": 510,
+  "low": 785
+ },
+ "meanManuscriptsPerLine": 118.6872,
+ "sha256": "2d7617de9098a276521554ef7171c4091754641e584fa67dc39302b45b55d0f2"
+}

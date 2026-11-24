@@ -1,0 +1,34 @@
+{
+ "name": "2 Corinthians",
+ "book": "2Cor",
+ "model": "Grok Bot",
+ "manuscripts": 15,
+ "early": 6,
+ "lines": 256,
+ "uncoveredLines": 0,
+ "words": 4446,
+ "columns": 4691,
+ "unanimousColumns": 2620,
+ "places": 168,
+ "settled": 20,
+ "contested": 36,
+ "meanPlaceConfidence": 0.7433,
+ "meanWordConfidence": 0.9914,
+ "singularReadingsWithoutVote": 49,
+ "eyeSkipsWithoutVote": 11,
+ "byType": {
+  "word order": 8,
+  "omission": 36,
+  "addition": 37,
+  "substitution": 84,
+  "mixed": 3
+ },
+ "bySeverity": {
+  "low": 20,
+  "settled": 20,
+  "medium": 92,
+  "high": 36
+ },
+ "meanManuscriptsPerLine": 6.1016,
+ "sha256": "951b2e19ce767420711ac6b0483a0bf32a80b4c5b85b07e9d281cc92e50b20fd"
+}

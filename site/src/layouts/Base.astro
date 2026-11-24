@@ -1,0 +1,70 @@
+---
+import "../styles/site.css";
+import { compilations, SECTIONS, sectionOf } from "../lib/data";
+interface Props { title: string; description?: string; current?: string; tab?: string }
+const { title, description = "One compiled transcription of the ancient manuscripts, word by word, with every word cited.", current, tab } = Astro.props;
+const list = compilations();
+const cur = current ? list.find((c) => c.id === current) : undefined;
+const groups = Object.entries(SECTIONS).map(([k, name]) => ({ name, items: list.filter((c) => sectionOf(c.id) === k) }));
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title} · Open Lexis</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#f7f3ea" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-row">
+      <a class="brand" href="/"><span class="mark">Λ</span><span>Open Lexis <em>compiled transcriptions</em></span></a>
+      <nav class="nav">
+        <a href="/" class={tab === "home" ? "on" : ""}>Compilations</a>
+        <a href="/disagreements/" class={tab === "dis" ? "on" : ""}>Disagreements</a>
+        <a href="/stats/" class={tab === "stats" ? "on" : ""}>Statistics</a>
+        <a href="/about/" class={tab === "about" ? "on" : ""}>About</a>
+      </nav>
+    </div>
+    <div class="wrap switch-row">
+      <label class="switch">
+        <span class="sr">Switch compilation</span>
+        <select id="switch" aria-label="Switch compilation">
+          <option value="">{cur ? cur.stats.name : "Choose a compilation…"}</option>
+          {groups.map((g) => (
+            <optgroup label={g.name}>
+              {g.items.map((c) => <option value={c.id} selected={c.id === current}>{c.stats.name}</option>)}
+            </optgroup>
+          ))}
+        </select>
+      </label>
+      {cur && (
+        <nav class="subnav" aria-label="This compilation">
+          <a href={`/c/${cur.id}/`} class={tab === "overview" ? "on" : ""}>Overview</a>
+          <a href={`/c/${cur.id}/${cur.chapters[0]}/`} class={tab === "read" ? "on" : ""}>Read</a>
+          <a href={`/c/${cur.id}/disagreements/`} class={tab === "cdis" ? "on" : ""}>Disagreements</a>
+          <a href={`/c/${cur.id}/inputs/`} class={tab === "inputs" ? "on" : ""}>Manuscripts</a>
+          <a href={`/c/${cur.id}/rules/`} class={tab === "rules" ? "on" : ""}>Rules</a>
+        </nav>
+      )}
+    </div>
+  </header>
+  <main class="wrap"><slot /></main>
+  <footer class="foot wrap">
+    <p>Built only from ancient manuscripts in the original language. No printed edition, translation or image is used. Page images stay with their holders; we link to them.</p>
+    <p><a href="https://github.com/openlexis/transcription">Source and data on GitHub</a></p>
+  </footer>
+  <script>
+    const s = document.getElementById("switch") as HTMLSelectElement | null;
+    s?.addEventListener("change", () => {
+      if (!s.value) return;
+      const m = location.pathname.match(/^\/c\/[^/]+\/(rules|inputs|disagreements)\//);
+      location.href = `/c/${s.value}/${m ? m[1] + "/" : ""}`;
+    });
+  </script>
+</body>
+</html>

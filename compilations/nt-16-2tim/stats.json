@@ -1,0 +1,33 @@
+{
+ "name": "2 Timothy",
+ "book": "2Tim",
+ "model": "Grok Bot",
+ "manuscripts": 5,
+ "early": 3,
+ "lines": 83,
+ "uncoveredLines": 0,
+ "words": 1239,
+ "columns": 1284,
+ "unanimousColumns": 1037,
+ "places": 38,
+ "settled": 24,
+ "contested": 2,
+ "meanPlaceConfidence": 0.8937,
+ "meanWordConfidence": 0.9967,
+ "singularReadingsWithoutVote": 2,
+ "eyeSkipsWithoutVote": 0,
+ "byType": {
+  "substitution": 26,
+  "word order": 3,
+  "omission": 2,
+  "addition": 3,
+  "mixed": 4
+ },
+ "bySeverity": {
+  "settled": 24,
+  "medium": 12,
+  "high": 2
+ },
+ "meanManuscriptsPerLine": 4.9759,
+ "sha256": "0b75311adf30a21d3b143dc30d6e68ca6425b028f6102c24e012415c72bb65be"
+}

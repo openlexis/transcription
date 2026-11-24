@@ -1,0 +1,12 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { compilations, md } from "../../../lib/data";
+export function getStaticPaths() { return compilations().map((c) => ({ params: { id: c.id } })); }
+const { id } = Astro.params;
+const c = compilations().find((x) => x.id === id)!;
+const body = c.rules.slice(0, c.rules.indexOf("## Inputs"));
+---
+<Base title={`${c.stats.name}: rules`} current={id} tab="rules">
+  <div class="rules" set:html={md(body)} />
+  <p class="meta">The full input list is on the <a href={`/c/${id}/inputs/`}>manuscripts page</a>. <a href={`https://github.com/openlexis/transcription/blob/main/compilations/${id}/RULES.md`}>See the rule file on GitHub</a>.</p>
+</Base>

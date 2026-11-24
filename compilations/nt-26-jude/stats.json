@@ -1,0 +1,34 @@
+{
+ "name": "Jude",
+ "book": "Jude",
+ "model": "Grok Bot",
+ "manuscripts": 132,
+ "early": 6,
+ "lines": 25,
+ "uncoveredLines": 0,
+ "words": 460,
+ "columns": 614,
+ "unanimousColumns": 24,
+ "places": 110,
+ "settled": 53,
+ "contested": 7,
+ "meanPlaceConfidence": 0.8618,
+ "meanWordConfidence": 0.8884,
+ "singularReadingsWithoutVote": 475,
+ "eyeSkipsWithoutVote": 24,
+ "byType": {
+  "word order": 4,
+  "addition": 15,
+  "substitution": 62,
+  "omission": 20,
+  "mixed": 9
+ },
+ "bySeverity": {
+  "low": 11,
+  "settled": 53,
+  "high": 7,
+  "medium": 39
+ },
+ "meanManuscriptsPerLine": 124.52,
+ "sha256": "99726a81d3716bcf556c9eaf358825e423022fbf7d255e8a7c4aec33268b4990"
+}

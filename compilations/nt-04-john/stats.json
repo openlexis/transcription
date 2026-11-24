@@ -1,0 +1,34 @@
+{
+ "name": "John",
+ "book": "John",
+ "model": "Grok Bot",
+ "manuscripts": 220,
+ "early": 39,
+ "lines": 879,
+ "uncoveredLines": 0,
+ "words": 15378,
+ "columns": 20973,
+ "unanimousColumns": 787,
+ "places": 3676,
+ "settled": 1282,
+ "contested": 528,
+ "meanPlaceConfidence": 0.8535,
+ "meanWordConfidence": 0.877,
+ "singularReadingsWithoutVote": 13018,
+ "eyeSkipsWithoutVote": 425,
+ "byType": {
+  "addition": 658,
+  "substitution": 2140,
+  "omission": 609,
+  "word order": 126,
+  "mixed": 143
+ },
+ "bySeverity": {
+  "low": 961,
+  "settled": 1282,
+  "high": 528,
+  "medium": 905
+ },
+ "meanManuscriptsPerLine": 137.9977,
+ "sha256": "3c6a906fc22a6bf06627fbd0e56b7d63cbc7b624be63278a2afcbf0db313fdf0"
+}

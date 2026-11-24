@@ -1,0 +1,34 @@
+{
+ "name": "Luke",
+ "book": "Luke",
+ "model": "Grok Bot",
+ "manuscripts": 42,
+ "early": 19,
+ "lines": 1151,
+ "uncoveredLines": 0,
+ "words": 19357,
+ "columns": 22950,
+ "unanimousColumns": 5292,
+ "places": 3033,
+ "settled": 686,
+ "contested": 421,
+ "meanPlaceConfidence": 0.8041,
+ "meanWordConfidence": 0.9579,
+ "singularReadingsWithoutVote": 2862,
+ "eyeSkipsWithoutVote": 86,
+ "byType": {
+  "omission": 482,
+  "substitution": 1607,
+  "addition": 653,
+  "word order": 150,
+  "mixed": 141
+ },
+ "bySeverity": {
+  "medium": 1542,
+  "high": 421,
+  "settled": 686,
+  "low": 384
+ },
+ "meanManuscriptsPerLine": 16.5169,
+ "sha256": "ae04bc0a8a49b07c185aead7202cc1f6afb286502051483ae34584f71980cfce"
+}

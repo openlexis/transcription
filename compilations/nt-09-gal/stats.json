@@ -1,0 +1,34 @@
+{
+ "name": "Galatians",
+ "book": "Gal",
+ "model": "Grok Bot",
+ "manuscripts": 203,
+ "early": 14,
+ "lines": 150,
+ "uncoveredLines": 1,
+ "words": 2217,
+ "columns": 3819,
+ "unanimousColumns": 73,
+ "places": 497,
+ "settled": 258,
+ "contested": 50,
+ "meanPlaceConfidence": 0.89,
+ "meanWordConfidence": 0.8866,
+ "singularReadingsWithoutVote": 2301,
+ "eyeSkipsWithoutVote": 106,
+ "byType": {
+  "substitution": 298,
+  "addition": 79,
+  "omission": 75,
+  "word order": 16,
+  "mixed": 29
+ },
+ "bySeverity": {
+  "settled": 258,
+  "medium": 79,
+  "high": 50,
+  "low": 110
+ },
+ "meanManuscriptsPerLine": 189.4698,
+ "sha256": "783260e9e2db67cba0ba0ed952476afbe128304fff48c6c113792ade01674602"
+}

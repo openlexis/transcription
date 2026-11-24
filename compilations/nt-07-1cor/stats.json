@@ -1,0 +1,34 @@
+{
+ "name": "1 Corinthians",
+ "book": "1Cor",
+ "model": "Grok Bot",
+ "manuscripts": 19,
+ "early": 11,
+ "lines": 437,
+ "uncoveredLines": 0,
+ "words": 6779,
+ "columns": 7195,
+ "unanimousColumns": 3087,
+ "places": 342,
+ "settled": 86,
+ "contested": 59,
+ "meanPlaceConfidence": 0.7766,
+ "meanWordConfidence": 0.989,
+ "singularReadingsWithoutVote": 115,
+ "eyeSkipsWithoutVote": 7,
+ "byType": {
+  "word order": 19,
+  "omission": 49,
+  "addition": 92,
+  "substitution": 163,
+  "mixed": 19
+ },
+ "bySeverity": {
+  "medium": 170,
+  "settled": 86,
+  "high": 59,
+  "low": 27
+ },
+ "meanManuscriptsPerLine": 7.1602,
+ "sha256": "8f043dc4f5cccbc7426d610fe0d605f13cf2e28c4ffda9fb0f3f2e7448b2b4c1"
+}

@@ -1,0 +1,34 @@
+{
+ "name": "Romans",
+ "book": "Rom",
+ "model": "Grok Bot",
+ "manuscripts": 151,
+ "early": 18,
+ "lines": 439,
+ "uncoveredLines": 0,
+ "words": 7192,
+ "columns": 10142,
+ "unanimousColumns": 583,
+ "places": 1688,
+ "settled": 849,
+ "contested": 119,
+ "meanPlaceConfidence": 0.9167,
+ "meanWordConfidence": 0.9328,
+ "singularReadingsWithoutVote": 5131,
+ "eyeSkipsWithoutVote": 252,
+ "byType": {
+  "word order": 43,
+  "substitution": 962,
+  "omission": 339,
+  "addition": 277,
+  "mixed": 67
+ },
+ "bySeverity": {
+  "high": 119,
+  "low": 494,
+  "settled": 849,
+  "medium": 226
+ },
+ "meanManuscriptsPerLine": 119.4237,
+ "sha256": "8343b760d0d99c548ea8be353c23b4db2c93685055c8f1daf6e3605b516e0425"
+}

@@ -1,0 +1,33 @@
+{
+ "name": "2 Peter",
+ "book": "2Pet",
+ "model": "Grok Bot",
+ "manuscripts": 9,
+ "early": 5,
+ "lines": 61,
+ "uncoveredLines": 0,
+ "words": 1095,
+ "columns": 1187,
+ "unanimousColumns": 586,
+ "places": 87,
+ "settled": 6,
+ "contested": 25,
+ "meanPlaceConfidence": 0.7029,
+ "meanWordConfidence": 0.9749,
+ "singularReadingsWithoutVote": 44,
+ "eyeSkipsWithoutVote": 0,
+ "byType": {
+  "substitution": 54,
+  "addition": 17,
+  "word order": 5,
+  "omission": 6,
+  "mixed": 5
+ },
+ "bySeverity": {
+  "medium": 56,
+  "high": 25,
+  "settled": 6
+ },
+ "meanManuscriptsPerLine": 7.2131,
+ "sha256": "c5d213749fdde3e1f4036df6766230a50e3e9c4816621dd7e897f5bf02b30b60"
+}

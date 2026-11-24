@@ -1,0 +1,36 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { compilations, full, pct, num } from "../../../lib/data";
+export function getStaticPaths() { return compilations().map((c) => ({ params: { id: c.id } })); }
+const { id } = Astro.params;
+const c = compilations().find((x) => x.id === id)!;
+const s = c.stats, t = full(id);
+const early = t.witnesses.filter((w) => w.early).sort((a, b) => a.year - b.year);
+const sev = ["high", "medium", "low", "settled"];
+---
+<Base title={s.name} current={id} tab="overview">
+  <h1>{s.name}</h1>
+  <p class="lede">The compiled transcription of {s.name}, from {num(s.manuscripts)} Greek manuscripts. Made by {s.model} following this folder's <a href={`/c/${id}/rules/`}>rule file</a>.</p>
+  <div class="kpis">
+    <div class="kpi"><b>{num(s.manuscripts)}</b><span>manuscripts ({s.early} copied by 500)</span></div>
+    <div class="kpi"><b>{num(s.lines - s.uncoveredLines)}</b><span>lines covered of {num(s.lines)}</span></div>
+    <div class="kpi"><b>{num(s.words)}</b><span>words printed</span></div>
+    <div class="kpi"><b>{num(s.places)}</b><span>places of disagreement</span></div>
+    <div class="kpi"><b>{pct(s.meanWordConfidence)}</b><span>mean word confidence</span></div>
+    <div class="kpi"><b>{s.meanManuscriptsPerLine}</b><span>manuscripts per line, on average</span></div>
+  </div>
+  <h2>Read</h2>
+  <div class="chapters">{c.chapters.map((ch) => <a href={`/c/${id}/${ch}/`}>{ch}</a>)}</div>
+  <h2>Disagreements</h2>
+  <div class="kpis">
+    {sev.map((k) => <a class="kpi card" href={`/c/${id}/disagreements/?severity=${k}`}><b>{num(s.bySeverity[k] ?? 0)}</b><span><span class={`pill ${k}`}>{k}</span></span></a>)}
+    {Object.entries(s.byType).sort((a, b) => b[1] - a[1]).map(([k, v]) => <a class="kpi card" href={`/c/${id}/disagreements/?type=${encodeURIComponent(k)}`}><b>{num(v)}</b><span>{k}</span></a>)}
+  </div>
+  <p class="meta">{num(s.singularReadingsWithoutVote)} singular readings and {num(s.eyeSkipsWithoutVote)} eye-skips were set aside without a vote, as the rules say.</p>
+  {early.length > 0 && (<>
+    <h2>The earliest witnesses</h2>
+    <div class="chips">{early.map((w) => <a class="chip early" href={`/c/${id}/inputs/#ms-${w.siglum}`} title={w.name ?? ""}>{w.siglum} · {w.century}</a>)}</div>
+  </>)}
+  <h2>Output files</h2>
+  <p class="meta">Saved next to the rule file: <a href={`https://github.com/openlexis/transcription/tree/main/compilations/${id}`}>compilations/{id}</a>. Hash of this output: <code>{s.sha256.slice(0, 16)}…</code></p>
+</Base>

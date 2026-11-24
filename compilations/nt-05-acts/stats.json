@@ -1,0 +1,34 @@
+{
+ "name": "Acts",
+ "book": "Acts",
+ "model": "Grok Bot",
+ "manuscripts": 165,
+ "early": 28,
+ "lines": 1010,
+ "uncoveredLines": 4,
+ "words": 18397,
+ "columns": 25324,
+ "unanimousColumns": 1167,
+ "places": 4567,
+ "settled": 1887,
+ "contested": 377,
+ "meanPlaceConfidence": 0.8836,
+ "meanWordConfidence": 0.9169,
+ "singularReadingsWithoutVote": 15588,
+ "eyeSkipsWithoutVote": 396,
+ "byType": {
+  "substitution": 2722,
+  "omission": 736,
+  "word order": 157,
+  "addition": 768,
+  "mixed": 184
+ },
+ "bySeverity": {
+  "settled": 1887,
+  "high": 377,
+  "low": 1147,
+  "medium": 1156
+ },
+ "meanManuscriptsPerLine": 120.7962,
+ "sha256": "d3750bc4a5fc13589aa20fee58bb92e88895f722bf790f893db06994144a8fa8"
+}

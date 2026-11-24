@@ -1,0 +1,11 @@
+{
+  "name": "openlexis-transcription-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bun prepare.ts && astro build"
+  },
+  "dependencies": {
+    "astro": "^5.15.0"
+  }
+}

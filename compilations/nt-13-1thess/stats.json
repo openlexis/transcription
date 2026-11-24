@@ -1,0 +1,34 @@
+{
+ "name": "1 Thessalonians",
+ "book": "1Thess",
+ "model": "Grok Bot",
+ "manuscripts": 52,
+ "early": 9,
+ "lines": 91,
+ "uncoveredLines": 0,
+ "words": 1536,
+ "columns": 1978,
+ "unanimousColumns": 179,
+ "places": 287,
+ "settled": 189,
+ "contested": 26,
+ "meanPlaceConfidence": 0.9197,
+ "meanWordConfidence": 0.9646,
+ "singularReadingsWithoutVote": 523,
+ "eyeSkipsWithoutVote": 22,
+ "byType": {
+  "substitution": 145,
+  "mixed": 13,
+  "addition": 39,
+  "omission": 77,
+  "word order": 13
+ },
+ "bySeverity": {
+  "settled": 189,
+  "medium": 37,
+  "low": 35,
+  "high": 26
+ },
+ "meanManuscriptsPerLine": 38.0989,
+ "sha256": "68880b9a5decf435504e8d6a9f4ea02cf1151490e11e12ef4f85e3747aa775c8"
+}

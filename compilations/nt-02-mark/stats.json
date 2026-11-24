@@ -1,0 +1,34 @@
+{
+ "name": "Mark",
+ "book": "Mark",
+ "model": "Grok Bot",
+ "manuscripts": 221,
+ "early": 17,
+ "lines": 678,
+ "uncoveredLines": 0,
+ "words": 11156,
+ "columns": 17227,
+ "unanimousColumns": 310,
+ "places": 2580,
+ "settled": 780,
+ "contested": 573,
+ "meanPlaceConfidence": 0.7939,
+ "meanWordConfidence": 0.7762,
+ "singularReadingsWithoutVote": 20744,
+ "eyeSkipsWithoutVote": 737,
+ "byType": {
+  "omission": 446,
+  "substitution": 1383,
+  "mixed": 215,
+  "addition": 447,
+  "word order": 89
+ },
+ "bySeverity": {
+  "high": 573,
+  "medium": 920,
+  "settled": 780,
+  "low": 307
+ },
+ "meanManuscriptsPerLine": 180.9617,
+ "sha256": "ce5f6c6d23c46eaff4a37874d86444470b09cf8d53c9e1ac07855b9854fb83dd"
+}

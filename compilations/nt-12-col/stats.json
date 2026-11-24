@@ -1,0 +1,34 @@
+{
+ "name": "Colossians",
+ "book": "Col",
+ "model": "Grok Bot",
+ "manuscripts": 14,
+ "early": 5,
+ "lines": 95,
+ "uncoveredLines": 0,
+ "words": 1578,
+ "columns": 1746,
+ "unanimousColumns": 781,
+ "places": 107,
+ "settled": 30,
+ "contested": 18,
+ "meanPlaceConfidence": 0.7601,
+ "meanWordConfidence": 0.9869,
+ "singularReadingsWithoutVote": 29,
+ "eyeSkipsWithoutVote": 0,
+ "byType": {
+  "word order": 3,
+  "addition": 38,
+  "substitution": 53,
+  "mixed": 1,
+  "omission": 12
+ },
+ "bySeverity": {
+  "settled": 30,
+  "medium": 56,
+  "high": 18,
+  "low": 3
+ },
+ "meanManuscriptsPerLine": 7.5684,
+ "sha256": "6042b440fc44aa2b4820aacbfb0d79597389427349eac101c0c421c991583d50"
+}

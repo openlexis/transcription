@@ -1,0 +1,11 @@
+{
+  "name": "openlexis-transcription",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "import": "bun scripts/import.ts",
+    "compile": "bun --smol scripts/compile.ts",
+    "check": "bun scripts/check.ts",
+    "site": "cd site && bun run build"
+  }
+}

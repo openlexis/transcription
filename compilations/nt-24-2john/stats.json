@@ -1,0 +1,34 @@
+{
+ "name": "2 John",
+ "book": "2John",
+ "model": "Grok Bot",
+ "manuscripts": 20,
+ "early": 5,
+ "lines": 13,
+ "uncoveredLines": 0,
+ "words": 248,
+ "columns": 271,
+ "unanimousColumns": 27,
+ "places": 34,
+ "settled": 5,
+ "contested": 5,
+ "meanPlaceConfidence": 0.8315,
+ "meanWordConfidence": 0.9597,
+ "singularReadingsWithoutVote": 24,
+ "eyeSkipsWithoutVote": 0,
+ "byType": {
+  "addition": 6,
+  "omission": 10,
+  "mixed": 2,
+  "substitution": 14,
+  "word order": 2
+ },
+ "bySeverity": {
+  "medium": 13,
+  "settled": 5,
+  "low": 11,
+  "high": 5
+ },
+ "meanManuscriptsPerLine": 16.3077,
+ "sha256": "63486cfae7b0b402091a7c1f41bc364a02222a1c0134c2e2ee8296c4a141316d"
+}

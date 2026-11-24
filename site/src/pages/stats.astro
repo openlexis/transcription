@@ -1,0 +1,36 @@
+---
+import Base from "../layouts/Base.astro";
+import { compilations, pct, num } from "../lib/data";
+const list = compilations();
+const sum = (f: (s: any) => number) => list.reduce((a, c) => a + f(c.stats), 0);
+const types = [...new Set(list.flatMap((c) => Object.keys(c.stats.byType)))].sort();
+const sev = ["high", "medium", "low", "settled"];
+const words = sum((s) => s.words), wc = sum((s) => s.meanWordConfidence * s.words) / Math.max(1, words);
+---
+<Base title="Statistics" tab="stats">
+  <h1>Statistics</h1>
+  <p class="lede">Numbers for every compilation, straight from each folder's <code>stats.json</code>. A place is a stretch where the manuscripts that cover it do not all read the same; its confidence is the printed reading's share of the votes.</p>
+  <div class="kpis">
+    <div class="kpi"><b>{num(sum((s) => s.lines))}</b><span>lines</span></div>
+    <div class="kpi"><b>{num(words)}</b><span>words printed</span></div>
+    <div class="kpi"><b>{num(sum((s) => s.places))}</b><span>places of disagreement</span></div>
+    <div class="kpi"><b>{num(sum((s) => s.contested))}</b><span>contested (confidence under 60%)</span></div>
+    <div class="kpi"><b>{pct(wc)}</b><span>mean word confidence</span></div>
+    <div class="kpi"><b>{num(sum((s) => s.uncoveredLines))}</b><span>lines no manuscript covers</span></div>
+  </div>
+  <h2>By type</h2>
+  <div class="kpis">{types.map((t) => <div class="kpi"><b>{num(sum((s) => s.byType[t] ?? 0))}</b><span>{t}</span></div>)}</div>
+  <h2>By severity</h2>
+  <div class="kpis">{sev.map((t) => <div class="kpi"><b>{num(sum((s) => s.bySeverity[t] ?? 0))}</b><span><span class={`pill ${t}`}>{t}</span></span></div>)}</div>
+  <h2>Each compilation</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Compilation</th><th class="num">Manuscripts</th><th class="num">Early</th><th class="num">Lines</th><th class="num">Words</th><th class="num">Places</th><th class="num">Contested</th><th class="num">Word confidence</th><th class="num">Not covered</th></tr></thead>
+      <tbody>
+        {list.map((c) => { const s = c.stats; return (
+          <tr><td><a href={`/c/${c.id}/`}>{s.name}</a></td><td class="num">{num(s.manuscripts)}</td><td class="num">{s.early}</td><td class="num">{num(s.lines)}</td><td class="num">{num(s.words)}</td><td class="num"><a href={`/c/${c.id}/disagreements/`}>{num(s.places)}</a></td><td class="num">{num(s.contested)}</td><td class="num">{pct(s.meanWordConfidence)}</td><td class="num">{s.uncoveredLines}</td></tr>
+        ); })}
+      </tbody>
+    </table>
+  </div>
+</Base>

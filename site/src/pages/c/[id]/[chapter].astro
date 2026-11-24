@@ -1,0 +1,47 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { compilations, full, placesOf } from "../../../lib/data";
+export function getStaticPaths() { return compilations().flatMap((c) => c.chapters.map((ch) => ({ params: { id: c.id, chapter: ch } }))); }
+const { id, chapter } = Astro.params;
+const c = compilations().find((x) => x.id === id)!;
+const t = full(id), P = placesOf(id);
+const lines = t.lines.filter((l) => l.ref.split(":")[0] === chapter);
+const used = new Set<number>(); for (const l of lines) for (const w of l.words ?? []) if (w.p !== undefined) used.add(w.p);
+const places = Object.fromEntries([...used].map((p) => { const x = P[p]; return [p, { c: x.confidence, w: x.weight, t: x.type, s: x.severity, l: x.partlyLost, r: x.readings.map((r) => ({ x: r.text, s: r.share, w: r.witnesses, p: r.partly, v: r.votes, f: r.flags })) }]; }));
+const data = { id, book: t.book ?? "", lines: lines.map((l) => ({ r: l.ref, u: l.uncovered ? 1 : 0, m: l.witnesses, s: l.src, w: (l.words ?? []).map((w) => [w.t, w.c ?? 1, w.p ?? -1, w.l ?? 0, w.d ?? 0]) })), places };
+const i = c.chapters.indexOf(chapter), prev = c.chapters[i - 1], next = c.chapters[i + 1];
+const sevOf = (p?: number) => (p === undefined ? "" : `v-${P[p].severity}`);
+---
+<Base title={`${c.stats.name} ${chapter}`} current={id} tab="read" description={`${c.stats.name} chapter ${chapter}, compiled from the ancient Greek manuscripts, every word cited.`}>
+  <h1>{c.stats.name} <span style="color:var(--faint)">{chapter}</span></h1>
+  <div class="chapters">{c.chapters.map((ch) => <a href={`/c/${id}/${ch}/`} class={ch === chapter ? "on" : ""}>{ch}</a>)}</div>
+  <div class="toolbar">
+    <div class="legend">
+      <span><i style="border-color:var(--high);border-bottom-style:double"></i>contested</span>
+      <span><i style="border-color:var(--medium)"></i>real disagreement</span>
+      <span><i style="border-color:var(--settled)"></i>minor</span>
+    </div>
+    <label><input type="checkbox" id="marks" checked /> show marks</label>
+  </div>
+  <p class="meta" style="margin-top:0">Tap any word to see which manuscripts read it.</p>
+  <article class="text" lang="grc">
+    {lines.map((l, li) => (
+      <div class="ln" id={`l${l.ref.replace(":", "-")}`}>
+        <a class="no" href={`#l${l.ref.replace(":", "-")}`}>{l.ref.split(":")[1]}</a>
+        {l.uncovered ? <div class="uncovered">No manuscript we hold covers this line.</div> : (
+          <div class="greek">{(l.words ?? []).map((w, wi) => <><button class={`w ${sevOf(w.p)}`} data-l={li} data-w={wi}>{w.t}</button>{" "}</>)}</div>
+        )}
+      </div>
+    ))}
+  </article>
+  <nav class="pager">
+    {prev ? <a href={`/c/${id}/${prev}/`}>← Chapter {prev}</a> : <span></span>}
+    {next ? <a href={`/c/${id}/${next}/`}>Chapter {next} →</a> : <span></span>}
+  </nav>
+  <aside class="sheet" id="sheet" aria-live="polite" role="dialog" aria-label="Word citations">
+    <div class="grab"></div><button class="close" id="close" aria-label="Close">×</button>
+    <div id="sheet-body"></div>
+  </aside>
+  <script type="application/json" id="data" set:html={JSON.stringify(data).replace(/</g, "\\u003c")} />
+  <script src="../../../scripts/reader.ts"></script>
+</Base>
