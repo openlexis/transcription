@@ -56,7 +56,7 @@ export function unitRef(n: string): { book: number; lxx?: string; ref: string } 
 }
 export type Spell = { sacred: (w: string) => string; numeral: (letters: string) => string[] | undefined };
 const FIRST = (r: Node) => r.a.type === "orig" || r.a.type === "main-corr" || r.a.hand === "firsthand" || r.a.hand === "*" || r.a.hand === "firsthand*";
-/** Reads one transcription file into its verse units in text order (several units can share a ref when a unit is split by a page). */
+/** Reads one transcription file into its line units in text order (several units can share a ref when a unit is split by a page). */
 export function teiUnits(xml: string, sp: Spell): TeiUnit[] {
   const body = xml.replace(/<teiHeader[\s\S]*?<\/teiHeader>/, "");
   const root = parseXml(body), units: TeiUnit[] = [], CONT = new Set<TeiUnit>();
