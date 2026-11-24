@@ -1,5 +1,5 @@
 ---
-import { compilations } from "../lib/data";
+import { compilations, SECTIONS, sectionOf } from "../lib/data";
 interface Props { fixed?: string }
 const { fixed } = Astro.props;
 const list = compilations();
@@ -9,7 +9,7 @@ const list = compilations();
     <fieldset><legend>Book</legend>
       <select name="book" aria-label="Book">
         <option value="">All books</option>
-        {list.map((c) => <option value={c.id}>{c.stats.name}</option>)}
+        {Object.entries(SECTIONS).map(([k, name]) => <optgroup label={name}>{list.filter((c) => sectionOf(c.id) === k).map((c) => <option value={c.id}>{c.stats.name}</option>)}</optgroup>)}
       </select>
     </fieldset>
   )}
@@ -29,7 +29,7 @@ const list = compilations();
       <option value="conf">Least confident first</option>
       <option value="size">Most readings first</option>
     </select>
-    <input type="search" name="q" placeholder="Greek word or 3:16" aria-label="Search" />
+    <input type="search" name="q" placeholder="A word or 3:16" aria-label="Search" />
   </fieldset>
 </form>
 <p class="count" id="count">Loading…</p>

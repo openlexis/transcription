@@ -49,3 +49,30 @@ export const NT_BOOKS = [
   ["Gal", "Galatians"], ["Eph", "Ephesians"], ["Phil", "Philippians"], ["Col", "Colossians"], ["1Thess", "1 Thessalonians"], ["2Thess", "2 Thessalonians"], ["1Tim", "1 Timothy"], ["2Tim", "2 Timothy"],
   ["Titus", "Titus"], ["Phlm", "Philemon"], ["Heb", "Hebrews"], ["Jas", "James"], ["1Pet", "1 Peter"], ["2Pet", "2 Peter"], ["1John", "1 John"], ["2John", "2 John"], ["3John", "3 John"], ["Jude", "Jude"], ["Rev", "Revelation"],
 ].map(([id, name], i) => ({ id, name, n: i + 1 }));
+
+/** The books of the Hebrew Bible, in the order of the Leningrad Codex transcription (UXLC); uxlc is its file name. */
+export const HEB_BOOKS = [
+  ["Gen", "Genesis", "Genesis"], ["Exod", "Exodus", "Exodus"], ["Lev", "Leviticus", "Leviticus"], ["Num", "Numbers", "Numbers"], ["Deut", "Deuteronomy", "Deuteronomy"],
+  ["Josh", "Joshua", "Joshua"], ["Judg", "Judges", "Judges"], ["1Sam", "1 Samuel", "Samuel_1"], ["2Sam", "2 Samuel", "Samuel_2"], ["1Kgs", "1 Kings", "Kings_1"], ["2Kgs", "2 Kings", "Kings_2"],
+  ["Isa", "Isaiah", "Isaiah"], ["Jer", "Jeremiah", "Jeremiah"], ["Ezek", "Ezekiel", "Ezekiel"], ["Hos", "Hosea", "Hosea"], ["Joel", "Joel", "Joel"], ["Amos", "Amos", "Amos"],
+  ["Obad", "Obadiah", "Obadiah"], ["Jonah", "Jonah", "Jonah"], ["Mic", "Micah", "Micah"], ["Nah", "Nahum", "Nahum"], ["Hab", "Habakkuk", "Habakkuk"], ["Zeph", "Zephaniah", "Zephaniah"],
+  ["Hag", "Haggai", "Haggai"], ["Zech", "Zechariah", "Zechariah"], ["Mal", "Malachi", "Malachi"], ["1Chr", "1 Chronicles", "Chronicles_1"], ["2Chr", "2 Chronicles", "Chronicles_2"],
+  ["Ps", "Psalms", "Psalms"], ["Job", "Job", "Job"], ["Prov", "Proverbs", "Proverbs"], ["Ruth", "Ruth", "Ruth"], ["Song", "Song of Songs", "Song_of_Songs"], ["Eccl", "Ecclesiastes", "Ecclesiastes"],
+  ["Lam", "Lamentations", "Lamentations"], ["Esth", "Esther", "Esther"], ["Dan", "Daniel", "Daniel"], ["Ezra", "Ezra", "Ezra"], ["Neh", "Nehemiah", "Nehemiah"],
+].map(([id, name, uxlc], i) => ({ id, name, uxlc, n: i + 1 }));
+
+/** The books of the Greek Old Testament held in a manuscript transcription, in the order of their First1KGreek work numbers. */
+export const LXX_BOOKS = [
+  ["001", "Gen", "Genesis"], ["003", "Lev", "Leviticus"], ["004", "Num", "Numbers"], ["005", "Deut", "Deuteronomy"], ["006", "Josh", "Joshua"], ["008", "Judg", "Judges"],
+  ["012", "2Kgdms", "2 Kingdoms"], ["015", "1Chr", "1 Chronicles"], ["018", "2Esd", "2 Esdras"], ["019", "Esth", "Esther"], ["020", "Jdt", "Judith"], ["021", "Tob", "Tobit"],
+  ["023", "1Macc", "1 Maccabees"], ["026", "4Macc", "4 Maccabees"], ["027", "Ps", "Psalms"], ["029", "Prov", "Proverbs"], ["030", "Eccl", "Ecclesiastes"], ["031", "Song", "Song of Songs"],
+  ["032", "Job", "Job"], ["033", "Wis", "Wisdom"], ["034", "Sir", "Sirach"], ["039", "Joel", "Joel"], ["040", "Obad", "Obadiah"], ["041", "Jonah", "Jonah"], ["042", "Nah", "Nahum"],
+  ["043", "Hab", "Habakkuk"], ["044", "Zeph", "Zephaniah"], ["045", "Hag", "Haggai"], ["046", "Zech", "Zechariah"], ["047", "Mal", "Malachi"], ["048", "Isa", "Isaiah"], ["049", "Jer", "Jeremiah"], ["051", "Lam", "Lamentations"],
+].map(([n, id, name], i) => ({ n, id, name, i: i + 1 }));
+
+/** Hebrew key (RULES.md, rule 5): the consonants; final letter forms written as the plain letters; a ו or י inside a word
+ * (not its first or last letter), the letters copyists added or left out to mark vowels, is not compared. */
+export const hebrewSpell = (w: string) => {
+  const c = w.replace(/[^\u05D0-\u05EA]/g, "").replace(/ך/g, "כ").replace(/ם/g, "מ").replace(/ן/g, "נ").replace(/ף/g, "פ").replace(/ץ/g, "צ");
+  return c.length > 2 ? c[0] + c.slice(1, -1).replace(/[וי]/g, "") + c[c.length - 1] : c;
+};

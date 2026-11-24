@@ -1,34 +1,35 @@
 {
  "name": "Mark",
  "book": "Mark",
+ "language": "Greek",
  "model": "Grok Bot",
- "manuscripts": 221,
+ "manuscripts": 233,
  "early": 17,
  "lines": 678,
  "uncoveredLines": 0,
- "words": 11156,
- "columns": 17227,
- "unanimousColumns": 310,
- "places": 2580,
- "settled": 780,
- "contested": 573,
- "meanPlaceConfidence": 0.7939,
- "meanWordConfidence": 0.7762,
- "singularReadingsWithoutVote": 20744,
- "eyeSkipsWithoutVote": 737,
+ "words": 11161,
+ "columns": 17802,
+ "unanimousColumns": 284,
+ "places": 2631,
+ "settled": 819,
+ "contested": 571,
+ "meanPlaceConfidence": 0.7977,
+ "meanWordConfidence": 0.7721,
+ "singularReadingsWithoutVote": 21004,
+ "eyeSkipsWithoutVote": 728,
  "byType": {
-  "omission": 446,
-  "substitution": 1383,
-  "mixed": 215,
-  "addition": 447,
-  "word order": 89
+  "substitution": 1402,
+  "omission": 451,
+  "mixed": 229,
+  "addition": 461,
+  "word order": 88
  },
  "bySeverity": {
-  "high": 573,
-  "medium": 920,
-  "settled": 780,
-  "low": 307
+  "settled": 819,
+  "high": 572,
+  "medium": 928,
+  "low": 312
  },
- "meanManuscriptsPerLine": 180.9617,
- "sha256": "ce5f6c6d23c46eaff4a37874d86444470b09cf8d53c9e1ac07855b9854fb83dd"
+ "meanManuscriptsPerLine": 187.1032,
+ "sha256": "28f150c3dfcf42505ffb92ea83a7b1398e518f259d499f17294bf3177e1e2317"
 }

@@ -1,7 +1,7 @@
 :root {
   --paper: #f7f3ea; --card: #fffdf8; --ink: #1d1b18; --soft: #5d574d; --faint: #8c8577; --line: #e4ddcf;
   --accent: #0f5e5a; --accent-soft: #dcebe8; --high: #b4441f; --medium: #c98a12; --low: #7a8f8c; --settled: #b9c4c2;
-  --greek: "Gentium Book Plus", "Noto Serif", "Times New Roman", serif; --ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --greek: "Gentium Book Plus", "Noto Serif Hebrew", "Noto Serif", "Times New Roman", serif; --hebrew: "Noto Serif Hebrew", "SBL Hebrew", "Ezra SIL", "Times New Roman", serif; --ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --r: 14px;
 }
 * { box-sizing: border-box; }
@@ -62,6 +62,8 @@ th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color:
 .ln:target { background: #fff6dc; border-radius: 8px; }
 .ln .no { color: var(--faint); font-size: .8rem; padding-top: .55em; font-variant-numeric: tabular-nums; text-decoration: none; }
 .greek { font-family: var(--greek); font-size: 1.32rem; line-height: 1.9; }
+.hebrew { font-family: var(--hebrew); font-size: 1.5rem; line-height: 2; }
+.hebrew-text .no { text-align: left; }
 .w { cursor: pointer; border: 0; background: none; font: inherit; color: inherit; padding: 0 1px; margin: 0; border-radius: 4px; border-bottom: 2px solid transparent; }
 .w:hover, .w:focus-visible { background: var(--accent-soft); outline: none; }
 .w.sel { background: #ffe8a3; }
@@ -126,6 +128,7 @@ body.marks-off .w { border-bottom-color: transparent !important; }
   .nav a, .subnav a { padding: 5px 9px; font-size: .88rem; }
   .switch-row { position: sticky; top: 0; }
   .greek { font-size: 1.22rem; line-height: 1.85; }
+  .hebrew { font-size: 1.36rem; line-height: 1.95; }
   .text { padding: 4px 12px 12px; }
   .ln { grid-template-columns: 2em 1fr; }
   h1 { margin-top: 18px; }

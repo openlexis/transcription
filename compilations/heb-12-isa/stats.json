@@ -1,0 +1,34 @@
+{
+ "name": "Isaiah",
+ "book": "Isa",
+ "language": "Hebrew",
+ "model": "Grok Bot",
+ "manuscripts": 23,
+ "early": 22,
+ "lines": 1291,
+ "uncoveredLines": 0,
+ "words": 17150,
+ "columns": 17153,
+ "unanimousColumns": 7319,
+ "places": 1738,
+ "settled": 1686,
+ "contested": 39,
+ "meanPlaceConfidence": 0.9858,
+ "meanWordConfidence": 0.9985,
+ "singularReadingsWithoutVote": 3,
+ "eyeSkipsWithoutVote": 10,
+ "byType": {
+  "substitution": 1560,
+  "omission": 115,
+  "lost text": 2,
+  "mixed": 60,
+  "word order": 1
+ },
+ "bySeverity": {
+  "settled": 1686,
+  "medium": 13,
+  "high": 39
+ },
+ "meanManuscriptsPerLine": 2.8885,
+ "sha256": "3ad558d6894d71419f47e6786658b5a01ca3ce4bd9b78574e573c0bd850bbdea"
+}

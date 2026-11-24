@@ -1,34 +1,35 @@
 {
  "name": "Ephesians",
  "book": "Eph",
+ "language": "Greek",
  "model": "Grok Bot",
- "manuscripts": 146,
+ "manuscripts": 175,
  "early": 11,
  "lines": 155,
  "uncoveredLines": 0,
- "words": 2401,
- "columns": 3899,
- "unanimousColumns": 166,
- "places": 636,
- "settled": 301,
+ "words": 2404,
+ "columns": 3968,
+ "unanimousColumns": 112,
+ "places": 645,
+ "settled": 312,
  "contested": 39,
- "meanPlaceConfidence": 0.9161,
- "meanWordConfidence": 0.9385,
- "singularReadingsWithoutVote": 1736,
- "eyeSkipsWithoutVote": 90,
+ "meanPlaceConfidence": 0.9182,
+ "meanWordConfidence": 0.9308,
+ "singularReadingsWithoutVote": 1998,
+ "eyeSkipsWithoutVote": 109,
  "byType": {
-  "substitution": 343,
+  "substitution": 344,
   "word order": 14,
-  "addition": 128,
-  "omission": 124,
+  "addition": 127,
+  "omission": 133,
   "mixed": 27
  },
  "bySeverity": {
-  "settled": 301,
-  "medium": 102,
+  "settled": 312,
+  "medium": 98,
   "high": 39,
-  "low": 194
+  "low": 196
  },
- "meanManuscriptsPerLine": 131.7613,
- "sha256": "d735ebe666d6f95ff52d6c708bd091f2797fb058be45c2c51d7226e8b45b9a8a"
+ "meanManuscriptsPerLine": 153.5161,
+ "sha256": "ebc1249cc38a9d3dd1a3c09487fab78a6a8ab992e57eb10fa564eb5a2a2617f0"
 }

@@ -15,7 +15,7 @@ transcription, and who does the work. The output is saved in this folder, next t
 ## How the model does the work
 
 1. Read this file from top to bottom. Read nothing that is not listed under Inputs.
-2. Run `bun run compile compilations/nt-10-eph`. It carries out rules 1 to 12 below exactly as written, in that
+2. Run `bun run compile compilations/nt-10-eph`. It carries out rules 1 to 13 below exactly as written, in that
    order, with every tie broken as stated, so the same inputs always give the same output. Nothing in it is random.
 3. Run `bun run check` (it reads the output only and takes about a second). If it fails, report what failed and change nothing by hand.
 4. Save the output in this folder: `transcription.json`, `transcription.md`, `disagreements.json` and `stats.json`.
@@ -23,26 +23,26 @@ transcription, and who does the work. The output is saved in this folder, next t
 
 ## Rules
 
-1. **Inputs.** Read only the transcriptions listed under Inputs: ancient manuscripts in Greek, the language the book was written in.
-   No printed edition, translation, quotation or image is read. Each transcription gives the first hand of its manuscript;
-   a word the transcriber marks as damaged, supplied or unread counts as lost.
+1. **Inputs.** Read only the transcriptions listed under Inputs: ancient manuscripts in Greek, the language the book was written in: continuous-text manuscripts, lectionaries (the book read in lessons) and the biblical text of catena manuscripts (the book cut into pieces between comments).
+   No printed edition, translation, quotation by a later writer or image is read. Each transcription gives the first hand of
+   its manuscript; a word the transcriber marks as damaged, supplied or unread counts as lost.
 2. **One manuscript, one voice.** Leaves of one manuscript that carry separate numbers are one manuscript (P64 with P67,
    P77 with P103). Several transcriptions of one manuscript are one manuscript.
 3. **Proximity.** A manuscript copied nearer in time to the original counts more. Its proximity is
-   T = min(1, 2^(-(year - origin year) / half-life)): every 100 years after the year 100 halve it. The year is the middle of
-   the date range in the INTF catalogue; an undated manuscript is taken as written in 1500. A manuscript written more than
+   T = min(1, 2^(-(year - origin year) / half-life)): every 100 years after the year 100 halve it. The year is
+   the middle of the date range in the INTF catalogue; an undated manuscript is taken as written in 1500. A manuscript written more than
    400 years after the origin year (after 500) is a late copy.
 4. **Which transcription.** Where several transcriptions of one manuscript hold a line, the one with the most words in that
-   line is read; a tie goes to the one listed first under Inputs for that manuscript (the holder order: Codex Sinaiticus
-   Project, Codex Zacynthius project, IGNTP and ITSEE files, INTF, CNTR).
+   line is read; a tie goes to the one listed first under Inputs for that manuscript (the holder order: Codex Sinaiticus Project, Codex Zacynthius project, IGNTP and ITSEE files, INTF, CNTR).
 5. **Alignment.** For each line, the manuscripts' words are lined up into columns, oldest manuscript first (then by
-   number). Spellings that copyists used for the same word count as one word: ει written for ι, doubled letters, a movable
+   name). Spellings that copyists used for the same word count as one word: ει written for ι, doubled letters, a movable
    ν, and the final σ of ουτως, αχρις, μεχρις. Accents and breathings are not compared (the manuscripts have none).
    Sacred names written short are written out, and so are numbers written as letters.
 6. **Places.** A column where the manuscripts that cover it do not all read the same is a variant. Neighbouring variant
    columns are one place. Two places at most two columns apart that share a word (a word moved) are one place, with the
-   columns between them. A manuscript that has a lacuna anywhere in a place does not vote there. A manuscript that has
-   a line covers every column of it; where it has no word in a column and no lacuna, it reads that the word is absent.
+   columns between them. A manuscript that has a line covers every column of it; where it has no word in a column and no
+   lacuna, it reads that the word is absent. A manuscript with a lacuna in a place votes there only where the words it keeps
+   agree with exactly one complete reading, and then for that reading.
 7. **Readings.** At each place, each manuscript reads its whole run of words across the place. The compiled transcription
    always prints, at a place, a reading that some manuscript has whole.
 8. **Singular readings.** A reading found in one manuscript alone, where another reading has two or more, has no vote. It is
@@ -59,8 +59,11 @@ transcription, and who does the work. The output is saved in this folder, next t
 12. **Labels.** Each place gets a type, comparing the printed reading with the next strongest: omission, addition, word order,
     substitution, or mixed (lost text where no complete reading is left). Its weight is the next strongest reading's share of the
     votes. Its severity is high where the confidence is under 0.6, medium where the weight is at least 0.1, low where it is at
-    least 0.01, and settled below that. Each printed form is spelled as in the oldest manuscript that reads it (then by number).
+    least 0.01, and settled below that. Each printed form is spelled as in the oldest manuscript that reads it (then by name).
     A line that no manuscript covers is listed as not covered and is not filled from any other source.
+13. **Pieces of a line.** A lectionary, a catena or a scroll may give only part of a line (a lesson can start or stop
+    inside it; a catena quotes a piece before each comment; a scroll is mostly fragments). Such a manuscript never reads that a
+    word is absent: a word it does not have counts as lost, and rule 6 decides whether it votes.
 
 ## Citations
 
@@ -69,7 +72,7 @@ to the holder's file it came from, and to the holder's page images where a viewe
 
 ## Inputs
 
-146 manuscripts, 166 transcriptions:
+175 manuscripts, 197 transcriptions:
 
 - `transcriptions/greek/01.cntr.txt`
 - `transcriptions/greek/01.igntp-ephesians.txt`
@@ -105,6 +108,7 @@ to the holder's file it came from, and to the holder's page images where a viewe
 - `transcriptions/greek/049.igntp-ephesians.txt`
 - `transcriptions/greek/056.igntp-ephesians.txt`
 - `transcriptions/greek/06.igntp-ephesians.txt`
+- `transcriptions/greek/075.igntp-catena.txt`
 - `transcriptions/greek/075.igntp-ephesians.txt`
 - `transcriptions/greek/082.igntp-ephesians.txt`
 - `transcriptions/greek/1.igntp-ephesians.txt`
@@ -149,24 +153,36 @@ to the holder's file it came from, and to the holder's page images where a viewe
 - `transcriptions/greek/1881.igntp-ephesians.txt`
 - `transcriptions/greek/1886.igntp-ephesians.txt`
 - `transcriptions/greek/1893.igntp-ephesians.txt`
+- `transcriptions/greek/1905.igntp-catena.txt`
+- `transcriptions/greek/1907.igntp-catena.txt`
 - `transcriptions/greek/1908.igntp-ephesians.txt`
 - `transcriptions/greek/1910.igntp-ephesians.txt`
 - `transcriptions/greek/1912.igntp-ephesians.txt`
 - `transcriptions/greek/1913.igntp-ephesians.txt`
+- `transcriptions/greek/1916.igntp-catena.txt`
 - `transcriptions/greek/1918.igntp-ephesians.txt`
+- `transcriptions/greek/1919.igntp-catena.txt`
+- `transcriptions/greek/1923.igntp-catena.txt`
+- `transcriptions/greek/1932.igntp-catena.txt`
 - `transcriptions/greek/1939.igntp-ephesians.txt`
 - `transcriptions/greek/1942.igntp-ephesians.txt`
 - `transcriptions/greek/1959.igntp-ephesians.txt`
 - `transcriptions/greek/1962.igntp-ephesians.txt`
 - `transcriptions/greek/1963.igntp-ephesians.txt`
+- `transcriptions/greek/1971.igntp-catena.txt`
+- `transcriptions/greek/1980.igntp-catena.txt`
+- `transcriptions/greek/1982.igntp-catena.txt`
 - `transcriptions/greek/1985.igntp-ephesians.txt`
 - `transcriptions/greek/1987.igntp-ephesians.txt`
 - `transcriptions/greek/1991.igntp-ephesians.txt`
 - `transcriptions/greek/1996.igntp-ephesians.txt`
+- `transcriptions/greek/1997.igntp-catena.txt`
+- `transcriptions/greek/1998.igntp-catena.txt`
 - `transcriptions/greek/1999.igntp-ephesians.txt`
 - `transcriptions/greek/2004.igntp-ephesians.txt`
 - `transcriptions/greek/2005.igntp-ephesians.txt`
 - `transcriptions/greek/2008.igntp-ephesians.txt`
+- `transcriptions/greek/2011.igntp-catena.txt`
 - `transcriptions/greek/2011.igntp-ephesians.txt`
 - `transcriptions/greek/2012.igntp-ephesians.txt`
 - `transcriptions/greek/203.igntp-ephesians.txt`
@@ -174,6 +190,7 @@ to the holder's file it came from, and to the holder's page images where a viewe
 - `transcriptions/greek/2138.igntp-ephesians.txt`
 - `transcriptions/greek/218.igntp-ephesians.txt`
 - `transcriptions/greek/2180.igntp-ephesians.txt`
+- `transcriptions/greek/2183.igntp-catena.txt`
 - `transcriptions/greek/2243.igntp-ephesians.txt`
 - `transcriptions/greek/2344.igntp-ephesians.txt`
 - `transcriptions/greek/2352.igntp-ephesians.txt`
@@ -192,6 +209,7 @@ to the holder's file it came from, and to the holder's page images where a viewe
 - `transcriptions/greek/2853.igntp-ephesians.txt`
 - `transcriptions/greek/2865.igntp-ephesians.txt`
 - `transcriptions/greek/296.igntp-ephesians.txt`
+- `transcriptions/greek/2962.igntp-catena.txt`
 - `transcriptions/greek/322.igntp-ephesians.txt`
 - `transcriptions/greek/326.igntp-ephesians.txt`
 - `transcriptions/greek/33.igntp-ephesians.txt`
@@ -215,6 +233,7 @@ to the holder's file it came from, and to the holder's page images where a viewe
 - `transcriptions/greek/6.intf.txt`
 - `transcriptions/greek/606.igntp-ephesians.txt`
 - `transcriptions/greek/61.igntp-ephesians.txt`
+- `transcriptions/greek/627.igntp-catena.txt`
 - `transcriptions/greek/629.igntp-ephesians.txt`
 - `transcriptions/greek/636.igntp-ephesians.txt`
 - `transcriptions/greek/664.igntp-ephesians.txt`
@@ -222,9 +241,24 @@ to the holder's file it came from, and to the holder's page images where a viewe
 - `transcriptions/greek/69.igntp-ephesians.txt`
 - `transcriptions/greek/81.igntp-ephesians.txt`
 - `transcriptions/greek/88.igntp-ephesians.txt`
+- `transcriptions/greek/91.igntp-catena.txt`
 - `transcriptions/greek/915.igntp-ephesians.txt`
 - `transcriptions/greek/93.igntp-ephesians.txt`
 - `transcriptions/greek/94.igntp-ephesians.txt`
+- `transcriptions/greek/L1126.igntp-ephesians.txt`
+- `transcriptions/greek/L1159.igntp-ephesians.txt`
+- `transcriptions/greek/L1178.igntp-ephesians.txt`
+- `transcriptions/greek/L1188.igntp-ephesians.txt`
+- `transcriptions/greek/L1298.igntp-ephesians.txt`
+- `transcriptions/greek/L1440.igntp-ephesians.txt`
+- `transcriptions/greek/L156.igntp-ephesians.txt`
+- `transcriptions/greek/L169.igntp-ephesians.txt`
+- `transcriptions/greek/L2010.igntp-ephesians.txt`
+- `transcriptions/greek/L2058.igntp-ephesians.txt`
+- `transcriptions/greek/L23.igntp-ephesians.txt`
+- `transcriptions/greek/L587.igntp-ephesians.txt`
+- `transcriptions/greek/L60.igntp-ephesians.txt`
+- `transcriptions/greek/L809.igntp-ephesians.txt`
 - `transcriptions/greek/P132.cntr.txt`
 - `transcriptions/greek/P132.igntp-ephesians.txt`
 - `transcriptions/greek/P132.intf.txt`

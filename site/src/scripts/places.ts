@@ -45,7 +45,7 @@ function page() {
   const html = rows.slice(shown, shown + 40).map(({ id, name, p }) => {
     const [pid, ref, type, sev, w, c, rs] = p, ch = ref.split(":")[0];
     return `<div class="place"><div class="head"><a href="/c/${id}/${ch}/?p=${pid}#l${ref.replace(":", "-")}">${esc(fixed ? "" : name + " ")}${esc(ref)}</a><span class="pill ${sev}">${sev}</span><span class="pill">${esc(type)}</span><span class="meta">confidence ${pct(c)} · weight ${pct(w)}</span></div>
-      <div class="rds">${rs.slice(0, 6).map((r, i) => `<div class="r${i === 0 ? " win" : ""}"><div class="g" lang="grc">${esc(r[0])}</div><div class="n">${pct(r[1])} · ${r[2]} ms</div><div class="sig">${esc(r[5])}${r[2] > 16 ? " …" : ""}${r[4] ? ` · ${r[4].split(",").map((f) => WHY[f] ?? f).join(", ")}` : ""}</div></div>`).join("")}${rs.length > 6 ? `<div class="meta">and ${rs.length - 6} more readings</div>` : ""}</div></div>`;
+      <div class="rds">${rs.slice(0, 6).map((r, i) => `<div class="r${i === 0 ? " win" : ""}"><div class="g" dir="auto">${esc(r[0])}</div><div class="n">${pct(r[1])} · ${r[2]} ms</div><div class="sig">${esc(r[5])}${r[2] > 16 ? " …" : ""}${r[4] ? ` · ${r[4].split(",").map((f) => WHY[f] ?? f).join(", ")}` : ""}</div></div>`).join("")}${rs.length > 6 ? `<div class="meta">and ${rs.length - 6} more readings</div>` : ""}</div></div>`;
   }).join("");
   listEl.insertAdjacentHTML("beforeend", html);
   shown += 40; more.hidden = shown >= rows.length;

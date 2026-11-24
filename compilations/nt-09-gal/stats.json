@@ -1,34 +1,35 @@
 {
  "name": "Galatians",
  "book": "Gal",
+ "language": "Greek",
  "model": "Grok Bot",
- "manuscripts": 203,
+ "manuscripts": 217,
  "early": 14,
  "lines": 150,
  "uncoveredLines": 1,
- "words": 2217,
- "columns": 3819,
- "unanimousColumns": 73,
- "places": 497,
- "settled": 258,
- "contested": 50,
- "meanPlaceConfidence": 0.89,
- "meanWordConfidence": 0.8866,
- "singularReadingsWithoutVote": 2301,
+ "words": 2219,
+ "columns": 3829,
+ "unanimousColumns": 66,
+ "places": 508,
+ "settled": 266,
+ "contested": 51,
+ "meanPlaceConfidence": 0.8921,
+ "meanWordConfidence": 0.8858,
+ "singularReadingsWithoutVote": 2320,
  "eyeSkipsWithoutVote": 106,
  "byType": {
-  "substitution": 298,
-  "addition": 79,
-  "omission": 75,
+  "substitution": 311,
+  "addition": 81,
+  "omission": 72,
   "word order": 16,
-  "mixed": 29
+  "mixed": 28
  },
  "bySeverity": {
-  "settled": 258,
-  "medium": 79,
-  "high": 50,
-  "low": 110
+  "settled": 266,
+  "medium": 77,
+  "high": 51,
+  "low": 114
  },
- "meanManuscriptsPerLine": 189.4698,
- "sha256": "783260e9e2db67cba0ba0ed952476afbe128304fff48c6c113792ade01674602"
+ "meanManuscriptsPerLine": 200.8658,
+ "sha256": "62c6f04bfd21d77dc0ff4fa0bf2e85b97a67433b9284374c749ba4e217e64e57"
 }

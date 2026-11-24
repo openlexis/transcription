@@ -1,33 +1,34 @@
 {
  "name": "2 Timothy",
  "book": "2Tim",
+ "language": "Greek",
  "model": "Grok Bot",
- "manuscripts": 5,
+ "manuscripts": 6,
  "early": 3,
  "lines": 83,
  "uncoveredLines": 0,
  "words": 1239,
- "columns": 1284,
- "unanimousColumns": 1037,
- "places": 38,
- "settled": 24,
+ "columns": 1289,
+ "unanimousColumns": 1025,
+ "places": 46,
+ "settled": 32,
  "contested": 2,
- "meanPlaceConfidence": 0.8937,
+ "meanPlaceConfidence": 0.9119,
  "meanWordConfidence": 0.9967,
- "singularReadingsWithoutVote": 2,
+ "singularReadingsWithoutVote": 5,
  "eyeSkipsWithoutVote": 0,
  "byType": {
-  "substitution": 26,
+  "substitution": 31,
   "word order": 3,
   "omission": 2,
-  "addition": 3,
+  "addition": 6,
   "mixed": 4
  },
  "bySeverity": {
-  "settled": 24,
+  "settled": 32,
   "medium": 12,
   "high": 2
  },
- "meanManuscriptsPerLine": 4.9759,
- "sha256": "0b75311adf30a21d3b143dc30d6e68ca6425b028f6102c24e012415c72bb65be"
+ "meanManuscriptsPerLine": 5.4578,
+ "sha256": "a5c6517ccfe089b8f1ccbe51c709f2f3e118c01aabb05c2330d3bb1123015b2c"
 }

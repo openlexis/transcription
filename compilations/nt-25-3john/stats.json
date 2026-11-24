@@ -1,20 +1,21 @@
 {
  "name": "3 John",
  "book": "3John",
+ "language": "Greek",
  "model": "Grok Bot",
- "manuscripts": 44,
+ "manuscripts": 48,
  "early": 5,
  "lines": 15,
  "uncoveredLines": 0,
  "words": 219,
- "columns": 262,
- "unanimousColumns": 20,
+ "columns": 275,
+ "unanimousColumns": 18,
  "places": 37,
  "settled": 9,
  "contested": 5,
  "meanPlaceConfidence": 0.8376,
  "meanWordConfidence": 0.9596,
- "singularReadingsWithoutVote": 35,
+ "singularReadingsWithoutVote": 36,
  "eyeSkipsWithoutVote": 0,
  "byType": {
   "omission": 6,
@@ -29,6 +30,6 @@
   "low": 8,
   "high": 5
  },
- "meanManuscriptsPerLine": 25.6667,
- "sha256": "129fb3e31a13acdefc87dbb10429d9be368364d3e7c89d4540d72f8b7674f093"
+ "meanManuscriptsPerLine": 26.6,
+ "sha256": "722f9cc0021fdabda1d01276b34a438c0bc468eb25a009c4c77983bf3a448637"
 }

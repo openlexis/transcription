@@ -1,34 +1,35 @@
 {
  "name": "Luke",
  "book": "Luke",
+ "language": "Greek",
  "model": "Grok Bot",
- "manuscripts": 42,
+ "manuscripts": 47,
  "early": 19,
  "lines": 1151,
  "uncoveredLines": 0,
  "words": 19357,
- "columns": 22950,
- "unanimousColumns": 5292,
- "places": 3033,
- "settled": 686,
+ "columns": 22968,
+ "unanimousColumns": 5267,
+ "places": 3040,
+ "settled": 693,
  "contested": 421,
- "meanPlaceConfidence": 0.8041,
+ "meanPlaceConfidence": 0.8047,
  "meanWordConfidence": 0.9579,
- "singularReadingsWithoutVote": 2862,
+ "singularReadingsWithoutVote": 2879,
  "eyeSkipsWithoutVote": 86,
  "byType": {
   "omission": 482,
-  "substitution": 1607,
-  "addition": 653,
+  "substitution": 1612,
+  "addition": 655,
   "word order": 150,
   "mixed": 141
  },
  "bySeverity": {
-  "medium": 1542,
+  "medium": 1540,
   "high": 421,
-  "settled": 686,
-  "low": 384
+  "settled": 693,
+  "low": 386
  },
- "meanManuscriptsPerLine": 16.5169,
- "sha256": "ae04bc0a8a49b07c185aead7202cc1f6afb286502051483ae34584f71980cfce"
+ "meanManuscriptsPerLine": 16.6142,
+ "sha256": "72432e01a9aef91cd2a076c391093ec96cc1700d5dd6e354561fcd9d2d04468c"
 }

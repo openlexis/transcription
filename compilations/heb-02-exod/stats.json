@@ -1,0 +1,35 @@
+{
+ "name": "Exodus",
+ "book": "Exod",
+ "language": "Hebrew",
+ "model": "Grok Bot",
+ "manuscripts": 42,
+ "early": 40,
+ "lines": 1213,
+ "uncoveredLines": 0,
+ "words": 16890,
+ "columns": 18130,
+ "unanimousColumns": 8158,
+ "places": 906,
+ "settled": 38,
+ "contested": 13,
+ "meanPlaceConfidence": 0.8182,
+ "meanWordConfidence": 0.9895,
+ "singularReadingsWithoutVote": 20,
+ "eyeSkipsWithoutVote": 19,
+ "byType": {
+  "substitution": 616,
+  "mixed": 73,
+  "addition": 155,
+  "omission": 56,
+  "lost text": 1,
+  "word order": 5
+ },
+ "bySeverity": {
+  "medium": 855,
+  "settled": 38,
+  "high": 13
+ },
+ "meanManuscriptsPerLine": 2.8937,
+ "sha256": "2c7c58376fefe6bf30aab5ff93f51b26a025b7c9fe0d91092028aa63c245c0a6"
+}

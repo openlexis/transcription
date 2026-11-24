@@ -1,34 +1,35 @@
 {
  "name": "Acts",
  "book": "Acts",
+ "language": "Greek",
  "model": "Grok Bot",
- "manuscripts": 165,
+ "manuscripts": 167,
  "early": 28,
  "lines": 1010,
  "uncoveredLines": 4,
- "words": 18397,
- "columns": 25324,
- "unanimousColumns": 1167,
- "places": 4567,
- "settled": 1887,
- "contested": 377,
- "meanPlaceConfidence": 0.8836,
- "meanWordConfidence": 0.9169,
- "singularReadingsWithoutVote": 15588,
- "eyeSkipsWithoutVote": 396,
+ "words": 18389,
+ "columns": 25415,
+ "unanimousColumns": 1076,
+ "places": 4624,
+ "settled": 1955,
+ "contested": 379,
+ "meanPlaceConfidence": 0.885,
+ "meanWordConfidence": 0.9158,
+ "singularReadingsWithoutVote": 16028,
+ "eyeSkipsWithoutVote": 412,
  "byType": {
-  "substitution": 2722,
-  "omission": 736,
-  "word order": 157,
-  "addition": 768,
-  "mixed": 184
+  "substitution": 2804,
+  "omission": 712,
+  "word order": 156,
+  "addition": 771,
+  "mixed": 181
  },
  "bySeverity": {
-  "settled": 1887,
-  "high": 377,
-  "low": 1147,
-  "medium": 1156
+  "settled": 1955,
+  "high": 379,
+  "low": 1146,
+  "medium": 1144
  },
- "meanManuscriptsPerLine": 120.7962,
- "sha256": "d3750bc4a5fc13589aa20fee58bb92e88895f722bf790f893db06994144a8fa8"
+ "meanManuscriptsPerLine": 122.3101,
+ "sha256": "cc6051d5c86113a7babb0bc140ac6494525d09bea9d700cda0548c1a37594a8f"
 }

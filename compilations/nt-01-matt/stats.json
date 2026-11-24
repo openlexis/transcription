@@ -1,34 +1,35 @@
 {
  "name": "Matthew",
  "book": "Matt",
+ "language": "Greek",
  "model": "Grok Bot",
- "manuscripts": 182,
+ "manuscripts": 193,
  "early": 33,
  "lines": 1071,
  "uncoveredLines": 0,
- "words": 18357,
- "columns": 23821,
- "unanimousColumns": 1471,
- "places": 4215,
- "settled": 1651,
- "contested": 510,
- "meanPlaceConfidence": 0.8555,
- "meanWordConfidence": 0.8919,
- "singularReadingsWithoutVote": 13418,
+ "words": 18354,
+ "columns": 24640,
+ "unanimousColumns": 1224,
+ "places": 4381,
+ "settled": 1719,
+ "contested": 515,
+ "meanPlaceConfidence": 0.8598,
+ "meanWordConfidence": 0.8849,
+ "singularReadingsWithoutVote": 14788,
  "eyeSkipsWithoutVote": 567,
  "byType": {
-  "substitution": 2579,
-  "addition": 684,
-  "omission": 667,
-  "mixed": 155,
-  "word order": 130
+  "substitution": 2771,
+  "addition": 721,
+  "omission": 597,
+  "mixed": 175,
+  "word order": 117
  },
  "bySeverity": {
-  "settled": 1651,
-  "medium": 1269,
-  "high": 510,
-  "low": 785
+  "settled": 1719,
+  "medium": 1252,
+  "high": 515,
+  "low": 895
  },
- "meanManuscriptsPerLine": 118.6872,
- "sha256": "2d7617de9098a276521554ef7171c4091754641e584fa67dc39302b45b55d0f2"
+ "meanManuscriptsPerLine": 126.7582,
+ "sha256": "38d81d1018d954c41652f5ba5f296911755ad55c39f7e0df7c1beaf9909e0c47"
 }

@@ -2,7 +2,7 @@
 type Ms = [string, string, string, number, number, number, number, { name: string; url: string }[], [string, string, string, string][]];
 type Rd = { x: string; s: number; w: number[]; p?: number[]; v: number; f?: string[] };
 type Pl = { c: number; w: number; t: string; s: string; l?: number[]; r: Rd[] };
-type Data = { id: string; lines: { r: string; u: number; m: number[]; s?: string[]; w: [string, number, number, number[] | 0, number[] | 0][] }[]; places: Record<string, Pl> };
+type Data = { id: string; lang?: string; lines: { r: string; u: number; m: number[]; s?: string[]; w: [string, number, number, number[] | 0, number[] | 0][] }[]; places: Record<string, Pl> };
 const D: Data = JSON.parse(document.getElementById("data")!.textContent!);
 const REPO = "https://github.com/openlexis/transcription/blob/main/";
 let MS: Ms[] | null = null;
@@ -36,7 +36,7 @@ async function open(li: number, wi: number) {
     html += `<div class="sub">The manuscripts disagree here: <span class="pill ${pl.s}">${pl.s}</span> <span class="pill">${esc(pl.t)}</span></div>`;
     pl.r.forEach((r, ri) => {
       const all = [...r.w, ...(r.p ?? [])];
-      html += `<div class="rd${ri === 0 ? " win" : ""}"><div class="g" lang="grc">${esc(r.x)}</div><div class="share"><i style="width:${r.s * 100}%"></i></div>
+      html += `<div class="rd${ri === 0 ? " win" : ""}"><div class="g" lang="${D.lang ?? "grc"}" dir="auto">${esc(r.x)}</div><div class="share"><i style="width:${r.s * 100}%"></i></div>
         <div class="meta">${ri === 0 ? "<b>printed</b> · " : ""}${pct(r.s)} of the votes · ${all.length} manuscript${all.length === 1 ? "" : "s"}${r.p?.length ? ` (${r.p.length} with part lost)` : ""}</div>
         ${(r.f ?? []).map((f) => `<div class="why">${WHY[f] ?? f}</div>`).join("")}${chips(all, li)}</div>`;
     });
@@ -66,3 +66,12 @@ marks?.addEventListener("change", () => document.body.classList.toggle("marks-of
 // a link to a place (?p=<id>) opens it
 const q = new URLSearchParams(location.search).get("p");
 if (q) { const li = D.lines.findIndex((l) => l.w.some((w) => w[2] === +q)); if (li >= 0) { const wi = D.lines[li].w.findIndex((w) => w[2] === +q); open(li, wi); document.querySelector(`.w[data-l="${li}"][data-w="${wi}"]`)?.scrollIntoView({ block: "center" }); } }
+
+// Hebrew: show the consonants only (the vowel points and marks are hidden, not removed from the data).
+const points = document.getElementById("points") as HTMLInputElement | null;
+points?.addEventListener("change", () => {
+  for (const b of document.querySelectorAll<HTMLButtonElement>(".hebrew .w")) {
+    b.dataset.full ??= b.textContent ?? "";
+    b.textContent = points.checked ? b.dataset.full.replace(/[\u0591-\u05C7]/g, (ch) => (ch === "\u05BE" ? ch : "")) : b.dataset.full;
+  }
+});

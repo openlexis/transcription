@@ -1,0 +1,36 @@
+{
+ "name": "Deuteronomy",
+ "book": "Deut",
+ "language": "Hebrew",
+ "model": "Grok Bot",
+ "manuscripts": 65,
+ "early": 62,
+ "lines": 959,
+ "uncoveredLines": 0,
+ "words": 14334,
+ "columns": 14728,
+ "unanimousColumns": 6279,
+ "places": 769,
+ "settled": 45,
+ "contested": 29,
+ "meanPlaceConfidence": 0.8167,
+ "meanWordConfidence": 0.9894,
+ "singularReadingsWithoutVote": 58,
+ "eyeSkipsWithoutVote": 6,
+ "byType": {
+  "substitution": 583,
+  "mixed": 49,
+  "omission": 49,
+  "word order": 5,
+  "addition": 82,
+  "lost text": 1
+ },
+ "bySeverity": {
+  "medium": 645,
+  "high": 30,
+  "settled": 45,
+  "low": 49
+ },
+ "meanManuscriptsPerLine": 3.269,
+ "sha256": "a4aeec904f2e0def49f74b98b9a9f3a5b482ee2eb5a5872b5cdec89870587b08"
+}

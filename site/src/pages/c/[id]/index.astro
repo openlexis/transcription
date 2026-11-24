@@ -10,7 +10,7 @@ const sev = ["high", "medium", "low", "settled"];
 ---
 <Base title={s.name} current={id} tab="overview">
   <h1>{s.name}</h1>
-  <p class="lede">The compiled transcription of {s.name}, from {num(s.manuscripts)} Greek manuscripts. Made by {s.model} following this folder's <a href={`/c/${id}/rules/`}>rule file</a>.</p>
+  <p class="lede">The compiled transcription of {s.name}, from {num(s.manuscripts)} {s.language ?? "Greek"} manuscripts. Made by {s.model} following this folder's <a href={`/c/${id}/rules/`}>rule file</a>.</p>
   <div class="kpis">
     <div class="kpi"><b>{num(s.manuscripts)}</b><span>manuscripts ({s.early} copied by 500)</span></div>
     <div class="kpi"><b>{num(s.lines - s.uncoveredLines)}</b><span>lines covered of {num(s.lines)}</span></div>

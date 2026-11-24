@@ -1,0 +1,31 @@
+{
+ "name": "2 Samuel",
+ "book": "2Sam",
+ "language": "Hebrew",
+ "model": "Grok Bot",
+ "manuscripts": 5,
+ "early": 4,
+ "lines": 695,
+ "uncoveredLines": 0,
+ "words": 11047,
+ "columns": 11047,
+ "unanimousColumns": 7201,
+ "places": 149,
+ "settled": 146,
+ "contested": 3,
+ "meanPlaceConfidence": 0.9894,
+ "meanWordConfidence": 0.9999,
+ "singularReadingsWithoutVote": 0,
+ "eyeSkipsWithoutVote": 0,
+ "byType": {
+  "substitution": 141,
+  "mixed": 6,
+  "omission": 2
+ },
+ "bySeverity": {
+  "settled": 146,
+  "high": 3
+ },
+ "meanManuscriptsPerLine": 1.4129,
+ "sha256": "2301c5d34615f6cd92628f5f39d3481dd82b4327738e93bd1780e21cc3b3577f"
+}

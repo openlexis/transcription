@@ -5,22 +5,22 @@
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { align } from "../src/align";
-import { greekKey, showGreek } from "../src/text";
+import { greekKey, hebrewSpell, showGreek } from "../src/text";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const r4 = (x: number) => Math.round(x * 10000) / 10000;
 
 // ---------- the rule file ----------
-export type RuleFile = { model: string; book: string; name: string; inputs: string[]; origin: number; halfLife: number; lateAfter: number; undated: number };
+export type RuleFile = { model: string; book: string; name: string; language: string; inputs: string[]; origin: number; halfLife: number; lateAfter: number; undated: number };
 export function readRules(dir: string): RuleFile {
   const md = readFileSync(`${dir}/RULES.md`, "utf8");
   const field = (k: string) => { const m = md.match(new RegExp(`^- \\*\\*${k}:\\*\\* (.+)$`, "m")); if (!m) throw new Error(`${dir}/RULES.md: no ${k}`); return m[1].replace(/`/g, "").trim(); };
   const inputs = [...md.slice(md.indexOf("## Inputs")).matchAll(/^- `(transcriptions\/[^`]+)`/gm)].map((m) => m[1]);
-  return { model: field("Model"), book: field("Book"), name: field("Name"), inputs, origin: +field("Origin year"), halfLife: +field("Half-life"), lateAfter: +field("Late after"), undated: +field("Undated year") };
+  return { model: field("Model"), book: field("Book"), name: field("Name"), language: field("Language"), inputs, origin: +field("Origin year"), halfLife: +field("Half-life"), lateAfter: +field("Late after"), undated: +field("Undated year") };
 }
 
 // ---------- manuscripts ----------
-type MsInfo = { siglum: string; name?: string; shelfmark?: string; century?: string; year?: number; viewer?: { name: string; url: string }[]; transcriptions: { holder: string; file: string; source: string; license: string }[] };
+type MsInfo = { siglum: string; kind?: string; language?: string; dateSource?: string; name?: string; shelfmark?: string; century?: string; year?: number; viewer?: { name: string; url: string }[]; transcriptions: { holder: string; file: string; source: string; license: string }[] };
 const CAT = JSON.parse(readFileSync(`${ROOT}transcriptions/manuscripts.json`, "utf8")) as { holders: Record<string, { name: string; web: string; license: string }>; manuscripts: MsInfo[] };
 const INFO = new Map(CAT.manuscripts.map((m) => [m.siglum, m]));
 /** Rule 2: leaves of one manuscript that were given separate numbers are one manuscript. */
@@ -31,6 +31,9 @@ type LineText = { absent: boolean; words: Tok[]; gapEnd: boolean; file: string; 
 
 export function compile(dir: string) {
   const R = readRules(dir);
+  const KEY = R.language === "Hebrew" ? hebrewSpell : greekKey, SHOW = R.language === "Hebrew" ? (w: string) => w : showGreek;
+  /** rule 13: only a continuous-text manuscript can show that a word is absent */
+  const partialKind = (s: string) => (INFO.get(s)?.kind ?? "continuous") !== "continuous";
   // rule 1: read every listed transcription; group them by manuscript
   const byMs = new Map<string, { files: string[]; lines: Map<string, LineText[]> }>();
   for (const file of R.inputs) {
@@ -41,7 +44,7 @@ export function compile(dir: string) {
       const words: Tok[] = []; let gap = false, gapEnd = false;
       const parts = m[3].split(" ").filter(Boolean);
       if (m[3] === "-") { const x = ms.lines.get(m[2]) ?? []; x.push({ absent: true, words: [], gapEnd: false, file, lineNo: i + 1 }); ms.lines.set(m[2], x); return; }
-      parts.forEach((p, j) => { if (p === "…") { if (j === parts.length - 1) gapEnd = true; else gap = true; return; } words.push({ k: greekKey(p), t: p, gap }); gap = false; });
+      parts.forEach((p, j) => { if (p === "…") { if (j === parts.length - 1) gapEnd = true; else gap = true; return; } words.push({ k: KEY(p), t: p, gap }); gap = false; });
       const x = ms.lines.get(m[2]) ?? []; x.push({ absent: false, words, gapEnd, file, lineNo: i + 1 }); ms.lines.set(m[2], x);
     });
   }
@@ -55,7 +58,7 @@ export function compile(dir: string) {
   const witnesses = sigla.map((s) => {
     const i = INFO.get(SAME_MANUSCRIPT[s] ?? s) ?? INFO.get(s);
     const leaves = Object.entries(SAME_MANUSCRIPT).filter(([, v]) => v === s).map(([k]) => k);
-    return { siglum: s, ...(leaves.length ? { leaves } : {}), name: i?.name, century: i?.century, year: year(s), dated: INFO.get(s)?.year !== undefined, early: early(s), proximity: r4(T(s)), viewer: i?.viewer ?? [], files: byMs.get(s)!.files };
+    return { siglum: s, ...(leaves.length ? { leaves } : {}), kind: i?.kind ?? "continuous", name: i?.name, century: i?.century, dateSource: i?.dateSource, year: year(s), dated: INFO.get(s)?.year !== undefined, early: early(s), proximity: r4(T(s)), viewer: i?.viewer ?? [], files: byMs.get(s)!.files };
   });
   // the lines: every line any manuscript has, in chapter and line order
   const refs = [...new Set(sigla.flatMap((s) => [...byMs.get(s)!.lines.keys()]))].sort((a, b) => { const [x, y] = [a, b].map((r) => r.split(":").map(Number)); return x[0] - y[0] || x[1] - y[1]; });
@@ -81,7 +84,7 @@ export function compile(dir: string) {
     const nC = cols.length;
     // what each manuscript reads at each column: a key, "" (no word: it does not have one here), or null (lost: no vote)
     const reads: (string | null)[][] = present.map((p) => {
-      const wi = withWords.indexOf(p), out: (string | null)[] = new Array(nC).fill("");
+      const wi = withWords.indexOf(p), out: (string | null)[] = new Array(nC).fill(""), partial = partialKind(p.s);
       if (wi < 0) return out; // the manuscript marks the line as not having it
       const at: number[] = []; cols.forEach((c, ci) => { const j = c.cells.get(wi); if (j !== undefined) at[j] = ci; });
       const ws = p.x.words;
@@ -90,7 +93,7 @@ export function compile(dir: string) {
         if (cols[ci].cells.has(wi)) continue;
         let next = ws.findIndex((_, j) => at[j] > ci);
         const lostBefore = next >= 0 ? ws[next].gap : p.x.gapEnd;
-        if (lostBefore) out[ci] = null;
+        if (lostBefore || partial) out[ci] = null;
       }
       return out;
     });
@@ -130,7 +133,7 @@ export function compile(dir: string) {
           const diff = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] !== null && reads[pi][ci] !== k);
           const lost = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] === null);
           const by = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] === k).sort((x, y) => year(present[x].s) - year(present[y].s) || (present[x].s < present[y].s ? -1 : 1));
-          words.push({ t: showGreek(form(by[0], ci)!), k, ...(lost.length ? { l: sortW(lost) } : {}), ...(diff.length ? { d: sortW(diff) } : {}), col: ci });
+          words.push({ t: SHOW(form(by[0], ci)!), k, ...(lost.length ? { l: sortW(lost) } : {}), ...(diff.length ? { d: sortW(diff) } : {}), col: ci });
         }
         ci = b + 1;
         // rule 7: each manuscript's reading of the place is its words across all the place's columns
@@ -207,7 +210,7 @@ export function compile(dir: string) {
           readings: all.map((r) => ({ text: r.forms.map(showGreek).join(" ") || "—", keys: id(r), witnesses: sortW(r.wits), ...(r.partly.length ? { partly: sortW(r.partly) } : {}), votes: r.voting.length, score: r4(r.score), share: r4(total > 0 ? r.score / total : r === chosen ? 1 : 0), ...(r.flags.size ? { flags: [...r.flags].sort() } : {}) })),
           ...(stillLost.length ? { partlyLost: sortW(stillLost) } : {}),
         });
-        chosen.keys.forEach((k, j) => words.push({ t: showGreek(chosen.forms[j] ?? k), k, c: r4(conf), p: pl, col: a, span: si }));
+        chosen.keys.forEach((k, j) => words.push({ t: SHOW(chosen.forms[j] ?? k), k, c: r4(conf), p: pl, col: a, span: si }));
       });
       for (; ci < nC; ci++) {
         const n = new Map<string, number>(); for (const r of reads) { const x = r[ci]; if (x !== null) n.set(x, (n.get(x) ?? 0) + 1); }
@@ -216,7 +219,7 @@ export function compile(dir: string) {
         const diff = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] !== null && reads[pi][ci] !== k);
         const lost = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] === null);
         const by = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] === k).sort((x, y) => year(present[x].s) - year(present[y].s) || (present[x].s < present[y].s ? -1 : 1));
-        words.push({ t: showGreek(form(by[0], ci)!), k, ...(lost.length ? { l: sortW(lost) } : {}), ...(diff.length ? { d: sortW(diff) } : {}), col: ci });
+        words.push({ t: SHOW(form(by[0], ci)!), k, ...(lost.length ? { l: sortW(lost) } : {}), ...(diff.length ? { d: sortW(diff) } : {}), col: ci });
       }
       return { words, local };
     };
@@ -250,7 +253,7 @@ export function compile(dir: string) {
     lines.push({ ref, witnesses: present.map((p) => WIDX.get(p.s)), src: present.map((p) => `${byMs.get(p.s)!.files.indexOf(p.x.file)}:${p.x.lineNo}`), words });
   }
   const stats = {
-    name: R.name, book: R.book, model: R.model, manuscripts: witnesses.length, early: witnesses.filter((w) => w.early).length,
+    name: R.name, book: R.book, language: R.language, model: R.model, manuscripts: witnesses.length, early: witnesses.filter((w) => w.early).length,
     lines: st.lines, uncoveredLines: st.uncovered, words: st.words, columns: st.columns, unanimousColumns: st.unanimous,
     places: st.places, settled: st.settled, contested: st.contested, meanPlaceConfidence: r4(st.places ? st.confidenceSum / st.places : 1),
     meanWordConfidence: 0, singularReadingsWithoutVote: st.singularNoVote, eyeSkipsWithoutVote: st.eyeSkipNoVote, byType: st.byType, bySeverity: st.bySeverity,
@@ -258,7 +261,7 @@ export function compile(dir: string) {
   };
   let cs = 0, cn = 0; for (const l of lines as { words?: { c?: number }[] }[]) for (const w of l.words ?? []) { cs += w.c ?? 1; cn++; }
   stats.meanWordConfidence = r4(cn ? cs / cn : 1);
-  const tj = JSON.stringify({ name: R.name, book: R.book, witnesses, lines }) + "\n";
+  const tj = JSON.stringify({ name: R.name, book: R.book, language: R.language, witnesses, lines }) + "\n";
   const dj = JSON.stringify({ name: R.name, book: R.book, places }) + "\n";
   writeFileSync(`${dir}/transcription.json`, tj);
   writeFileSync(`${dir}/disagreements.json`, dj);

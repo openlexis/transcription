@@ -1,0 +1,32 @@
+{
+ "name": "2 Kingdoms",
+ "book": "2Kgdms",
+ "language": "Greek",
+ "model": "Grok Bot",
+ "manuscripts": 2,
+ "early": 0,
+ "lines": 135,
+ "uncoveredLines": 0,
+ "words": 3313,
+ "columns": 3354,
+ "unanimousColumns": 3128,
+ "places": 142,
+ "settled": 142,
+ "contested": 0,
+ "meanPlaceConfidence": 0.9973,
+ "meanWordConfidence": 0.9999,
+ "singularReadingsWithoutVote": 0,
+ "eyeSkipsWithoutVote": 6,
+ "byType": {
+  "substitution": 77,
+  "omission": 32,
+  "mixed": 9,
+  "addition": 22,
+  "word order": 2
+ },
+ "bySeverity": {
+  "settled": 142
+ },
+ "meanManuscriptsPerLine": 2,
+ "sha256": "10bc077c8fb98cc5567d58c4206ecf86e348d9d5391ced7eaf31f04f249cab02"
+}

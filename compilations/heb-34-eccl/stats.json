@@ -1,0 +1,30 @@
+{
+ "name": "Ecclesiastes",
+ "book": "Eccl",
+ "language": "Hebrew",
+ "model": "Grok Bot",
+ "manuscripts": 3,
+ "early": 2,
+ "lines": 222,
+ "uncoveredLines": 0,
+ "words": 2990,
+ "columns": 2990,
+ "unanimousColumns": 2726,
+ "places": 20,
+ "settled": 20,
+ "contested": 0,
+ "meanPlaceConfidence": 0.9995,
+ "meanWordConfidence": 1,
+ "singularReadingsWithoutVote": 0,
+ "eyeSkipsWithoutVote": 1,
+ "byType": {
+  "substitution": 17,
+  "omission": 2,
+  "mixed": 1
+ },
+ "bySeverity": {
+  "settled": 20
+ },
+ "meanManuscriptsPerLine": 1.1306,
+ "sha256": "655b0bd3b6371baa581ac079c797f9575fcb1d7897dfdebc463a7dd37ade1e6e"
+}

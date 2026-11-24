@@ -6,7 +6,7 @@ export const REPO = "https://github.com/openlexis/transcription";
 export const blob = (file: string, line?: number) => `${REPO}/blob/main/${file.split("/").map(encodeURIComponent).join("/")}${line ? `#L${line}` : ""}`;
 
 export type Stats = {
-  name: string; book: string; model: string; manuscripts: number; early: number; lines: number; uncoveredLines: number; words: number;
+  name: string; book: string; language?: string; model: string; manuscripts: number; early: number; lines: number; uncoveredLines: number; words: number;
   columns: number; unanimousColumns: number; places: number; settled: number; contested: number; meanPlaceConfidence: number; meanWordConfidence: number;
   singularReadingsWithoutVote: number; eyeSkipsWithoutVote: number; byType: Record<string, number>; bySeverity: Record<string, number>; meanManuscriptsPerLine: number; sha256: string;
 };
@@ -17,7 +17,9 @@ export type Reading = { text: string; keys: string; witnesses: number[]; partly?
 export type Place = { id: number; ref: string; at: number; n: number; confidence: number; weight: number; type: string; severity: string; readings: Reading[]; partlyLost?: number[] };
 export type Compilation = { id: string; stats: Stats; rules: string; chapters: string[] };
 
-export const SECTIONS: Record<string, string> = { nt: "Greek New Testament" };
+export const SECTIONS: Record<string, string> = { nt: "Greek New Testament", heb: "Hebrew Bible", lxx: "Greek Old Testament" };
+/** How a compilation's text is written: Hebrew runs right to left. */
+export const script = (language?: string) => (language === "Hebrew" ? { lang: "hbo", dir: "rtl", cls: "hebrew" } : { lang: "grc", dir: "ltr", cls: "greek" });
 
 let LIST: Compilation[] | undefined;
 export function compilations(): Compilation[] {

@@ -1,0 +1,31 @@
+{
+ "name": "Song of Songs",
+ "book": "Song",
+ "language": "Hebrew",
+ "model": "Grok Bot",
+ "manuscripts": 5,
+ "early": 4,
+ "lines": 117,
+ "uncoveredLines": 0,
+ "words": 1255,
+ "columns": 1257,
+ "unanimousColumns": 867,
+ "places": 27,
+ "settled": 27,
+ "contested": 0,
+ "meanPlaceConfidence": 0.9995,
+ "meanWordConfidence": 1,
+ "singularReadingsWithoutVote": 0,
+ "eyeSkipsWithoutVote": 0,
+ "byType": {
+  "substitution": 22,
+  "mixed": 3,
+  "lost text": 1,
+  "omission": 1
+ },
+ "bySeverity": {
+  "settled": 27
+ },
+ "meanManuscriptsPerLine": 1.4188,
+ "sha256": "626fa40ee9a50ad9c4a2430d2f50d04e2709737d4a9adb91a2f2064704a189f4"
+}
