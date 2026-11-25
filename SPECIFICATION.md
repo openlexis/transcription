@@ -11,28 +11,28 @@ digits and letters, leaving out I, L, O and U so they are not mistaken for one a
 
 Produce the text of each book of the Bible as its original authors wrote it, in its original language, from all
 available manuscripts in that language that were copied in or near the era of the original. Each book's original
-language is the one it was written in, as recorded for that book in `transcriptions/books.json`.
+language is the one it was written in, as recorded for that book in `source/books.json`.
 
 ## Evidence
 
 Use only the transcriptions of those manuscripts held in this repository and the documented facts about each manuscript
-that its holders give, as recorded in `transcriptions/manuscripts.json`: its date as a range with its margin of error and
+that its holders give, as recorded in `source/manuscripts.json`: its date as a range with its margin of error and
 the method of dating (for example carbon dating, handwriting style or a colophon), where it was written, any scientific
 dating, its condition, its corrections and errors, and how it agrees with the other manuscripts. Where a fact is not given,
 treat it as unknown; never invent a value. Printed editions, translations into other languages, modern reconstructions and
 images are not evidence for this work.
 
-The file `transcriptions/manuscripts.json` is part of this specification: it is the list of manuscripts, the facts
+The file `source/manuscripts.json` is part of this specification: it is the list of manuscripts, the facts
 recorded about them, and the transcription files this work may read. The books themselves are listed in
-`transcriptions/books.json`.
+`source/books.json`.
 
 ## The transcription files
 
-Each transcription is a file in the folder `transcriptions/`, with no subfolders. Files are named
-`{manuscript}.{holder}.xml`. The manuscript is its usual identifier (for example 01, P1, L, 4Q2). The holder is the short
-name given in `transcriptions/manuscripts.json` (for example intf, uxlc). If one manuscript and one holder give more than
-one file, a further part is added from the holder's own name for the file:
-`{manuscript}.{holder}.{part}.xml` (for example `L.uxlc.Genesis.xml`).
+Each transcription is a file in the folder `source/`, in a subfolder named for the project or holder it was obtained
+from (for example `source/intf/`, `source/uxlc/`, `source/etcbc-dss/`). There is no nesting below that. Files are named
+`{manuscript}.xml`. The manuscript is its usual identifier (for example 01, P1, L, 4Q2). If one manuscript and one holder
+give more than one file, a further part is added from the holder's own name for the file: `{manuscript}.{part}.xml`
+(for example `source/uxlc/L.Genesis.xml`).
 
 Where a holder publishes TEI XML, that file is stored as they published it, unchanged. Where a holder publishes XML that
 is not TEI, that XML is stored unchanged, and the inventory says what format it is. Where a holder publishes no XML, the

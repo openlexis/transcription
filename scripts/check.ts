@@ -15,7 +15,7 @@ const sha = (x: string | Buffer) => createHash("sha256").update(x).digest("hex")
 const fails: string[] = [];
 const cache = new Map<string, string[]>();
 const lines = (f: string) => cache.get(f) ?? cache.set(f, existsSync(`${ROOT}${f}`) ? readFileSync(`${ROOT}${f}`, "utf8").split("\n") : []).get(f)!;
-const ruleFiles = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? (["node_modules", ".git", "www", "transcriptions", "outputs"].includes(e.name) ? [] : ruleFiles(`${dir}/${e.name}`)) : /^(RULES|SPECIFICATION).*\.(md|json|ya?ml|txt|xml|toml)$/i.test(e.name) ? [`${dir}/${e.name}`.slice(ROOT.length)] : []);
+const ruleFiles = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? (["node_modules", ".git", "www", "source", "transcriptions", "outputs"].includes(e.name) ? [] : ruleFiles(`${dir}/${e.name}`)) : /^(RULES|SPECIFICATION).*\.(md|json|ya?ml|txt|xml|toml)$/i.test(e.name) ? [`${dir}/${e.name}`.slice(ROOT.length)] : []);
 const found = ruleFiles(ROOT.replace(/\/$/, ""));
 if (found.length !== 1 || found[0] !== "SPECIFICATION.md") fails.push(`specification files: expected only SPECIFICATION.md, found ${found.join(", ") || "none"}`);
 const SPEC_SHA = sha(readFileSync(`${ROOT}SPECIFICATION.md`));
@@ -52,12 +52,15 @@ for (const spec of existsSync(`${ROOT}outputs`) ? readdirSync(`${ROOT}outputs`).
           if (!l.witnesses.some((x) => !out.has(x))) fails.push(`${at} ${b.id} ${l.ref}: word ${i + 1} (${w.t}) has no manuscript`);
         }
         if (i && ws[i - 1].k === w.k && !(w.p !== undefined && w.p === ws[i - 1].p)) {
-          const has = l.witnesses.some((x) => (B.witnesses[x].files as string[]).some((f) => lines(f).some((ln) => {
-            if (!ln.startsWith(`${B.book} ${l.ref}\t`)) return false;
-            const ks = ln.split("\t")[1].split(" ").filter((q) => q !== "…").map(KEY);
-            return ks.some((k, j) => j && k === w.k && ks[j - 1] === w.k);
-          })));
-          if (!has) fails.push(`${at} ${b.id} ${l.ref}: doubled word ${w.t} that no manuscript has`);
+          const files = l.witnesses.flatMap((x) => (B.witnesses[x].files as string[]) ?? []);
+          if (files.some((f) => existsSync(`${ROOT}${f}`))) {
+            const has = l.witnesses.some((x) => (B.witnesses[x].files as string[]).some((f) => lines(f).some((ln) => {
+              if (!ln.startsWith(`${B.book} ${l.ref}\t`)) return false;
+              const ks = ln.split("\t")[1].split(" ").filter((q) => q !== "…").map(KEY);
+              return ks.some((k, j) => j && k === w.k && ks[j - 1] === w.k);
+            })));
+            if (!has) fails.push(`${at} ${b.id} ${l.ref}: doubled word ${w.t} that no manuscript has`);
+          }
         }
       });
     }

@@ -5,7 +5,7 @@ import { readFileSync } from "node:fs";
 
 type Tr = { holder: string; file?: string; files?: string[]; source: string; member?: string; format: string; license: string; lines?: number; words?: number };
 type Ms = { siglum: string; kind: string; language: string; name?: string; shelfmark?: string; century?: string; year?: number; yearFrom?: number; yearTo?: number; dateBasis?: string; dateSource?: string; viewer?: { name: string; url: string }[]; transcriptions: Tr[] };
-const CAT = JSON.parse(readFileSync(`${ROOT}transcriptions/manuscripts.json`, "utf8")) as { note?: string; holders: Record<string, { name: string; web: string; license: string }>; manuscripts: Ms[] };
+const CAT = JSON.parse(readFileSync(`${ROOT}source/manuscripts.json`, "utf8")) as { note?: string; holders: Record<string, { name: string; web: string; license: string }>; manuscripts: Ms[] };
 const holders = CAT.holders;
 const blob = (file: string) => `${REPO}/blob/main/${file.split("/").map(encodeURIComponent).join("/")}`;
 const dateOf = (m: Ms) => {
@@ -18,10 +18,10 @@ const dateOf = (m: Ms) => {
 const greek = CAT.manuscripts.filter((m) => m.language === "Greek");
 const hebrew = CAT.manuscripts.filter((m) => m.language !== "Greek");
 ---
-<Base title="Manuscripts" tab="spec" description="The manuscripts listed in transcriptions/manuscripts.json, which is part of the specification.">
+<Base title="Manuscripts" tab="spec" description="The manuscripts listed in source/manuscripts.json, which is part of the specification.">
   <h1>The manuscripts</h1>
-  <p class="lede">This is the list in <code>transcriptions/manuscripts.json</code>, which is part of the <a href="/specification/">specification</a>. Each row is one manuscript. Links under “Transcription” go to the file held in this repository, and to the holder’s own source. Where a date range is unknown, it is marked unknown.</p>
-  <p class="meta"><a href="https://github.com/openlexis/transcription/blob/main/transcriptions/manuscripts.json">The raw file, manuscripts.json</a> · {num(CAT.manuscripts.length)} manuscripts · {num(CAT.manuscripts.reduce((n, m) => n + m.transcriptions.length, 0))} transcriptions</p>
+  <p class="lede">This is the list in <code>source/manuscripts.json</code>, which is part of the <a href="/specification/">specification</a>. The transcription files live in <code>source/</code>, one folder for each project or holder they were obtained from. Each row is one manuscript. Links under “Transcription” go to the file held in this repository, and to the holder’s own source. Where a date range is unknown, it is marked unknown.</p>
+  <p class="meta"><a href="https://github.com/openlexis/transcription/blob/main/source/manuscripts.json">The raw file, manuscripts.json</a> · {num(CAT.manuscripts.length)} manuscripts · {num(CAT.manuscripts.reduce((n, m) => n + m.transcriptions.length, 0))} transcriptions</p>
   {CAT.note && <p class="meta">{CAT.note}</p>}
   <form class="filters" id="msfilter" onsubmit="return false">
     <fieldset>
@@ -63,7 +63,7 @@ const hebrew = CAT.manuscripts.filter((m) => m.language !== "Greek");
                         <div class="tr">
                           <a href={holder?.web ?? t.source} rel="noopener">{holder?.name ?? t.holder}</a>
                           {paths.map((f) => (
-                            <div><a href={blob(f)}><code>{f.replace(/^transcriptions\//, "")}</code></a></div>
+                            <div><a href={blob(f)}><code>{f.replace(/^source\//, "")}</code></a></div>
                           ))}
                           <div class="meta">{t.format}{t.member ? ` · ${t.member}` : ""} · {t.license}</div>
                           <div class="meta"><a href={t.source} rel="noopener">holder’s source</a>{t.lines ? ` · ${num(t.lines)} lines, ${num(t.words ?? 0)} words` : ""}</div>

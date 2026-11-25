@@ -86,13 +86,16 @@ export const pct = (x: number) => (x >= 0.9995 ? "over 99.9%" : x <= 0.0005 ? "u
 export const range = (lo: number, hi: number) => `${pct(lo)} to ${pct(hi)}`;
 
 /** The holders' own files, from the inventory: never this repository's derived text files. */
-type Tr = { holder: string; file: string; source: string; license: string; member?: string; format?: string };
+type Tr = { holder: string; file?: string; files?: string[]; source: string; license: string; member?: string; format?: string };
 let FILES: Map<string, Tr & { holderName: string; holderWeb: string }> | undefined;
 export function holderFile(f: string) {
   if (!FILES) {
-    const CAT = JSON.parse(readFileSync(`${ROOT}transcriptions/manuscripts.json`, "utf8"));
+    const CAT = JSON.parse(readFileSync(`${ROOT}source/manuscripts.json`, "utf8"));
     FILES = new Map();
-    for (const m of CAT.manuscripts) for (const t of m.transcriptions as Tr[]) FILES.set(t.file, { ...t, holderName: CAT.holders[t.holder]?.name ?? t.holder, holderWeb: CAT.holders[t.holder]?.web ?? "" });
+    for (const m of CAT.manuscripts) for (const t of m.transcriptions as Tr[]) {
+      const rec = { ...t, holderName: CAT.holders[t.holder]?.name ?? t.holder, holderWeb: CAT.holders[t.holder]?.web ?? "" };
+      for (const f of t.files ?? (t.file ? [t.file] : [])) FILES.set(f, rec);
+    }
   }
   return FILES.get(f);
 }

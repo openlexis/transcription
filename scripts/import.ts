@@ -1,9 +1,9 @@
-// Brings the holders' manuscript transcriptions into the folder transcriptions/, one file per transcription, with no
-// subfolders, and lists every manuscript with its date, holder and links in transcriptions/manuscripts.json.
+// Brings the holders' manuscript transcriptions into source/<holder>/, one file per transcription, and lists every
+// manuscript with its date, holder and links in source/manuscripts.json.
 //   bun scripts/import.ts <folder holding the holders' downloaded files>
-// Naming: {manuscript}.{holder}.xml, or {manuscript}.{holder}.{part}.xml when one manuscript and holder give more than
-// one file. Where the holder publishes TEI XML (or other XML), that file is stored unchanged. Where the holder publishes
-// no XML, a TEI P5 document is written, and the inventory says so.
+// Naming: source/{holder}/{manuscript}.xml, or source/{holder}/{manuscript}.{part}.xml when one manuscript and holder
+// give more than one file. Where the holder publishes TEI XML (or other XML), that file is stored unchanged. Where the
+// holder publishes no XML, a TEI P5 document is written, and the inventory says so.
 // Line and word counts in the inventory are taken from the first hand of each transcription. Nothing from a printed
 // edition, translation or image is read.
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -14,10 +14,9 @@ import { HEB_BOOKS, NT_BOOKS, numeral, sacred, skel } from "../src/text";
 const SRC = process.argv[2];
 if (!SRC || !existsSync(SRC)) throw new Error("usage: bun scripts/import.ts <folder with the holders' files>");
 const ROOT = new URL("..", import.meta.url).pathname;
-rmSync(`${ROOT}transcriptions/greek-translation`, { recursive: true, force: true });
-for (const d of ["greek", "hebrew"]) rmSync(`${ROOT}transcriptions/${d}`, { recursive: true, force: true });
-mkdirSync(`${ROOT}transcriptions`, { recursive: true });
-for (const f of readdirSync(`${ROOT}transcriptions`)) if (f !== "manuscripts.json" && f !== "books.json") rmSync(`${ROOT}transcriptions/${f}`, { recursive: true, force: true });
+rmSync(`${ROOT}transcriptions`, { recursive: true, force: true });
+mkdirSync(`${ROOT}source`, { recursive: true });
+for (const f of readdirSync(`${ROOT}source`)) if (f !== "manuscripts.json" && f !== "books.json") rmSync(`${ROOT}source/${f}`, { recursive: true, force: true });
 
 const snap = (p: string) => { const d = readdirSync(`${SRC}/${p}`).filter((x) => /^\d{4}-\d\d-\d\d$/.test(x)).sort().pop()!; return `${SRC}/${p}/${d}`; };
 const zipList = (zip: string) => spawnSync("unzip", ["-Z1", zip], { maxBuffer: 1 << 26 }).stdout.toString().split("\n").filter(Boolean).sort();
@@ -36,7 +35,7 @@ export function gaSiglum(s: string): string | undefined {
 }
 const docOf = (s: string) => (s.startsWith("P") ? 10000 + +s.slice(1) : s.startsWith("L") ? 40000 + +s.slice(1) : s.startsWith("0") ? 20000 + +s : 30000 + +s);
 
-const xmlName = (siglum: string, holder: string, part?: string) => `transcriptions/${siglum}.${holder}${part ? `.${part}` : ""}.xml`;
+const xmlName = (siglum: string, holder: string, part?: string) => { mkdirSync(`${ROOT}source/${holder}`, { recursive: true }); return `source/${holder}/${siglum}${part ? `.${part}` : ""}.xml`; };
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 /** A TEI P5 document for a transcription whose holder publishes no XML. */
 function teiDoc(o: { title: string; source: string; license: string; why: string; lang?: string; body: string }) {
@@ -385,8 +384,8 @@ const hebWords = (raw: string) => raw.normalize("NFD").replace(/[\u0591-\u05AF\u
 
 const list = [...MSS.values()].sort((a, b) => (a.siglum < b.siglum ? -1 : a.siglum > b.siglum ? 1 : 0));
 for (const m of list) m.transcriptions.sort((a, b) => HOLDER_ORDER.indexOf(a.holder) - HOLDER_ORDER.indexOf(b.holder));
-writeFileSync(`${ROOT}transcriptions/manuscripts.json`, JSON.stringify({
-  note: "The list of manuscripts this specification uses. Each transcription is a file in this folder, named {manuscript}.{holder}.xml (or {manuscript}.{holder}.{part}.xml when one manuscript and holder give more than one file). Where the format says the holder's file is stored unchanged, the file is as the holder published it. Where the holder publishes no XML, the file is a TEI P5 document and the format says so.",
+writeFileSync(`${ROOT}source/manuscripts.json`, JSON.stringify({
+  note: "The list of manuscripts this specification uses. Each transcription is a file in source/{holder}/, named {manuscript}.xml (or {manuscript}.{part}.xml when one manuscript and holder give more than one file). Where the format says the holder's file is stored unchanged, the file is as the holder published it. Where the holder publishes no XML, the file is a TEI P5 document and the format says so.",
   holders: HOLDERS,
   manuscripts: list,
 }, null, 1) + "\n");

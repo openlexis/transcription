@@ -1,5 +1,5 @@
 // The compiler: works toward the goal of SPECIFICATION.md (the one specification of this repository) for every book listed in
-// transcriptions/books.json, by the method it describes in scripts/METHOD.md, and writes one output artifact:
+// source/books.json, by the method it describes in scripts/METHOD.md, and writes one output artifact:
 //   outputs/<first 12 characters of the specification's SHA-256>/<compiler>/compilation.json   the method, who did the work, the books
 //   outputs/<...>/<compiler>/books/<book>.json                                                   each book: text, evidence, estimates
 //   bun run compile all          every book, one at a time
@@ -26,11 +26,11 @@ const SETTINGS: Record<string, { origin: number; halfLife: number; lateAfter: nu
 export type Book = { id: string; book: string; name: string; section: string; sectionName: string; language: string; origin: number; halfLife: number; lateAfter: number; undated: number; inputs: string[] };
 export function readBooks() {
   const text = readFileSync(`${ROOT}${SPEC_FILE}`, "utf8");
-  const B = JSON.parse(readFileSync(`${ROOT}transcriptions/books.json`, "utf8")) as { sections: Record<string, { name: string; languages: string; folders: string[] }>; books: { section: string; number: number; book: string; name: string }[] };
+  const B = JSON.parse(readFileSync(`${ROOT}source/books.json`, "utf8")) as { sections: Record<string, { name: string; languages: string; folders: string[] }>; books: { section: string; number: number; book: string; name: string }[] };
   // a book's inputs: every transcription in the inventory, in its section's folders, that holds a line of the book (by file path)
-  const cat = JSON.parse(readFileSync(`${ROOT}transcriptions/manuscripts.json`, "utf8")) as { manuscripts: { transcriptions: { file: string }[] }[] };
+  const cat = JSON.parse(readFileSync(`${ROOT}source/manuscripts.json`, "utf8")) as { manuscripts: { transcriptions: { file: string }[] }[] };
   const holds = new Map<string, Set<string>>();
-  for (const f of cat.manuscripts.flatMap((m) => m.transcriptions.map((t) => t.file))) {
+  for (const f of cat.manuscripts.flatMap((m) => m.transcriptions.flatMap((t) => t.files ?? (t.file ? [t.file] : [])))) {
     holds.set(f, new Set(readFileSync(`${ROOT}${f}`, "utf8").split("\n").map((l) => l.split(" ")[0]).filter(Boolean)));
   }
   const files = [...holds.keys()].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
@@ -58,8 +58,8 @@ export function selfIdentify() {
 }
 
 // ---------- manuscripts ----------
-type MsInfo = { siglum: string; yearFrom?: number; yearTo?: number; dateBasis?: string; kind?: string; language?: string; dateSource?: string; name?: string; shelfmark?: string; century?: string; year?: number; viewer?: { name: string; url: string }[]; transcriptions: { holder: string; file: string; source: string; license: string }[] };
-const CAT = JSON.parse(readFileSync(`${ROOT}transcriptions/manuscripts.json`, "utf8")) as { holders: Record<string, { name: string; web: string; license: string }>; manuscripts: MsInfo[] };
+type MsInfo = { siglum: string; yearFrom?: number; yearTo?: number; dateBasis?: string; kind?: string; language?: string; dateSource?: string; name?: string; shelfmark?: string; century?: string; year?: number; viewer?: { name: string; url: string }[]; transcriptions: { holder: string; file?: string; files?: string[]; source: string; license: string }[] };
+const CAT = JSON.parse(readFileSync(`${ROOT}source/manuscripts.json`, "utf8")) as { holders: Record<string, { name: string; web: string; license: string }>; manuscripts: MsInfo[] };
 const INFO = new Map(CAT.manuscripts.map((m) => [m.siglum, m]));
 /** Leaves of one manuscript that were given separate numbers are one manuscript. */
 export const SAME_MANUSCRIPT: Record<string, string> = { P67: "P64", P103: "P77" };
@@ -303,7 +303,7 @@ if (import.meta.main) {
   const out = `${ROOT}outputs/${spec.sha256.slice(0, 12)}/${compiler}`;
   mkdirSync(`${out}/books`, { recursive: true });
   const books = arg === "all" ? spec.books : spec.books.filter((b) => b.book === arg || b.id === arg);
-  if (!books.length) throw new Error(`no book ${arg} in transcriptions/books.json`);
+  if (!books.length) throw new Error(`no book ${arg} in source/books.json`);
   console.log(`under ${SPEC_FILE} (sha256 ${spec.sha256.slice(0, 12)}), by ${by.program} at ${by.commit?.slice(0, 12) ?? "no commit"}${by.codeMatchesCommit === false ? " (code changed since that commit)" : ""}, ${by.runtime} -> ${out.slice(ROOT.length)}`);
   const manifestFile = `${out}/compilation.json`;
   const old = existsSync(manifestFile) ? JSON.parse(readFileSync(manifestFile, "utf8")) : { books: [] };
@@ -322,7 +322,7 @@ if (import.meta.main) {
     specification: { file: SPEC_FILE, sha256: spec.sha256, statement: `This compilation was produced under ${SPEC_FILE} (SHA-256 ${spec.sha256}).` },
     compiler: { id: compiler, ...by },
     method: { file: METHOD_FILE, sha256: sha(method), text: method },
-    evidence: { inventory: "transcriptions/manuscripts.json", inventorySha256: sha(readFileSync(`${ROOT}transcriptions/manuscripts.json`)), books: "transcriptions/books.json" },
+    evidence: { inventory: "source/manuscripts.json", inventorySha256: sha(readFileSync(`${ROOT}source/manuscripts.json`)), books: "source/books.json" },
     sections: spec.sections,
     books: [...entries.values()].sort((x, y) => order.indexOf((x as { id: string }).id) - order.indexOf((y as { id: string }).id)),
   };
