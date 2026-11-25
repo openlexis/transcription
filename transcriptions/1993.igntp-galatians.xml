@@ -1,0 +1,2113 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE TEI>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="GA1993"><teiHeader>
+    <fileDesc>      
+      <titleStmt>
+        <title>A Transcription of Galatians in 1993</title>
+        <title type="document" key="31993" n="1993">GA 1993</title>
+        <title type="collection" level="s" xml:lang="en">The New Testament</title>
+        <title type="collection" level="s" xml:lang="de">Das Neue Testament</title>
+        <title type="work" level="m" xml:lang="de" n="Gal">The Epistle to the Galatians</title>
+        <title type="short" level="m" xml:lang="de" n="Gal">Galatians</title>      
+	<respStmt>
+		<resp>Created by</resp><name type="org">the International Greek New Testament Project</name></respStmt>
+	<respStmt><resp when="2015-04-29">Transcribed by</resp><name type="person">Bill Elliott</name></respStmt>
+	<respStmt><resp when="2019-07-10">Transcribed by</resp><name type="person">Amy Myshrall</name></respStmt>
+	<respStmt><resp>Reconciled by</resp><name type="person">Amy Myshrall</name></respStmt>
+	<sponsor><name type="org">The Institute for Textual Scholarship and Electronic Editing</name></sponsor>
+	</titleStmt>
+      <editionStmt>
+        <edition n="1.0">Version 1.0, created on <date>17.9.2020</date>, archived on the University of Birmingham eData repository on <date>13.5.2024</date>.</edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>
+          <name type="org">The Institute for Textual Scholarship and Electronic Editing</name> 
+					<name type="org">University of Birmingham</name></publisher>
+        <date>13.5.2024</date>
+          <availability><p>Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further <ptr target="https://creativecommons.org/licenses/by/4.0/"/>.</p></availability>
+      </publicationStmt>
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier>
+            <country>Vatican City</country><settlement>Città del Vaticano</settlement><repository>Biblioteca Apostolica Vaticana</repository><idno>Vat. gr. 692</idno><altIdentifier type="GA">
+              <idno>1993</idno>
+            </altIdentifier>
+            <altIdentifier type="Liste">
+              <idno>31993</idno>
+            </altIdentifier>
+          </msIdentifier>
+        </msDesc>
+        <listWit><witness xml:id="firsthand"/><witness xml:id="corrector"/></listWit>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc n="1.6">
+			<projectDesc><p>This transcription was made by the International Greek New Testament Project (IGNTP) in 2019. </p></projectDesc>
+			<editorialDecl><p>The initial transcription file was a plain text file in Unicode.  The original transcription guidelines can be found at <ptr target="http://epapers.bham.ac.uk/1676/"/>. This is a commentary manuscript.</p>
+				
+				<p>The initial transcriptions were reconciled by Amy Myshrall. The plain text file was converted to XML by Hugh Houghton and Catherine Smith using the project's Python conversion scripts.</p>
+				<p>The XML specifications used are version 1.6 of the IGNTP Guidelines available at <ptr target="http://epapers.bham.ac.uk/4301/"/></p></editorialDecl>
+			<variantEncoding method="parallel-segmentation" location="internal"/>
+	</encodingDesc>
+<revisionDesc>
+<change n="1" when="2020-10-21">Addition of block markers for missing verses, plus the odd surplus tag, by Hugh Houghton.</change>
+<change n="0" when="2020-09-17">Converted from plain text by Hugh Houghton and Catherine Smith using Python conversion scripts.</change>
+</revisionDesc>
+</teiHeader>
+<text xml:lang="grc"><body>
+<pb n="P77r-1993" type="folio"/>
+<cb n="P77rC1-1993"/>
+<lb/><div n="Gal" type="book"><div type="inscriptio"><ab n="Gal.inscriptio"><w>των</w><w>εις</w><w>την</w><w>προς</w>
+<lb/><w>γαλατας</w><w>επιστο
+<lb break="no"/>λην</w><w>εξηγητι
+<lb break="no"/>κων</w><w>εκ
+<lb break="no"/>λο
+<lb break="no"/>γων</w>
+<lb/></ab></div><div n="Gal.1" type="chapter"><ab n="Gal.1.1"><w>παυλος</w><w>αποστολος</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w>
+<lb/><w>ουκ</w><w>απ</w><w><abbr type="nomSac"><hi rend="overline">ανων</hi></abbr></w><w>ουδε</w><w>δι</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>αλλα</w><w>δια</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>και</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>του</w><w>εγειραντος</w>
+<lb/><w>αυτον</w><w>εκ</w><w>νεκρων</w></ab><ab n="Gal.1.2"><w>και</w>
+<lb/><w>οι</w><w>συν</w><w>εμοι</w><w>παντες</w><w>α
+<lb break="no"/>δελφοι</w><w>ταις</w><w>εκκλησι
+<lb break="no"/>αις</w><w>της</w><w>γαλατιας</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P77rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P77v-1993" type="folio"/>
+<cb n="P77vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.1.3"><w>χαρις</w><w>υμιν</w><w>και</w><w>ειρηνη</w>
+<lb/><w>απο</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>ημων</w><w>και</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="Gal.1.4"><w>του</w><w>δοντος</w><w>ε
+<lb break="no"/>αυτον</w><w>περι</w><w>των</w><w>αμαρ
+<lb break="no"/>τιων</w><w>ημων</w><w>οπως</w><w>εξελη
+<lb break="no"/>ται</w><w>ημας</w><w>εκ</w><w>του</w><w>ενεσ
+<lb break="no"/>τωτος</w><w>αιωνος</w><w>πονηρου</w>
+<lb/><w>κατα</w><w>το</w><w>θελημα</w><w>του</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>ημων</w></ab><ab n="Gal.1.5"><w>ω</w><w>η</w>
+<lb/><w>δοξα</w><w>εις</w><w>τους</w><w>αιωνας</w></ab><ab n="Gal.1.6"/><ab n="Gal.1.7">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P77vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.1.8"><w>αλλα</w><w>και</w><w>εαν</w><w>ημεις</w><w>η</w><w>αγγε
+<lb break="no"/>λος</w><w>εξ</w><w><abbr type="nomSac"><hi rend="overline">ουνου</hi></abbr></w><w>ευαγγελι
+<lb break="no"/>ζεται</w><w>υμιν</w><w>παρ</w><w>ω</w><w>ευηγ
+<lb break="no"/>γελισαμεθα</w><w>υμιν</w><w>ανα
+<lb break="no"/>θεμα</w><w>εστω</w></ab><ab n="Gal.1.9"><w>ως</w><w>προει
+<lb break="no"/>ρηκαμεν</w><w>και</w><w>αρτι</w><w>παλιν</w><w>λε
+<lb break="no"/>γω</w><w>ει</w><w>τις</w><w>υμας</w><w>ευαγγελιζεται</w>
+<lb/><w>παρ</w><w>ω</w><w>παρελαβετε</w><w>αναθεμα</w><w>εστω</w>
+<pb n="P78r-1993" type="folio"/>
+<cb n="P78rC1-1993"/>
+<lb/></ab><ab n="Gal.1.10"><w>αρτι</w><w>γαρ</w><w><abbr type="nomSac"><hi rend="overline">ανους</hi></abbr></w><w>πειθω</w>
+<lb/><w>η</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w><w>η</w><w>ζητω</w></ab><ab n="Gal.1.11"/><ab n="Gal.1.12">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P78rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.1.13"><w>ηκουσατε</w><w>γαρ</w><w>την</w><w>ε
+<lb break="no"/>μην</w><w>αναστροφην</w><app><rdg type="orig" hand="firsthand"/><rdg type="corr" hand="corrector"><w>ποτε</w></rdg></app><w>εν</w>
+<lb/><w>τω</w><w>ιουδαισμω</w><w>οτι</w>
+<lb/><w>καθ</w><w>υπερβολην</w><w>εδι
+<lb break="no"/>ωκον</w><w>την</w><w>εκκλησιαν</w>
+<lb/><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>και</w><w>επορθουν</w></ab><ab n="Gal.1.14">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P78v-1993" type="folio"/>
+<cb n="P78vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P78vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.1.15"><w>οτε</w><w>δε</w><w>ευδοκησεν</w><w>ο</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>ο</w><w>αφορισας</w><w>με</w><w>εκ</w>
+<lb/><w>κοιλιας</w><w><abbr type="nomSac"><hi rend="overline">μρς</hi></abbr></w><w>μου</w><w>και</w>
+<lb/><w>καλεσας</w><w>δια</w><w>της</w><w>χαριτος</w>
+<lb/><w>αυτου</w></ab><ab n="Gal.1.16"><w>αποκαλυψαι</w><w>τον</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">υν</hi></abbr></w><w>αυτου</w><w>εν</w><w>εμοι</w><w>ινα</w><app><rdg type="orig" hand="firsthand"><w>ευ
+<lb break="no"/>αγγελιζομαι</w></rdg><rdg type="corr" hand="corrector"><w>ευαγγελιζωμαι</w></rdg></app><w>αυτον</w>
+<lb/><w>εν</w><w>τοις</w><w>εθνεσιν</w><w>ευ
+<lb break="no"/>θεως</w><w>ου</w><app><rdg type="orig" hand="firsthand"><w>προανεθεμην</w></rdg><rdg type="corr" hand="corrector"><w>προσανεθεμην</w></rdg></app><w>σαρκι</w><w>και</w><w>αιματι</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P79r-1993" type="folio"/>
+<cb n="P79rC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P79rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P79v-1993" type="folio"/>
+<cb n="P79vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P79vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note><surplus reason="repetition"><w>ου</w><w>προσανεθε
+<lb break="no"/>μην</w><w>σαρκι</w><w>και</w><w>αιματι</w></surplus>
+<lb/></ab><ab n="Gal.1.17"><w>ουδε</w><w>ανηλθον</w><w>εις</w><w>ιερο
+<lb break="no"/>σολυμα</w><w>προς</w><w>τους</w><w>προ</w><w>ε
+<lb break="no"/>μου</w><w>αποστολους</w></ab><ab n="Gal.1.18"/><ab n="Gal.1.19"/><ab n="Gal.1.20"/><ab n="Gal.1.21"/><ab n="Gal.1.22"/><ab n="Gal.1.23"/><ab n="Gal.1.24"><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P80r-1993" type="folio"/>
+<cb n="P80rC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab></div><div n="Gal.2" type="chapter"><ab n="Gal.2.1"><w>επειτα</w><w>δια</w><w>δεκατεσ
+<lb break="no"/>σαρων</w><w>ετων</w><w>ανεβην</w><w>εις</w>
+<lb/><w>ιεροσολυμα</w><w>μετα</w><w>βαρνα
+<lb break="no"/>βα</w><w>συμπαραλαβων</w><w>και</w>
+<lb/><w>τιτον</w></ab><ab n="Gal.2.2"><w>ανεβην</w><w>δε</w><w>κατα</w><w>απο
+<lb break="no"/>καλυψιν</w><w>και</w><w>ανεθε
+<lb break="no"/>μην</w><w>αυτοις</w><w>το</w><w>ευαγγε
+<lb break="no"/>λιον</w><w>ο</w><w>κηρυσσω</w><w>εν</w><w>τοις</w>
+<lb/><w>εθνεσιν</w><w>κατ</w><w>ιδιαν</w><w>δε</w>
+<lb/><w>τοις</w><w>δοκουσιν</w><w>μη</w><w>πως</w>
+<lb/><w>εις</w><w>κενον</w><w>τρεχω</w><w>η</w><w>εδραμον</w></ab><ab n="Gal.2.3"/><ab n="Gal.2.4"/><ab n="Gal.2.5">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P80rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P80v-1993" type="folio"/>
+<cb n="P80vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P80vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.2.6"><w>απο</w><w>δε</w><w>των</w><w>δοκουντων</w>
+<lb/><w>ειναι</w><w>τι</w><w>οποιοι</w><w>ποτε</w><w>η
+<lb break="no"/>σαν</w><w>ουδεν</w><w>μοι</w><w>διαφερει</w>
+<lb/><w>προσωπον</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>ου</w>
+<lb/><w>λαμβανει</w></ab><ab n="Gal.2.7"/><ab n="Gal.2.8"/><ab n="Gal.2.9"/><ab n="Gal.2.10">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P81r-1993" type="folio"/>
+<cb n="P81rC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.2.11"><w>οτε</w><w>δε</w><w>πετρος</w><w>ηλθεν</w>
+<lb/><w>εις</w><w>αντιοχειαν</w><w>κατα</w><w>προ
+<lb break="no"/>σωπον</w><w>αυτω</w><w>αντεστην</w><w>οτι</w>
+<lb/><w>κατεγνωσμενος</w><w>ην</w>
+<lb/></ab><ab n="Gal.2.12"><w>προ</w><w>του</w><w>γαρ</w><w>ελθειν</w><w>τινας</w>
+<lb/><w>απο</w><w>ιακωβου</w><w>μετα</w><w>των</w><w>ε
+<lb break="no"/>θνων</w><w>συνισθιεν</w><w>οτε</w>
+<lb/><w>δε</w><w>ηλθεν</w><w>υπεστελλεν</w>
+<lb/><w>και</w><w>αφωριζεν</w><w>εαυτον</w><w>φο
+<lb break="no"/>βουμενος</w><w>τους</w><w>εκ</w><w>περι
+<lb break="no"/>τομης</w></ab><ab n="Gal.2.13"><w>και</w><w>συνυπεκριθησαν</w></ab><ab n="Gal.2.14">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P81rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P81v-1993" type="folio"/>
+<cb n="P81vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P81vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.2.15"><w>ημεις</w><w>φυσει</w><w>ιουδαιοι</w><w>και</w>
+<lb/><w>ουκ</w><w>εξ</w><w>εθνων</w><w>αμαρτω
+<lb break="no"/>λοι</w></ab><ab n="Gal.2.16"><w>ειδοτες</w><w>δε</w><w>οτι</w><w>ου</w><w>δι
+<lb break="no"/>καιουται</w><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>εξ</w><w>εργων</w>
+<lb/><w>νομου</w><w>εαν</w><w>μη</w><w>δια</w><w>πι
+<lb break="no"/>στεως</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>και</w><w>ημεις</w>
+<lb/><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w><w>επιστευσαμεν</w>
+<lb/><w>ινα</w><w>δικαιωθωμεν</w><w>εκ</w>
+<lb/><w>πιστεως</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>και</w><w>ουκ</w><w>εξ</w><w>ερ
+<lb break="no"/>γων</w><w>νομου</w><w>διοτι</w><w>ου</w><w>δι
+<lb break="no"/>καιωθησεται</w><w>εξ</w><w>εργων</w>
+<lb/><w>νομου</w><w>πασα</w><w>σαρξ</w></ab><ab n="Gal.2.17"><w>ει</w><w>δε</w>
+<lb/><w>ζητουντες</w><w>δικαιωθηναι</w></ab><ab n="Gal.2.18">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P82r-1993" type="folio"/>
+<cb n="P82rC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P82rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.2.19"><w>εγω</w><w>γαρ</w><w>δια</w><w>νομου</w>
+<lb/><w>νομω</w><w>απεθανον</w><w>ινα</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>ζησω</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w>συνε
+<lb break="no"/>σταυρωμαι</w></ab><ab n="Gal.2.20"><w>ζω</w><w>δε</w>
+<lb/><w>ουκετι</w><w>εγω</w><w>ζη</w><w>δε</w><w>εν</w>
+<lb/><w>εμοι</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>ο</w><w>δε</w><w>νυν</w>
+<lb/><w>ζω</w><w>εν</w><w>σαρκι</w><w>εν</w><w>πιστει</w>
+<lb/><w>ζω</w><w>τη</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">υυ</hi></abbr></w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w>
+<lb/><w>του</w><w>ανατου</w></ab><ab n="Gal.2.22">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P82v-1993" type="folio"/>
+<cb n="P82vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P82vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P83r-1993" type="folio"/>
+<cb n="P83rC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P83rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P83v-1993" type="folio"/>
+<cb n="P83vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab></div><div n="Gal.3" type="chapter"><ab n="Gal.3.1"><w>ω</w><w>ανοητοι</w><w>γαλαται</w>
+<lb/><w>τις</w><w>υμας</w><w>εβασκανεν</w>
+<lb/><w>τη</w><w>αληθεια</w><w>μη</w><w>πειθεσθαι</w>
+<lb/><w>οις</w><w>κατ</w><w>οφθαλμους</w><w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>προεγραφη</w><w>εν</w><w>υμιν</w>
+<lb/><w>εσταυρωμενος</w></ab><ab n="Gal.3.2"><w>τουτο</w>
+<lb/><w>μονον</w><w>θελω</w><w>μαθειν</w><w>αφ</w><w>υμων</w></ab><ab n="Gal.3.3"/><ab n="Gal.3.4"/><ab n="Gal.3.5"/><ab n="Gal.3.6"/><ab n="Gal.3.7"/><ab n="Gal.3.8"/><ab n="Gal.3.9"/><ab n="Gal.3.10"/><ab n="Gal.3.11"/><ab n="Gal.3.12">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P83vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.3.13"><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>ημας</w><w>εξηγορασεν</w>
+<lb/><w>εκ</w><w>της</w><w>καταρας</w><w>του</w>
+<lb/><w>νομου</w><w>γενομενος</w><w>υ
+<lb break="no"/>περ</w><w>ημων</w><w>καταρα</w><w>γε
+<lb break="no"/>γραπται</w><w>γαρ</w><w>επικατα
+<lb break="no"/>ρατος</w><w>πας</w><w>ο</w><w>κρεμαμενος</w>
+<lb/><w>επι</w><w>ξυλου</w></ab><ab n="Gal.3.14"><w>ινα</w><w>εις</w><w>τα</w>
+<lb/><w>εθνη</w><w>η</w><w>ευλογια</w><w>του</w><w>α
+<lb break="no"/>βρααμ</w><w>γενηται</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w>
+<pb n="P84r-1993" type="folio"/>
+<cb n="P84rC1-1993"/>
+<lb/><w>ινα</w><w>την</w><w>επαγγελιαν</w>
+<lb/><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>λαβωμεν</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P84rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P84v-1993" type="folio"/>
+<cb n="P84vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P84vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.3.15"><w>αδελφοι</w><w>κατα</w><w><abbr type="nomSac"><hi rend="overline">ανον</hi></abbr></w><w>λεγω</w>
+<lb/><w>ομως</w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>κεκυρωμε
+<lb break="no"/>νην</w><w>διαθηκην</w><w>ουδεις</w><w>αθε
+<lb break="no"/>τει</w><w>η</w><w>επιδιατασσεται</w>
+<lb/></ab><ab n="Gal.3.16"><w>τω</w><w>δε</w><w>αβρααμ</w><w>ερρηθησαν</w><w>αι</w>
+<lb/><w>επαγγελιαι</w><w>και</w><w>τω</w><w>σπερ
+<lb break="no"/>ματι</w><w>αυτου</w><w>ουκ</w><w>ειπον</w><w>ως</w><w>επι</w><w>πολ
+<lb break="no"/>λων</w><w>αλλ</w><w>ως</w><w>εφ</w><w>ενος</w></ab><ab n="Gal.3.17"/><ab n="Gal.3.18">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P85r-1993" type="folio"/>
+<cb n="P85rC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.3.19"><w>τι</w><w>ουν</w><w>ο</w><w>νομος</w><w>των</w><w>πα
+<lb break="no"/>ραβασεων</w><w>χαριν</w><w>προσε
+<lb break="no"/>τεθη</w><w>αχρις</w><w>ου</w><w>ελθη</w>
+<lb/><w>το</w><w>σπερμα</w><w>ο</w><w>επηγγελται</w>
+<lb/><w>διαταγεις</w><w>δι</w><w>αγγελων</w>
+<lb/><w>εν</w><w>χειρι</w><w>μεσιτου</w></ab><ab n="Gal.3.20"><w>ο</w><w>δε</w>
+<lb/><w>μεσιτης</w><w>ενος</w><w>ουκ</w><w>εστιν</w></ab><ab n="Gal.3.21"/><ab n="Gal.3.22">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P85rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.3.23"><w>προ</w><w>του</w><w>ελθειν</w><w>την</w><w>πι
+<lb break="no"/>στιν</w><w>υπο</w><w>νομον</w><w>εφρου
+<lb break="no"/>ρουμεθα</w><w>συγκεκλεισ
+<lb break="no"/>μενοι</w><w>εις</w><w>την</w><w>μελ
+<lb break="no"/>λουσαν</w><w>πιστιν</w><w>απο
+<lb break="no"/>καλυφθηναι</w></ab><ab n="Gal.3.24"><w>ωστε</w>
+<lb/><w>ο</w><w>νομος</w><w>παιδαγωγος</w><w>ημων</w><w>γεγονεν</w></ab><ab n="Gal.3.25"/><ab n="Gal.3.26"/><ab n="Gal.3.27"/><ab n="Gal.3.28"/><ab n="Gal.3.29">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P85v-1993" type="folio"/>
+<cb n="P85vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P85vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab></div><div n="Gal.4" type="chapter"><ab n="Gal.4.1"><w>εφ</w><w>οσον</w><w>χρονον</w><w>ο</w><w>κληρονομος</w>
+<lb/><w>νηπιος</w><w>εστιν</w><w>ουδεν</w><w>διαφε
+<lb break="no"/>ρει</w><w>δουλου</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>παντων</w>
+<lb/><w>ων</w></ab><ab n="Gal.4.2"><w>αλλα</w><w>υπο</w><w>επιτρο
+<lb break="no"/>πους</w><w>εστι</w><w>και</w><w>οικονομους</w>
+<lb/></ab><ab n="Gal.4.3"><w>ουτως</w><w>και</w><w>ημεις</w><w>οτε</w><w>ημεν</w>
+<lb/><w>νηπιοι</w><w>υπο</w><w>τα</w><w>στοιχεια</w>
+<lb/><w>του</w><w>κοσμου</w><w>ημεν</w><w>δεδου
+<lb break="no"/>λωμενοι</w></ab><ab n="Gal.4.4"><w>οτε</w><w>δε</w><w>ηλθε</w><w>το</w>
+<lb/><w>πληρωμα</w><w>του</w><w>χρονου</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P86r-1993" type="folio"/>
+<cb n="P86rC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P86rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><surplus reason="repetition"><w>οτε</w><w>δε</w><w>ηλθεν</w><w>το</w><w>πληρω
+<lb break="no"/>μα</w><w>του</w><w>χρονου</w></surplus><w>εξαπεστει
+<lb break="no"/>λεν</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">υν</hi></abbr></w><w>αυτου</w>
+<lb/><w>γενομενον</w><w>εκ</w><w>γυναικος</w>
+<lb/><w>γενομενον</w><w>υπο</w><w>νομον</w>
+<pb n="P86v-1993" type="folio"/>
+<cb n="P86vC1-1993"/>
+<lb/></ab><ab n="Gal.4.5"><w>ινα</w><w>τους</w><w>υπο</w><w>νομον</w><w>ε
+<lb break="no"/>ξαγοραση</w><w>ινα</w><w>την</w><w>υιο
+<lb break="no"/>θεσιαν</w><w>απολαβωμεν</w></ab><ab n="Gal.4.6"/><ab n="Gal.4.7">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P86vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.4.8"><w>αλλα</w><w>τοτε</w><w>μεν</w><w>ουκ</w><w>ειδο
+<lb break="no"/>τες</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w><w>εδουλευσατε</w>
+<lb/><w>τοις</w><w>φυσει</w><w>μη</w><w>ουσι</w><w>θεοις</w>
+<lb/></ab><ab n="Gal.4.9"><w>νυν</w><w>δε</w><w>γνοντες</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w>
+<pb n="P87r-1993" type="folio"/>
+<cb n="P87rC1-1993"/>
+<lb/><w>μαλλον</w><w>δε</w><w>γνωσθεντες</w>
+<lb/><w>υπ</w><w>αυτου</w><w>πως</w><w>επιστρε
+<lb break="no"/>φεται</w><w>παλιν</w><w>επι</w><w>τα</w>
+<lb/><w>ασθενη</w><w>και</w><w>πτωχα</w><w>στοιχεια</w></ab><ab n="Gal.4.10"/><ab n="Gal.4.11"/><ab n="Gal.4.12"/><ab n="Gal.4.13"/><ab n="Gal.4.14"/><ab n="Gal.4.15"/><ab n="Gal.4.16"/><ab n="Gal.4.17"/><ab n="Gal.4.18">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P87rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.4.19"><w>τεκνια</w><w>μου</w><w>ους</w><w>παλιν</w>
+<lb/><w>ωδινω</w><w>αχρις</w><w>ου</w><w>μορ
+<lb break="no"/>φωθη</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>εν</w><w>υμιν</w></ab><ab n="Gal.4.20">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P87v-1993" type="folio"/>
+<cb n="P87vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.4.21"><w>λεγετε</w><w>μοι</w><w>οι</w><w>υπο</w><w>νομον</w>
+<lb/><w>θελοντες</w><w>ειναι</w><w>τον</w><w>νο
+<lb break="no"/>μον</w><w>ουκ</w><w>ακουετε</w></ab><ab n="Gal.4.22"><w>γεγρα
+<lb break="no"/>πται</w><w>γαρ</w><w>οτι</w><w>αβρααμ</w><w>δυο</w>
+<lb/><w>υιους</w><w>εσχεν</w><w>ενα</w><w>εκ</w><w>της</w>
+<lb/><w>παιδισκης</w><w>και</w><w>ενα</w><w>εκ</w>
+<lb/><w>της</w><w>ελευθερας</w></ab><ab n="Gal.4.23"><w>αλλ</w><w>ο</w>
+<lb/><w>μεν</w><w>εκ</w><w>της</w><w>παιδισκης</w>
+<lb/><w>κατα</w><w>σαρκα</w><w>γεγενηται</w>
+<lb/><w>ο</w><w>δε</w><w>εκ</w><w>της</w><w>ελευθερας</w>
+<lb/><w>δια</w><w>της</w><w>επαγγελιας</w></ab><ab n="Gal.4.24"><w>ατινα</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P87vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><surplus reason="repetition"><w>ατινα</w></surplus><w>εστιν</w><w>αλληγορου
+<lb break="no"/>μενα</w><w>αυται</w><w>γαρ</w><w>εισιν</w><w>δυο</w>
+<lb/><w>διαθηκαι</w><w>μια</w><w>μεν</w><w>απο</w>
+<lb/><w>ορους</w><w>σινα</w><w>εις</w><w>δουλειαν</w>
+<lb/><w>γεννωσα</w><w>ητις</w><w>εστιν</w><w>αγαρ</w></ab><ab n="Gal.4.25"/><ab n="Gal.4.26"/><ab n="Gal.4.27"/><ab n="Gal.4.28"/><ab n="Gal.4.29"/><ab n="Gal.4.30"/><ab n="Gal.4.31">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P88r-1993" type="folio"/>
+<cb n="P88rC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab></div><div n="Gal.5" type="chapter"><ab n="Gal.5.1"/><ab n="Gal.5.2"><w>ιδε</w><w>εγω</w><w>παυλος</w><w>λεγω</w>
+<lb/><w>υμιν</w><w>οτι</w><w>εαν</w><w>περιτεμνη
+<lb break="no"/>σθαι</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>ουδεν</w><w>υμας</w><w>ω
+<lb break="no"/>φελησει</w></ab><ab n="Gal.5.3"><w>μαρτυρομαι</w>
+<lb/><w>δε</w><w>παλιν</w><w>παντι</w><w><abbr type="nomSac"><hi rend="overline">ανω</hi></abbr></w>
+<lb/><w>περιτεμνομενω</w><w>οτι</w><w>οφει
+<lb break="no"/>λετης</w><w>εστιν</w><w>ολον</w><w>τον</w><w>νομον</w>
+<lb/><w>ποιησαι</w></ab><ab n="Gal.5.4"/><ab n="Gal.5.5"/><ab n="Gal.5.6"/><ab n="Gal.5.7"/><ab n="Gal.5.8">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P88rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P88v-1993" type="folio"/>
+<cb n="P88vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.5.9"><w>μικρα</w><w>ζυμη</w><w>ολον</w>
+<lb/><w>το</w><w>φυραμα</w><w>ζυμοι</w>
+<lb/></ab><ab n="Gal.5.10"><w>εγω</w><w>πεποιθα</w><w>εις</w><w>υμας</w></ab><ab n="Gal.5.11"/><ab n="Gal.5.12"/><ab n="Gal.5.13"/><ab n="Gal.5.14"/><ab n="Gal.5.15">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P88vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.5.16"><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>περιπατειτε</w><w>και</w><w>επι
+<lb break="no"/>θυμιαν</w><w>σαρκος</w><w>ου</w><w>μη</w>
+<lb/><w>τελεσητε</w></ab><ab n="Gal.5.17"><w>η</w><w>γαρ</w><app><rdg type="orig" hand="firsthand"/><rdg type="corr" hand="corrector"><w>σαρξ</w></rdg></app><w>επιθυ
+<lb break="no"/>μει</w><w>κατα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>το</w>
+<lb/><w>δε</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>κατα</w><w>της</w><w>σαρκος</w>
+<lb/><w>ταυτα</w><w>δε</w><w>αλληλοις</w><w>αντι
+<lb break="no"/>κειται</w><w>ινα</w><w>μη</w><w>α</w><w>αν</w><w>θελη
+<lb break="no"/>τε</w><w>ποιητε</w></ab><ab n="Gal.5.18">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P89r-1993" type="folio"/>
+<cb n="P89rC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P89rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.5.19"><w>φανερα</w><w>δε</w><w>εστι</w><w>τα</w><w>εργα</w><w>της</w>
+<lb/><w>σαρκος</w><w>ατινα</w><w>εστι</w><w>πορνεια</w>
+<lb/><w>μοιχεια</w><w>ακαθαρσια</w><w>α
+<lb break="no"/>σελγεια</w></ab><ab n="Gal.5.20"><app><rdg type="orig" hand="firsthand"><w>ειδωλολατρεια</w></rdg><rdg type="corr" hand="corrector"><w>ειδωλολατρια</w></rdg></app>
+<lb/><app><rdg type="orig" hand="firsthand"><w>φαρμακια</w></rdg><rdg type="corr" hand="corrector"><w>φαρμακεια</w></rdg></app><w>εχθρα</w><w>ερις</w>
+<lb/><w>ζηλος</w><w>θυμοι</w><w>διχοστα
+<lb break="no"/>σιαι</w></ab><ab n="Gal.5.21"><w>φθονοι</w><app><rdg type="orig" hand="firsthand"><w>φθονοι</w></rdg><rdg type="corr" hand="corrector"><w>φονοι</w></rdg></app>
+<lb/><w>μεθαι</w><w>κωμοι</w><w>και</w><w>τα</w>
+<lb/><w>ομοια</w><w>τουτοις</w><w>α</w><w>προλε
+<lb break="no"/>γω</w><w>υμιν</w><w>οτι</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P89v-1993" type="folio"/>
+<cb n="P89vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.5.22"><w>ο</w><w>δε</w><w>καρπος</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>εστιν</w>
+<lb/><w>αγαπη</w><w>χαρα</w><w>ειρηνη</w></ab><ab n="Gal.5.23">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.5.24"><w>οι</w><w>δε</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>την</w><w>σαρ
+<lb break="no"/>κα</w><w>εσταυρωσαν</w><w>συν</w>
+<lb/><w>τοις</w><w>παθημασι</w><w>και</w><w>της</w><w>επιθυμιας</w></ab><ab n="Gal.5.25"/><ab n="Gal.5.26">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P89vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P90r-1993" type="folio"/>
+<cb n="P90rC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab></div><div n="Gal.6" type="chapter"><ab n="Gal.6.1"/><ab n="Gal.6.2"><w>αλληλων</w><w>τα</w><w>βαρη</w><w>βαστα
+<lb break="no"/>ζετε</w><w>και</w><w>ουτως</w><w>αναπληρω
+<lb break="no"/>σατε</w><w>τον</w><w>νομον</w><w>του</w></ab><ab n="Gal.6.3"/><ab n="Gal.6.4"/><ab n="Gal.6.5"/><ab n="Gal.6.6"/><ab n="Gal.6.7"/><ab n="Gal.6.8">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.6.9"><w>το</w><w>δε</w><w>καλον</w><w>ποιουντες</w>
+<lb/><w>μη</w><w>εκκακωμεν</w><w>καιρω</w><w>γαρ</w><w>ι
+<lb break="no"/>διω</w><w>θερισομεν</w><w>μη</w><w>εκ
+<lb break="no"/>λυομενοι</w></ab><ab n="Gal.6.10"><w>αρα</w><w>ουν</w><w>εως</w>
+<lb/><w>καιρον</w><w>εχωμεν</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P90rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.6.11"><w>ιδετε</w><w>πηλικοις</w><w>υμιν</w>
+<lb/><w>γραμμασιν</w><w>εγραψα</w><w>τη</w>
+<lb/><w>εμη</w><w>χειρι</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P90v-1993" type="folio"/>
+<cb n="P90vC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.6.12"><w>οσοι</w><w>θελουσιν</w><w>ευπρο
+<lb break="no"/>σωπησαι</w><w>εν</w><w>σαρκι</w><w>ου
+<lb break="no"/>τοι</w><w>αναγκαζουσιν</w><w>υ
+<lb break="no"/>μας</w><w>περιτεμνεσθαι</w><w>μο
+<lb break="no"/>νον</w><w>ινα</w><w>μη</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">στρω</hi></abbr></w><w>του</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><app><rdg type="orig" hand="firsthand"><w>διωκονται</w></rdg><rdg type="corr" hand="corrector"><w>διωκωνται</w></rdg></app></ab><ab n="Gal.6.13"><w>θε
+<lb break="no"/>λουσιν</w><w>δε</w><w>υμας</w><w>περι
+<lb break="no"/>τεμνεσθαι</w><w>ινα</w><w>εν</w><w>τη</w><w>υμετε
+<lb break="no"/>ρα</w><w>σαρκι</w><w>καυχησωνται</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P90vC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.6.14"><w>εμοι</w><w>δε</w><w>μη</w><w>γενοιτο</w><w>καυ
+<lb break="no"/>χασθαι</w><w>ει</w><w>μη</w><w>εν</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">στρω</hi></abbr></w><w>του</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>δι</w><w>ου</w>
+<lb/><w>εμοι</w><w>κοσμος</w><w>εσταυρωται</w>
+<lb/><w>και</w><w>εγω</w><w>τω</w><w>κοσμω</w></ab><ab n="Gal.6.15">
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<pb n="P91r-1993" type="folio"/>
+<cb n="P91rC1-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.6.16"><w>και</w><w>οσοι</w><w>τω</w><w>κανονι</w>
+<lb/><w>τουτω</w><w>στοιχησου
+<lb break="no"/>σιν</w><w>ειρηνη</w><w>επ</w><w>αυτους</w><w>και</w>
+<lb/><w>ελεος</w><w>και</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<cb n="P91rC2-1993"/>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.6.17"><w>του</w><w>λοιπου</w><w>κοπους</w><w>μοι</w><w>μηδεις</w>
+<lb/><w>παρεχετω</w><w>εγω</w><w>γαρ</w><w>τα</w><w>στιγματα</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/></ab><ab n="Gal.6.18"><w>η</w><w>χαρις</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>μετα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>υμων</w>
+<lb/><w>αδελφοι</w><w>αμην</w>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+<lb/><note type="commentary">Untranscribed commentary text</note>
+  <lb/><note type="commentary">Untranscribed commentary text</note></ab></div><div type="subscriptio"><ab n="Gal.subscriptio"/></div></div></body></text>
+             </TEI>

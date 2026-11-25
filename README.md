@@ -2,10 +2,9 @@
 
 Each book of the Old Testament in Hebrew and Aramaic and of the New Testament in Greek, compiled only from ancient manuscripts in the language the book was written in, with the evidence for every word.
 
-- **One specification, `SPECIFICATION.md`,** states the goal and what every output must contain. It prescribes no method and names no model or program.
-- **The compiler chooses its own method** and writes it into its output. This repository's compiler is `scripts/compile.ts`; its method, including the statistical model that estimates how likely each reading is to be original and with what uncertainty, is described in `scripts/METHOD.md`.
-- **Each compilation is one output artifact,** filed by the specification's hash and the compiler's name: `outputs/<first 12 characters of the specification's SHA-256>/<compiler>/`. It holds `compilation.json` (the specification's hash, the compiler's record of itself, the full method text, and each book with its hash) and `books/<book>.json` (the text, every manuscript's reading, the estimates and their ranges). This compiler names its outputs `compile-<commit>`, with `-modified-<hash>` added when its code differs from that commit.
-- **The inputs are data, not rules:** `transcriptions/books.json` lists the books and the folders each section reads; `transcriptions/manuscripts.json` lists each manuscript with the facts its holder records (its date range and how it was dated, its holders, the license and the holder's own file for each transcription, and links to page images held elsewhere); `transcriptions/greek/` and `transcriptions/hebrew/` hold one plain text file per manuscript transcription, made from the holders' files.
+- **One specification, `SPECIFICATION.md`,** states the goal and what every output must contain. It has its own ULID and prescribes no statistical model: the output must use one, describe it, and name the model that made the judgments.
+- **Each compilation is one output,** written in TEI P5 XML and filed under `outputs/<the specification's ULID>/`. The output records that ULID, the model's name and version, the evidence for every reading, and the method that was used.
+- **The manuscripts** are listed in `transcriptions/manuscripts.json`, which is part of the specification. Each transcription is a file in the folder `transcriptions/`, with no subfolders, named `{manuscript}.{holder}.xml` (or `{manuscript}.{holder}.{part}.xml` when one manuscript and holder give more than one file). Where the holder publishes TEI XML, or other XML, that file is stored as they published it. Where they publish no XML, the file is a TEI P5 document and the inventory says so. The books are listed in `transcriptions/books.json`.
 - **No printed editions, modern reconstructions, translations or images are used.** A line no manuscript has is shown as missing.
 
 ## Commands (Bun)
@@ -13,7 +12,7 @@ Each book of the Old Testament in Hebrew and Aramaic and of the New Testament in
 | Command | What it does |
 |---|---|
 | `bun run import <folder>` | Reads the holders' downloaded files into `transcriptions/` |
-| `bun run compile all` (or one book, `bun run compile Gen`) | Compiles every book into one output artifact; the same inputs and code always give the same output |
+| `bun run compile all` (or one book, `bun run compile Gen`) | Compiles every book into one output; the same inputs always give the same output |
 | `bun run check` | Quick check of every output, about one second |
 | `bun run site` | Builds the website in `site/www` |
 
@@ -21,7 +20,7 @@ Each book of the Old Testament in Hebrew and Aramaic and of the New Testament in
 
 https://openlexis-transcription.pages.dev
 
-Read any book by chapter and line. Tap a word or a line number: a panel opens under the line with the chance that each reading is original and its range, the manuscripts behind each reading with their dates and reliability, and every manuscript's own text of the line, lined up word by word. The site reads every output in `outputs/` and shows each one with its own method.
+The [specification](https://openlexis-transcription.pages.dev/specification/) and the [list of manuscripts](https://openlexis-transcription.pages.dev/specification/manuscripts/) are on the site. Read any book by chapter and line. Tap a word or a line number: a panel opens under the line with the chance that each reading is original and its range, the manuscripts behind each reading, and every manuscript's own text of the line, lined up word by word.
 
 ## Licenses
 

@@ -190,3 +190,10 @@ mark.ds { background: #f7e3a3; color: inherit; border-radius: 2px; }
 .al-note { margin: 4px 0 6px; font-size: .8rem; }
 mark.dsm { background: #f7e3a3; color: #8c6a00; text-decoration: line-through; border-radius: 2px; font-size: .85em; }
 table.al td, table.al th { vertical-align: middle; }
+
+table.mslist { font-size: .92rem; }
+table.mslist td { vertical-align: top; }
+table.mslist .tr { margin: 0 0 10px; }
+table.mslist .tr:last-child { margin-bottom: 0; }
+#msfilter { margin: 12px 0; }
+#msfilter input[type="search"] { font: 1rem var(--ui); padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; width: min(100%, 28rem); background: var(--card); }

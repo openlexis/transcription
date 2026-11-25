@@ -1,0 +1,758 @@
+
+<!DOCTYPE TEI>
+<?xml-model href="TEI-NTMSS.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"><teiHeader>
+    <fileDesc>      
+      <titleStmt>
+        <title>A Transcription of 2 Thessalonians</title>
+        <title type="document" key="31961" n="1961">GA 1961</title>
+        <title type="collection" level="s" xml:lang="en">The New Testament</title>
+        <title type="collection" level="s" xml:lang="de">Das Neue Testament</title>
+        <title type="work" level="m" xml:lang="en" n="14">The Second Epistle to the Thessalonians</title>
+        <title type="short" level="m" xml:lang="en" n="14">2 Thessalonians</title>      
+        <respStmt>
+          <resp>Created by</resp>
+          <name type="persname">Grant Edwards</name>
+        </respStmt>       
+        <respStmt>
+          <resp>XML conversion by</resp>
+          <name type="org">the Institute for Textual Scholarship and Electronic Editing, Birmingham</name>
+        </respStmt>
+      </titleStmt>
+      <editionStmt>
+        <edition n="1.0">Version 1.0, created on <date>23.9.2015</date></edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>
+          <name type="persname">Grant Edwards</name>
+        </publisher>
+        <date>23.9.2015</date>
+      </publicationStmt>
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier>
+            <altIdentifier type="GA">
+              <idno>1961</idno>
+            </altIdentifier>
+            <altIdentifier type="Liste">
+              <idno>31961</idno>
+            </altIdentifier>
+          </msIdentifier>
+        </msDesc>
+      <listWit><witness xml:id="firsthand"/><witness xml:id="corrector"/></listWit></sourceDesc>
+    </fileDesc>
+    <encodingDesc n="1.4">
+      <projectDesc>
+        <p>This transcription was made as part of a doctoral research project</p>
+      </projectDesc>
+      <editorialDecl>
+       
+          
+      	<p>The XML specifications used are version 1.4 of the IGNTP Guidelines available at <ptr target="http://epapers.bham.ac.uk/1727/"/></p></editorialDecl>
+      <variantEncoding method="parallel-segmentation" location="internal"/>
+    	
+    </encodingDesc>
+  </teiHeader><text xml:lang="grc"><body><div type="book" n="B14">
+<pb n="178r" type="folio" xml:id="P178r-1961"/>
+<cb n="P178rC-1961"/>
+<lb n="P178rCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><div type="incipit" n="B14incipit"><ab/></div><div type="chapter" n="B14K1"><ab n="B14K1V1"><w><hi rend="cap" height="undefined">π</hi>αυλος</w><w>και</w><w>σιλουανος</w><w>και</w><w>τιμοθεος</w><w>τη</w><w>εκκλη
+<lb n="P178rCL-1961" break="no"/>σια</w><w>θεσσαλονικεων</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πρι</hi></abbr></w><w>ημων</w><w>και</w><w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w>
+<lb n="P178rCL-1961"/><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K1V2"><w>χαρις</w><w>υμιν</w>
+<lb n="P178rCL-1961"/><w>και</w><w>ειρηνη</w><w>απο</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="178v" type="folio" xml:id="P178v-1961"/>
+<cb n="P178vC-1961"/>
+<lb n="P178vCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K1V3"><w>ευχαριστειν</w><w>οφειλομεν</w><w>παντοτε</w>
+<lb n="P178vCL-1961"/><w>τω</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>περι</w><w>υμων</w><w>αδελφοι</w><w>καθως</w><w>αξιον</w>
+<lb n="P178vCL-1961"/><w>εστιν</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>οτι</w><w>υπεραυ
+<lb n="P178vCL-1961" break="no"/>ξανει</w><w>η</w><w>πιστις</w><w>υμων</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>και</w><w>πλεοναζει</w><w>η</w><w>αγαπη</w><w>ενος</w>
+<lb n="P178vCL-1961"/><w>εκαστου</w><w>παντων</w><w>υμων</w><w>εις</w><w>αλληλους</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="179r" type="folio" xml:id="P179r-1961"/>
+<cb n="P179rC-1961"/>
+<lb n="P179rCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K1V4"><w>ωστε</w><w>ημας</w><w>αυτους</w>
+<lb n="P179rCL-1961"/><w>εν</w><w>υμιν</w><w>καυχασθε</w><w>εν</w><w>ταις</w><w>εκκλησιαις</w><w>του</w>
+<lb n="P179rCL-1961"/><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>υπερ</w><w>της</w><w>υπομονης</w><w>υμων</w><w>και</w><w>της</w><w>πιστεως</w>
+<lb n="P179rCL-1961"/><w>εν</w><w>πασι</w><w>τοις</w><w>διωγμοις</w><w>υμων</w><w>και</w><w>ταις</w><w>θλι
+<lb n="P179rCL-1961" break="no"/>ψεσιν</w><w>αις</w><w>ανεχεσθε</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K1V5"><w>εις</w><w>ενδειγμα</w><w>της</w><w>δι
+<lb n="P179rCL-1961" break="no"/>καιας</w><w>κρισεως</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>εις</w><w>το</w><w>καταξιωθηναι</w>
+<lb n="P179rCL-1961"/><w>υμας</w><w>της</w><w>βασιλειας</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="179v" type="folio" xml:id="P179v-1961"/>
+<cb n="P179vC-1961"/>
+<lb n="P179vCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>υπερ</w><w>ης</w><w>και</w><w>πασχετε</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K1V6"><w>ειπερ</w><w>δικαιον</w>
+<lb n="P179vCL-1961"/><w>παρα</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>ανταποδουναι</w><w>τοις</w><w>θλιβουσιν</w>
+<lb n="P179vCL-1961"/><w>υμας</w><w>θλιψιν</w></ab><ab n="B14K1V7"><w>και</w><w>υμιν</w><w>τοις</w><w>θλιβομενοις</w>
+<lb n="P179vCL-1961"/><w>ανεσιν</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>μεθ</w><w>η
+<lb n="P179vCL-1961" break="no"/>μων</w><w>εν</w><w>τη</w><w>αποκαλυψει</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>απ</w><w><abbr type="nomSac"><hi rend="overline">ουνου</hi></abbr></w>
+<lb n="P179vCL-1961"/><w>μετ</w><w>αγγελων</w><w>δυναμεως</w><w>αυτου</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K1V8"><w>εν</w><w>πυρι</w><w>φλογος</w><w>διδοντος</w><w>εκδι
+<lb n="P179vCL-1961" break="no"/>κησιν</w><w>τοις</w><w>μη</w><w>ειδοσι</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w><w>και</w><w>τοις</w><w>μη</w><w>υπα
+<lb n="P179vCL-1961" break="no"/>κουουσι</w><w>τω</w><w>ευαγγελιω</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="180r" type="folio" xml:id="P180r-1961"/>
+<cb n="P180rC-1961"/>
+<lb n="P180rCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K1V9"><w>οιτινες</w><w>δι
+<lb n="P180rCL-1961" break="no"/>κην</w><w>τισουσιν</w><w>ολεθρον</w><w>αιωνιον</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>απο</w><w>προσωπου</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>και</w><w>απο</w><w>της</w><w>δο
+<lb n="P180rCL-1961" break="no"/>ξης</w><w>της</w><w>ισχυος</w><w>αυτου</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K1V10"><w>οταν</w><w>ελθη</w><w>ενδοξασθηναι</w><w>εν</w><w>τοις</w>
+<lb n="P180rCL-1961"/><w>αγιοις</w><w>αυτου</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="180v" type="folio" xml:id="P180v-1961"/>
+<cb n="P180vC-1961"/>
+<lb n="P180vCL-1961"/><w>και</w><w>θαυμασθηναι</w><w>εν</w><w>πασι</w><w>τοις</w><w>πιστευ<unclear reason="poor image">σα</unclear>σι</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>οτι</w><w>επι
+<lb n="P180vCL-1961" break="no"/>στευθη</w><w>το</w><w>μαρτυριον</w><w>ημων</w><w>εφ</w><w>υμας</w><w>εν</w>
+<lb n="P180vCL-1961"/><w>τη</w><w>ημερα</w><w>εκεινη</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K1V11"><w>εις</w><w>ο</w><w>και</w><w>προ
+<lb n="P180vCL-1961" break="no"/>σευχομεθα</w><w>παντοτε</w><w>περι</w><w>υμων</w><w>ινα</w><w>υμας</w>
+<lb n="P180vCL-1961"/><w>αξιωση</w><w>της</w><w>κλησεως</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>ημων</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>και</w><w>πλη
+<lb n="P180vCL-1961" break="no"/>ρωση</w><w>πασαν</w><w>ευδοκιαν</w><w>αγαθωσυνης</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>και</w><w>εργον</w><w>πιστεως</w><w>εν</w><w>δυναμει</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="181r" type="folio" xml:id="P181r-1961"/>
+<cb n="P181rC-1961"/>
+<lb n="P181rCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K1V12"><w>οπως</w><w>ενδοξασθη</w><w>το</w><w>ο
+<lb n="P181rCL-1961" break="no"/>νομα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>εν</w><w>υμιν</w><w>και</w><w>υμεις</w>
+<lb n="P181rCL-1961"/><w>εν</w><w>αυτω</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab></div><div type="chapter" n="B14K2"><ab n="B14K2V1"><w>ερωτωμεν</w><w>δε</w><w>υμας</w><w>αδελφοι</w><w>περι</w>
+<lb n="P181rCL-1961"/><w>της</w><w>παρουσιας</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>και</w><w>ημων</w><w>ε
+<lb n="P181rCL-1961" break="no"/>πισυναγωγης</w><w>επ</w><w>αυτον</w></ab><ab n="B14K2V2"><w>εις</w><w>το</w><w>μη</w><w>ταχεως</w><w>σαλευ
+<lb n="P181rCL-1961" break="no"/>θηναι</w><w>υμας</w><w>απο</w><w>του</w><w>νοος</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>μητε</w><w>θροει
+<lb n="P181rCL-1961" break="no"/>σθε</w><w>μητε</w><w>δια</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>μητε</w><w>δια</w><w>λογου</w>
+<pb n="181v" type="folio" xml:id="P181v-1961"/>
+<cb n="P181vC-1961"/>
+<lb n="P181vCL-1961"/><w>μητε</w><w>δι</w><w>επιστολης</w><w>ως</w><w>δι</w><w>ημων</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>ως</w><w>οτι</w><w>ενεστηκεν</w><w>η</w><w>ημερα</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V3"><w>μη</w><w>τις</w><w>υμας</w><w>εξαπατηση</w><w>κατα</w>
+<lb n="P181vCL-1961"/><w>μηδενα</w><w>τροπον</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>οτι</w><w>εαν</w><w>μη</w>
+<lb n="P181vCL-1961"/><w>ελθη</w><w>η</w><w>αποστασια</w><w>πρωτον</w><w>και</w><w>αποκαλυφθη</w>
+<lb n="P181vCL-1961"/><w>ο</w><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>της</w><w>αμαρτιας</w><w>ο</w><w>υιος</w><w>της</w><w>απωλειας</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V4"><w>ο</w><w>αντικειμενος</w>
+<lb n="P181vCL-1961"/><w>και</w><w>υπεραιρομενος</w><w>επι</w><w>παντα</w><w>λεγομενον</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w>
+<lb n="P181vCL-1961"/><w>η</w><w>σεβασμα</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>αποδεικνυντα</w><w>εαυτον</w>
+<lb n="P181vCL-1961"/><w>οτι</w><w>εστι</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V5"><w>ου</w><w>μνημονευετε</w><w>οτι</w><w>ετι</w><w>ων</w><w>προς</w>
+<lb n="P181vCL-1961"/><w>υμας</w><w>ταυτα</w><w>ελεγον</w><w>υμιν</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="182r" type="folio" xml:id="P182r-1961"/>
+<cb n="P182rC-1961"/>
+<lb n="P182rCL-1961"/></ab><ab n="B14K2V6"><w>και</w><w>νυν</w><w>το</w><w>κατεχον</w><w>οιδατε</w><w>εις</w><w>το</w><w>αποκαλυ
+<lb n="P182rCL-1961" break="no"/>φθηναι</w><w>αυτον</w><w>εν</w><w>τω</w><w>εαυτου</w><w>καιρω</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V7"><w>το</w><w>γαρ</w><w>μυστηριον</w>
+<lb n="P182rCL-1961"/><w>ηδη</w><w>ενεργειται</w><w>της</w><w>ανομιας</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>μονον</w><w>ο</w><w>κατεχων</w><w>αρτι</w><w>εως</w><w>εκ</w>
+<lb n="P182rCL-1961"/><w>μεσου</w><w>γενηται</w></ab><ab n="B14K2V8"><w>και</w><w>τοτε</w><w>αποκαλυφθησεται</w>
+<lb n="P182rCL-1961"/><w>ο</w><w>ανομος</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="182v" type="folio" xml:id="P182v-1961"/>
+<cb n="P182vC1-1961"/>
+<lb n="P182vC1L-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>ον</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w>
+<lb n="P182vC1L-1961"/><w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w><w>αναλωσει</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>του</w><w>στοματος</w><w>αυτου</w><w>και</w>
+<lb n="P182vC1L-1961"/><w>καταργησει</w><w>τη</w><w>επιφανεια</w><w>της</w><w>παρουσιας</w>
+<lb n="P182vC1L-1961"/><w>αυτου</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V9"><w>ου</w><w>εστιν</w><w>η</w><w>παρουσι
+<lb n="P182vC1L-1961" break="no"/>α</w><w>κατ</w><w>ενεργειαν</w><w>του</w><w>σατανα</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>εν</w><w>παση</w><w>δυναμει</w><w>και</w><w>σημειοις</w><w>και</w><w>τερασι</w>
+<pb n="183r" type="folio" xml:id="P183r-1961"/>
+<cb n="P183rC-1961"/>
+<lb n="P183rCL-1961"/><w>ψευδους</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V10"><w>και</w><w>εν</w><w>παση</w><w>απατη</w><w>της</w><w>αδικιας</w>
+<lb n="P183rCL-1961"/><w>εν</w><w>τοις</w><w>απολλυμενοις</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>ανθ</w><w>ων</w><w>την</w><w>αγαπην</w><w>της</w>
+<lb n="P183rCL-1961"/><w>αληθειας</w><w>ουκ</w><w>εδεξαντο</w><w>εις</w><w>το</w><w>σωθηναι</w>
+<lb n="P183rCL-1961"/><w>αυτους</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V11"><w>και</w><w>δια</w>
+<lb n="P183rCL-1961"/><w>τουτο</w><w>πεμψει</w><w>αυτοις</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>ενεργειαν</w><w>πλανης</w>
+<lb n="P183rCL-1961"/><w>εις</w><w>το</w><w>πιστευσαι</w><w>αυτους</w><w>τω</w><w>ψευδει</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V12"><w>ινα</w><w>κριθωσι</w><w>παντες</w>
+<lb n="P183rCL-1961"/><w>οι</w><w><unclear>μ</unclear>η</w><w>πιστευσαντες</w><w>τη</w><w>αληθεια</w><w>αλλ</w><w>ευδο
+<lb n="P183rCL-1961" break="no"/>κησαντες</w><w>εν</w><w>τη</w><w>αδικια</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="183v" type="folio" xml:id="P183v-1961"/>
+<cb n="P183vC-1961"/>
+<lb n="P183vCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V13"><w>ημεις</w><w>δε</w><w>οφειλομεν</w>
+<lb n="P183vCL-1961"/><w>ευχαριστειν</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>παντοτε</w><w>περι</w><w>υμων</w><w>α
+<lb n="P183vCL-1961" break="no"/>δελφοι</w><w>ηγαπημενοι</w><w>υπο</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>οτι</w><w>ειλετο</w><w>υμας</w><w>απ</w><w>αρχης</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">σριαν</hi></abbr></w>
+<lb n="P183vCL-1961"/><w>εν</w><w>αγιασμω</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>και</w><w>πιστει</w><w>αληθειας</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V14"><w>εις</w><w>ο</w><w>εκαλεσεν</w><w>υμας</w><w>δια</w><w>του</w><w>ευαγγελιου</w><w>ημων</w>
+<lb n="P183vCL-1961"/><w>εις</w><w>περιποιησιν</w><w>δοξης</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="184r" type="folio" xml:id="P184r-1961"/>
+<cb n="P184rC-1961"/>
+<lb n="P184rCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V15"><w>αρα</w><w>ουν</w><w>αδελφοι</w><w>στηκετε</w><w>και</w><w>κρα
+<lb n="P184rCL-1961" break="no"/>τειτε</w><w>τας</w><w>παραδοσεις</w><w>ας</w><w>εδιδαχθητε</w><w>ειτε</w>
+<lb n="P184rCL-1961"/><w>δια</w><w>λογου</w><w>ειτε</w><w>δι</w><w>επιστολης</w><w>ημων</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K2V16"><w>αυτος</w>
+<lb n="P184rCL-1961"/><w>δε</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>και</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">πηρ</hi></abbr></w><w>ημων</w><w>ο</w>
+<lb n="P184rCL-1961"/><w>αγαπησας</w><w>ημας</w><w>και</w><w>δους</w><w>παρακλησιν</w><w>αιωνιαν</w>
+<lb n="P184rCL-1961"/><w><unclear>και</unclear></w><w>ελπιδα</w><w>αγαθην</w><w>εν</w><w>χαριτι</w></ab><ab n="B14K2V17"><w>παρακαλεσαι</w><w>υ
+<lb n="P184rCL-1961" break="no"/>μων</w><w>τας</w><w>καρδιας</w><w>και</w><w>στηριξαι</w><w>υμας</w><w>εν</w><w>παντι</w>
+<lb n="P184rCL-1961"/><w>εργω</w><w>και</w><w>λογω</w><w>αγαθω</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="184v" type="folio" xml:id="P184v-1961"/>
+<cb n="P184vC-1961"/>
+<lb n="P184vCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab></div><div type="chapter" n="B14K3"><ab n="B14K3V1"><w>τ<unclear reason="faded ink">ο</unclear></w><w>λοιπον</w><w>προσ<unclear reason="faded ink">ευ</unclear>χεσθε</w><w>αδελ
+<lb n="P184vCL-1961" break="no"/>φοι</w><w>περι</w><w><gap reason="illegible" unit="char" extent="1"/>μων</w><w>ινα</w><w>ο</w><w>λογος</w><w>του</w><w><abbr type="nomSac"><hi rend="overline"><unclear reason="faded ink">κ</unclear>υ</hi></abbr></w><w>τρεχη</w><w>και</w>
+<lb n="P184vCL-1961"/><w>δοξαζηται</w><w>καθως</w><w>και</w><w>προς</w><w>υμας</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V2"><w>και</w><w>ινα</w><w>ρυσθωμεν</w>
+<lb n="P184vCL-1961"/><w>απο</w><w>των</w><w>ατοπων</w><w>και</w><w>πονηρων</w><w><abbr type="nomSac"><hi rend="overline">ανων</hi></abbr></w><w>ου</w><w>γαρ</w>
+<lb n="P184vCL-1961"/><w>παντων</w><w>η</w><w>πιστις</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V3"><w>πιστος</w><w>δε</w><w>εστιν</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>ος</w><w>στηριξει</w><w>υμας</w><w>και</w><w>φυλα
+<lb n="P184vCL-1961" break="no"/>ξει</w><w>απο</w><w>του</w><w>πονηρου</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="185r" type="folio" xml:id="P185r-1961"/>
+<cb n="P185rC-1961"/>
+<lb n="P185rCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V4"><w>πεποιθαμεν</w><w>δε</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w><w>εφ</w><w>υμας</w><w>οτι</w><w>α</w><w>παραγγε
+<lb n="P185rCL-1961" break="no"/>λομεν</w><w>και</w><w>ποιειτε</w><w>και</w><app><rdg type="orig" hand="firsthand"><w>ποιησετ<gap reason="illegible" unit="char" extent="1-2"/></w></rdg><rdg type="corr" hand="corrector"><w>ποιησετε</w></rdg></app>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V5"><w>ο</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>κατευθυναι</w><w>υμων</w><w>τας</w><w>καρ
+<lb n="P185rCL-1961" break="no"/>διας</w><w>εις</w><w>την</w><w>αγαπην</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>και</w><w>εις</w><w>την</w><w>υπο
+<lb n="P185rCL-1961" break="no"/>μονην</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="185v" type="folio" xml:id="P185v-1961"/>
+<cb n="P185vC-1961"/>
+<lb n="P185vCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V6"><w>παρα
+<lb n="P185vCL-1961" break="no"/>γγελλομεν</w><w>δε</w><w>υμιν</w><w>αδελφοι</w><w>εν</w><w>ονοματι</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb n="P185vCL-1961"/><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>στελλεσθαι</w><w>υμας</w><w>απο</w><w>παντος</w>
+<lb n="P185vCL-1961"/><w>αδελφου</w><w>ατακτως</w><w>περιπατουντος</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>και</w><w>μη</w><w>κατα</w><w>την</w><w>παραδοσιν</w><w>ην</w><w>παρε
+<lb n="P185vCL-1961" break="no"/>λαβον</w><w>παρ</w><w>ημων</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V7"><w>αυτοι</w><w>γαρ</w><w>οιδατε</w><w>πως</w><w>δει</w><w>μιμει
+<lb n="P185vCL-1961" break="no"/>σθαι</w><w>ημας</w><w>οτι</w><w>ουκ</w><w>ητακτησαμεν</w><w>εν</w><w>υμιν</w></ab><ab n="B14K3V8"><w>ου
+<lb n="P185vCL-1961" break="no"/>δε</w><w>δωρεαν</w><w>αρτον</w><w>εφαγομεν</w><w>παρα</w><w>τινος</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>αλλ</w><w>εν</w><w>κοπω</w><w>και</w><w>μοχθω</w><w>νυκτα</w><w>και</w>
+<lb n="P185vCL-1961"/><w>ημεραν</w><w>εργαζομενοι</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>προς</w><w>το</w><w>μη</w><w>επιβαρησαι</w><w>τινα</w><w>υμων</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="186r" type="folio" xml:id="P186r-1961"/>
+<cb n="P186rC-1961"/>
+<lb n="P186rCL-1961"/></ab><ab n="B14K3V9"><w>ουχ</w><w>οτι</w><w>ουκ</w><w>εχομεν</w><w>ε
+<lb n="P186rCL-1961" break="no"/>ξουσιαν</w><w>αλλ</w><w>ινα</w><w>εαυτους</w><w>τυπον</w><w>δωμεν</w><w>υμιν</w>
+<lb n="P186rCL-1961"/><w>εις</w><w>το</w><w>μιμεισθαι</w><w>ημας</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V10"><w>και</w><w>γαρ</w><w>οτε</w><w>ημεν</w><w>προς</w><w>υμας</w>
+<lb n="P186rCL-1961"/><w>τουτο</w><w>παρηγγελλομεν</w><w>υμιν</w><w>οτι</w><w>ει</w><w>τις</w><w>ου</w><w>θελει</w>
+<lb n="P186rCL-1961"/><w>εργαζεσθαι</w><w>μηδε</w><w>εσθιετω</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V11"><w>ακου
+<lb n="P186rCL-1961" break="no"/>ομεν</w><w>γαρ</w><w>τινας</w><w>περιπατουντας</w><w>εν</w><w>υμιν</w><w>ατα
+<lb n="P186rCL-1961" break="no"/>κτως</w><w>μηδεν</w><w>εργαζομενους</w><w>αλλα</w><w>περιεργαζο
+<lb n="P186rCL-1961" break="no"/>μενους</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V12"><w>τοις</w><w>δε</w><w>τοιουτοις</w><app><rdg type="orig" hand="firsthand"><w>παραγγελομεν</w></rdg><rdg type="corr" hand="corrector"><w>παραγγελλομεν</w></rdg></app><w>και</w><w>παρακα
+<lb n="P186rCL-1961" break="no"/>λουμεν</w><w>μεσιτην</w><w>παραλαμβανοντες</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>ινα</w><w>μετα</w>
+<lb n="P186rCL-1961"/><w>ησυχιας</w><w>εργαζομενοι</w><w>τον</w><w>εαυτων</w><w>αρτον</w><w>εσθι
+<lb n="P186rCL-1961" break="no"/>ωσιν</w>
+<pb n="186v" type="folio" xml:id="P186v-1961"/>
+<cb n="P186vC-1961"/>
+<lb n="P186vCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V13"><w><unclear reason="faded ink">υ</unclear>με<unclear reason="faded ink">ις</unclear></w><w>δ<unclear reason="faded ink">ε</unclear></w><w><unclear reason="faded ink">αδελ</unclear>φ<unclear reason="faded ink">οι</unclear></w><w><unclear reason="faded ink">μη</unclear></w>
+<lb n="P186vCL-1961"/><w>εκκακησητε</w><w>καλο<unclear reason="faded ink">ποιουντες</unclear></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V14"><w>ει</w><w>δε</w><w>τις</w><w>ουχ</w><w>υπακουει</w><w>τω</w><w>λογω</w><w>υμων</w><w>δια</w>
+<lb n="P186vCL-1961"/><w>της</w><w>επιστολης</w><w>τουτον</w><w>σημειουσθε</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>και</w><w>μη</w><w>συναναμιγνυσθε</w><w>αυτω</w><w>ινα</w><w>εν
+<lb n="P186vCL-1961" break="no"/>τραπη</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V15"><w>και</w><w>μη</w><w>ως</w><w>εχθρον</w><w>ηγεισθε</w><w>αλλα</w><w>νουθ<unclear>ετει</unclear>
+<lb n="P186vCL-1961" break="no"/>τε</w><w>ως</w><w>αδελφον</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="187r" type="folio" xml:id="P187r-1961"/>
+<cb n="P187rC-1961"/>
+<lb n="P187rCL-1961"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V16"><w>αυτος</w><w>δε</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>της</w>
+<lb n="P187rCL-1961"/><w>ε<unclear reason="poor image">ι</unclear>ρηνης</w><w>δωη</w><w>υμιν</w><w>την</w><w>ειρηνην</w><w>δια</w><w>παντος</w>
+<lb n="P187rCL-1961"/><w>εν</w><w>παντι</w><w>τροπω</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>ο</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>μετα</w><w>παντων</w><w>υμων</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="187v" type="folio" xml:id="P187v-1961"/>
+<cb n="P187vC-1961"/>
+<lb n="P187vCL-1961"/></ab><ab n="B14K3V17"><w>ο</w><w>ασπασμος</w><w>τη</w><w>ε
+<lb n="P187vCL-1961" break="no"/>μη</w><w>χειρι</w><w>παυλου</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note><w>ο</w><w>εστιν</w><w>σημειον</w><w>εν</w><w>παση</w><w>επιστολη</w>
+<lb n="P187vCL-1961"/><w>ουτως</w><w>γραφω</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab><ab n="B14K3V18"><w>η</w><w>χαρις</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb n="P187vCL-1961"/><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>μετα</w><w>παντων</w><w>υμων</w><w>αμην</w></ab></div><div type="explicit" n="B14explicit"><ab>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note></ab></div></div></body></text></TEI>

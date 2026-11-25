@@ -1,13 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
-import { md, SPEC, SPEC_SHA, shortHash } from "../lib/data";
+import { md, SPEC, SPEC_ULID } from "../lib/data";
 const body = SPEC.replace(/^# .*\n/, "");
 ---
 <Base title="Specification" tab="spec" description="The one specification that every compiled transcription is produced under, in full.">
   <h1>The specification</h1>
-  <p class="lede">This repository has one specification, <code>SPECIFICATION.md</code>. It states the goal and what every output must contain. It does not prescribe a method and names no model or program: whatever does the work chooses its own method, writes it into its output, and identifies itself there.</p>
+  <p class="lede">This repository has one specification, <code>SPECIFICATION.md</code>. It states the goal and what every output must contain. It does not prescribe a statistical model: the output must use one, describe it, and name the model that made the judgments.</p>
   <div class="rulebox">
-    <p class="meta">This file: SHA-256 <code>{shortHash(SPEC_SHA)}…</code> · <a href="https://github.com/openlexis/transcription/blob/main/SPECIFICATION.md">SPECIFICATION.md on GitHub</a> · <a href="/outputs/">the outputs produced under it</a></p>
+    <p>Identifier: ULID <code>{SPEC_ULID}</code> · <a href="https://github.com/openlexis/transcription/blob/main/SPECIFICATION.md">SPECIFICATION.md on GitHub</a> · <a href="/outputs/">the outputs produced under it</a></p>
+    <p class="meta" style="margin-bottom:0">The manuscripts this specification uses are listed in <code>transcriptions/manuscripts.json</code>. <a href="/specification/manuscripts/">See them as a table</a>, or read the <a href="https://github.com/openlexis/transcription/blob/main/transcriptions/manuscripts.json">raw file</a>.</p>
   </div>
   <div class="rules" set:html={md(body)} />
 </Base>

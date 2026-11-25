@@ -1,18 +1,18 @@
 {
- "note": "The books of the Old Testament (Hebrew and Aramaic) and the New Testament (Greek), with the identifiers the transcription files use.",
+ "note": "The books of the Old Testament (Hebrew and Aramaic) and the New Testament (Greek), with the identifiers the transcription files use. The transcriptions themselves are the files in the folder transcriptions/, listed in manuscripts.json.",
  "sections": {
   "ot": {
    "name": "Old Testament (Hebrew and Aramaic)",
    "languages": "Hebrew and Aramaic",
    "folders": [
-    "transcriptions/hebrew"
+    "transcriptions"
    ]
   },
   "nt": {
    "name": "New Testament (Greek)",
    "languages": "Greek",
    "folders": [
-    "transcriptions/greek"
+    "transcriptions"
    ]
   }
  },

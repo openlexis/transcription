@@ -1,0 +1,91 @@
+---
+import Base from "../../layouts/Base.astro";
+import { ROOT, REPO, era, num } from "../../lib/data";
+import { readFileSync } from "node:fs";
+
+type Tr = { holder: string; file?: string; files?: string[]; source: string; member?: string; format: string; license: string; lines?: number; words?: number };
+type Ms = { siglum: string; kind: string; language: string; name?: string; shelfmark?: string; century?: string; year?: number; yearFrom?: number; yearTo?: number; dateBasis?: string; dateSource?: string; viewer?: { name: string; url: string }[]; transcriptions: Tr[] };
+const CAT = JSON.parse(readFileSync(`${ROOT}transcriptions/manuscripts.json`, "utf8")) as { note?: string; holders: Record<string, { name: string; web: string; license: string }>; manuscripts: Ms[] };
+const holders = CAT.holders;
+const blob = (file: string) => `${REPO}/blob/main/${file.split("/").map(encodeURIComponent).join("/")}`;
+const dateOf = (m: Ms) => {
+  if (m.yearFrom !== undefined && m.yearTo !== undefined) {
+    const mid = Math.round((m.yearFrom + m.yearTo) / 2), margin = Math.round((m.yearTo - m.yearFrom) / 2);
+    return { short: `${era(mid)}${margin ? ` ± ${margin}` : ""}`, full: `${era(m.yearFrom)} to ${era(m.yearTo)}${m.dateBasis ? ` · ${m.dateBasis}` : ""}` };
+  }
+  return { short: "unknown", full: m.dateBasis ?? "no date range given by the holder" };
+};
+const greek = CAT.manuscripts.filter((m) => m.language === "Greek");
+const hebrew = CAT.manuscripts.filter((m) => m.language !== "Greek");
+---
+<Base title="Manuscripts" tab="spec" description="The manuscripts listed in transcriptions/manuscripts.json, which is part of the specification.">
+  <h1>The manuscripts</h1>
+  <p class="lede">This is the list in <code>transcriptions/manuscripts.json</code>, which is part of the <a href="/specification/">specification</a>. Each row is one manuscript. Links under “Transcription” go to the file held in this repository, and to the holder’s own source. Where a date range is unknown, it is marked unknown.</p>
+  <p class="meta"><a href="https://github.com/openlexis/transcription/blob/main/transcriptions/manuscripts.json">The raw file, manuscripts.json</a> · {num(CAT.manuscripts.length)} manuscripts · {num(CAT.manuscripts.reduce((n, m) => n + m.transcriptions.length, 0))} transcriptions</p>
+  {CAT.note && <p class="meta">{CAT.note}</p>}
+  <form class="filters" id="msfilter" onsubmit="return false">
+    <fieldset>
+      <legend>Find a manuscript</legend>
+      <input type="search" id="q" name="q" placeholder="A siglum or name, for example 01 or Leningrad" aria-label="Find a manuscript" />
+    </fieldset>
+  </form>
+  {[{ title: "New Testament (Greek)", rows: greek }, { title: "Old Testament (Hebrew and Aramaic)", rows: hebrew }].map((sec) => (
+    <section>
+      <h2>{sec.title}</h2>
+      <p class="meta">{num(sec.rows.length)} manuscripts</p>
+      <div class="scroll">
+        <table class="mslist">
+          <thead>
+            <tr>
+              <th>Manuscript</th>
+              <th>Date</th>
+              <th>Kind</th>
+              <th>Transcriptions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sec.rows.map((m) => {
+              const d = dateOf(m);
+              return (
+                <tr id={`ms-${m.siglum}`} data-q={`${m.siglum} ${m.name ?? ""} ${m.shelfmark ?? ""} ${m.transcriptions.map((t) => t.holder).join(" ")}`.toLowerCase()}>
+                  <td>
+                    <b>{m.siglum}</b>
+                    {m.name && <><br /><span class="meta">{m.name}</span></>}
+                    {m.shelfmark && <><br /><span class="meta">{m.shelfmark}</span></>}
+                  </td>
+                  <td>{d.short}<br /><span class="meta">{d.full}{m.dateSource ? ` · ${m.dateSource}` : ""}</span></td>
+                  <td>{m.kind}</td>
+                  <td>
+                    {m.transcriptions.map((t) => {
+                      const paths = t.files ?? (t.file ? [t.file] : []);
+                      const holder = holders[t.holder];
+                      return (
+                        <div class="tr">
+                          <a href={holder?.web ?? t.source} rel="noopener">{holder?.name ?? t.holder}</a>
+                          {paths.map((f) => (
+                            <div><a href={blob(f)}><code>{f.replace(/^transcriptions\//, "")}</code></a></div>
+                          ))}
+                          <div class="meta">{t.format}{t.member ? ` · ${t.member}` : ""} · {t.license}</div>
+                          <div class="meta"><a href={t.source} rel="noopener">holder’s source</a>{t.lines ? ` · ${num(t.lines)} lines, ${num(t.words ?? 0)} words` : ""}</div>
+                        </div>
+                      );
+                    })}
+                    {m.viewer?.length ? <div class="meta">Images: {m.viewer.map((v, i) => <><a href={v.url} rel="noopener">{v.name}</a>{i < m.viewer!.length - 1 ? ", " : ""}</>)}</div> : null}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  ))}
+  <script>
+    const q = document.getElementById("q") as HTMLInputElement;
+    const rows = [...document.querySelectorAll<HTMLTableRowElement>("table.mslist tbody tr")];
+    q?.addEventListener("input", () => {
+      const v = q.value.trim().toLowerCase();
+      for (const r of rows) r.hidden = !!(v && !r.dataset.q?.includes(v));
+    });
+  </script>
+</Base>

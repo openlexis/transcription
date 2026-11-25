@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="TEI-NTMSS.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title type="document" n="1422">1422</title>
+<respStmt xml:id="VMRCRE"><resp>edition metadata assembled by</resp><name type="org">VMRCRE (Virtual Manuscript Room Collaborative Research Environment), transcript/get</name></respStmt>
+      </titleStmt>
+      <!-- VMRCRE-generated: publicationStmt -->
+      <publicationStmt>
+        <publisher><name type="org">The Institut für neutestamentliche Textforschung</name></publisher>
+        <availability><p>
+<![CDATA[
+(C) 2026 Institut für Neutestamentliche Textforschung.
+]]>
+</p><p> <![CDATA[
+This work is licensed under a <a rel="license" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 Unported License<br/><span style="float:right;"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by/4.0/80x15.png" /></span></a>
+]]>
+</p><p> <![CDATA[
+
+]]>
+</p></availability>
+      </publicationStmt>
+<!-- VMRCRE-generated: sourceDesc -->
+      <sourceDesc>
+        <msDesc>
+		<msIdentifier>
+            <country>Czech Republic</country>
+            <settlement>Prague</settlement>
+            <repository>National Library of the Czech Republic</repository>
+            <idno>XXV B 7</idno>
+          </msIdentifier>
+        </msDesc>
+      </sourceDesc>
+</fileDesc>
+<!-- VMRCRE-generated: profileDesc -->
+    <profileDesc>
+      <langUsage>
+        <language ident="grc"></language>
+      </langUsage>
+      <handNotes>
+        <handNote>
+          <listWit>
+            <witness n="firsthand"></witness>
+<witness n="corrector"></witness>
+</listWit>
+        </handNote>
+      </handNotes>
+    </profileDesc>
+</teiHeader>
+<text xml:lang="grc"><body>
+
+
+<pb n="17v" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="Jude"><div type="chapter" n="Jude.1"><ab n="Jude.1.15" part="F"><w>ων</w> <w>ελαλησαν</w> <w>κατα</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>αμαρτωλοι</w> <w>ασεβεις</w>
+<lb/></ab> <ab n="Jude.1.16"><w>ουτοι</w> <w>εισι</w> <w>γογγυσται</w> <w>μεμψειμοιροι</w> <w>κατα</w> <w>τας</w> <w>ι
+<lb break="no"/>διας</w> <w>επιθυμιας</w> <w>αυτων</w> <app><rdg type="orig" hand="firsthand"><w>πορευο<gap reason="lacuna" unit="char" extent="8-9"/>​
+<lb break="no"/><gap reason="lacuna" unit="char" extent="12-14"/>μενοι</w></rdg><rdg type="corr" hand="corrector"><w>πορευο​
+<lb break="no"/>μενοι</w></rdg></app> <w>και</w> <w>το</w> <w>στομα</w> <w>αυτων</w>
+<lb/><w>λαλει</w> <w>υπερογγα</w> <w>θαυμαζοντες</w> <w>προσωπα</w>
+<lb/><w>ωφελειας</w> <w>χαριν</w></ab> <ab n="Jude.1.17"><w>υμεις</w> <w>δε</w> <w>αγαπητοι</w> <w>μνημονευε
+<lb break="no"/>τε</w> <w>των</w> <w>προειρημενων</w> <w>ρηματων</w> <w>υπο</w> <w>των</w> <w>αποστο
+<lb break="no"/>λων</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w></ab> <ab n="Jude.1.18"><w>οτι</w> <w>ελεγον</w> <w>υμιν</w> <w>οτι</w> <w>επ</w> <w>εσχα
+<lb break="no"/>του</w> <w>των</w> <w>ημερων</w> <w>ελευσονται</w> <w>εμπαικται</w> <w>κατα</w>
+<lb/><w>τας</w> <w>εαυτων</w> <w>επιθυμιας</w> <w>πορευομενοι</w> <w>των</w> <w>ασεβει
+<lb break="no"/>ων</w></ab> <ab n="Jude.1.19"><w>ουτοι</w> <w>εισιν</w> <w>οι</w> <w>αποδιοριζοντες</w> <w>εαυτους</w> <w>ψυ
+<lb break="no"/>χικοι</w> <w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w> <w>μη</w> <w>εχοντες</w></ab> <ab n="Jude.1.20"><w>υμεις</w> <w>δε</w> <w>αγαπητοι</w> <w>εποι
+<lb break="no"/>κοδομουντες</w> <w>εαυτους</w> <w>τη</w> <w>αγιωτατη</w> <w>υμων</w> <w>πι
+<lb break="no"/>στει</w> <w>εν</w> <w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w> <w>αγιω</w> <w>προσευχομενοι</w></ab> <ab n="Jude.1.21"><w>εαυτους</w> <w>εν</w> <w>α
+<lb break="no"/>γαπη</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>τηρησατε</w> <w>προσδεχομενοι</w> <w>το</w> <w>ελεος</w>
+<lb/><w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>εις</w> <w>ζωην</w> <w>αιωνιον</w></ab> <ab n="Jude.1.22"><w>και</w> <w>ους</w> <w>μεν</w>
+<lb/><w>ελεγχετε</w> <w>διακρινομενους</w></ab> <ab n="Jude.1.23"><w>ους</w> <w>δε</w> <w>σωζετε</w> <w>εκ</w>
+<lb/><w>πυρος</w> <w>αρπαζοντες</w> <w>ους</w> <w>δε</w> <w>ελεατε</w> <w>εν</w> <w>φοβω</w>
+<lb/><w>μισουντες</w> <w>τον</w> <w>απο</w> <w>της</w> <w>σαρκος</w> <w>εσπιλωμενον</w>
+<lb/><w>χιτωνα</w></ab> <ab n="Jude.1.24"><w>τω</w> <w>δε</w> <w>δυναμενω</w> <w>υμας</w> <w>φυλαξαι</w>
+<lb/><w>απταιστους</w> <w>και</w> <w>σπιλους</w> <w>και</w> <w>στησαι</w> <w>κατενω
+<lb break="no"/>πιον</w> <w>της</w> <w>δοξης</w> <w>αυτου</w> <w>αμωμους</w> <w>εν</w> <w>αγαλλι
+<lb break="no"/>ασει</w></ab> <ab n="Jude.1.25" part="I"><w>μονω</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">σρι</hi></abbr></w> <w>ημων</w> <w>δια</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w>
+<lb/><w>δοξα</w> <w>και</w> <w>μεγαλοσυνη</w> <w>κρατος</w> <w>και</w> <w>εξουσια</w></ab></div> </div></body></text></TEI>

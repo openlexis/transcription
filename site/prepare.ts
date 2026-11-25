@@ -4,7 +4,7 @@
 //   public/data/<artifact>/<book>/places.json       the places where the manuscripts differ, for the list of disagreements
 // Each manuscript's words come from the transcription the artifact names for the line; each word gets a mark that says how
 // it compares with the printed word in its column, by the same spelling keys the compiler used.
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { greekKey, hebrewSpell } from "../src/text";
 import { artifacts, book, holderFile, type Line } from "./src/lib/data";
 
@@ -12,7 +12,7 @@ const ROOT = new URL("../", import.meta.url).pathname;
 const OUT = new URL("./public/data/", import.meta.url).pathname;
 rmSync(OUT, { recursive: true, force: true });
 const fileLines = new Map<string, string[]>();
-const lineOf = (f: string, n: number) => { if (!fileLines.has(f)) { if (fileLines.size > 400) fileLines.clear(); fileLines.set(f, readFileSync(`${ROOT}${f}`, "utf8").split("\n")); } return fileLines.get(f)![n - 1] ?? ""; };
+const lineOf = (f: string, n: number) => { if (!fileLines.has(f)) { if (fileLines.size > 400) fileLines.clear(); fileLines.set(f, existsSync(`${ROOT}${f}`) && f.endsWith(".txt") ? readFileSync(`${ROOT}${f}`, "utf8").split("\n") : []); } return fileLines.get(f)![n - 1] ?? ""; };
 let files = 0;
 for (const a of artifacts()) {
   for (const e of a.manifest.books) {

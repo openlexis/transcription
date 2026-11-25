@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="TEI-NTMSS.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title type="document" n="1725">1725</title>
+<respStmt xml:id="VMRCRE"><resp>edition metadata assembled by</resp><name type="org">VMRCRE (Virtual Manuscript Room Collaborative Research Environment), transcript/get</name></respStmt>
+      </titleStmt>
+      <!-- VMRCRE-generated: publicationStmt -->
+      <publicationStmt>
+        <publisher><name type="org">The Institut für neutestamentliche Textforschung</name></publisher>
+        <availability><p>
+<![CDATA[
+(C) 2026 Institut für Neutestamentliche Textforschung.
+]]>
+</p><p> <![CDATA[
+This work is licensed under a <a rel="license" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 Unported License<br/><span style="float:right;"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by/4.0/80x15.png" /></span></a>
+]]>
+</p><p> <![CDATA[
+
+]]>
+</p></availability>
+      </publicationStmt>
+<!-- VMRCRE-generated: sourceDesc -->
+      <sourceDesc>
+        <msDesc>
+		<msIdentifier>
+            <country>Greece</country>
+            <settlement>Athos</settlement>
+            <repository>Vatopedi Monastery</repository>
+            <idno>859</idno>
+          </msIdentifier>
+        </msDesc>
+      </sourceDesc>
+</fileDesc>
+<!-- VMRCRE-generated: profileDesc -->
+    <profileDesc>
+      <langUsage>
+        <language ident="grc"></language>
+      </langUsage>
+      <handNotes>
+        <handNote>
+          <listWit>
+            <witness n="firsthand"></witness>
+</listWit>
+        </handNote>
+      </handNotes>
+    </profileDesc>
+</teiHeader>
+<text xml:lang="grc"><body>
+
+
+
+<pb n="175v" type="folio"/>
+<cb n="1"/>
+<lb/><div type="inscriptio"><ab n=".inscriptio"><w>προς</w> <w>θεσσαλονικεις</w> <w>επιστολη</w> <w>πρωτη</w>
+<lb/></ab></div><div type="chapter" n=".1"><ab n=".1.1"><w><hi rend="cap" height="2">π</hi>αυλος</w> <w>και</w> <w>σιλουανος</w> <w>και</w> <w>τιμοθεος</w> <w>τη</w> <w>εκκλη
+<lb break="no"/>σια</w> <w>θεσσαλονικεων</w> <w>εν</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">πρι</hi></abbr></w> <w>και</w> <w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w>
+<lb/><w>χαρις</w> <w>υμιν</w> <w>και</w> <w>ειρηνη</w> <w>απο</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w> <w>ημων</w> <w>και</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab> <ab n=".1.2"><w>ευχαριστουμεν</w> <w>τω</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w>παντοτε</w> <w>περι</w>
+<lb/><w>παντων</w> <w>υμων</w> <w>μνειαν</w> <w>υμων</w> <w>ποιουμενοι</w>
+<lb/><w>επι</w> <w>των</w> <w>προσευχων</w> <w>ημων</w></ab> <ab n=".1.3" part="I"><w>αδιαλειπτως</w> <w>μνη
+<lb break="no"/>μονευοντες</w> <w>υμων</w> <w>του</w> <w>εργου</w> <w>της</w> <w>πιστεως</w> <w>και</w>
+<lb/><w>του</w> <w>κοπου</w> <w>της</w> <w>αγαπης</w> <w>και</w> <w>της</w> <w>υπομονης</w> <w>της</w> <w>ελπιδος</w></ab></div> 
+
+
+<pb n="176r" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="1Thess"><div type="chapter" n="1Thess.1"><ab n="1Thess.1.3" part="F"><w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>εμπροσθεν</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>και</w> <w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w> <w>ημων</w>
+<lb/></ab> <ab n="1Thess.1.4"><w>ειδοτες</w> <w>αδελφοι</w> <w>ηγαπημενοι</w> <w>υπο</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>την</w> <w>εκλο
+<lb break="no"/>γην</w> <w>υμων</w></ab> <ab n="1Thess.1.5"><w>οτι</w> <w>το</w> <w>ευαγγελιον</w> <w>ημων</w> <w>ουκ</w> <w>εγενηθη</w>
+<lb/><w>εις</w> <w>υμας</w> <w>εν</w> <w>λογω</w> <w>μονον</w> <w>αλλα</w> <w>και</w> <w>εν</w> <w>δυναμει</w>
+<lb/><w>και</w> <w>εν</w> <w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w> <w>αγιω</w> <w>και</w> <w>εν</w> <w>πληροφορια</w> <w>πολλη</w> <w>καθως</w>
+<lb/><w>οιδατε</w> <w>οιοι</w> <w>εγενηθημεν</w> <w>εν</w> <w>υμιν</w> <w>δι</w> <w>υμας</w></ab> <ab n="1Thess.1.6"><w>και</w>
+<lb/><w><hi rend="cap" height="2">υ</hi>μεις</w> <w>μιμηται</w> <w>ημων</w> <w>εγενηθητε</w> <w>και</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>δεξα
+<lb break="no"/>μενοι</w> <w>τον</w> <w>λογον</w> <w>εν</w> <w>θλιψει</w> <w>πολλη</w> <w>μετα</w> <w>χαρας</w> <w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w>
+<lb/><w>αγιου</w></ab> <ab n="1Thess.1.7"><w>ωστε</w> <w>γενεσθαι</w> <w>υμας</w> <w>τυπους</w> <w>πασι</w> <w>τοις</w>
+<lb/><w>πιστευουσιν</w> <w>εν</w> <w>τη</w> <w>μακεδονια</w> <w>και</w> <w>αχαια</w></ab> <ab n="1Thess.1.8"><w>αφ</w>
+<lb/><w>υμων</w> <w>γαρ</w> <w>εξηχηται</w> <w>ο</w> <w>λογος</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ου</w> <w>μονον</w>
+<lb/><w>εν</w> <w>τη</w> <w>μακεδονια</w> <w>και</w> <w>αχαια</w> <w>αλλα</w> <w>και</w> <w>εν</w> <w>παντι</w>
+<lb/><w>τοπω</w> <w>η</w> <w>πιστις</w> <w>υμων</w> <w>η</w> <w>προς</w> <w>τον</w> <w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w> <w>εξεληλυθεν</w>
+<lb/><w>ωστε</w> <w>μη</w> <w>χρειαν</w> <w>ημας</w> <w>εχειν</w> <w>λαλειν</w> <w>τι</w></ab> <ab n="1Thess.1.9"><w>αυτοι</w>
+<lb/><w>γαρ</w> <w>περι</w> <w>υμων</w> <w>απαγγελλουσιν</w> <w>οποιαν</w> <w>εισοδον</w>
+<lb/><w>εσχομεν</w> <w>προς</w> <w>υμας</w> <w>και</w> <w>πως</w> <w>επεστρεψατε</w>
+<lb/><w>προς</w> <w>τον</w> <w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w> <w>απο</w> <w>των</w> <w>ειδωλων</w> <w>δουλευειν</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w>
+<lb/><w>ζωντι</w> <w>και</w> <w>αληθινω</w></ab> <ab n="1Thess.1.10"><w>και</w> <w>αναμενειν</w> <w>τον</w> <w>υιον</w> <w>αυτου</w>
+<lb/><w>εκ</w> <w>των</w> <w><abbr type="nomSac"><hi rend="overline">ουνων</hi></abbr></w> <w>ον</w> <w>ηγειρεν</w> <w>εκ</w> <w>των</w> <w>νεκρων</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w> <w>τον</w> <w>ρυομενον</w> <w>ημας</w> <w>απο</w> <w>της</w> <w>οργης</w> <w>της</w> <w>ερχο
+<lb break="no"/>μενης</w></ab></div> <div type="chapter" n="1Thess.2"><ab n="1Thess.2.1"><w>αυτοι</w> <w>γαρ</w> <w>οιδατε</w> <w>αδελφοι</w> <w>την</w>
+<lb/><w><hi rend="cap" height="2">ε</hi>ισοδον</w> <w>ημων</w> <w>την</w> <w>προς</w> <w>υμας</w> <w>οτι</w> <w>ου</w> <w>κενη</w> <w>γεγονεν</w>
+<lb/></ab> <ab n="1Thess.2.2" part="I"><w>αλλα</w> <w>προπαθοντες</w> <w>και</w> <w>υβρισθεντες</w> <w>καθως</w></ab></div> </div>
+
+
+<pb n="176v" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="1Thess"><div type="chapter" n="1Thess.2"><ab n="1Thess.2.2" part="F"><w>οιδατε</w> <w>εν</w> <w>φιλιπποις</w> <w>επαρρησιασαμεθα</w> <w>εν</w> <w>τω</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w>ημων</w> <w>λαλησαι</w> <w>προς</w> <w>υμας</w> <w>το</w> <w>ευαγγελιον</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w>
+<lb/><w>εν</w> <w>πολλω</w> <w>αγωνι</w></ab> <ab n="1Thess.2.3"><w>η</w> <w>γαρ</w> <w>παρακλησις</w> <w>ημων</w> <w>ουκ</w>
+<lb/><w>εκ</w> <w>πλανης</w> <w>ουδε</w> <w>εξ</w> <w>ακαθαρσιας</w> <w>ουτε</w> <w>εν</w> <w>δολω</w>
+<lb/></ab> <ab n="1Thess.2.4"><w>αλλα</w> <w>καθως</w> <w>δεδοκιμασμεθα</w> <w>υπο</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>πιστευθηναι</w>
+<lb/><w>το</w> <w>ευαγγελιον</w> <w>ουτω</w> <w>λαλουμεν</w> <w>ουχ</w> <w>ως</w> <w><abbr type="nomSac"><hi rend="overline">ανοις</hi></abbr></w> <w>αρε
+<lb break="no"/>σκοντες</w> <w>αλλα</w> <w>τω</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w>τω</w> <w>δοκιμαζοντι</w> <w>τας</w> <w>καρ
+<lb break="no"/>διας</w> <w>ημων</w></ab> <ab n="1Thess.2.5"><w>ουτε</w> <w>γαρ</w> <w>ποτε</w> <w>εν</w> <w>λογω</w> <w>κολακειας</w>
+<lb/><w>εγενηθημεν</w> <w>καθως</w> <w>οιδατε</w> <w>ουτε</w> <w>εν</w> <w>προφασει</w>
+<lb/><w>πλεονεξιας</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w> <w>μαρτυς</w></ab> <ab n="1Thess.2.6"><w>ουτε</w> <w>ζητουντες</w> <w>εξ</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">ανων</hi></abbr></w> <w>δοξαν</w> <w>ουτε</w> <w>αφ</w> <w>υμων</w> <w>ουτε</w> <w>απο</w> <w>αλλων</w>
+<lb/></ab> <ab n="1Thess.2.7"><w>δυναμενοι</w> <w>εν</w> <w>βαρει</w> <w>ειναι</w> <w>ως</w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>αποστολοι</w> <w>αλλ</w>
+<lb/><w>εγενηθημεν</w> <w>ηπιοι</w> <w>εν</w> <w>μεσω</w> <w>υμων</w> <w>ως</w> <w>αν</w> <w>τροφος</w>
+<lb/><w>θαλπη</w> <w>τα</w> <w>εαυτης</w> <w>τεκνα</w></ab> <ab n="1Thess.2.8"><w>ουτως</w> <w>ιμειρομενοι</w>
+<lb/><w>υμων</w> <w>ευδοκουμεν</w> <w>μεταδουναι</w> <w>υμιν</w> <w>ου</w> <w>μονον</w>
+<lb/><w>το</w> <w>ευαγγελιον</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>αλλα</w> <w>και</w> <w>τας</w> <w>εαυτων</w> <w>ψυχας</w>
+<lb/><w>διοτι</w> <w>αγαπητοι</w> <w>ημιν</w> <w>γεγενησθε</w></ab> <ab n="1Thess.2.9"><w>μνημονευετε</w>
+<lb/><w><hi rend="cap" height="1">γ</hi>αρ</w> <w>αδελφοι</w> <w>τον</w> <w>κοπον</w> <w>ημων</w> <w>και</w> <w>τον</w> <w>μοχθον</w> <w>νυκτος</w>
+<lb/><w>γαρ</w> <w>και</w> <w>ημερας</w> <w>εργαζομενοι</w> <w>προς</w> <w>το</w> <w>μη</w> <w>επι
+<lb break="no"/>βαρησαι</w> <w>τινα</w> <w>υμων</w> <w>εκηρυξαμεν</w> <w>εις</w> <w>υμας</w> <w>το</w>
+<lb/><w>ευαγγελιον</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w></ab> <ab n="1Thess.2.10"><w>υμεις</w> <w>μαρτυρες</w> <w>και</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w>
+<lb/><w>ως</w> <w>οσιως</w> <w>και</w> <w>δικαιως</w> <w>και</w> <w>αμεμπτως</w> <w>υμιν</w> <w>τοις</w>
+<lb/><w>πιστευουσιν</w> <w>εγενηθημεν</w></ab> <ab n="1Thess.2.11" part="I"><w>καθαπερ</w> <w>οιδατε</w> <w>ως</w></ab></div> </div>
+
+
+<pb n="177r" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="1Thess"><div type="chapter" n="1Thess.2"><ab n="1Thess.2.11" part="F"><w><hi rend="cap" height="1">ε</hi>να</w> <w>εκαστον</w> <w>υμων</w> <w>ως</w> <w><abbr type="nomSac"><hi rend="overline">πηρ</hi></abbr></w> <w>τεκνα</w> <w>εαυτου</w></ab> <ab n="1Thess.2.12"><w>παρα
+<lb break="no"/>καλουντες</w> <w>υμας</w> <w>και</w> <w>παραμυθουμενοι</w> <w>και</w>
+<lb/><w>μαρτυρομενοι</w> <w>εις</w> <w>το</w> <w>περιπατησαι</w> <w>υμας</w>
+<lb/><w>αξιως</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>του</w> <w>καλουντος</w> <w>υμας</w> <w>εις</w> <w>την</w> <w>ε
+<lb break="no"/>αυτου</w> <w>βασιλειαν</w> <w>και</w> <w>δοξαν</w></ab> <ab n="1Thess.2.13"><w>δια</w> <w>τουτο</w> <w>και</w> <w>ημεις</w>
+<lb/><w>ευχαριστουμεν</w> <w>τω</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w>αδιαλειπτως</w> <w>οτι</w> <w>παραλα
+<lb break="no"/>βοντες</w> <w>λογον</w> <w>ακοης</w> <w>παρ</w> <w>ημων</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>εδεξασθε</w>
+<lb/><w>ου</w> <w>λογον</w> <w><abbr type="nomSac"><hi rend="overline">ανων</hi></abbr></w> <w>αλλα</w> <w>καθως</w> <w>εστιν</w> <w>αληθως</w> <w>λογον</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>ος</w> <w>και</w> <w>ενεργειται</w> <w>εν</w> <w>υμιν</w> <w>τοις</w> <w>πιστευουσιν</w>
+<lb/></ab> <ab n="1Thess.2.14"><w><hi rend="cap" height="2">υ</hi>μεις</w> <w>γαρ</w> <w>μιμηται</w> <w>εγενηθητε</w> <w>αδελφοι</w> <w>των</w> <w>εκκλη
+<lb break="no"/>σιων</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>των</w> <w>ουσων</w> <w>εν</w> <w>τη</w> <w>ιουδαια</w> <w>εν</w> <w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w>
+<lb/><w>οτι</w> <w>τα</w> <w>αυτα</w> <w>επαθετε</w> <w>και</w> <w>υμεις</w> <w>υπο</w> <w>των</w> <w>ιδιων</w>
+<lb/><w>συμφυλετων</w> <w>καθως</w> <w>και</w> <w>αυτοι</w> <w>υπο</w> <w>των</w> <w>ιουδαιων</w>
+<lb/></ab> <ab n="1Thess.2.15"><w>των</w> <w>και</w> <w>τον</w> <w><abbr type="nomSac"><hi rend="overline">κν</hi></abbr></w> <w>αποκτειναντων</w> <w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w> <w>και</w> <w>τους</w> <w>ιδιους</w>
+<lb/><w>προφητας</w> <w>και</w> <w>ημας</w> <w>εκδιωξαντων</w> <w>και</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w>
+<lb/><w>μη</w> <w>αρεσκοντων</w> <w>και</w> <w>πασιν</w> <w><abbr type="nomSac"><hi rend="overline">ανοις</hi></abbr></w> <w>εναντιων</w>
+<lb/></ab> <ab n="1Thess.2.16"><w>κωλυοντων</w> <w>ημας</w> <w>τοις</w> <w>εθνεσι</w> <w>λαλησαι</w> <w>ινα</w> <w>σω
+<lb break="no"/>θωσιν</w> <w>εις</w> <w>το</w> <w>αναπληρωσαι</w> <w>αυτων</w> <w>τας</w> <w>αμαρτιας</w>
+<lb/><w>παντοτε</w> <w>εφθασε</w> <w>δε</w> <w>επ</w> <w>αυτους</w> <w>η</w> <w>οργη</w> <w>εις</w> <w>τελος</w>
+<lb/></ab> <ab n="1Thess.2.17"><w>ημεις</w> <w>δε</w> <w>αδελφοι</w> <w>απορφανισθεντες</w> <w>αφ</w> <w>υμων</w>
+<lb/><w>προς</w> <w>καιρον</w> <w>ωρας</w> <w>προσωπω</w> <w>ου</w> <w>καρδια</w> <w>περισ
+<lb break="no"/>σοτερως</w> <w>εσπουδασαμεν</w> <w>το</w> <w>προσωπον</w> <w>υμων</w>
+<lb/><w><hi rend="cap" height="1">ι</hi>δειν</w> <w>εν</w> <w>πολλη</w> <w>επιθυμια</w></ab> <ab n="1Thess.2.18" part="I"><w>διο</w> <w>ηθελησαμεν</w> <w>ελθειν</w></ab></div> </div>
+
+
+<pb n="177v" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="1Thess"><div type="chapter" n="1Thess.2"><ab n="1Thess.2.18" part="F"><w>προς</w> <w>υμας</w> <w>εγω</w> <w>μεν</w> <w>παυλος</w> <w>και</w> <w>απαξ</w> <w>και</w> <w>δις</w>
+<lb/><w>και</w> <w>ενεκοψεν</w> <w>ημας</w> <w>ο</w> <w>σατανας</w></ab> <ab n="1Thess.2.19"><w>τις</w> <w>γαρ</w> <w>ημων</w>
+<lb/><w>ελπις</w> <w>η</w> <w>χαρα</w> <w>η</w> <w>στεφανος</w> <w>καυχησεως</w> <w>η</w> <w>ουχι</w>
+<lb/><w>και</w> <w>υμεις</w> <w>εμπροσθεν</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w>εν</w> <w>τη</w>
+<lb/><w>αυτου</w> <w>παρουσια</w></ab> <ab n="1Thess.2.20"><w>υμεις</w> <w>γαρ</w> <w>εστε</w> <w>η</w> <w>δοξα</w>
+<lb/><w><hi rend="cap" height="1">η</hi>μων</w> <w>και</w> <w>η</w> <w>χαρα</w></ab></div> <div type="chapter" n="1Thess.3"><ab n="1Thess.3.1"><w>διο</w> <w>μηκετι</w> <w>στεγοντες</w> <w>ευδοκησαμεν</w>
+<lb/><w>καταλειφθηναι</w> <w>εν</w> <w>αθηναις</w> <w>μονοι</w></ab> <ab n="1Thess.3.2"><w>και</w> <w>επεμψαμεν</w>
+<lb/><w>τιμοθεον</w> <w>τον</w> <w>αδελφον</w> <w>ημων</w> <w>και</w> <w>διακονον</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w>
+<lb/><w>και</w> <w>συνεργον</w> <w>ημων</w> <w>εν</w> <w>τω</w> <w>ευαγγελιω</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>εις</w> <w>το</w>
+<lb/><w>στηριξαι</w> <w>υμας</w> <w>και</w> <w>παρακαλεσαι</w> <w>υμας</w> <w>περι</w>
+<lb/><w>της</w> <w>πιστεως</w> <w>υμων</w></ab> <ab n="1Thess.3.3"><w>το</w> <w>μηδενα</w> <w>σαινεσθαι</w> <w>εν</w> <w>ταις</w>
+<lb/><w>θλιψεσι</w> <w>ταυταις</w> <w>αυτοι</w> <w>γαρ</w> <w>οιδατε</w> <w>οτι</w> <w>εις</w> <w>τουτο</w>
+<lb/><w>κειμεθα</w></ab> <ab n="1Thess.3.4"><w>και</w> <w>γαρ</w> <w>οτε</w> <w>προς</w> <w>υμας</w> <w>ημεν</w> <w>προε
+<lb break="no"/>λεγομεν</w> <w>υμιν</w> <w>οτι</w> <w>μελλομεν</w> <w>θλιβεσθαι</w> <w>καθως</w>
+<lb/><w><hi rend="cap" height="1">κ</hi>αι</w> <w>εγενετο</w> <w>και</w> <w>οιδατε</w></ab> <ab n="1Thess.3.5"><w>δια</w> <w>τουτο</w> <w>καγω</w> <w>μηκετι</w>
+<lb/><w>στεγων</w> <w>επεμψα</w> <w>εις</w> <w>το</w> <w>γνωναι</w> <w>την</w> <w>πιστιν</w> <w>υμων</w>
+<lb/><w>μηπως</w> <w>επειρασεν</w> <w>υμας</w> <w>ο</w> <w>πειραζων</w> <w>και</w> <w>εις</w>
+<lb/><w>κενον</w> <w>γενηται</w> <w>ο</w> <w>κοπος</w> <w>ημων</w></ab> <ab n="1Thess.3.6"><w>αρτι</w> <w>δε</w> <w>ελθοντος</w>
+<lb/><w>τιμοθεου</w> <w>προς</w> <w>ημας</w> <w>αφ</w> <w>υμων</w> <w>και</w> <w>ευαγγελισα
+<lb break="no"/>μενου</w> <w>ημιν</w> <w>την</w> <w>πιστιν</w> <w>και</w> <w>την</w> <w>αγαπην</w> <w>υμων</w> <w>και</w>
+<lb/><w>οτι</w> <w>εχετε</w> <w>μνειαν</w> <w>ημων</w> <w>αγαθην</w> <w>παντοτε</w> <w>επιπο
+<lb break="no"/>θουντες</w> <w>ημας</w> <w>ιδειν</w> <w>καθαπερ</w> <w>και</w> <w>ημεις</w> <w>υμας</w>
+<lb/></ab> <ab n="1Thess.3.7" part="I"><w><hi rend="cap" height="2">δ</hi>ια</w> <w>τουτο</w> <w>παρεκληθημεν</w> <w>αδελφοι</w> <w>εφ</w> <w>υμιν</w> <w>επι</w></ab></div> </div>
+
+
+<pb n="178r" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="1Thess"><div type="chapter" n="1Thess.3"><ab n="1Thess.3.7" part="F"><w>παση</w> <w>τη</w> <w>θλιψει</w> <w>και</w> <w>αναγκη</w> <w>ημων</w> <w>δια</w> <w>της</w> <w>υμων</w> <w>πιστεως</w>
+<lb/></ab> <ab n="1Thess.3.8"><w>οτι</w> <w>νυν</w> <w>ζωμεν</w> <w>εαν</w> <w>υμεις</w> <w>στηκετε</w> <w>εν</w> <w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w></ab> <ab n="1Thess.3.9"><w>τινα</w>
+<lb/><w><hi rend="cap" height="1">γ</hi>αρ</w> <w>ευχαριστιαν</w> <w>δυναμεθα</w> <w>τω</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w>ανταποδουναι</w> <w>περι</w>
+<lb/><w>υμων</w> <w>επι</w> <w>παση</w> <w>τη</w> <w>χαρα</w> <w>η</w> <w>χαιρομεν</w> <w>δι</w> <w>υμας</w> <w>εμ
+<lb break="no"/>προσθεν</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>ημων</w></ab> <ab n="1Thess.3.10"><w>νυκτος</w> <w>και</w> <w>ημερας</w> <w>υπερ
+<lb break="no"/>εκπερισσου</w> <w>δεομενοι</w> <w>εις</w> <w>το</w> <w>ιδειν</w> <w>υμων</w> <w>το</w> <w>προ
+<lb break="no"/>σωπον</w> <w>και</w> <w>καταρτισαι</w> <w>τα</w> <w>υστερηματα</w> <w>της</w>
+<lb/><w>πιστεως</w> <w>υμων</w></ab> <ab n="1Thess.3.11"><w>αυτος</w> <w>δε</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w> <w>και</w> <w><abbr type="nomSac"><hi rend="overline">πηρ</hi></abbr></w> <w>ημων</w> <w>και</w>
+<lb/><w>ο</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w> <w>κατευθυναι</w> <w>την</w> <w>οδον</w> <w>ημων</w> <w>προς</w>
+<lb/><w>υμας</w></ab> <ab n="1Thess.3.12"><w>υμας</w> <w>δε</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w> <w>πλεονασαι</w> <w>και</w> <w>περισ
+<lb break="no"/>σευσαι</w> <w>τη</w> <w>αγαπη</w> <w>εις</w> <w>αλληλους</w> <w>και</w> <w>εις</w> <w>παντας</w>
+<lb/><w>καθαπερ</w> <w>και</w> <w>ημεις</w> <w>εις</w> <w>υμας</w></ab> <ab n="1Thess.3.13"><w>εις</w> <w>το</w> <w>στηριξαι</w>
+<lb/><w>υμων</w> <w>τας</w> <w>καρδιας</w> <w>αμεμπτους</w> <w>εν</w> <w>αγιωσυνη</w>
+<lb/><w>εμπροσθεν</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>και</w> <w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w> <w>ημων</w> <w>εν</w> <w>τη</w> <w>παρου
+<lb break="no"/>σια</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>μετα</w> <w>παντων</w> <w>των</w> <w>αγιων</w>
+<lb/><w>αυτου</w></ab></div> <div type="chapter" n="1Thess.4"><ab n="1Thess.4.1"><w>το</w> <w>λοιπον</w> <w>ουν</w> <w>αδελφοι</w> <w>ερωτωμεν</w>
+<lb/><w><hi rend="cap" height="2">υ</hi>μας</w> <w>και</w> <w>παρακαλουμεν</w> <w>εν</w> <w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w>καθως</w> <w>παρε
+<lb break="no"/>λαβετε</w> <w>παρ</w> <w>ημων</w> <w>το</w> <w>πως</w> <w>δει</w> <w>υμας</w> <w>περι
+<lb break="no"/>πατειν</w> <w>και</w> <w>αρεσκειν</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w>ινα</w> <w>περισσευητε</w>
+<lb/><w>μαλλον</w></ab> <ab n="1Thess.4.2"><w>οιδατε</w> <w>γαρ</w> <w>τινας</w> <w>παραγγελιας</w> <w>εδω
+<lb break="no"/>καμεν</w> <w>υμιν</w> <w>δια</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w></ab> <ab n="1Thess.4.3"><w>τουτο</w> <w>γαρ</w> <w>εστι</w> <w>θελημα</w>
+<lb/><w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>ο</w> <w>αγιασμος</w> <w>υμων</w> <w>απεχεσθαι</w> <w>υμας</w> <w>απο</w>
+<lb/><w>της</w> <w>πορνειας</w></ab> <ab n="1Thess.4.4" part="I"><w>ειδεναι</w> <w>εκαστον</w> <w>υμων</w> <w>το</w> <w>εαυτου</w></ab></div> </div>
+
+
+<pb n="178v" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="1Thess"><div type="chapter" n="1Thess.4"><ab n="1Thess.4.4" part="F"><w>σκευος</w> <w>κτασθαι</w> <w>εν</w> <w>αγιασμω</w> <w>και</w> <w>τιμη</w></ab> <ab n="1Thess.4.5"><w>μη</w> <w>εν</w> <w>παθει</w>
+<lb/><w>επιθυμιας</w> <w>καθαπερ</w> <w>και</w> <w>τα</w> <w>εθνη</w> <w>τα</w> <w>μη</w> <w>ειδοτα</w>
+<lb/><w>τον</w> <w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w></ab> <ab n="1Thess.4.6"><w>το</w> <w>μη</w> <w>υπερβαινειν</w> <w>και</w> <w>πλεονεκτειν</w> <w>εν</w> <w>τω</w>
+<lb/><w>πραγματι</w> <w>τον</w> <w>αδελφον</w> <w>αυτου</w> <w>διοτι</w> <w>εκδικος</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w>
+<lb/><w><hi rend="cap" height="1">π</hi>ερι</w> <w>παντων</w> <w>τουτων</w> <w>καθως</w> <w>και</w> <w>προειπομεν</w>
+<lb/><w>υμιν</w> <w>και</w> <w>διεμαρτυραμεθα</w></ab> <ab n="1Thess.4.7"><w>ου</w> <w>γαρ</w> <w>εκαλεσεν</w>
+<lb/><w>ημας</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w> <w>επι</w> <w>ακαθαρσια</w> <w>αλλ</w> <w>εν</w> <w>αγιασμω</w>
+<lb/></ab> <ab n="1Thess.4.8"><w>τοιγαρουν</w> <w>ο</w> <w>αθετων</w> <w>ουκ</w> <w><abbr type="nomSac"><hi rend="overline">ανον</hi></abbr></w> <w>αθετει</w> <w>αλλα</w> <w>τον</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w> <w>τον</w> <w>και</w> <w>δοντα</w> <w>το</w> <w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w> <w>αυτου</w> <w>το</w> <w>αγιον</w> <w>εις</w> <w>υμας</w>
+<lb/></ab> <ab n="1Thess.4.9"><w>περι</w> <w>δε</w> <w>της</w> <w>φιλαδελφιας</w> <w>ου</w> <w>χρειαν</w> <w>εχετε</w> <w>γρα
+<lb break="no"/>φειν</w> <w>υμιν</w> <w>αυτοι</w> <w>γαρ</w> <w>θεοδιδακτοι</w> <w>εστε</w> <w>εις</w> <w>το</w> <w>αγα
+<lb break="no"/>παν</w> <w>αλληλους</w></ab> <ab n="1Thess.4.10"><w>και</w> <w>γαρ</w> <w>ποιειτε</w> <w>αυτο</w> <w>εις</w> <w>παντας</w>
+<lb/><w>τους</w> <w>αδελφους</w> <w>τους</w> <w>εν</w> <w>ολη</w> <w>τη</w> <w>μακεδονια</w> <w>παρα
+<lb break="no"/>καλουμεν</w> <w>δε</w> <w>υμας</w> <w>αδελφοι</w> <w>περισσευειν</w> <w>μαλ
+<lb break="no"/>λον</w></ab> <ab n="1Thess.4.11"><w>και</w> <w>φιλοτιμεισθαι</w> <w>ησυχαζειν</w> <w>και</w> <w>πρασσειν</w>
+<lb/><w>τα</w> <w>ιδια</w> <w>και</w> <w>εργαζεσθαι</w> <w>ταις</w> <w>ιδιαις</w> <w>χερσιν</w>
+<lb/><w>υμων</w> <w>καθως</w> <w>υμιν</w> <w>παρηγγειλαμεν</w></ab> <ab n="1Thess.4.12"><w>ινα</w> <w>περι
+<lb break="no"/>πατητε</w> <w>ευσχημονως</w> <w>προς</w> <w>τους</w> <w>εξω</w> <w>και</w> <w>μη
+<lb break="no"/>δενος</w> <w>χρειαν</w> <w>εχητε</w></ab> <ab n="1Thess.4.13"><w>ου</w> <w>θελομεν</w> <w>δε</w>
+<lb/><w><hi rend="cap" height="2">υ</hi>μας</w> <w>αγνοειν</w> <w>αδελφοι</w> <w>περι</w> <w>των</w> <w>κεκοιμημενων</w>
+<lb/><w>ινα</w> <w>μη</w> <w>λυπησθε</w> <w>καθως</w> <w>και</w> <w>οι</w> <w>λοιποι</w> <w>οι</w> <w>μη</w> <w>εχοντες</w>
+<lb/><w>ελπιδα</w></ab> <ab n="1Thess.4.14" part="I"><w>ει</w> <w>γαρ</w> <w>πιστευομεν</w> <w>οτι</w> <w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w> <w>απεθανε</w> <w>και</w>
+<lb/><w>ανεστη</w> <w>ουτω</w> <w>και</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w> <w>τους</w> <w>κοιμηθεντας</w> <w>δια</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w></ab></div> </div>
+
+
+<pb n="179r" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="1Thess"><div type="chapter" n="1Thess.4"><ab n="1Thess.4.14" part="F"><w>αξει</w> <w>συν</w> <w>αυτω</w></ab> <ab n="1Thess.4.15"><w>τουτο</w> <w>γαρ</w> <w>υμιν</w> <w>λεγομεν</w>
+<lb/><w><hi rend="cap" height="2">ε</hi>ν</w> <w>λογω</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>οτι</w> <w>ημεις</w> <w>οι</w> <w>ζωντες</w> <w>οι</w> <w>περιλει
+<lb break="no"/>πομενοι</w> <w>εις</w> <w>την</w> <w>παρουσιαν</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ου</w> <w>μη</w>
+<lb/><w>φθασωμεν</w> <w>τους</w> <w>κοιμηθεντας</w></ab> <ab n="1Thess.4.16"><w>οτι</w> <w>αυτος</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w>
+<lb/><w>εν</w> <w>κελευσματι</w> <w>εν</w> <w>φωνη</w> <w>αρχαγγελου</w> <w>και</w> <w>εν</w> <w>σαλ
+<lb break="no"/>πιγγι</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>καταβησεται</w> <w>απ</w> <w><abbr type="nomSac"><hi rend="overline">ουνου</hi></abbr></w> <w>και</w> <w>οι</w> <w>νεκροι</w>
+<lb/><w>εν</w> <w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w> <w>αναστησονται</w> <w>πρωτον</w></ab> <ab n="1Thess.4.17"><w>επειτα</w> <w>ημεις</w>
+<lb/><w>οι</w> <w>ζωντες</w> <w>οι</w> <w>περιλειπομενοι</w> <w>αμα</w> <w>συν</w> <w>αυτοις</w>
+<lb/><w>αρπαγησομεθα</w> <w>εν</w> <w>νεφελαις</w> <w>εις</w> <w>απαντησιν</w>
+<lb/><w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>εις</w> <w>αερα</w> <w>και</w> <w>ουτως</w> <w>παντοτε</w> <w>συν</w> <w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w>
+<lb/><w>εσομεθα</w></ab> <ab n="1Thess.4.18"><w>ωστε</w> <w>παρακαλειτε</w> <w>αλληλους</w>
+<lb/><w><hi rend="cap" height="2">ε</hi>ν</w> <w>τοις</w> <w>λογοις</w> <w>τουτοις</w></ab></div> <div type="chapter" n="1Thess.5"><ab n="1Thess.5.1"><w>περι</w> <w>δε</w> <w>των</w> <w>χρονων</w> <w>και</w>
+<lb/><w>των</w> <w>καιρων</w> <w>αδελφοι</w> <w>ου</w> <w>χρειαν</w> <w>εχετε</w> <w>υμιν</w>
+<lb/><w>γραφεσθαι</w></ab> <ab n="1Thess.5.2"><w>αυτοι</w> <w>γαρ</w> <w>ακριβως</w> <w>οιδατε</w> <w>οτι</w>
+<lb/><w>η</w> <w>ημερα</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ως</w> <w>κλεπτης</w> <w>εν</w> <w>νυκτι</w> <w>ουτως</w> <w>ερχεται</w>
+<lb/></ab> <ab n="1Thess.5.3"><w>οταν</w> <w>γαρ</w> <w>λεγωσιν</w> <w>ειρηνη</w> <w>και</w> <w>ασφαλεια</w> <w>τοτε</w>
+<lb/><w>αιφνιδιος</w> <w>αυτοις</w> <w>εφισταται</w> <w>ολεθρος</w> <w>ωσπερ</w>
+<lb/><w>η</w> <w>ωδιν</w> <w>τη</w> <w>εν</w> <w>γαστρι</w> <w>εχουση</w> <w>και</w> <w>ου</w> <w>μη</w> <w>εκφυγωσιν</w>
+<lb/></ab> <ab n="1Thess.5.4"><w>υμεις</w> <w>δε</w> <w>αδελφοι</w> <w>ουκ</w> <w>εστε</w> <w>εν</w> <w>σκοτει</w> <w>ινα</w> <w>η</w>
+<lb/><w>ημερα</w> <w>υμας</w> <w>ως</w> <w>κλεπτης</w> <w>καταλαβη</w></ab> <ab n="1Thess.5.5"><w>παντες</w>
+<lb/><w>υμεις</w> <w>υιοι</w> <w>φωτος</w> <w>εστε</w> <w>και</w> <w>υιοι</w> <w>ημερας</w> <w>ουκ</w> <w>εσμεν</w>
+<lb/><w>νυκτος</w> <w>ουδε</w> <w>σκοτους</w></ab> <ab n="1Thess.5.6"><w>αρα</w> <w>ουν</w> <w>μη</w> <w>καθευδωμεν</w>
+<lb/><w><hi rend="cap" height="1">ω</hi>ς</w> <w>και</w> <w>οι</w> <w>λοιποι</w> <w>αλλα</w> <w>γρηγορωμεν</w> <w>και</w> <w>νηφωμεν</w></ab></div> </div>
+
+
+<pb n="179v" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="1Thess"><div type="chapter" n="1Thess.5"><ab n="1Thess.5.7"><w>οι</w> <w>γαρ</w> <w>καθευδοντες</w> <w>νυκτος</w> <w>καθευδουσι</w> <w>και</w> <w>οι</w> <w>με
+<lb break="no"/>θυσκομενοι</w> <w>νυκτος</w> <w>μεθυουσιν</w></ab> <ab n="1Thess.5.8"><w>ημεις</w> <w>δε</w> <w>η
+<lb break="no"/>μερας</w> <w>οντες</w> <w>νηφωμεν</w> <w>ενδυσαμενοι</w> <w>θω
+<lb break="no"/>ρακα</w> <w>πιστεως</w> <w>και</w> <w>αγαπης</w> <w>και</w> <w>περικεφα
+<lb break="no"/>λαιαν</w> <w>ελπιδα</w> <w><abbr type="nomSac"><hi rend="overline">σριας</hi></abbr></w></ab> <ab n="1Thess.5.9"><w>οτι</w> <w>ουκ</w> <w>εθετο</w>
+<lb/><w><hi rend="cap" height="2">η</hi>μας</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w> <w>εις</w> <w>οργην</w> <w>αλλ</w> <w>εις</w> <w>περιποιησιν</w> <w><abbr type="nomSac"><hi rend="overline">σριας</hi></abbr></w>
+<lb/><w>δια</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab> <ab n="1Thess.5.10"><w>του</w> <w>αποθανοντος</w> <w>υπερ</w>
+<lb/><w>ημων</w> <w>ινα</w> <w>ειτε</w> <w>γρηγορουμεν</w> <w>ειτε</w> <w>καθευδομεν</w>
+<lb/><w>αμα</w> <w>συν</w> <w>αυτω</w> <w>ζησωμεν</w></ab> <ab n="1Thess.5.11"><w>διο</w> <w>παρακαλειτε</w>
+<lb/><w>αλληλους</w> <w>και</w> <w>οικοδομειτε</w> <w>εις</w> <w>τον</w> <w>ενα</w> <w>καθως</w>
+<lb/><w>και</w> <w>ποιειτε</w></ab> <ab n="1Thess.5.12"><w>ερωτωμεν</w> <w>δε</w> <w>υμας</w> <w>αδελφοι</w>
+<lb/><w>ειδεναι</w> <w>τους</w> <w>κοπιωντας</w> <w>εν</w> <w>υμιν</w> <w>και</w> <w>προιστα
+<lb break="no"/>μενους</w> <w>υμων</w> <w>εν</w> <w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w> <w>και</w> <w>νουθετουντας</w> <w>υμας</w>
+<lb/></ab> <ab n="1Thess.5.13"><w>και</w> <w>ηγεισθαι</w> <w>αυτους</w> <w>υπερεκπερισσου</w> <w>εν</w> <w>αγαπη</w>
+<lb/><w>δια</w> <w>το</w> <w>εργον</w> <w>αυτων</w> <w>ειρηνευετε</w> <w>εν</w> <w>εαυτοις</w>
+<lb/></ab> <ab n="1Thess.5.14"><w><hi rend="cap" height="2">π</hi>αρακαλουμεν</w> <w>δε</w> <w>υμας</w> <w>αδελφοι</w> <w>νουθετειτε</w>
+<lb/><w>τους</w> <w>ατακτους</w> <w>παραμυθεισθε</w> <w>τους</w> <w>ολιγο
+<lb break="no"/>ψυχους</w> <w>αντεχεσθε</w> <w>των</w> <w>ασθενων</w> <w>μακροθυ
+<lb break="no"/>μειτε</w> <w>προς</w> <w>παντας</w></ab> <ab n="1Thess.5.15"><w>ορατε</w> <w>μη</w> <w>τις</w> <w>κακον</w>
+<lb/><w>αντι</w> <w>κακου</w> <w>τινι</w> <w>αποδω</w> <w>αλλα</w> <w>παντοτε</w> <w>το</w>
+<lb/><w>αγαθον</w> <w>διωκετε</w> <w>και</w> <w>εις</w> <w>αλληλους</w> <w>και</w> <w>εις</w> <w>παντας</w>
+<lb/></ab> <ab n="1Thess.5.16"><w>παντοτε</w> <w>χαιρετε</w></ab> <ab n="1Thess.5.17"><w>αδιαλειπτως</w> <w>προσευχεσθε</w>
+<lb/></ab> <ab n="1Thess.5.18" part="I"><w>εν</w> <w>παντι</w> <w>ευχαριστειτε</w> <w>τουτο</w> <w>γαρ</w> <w>θελημα</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w></ab></div> </div>
+
+
+<pb n="180r" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="1Thess"><div type="chapter" n="1Thess.5"><ab n="1Thess.5.18" part="F"><w>εν</w> <w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w>εις</w> <w>υμας</w></ab> <ab n="1Thess.5.19"><w>το</w> <w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w> <w>μη</w> <w>σβεννητε</w></ab> <ab n="1Thess.5.20"><w>προ
+<lb break="no"/>φητειας</w> <w>μη</w> <w>εξουθενειτε</w></ab> <ab n="1Thess.5.21"><w>παντα</w> <w>δε</w> <w>δοκιμα
+<lb break="no"/>ζετε</w> <w>το</w> <w>καλον</w> <w>κατεχετε</w></ab> <ab n="1Thess.5.22"><w>απο</w> <w>παντος</w> <w>ειδους</w>
+<lb/><w><hi rend="cap" height="2">π</hi>ονηρου</w> <w>απεχεσθε</w></ab> <ab n="1Thess.5.23"><w>αυτος</w> <w>δε</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w> <w>της</w> <w>ειρηνης</w>
+<lb/><w>αγιασαι</w> <w>υμας</w> <w>ολοτελεις</w> <w>και</w> <w>ολοκληρον</w> <w>υμων</w>
+<lb/><w>το</w> <w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w> <w>και</w> <w>η</w> <w>ψυχη</w> <w>και</w> <w>το</w> <w>σωμα</w> <w>αμεμπτως</w>
+<lb/><w>εν</w> <w>τη</w> <w>παρουσια</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>τηρηθειη</w>
+<lb/></ab> <ab n="1Thess.5.24"><w>πιστος</w> <w>ο</w> <w>καλων</w> <w>υμας</w> <w>ος</w> <w>και</w> <w>ποιησει</w></ab> <ab n="1Thess.5.25"><w>αδελφοι</w>
+<lb/><w>προσευχεσθε</w> <w>περι</w> <w>ημων</w></ab> <ab n="1Thess.5.26"><w>ασπασασθε</w> <w>τους</w>
+<lb/><w>αδελφους</w> <w>παντας</w> <w>εν</w> <w>φιληματι</w> <w>αγιω</w>
+<lb/></ab> <ab n="1Thess.5.27"><w>ορκιζω</w> <w>υμας</w> <w>τον</w> <w><abbr type="nomSac"><hi rend="overline">κν</hi></abbr></w> <w>αναγνω
+<lb break="no"/>σθηναι</w> <w>την</w> <w>επιστολην</w>
+<lb/><w>πασι</w> <w>τοις</w> <w>αγιοις</w> <w>αδελ
+<lb break="no"/>φοις</w></ab> <ab n="1Thess.5.28"><w>η</w>
+<lb/><w>χα
+<lb break="no"/>ρις</w>
+<lb/><w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>μεθ</w> <w>υμων</w>
+<lb/><w>α
+<lb break="no"/>μην</w>
+<lb/></ab></div><div type="subscriptio"><ab n="1Thess.subscriptio"><w>εγραφη</w> <w>απο</w> <w>αθηνων</w> <w>στιχοι</w> <w>ρστγ</w></ab></div> </div>
+
+
+<pb n="181r" type="folio"/>
+<cb n="1"/>
+<lb/><div type="inscriptio"><ab n=".inscriptio"><w>προς</w> <w>θεσσαλονικεις</w> <w>δευτερα</w> <w>επιστολη</w>
+<lb/></ab></div><div type="chapter" n=".1"><ab n=".1.1"><w><hi rend="cap" height="3">π</hi>αυλος</w> <w>και</w> <w>σιλουανος</w> <w>και</w> <w>τιμοθεος</w> <w>τη</w> <w>εκκλη
+<lb break="no"/>σια</w> <w>θεσσαλονικεων</w> <w>εν</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">πρι</hi></abbr></w> <w>ημων</w> <w>και</w> <w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w></ab> <ab n=".1.2"><w>χαρις</w> <w>υμιν</w> <w>και</w> <w>ειρηνη</w> <w>απο</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w> <w>ημων</w> <w>και</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab> <ab n=".1.3"><w>ευχαριστειν</w> <w>οφειλομεν</w> <w>τω</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w>παντοτε</w>
+<lb/><w>περι</w> <w>υμων</w> <w>αδελφοι</w> <w>καθως</w> <w>αξιον</w> <w>εστιν</w> <w>οτι</w>
+<lb/><w>υπεραυξανει</w> <w>η</w> <w>πιστις</w> <w>υμων</w> <w>και</w> <w>πλεοναζει</w>
+<lb/><w>η</w> <w>αγαπη</w> <w>ενος</w> <w>εκαστου</w> <w>παντων</w> <w>υμων</w> <w>εις</w> <w>αλλη
+<lb break="no"/>λους</w></ab> <ab n=".1.4"><w>ωστε</w> <w>ημας</w> <w>αυτους</w> <w>εν</w> <w>υμιν</w> <w>καυχασθαι</w>
+<lb/><w>εν</w> <w>ταις</w> <w>εκκλησιαις</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>υπερ</w> <w>της</w> <w>υπομο
+<lb break="no"/>νης</w> <w>υμων</w> <w>και</w> <w>πιστεως</w> <w>εν</w> <w>πασι</w> <w>τοις</w> <w>διωγμοις</w>
+<lb/><w>υμων</w> <w>και</w> <w>ταις</w> <w>θλιψεσιν</w> <w>αις</w> <w>ανεχεσθε</w></ab> <ab n=".1.5"><w>ενδειγμα</w>
+<lb/><w>της</w> <w>δικαιας</w> <w>κρισεως</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>εις</w> <w>το</w> <w>καταξιω
+<lb break="no"/>θηναι</w> <w>υμας</w> <w>της</w> <w>βασιλειας</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>υπερ</w>
+<lb/><w>ης</w> <w>και</w> <w>πασχετε</w></ab> <ab n=".1.6" part="I"><w>ειπερ</w> <w>δικαιον</w> <w>παρα</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w></ab></div> 
+
+
+<pb n="181v" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="2Thess"><div type="chapter" n="2Thess.1"><ab n="2Thess.1.6" part="F"><w>ανταποδουναι</w> <w>τοις</w> <w>θλιβουσιν</w> <w>υμας</w> <w>θλιψιν</w></ab> <ab n="2Thess.1.7"><w>και</w>
+<lb/><w><hi rend="cap" height="2">υ</hi>μιν</w> <w>τοις</w> <w>θλιβομενοις</w> <w>ανεσιν</w> <w>μεθ</w> <w>ημων</w> <w>εν</w> <w>τη</w>
+<lb/><w>αποκαλυψει</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w>απ</w> <w><abbr type="nomSac"><hi rend="overline">ουνου</hi></abbr></w> <w>μετ</w> <w>αγγελων</w>
+<lb/><w>δυναμεως</w> <w>αυτου</w></ab> <ab n="2Thess.1.8"><w>εν</w> <w>πυρι</w> <w>φλογος</w> <w>διδοντος</w>
+<lb/><w>εκδικησιν</w> <w>τοις</w> <w>μη</w> <w>ειδοσι</w> <w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w> <w>και</w> <w>τοις</w> <w>μη</w> <w>υπακου
+<lb break="no"/>ουσι</w> <w>τω</w> <w>ευαγγελιω</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab> <ab n="2Thess.1.9"><w>οιτινες</w>
+<lb/><w>δικην</w> <w>τισουσιν</w> <w>ολεθρον</w> <w>αιωνιον</w> <w>απο</w> <w>προσωπου</w>
+<lb/><w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>και</w> <w>απο</w> <w>της</w> <w>δοξης</w> <w>της</w> <w>ισχυος</w> <w>αυτου</w>
+<lb/></ab> <ab n="2Thess.1.10"><w>οταν</w> <w>ελθη</w> <w>ενδοξασθηναι</w> <w>εν</w> <w>τοις</w> <w>αγιοις</w> <w>αυτου</w>
+<lb/><w>και</w> <w>θαυμασθηναι</w> <w>εν</w> <w>πασι</w> <w>τοις</w> <w>πιστευσασιν</w>
+<lb/><w>οτι</w> <w>επιστευθη</w> <w>το</w> <w>μαρτυριον</w> <w>ημων</w> <w>εφ</w> <w>υμας</w>
+<lb/><w><hi rend="cap" height="2">ε</hi>ν</w> <w>τη</w> <w>ημερα</w> <w>εκεινη</w></ab> <ab n="2Thess.1.11"><w>εις</w> <w>ο</w> <w>και</w> <w>προσευχομεθα</w>
+<lb/><w>παντοτε</w> <w>περι</w> <w>υμων</w> <w>ινα</w> <w>υμας</w> <w>αξιωση</w>
+<lb/><w>της</w> <w>κλησεως</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w> <w>ημων</w> <w>και</w> <w>πληρωση</w> <w>πασαν</w>
+<lb/><w>ευδοκιαν</w> <w>αγαθωσυνης</w> <w>και</w> <w>εργον</w> <w>πιστεως</w> <w>εν</w>
+<lb/><w>δυναμει</w></ab> <ab n="2Thess.1.12"><w>οπως</w> <w>ενδοξασθη</w> <w>το</w> <w>ονομα</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb/><w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>εν</w> <w>υμιν</w> <w>και</w> <w>υμεις</w> <w>εν</w> <w>αυτω</w> <w>κατα</w>
+<lb/><w>την</w> <w>χαριν</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>ημων</w> <w>και</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab></div> <div type="chapter" n="2Thess.2"><ab n="2Thess.2.1"><w>ερωτωμεν</w>
+<lb/><w><hi rend="cap" height="2">δ</hi>ε</w> <w>υμας</w> <w>αδελφοι</w> <w>υπερ</w> <w>της</w> <w>παρουσιας</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb/><w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>και</w> <w>ημων</w> <w>επισυναγωγης</w> <w>επ</w> <w>αυτον</w>
+<lb/></ab> <ab n="2Thess.2.2" part="I"><w>εις</w> <w>το</w> <w>μη</w> <w>ταχεως</w> <w>σαλευθηναι</w> <w>υμας</w> <w>απο</w> <w>του</w> <w>νοος</w>
+<lb/><w>μητε</w> <w>θροεισθαι</w> <w>μητε</w> <w>δια</w> <w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w> <w>μητε</w> <w>δια</w>
+<lb/><w>λογου</w> <w>μητε</w> <w>δι</w> <w>επιστολης</w> <w>ως</w> <w>δι</w> <w>ημων</w> <w>ως</w> <w>οτι</w></ab></div> </div>
+
+
+<pb n="182r" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="2Thess"><div type="chapter" n="2Thess.2"><ab n="2Thess.2.2" part="F"><w>ενεστηκεν</w> <w>η</w> <w>ημερα</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab> <ab n="2Thess.2.3"><w>μη</w> <w>τις</w> <w>υμας</w> <w>εξα
+<lb break="no"/>πατηση</w> <w>κατα</w> <w>μηδενα</w> <w>τροπον</w> <w>οτι</w> <w>εαν</w> <w>μη</w>
+<lb/><w>ελθη</w> <w>η</w> <w>αποστασια</w> <w>πρωτον</w> <w>και</w> <w>αποκαλυφθη</w>
+<lb/><w><hi rend="cap" height="2">ο</hi></w> <w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w> <w>της</w> <w>αμαρτιας</w> <w>ο</w> <w>υιος</w> <w>της</w> <w>απωλειας</w></ab> <ab n="2Thess.2.4"><w>ο</w>
+<lb/><w>αντικειμενος</w> <w>και</w> <w>υπεραιρομενος</w> <w>επι</w> <w>παντα</w>
+<lb/><w>λεγομενον</w> <w>θεον</w> <w>η</w> <w>σεβασμα</w> <w>ωστε</w> <w>αυτον</w> <w>εις</w>
+<lb/><w>τον</w> <w>ναον</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>ως</w> <w>θεον</w> <w>καθισαι</w> <w>αποδεικνυντα</w>
+<lb/><w>εαυτον</w> <w>οτι</w> <w>εστι</w> <w>θεος</w></ab> <ab n="2Thess.2.5"><w>ου</w> <w>μνημονευετε</w> <w>οτι</w>
+<lb/><w>ετι</w> <w>ων</w> <w>προς</w> <w>υμας</w> <w>ταυτα</w> <w>ελεγον</w> <w>υμιν</w></ab> <ab n="2Thess.2.6"><w>και</w> <w>νυν</w>
+<lb/><w>το</w> <w>κατεχον</w> <w>οιδατε</w> <w>εις</w> <w>το</w> <w>αποκαλυφθηναι</w> <w>αυτον</w>
+<lb/><w>εν</w> <w>τω</w> <w>εαυτου</w> <w>καιρω</w></ab> <ab n="2Thess.2.7"><w>το</w> <w>γαρ</w> <w>μυστηριον</w> <w>ηδη</w> <w>ενερ
+<lb break="no"/>γειται</w> <w>της</w> <w>ανομιας</w> <w>μονον</w> <w>ο</w> <w>κατεχων</w> <w>αρτι</w>
+<lb/><w>εως</w> <w>εκ</w> <w>μεσου</w> <w>γενηται</w></ab> <ab n="2Thess.2.8"><w>και</w> <w>τοτε</w> <w>αποκαλυ
+<lb break="no"/>φθησεται</w> <w>ο</w> <w>ανομος</w> <w>ον</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w> <w>αναλωσει</w> <w>τω</w> <w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w>
+<lb/><w>του</w> <w>στοματος</w> <w>αυτου</w> <w>και</w> <w>καταργησει</w> <w>τη</w> <w>επι
+<lb break="no"/>φανεια</w> <w>της</w> <w>παρουσιας</w> <w>αυτου</w></ab> <ab n="2Thess.2.9"><w>ου</w> <w>εστιν</w> <w>η</w>
+<lb/><w>παρουσια</w> <w>κατ</w> <w>ενεργειαν</w> <w>του</w> <w>σατανα</w> <w>εν</w>
+<lb/><w>παση</w> <w>δυναμει</w> <w>και</w> <w>σημειοις</w> <w>και</w> <w>τερασι</w>
+<lb/><w>ψευδους</w></ab> <ab n="2Thess.2.10"><w>και</w> <w>εν</w> <w>παση</w> <w>απατη</w> <w>της</w> <w>αδικιας</w>
+<lb/><w><hi rend="cap" height="3">ε</hi>ν</w> <w>τοις</w> <w>απολλυμενοις</w> <w>ανθ</w> <w>ων</w> <w>την</w> <w>αγαπην</w>
+<lb/><w>της</w> <w>αληθειας</w> <w>ουκ</w> <w>εδεξαντο</w> <w>εις</w> <w>το</w> <w>σωθηναι</w>
+<lb/><w>αυτους</w></ab> <ab n="2Thess.2.11" part="I"><w>και</w> <w>δια</w> <w>τουτο</w> <w>πεμψει</w> <w>αυτοις</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w>
+<lb/><w>ενεργειαν</w> <w>πλανης</w> <w>εις</w> <w>το</w> <w>πιστευσαι</w> <w>αυτους</w></ab></div> </div>
+
+
+<pb n="182v" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="2Thess"><div type="chapter" n="2Thess.2"><ab n="2Thess.2.11" part="F"><w>τω</w> <w>ψευδει</w></ab> <ab n="2Thess.2.12"><w>ινα</w> <w>κριθωσι</w> <w>παντες</w> <w>οι</w> <w>μη</w> <w>πιστευ
+<lb break="no"/>σαντες</w> <w>τη</w> <w>αληθεια</w> <w>αλλ</w> <w>ευδοκησαντες</w> <w>εν</w> <w>τη</w>
+<lb/><w>αδικια</w></ab> <ab n="2Thess.2.13"><w>ημεις</w> <w>δε</w> <w>οφειλομεν</w> <w>ευχαριστειν</w>
+<lb/><w><hi rend="cap" height="2">τ</hi>ω</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w>παντοτε</w> <w>περι</w> <w>υμων</w> <w>αδελφοι</w> <w>ηγαπη
+<lb break="no"/>μενοι</w> <w>υπο</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>οτι</w> <w>ειλετο</w> <w>υμας</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w> <w>απαρχης</w>
+<lb/><w>εις</w> <w><abbr type="nomSac"><hi rend="overline">σριαν</hi></abbr></w> <w>εν</w> <w>αγιασμω</w> <w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w> <w>και</w> <w>πιστει</w> <w>αληθειας</w>
+<lb/></ab> <ab n="2Thess.2.14"><w>εις</w> <w>ο</w> <w>εκαλεσεν</w> <w>υμας</w> <w>δια</w> <w>του</w> <w>ευαγγελιου</w> <w>ημων</w>
+<lb/><w>εις</w> <w>περιποιησιν</w> <w>δοξης</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w>
+<lb/></ab> <ab n="2Thess.2.15"><w>αρα</w> <w>ουν</w> <w>αδελφοι</w> <w>στηκετε</w> <w>και</w> <w>κρατειτε</w> <w>τας</w>
+<lb/><w>παραδοσεις</w> <w>ας</w> <w>εδιδαχθητε</w> <w>ειτε</w> <w>δια</w> <w>λογου</w>
+<lb/><w>ειτε</w> <w>δι</w> <w>επιστολης</w> <w>ημων</w></ab> <ab n="2Thess.2.16"><w>αυτος</w> <w>δε</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w> <w>ημων</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w> <w>και</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w> <w>και</w> <w><abbr type="nomSac"><hi rend="overline">πηρ</hi></abbr></w> <w>ημων</w> <w>ο</w> <w>αγαπησας</w>
+<lb/><w>ημας</w> <w>και</w> <w>δους</w> <w>παρακλησιν</w> <w>αιωνιαν</w> <w>και</w> <w>ελ
+<lb break="no"/>πιδα</w> <w>αγαθην</w> <w>εν</w> <w>χαριτι</w></ab> <ab n="2Thess.2.17"><w>παρακαλεσαι</w> <w>υμων</w>
+<lb/><w>τας</w> <w>καρδιας</w> <w>και</w> <w>στηριξαι</w> <w>υμας</w> <w>εν</w> <w>παντι</w>
+<lb/><w>λογω</w> <w>και</w> <w>εργω</w> <w>αγαθω</w></ab></div> <div type="chapter" n="2Thess.3"><ab n="2Thess.3.1"><w>το</w> <w>λοιπον</w> <w>προσευχεσθε</w>
+<lb/><w><hi rend="cap" height="3">α</hi>δελφοι</w> <w>περι</w> <w>ημων</w> <w>ινα</w> <w>ο</w> <w>λογος</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>τρεχη</w>
+<lb/><w>και</w> <w>δοξαζηται</w> <w>καθως</w> <w>και</w> <w>προς</w> <w>υμας</w></ab> <ab n="2Thess.3.2"><w>και</w>
+<lb/><w>ινα</w> <w>ρυσθωμεν</w> <w>απο</w> <w>των</w> <w>ατοπων</w> <w>και</w> <w>πονηρων</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">ανων</hi></abbr></w> <w>ου</w> <w>γαρ</w> <w>παντων</w> <w>η</w> <w>πιστις</w></ab> <ab n="2Thess.3.3"><w>πιστος</w> <w>δε</w>
+<lb/><w>εστιν</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w> <w>ος</w> <w>στηριξει</w> <w>υμας</w> <w>και</w> <w>φυλαξει</w> <w>απο</w>
+<lb/><w>του</w> <w>πονηρου</w></ab> <ab n="2Thess.3.4" part="I"><w>πεποιθαμεν</w> <w>δε</w> <w>εν</w> <w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w> <w>εφ</w> <w>υμας</w>
+<lb/><w>οτι</w> <w>α</w> <w>παραγγελλομεν</w> <w>υμιν</w> <w>και</w> <w>ποιειτε</w> <w>και</w></ab></div> </div>
+
+
+<pb n="183r" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="2Thess"><div type="chapter" n="2Thess.3"><ab n="2Thess.3.4" part="F"><w>ποιησετε</w></ab> <ab n="2Thess.3.5"><w>ο</w> <w>δε</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w> <w>κατευθυναι</w> <w>υμων</w> <w>τας</w> <w>καρ
+<lb break="no"/>διας</w> <w>εις</w> <w>την</w> <w>αγαπην</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>και</w> <w>εις</w> <w>την</w> <w>υπομο
+<lb break="no"/>νην</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab> <ab n="2Thess.3.6"><w>παραγγελλομεν</w> <w>δε</w> <w>υμιν</w>
+<lb/><w><hi rend="cap" height="3">α</hi>δελφοι</w> <w>εν</w> <w>ονοματι</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>στελλεσθαι</w>
+<lb/><w>υμας</w> <w>απο</w> <w>παντος</w> <w>αδελφου</w> <w>ατακτως</w> <w>περι
+<lb break="no"/>πατουντος</w> <w>και</w> <w>μη</w> <w>κατα</w> <w>την</w> <w>παραδοσιν</w> <w>ην</w>
+<lb/><w>παρελαβον</w> <w>παρ</w> <w>ημων</w></ab> <ab n="2Thess.3.7"><w>αυτοι</w> <w>γαρ</w> <w>οιδατε</w> <w>πως</w>
+<lb/><w>δει</w> <w>μιμεισθαι</w> <w>ημας</w> <w>οτι</w> <w>ουκ</w> <w>ητακτησαμεν</w> <w>εν</w>
+<lb/><w>υμιν</w></ab> <ab n="2Thess.3.8"><w>ουδε</w> <w>δωρεαν</w> <w>αρτον</w> <w>εφαγομεν</w> <w>παρα</w> <w>τινος</w>
+<lb/><w>αλλ</w> <w>εν</w> <w>κοπω</w> <w>και</w> <w>μοχθω</w> <w>νυκτα</w> <w>και</w> <w>ημεραν</w> <w>ερ
+<lb break="no"/>γαζομενοι</w> <w>προς</w> <w>το</w> <w>μη</w> <w>επιβαρησαι</w> <w>τινα</w> <w>υμων</w>
+<lb/></ab> <ab n="2Thess.3.9"><w>ουχ</w> <w>οτι</w> <w>ουκ</w> <w>εχομεν</w> <w>εξουσιαν</w> <w>αλλ</w> <w>ινα</w> <w>εαυτους</w>
+<lb/><w>τυπον</w> <w>δωμεν</w> <w>υμιν</w> <w>εις</w> <w>το</w> <w>μιμεισθαι</w> <w>ημας</w>
+<lb/></ab> <ab n="2Thess.3.10"><w><hi rend="cap" height="2">κ</hi>αι</w> <w>γαρ</w> <w>οτε</w> <w>ημεν</w> <w>προς</w> <w>υμας</w> <w>τουτο</w> <w>παρηγγε
+<lb break="no"/>λλομεν</w> <w>υμιν</w> <w>οτι</w> <w>ει</w> <w>τις</w> <w>ου</w> <w>θελει</w> <w>εργαζεσθαι</w>
+<lb/><w>μηδε</w> <w>εσθιετω</w></ab> <ab n="2Thess.3.11"><w>ακουομεν</w> <w>γαρ</w> <w>τινας</w> <w>περιπα
+<lb break="no"/>τουντας</w> <w>εν</w> <w>υμιν</w> <w>ατακτως</w> <w>μηδεν</w> <w>εργαζομενους</w>
+<lb/><w>αλλα</w> <w>περιεργαζομενους</w></ab> <ab n="2Thess.3.12"><w>τοις</w> <w>δε</w> <w>τοιουτοις</w>
+<lb/><w>παραγγελλομεν</w> <w>και</w> <w>παρακαλουμεν</w> <w>δια</w> <w>του</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>ινα</w> <w>μετα</w> <w>ησυχιας</w> <w>εργαζομενοι</w>
+<lb/><w>τον</w> <w>εαυτων</w> <w>αρτον</w> <w>εσθιωσιν</w></ab> <ab n="2Thess.3.13"><w>υμεις</w> <w>δε</w> <w>αδελφοι</w>
+<lb/><w>μη</w> <w>εκκακησητε</w> <w>καλοποιουντες</w></ab> <ab n="2Thess.3.14" part="I"><w>ει</w> <w>δε</w> <w>τις</w>
+<lb/><w><hi rend="cap" height="2">ο</hi>υχ</w> <w>υπακουει</w> <w>τω</w> <w>λογω</w> <w>ημων</w> <w>δια</w> <w>της</w> <w>επιστολης</w></ab></div> </div>
+
+
+<pb n="183v" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="2Thess"><div type="chapter" n="2Thess.3"><ab n="2Thess.3.14" part="F"><w>τουτον</w> <w>σημειουσθε</w> <w>και</w> <w>μη</w> <w>συναναμιγνυσθε</w>
+<lb/><w>αυτω</w> <w>ινα</w> <w>εντραπη</w></ab> <ab n="2Thess.3.15"><w>και</w> <w>μη</w> <w>ως</w> <w>εχθρον</w> <w>ηγεισθε</w>
+<lb/><w>αλλα</w> <w>νουθετειτε</w> <w>ως</w> <w>αδελφον</w></ab> <ab n="2Thess.3.16"><w>αυτος</w> <w>δε</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w>
+<lb/><w>της</w> <w>ειρηνης</w> <w>δωη</w> <w>υμιν</w> <w>την</w> <w>ειρηνην</w> <w>δια</w> <w>παντος</w>
+<lb/><w>εν</w> <w>παντι</w> <w>τροπω</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w> <w>μετα</w> <w>παντων</w> <w>υμων</w>
+<lb/></ab> <ab n="2Thess.3.17"><w>ο</w> <w>ασπασμος</w> <w>τη</w> <w>εμη</w> <w>χειρι</w> <w>παυλου</w> <w>ο</w> <w>εστι</w> <w>ση
+<lb break="no"/>μειον</w> <w>εν</w> <w>παση</w> <w>επιστολη</w> <w>ουτως</w> <w>γραφω</w>
+<lb/></ab> <ab n="2Thess.3.18"><w>η</w> <w>χαρις</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>μετα</w> <w>παντων</w>
+<lb/><w>υμων</w> <w>αμην</w></ab></div> <div type="subscriptio"><ab n="2Thess.subscriptio"><w>εγραφη</w> <w>απο</w> <w>ρωμης</w>
+<lb/><w>στιχοι</w> <w><abbr type="num"><hi rend="overline">ρς</hi></abbr></w></ab></div> </div></body></text></TEI>

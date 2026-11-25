@@ -1,0 +1,484 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE TEI>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="GA506"><teiHeader><fileDesc><titleStmt><title>A transcription of Galatians in 506</title><title type="document" n="506" key="30506">GA 506</title><title type="collection" level="s" xml:lang="en">The New Testament</title><title type="collection" level="s" xml:lang="de">Das Neue Testament</title><title type="work" level="m" n="Gal" xml:lang="en">The Epistle to the Galatians</title><title type="short" level="m" n="Gal" xml:lang="en">Galatians</title><respStmt><resp>Created by</resp><name type="org">The International Greek New Testament Project</name></respStmt><respStmt><resp>Transcribed by</resp><name type="person">Amy Myshrall</name></respStmt><respStmt><resp>Transcribed by</resp><name type="person">Alan Taylor Farnes</name></respStmt><respStmt><resp>Reconciled by</resp><name type="person">Amy Myshrall</name></respStmt><sponsor><name type="org">The Institute for Textual Scholarship and Electronic Editing</name></sponsor></titleStmt><editionStmt><edition n="1.1">Version 1.1, created on <date>8.11.2017</date>, archived on the University of Birmingham eData repository on <date>13.5.2024</date>.</edition></editionStmt><publicationStmt><publisher><name type="org">The Institute for Textual Scholarship and Electronic Editing</name><name type="org">University of Birmingham</name></publisher>
+        <date>13.5.2024</date><availability><p>Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further <ptr target="https://creativecommons.org/licenses/by/4.0/"/>.</p></availability></publicationStmt><sourceDesc><msDesc><msIdentifier><country>United Kingdom</country><settlement>Oxford</settlement><repository>Christ Church</repository><idno>Wake 12</idno><altIdentifier type="GA"><idno>506</idno></altIdentifier><altIdentifier type="Liste"><idno>30506</idno></altIdentifier></msIdentifier></msDesc><listWit><witness xml:id="firsthand"/><witness xml:id="corrector"/></listWit></sourceDesc></fileDesc><encodingDesc n="1.6"><projectDesc><p>This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior.</p></projectDesc><editorialDecl><p>This transcription was produced using the online transcription editor developed by the Center for Digital Humanities at the University of Trier as part of the Workspace for Collaborative Editing Project between 2010 and 2013 and made available for use by the Institute for Textual Scholarship and Electronic Editing and the University of Birmingham.</p><p>The XML specifications used are version 1.6 of the IGNTP Guidelines available at <ptr target="http://epapers.bham.ac.uk/4301/"/></p></editorialDecl><variantEncoding method="parallel-segmentation" location="internal"/></encodingDesc></teiHeader><text xml:lang="grc"><body><div type="book" n="Gal">
+<pb n="P180r-506" type="folio"/>
+<cb n="P180rC1-506"/>
+<lb n="P180rC1L-506"/><div type="inscriptio"><ab n="Gal.inscriptio"><w>του</w><w>αγιου</w><w>και</w><w>ενδοξου</w><w>αποστολου</w><w>παυλου</w><w>επιστολη</w>
+<lb n="P180rC1L-506"/><w>προς</w><w>γαλατας</w>
+<lb n="P180rC1L-506"/></ab></div><div type="chapter" n="Gal.1"><ab n="Gal.1.1"><w>παυλος</w><w>αποστολος</w><w>ουκ</w><w>απ</w><w>αν
+<lb n="P180rC1L-506" break="no"/>θρωπων</w><w>ουδε</w><w>δι</w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>αλ
+<lb n="P180rC1L-506" break="no"/>λα</w><w>δια</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>του</w>
+<lb n="P180rC1L-506"/><w>εγειραντος</w><w>αυτον</w><w>εκ</w><w>νεκρων</w>
+<lb n="P180rC1L-506"/></ab><ab n="Gal.1.2"><w>και</w><w>οι</w><w>συν</w><w>εμοι</w><w>παντες</w><w>αδελ
+<lb n="P180rC1L-506" break="no"/>φοι</w><w>ταις</w><w>εκκλησιαις</w><w>της</w><w>γα
+<lb n="P180rC1L-506" break="no"/>λατιας</w>
+<lb n="P180rC1L-506"/></ab><ab n="Gal.1.3"><w>χαρις</w><w>υμιν</w><w>και</w><w>ειρηνη</w>
+<lb n="P180rC1L-506"/><w>απο</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w>
+<lb n="P180rC1L-506"/><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="Gal.1.4"><w>του</w><w>δοντος</w><w>εαυτον</w><w>πε
+<lb n="P180rC1L-506" break="no"/>ρι</w><w>των</w><w>αμαρτιων</w><w>ημων</w><w>οπως</w>
+<lb n="P180rC1L-506"/><w>εξεληται</w><w>ημας</w><w>εκ</w><w>του</w><w>ενεστω
+<lb n="P180rC1L-506" break="no"/>τος</w><w>αιωνος</w><w>πονηρου</w><w>κατα</w>
+<lb n="P180rC1L-506"/><w>το</w><w>θελημα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>η
+<lb n="P180rC1L-506" break="no"/>μων</w></ab><ab n="Gal.1.5"><w>ω</w><w>η</w><w>δοξα</w><w>εις</w><w>τους</w><w>αιωνας</w>
+<lb n="P180rC1L-506"/><w>των</w><w>αιωνων</w><w>αμην</w></ab><ab n="Gal.1.6"><w>θαυμα
+<lb n="P180rC1L-506" break="no"/>ζω</w><w>οτι</w><w>ταχεως</w><w>μετατιθεσθε</w>
+<lb n="P180rC1L-506"/><w>απο</w><w>του</w><w>καλεσαντος</w><w>υμας</w>
+<lb n="P180rC1L-506"/><w>εν</w><w>χαριτι</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>εις</w><w>ετερον</w><w>ευαγγε
+<lb n="P180rC1L-506" break="no"/>λιον</w></ab><ab n="Gal.1.7"><w>ο</w><w>ουκ</w><w>εστιν</w><w>αλλο</w><w>ει</w><w>μη</w><w>τινες</w>
+<lb n="P180rC1L-506"/><w>εισιν</w><w>οι</w><w>ταρασσοντες</w><w>υμας</w>
+<lb n="P180rC1L-506"/><w>και</w><w>θελοντες</w><w>μεταστρεψαι</w>
+<lb n="P180rC1L-506"/><w>το</w><w>ευαγγελιον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="Gal.1.8"><w>αλλα</w>
+<lb n="P180rC1L-506"/><w>και</w><w>εαν</w><w>ημεις</w><w>η</w><w>αγγελος</w><w>εξ</w><w>ου
+<lb n="P180rC1L-506" break="no"/>ρανου</w><w>ευαγγελιζεται</w><w>υμιν</w>
+<lb n="P180rC1L-506"/><w>παρ</w><w>ο</w><w>ευηγγελισαμεθα</w><w>υμιν</w>
+<cb n="P180rC2-506"/>
+<lb n="P180rC2L-506"/><w>αναθεμα</w><w>εστω</w></ab><ab n="Gal.1.9"><w>ως</w><w>προειρη
+<lb n="P180rC2L-506" break="no"/>καμεν</w><w>και</w><w>αρτι</w><w>παλιν</w><w>λεγω</w>
+<lb n="P180rC2L-506"/><w>ει</w><w>τις</w><w>υμας</w><w>ευαγγελιζεται</w><w>πα
+<lb n="P180rC2L-506" break="no"/>ρ</w><w>ο</w><w>παρελαβετε</w><w>αναθεμα</w><w>εστω</w>
+<lb n="P180rC2L-506"/></ab><ab n="Gal.1.10"><w>αρτι</w><w>γαρ</w><w><abbr type="nomSac"><hi rend="overline">ανους</hi></abbr></w><w>πειθω</w><w>η</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w>
+<lb n="P180rC2L-506"/><w>η</w><w>ζητω</w><w><abbr type="nomSac"><hi rend="overline">ανοις</hi></abbr></w><w>αρεσκειν</w><w>ει</w><w>γαρ</w>
+<lb n="P180rC2L-506"/><w>ετι</w><w><abbr type="nomSac"><hi rend="overline">ανοις</hi></abbr></w><w>ηρεσκον</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>δουλος</w>
+<lb n="P180rC2L-506"/><w>ουκ</w><w>αν</w><w>ημην</w></ab><ab n="Gal.1.11"><w>γνωριζω</w>
+<lb n="P180rC2L-506"/><w>δε</w><w>υμιν</w><w>αδελφοι</w>
+<lb n="P180rC2L-506"/><w>το</w><w>ευαγγελι
+<lb n="P180rC2L-506" break="no"/>ον</w><w>το</w><w>ευαγγελισθεν</w><w>υπ</w><w>εμου</w>
+<lb n="P180rC2L-506"/><w>οτι</w><w>ουκ</w><w>εστι</w><w>κατα</w><w><abbr type="nomSac"><hi rend="overline">ανον</hi></abbr></w></ab><ab n="Gal.1.12"><w>ουδε</w>
+<lb n="P180rC2L-506"/><w>γαρ</w><w>εγω</w><w>παρα</w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>παρελαβον</w>
+<lb n="P180rC2L-506"/><w>αυτο</w><w>ουδε</w><w>εδιδαχθην</w><w>αλλα</w>
+<lb n="P180rC2L-506"/><w>δι</w><w>αποκαλυψεως</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="Gal.1.13"><w>η
+<lb n="P180rC2L-506" break="no"/>κουσατε</w><w>γαρ</w><w>την</w><w>εμην</w><w>ανα
+<lb n="P180rC2L-506" break="no"/>στροφην</w><w>ποτε</w><w>εν</w><w>τω</w><w>ιουδα
+<lb n="P180rC2L-506" break="no"/>ισμω</w><w>οτι</w><w>καθ</w><w>υπερβολην</w>
+<lb n="P180rC2L-506"/><w>εδιωκον</w><w>την</w><w>εκκλησιαν</w><w>του</w>
+<lb n="P180rC2L-506"/><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>και</w><w>επορθουν</w><w>αυτην</w></ab><ab n="Gal.1.14"><w>και</w>
+<lb n="P180rC2L-506"/><w>προεκοπτον</w><w>εν</w><w>τω</w><w>ιουδαισ
+<lb n="P180rC2L-506" break="no"/>μω</w><w>υπερ</w><w>παντας</w><w>συνηλικι
+<lb n="P180rC2L-506" break="no"/>ωτας</w><w>εν</w><w>τω</w><w>γενει</w><w>μου</w><w>περισ
+<lb n="P180rC2L-506" break="no"/>σοτερως</w><w>ζηλωτης</w><w>υπαρχων</w>
+<lb n="P180rC2L-506"/><w>των</w><w>πατρικων</w><w>μου</w><w>παραδω
+<lb n="P180rC2L-506" break="no"/>σεων</w></ab><ab n="Gal.1.15"><w>οτε</w><w>δε</w><w>ευδοκησεν</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w>
+<lb n="P180rC2L-506"/><w>ο</w><w>αφορισας</w><w>με</w><w>εκ</w><w>κοιλιας</w><w><abbr type="nomSac"><hi rend="overline">μρς</hi></abbr></w>
+<lb n="P180rC2L-506"/><w>μου</w><w>και</w><w>καλεσας</w><w>με</w><w>δια</w><w>της</w>
+<lb n="P180rC2L-506"/><w>χαριτος</w><w>αυτου</w></ab><ab n="Gal.1.16"><w>αποκαλυψαι</w>
+<lb n="P180rC2L-506"/><w>τον</w><w><abbr type="nomSac"><hi rend="overline">υν</hi></abbr></w><w>αυτου</w><w>εν</w><w>εμοι</w><w>ινα</w><w>ευαγ
+<lb n="P180rC2L-506" break="no"/>γελιζομαι</w><w>αυτον</w><w>εν</w><w>τοις</w><w>ε
+<lb n="P180rC2L-506" break="no"/>θνεσιν</w><w>ευθεως</w><w>ου</w><w>προσ
+<lb n="P180rC2L-506" break="no"/>ανεθεμην</w><w>σαρκι</w><w>και</w><w>αιματι</w>
+<lb n="P180rC2L-506"/></ab><ab n="Gal.1.17"><w>ουδε</w><w>ανηλθον</w><w>εις</w><w>ιεροσολυμα</w>
+<lb n="P180rC2L-506"/><w>προς</w><w>τους</w><w>προ</w><w>εμου</w><w>αποστολους</w>
+<lb n="P180rC2L-506"/><w>αλλα</w><w>απηλθον</w><w>εις</w><w>αραβιαν</w>
+<pb n="P180v-506" type="folio"/>
+<cb n="P180vC1-506"/>
+<lb n="P180vC1L-506"/><w>και</w><w>παλιν</w><w>υπεστρεψα</w><w>εις</w>
+<lb n="P180vC1L-506"/><w>δαμασκον</w></ab><ab n="Gal.1.18"><w>επειτα</w><w>μετα</w><w>ετη</w>
+<lb n="P180vC1L-506"/><w>τρια</w><w>ανηλθον</w><w>εις</w><w>ιεροσολυμα</w>
+<lb n="P180vC1L-506"/><w>ιστορησαι</w><w>πετρον</w><w>και</w><w>εμεινα</w>
+<lb n="P180vC1L-506"/><w>προς</w><w>αυτον</w><w>ημερας</w><w>δεκα
+<lb n="P180vC1L-506" break="no"/>πεντε</w></ab><ab n="Gal.1.19"><w>ετερον</w><w>δε</w><w>των</w><w>απο
+<lb n="P180vC1L-506" break="no"/>στολων</w><w>ουκ</w><w>οιδον</w><w>ει</w><w>μη</w><w>ιακω
+<lb n="P180vC1L-506" break="no"/>βον</w><w>τον</w><w>αδελφον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb n="P180vC1L-506"/></ab><ab n="Gal.1.20"><w>α</w><w>δε</w><w>γραφω</w><w>υμιν</w><w>ιδου</w><w>ενωπι
+<lb n="P180vC1L-506" break="no"/>ον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>οτι</w><w>ου</w><w>ψευδομαι</w></ab><ab n="Gal.1.21"><w>ε
+<lb n="P180vC1L-506" break="no"/>πειτα</w><w>ηλθον</w><w>εις</w><w>τα</w><w>κλιματα</w>
+<lb n="P180vC1L-506"/><w>της</w><w>συριας</w><w>και</w><w>της</w><w>κιλικιας</w>
+<lb n="P180vC1L-506"/></ab><ab n="Gal.1.22"><w>ημην</w><w>δε</w><w>αγνωουμενος</w><w>τω</w>
+<lb n="P180vC1L-506"/><w>προσωπω</w><w>ταις</w><w>εκκλησιαις</w>
+<lb n="P180vC1L-506"/><w>της</w><w>ιουδαιας</w><w>ταις</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w>
+<lb n="P180vC1L-506"/></ab><ab n="Gal.1.23"><w>μονον</w><w>δε</w><w>ακουοντες</w><w>ησαν</w>
+<lb n="P180vC1L-506"/><w>οτι</w><w>ο</w><w>διωκων</w><w>ημας</w><w>ποτε</w>
+<lb n="P180vC1L-506"/><w>νυν</w><w>ευαγγελιζεται</w><w>την</w><w>πι
+<lb n="P180vC1L-506" break="no"/>στιν</w><w>ην</w><w>ποτε</w><w>επορθει</w></ab><ab n="Gal.1.24"><w>και</w>
+<lb n="P180vC1L-506"/><w>εδοξαζον</w><w>εν</w><w>εμοι</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w>
+<lb n="P180vC1L-506"/></ab></div><div type="chapter" n="Gal.2"><ab n="Gal.2.1"><w>επειτα</w><w>δια</w><w>δεκατεσσαρων</w>
+<lb n="P180vC1L-506"/><w>ετων</w><w>παλιν</w><w>ανεβην</w><w>εις</w><w>ι
+<lb n="P180vC1L-506" break="no"/>εροσολυμα</w><w>μετα</w><w>βαρναβα</w>
+<lb n="P180vC1L-506"/><w>συμπαραλαβων</w><w>και</w><w>τιτον</w>
+<lb n="P180vC1L-506"/></ab><ab n="Gal.2.2"><w>ανεβην</w><w>δε</w><w>κατα</w><w>αποκα
+<lb n="P180vC1L-506" break="no"/>λυψιν</w><w>και</w><w>ανεθεμην</w><w>αυτοις</w>
+<lb n="P180vC1L-506"/><w>το</w><w>ευαγγελιον</w><w>ο</w><w>κηρυσσω</w><w>εν</w>
+<lb n="P180vC1L-506"/><w>τοις</w><w>εθνεσιν</w><w>κατ</w><w>ιδιαν</w><w>δε</w>
+<lb n="P180vC1L-506"/><w>τοις</w><w>δοκουσιν</w><w>μη</w><w>πως</w><w>εις</w>
+<lb n="P180vC1L-506"/><w>καινον</w><w>τρεχω</w><w>η</w><w>εδραμον</w></ab><ab n="Gal.2.3"><w>αλ
+<lb n="P180vC1L-506" break="no"/>λ</w><w>ουδε</w><w>τιτος</w><w>ο</w><w>συν</w><w>εμοι</w><w>ελλην</w>
+<lb n="P180vC1L-506"/><w>ων</w><w>ηναγκασθη</w><w>περιτμηθηναι</w>
+<lb n="P180vC1L-506"/></ab><ab n="Gal.2.4"><w>δια</w><w>δε</w><w>τους</w><w>παρεισακτους</w>
+<lb n="P180vC1L-506"/><w>ψευδαδελφους</w><w>οιτινες</w><w>πα
+<lb n="P180vC1L-506" break="no"/>ρεισηλθον</w><w>κατασκοπησαι</w>
+<lb n="P180vC1L-506"/><w>την</w><w>ελευθεριαν</w><w>ημων</w><w>ην</w><w>ε
+<cb n="P180vC2-506" break="no"/>
+<lb n="P180vC2L-506"/>χομεν</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>ινα</w><w>ημας</w><w>κα
+<lb n="P180vC2L-506" break="no"/>ταδουλωσονται</w></ab><ab n="Gal.2.5"><w>οις</w><w>ουδε</w><w>προς</w>
+<lb n="P180vC2L-506"/><w>ωραν</w><w>ειξαμεν</w><w>τη</w><w>υποταγη</w>
+<lb n="P180vC2L-506"/><w>ινα</w><w>η</w><w>αληθεια</w><w>του</w><w>ευαγγελιου</w>
+<lb n="P180vC2L-506"/><w>διαμεινη</w><w>προς</w><w>υμας</w>
+<lb n="P180vC2L-506"/></ab><ab n="Gal.2.6"><w>απο</w><w>δε</w>
+<lb n="P180vC2L-506"/><w>των</w><w>δοκουντων</w>
+<lb n="P180vC2L-506"/><w>ειναι</w><w>τι</w><w>οποιοι</w><w>ποτε</w><w>ησαν</w>
+<lb n="P180vC2L-506"/><w>ουδεν</w><w>μοι</w><w>διαφερει</w><w>προσω
+<lb n="P180vC2L-506" break="no"/>πον</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>ου</w><w>λαμβανει</w>
+<lb n="P180vC2L-506"/><w>εμοι</w><w>γαρ</w><w>οι</w><w>δοκουντες</w><w>ουδεν</w>
+<lb n="P180vC2L-506"/><w>προσανεθεντο</w></ab><ab n="Gal.2.7"><w>αλλα</w><w>του
+<lb n="P180vC2L-506" break="no"/>ναντιον</w><w>ιδοντες</w><w>οτι</w><w>πεπι
+<lb n="P180vC2L-506" break="no"/>στευμαι</w><w>το</w><w>ευαγγελιον</w><w>της</w><w>ακρο
+<lb n="P180vC2L-506" break="no"/>βυστιας</w><w>καθως</w><w>πετρος</w><w>της</w>
+<lb n="P180vC2L-506"/><w>περιτομης</w></ab><ab n="Gal.2.8"><w>ο</w><w>γαρ</w><w>ενεργησας</w>
+<lb n="P180vC2L-506"/><w>πετρω</w><w>εις</w><w>αποστολην</w><w>της</w>
+<lb n="P180vC2L-506"/><w>περιτομης</w><w>ενειργησεν</w><w>και</w>
+<lb n="P180vC2L-506"/><w>εμοι</w><w>εις</w><w>τα</w><w>εθνη</w></ab><ab n="Gal.2.9"><w>και</w><w>γνων
+<lb n="P180vC2L-506" break="no"/>τες</w><w>την</w><w>χαριν</w><w>την</w><w>δοθεισαν</w><w>μοι</w>
+<lb n="P180vC2L-506"/><w>ιακωβος</w><w>και</w><w>κηφας</w><w>και</w><w>ιω
+<lb n="P180vC2L-506" break="no"/>αννης</w><w>οι</w><w>δοκουντες</w><w>στυλοι</w><w>ειναι</w>
+<lb n="P180vC2L-506"/><w>δεξιας</w><w>εδωκαν</w><w>εμοι</w><w>και</w><w>βαρ
+<lb n="P180vC2L-506" break="no"/>ναβα</w><w>κοινωνιας</w><w>ινα</w><w>ημεις</w>
+<lb n="P180vC2L-506"/><w>εις</w><w>τα</w><w>εθνη</w><w>αυτοι</w><w>δε</w><w>εις</w><w>την</w>
+<lb n="P180vC2L-506"/><w>περιτομην</w></ab><ab n="Gal.2.10"><w>μονον</w><w>των</w><w>πτω
+<lb n="P180vC2L-506" break="no"/>χων</w><w>ινα</w><w>μνημονευομεν</w><w>ο</w><w>και</w>
+<lb n="P180vC2L-506"/><w>εσπουδασα</w><w>αυτο</w><w>τουτο</w><w>ποιησαι</w>
+<lb n="P180vC2L-506"/></ab><ab n="Gal.2.11"><w>οτε</w><w>δε</w>
+<lb n="P180vC2L-506"/><w>ηλθε</w><w>πετρος</w><w>εις</w>
+<lb n="P180vC2L-506"/><w>αντιοχειαν</w><w>κατα</w><w>προσωπον</w>
+<lb n="P180vC2L-506"/><w>αυτω</w><w>αντεστην</w><w>οτι</w><w>κατεγνωσ
+<lb n="P180vC2L-506" break="no"/>μενος</w><w>ην</w></ab><ab n="Gal.2.12"><w>προ</w><w>του</w><w>γαρ</w><w>ελθειν</w>
+<lb n="P180vC2L-506"/><w>τινας</w><w>απο</w><w>ιακωβου</w><w>μετα</w>
+<lb n="P180vC2L-506"/><w>των</w><w>εθνων</w><w>συνησθιεν</w><w>οτε</w>
+<lb n="P180vC2L-506"/><w>δε</w><w>ηλθον</w><w>υπεστελλε</w><w>και</w><w>α
+<pb n="P181r-506" type="folio" break="no"/>
+<cb n="P181rC1-506"/>
+<lb n="P181rC1L-506"/>φοριζεν</w><w>εαυτον</w><w>φοβουμενος</w>
+<lb n="P181rC1L-506"/><w>τους</w><w>εκ</w><w>περιτομης</w></ab><ab n="Gal.2.13"><w>και</w><w>συν
+<lb n="P181rC1L-506" break="no"/>υπεκριθησαν</w><w>αυτω</w><w>και</w><w>οι</w>
+<lb n="P181rC1L-506"/><w>λοιποι</w><w>ιουδαιοι</w><w>ωστε</w><w>και</w><w>βαρ
+<lb n="P181rC1L-506" break="no"/>ναβας</w><w>συναπηχθη</w><w>αυτων</w>
+<lb n="P181rC1L-506"/><w>τη</w><w>υποκρισει</w></ab><ab n="Gal.2.14"><w>αλλ</w><w>οτε</w><w>ιδον</w>
+<lb n="P181rC1L-506"/><w>οτι</w><w>ουκ</w><w>ορθοποδουσι</w><w>προς</w>
+<lb n="P181rC1L-506"/><w>την</w><w>αληθειαν</w><w>του</w><w>ευαγγελι
+<lb n="P181rC1L-506" break="no"/>ου</w><w>ειπον</w><w>τω</w><w>πετρω</w><w>εμ
+<lb n="P181rC1L-506" break="no"/>προσθεν</w><w>παντων</w><w>ει</w><w>συ</w>
+<lb n="P181rC1L-506"/><w>ιουδαιος</w><w>υπαρχων</w><w>εθνη
+<lb n="P181rC1L-506" break="no"/>κως</w><w>και</w><w>ουχ</w><w>ιουδαικως</w><w>ζης</w>
+<lb n="P181rC1L-506"/><w>πως</w><w>τα</w><w>εθνη</w><w>αναγκαζεις</w>
+<lb n="P181rC1L-506"/><w>ιουδαιζειν</w></ab><ab n="Gal.2.15"><w>ημεις</w><w>φυσει</w><w>ιου
+<lb n="P181rC1L-506" break="no"/>δαιοι</w><w>και</w><w>εξ</w><w>εθνων</w><w>αμαρτω
+<lb n="P181rC1L-506" break="no"/>λοι</w></ab><ab n="Gal.2.16"><w>ειδοτες</w><w>δε</w>
+<lb n="P181rC1L-506"/><w>οτι</w><w>ου</w><w>δικαιου
+<lb n="P181rC1L-506" break="no"/>ται</w><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>εξ</w><w>εργων</w><w>νομου</w>
+<lb n="P181rC1L-506"/><w>εαν</w><w>μη</w><w>δια</w><w>πιστεως</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w>
+<lb n="P181rC1L-506"/><w>και</w><w>ημεις</w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w><w>επιστευ
+<lb n="P181rC1L-506" break="no"/>σαμεν</w><w>ινα</w><w>δικαιωθωμεν</w>
+<lb n="P181rC1L-506"/><w>εκ</w><w>πιστεως</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>και</w><w>ουκ</w><w>ε
+<lb n="P181rC1L-506" break="no"/>ξ</w><w>εργων</w><w>νομου</w><w>διοτι</w><w>εξ</w><w>ερ
+<lb n="P181rC1L-506" break="no"/>γων</w><w>νομου</w><w>ου</w><w>δικαιωθησε
+<lb n="P181rC1L-506" break="no"/>ται</w><w>πασα</w><w>σαρξ</w>
+<lb n="P181rC1L-506"/></ab><ab n="Gal.2.17"><w>ει</w><w>δε</w><w>ζητουντες</w><w>δικαιωθη
+<lb n="P181rC1L-506" break="no"/>ναι</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w>ευρεθημεν</w><w>και</w>
+<lb n="P181rC1L-506"/><w>αυτοι</w><w>αμαρτωλοι</w><w>ἆρα</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w>
+<lb n="P181rC1L-506"/><w>αμαρτιας</w><w>διακονος</w><w>μη</w><w>γε
+<lb n="P181rC1L-506" break="no"/>νοιτο</w></ab><ab n="Gal.2.18"><w>ει</w><w>γαρ</w><w>α</w><w>κατελυσα</w><w>ταυ
+<lb n="P181rC1L-506" break="no"/>τα</w><w>παλιν</w><w>οικοδομω</w><w>πα
+<lb n="P181rC1L-506" break="no"/>ραβατην</w><w>εμαυτον</w><w>συνιστη
+<lb n="P181rC1L-506" break="no"/>μι</w></ab><ab n="Gal.2.19"><w>εγω</w><w>γαρ</w><w>δια</w><w>νομου</w><w>νομω</w>
+<lb n="P181rC1L-506"/><w>απεθανον</w><w>ινα</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>ζησω</w>
+<lb n="P181rC1L-506"/><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w>συνεσταυρωμαι</w></ab><ab n="Gal.2.20"><w>ζω</w><w>δε</w>
+<lb n="P181rC1L-506"/><w>ουκετι</w><w>εγω</w><w>ζη</w><w>δε</w><w>εν</w><w>εμοι</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w>
+<cb n="P181rC2-506"/>
+<lb n="P181rC2L-506"/><w>ο</w><w>δε</w><w>νυν</w><w>ζω</w><w>εν</w><w>σαρκι</w><w>εν</w><w>πι
+<lb n="P181rC2L-506" break="no"/>στει</w><w>ζω</w><w>τη</w><w>του</w><w>υιου</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w>
+<lb n="P181rC2L-506"/><w>του</w><w>αγαπησαντος</w><w>με</w><w>και</w>
+<lb n="P181rC2L-506"/><w>παραδοντος</w><w>εαυτον</w><w>υπερ</w>
+<lb n="P181rC2L-506"/><w>εμου</w>
+<lb n="P181rC2L-506"/></ab><ab n="Gal.2.21"><w>ουκ</w><w>αθετω</w><w>την</w><w>χα
+<lb n="P181rC2L-506" break="no"/>ριν</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>ει</w><w>γαρ</w><w>δια</w><w>νομου</w>
+<lb n="P181rC2L-506"/><w>δικαιοσυνη</w><w>ἆρα</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>δωρεαν</w>
+<lb n="P181rC2L-506"/><w>απεθανεν</w></ab></div><div type="chapter" n="Gal.3"><ab n="Gal.3.1"><w>ω</w><w>ανοητοι</w><w>γα
+<lb n="P181rC2L-506" break="no"/>λαται</w><w>τις</w><w>υμας</w><w>εβασκηνε</w>
+<lb n="P181rC2L-506"/><w>τη</w><w>αληθεια</w><w>μη</w><w>πειθεσθαι</w>
+<lb n="P181rC2L-506"/><w>οις</w><w>κατ</w><w>οφθαλμους</w><w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w>
+<lb n="P181rC2L-506"/><w>προεγραφει</w><w>εν</w><w>υμιν</w><w>σταυ
+<lb n="P181rC2L-506" break="no"/>ρωμενος</w></ab><ab n="Gal.3.2"><w>τουτο</w><w>μονον</w><w>θε
+<lb n="P181rC2L-506" break="no"/>λω</w><w>μαθειν</w><w>αφ</w><w>υμων</w><w>ε
+<lb n="P181rC2L-506" break="no"/>ξ</w><w>εργων</w><w>νομου</w><w>το</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>ε
+<lb n="P181rC2L-506" break="no"/>λαβετε</w><w>η</w><w>εξ</w><w>ακοης</w><w>πιστεως</w>
+<lb n="P181rC2L-506"/></ab><ab n="Gal.3.3"><w>ουτως</w><w>ανοητοι</w><w>εστε</w><w>εναρ
+<lb n="P181rC2L-506" break="no"/>ξαμενοι</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>νυν</w><w>σαρκι</w><w>ε
+<lb n="P181rC2L-506" break="no"/>πιτελεισθε</w></ab><ab n="Gal.3.4"><w>τοσαυτα</w><w>ε
+<lb n="P181rC2L-506" break="no"/>παθετε</w><w>εικη</w><w>ει</w><w>γε</w><w>και</w><w>ει
+<lb n="P181rC2L-506" break="no"/>κη</w></ab><ab n="Gal.3.5"><w>ο</w><w>ουν</w><w>επιχωρηγων</w><w>υ
+<lb n="P181rC2L-506" break="no"/>μιν</w><w>το</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>και</w><w>ενεργων</w>
+<lb n="P181rC2L-506"/><w>δυναμεις</w><w>εν</w><w>υμιν</w><w>εξ</w><w>εργων</w>
+<lb n="P181rC2L-506"/><w>νομου</w><w>η</w><w>εξ</w><w>ακοης</w><w>πιστεως</w>
+<lb n="P181rC2L-506"/></ab><ab n="Gal.3.6"><w>καθως</w><w>αβρααμ</w><w>επιστευσε</w>
+<lb n="P181rC2L-506"/><w>τω</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>και</w><w>ελογισθη</w><w>αυτω</w>
+<lb n="P181rC2L-506"/><w>εις</w><w>δικαιοσυνην</w></ab><ab n="Gal.3.7"><w>γινωσ
+<lb n="P181rC2L-506" break="no"/>κετε</w><w>αρα</w><w>οτι</w><w>οι</w><w>εκ</w><w>πιστεως</w>
+<lb n="P181rC2L-506"/><w>ουτοι</w><w>εισιν</w><w>υιοι</w><w>αβρααμ</w>
+<lb n="P181rC2L-506"/></ab><ab n="Gal.3.8"><w>προιδουσα</w><w>δε</w>
+<lb n="P181rC2L-506"/><w>η</w><w>γραφη</w><w>οτι</w>
+<lb n="P181rC2L-506"/><w>εκ</w><w>πιστεως</w><w>δικαιοι</w><w>τα</w><w>εθνη</w>
+<lb n="P181rC2L-506"/><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>προευηγγελισατο</w><w>τω</w><w>α
+<lb n="P181rC2L-506" break="no"/>βρααμ</w><w>οτι</w><w>ενευλογηθησον
+<lb n="P181rC2L-506" break="no"/>ται</w><w>εν</w><w>σοι</w><w>παντα</w><w>τα</w><w>εθνη</w>
+<pb n="P181v-506" type="folio"/>
+<cb n="P181vC1-506"/>
+<lb n="P181vC1L-506"/></ab><ab n="Gal.3.9"><w>ωστε</w><w>οι</w><w>εκ</w><w>πιστεως</w><w>ευλογουν
+<lb n="P181vC1L-506" break="no"/>ται</w><w>συν</w><w>τω</w><w>πιστω</w><w>αβρααμ</w>
+<lb n="P181vC1L-506"/></ab><ab n="Gal.3.10"><w>οσοι</w><w>γαρ</w><w>εξ</w><w>εργων</w><w>νομου</w><w>εισιν</w><w>υ
+<lb n="P181vC1L-506" break="no"/>πο</w><w>καταραν</w><w>εισιν</w><w>γεγραπται</w>
+<lb n="P181vC1L-506"/><w>γαρ</w><w>επικαταρατος</w><w>πας</w>
+<lb n="P181vC1L-506"/><w>ος</w><w>ουκ</w><w>εμμενει</w><w>πασι</w><w>τοις</w><w>γε
+<lb n="P181vC1L-506" break="no"/>γραμμενοις</w><w>εν</w><w>τω</w><w>βιβλιω</w><w>του</w>
+<lb n="P181vC1L-506"/><w>νομου</w><w>του</w><w>ποιησαι</w><w>αυτα</w>
+<lb n="P181vC1L-506"/></ab><ab n="Gal.3.11"><w>οτι</w><w>δε</w><w>εν</w><w>νομω</w><w>ουδεις</w><w>δικαι
+<lb n="P181vC1L-506" break="no"/>ουται</w><w>παρα</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>δηλον</w><w>ο
+<lb n="P181vC1L-506" break="no"/>τι</w><w>ο</w><w>δικαιος</w><w>εκ</w><w>πιστεως</w><w>ζη
+<lb n="P181vC1L-506" break="no"/>σεται</w></ab><ab n="Gal.3.12"><w>ο</w><app><rdg type="orig" hand="firsthand"><w>ν</w></rdg><rdg type="corr" hand="firsthand"><w>δε</w></rdg></app><w>νομος</w><w>ουκ</w><w>εστιν</w><w>εκ</w>
+<lb n="P181vC1L-506"/><w>πιστεως</w><w>αλλ</w><w>ο</w><w>ποιησας</w><w>αυτα</w>
+<lb n="P181vC1L-506"/><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>ζησεται</w><w>εν</w><w>αυτοις</w>
+<lb n="P181vC1L-506"/></ab><ab n="Gal.3.13"><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>ημας</w><w>εξηγορασεν</w>
+<lb n="P181vC1L-506"/><w>εκ</w><w>της</w><w>καταρας</w><w>του</w><w>νομου</w>
+<lb n="P181vC1L-506"/><w>γενομενος</w><w>υπερ</w><w>ημων</w><w>κα
+<lb n="P181vC1L-506" break="no"/>ταρα</w><w>γεγραπται</w><w>γαρ</w><w>επι
+<lb n="P181vC1L-506" break="no"/>καταρατος</w><w>πας</w><w>ο</w><w>κρεμαμενος</w>
+<lb n="P181vC1L-506"/><w>επι</w><w>ξυλου</w></ab><ab n="Gal.3.14"><w>ινα</w><w>εις</w><w>τα</w><w>εθνη</w><w>η</w>
+<lb n="P181vC1L-506"/><w>ευλογια</w><w>του</w><w>αβρααμ</w><w>γενηται</w>
+<lb n="P181vC1L-506"/><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>ινα</w><w>την</w><w>επαγγελι
+<lb n="P181vC1L-506" break="no"/>αν</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>λαβωμεν</w><w>δια</w><w>της</w>
+<lb n="P181vC1L-506"/><w>πιστεως</w>
+<lb n="P181vC1L-506"/><note type="editorial">Lectionary notation.</note>
+<lb n="P181vC1L-506"/></ab><ab n="Gal.3.15"><w>αδελφοι</w><note type="editorial">αδελφοι is written in the same way here as other lectionary notations which have not been transcribed.</note><w>κατα</w><w><abbr type="nomSac"><hi rend="overline">ανον</hi></abbr></w><w>λεγω</w><w>ο
+<lb n="P181vC1L-506" break="no"/>μως</w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>κεκυρωμενην</w><w>δι
+<lb n="P181vC1L-506" break="no"/>αθηκην</w><w>ουδεις</w><w>αθετει</w><w>η</w><w>ε
+<lb n="P181vC1L-506" break="no"/>πιδιατασσεται</w></ab><ab n="Gal.3.16"><w>τω</w><w>δε</w><w>αβρα
+<lb n="P181vC1L-506" break="no"/>αμ</w><w>ερρεθησαν</w><w>αι</w><w>επαγγελιαι</w>
+<lb n="P181vC1L-506"/><w>και</w><w>τω</w><w>σπερματι</w><w>αυτου</w><w>ου</w>
+<lb n="P181vC1L-506"/><w>λεγει</w><w>και</w><w>τοις</w><w>σπερμασιν</w><w>ως</w>
+<lb n="P181vC1L-506"/><w>επι</w><w>πολλων</w><w>αλλ</w><w>ως</w><w>εφ</w><w>ενος</w>
+<lb n="P181vC1L-506"/><w>και</w><w>τω</w><w>σπερματι</w><w>σου</w><w>ος</w><w>εστι</w>
+<lb n="P181vC1L-506"/><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w></ab><ab n="Gal.3.17"><w>τουτο</w><w>δε</w><w>λεγω</w><w>διαθηκην</w>
+<lb n="P181vC1L-506"/><w>προσκεκυρωμενην</w><w>υπο</w>
+<cb n="P181vC2-506"/>
+<lb n="P181vC2L-506"/><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>ο</w><w>μετα</w><w>τετρακοσια</w>
+<lb n="P181vC2L-506"/><w>και</w><w>τριακοσια</w><w>ετη</w><w>γεγονως</w><w>νομος</w>
+<lb n="P181vC2L-506"/><w>ουκ</w><w>ακυροι</w><w>εις</w><w>το</w><w>καταργησαι</w>
+<lb n="P181vC2L-506"/><w>την</w><w>επαγγελιαν</w></ab><ab n="Gal.3.18"><w>ει</w><w>γαρ</w><w>εκ</w><w>νομου</w>
+<lb n="P181vC2L-506"/><w>η</w><w>κληρονομια</w><w>ουκετι</w><w>εξ</w><w>επαγγε
+<lb n="P181vC2L-506" break="no"/>λιας</w><w>τω</w><w>δε</w><w>αβρααμ</w><w>δι</w><w>επαγγε
+<lb n="P181vC2L-506" break="no"/>λιας</w><w>κεχαριστε</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w></ab><ab n="Gal.3.19"><w>τι</w><w>ουν</w><w>ο</w>
+<lb n="P181vC2L-506"/><w>νομος</w><w>των</w><w>παραβασεων</w><w>χα
+<lb n="P181vC2L-506" break="no"/>ριν</w><w>προσετεθη</w><w>αχρις</w><w>ου</w><w>ελ
+<lb n="P181vC2L-506" break="no"/>θη</w><w>το</w><w>σπερμα</w><w>ω</w><w>επηγγελται</w>
+<lb n="P181vC2L-506"/><w>διαταγεις</w><w>δι</w><w>αγγελων</w><w>εν</w><w>χειρι</w>
+<lb n="P181vC2L-506"/><w>μεσιτου</w></ab><ab n="Gal.3.20"><w>ο</w><w>δε</w><w>μεσιτης</w><w>ενος</w>
+<lb n="P181vC2L-506"/><w>ουκ</w><w>εστιν</w><w>ο</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>εις</w><w>εστιν</w>
+<lb n="P181vC2L-506"/></ab><ab n="Gal.3.21"><w>ο</w><w>ουν</w><w>νομος</w><w>κατα</w><w>των</w><w>επαγγελι
+<lb n="P181vC2L-506" break="no"/>ων</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>μη</w><w>γενοιτο</w><w>ει</w><w>γαρ</w><w>ε
+<lb n="P181vC2L-506" break="no"/>δοθη</w><w>νομος</w><w>ο</w><w>δυναμενος</w>
+<lb n="P181vC2L-506"/><w>ζωοποιησαι</w><w>οντως</w><w>αν</w><w>εκ</w><w>νομου</w>
+<lb n="P181vC2L-506"/><w>ην</w><w>η</w><w>δικαιοσυνη</w></ab><ab n="Gal.3.22"><w>αλλα</w><w>συνε
+<lb n="P181vC2L-506" break="no"/>κλεισεν</w><w>η</w><w>γραφη</w><w>τα</w><w>παντα</w><w>υ
+<lb n="P181vC2L-506" break="no"/>πο</w><w>αμαρτιαν</w><w>ινα</w><w>η</w><w>επαγγε
+<lb n="P181vC2L-506" break="no"/>λια</w><w>εκ</w><w>πιστεως</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>δοθη</w>
+<lb n="P181vC2L-506"/><w>τοις</w><w>πιστευουσιν</w>
+<lb n="P181vC2L-506"/></ab><ab n="Gal.3.23"><w>προ</w><w>του</w><w>δε</w>
+<lb n="P181vC2L-506"/><w>ελθειν</w><w>την</w><w>πιστιν</w>
+<lb n="P181vC2L-506"/><w>υπο</w><w>νομον</w><w>εφρουρουμεθα</w>
+<lb n="P181vC2L-506"/><w>συγκεκλεισμενοι</w><w>εις</w><w>την</w><w>μελλου
+<lb n="P181vC2L-506" break="no"/>σαν</w><w>πιστιν</w><w>αποκαλυφθηναι</w>
+<lb n="P181vC2L-506"/></ab><ab n="Gal.3.24"><w>ωστε</w><w>ο</w><w>νομος</w><w>παιδαγωγος</w><w>η
+<lb n="P181vC2L-506" break="no"/>μων</w><w>γεγονεν</w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w>ινα</w><w>εκ</w><w>πι
+<lb n="P181vC2L-506" break="no"/>στεως</w><w>δικαιωθωμεν</w></ab><ab n="Gal.3.25"><w>ελθου
+<lb n="P181vC2L-506" break="no"/>σης</w><w>δε</w><w>της</w><w>πιστεως</w><w>ουκετι</w>
+<lb n="P181vC2L-506"/><w>υπο</w><w>παιδαγωγον</w><w>εσμεν</w></ab><ab n="Gal.3.26"><w>παν
+<lb n="P181vC2L-506" break="no"/>τες</w><w>γαρ</w><w>υιοι</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>εστε</w><w>δια</w><w>της</w><w>πι
+<lb n="P181vC2L-506" break="no"/>στεως</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w></ab><ab n="Gal.3.27"><w>οσοι</w><w>γαρ</w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w>
+<lb n="P181vC2L-506"/><w>εβαπτισθητε</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w>ενεδυσασθε</w>
+<lb n="P181vC2L-506"/></ab><ab n="Gal.3.28"><w>ουκ</w><w>ενι</w><w>ιουδαιος</w><w>ουδε</w><w>ελλην</w>
+<pb n="P182r-506" type="folio"/>
+<cb n="P182rC1-506"/>
+<lb n="P182rC1L-506"/><w>ουκ</w><w>ενι</w><w>δουλος</w><w>ουδε</w><w>ελευθερος</w>
+<lb n="P182rC1L-506"/><w>ουκ</w><w>ενι</w><w>αρσεν</w><w>και</w><w>θηλυ</w><w>παντες</w>
+<lb n="P182rC1L-506"/><w>γαρ</w><w>υμεις</w><w>εις</w><w>εστε</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w></ab><ab n="Gal.3.29"><w>ει</w>
+<lb n="P182rC1L-506"/><w>δε</w><w>υμεις</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>ἆρα</w><w>του</w><w>αβρααμ</w>
+<lb n="P182rC1L-506"/><w>σπερμα</w><w>εστε</w><w>και</w><w>κατ</w><w>επαγγε
+<lb n="P182rC1L-506" break="no"/>λιαν</w><w>κληρονομοι</w>
+<lb n="P182rC1L-506"/></ab></div><div type="chapter" n="Gal.4"><ab n="Gal.4.1"><w>λεγω</w><w>δε</w><w>εφ</w><w>οσον</w><w>χρονον</w><w>ο</w><w>κληρονομος</w>
+<lb n="P182rC1L-506"/><w>νηπιος</w><w>εστιν</w><w>ουδεν</w><w>διαφερει</w>
+<lb n="P182rC1L-506"/><w>δουλου</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>παντων</w><w>ων</w></ab><ab n="Gal.4.2"><w>αλλα</w><w>υ
+<lb n="P182rC1L-506" break="no"/>πο</w><w>επιτροπους</w><w>εστι</w><w>και</w><w>οικονομους</w>
+<lb n="P182rC1L-506"/><w>αχρι</w><w>της</w><w>προθεσμιας</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w>
+<lb n="P182rC1L-506"/></ab><ab n="Gal.4.3"><w>ουτω</w><w>και</w><w>ημεις</w><w>οτε</w><w>ημεν</w><w>νηπι
+<lb n="P182rC1L-506" break="no"/><unclear>οι</unclear></w><w>υπο</w><w>τα</w><w>στοιχεια</w><w>του</w><w>κοσμου</w>
+<lb n="P182rC1L-506"/><w>ημεν</w><w>δεδουλωμενοι</w></ab><ab n="Gal.4.4"><w>οτε</w><w>δε</w>
+<lb n="P182rC1L-506"/><note type="editorial">Lectionary notation.</note>
+<lb n="P182rC1L-506"/><w>ηλθε</w><w>το</w><w>πληρωμα</w><w>του</w>
+<lb n="P182rC1L-506"/><w>χρονου</w><w>εξαπεστειλεν</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>τον</w>
+<lb n="P182rC1L-506"/><w><abbr type="nomSac"><hi rend="overline">υν</hi></abbr></w><w>αυτου</w><w>γεννωμενον</w><w>εκ</w><w>γυ
+<lb n="P182rC1L-506" break="no"/>ναικος</w><w>γενομενον</w><w>υπο</w><w>νομον</w>
+<lb n="P182rC1L-506"/></ab><ab n="Gal.4.5"><w>ινα</w><w>τους</w><w>υπο</w><w>νομον</w><w>εξαγοραση</w>
+<lb n="P182rC1L-506"/><w>ινα</w><w>την</w><w>υιοθεσιαν</w><w>απολαβομεν</w>
+<lb n="P182rC1L-506"/></ab><ab n="Gal.4.6"><w>οτι</w><w>δε</w><w>εστε</w><w>υιοι</w><w>εξαπεστειλεν</w><w>ο</w>
+<lb n="P182rC1L-506"/><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>το</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>του</w><w>υιου</w><w>αυτου</w><w>εις</w>
+<lb n="P182rC1L-506"/><w>τας</w><w>καρδιας</w><w>υμων</w><w>κραζων</w>
+<lb n="P182rC1L-506"/><w>αββα</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">πηρ</hi></abbr></w></ab><ab n="Gal.4.7"><w>ωστε</w><w>ουκετι</w><w>ει</w>
+<lb n="P182rC1L-506"/><w>δουλος</w><w>αλλ</w><w>υιος</w><w>ει</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">υς</hi></abbr></w><w>και</w>
+<lb n="P182rC1L-506"/><w>κληρονομος</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>δια</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w>
+<lb n="P182rC1L-506"/></ab><ab n="Gal.4.8"><w>αλλα</w><w>τοτε</w>
+<lb n="P182rC1L-506"/><w>μεν</w><w>ουκ</w><w>ειδοτες</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w>
+<lb n="P182rC1L-506"/><w>εδουλευσατε</w><w>τοις</w><w>φυσει</w><w>μη</w>
+<lb n="P182rC1L-506"/><w>ουσι</w><w>θεοις</w></ab><ab n="Gal.4.9"><w>νυν</w><w>δε</w><w>γνοντες</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w>
+<lb n="P182rC1L-506"/><w>μαλλον</w><w>δε</w><w>γνωσθεντες</w><w>υπο</w>
+<lb n="P182rC1L-506"/><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>πως</w><w>επιστρεφετε</w><w>παλιν</w>
+<lb n="P182rC1L-506"/><w>επι</w><w>τα</w><w>ασθενη</w><w>και</w><w>πτωχα</w><w>στοι
+<lb n="P182rC1L-506" break="no"/>χεια</w><w>οις</w><w>παλιν</w><w>ανωθεν</w><w>δου
+<lb n="P182rC1L-506" break="no"/>λευειν</w><w>θελετε</w></ab><ab n="Gal.4.10"><w>ημερας</w><w>παρα
+<cb n="P182rC2-506" break="no"/>
+<lb n="P182rC2L-506"/>τηρεισθε</w><w>και</w><w>μηνας</w><w>και</w><w>καιρους</w>
+<lb n="P182rC2L-506"/><w>και</w><w>ενιαυτους</w></ab><ab n="Gal.4.11"><w>φοβουμαι</w><w>υμας</w>
+<lb n="P182rC2L-506"/><w>μη</w><w>πως</w><w>εικη</w><w>κεκοπιακα</w><w>εις</w>
+<lb n="P182rC2L-506"/><w>υμας</w></ab><ab n="Gal.4.12"><w>γινεσθε</w><w>ως</w><w>εγω</w><w>οτι</w><w>κα
+<lb n="P182rC2L-506" break="no"/>γω</w><w>ως</w><w>υμεις</w><app><rdg type="orig" hand="firsthand"><w>δ</w></rdg><rdg type="corr" hand="firsthand"><w>αδελφοι</w></rdg></app><w>δεομαι</w>
+<lb n="P182rC2L-506"/><w>υμων</w><w>ουδεν</w><w>με</w><w>ηδικησατε</w>
+<lb n="P182rC2L-506"/></ab><ab n="Gal.4.13"><w>οιδατε</w><w>δε</w><w>οτι</w><w>δι</w><w>ασθενειαν</w><w>της</w>
+<lb n="P182rC2L-506"/><w>σαρκος</w><w>ευηγγελισαμην</w><w>υμιν</w>
+<lb n="P182rC2L-506"/><w>το</w><w>προτερον</w></ab><ab n="Gal.4.14"><w>και</w><w>τον</w><w>πειρασ
+<lb n="P182rC2L-506" break="no"/>μον</w><w>μου</w><w>τον</w><w>εν</w><w>τη</w><w>σαρκι</w><w>μου</w>
+<lb n="P182rC2L-506"/><w>ουκ</w><w>εξουθενησατε</w><w>ουδε</w><w>εξε
+<lb n="P182rC2L-506" break="no"/>πτυσατε</w><w>αλλ</w><w>ως</w><w>αγγελον</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>ε
+<lb n="P182rC2L-506" break="no"/>δεξασθε</w><w>με</w><w>ως</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w></ab><ab n="Gal.4.15"><w>τις</w><w>ουν</w>
+<lb n="P182rC2L-506"/><w>ην</w><w>ο</w><w>μακαρισμος</w><w>υμων</w><w>μαρ
+<lb n="P182rC2L-506" break="no"/>τυρω</w><w>γαρ</w><w>υμιν</w><w>οτι</w><w>ει</w><w>δυνατον</w>
+<lb n="P182rC2L-506"/><w>τους</w><w>οφθαλμους</w><w>υμων</w><w>εξορυ
+<lb n="P182rC2L-506" break="no"/>ξαντες</w><w>αν</w><w>εδοκατε</w><w>μοι</w></ab><ab n="Gal.4.16"><w>ωστε</w>
+<lb n="P182rC2L-506"/><w>εχθρος</w><w>υμων</w><w>γεγονα</w><w>αληθευων</w>
+<lb n="P182rC2L-506"/><w>υμιν</w></ab><ab n="Gal.4.17"><w>ζηλουσιν</w><w>υμας</w><w>ου</w><w>καλως</w>
+<lb n="P182rC2L-506"/><w>αλλ</w><w>εκκλεισαι</w><w>υμας</w><w>θελουσιν</w>
+<lb n="P182rC2L-506"/><w>ινα</w><w>αυτους</w><w>ζηλουτε</w></ab><ab n="Gal.4.18"><w>καλον</w><w>δε</w>
+<lb n="P182rC2L-506"/><w>το</w><w>ζηλουσθε</w><w>εν</w><w>καλω</w><w>παντοτε</w>
+<lb n="P182rC2L-506"/><w>και</w><w>μη</w><w>μονον</w><w>εν</w><w>τω</w><w>παρηναι</w><w>με</w>
+<lb n="P182rC2L-506"/><w>προς</w><w>υμας</w></ab><ab n="Gal.4.19"><w>τεκνια</w><w>μου</w><w>ους</w>
+<lb n="P182rC2L-506"/><w>παλιν</w><w>ωδινω</w><w>αχρις</w><w>ου</w><w>μορ
+<lb n="P182rC2L-506" break="no"/>φωθη</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>εν</w><w>υμιν</w></ab><ab n="Gal.4.20"><w>ηθελον</w>
+<lb n="P182rC2L-506"/><w>παρειναι</w><w>προς</w><w>υμας</w><w>αρτι</w>
+<lb n="P182rC2L-506"/><w>και</w><w>αλλαξαι</w><w>την</w><w>φωνην</w><w>μου</w>
+<lb n="P182rC2L-506"/><w>οτι</w><w>απορουμαι</w><w>εν</w><w>υμιν</w></ab><ab n="Gal.4.21"><w>λεγε
+<lb n="P182rC2L-506" break="no"/>τε</w><w>μοι</w><w>οι</w><w>υπο</w><w>νομον</w><w>θελοντες</w>
+<lb n="P182rC2L-506"/><w>ειναι</w><w>τον</w><w>νομον</w><w>ουκ</w><w>αναγινωσκετε</w>
+<lb n="P182rC2L-506"/></ab><ab n="Gal.4.22"><w>γεγραπται</w><w>γαρ</w><w>οτι</w>
+<lb n="P182rC2L-506"/><w>αβρααμ</w><w>δυο</w><w>υιους</w>
+<lb n="P182rC2L-506"/><w>εσχεν</w><w>ενα</w><w>εκ</w><w>της</w><w>παιδισκης</w>
+<lb n="P182rC2L-506"/><w>και</w><w>ενα</w><w>εκ</w><w>της</w><w>ελευθερας</w></ab><ab n="Gal.4.23"><w>αλλ</w><w>ο</w>
+<lb n="P182rC2L-506"/><w>μεν</w><w>εκ</w><w>της</w><w>παιδισκης</w><w>κατα</w>
+<pb n="P182v-506" type="folio"/>
+<cb n="P182vC1-506"/>
+<lb n="P182vC1L-506"/><w>σαρκα</w><w>γεγεννηται</w><w>ο</w><w>δε</w><w>εκ</w><w>της</w>
+<lb n="P182vC1L-506"/><w>ελευθερας</w><w>δι</w><w>επαγγελιας</w>
+<lb n="P182vC1L-506"/></ab><ab n="Gal.4.24"><w>ατινα</w><w>εστιν</w><w>αλληγορουμενα</w><w>αυ
+<lb n="P182vC1L-506" break="no"/>ται</w><w>γαρ</w><w>εισι</w><w>δυο</w><w>διαθηκαι</w><w>μια</w>
+<lb n="P182vC1L-506"/><w>μεν</w><w>απο</w><w>ορους</w><w>σινα</w><w>εις</w><w>δουλει
+<lb n="P182vC1L-506" break="no"/>αν</w><w>γεννωσα</w><w>ητις</w><w>εστιν</w><w>αγαρ</w>
+<lb n="P182vC1L-506"/></ab><ab n="Gal.4.25"><w>το</w><w>δε</w><w>αγαρ</w><w>σινα</w><w>ορος</w><w>εστιν</w><w>εν</w><w>τη</w>
+<lb n="P182vC1L-506"/><w>αραβια</w><w>συστοιχη</w><w>δε</w><w>τη</w><w>νυν</w><w>ι
+<lb n="P182vC1L-506" break="no"/>ερουσαλημ</w><w>δουλευει</w><w>δε</w><w>μετα</w><w>των</w>
+<lb n="P182vC1L-506"/><w>τεκνων</w><w>αυτης</w></ab><ab n="Gal.4.26"><w>η</w><w>δε</w><w>ανω</w><w><abbr type="nomSac"><hi rend="overline">ιλημ</hi></abbr></w>
+<lb n="P182vC1L-506"/><w>ελευθερα</w><w>εστιν</w><w>ητις</w><w>εστιν</w><w><abbr type="nomSac"><hi rend="overline">μηρ</hi></abbr></w>
+<lb n="P182vC1L-506"/><w>παντων</w><w>ημων</w></ab><ab n="Gal.4.27"><w>γεγραπται</w>
+<lb n="P182vC1L-506"/><w>γαρ</w><w>ευφρανθητι</w><w>στειρα</w><w>η</w><w>ου</w><w>τι
+<lb n="P182vC1L-506" break="no"/>κτουσα</w><w>ρηξον</w><w>και</w><w>βοησον</w><w>η</w><w>ου
+<lb n="P182vC1L-506" break="no"/>κ</w><w>ωδινουσα</w><w>οτι</w><w>πολλα</w><w>τα</w><w>τε
+<lb n="P182vC1L-506" break="no"/>κνα</w><w>της</w><w>ερημου</w><w>μαλλον</w><w>η</w><w>της</w>
+<lb n="P182vC1L-506"/><w>εχουσης</w><w>τον</w><w>ανδρα</w></ab><ab n="Gal.4.28"><w>ημεις</w><w>δε</w>
+<lb n="P182vC1L-506"/><w>αδελφοι</w>
+<lb n="P182vC1L-506"/><w>κατα</w><w>ισαακ</w><w>επαγ
+<lb n="P182vC1L-506" break="no"/>γελιας</w><w>τεκνα</w><w>εσμεν</w></ab><ab n="Gal.4.29"><w>αλλ</w><w>ωσ
+<lb n="P182vC1L-506" break="no"/>περ</w><w>ποτε</w><w>ο</w><w>κατα</w><w>σαρκα</w><w>γεν
+<lb n="P182vC1L-506" break="no"/>νηθεις</w><w>εδιωκε</w><w>τον</w><w>κατα</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w>
+<lb n="P182vC1L-506"/><w>ουτω</w><w>και</w><w>νυν</w></ab><ab n="Gal.4.30"><w>αλλα</w><w>τι</w><w>λεγει</w><w>η</w><w>γρα
+<lb n="P182vC1L-506" break="no"/>φη</w><w>εκβαλε</w><w>την</w><w>παιδισκην</w>
+<lb n="P182vC1L-506"/><w>και</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">υν</hi></abbr></w><w>αυτης</w><w>ου</w><w>γαρ</w><w>μη</w><w>κλη
+<lb n="P182vC1L-506" break="no"/>ρονομησει</w><w>ο</w><w>υιος</w><w>της</w><w>παιδισκης</w>
+<lb n="P182vC1L-506"/><w>μετα</w><w>του</w><w>υιου</w><w>της</w><w>ελευθερας</w>
+<lb n="P182vC1L-506"/></ab><ab n="Gal.4.31"><w>αρα</w><w>αδελφοι</w><w>ουκ</w><w>εσμεν</w><w>παι
+<lb n="P182vC1L-506" break="no"/>δισκης</w><w>τεκνα</w><w>αλλα</w><w>της</w><w>ελευ
+<lb n="P182vC1L-506" break="no"/>θερας</w></ab></div><div type="chapter" n="Gal.5"><ab n="Gal.5.1"><w>τη</w><w>ελευθερια</w><w>ουν</w><app><rdg type="orig" hand="firsthand"><w>η</w></rdg><rdg type="corr" hand="corrector"/></app>
+<lb n="P182vC1L-506"/><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>ημας</w><w>ηλευθερωσεν</w>
+<lb n="P182vC1L-506"/><w>στηκετε</w><w>και</w><w>μη</w><w>παλιν</w><w>ζυγω</w>
+<lb n="P182vC1L-506"/><w>δουλειας</w><w>ενεχεσθε</w></ab><ab n="Gal.5.2"><w>ιδε</w><w>ε
+<lb n="P182vC1L-506" break="no"/>γω</w><w>παυλος</w><w>γραφω</w><w>υμιν</w>
+<lb n="P182vC1L-506"/><w>οτι</w><w>εαν</w><w>περιτεμνεσθε</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w>
+<lb n="P182vC1L-506"/><w>υμας</w><w>ουδεν</w><w>ωφελησει</w></ab><ab n="Gal.5.3"><w>μαρτυ
+<cb n="P182vC2-506" break="no"/>
+<lb n="P182vC2L-506"/>ρομαι</w><w>δε</w><w>παλιν</w><w>παντι</w><w><abbr type="nomSac"><hi rend="overline">ανω</hi></abbr></w>
+<lb n="P182vC2L-506"/><w>περιτεμνομενω</w><w>οτι</w><w>οφειλετης</w>
+<lb n="P182vC2L-506"/><w>εστιν</w><w>ολον</w><w>τον</w><w>νομον</w><w>ποιησαι</w>
+<lb n="P182vC2L-506"/></ab><ab n="Gal.5.4"><w>κατηργηθητε</w><w>απο</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w>
+<lb n="P182vC2L-506"/><w>οιτινες</w><w>εν</w><w>νομω</w><w>δικαιουσθε</w>
+<lb n="P182vC2L-506"/><w>της</w><w>χαριτος</w><w>εξεπεσατε</w></ab><ab n="Gal.5.5"><w>η
+<lb n="P182vC2L-506" break="no"/>μεις</w><w>γαρ</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>εκ</w><w>πιστεως</w><w>ελ
+<lb n="P182vC2L-506" break="no"/>πιδα</w><w>δικαιοσυνης</w><w>απεκδε
+<lb n="P182vC2L-506" break="no"/>χομεθα</w></ab><ab n="Gal.5.6"><w>εν</w><w>γαρ</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>ουτε</w><w>πε
+<lb n="P182vC2L-506" break="no"/>ριτομη</w><w>τις</w><w>ισχυει</w><w>ουτε</w><w>ακροβυ
+<lb n="P182vC2L-506" break="no"/>στεια</w><w>αλλα</w><w>πιστις</w><w>δι</w><w>αγαπης</w><w>ε
+<lb n="P182vC2L-506" break="no"/>νεργουμενη</w></ab><ab n="Gal.5.7"><w>ετρεχετε</w><w>καλως</w>
+<lb n="P182vC2L-506"/><w>τις</w><w>υμας</w><w>ενεκοψε</w><w>τη</w><w>αληθεια</w>
+<lb n="P182vC2L-506"/><w>μη</w><w>πειθεσθαι</w></ab><ab n="Gal.5.8"><w>η</w><w>πεισμονη</w>
+<lb n="P182vC2L-506"/><w>ουκ</w><w>εκ</w><w>του</w><w>καλουντος</w><w>υμας</w>
+<lb n="P182vC2L-506"/></ab><ab n="Gal.5.9"><w>μικρα</w><w>ζυμη</w><w>ολον</w><w>το</w><w>φυραμα</w>
+<lb n="P182vC2L-506"/><w>ζυμοι</w></ab><ab n="Gal.5.10"><w>εγω</w><w>πεποιθα</w><w>εις</w><w>υμας</w>
+<lb n="P182vC2L-506"/><w>εν</w><w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w><w>οτι</w><w>ουδεν</w><w>αλλο</w><w>φρονησετε</w>
+<lb n="P182vC2L-506"/><w>ο</w><w>δε</w><w>ταρασσων</w><w>υμας</w><w>βαστασει</w>
+<lb n="P182vC2L-506"/><w>το</w><w>κριμα</w><w>οστις</w><w>αν</w><w>η</w>
+<lb n="P182vC2L-506"/></ab><ab n="Gal.5.11"><w>εγω</w><w>δε</w><w>αδελφοι</w>
+<lb n="P182vC2L-506"/><w>ει</w><w>περιτομην</w><w>ε
+<lb n="P182vC2L-506" break="no"/>τι</w><w>κηρυσσω</w><w>τι</w><w>ετι</w><w>διωκομαι</w><w>ἆ
+<lb n="P182vC2L-506" break="no"/>ρα</w><w>κατηργηται</w><w>το</w><w>σκανδαλον</w>
+<lb n="P182vC2L-506"/><w>του</w><w><abbr type="nomSac"><hi rend="overline">στρου</hi></abbr></w></ab><ab n="Gal.5.12"><w>οφελον</w><w>και</w><w>αποκο
+<lb n="P182vC2L-506" break="no"/>ψονται</w><w>οι</w><w>αναστατουντες</w><w>υμας</w>
+<lb n="P182vC2L-506"/></ab><ab n="Gal.5.13"><w>υμεις</w><w>γαρ</w><w>επ</w><w>ελευθερια</w><w>εκλη
+<lb n="P182vC2L-506" break="no"/>θητε</w><w>αδελφοι</w><w>μονον</w><w>μη</w><w>την</w>
+<lb n="P182vC2L-506"/><w>ελευθεριαν</w><w>εις</w><w>αφορμην</w><w>τη</w>
+<lb n="P182vC2L-506"/><w>σαρκι</w><w>αλλα</w><w>δια</w><w>της</w><w>αγαπης</w>
+<lb n="P182vC2L-506"/><w>δουλευετε</w><w>αλληλοις</w></ab><ab n="Gal.5.14"><w>ο</w><w>γαρ</w><w>πας</w>
+<lb n="P182vC2L-506"/><w>νομος</w><w>εν</w><w>ενι</w><w>λογω</w><w>πεπληρωται</w>
+<lb n="P182vC2L-506"/><w>εν</w><w>τω</w><w>αγαπησεις</w><w>τον</w><w>πλησιον</w>
+<lb n="P182vC2L-506"/><w>σου</w><w>ως</w><w>εαυτον</w></ab><ab n="Gal.5.15"><w>ει</w><w>δε</w><w>αλληλους</w>
+<lb n="P182vC2L-506"/><w>δακνετε</w><w>και</w><w>κατεσθιετε</w><w>βλε
+<lb n="P182vC2L-506" break="no"/>πετε</w><w>μη</w><w>υπο</w><w>αλληλων</w><w>αναλωθητε</w>
+<pb n="P182br-506" type="folio"/>
+<cb n="P182brC1-506"/>
+<lb n="P182brC1L-506"/><note type="editorial">The right hand side of this page has been cut out of the manuscript. The reverse of this page does not contain the end of Galatians.</note></ab><ab n="Gal.5.16"><w><supplied source="tr" reason="illegible">λ</supplied>εγω</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>περι<supplied source="tr" reason="lacuna">πατειτε</supplied></w>
+<lb n="P182brC1L-506"/><w>και</w><w>επιθυμιαν</w><w>σαρ<supplied source="tr" reason="lacuna">κος</supplied></w><w><supplied source="tr" reason="lacuna">ου</supplied></w><w><supplied source="tr" reason="lacuna">μη</supplied></w>
+<lb n="P182brC1L-506"/><w>τελεσητε</w></ab><ab n="Gal.5.17"><w>η</w><w>γαρ</w><w>σαρ<supplied source="tr" reason="lacuna">ξ</supplied></w><w><supplied source="tr" reason="lacuna">επιθυ</supplied>
+<lb n="P182brC1L-506" break="no"/>μει</w><w>κατα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w><supplied source="tr" reason="lacuna">το</supplied></w><w><supplied source="tr" reason="lacuna">δε</supplied></w><w><supplied source="tr" reason="lacuna"><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></supplied></w>
+<lb n="P182brC1L-506"/><w>κατα</w><w>της</w><w>σαρκος</w><w><unclear>τ</unclear><supplied source="tr" reason="lacuna">αυτα</supplied></w><w><supplied source="tr" reason="lacuna">δε</supplied></w><w><supplied source="tr" reason="lacuna">αλ</supplied>
+<lb n="P182brC1L-506" break="no"/>ληλοις</w><w>αντικεινται</w><w><supplied source="tr" reason="lacuna">ινα</supplied></w><w><supplied source="tr" reason="lacuna">μη</supplied></w><w><supplied source="tr" reason="lacuna">α</supplied></w>
+<lb n="P182brC1L-506"/><w>αν</w><w>θελητε</w><w>ταυτα</w><w><unclear>π</unclear><supplied source="tr" reason="lacuna">οιητε</supplied></w></ab><ab n="Gal.5.18"><w><supplied source="tr" reason="lacuna">ει</supplied></w>
+<lb n="P182brC1L-506"/><w>δε</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>αγεσθε</w><w>ου<gap reason="illegible" unit="char" extent="1-4"/></w><w><supplied source="tr" reason="lacuna">εστε</supplied></w><w><supplied source="tr" reason="lacuna">υπο</supplied></w>
+<lb n="P182brC1L-506"/><w>νομον</w></ab><ab n="Gal.5.19"><w>φανερα</w><w>δ<supplied source="tr" reason="lacuna">ε</supplied></w><w><supplied source="tr" reason="lacuna">εστι</supplied></w><w><supplied source="tr" reason="lacuna">τα</supplied></w><w><supplied source="tr" reason="lacuna">εργα</supplied></w>
+<lb n="P182brC1L-506"/><w>της</w><w>σαρκος</w><w>ατι<supplied source="tr" reason="lacuna">να</supplied></w><w><supplied source="tr" reason="lacuna">εστι</supplied></w><w><supplied source="tr" reason="lacuna">μοιχεια</supplied></w><w><supplied source="tr" reason="lacuna">πορνεια</supplied></w>
+<lb n="P182brC1L-506"/><w>ακαθαρσια</w><w>ασε<supplied source="tr" reason="lacuna">λγεια</supplied></w></ab><ab n="Gal.5.20"><w><supplied source="tr" reason="lacuna">ειδωλο</supplied>
+<lb n="P182brC1L-506" break="no"/>λατρεια</w><w>φαρμα<supplied source="tr" reason="lacuna">κεια</supplied></w><w><supplied source="tr" reason="lacuna">εχθραι</supplied></w>
+<lb n="P182brC1L-506"/><w>ερεις</w><w>ζηλοι</w><w>θ<supplied source="tr" reason="lacuna">υμοι</supplied></w><w><supplied source="tr" reason="lacuna">εριθειαι</supplied></w>
+<lb n="P182brC1L-506"/><w>διχοστασιαι</w><w>αιρ<unclear>ε</unclear><supplied source="tr" reason="lacuna">σεις</supplied></w></ab><ab n="Gal.5.21"><w><supplied source="tr" reason="lacuna">φθονοι</supplied></w>
+<lb n="P182brC1L-506"/><w>φονοι</w><w>μεθαι</w><w><supplied source="tr" reason="lacuna">κωμοι</supplied></w><w><supplied source="tr" reason="lacuna">και</supplied></w><w><supplied source="tr" reason="lacuna">τα</supplied></w>
+<lb n="P182brC1L-506"/><w>ομοια</w><w>τουτοις</w><w><supplied source="tr" reason="lacuna">α</supplied></w><w><supplied source="tr" reason="lacuna">προλεγω</supplied></w><w><supplied source="tr" reason="lacuna">υ</supplied>
+<lb n="P182brC1L-506" break="no"/>μιν</w><w>καθως</w><w>και</w><w><supplied source="tr" reason="lacuna">προειπον</supplied></w><w><supplied source="tr" reason="lacuna">ο</supplied>
+<lb n="P182brC1L-506" break="no"/>τι</w><w>οι</w><w>τα</w><w>τοιαυτ<unclear>α</unclear></w><w><supplied source="tr" reason="lacuna">πρασσοντες</supplied></w>
+<lb n="P182brC1L-506"/><w>βασιλειαν</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>ο<unclear>υ</unclear></w><w><supplied source="tr" reason="lacuna">κληρονομησουσιν</supplied></w>
+<lb n="P182brC1L-506"/></ab><ab n="Gal.5.22"><w>ο</w><w>δε</w>
+<lb n="P182brC1L-506"/><w>καρπ<supplied source="tr" reason="lacuna">ος</supplied></w><w><supplied source="tr" reason="lacuna">του</supplied></w><w><supplied source="tr" reason="lacuna"><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></supplied></w><w><supplied source="tr" reason="lacuna">εστιν</supplied></w>
+<lb n="P182brC1L-506"/><w>αγαπη</w><w>χαρα</w><w><supplied source="tr" reason="lacuna">ειρηνη</supplied></w><w><supplied source="tr" reason="lacuna">μακρο</supplied>
+<lb n="P182brC1L-506" break="no"/>θυμια</w><w>χρηστο<supplied source="tr" reason="lacuna">της</supplied></w><w><supplied source="tr" reason="lacuna">αγαθωσυνη</supplied></w>
+<lb n="P182brC1L-506"/><w>πιστις</w></ab><ab n="Gal.5.23"><w>πρα<unclear>ο</unclear><supplied source="tr" reason="lacuna">της</supplied></w><w><supplied source="tr" reason="lacuna">εγκρατεια</supplied></w>
+<lb n="P182brC1L-506"/><w>κατα</w><w>των</w><w>τοιο<unclear>υ</unclear><supplied source="tr" reason="lacuna">των</supplied></w><w><supplied source="tr" reason="lacuna">ουκ</supplied></w><w><supplied source="tr" reason="lacuna">εστι</supplied></w><w><supplied source="tr" reason="lacuna">νομος</supplied></w>
+<lb n="P182brC1L-506"/></ab><ab n="Gal.5.24"><w>οι</w><w>δε</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w><unclear>τ</unclear><supplied source="tr" reason="lacuna">ην</supplied></w><w><supplied source="tr" reason="lacuna">σαρκα</supplied></w><w><supplied source="tr" reason="lacuna">εσταυ</supplied>
+<lb n="P182brC1L-506" break="no"/>ρωσαν</w><w>συν</w><w>τοι<unclear>ς</unclear></w><w><supplied source="tr" reason="lacuna">παθημασι</supplied></w><w><supplied source="tr" reason="lacuna">και</supplied></w>
+<lb n="P182brC1L-506"/><w>ταις</w><w>επιθυμι<unclear>α</unclear><supplied source="tr" reason="lacuna">ις</supplied></w></ab><ab n="Gal.5.25"><w><supplied source="tr" reason="lacuna">ει</supplied></w><w><supplied source="tr" reason="lacuna">ζωμεν</supplied></w><w><supplied source="tr" reason="lacuna"><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></supplied></w>
+<lb n="P182brC1L-506"/><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>και</w><w>στοιχω<unclear>μ</unclear><supplied source="tr" reason="lacuna">εν</supplied></w></ab><ab n="Gal.5.26"><w><supplied source="tr" reason="lacuna">μη</supplied></w><w><supplied source="tr" reason="lacuna">γινωμεθα</supplied></w>
+<lb n="P182brC1L-506"/><w>κενοδοξοι</w><w>αλλ<supplied source="tr" reason="lacuna">ηλους</supplied></w><w><supplied source="tr" reason="lacuna">προκα</supplied>
+<lb n="P182brC1L-506" break="no"/>λουμενοι</w><w>αλλη<unclear>λ</unclear><supplied source="tr" reason="lacuna">οις</supplied></w><w><supplied source="tr" reason="lacuna">φθονουντες</supplied></w>
+<lb n="P182brC1L-506"/></ab></div><div type="chapter" n="Gal.6"><ab n="Gal.6.1"><w>αδελφοι</w><w>εαν</w><w>κ<supplied source="tr" reason="lacuna">αι</supplied></w><w><supplied source="tr" reason="lacuna">προληφθη</supplied></w>
+<lb n="P182brC1L-506"/><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>εν</w><w>τινι</w><w>π<supplied source="tr" reason="lacuna">αραπτωματι</supplied></w>
+<lb n="P182brC1L-506"/><w>υμεις</w><w>οι</w><w><abbr type="nomSac"><hi rend="overline">πνικοι</hi></abbr></w><w><supplied source="tr" reason="lacuna">καταρτιζετε</supplied></w>
+<lb n="P182brC1L-506"/><w>τον</w><w>τοιουτον</w><w>εν</w><w><supplied source="tr" reason="lacuna"><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></supplied></w><w><supplied source="tr" reason="lacuna">πραοτητος</supplied></w>
+<lb n="P182brC1L-506"/><w>σκοπων</w><w>σεαυτ<unclear>ο</unclear></w><gap reason="witnessEnd"/></ab></div></div></body></text></TEI>

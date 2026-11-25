@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="TEI-NTMSS.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title type="document" n="1846">1846</title>
+<respStmt xml:id="VMRCRE"><resp>edition metadata assembled by</resp><name type="org">VMRCRE (Virtual Manuscript Room Collaborative Research Environment), transcript/get</name></respStmt>
+      </titleStmt>
+      <!-- VMRCRE-generated: publicationStmt -->
+      <publicationStmt>
+        <publisher><name type="org">The Institut für neutestamentliche Textforschung</name></publisher>
+        <availability><p>
+<![CDATA[
+(C) 2026 Institut für Neutestamentliche Textforschung.
+]]>
+</p><p> <![CDATA[
+This work is licensed under a <a rel="license" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 Unported License<br/><span style="float:right;"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by/4.0/80x15.png" /></span></a>
+]]>
+</p><p> <![CDATA[
+
+]]>
+</p></availability>
+      </publicationStmt>
+<!-- VMRCRE-generated: sourceDesc -->
+      <sourceDesc>
+        <msDesc>
+		<msIdentifier>
+            <country>Vatican City</country>
+            <settlement>Città del Vaticano</settlement>
+            <repository>Biblioteca Apostolica Vaticana</repository>
+            <idno>Vat. gr. 2099</idno>
+          </msIdentifier>
+        </msDesc>
+      </sourceDesc>
+</fileDesc>
+<!-- VMRCRE-generated: profileDesc -->
+    <profileDesc>
+      <langUsage>
+        <language ident="grc"></language>
+      </langUsage>
+      <handNotes>
+        <handNote>
+          <listWit>
+            <witness n="firsthand"></witness>
+<witness n="corrector"></witness>
+</listWit>
+        </handNote>
+      </handNotes>
+    </profileDesc>
+</teiHeader>
+<text xml:lang="grc"><body>
+
+
+<pb n="25r" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="Jude"><div type="inscriptio"><ab n="Jude.inscriptio"><app><rdg type="orig" hand="firsthand"></rdg><rdg type="corr" hand="corrector"><w>αναγνωσμα</w> <w>ιουδα</w> <w>καθολικη</w></rdg></app></ab></div><div type="chapter" n="Jude.1"><ab n="Jude.1.1"><note type="commentary">Untranscribed commentary text within the line</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><w>ιουδας</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>δουλος</w> <w>αδελφος</w> <w>δε</w> <w>ιακωβου</w> <w>τοις</w> <w>εν</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">πρι</hi></abbr></w> <w>ηγαπημενοις</w> <w>και</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w> <w>τετηρημενοις</w>
+<lb/><w>κλητοις</w> <w>αγιοις</w></ab> <ab n="Jude.1.2"><w>ελεος</w> <w>ημιν</w> <w>και</w> <w>ειρηνη</w> <w>και</w> <w>αγαπη</w>
+<lb/><w>πληθυνθειη</w></ab> <ab n="Jude.1.3"><w>αγαπητοι</w> <w>πασαν</w> <w>σπουδην</w> <w>ποιου
+<lb break="no"/>μενος</w> <w>γραφειν</w> <w>ημιν</w> <w>περι</w> <w>της</w> <w>κοινης</w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">σρι
+<lb break="no"/>ας</hi></abbr></w> <w>αναγκην</w> <w>εσχον</w> <w>γραψαι</w> <w>ημιν</w> <w>παρακαλων</w> <w>ε
+<lb break="no"/>παγωνιζεσθαι</w> <w>τη</w> <w>απαξ</w> <w>παραδοθησει</w> <w>τοις</w> <w>αγιοις</w>
+<lb/><w>πιστει</w></ab> <ab n="Jude.1.4"><w>παρεισεδυσαν</w> <w>γαρ</w> <w>τινες</w> <w><abbr type="nomSac"><hi rend="overline">ανοι</hi></abbr></w> <w>οι</w> <w>παλαι</w>
+<lb/><w>προγεγραμμενοι</w> <w>εις</w> <w>τουτο</w> <w>το</w> <w>κριμα</w> <w>ασεβεις</w>
+<lb/><w>την</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>ημων</w> <w>χαριν</w> <w>μετατιθεντες</w> <w>εις</w>
+<lb/><w>ασελγειαν</w> <w>και</w> <w>τον</w> <w>μονον</w> <w>δεσποτην</w> <w>και</w> <w><abbr type="nomSac"><hi rend="overline">κν</hi></abbr></w> <w>ημων</w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w> <w>αρνουμενοι</w></ab> <ab n="Jude.1.5"><w>υπομνησαι</w> <w>δε</w> <app><rdg type="orig" hand="firsthand"><w>ημας</w></rdg><rdg type="corr" hand="corrector"><w>υμας</w></rdg></app> <w>βουλο
+<lb break="no"/>μαι</w> <w>ειδοτας</w> <w>παντα</w> <w>οτι</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w> <w>απαξ</w> <w>λαον</w>
+<lb/><w>εκ</w> <w>γης</w> <w>αιγυπτου</w> <w>σωσας</w> <w>το</w> <w>δευτερον</w> <w>τους</w> <w>μη</w>
+<lb/><w>πιστευσαντας</w> <w>απολεσεν</w></ab> <ab n="Jude.1.6" part="I"><w>αγγελους</w> <w>τε</w> <w>τους</w>
+<lb/><w>μη</w> <w>τηρησαντας</w> <w>την</w> <w>εαυτων</w> <w>αρχην</w> <w>αλλ</w> <w part="I">α
+<lb break="no"/></w></ab></div> </div>
+
+<pb n="25v" type="folio" break="no"/>
+<cb n="1"/>
+<lb/><div type="book" n="Jude"><div type="chapter" n="Jude.1"><ab n="Jude.1.6" part="F"><w part="F">πολειποντας</w> <w>το</w> <w>ιδιον</w> <w>οικητηριον</w> <w>εις</w> <w>κρισιν</w> <w>μεγα
+<lb break="no"/>λης</w> <w>ημερας</w> <w>δεσμοις</w> <w>αιδιοις</w> <w>υπο</w> <w>ζοφον</w> <w>τετηρι
+<lb break="no"/>κεν</w></ab> <ab n="Jude.1.7"><w>ως</w> <w>σοδομα</w> <w>και</w> <w>γομορρα</w> <w>και</w> <w>αι</w> <w>περι</w> <w>αυτας</w>
+<lb/><w>πολεις</w> <w>τον</w> <w>ομοιον</w> <w>τουτοις</w> <w>τροπον</w> <w>εκπορνευσα
+<lb break="no"/>σαι</w> <w>και</w> <w>απελθουσαι</w> <w>οπισω</w> <w>σαρκος</w> <w>ετερας</w> <w>προ
+<lb break="no"/>κεινται</w> <w>δειγμα</w> <w>πυρος</w> <w>αιωνιου</w> <w>δικην</w> <w>υπαρχουσαι</w>
+<lb/></ab> <ab n="Jude.1.8"><w>ομοιως</w> <w>μεντοι</w> <w>και</w> <w>ουτοι</w> <w>ενυπνιαζομενοι</w> <w>σαρ
+<lb break="no"/>κα</w> <w>μεν</w> <w>μιαινουσιν</w> <w>κυριοτητας</w> <w>δε</w> <w>αθετουσιν</w>
+<lb/><w>δοξας</w> <w>φλασφημουσιν</w></ab> <ab n="Jude.1.9"><w>ο</w> <w>δε</w> <w>μιχαηλ</w> <w>ο</w> <w>αρχαγγελος</w>
+<lb/><w>οτε</w> <w>τω</w> <w>διαβολω</w> <w>διακρινομενος</w> <w>διελεγετο</w> <w>περι</w>
+<lb/><w>του</w> <w>μωυσεως</w> <w>σωματος</w> <w>ουκ</w> <w>ετολμησεν</w> <w>κρισιν</w>
+<lb/><w>επενεγκειν</w> <w>βλασφημιας</w> <w>αλλ</w> <w>ειπεν</w> <w>επιτιμη
+<lb break="no"/>σαι</w> <w>σοι</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w> <w>διαβολε</w></ab> <ab n="Jude.1.10"><w>ουτοι</w> <w>δε</w> <w>οσα</w> <w>μεν</w> <w>ουκ</w> <w>οιδασιν</w>
+<lb/><w>βλασφημουσιν</w> <w>οσα</w> <w>δε</w> <w>φυσικως</w> <w>ως</w> <w>τα</w> <w>αλογα</w>
+<lb/><w>ζωα</w> <w>επιστανται</w> <w>εν</w> <w>τουτοις</w> <w>φθειρονται</w></ab> <ab n="Jude.1.11"><w>ου
+<lb break="no"/>αι</w> <w>αυτοις</w> <w>οτι</w> <w>τη</w> <w>οδω</w> <w>του</w> <w>καιν</w> <w>επορευθησαν</w> <w>και</w> <w>τη</w>
+<lb/><w>πλανη</w> <w>του</w> <w>βαλααμ</w> <app><rdg type="orig" hand="firsthand"></rdg><rdg type="corr" hand="corrector"><w>μιστου</w></rdg></app> <w>εξεχυθησαν</w> <w>και</w> <w>τη</w> <w>αντιλο
+<lb break="no"/>για</w> <w>του</w> <w>κορε</w> <w>απωλοντο</w></ab> <ab n="Jude.1.12" part="I"><w>ουτοι</w> <w>εισιν</w> <w>οι</w> <w>εν</w> <w>ταις</w> <w>α
+<lb break="no"/>παταις</w> <w>υμων</w> <w>σπιλαδες</w> <w>συνευοχουμενοι</w> <w>υμιν</w>
+<lb/><w>αφοβως</w> <w>εαυτους</w> <w>ποιμενοντες</w> <w>νεφελαι</w> <w>ανυ
+<lb break="no"/>δροι</w> <w>υπο</w> <w>ανεμων</w> <w>παραφερομενοι</w> <w>δενδρα</w> <w>φθει
+<lb break="no"/>νοπορινα</w> <w>ακαρπα</w> <w>δις</w> <w>αποθανοντα</w> <w part="I">εκρι
+<lb break="no"/></w></ab></div> </div>
+
+<pb n="26r" type="folio" break="no"/>
+<cb n="1"/>
+<lb/><div type="book" n="Jude"><div type="chapter" n="Jude.1"><ab n="Jude.1.12" part="F"><w part="F">ζοθεντα</w></ab> <ab n="Jude.1.13"><w>κυματα</w> <w>αγρια</w> <w>θαλασσης</w> <w>επαφριζοντα</w> <w>τας</w>
+<lb/><w>εαυτων</w> <w>αισχυνας</w> <w>αστερες</w> <w>πλανηται</w> <w>οις</w> <w>ο</w> <w>ζοφος</w> <w>του</w>
+<lb/><w>σκοτους</w> <w>εις</w> <w>αιωνα</w> <w>τετηρηται</w></ab> <ab n="Jude.1.14"><w>προεφητευσεν</w> <w>δε</w> <w>και</w>
+<lb/><w>τουτοις</w> <w>εβδομαδος</w> <w>απο</w> <w>αδαμ</w> <w>ενωχ</w> <w>λεγων</w>
+<lb/><w>ιδου</w> <w>ηλθεν</w> <w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w> <w>εν</w> <w>μυριασιν</w> <w>αγιων</w> <w>αγγελων</w> <w>αυτου</w></ab> <ab n="Jude.1.15"><w>ποι
+<lb break="no"/>ησαι</w> <w>κρισιν</w> <w>κατα</w> <w>παντων</w> <w>και</w> <w>ελεγξαι</w> <w>παντας</w>
+<lb/><w>τους</w> <w>ασεβεις</w> <w>περι</w> <w>παντων</w> <w>των</w> <w>εργων</w> <w>αυτων</w>
+<lb/><w>ων</w> <w>ησεβησαν</w> <w>και</w> <w>περι</w> <w>παντων</w> <w>των</w> <w>σκληρων</w> <w>λο
+<lb break="no"/>λογων</w> <w>ων</w> <w>ελαλησαν</w> <w>κατ</w> <w>αυτου</w> <w>αμαρτωλοι</w>
+<lb/><w>ασεβεις</w></ab> <ab n="Jude.1.16"><w>ουτοι</w> <w>εισιν</w> <app><rdg type="orig" hand="firsthand"><w>γγυσται</w></rdg><rdg type="corr" hand="corrector"><w>γογγυσται</w></rdg></app> <w>μεμψιμυροι</w> <w>κατα</w>
+<lb/><w>τας</w> <w>επιθυμιας</w> <w>εαυτων</w> <w>πορευομενοι</w> <app><rdg type="orig" hand="firsthand"></rdg><rdg type="corr" hand="corrector"><w>τη</w> <w>ασεβεια</w> <w>και</w> <w>τη</w> <w>παρανομια</w></rdg></app> <w>και</w> <w>το</w>
+<lb/><w>στομα</w> <w>αυτων</w> <w>λαλει</w> <w>υπερογκα</w> <w>θαυμαζοντες</w>
+<lb/><w>προσωπα</w> <w>ωφελιας</w> <w>χαριν</w></ab> <ab n="Jude.1.17"><w>υμεις</w> <w>δε</w> <w>αγαπητοι</w>
+<lb/><w>μνησθητε</w> <w>των</w> <w>ρηματων</w> <w>των</w> <w>προειρημενων</w>
+<lb/><w>υπο</w> <w>των</w> <w>αποστολων</w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab> <ab n="Jude.1.18"><w>οτε</w> <w>ελε
+<lb break="no"/>γον</w> <w>υμιν</w> <w>οτι</w> <w>επ</w> <w>εσχατου</w> <w>του</w> <w>χρονου</w> <w>εσονται</w> <w>εμ
+<lb break="no"/>πεκται</w> <w>κατα</w> <w>τας</w> <w>εαυτων</w> <w>επιθυμιας</w> <w>πορευο
+<lb break="no"/>μενοι</w> <w>των</w> <w>ασεβειων</w></ab> <ab n="Jude.1.19"><w>ουτοι</w> <w>εισιν</w> <w>οι</w> <w>αποδιοριζον
+<lb break="no"/>τες</w> <w>αυτους</w> <w>ψυχικοι</w> <w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w> <w>μη</w> <w>εχοντες</w></ab> <ab n="Jude.1.20"><w>υμεις</w> <w>δε</w> <w>αγα
+<lb break="no"/>πητοι</w> <w>εποικοδομουντες</w> <w>εαυτους</w> <w>τη</w> <w>αγιωτατη</w>
+<lb/><w>υμων</w> <w>πιστει</w> <w>εν</w> <w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w> <w>αγιω</w> <w>προσευχομενοι</w></ab> <ab n="Jude.1.21" part="I"><w>εαυτους</w>
+<lb/><w>εν</w> <w>αγαπη</w> <w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w> <w>τηρησατε</w> <w>προσδεχομενοι</w> <w>το</w> <w>ελεος</w></ab></div> </div>
+
+<pb n="26v" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="Jude"><div type="chapter" n="Jude.1"><ab n="Jude.1.21" part="F"><w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>εις</w> <w>ζωην</w> <w>αιωνιον</w></ab> <ab n="Jude.1.22"><w>και</w> <w>ους</w> <w>μεν</w> <w>ελε
+<lb break="no"/>αται</w> <w>διακρινομενους</w></ab> <ab n="Jude.1.23"><w>ους</w> <w>δε</w> <w>σωζεται</w> <w>εκ</w> <w>πυρος</w>
+<lb/><w>αρπαζοντες</w> <w>ους</w> <w>δε</w> <w>ελεγχεται</w> <w>εν</w> <w>φοβω</w> <w>μησουν
+<lb break="no"/>τες</w> <w>και</w> <w>τον</w> <w>απο</w> <w>της</w> <w>σαρκος</w> <w>εσπηλωμενον</w> <w>χιτω
+<lb break="no"/>να</w></ab> <ab n="Jude.1.24"><w>τω</w> <w>δε</w> <w>δυναμενω</w> <w>φυλαξαι</w> <w>υμας</w> <w>απται
+<lb break="no"/>στους</w> <w>και</w> <w>ασπηλους</w> <w>στησαι</w> <w>ενωπιον</w> <w>της</w> <w>δοξης</w> <w>αυ
+<lb break="no"/>του</w> <w>αμωμους</w> <w>εν</w> <w>αγαλλιασει</w></ab> <ab n="Jude.1.25"><w>μονω</w> <w>σοφω</w> <w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">σρι</hi></abbr></w> <w>ημων</w> <w>δια</w> <w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w> <w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w> <w>ημων</w> <w>δοξα</w> <w>μεγαλοσυ
+<lb break="no"/>νη</w> <w>κρατος</w> <w>και</w> <w>εξουσια</w> <w>προ</w> <w>παντος</w> <w>του</w> <w>αιωνος</w>
+<lb/><w>και</w> <w>νυν</w> <w>και</w> <w>εις</w> <w>παντας</w> <w>τους</w> <w>αιωνας</w> <w>των</w>
+<lb/><w>αιωνων</w> <w>αμην</w></ab></div> <div type="subscriptio"><ab n="Jude.subscriptio"><w>ιουδας</w> <w>αποστολος</w> <w>αδελφου</w> <w>ιακω
+<lb break="no"/>βου</w> <w>επιστολη</w> <w>καθολικη</w><note type="commentary">Untranscribed commentary text within the line</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note><lb/><note type="commentary">One line of untranscribed commentary text</note></ab></div></div></body></text></TEI>

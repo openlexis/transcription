@@ -1,0 +1,172 @@
+
+<!DOCTYPE TEI>
+<?xml-model href="TEI-NTMSS.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"><teiHeader>
+    <fileDesc>      
+      <titleStmt>
+        <title>A Transcription of 2 Thessalonians</title>
+        <title type="document" key="31115" n="1115">GA 1115</title>
+        <title type="collection" level="s" xml:lang="en">The New Testament</title>
+        <title type="collection" level="s" xml:lang="de">Das Neue Testament</title>
+        <title type="work" level="m" xml:lang="en" n="14">The Second Epistle to the Thessalonians</title>
+        <title type="short" level="m" xml:lang="en" n="14">2 Thessalonians</title>      
+        <respStmt>
+          <resp>Created by</resp>
+          <name type="persname">Grant Edwards</name>
+        </respStmt>       
+        <respStmt>
+          <resp>XML conversion by</resp>
+          <name type="org">the Institute for Textual Scholarship and Electronic Editing, Birmingham</name>
+        </respStmt>
+      </titleStmt>
+      <editionStmt>
+        <edition n="1.0">Version 1.0, created on <date>23.9.2015</date></edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>
+          <name type="persname">Grant Edwards</name>
+        </publisher>
+        <date>23.9.2015</date>
+      </publicationStmt>
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier>
+            <altIdentifier type="GA">
+              <idno>1115</idno>
+            </altIdentifier>
+            <altIdentifier type="Liste">
+              <idno>31115</idno>
+            </altIdentifier>
+          </msIdentifier>
+        </msDesc>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc n="1.4">
+      <projectDesc>
+        <p>This transcription was made as part of a doctoral research project</p>
+      </projectDesc>
+      <editorialDecl>
+       
+          
+      	<p>The XML specifications used are version 1.4 of the IGNTP Guidelines available at <ptr target="http://epapers.bham.ac.uk/1727/"/></p></editorialDecl>
+      <variantEncoding method="parallel-segmentation" location="internal"/>
+    	
+    </encodingDesc>
+  </teiHeader><text xml:lang="GRC"><body><div type="book" n="B14">
+<pb n="99v" type="folio" xml:id="P99v-1115"/>
+<cb n="P99vC-1115"/>
+<lb n="P99vCL-1115"/><div type="chapter" n="B14K1"><ab n="B14K1V1"><w><hi rend="cap" height="undefined">π</hi>αυλος</w><w>και</w><w>σιλουανος</w><w>και</w><w>τιμοθεος</w><w>τη</w><w>εκκλησια</w>
+<lb n="P99vCL-1115"/><w>θεσαλονικεων</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πρι</hi></abbr></w><w><unclear>η</unclear>μων</w><w>και</w><w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w>
+<lb n="P99vCL-1115"/><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w></ab><ab n="B14K1V2"><w>χαρις</w><w>υμιν</w><w>και</w><w>ειρηνη</w><w>απο</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>ημων</w>
+<lb n="P99vCL-1115"/><w>και</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="B14K1V3"><w>ευχαριστειν</w><w>οφειλομ<unclear>εν</unclear></w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w>
+<lb n="P99vCL-1115"/><w>παντοτε</w><w>περι</w><w>υμων</w><w>αδελφοι</w><w>καθως</w><w><unclear>αξι</unclear>
+<lb n="P99vCL-1115" break="no"/>ον</w><w>εστιν</w><w>οτι</w><w>υπεραυξανει</w><w>η</w><w>πιστις</w><w>υμων</w><w>και</w>
+<lb n="P99vCL-1115"/><w><unclear>π</unclear>λεοναζει</w><w>η</w><w>αγαπη</w><w>ενος</w><w>εκαστου</w><w>παντων</w><w>υ
+<lb n="P99vCL-1115" break="no"/><unclear>μ</unclear>ων</w><w>εις</w><w>αλ<unclear>λη</unclear>λους</w></ab><ab n="B14K1V4"><w>ωστε</w><w>ημας</w><w>αυτους</w><w>εν</w><w>υμιν</w>
+<lb n="P99vCL-1115"/><w>καυχασθαι</w><w>εν</w><w>ταις</w><w>εκκλησιαις</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>υπερ</w><w>της</w>
+<lb n="P99vCL-1115"/><w>υπ<unclear>ομ</unclear>ονης</w><w>υμων</w><w>και</w><w>πιστ<unclear>εω</unclear>ς</w><w>εν</w><w>πασι</w><w>τοις</w><w>δι
+<lb n="P99vCL-1115" break="no"/>ωγμοις</w><w>υμων</w><w>και</w><w>ταις</w><w>θλι<unclear>ψ</unclear>εσι</w><w>αις</w><w>ανεχεσθε</w>
+<lb n="P99vCL-1115"/></ab><ab n="B14K1V5"><w>ενδειγμα</w><w>της</w><w>δικαιας</w><w>κρισεως</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>εις</w><w>το</w><w>κα
+<lb n="P99vCL-1115" break="no"/>ταξιωθηναι</w><w>υμας</w><w>της</w><w>βασιλειας</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>υπερ</w><w><unclear>ης</unclear></w>
+<lb n="P99vCL-1115"/><w>και</w><w>πασχετε</w></ab><ab n="B14K1V6"><w>ειπερ</w><w>δικαιον</w><w>παρα</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>ανταποδουναι</w>
+<lb n="P99vCL-1115"/><w>τοις</w><w>θλιβουσιν</w><w>υμας</w><w>θλιψιν</w></ab><ab n="B14K1V7"><w>και</w><w>υμιν</w><w>τοις</w><w>θλι
+<lb n="P99vCL-1115" break="no"/>βομενοις</w><w>ανεσιν</w><w>μεθ</w><w>υμων</w><w>εν</w><w>τ<unclear>η</unclear></w><w><unclear>α</unclear>ποκαλυψει</w>
+<lb n="P99vCL-1115"/><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>απ</w><w><abbr type="nomSac"><hi rend="overline">ουνου</hi></abbr></w><w>μετ</w><w>αγγελων</w><w>δυ<unclear>ναμ</unclear>εω<gap reason="illegible" unit="char" extent="1"/></w><w>αυτου</w>
+<lb n="P99vCL-1115"/></ab><ab n="B14K1V8"><w>εν</w><w>πυρι</w><w>φλογος</w><w>διδοντος</w><w>εκδι<unclear>κη</unclear>σιν</w><w>τοις</w><w>μη</w><w>ειδο
+<lb n="P99vCL-1115" break="no"/>σι</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w><w>και</w><w>τοις</w><w>μη</w><w>υπακουουσι</w><w>τω</w><w>ευαγγελιω</w>
+<lb n="P99vCL-1115"/><w><unclear>του</unclear></w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w><unclear>η</unclear>μων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="B14K1V9"><w>οιτινες</w><w>δικην</w><w>τισουσιν</w><w>ολε
+<lb n="P99vCL-1115" break="no"/>θ<unclear>ρον</unclear></w><w>αιωνιον</w><w><unclear>α</unclear>πο</w><w>προσ<unclear>ω</unclear>που</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>και</w><w>απο</w><w>τη<unclear>ς</unclear></w>
+<lb n="P99vCL-1115"/><w>δοξης</w><w>της</w><w>ισχυος</w><w>αυτου</w></ab><ab n="B14K1V10"><w>οταν</w><w>ελθη</w><w>ενδο<unclear>ξασθη</unclear>
+<lb n="P99vCL-1115" break="no"/><unclear>ναι</unclear></w><w><unclear>εν</unclear></w><w>τοις</w><w>αγιοις</w><w>αυτου</w><w>και</w><w>θαυμασθηναι</w><w><unclear>εν</unclear></w><w><unclear>πα</unclear>σι</w>
+<lb n="P99vCL-1115"/><w>τοις</w><w>πιστευσασιν</w><w>οτι</w><w>επιστευθη</w><w><unclear>το</unclear></w><w>μαρ
+<lb n="P99vCL-1115" break="no"/>τυριον</w><w><unclear>υ</unclear>μων</w><w><unclear>ε</unclear>φ</w><w><unclear>υ</unclear>μας</w><w>εν</w><w>τη</w><w>ημερ<unclear>α</unclear></w><w>εκεινη</w></ab><ab n="B14K1V11"><w>εις</w><w>ο</w><w>και</w>
+<lb n="P99vCL-1115"/><w>προσευχομεθα</w><w>πα<unclear>ν</unclear>τοτε</w><w>περι</w><w>υμων</w>
+<lb n="P99vCL-1115"/><w>ινα</w><w>υμας</w><w>αξιωση</w><w>της</w><w>κλησεως</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>ημων</w>
+<lb n="P99vCL-1115"/><w>και</w><w>πληρωση</w><w>πασαν</w><w>ευδο<unclear>κιαν</unclear></w><w><unclear>αγαθωσυνης</unclear></w><w><unclear>και</unclear></w>
+<pb n="100r" type="folio" xml:id="P100r-1115"/>
+<cb n="P100rC-1115"/>
+<lb n="P100rCL-1115"/><w>εργον</w><w>πιστεως</w><w>εν</w><w>δυναμει</w></ab><ab n="B14K1V12"><w>οπως</w><w>ενδοξασθη</w><w>το</w><w>ονομα</w>
+<lb n="P100rCL-1115"/><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>εν</w><w>υμιν</w><w>και</w><w>υμεις</w><w>εν</w><w>αυτω</w><w>κατα</w><w>την</w><w>αρχ<gap reason="illegible" unit="char" extent="1-2"/></w>
+<lb n="P100rCL-1115"/><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>ημων</w><w>και</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab></div><div type="chapter" n="B14K2"><ab n="B14K2V1"><w><hi rend="cap" height="undefined">ε</hi>ρωτωμεν</w><w><unclear>δε</unclear></w>
+<lb n="P100rCL-1115"/><w>υμας</w><w>αδελφοι</w><w>υπερ</w><w>της</w><w>παρουσιας</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w>
+<lb n="P100rCL-1115"/><w>και</w><w>ημων</w><w>επισυναγ<unclear>ωγης</unclear></w><w>επ</w><w>αυτον</w></ab><ab n="B14K2V2"><w>εις</w><w>το</w><w>μη</w><w>ταχεως</w><w>σαλευ
+<lb n="P100rCL-1115" break="no"/>θηναι</w><w>υμας</w><w>απο</w><w>του</w><w>νοος</w><w>μητε</w><w>θροεισθαι</w><w>μη<unclear>τε</unclear></w>
+<lb n="P100rCL-1115"/><w>δια</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>μητε</w><w>δια</w><w>λογου</w><w>μητε</w><w>δι</w><w>επιστολης</w><w>ως</w>
+<lb n="P100rCL-1115"/><w>δι</w><w>ημων</w><w>ως</w><w>οτι</w><w>ενεστηκεν</w><w>η</w><w>ημερα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb n="P100rCL-1115"/></ab><ab n="B14K2V3"><w>μη</w><w>τις</w><w>υμας</w><w>εξαπατηση</w><w>κατα</w><w>μηδενα</w><w>τροπο<unclear>ν</unclear></w><w>οτι</w>
+<lb n="P100rCL-1115"/><w><unclear>εαν</unclear></w><w>μη</w><w>ελθη</w><w>η</w><w>αποστασια</w><w>πρωτον</w><w><unclear>και</unclear></w><w>αποκα
+<lb n="P100rCL-1115" break="no"/>λυφθη</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline"><unclear>ανος</unclear></hi></abbr></w><w>της</w><w>ανομιας</w><w>ο</w><w>υιος</w><w>της</w><w>απω<unclear>λειας</unclear></w>
+<lb n="P100rCL-1115"/></ab><ab n="B14K2V4"><w>ο</w><w>αντικειμενος</w><w>και</w><w>υπεραιρομενος</w><w>επι</w><w>παντα</w><w>λεγομενον</w>
+<lb n="P100rCL-1115"/><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w><w>η</w><w>σεβασμα</w><w>ωστε</w><w>αυτον</w><w>εις</w><w>τον</w><w>ναον</w><w>του</w>
+<lb n="P100rCL-1115"/><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>καθισαι</w><w>αποδεικνυοντα</w><w>εαυτον</w><w>οτι</w><w>εστι</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w>
+<lb n="P100rCL-1115"/></ab><ab n="B14K2V5"><w>ου</w><w>μνημονευετε</w><w>οτι</w><w>ετι</w><w>ων</w><w>προς</w><w>υμας</w><w>ταυτα</w>
+<lb n="P100rCL-1115"/><w>ελεγον</w><w>υμιν</w></ab><ab n="B14K2V6"><w>και</w><w>ν<unclear>υ</unclear>ν</w><w>το</w><w>κατεχ<unclear>ο</unclear>ν</w><w>οιδατε</w><w>εις</w><w>το</w><w>α
+<lb n="P100rCL-1115" break="no"/>ποκαλυφθηναι</w><w>αυτον</w><w>εν</w><w>τω</w><w>αυτω</w><w>καιρω</w></ab><ab n="B14K2V7"><w>το</w><w>γαρ</w>
+<lb n="P100rCL-1115"/><w>μυστηριον</w><w>ηδη</w><w>ενεργειται</w><w>της</w><w>ανομιας</w><w>μονον</w>
+<lb n="P100rCL-1115"/><w>ο</w><w>κατεχων</w><w>αρτι</w><w>εως</w><w>εκ</w><w>μεσου</w><w>γενηται</w></ab><ab n="B14K2V8"><w>και</w><w>τοτε</w>
+<lb n="P100rCL-1115"/><w>αποκαλυφθησεται</w><w>ο</w><w>ανομος</w><w>ον</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>αναλωσ<unclear>ει</unclear></w>
+<lb n="P100rCL-1115"/><w>τω</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>του</w><w>στοματος</w><w>αυτου</w></ab><ab n="B14K2V9"><w>ου</w><w>εστιν</w><w>η</w><w>παρουσια</w>
+<lb n="P100rCL-1115"/><w>κατ</w><w>ενεργειαν</w><w>του</w><w>σατανα</w><w>εν</w><w>παση</w><w>δυναμ<unclear>ει</unclear></w>
+<lb n="P100rCL-1115"/><w>και</w><w>σημειοις</w><w>και</w><w>τερασιν</w><w>ψευδους</w></ab><ab n="B14K2V10"><w>και</w><w><unclear>εν</unclear></w><w>παση</w>
+<lb n="P100rCL-1115"/><w><unclear>απατη</unclear></w><w>της</w><w>αδικιας</w><w>εν</w><w>τοις</w><w>απολλυμενοις</w>
+<lb n="P100rCL-1115"/><w><unclear>αν</unclear>θ</w><w>ων</w><w>την</w><w>αγαπην</w><w>της</w><w>αληθειας</w><w>ουκ</w><w>εδεξαντο</w>
+<lb n="P100rCL-1115"/><w>εις</w><w>το</w><w>σωθηναι</w><w>αυτους</w></ab><ab n="B14K2V11"><w>και</w><w>δια</w><w>τουτο</w><w>πεμψει</w><w>αυ
+<lb n="P100rCL-1115" break="no"/>τ<gap reason="illegible" unit="char" extent="2"/>ς</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>ενεργειαν</w><w>της</w><w>πλανης</w><w>εις</w><w>το</w><w>πιστευσαι</w>
+<lb n="P100rCL-1115"/><w>αυτους</w><w>τω</w><w>ψευδει</w></ab><ab n="B14K2V12"><w>ινα</w><w>κριθωσιν</w><w>παντες</w>
+<lb n="P100rCL-1115"/><w>οι</w><w>μη</w><w><unclear>πι</unclear>στευσαντες</w><w>τη</w><w>αληθεια</w><w>αλλ</w><w>ευδοκησαντες</w>
+<lb n="P100rCL-1115"/><w>εν</w><w>τη</w><w>αδικια</w></ab><ab n="B14K2V13"><w>ημεις</w><w>δε</w><w>οφειλωμεν</w>
+<pb n="100v" type="folio" xml:id="P100v-1115"/>
+<cb n="P100vC-1115"/>
+<lb n="P100vCL-1115"/><w>ευχαριστειν</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>παντοτε</w><w>περι</w><w>υμων</w><w>α
+<lb n="P100vCL-1115" break="no"/>δελφοι</w><w>ηγαπημενοι</w><w>υπο</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>οτι</w><w>ειλετο</w><w>υμας</w>
+<lb n="P100vCL-1115"/><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>απ</w><w>αρχης</w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">σριαν</hi></abbr></w><w>εν</w><w>αγιασμω</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>και</w><w>πι
+<lb n="P100vCL-1115" break="no"/>στει</w><w>αληθειας</w></ab><ab n="B14K2V14"><w>εις</w><w>ο</w><w>εκαλεσεν</w><w>υμας</w><w>δια</w><w>του</w><w>ευα
+<lb n="P100vCL-1115" break="no"/>γγελιου</w><w>ημων</w><w>εις</w><w>περιποιησιν</w><w>δοξης</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb n="P100vCL-1115"/><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="B14K2V15"><w>αρα</w><w>ουν</w><w>αδελφοι</w><w>στηκετε</w><w>και</w><w>κρατειτε</w><w>τας</w>
+<lb n="P100vCL-1115"/><w>παραδοσεις</w><w>ας</w><w>εδιδαχθητε</w><w>ειτε</w><w>δια</w><w>λογου</w><w>ειτε</w>
+<lb n="P100vCL-1115"/><w>δι</w><w>επιστολης</w><w>ημων</w></ab><ab n="B14K2V16"><w>αυτος</w><w><unclear>δε</unclear></w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w><unclear>και</unclear></w>
+<lb n="P100vCL-1115"/><w><abbr type="nomSac"><hi rend="overline">πηρ</hi></abbr></w><w>ημων</w><w>ο</w><w>αγαπησας</w><w>ημας</w><w>και</w><w>δους</w><w>παρακλησιν</w>
+<lb n="P100vCL-1115"/><w>αιωνιαν</w><w>και</w><w>ελπιδα</w><w>αγαθην</w><w>εν</w><w>χαριτι</w></ab><ab n="B14K2V17"><w>παρα
+<lb n="P100vCL-1115" break="no"/>καλεσαι</w><w>υμων</w><w>τας</w><w>καρδιας</w><w>και</w><w>στηριξαι</w><w>υμας</w>
+<lb n="P100vCL-1115"/><w>εν</w><w>παντι</w><w>λογω</w><w>και</w><w>εργω</w><w>αγαθω</w></ab></div><div type="chapter" n="B14K3"><ab n="B14K3V1"><w>το</w><w>λοιπον</w><w>προ
+<lb n="P100vCL-1115" break="no"/>σευχεσθε</w><w>περι</w><w>ημων</w><w>αδελφοι</w><w>ινα</w><w>ο</w><w>λογος</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb n="P100vCL-1115"/><w>τρεχει</w><w>και</w><w>δοξαζηται</w><w>καθως</w><w>και</w><w>προς</w><w>υμας</w></ab><ab n="B14K3V2"><w>ινα</w>
+<lb n="P100vCL-1115"/><w>ρυσθωμεν</w><w>απο</w><w>των</w><w>ατοπων</w><w>και</w><w>πονηρων</w><w><abbr type="nomSac"><hi rend="overline">ανων</hi></abbr></w>
+<lb n="P100vCL-1115"/><w>ου</w><w>γαρ</w><w>παντων</w><w>η</w><w>πιστις</w></ab><ab n="B14K3V3"><w>πιστος</w><w>δε</w><w>εστιν</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>ος</w><w>στη
+<lb n="P100vCL-1115" break="no"/>ριξαι</w><w>υμας</w><w>και</w><w>φυλαξαι</w><w>απο</w><w>του</w><w>πονηρου</w></ab><ab n="B14K3V4"><w>πεποι
+<lb n="P100vCL-1115" break="no"/>θαμεν</w><w>δε</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w><w>εφ</w><w>υμας</w><w>οτι</w><w>α</w><w>παραγγελλομεν</w><w>υμιν</w>
+<lb n="P100vCL-1115"/><w>και</w><w>ποιειτε</w><w>και</w><w>ποιησετε</w></ab><ab n="B14K3V5"><w>ο</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>κατευθυναι</w><w>υμων</w>
+<lb n="P100vCL-1115"/><w>τας</w><w>καρδιας</w><w>εις</w><w>την</w><w>αγαπην</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>και</w><w>εις</w><w>την</w>
+<lb n="P100vCL-1115"/><w>υπομονην</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="B14K3V6"><w><hi rend="cap" height="undefined">π</hi>αραγγελλομεν</w>
+<lb n="P100vCL-1115"/><w>υμιν</w><w>αδελφοι</w><w>εν</w><w>ονοματι</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>στελλε
+<lb n="P100vCL-1115" break="no"/>σθαι</w><w>υμας</w><w>απο</w><w>παντος</w><w>αδελφου</w><w>ατακτως</w><w>περι
+<lb n="P100vCL-1115" break="no"/>πατουντος</w><w>και</w><w>μη</w><w>κατα</w><w>την</w><w>παραδοσιν</w><w>ην</w><w>παρε
+<lb n="P100vCL-1115" break="no"/>λαβ<unclear>ων</unclear></w><w>παρ</w><w>ημων</w></ab><ab n="B14K3V7"><w>αυτοι</w><w>γαρ</w><w>οιδατε</w><w>πως</w><w>δει</w><w>μι
+<lb n="P100vCL-1115" break="no"/>μεισθαι</w><w>ημας</w><w>οτι</w><w>ουκ</w><w>ητακτησαμεν</w><w>εν</w><w>υμιν</w>
+<lb n="P100vCL-1115"/></ab><ab n="B14K3V8"><w>ουδε</w><w>δωρεαν</w><w>αρτον</w><w>ελαβωμεν</w><w>παρα</w><w>τινος</w>
+<lb n="P100vCL-1115"/><w>αλλ</w><w>εν</w><w>κοπω</w><w>και</w><w>μοχθω</w><w>νυκτα</w><w>και</w><w>ημερα</w><w>εργα
+<lb n="P100vCL-1115" break="no"/>ζομενοι</w><w>προς</w><w>το</w><w>μη</w><w>επιβαρησαι</w><w>τινα</w><w>υμων</w>
+<lb n="P100vCL-1115"/></ab><ab n="B14K3V9"><w>ουχ</w><w>οτι</w><w>ουκ</w><w>εχομεν</w><w>εξουσιαν</w><w>αλλ</w><w>ινα</w><w>εαυτους</w>
+<pb n="101r" type="folio" xml:id="P101r-1115"/>
+<cb n="P101rC-1115"/>
+<lb n="P101rCL-1115"/><w>τυπον</w><w>διδωμεν</w><w>υμιν</w><w>εις</w><w>το</w><w>μιμεισθαι</w><w>υμας</w>
+<lb n="P101rCL-1115"/></ab><ab n="B14K3V10"><w>και</w><w>γαρ</w><w>οτε</w><w>ημεν</w><w>προς</w><w>υμας</w><w>τουτο</w><w>παρηγγελ
+<lb n="P101rCL-1115" break="no"/>λομεν</w><w>υμιν</w><w>οτι</w><w>ει</w><w>τις</w><w>ου</w><w>θελει</w><w>εργαζεσθαι</w>
+<lb n="P101rCL-1115"/><w>μηδε</w><w>εσθιετω</w></ab><ab n="B14K3V11"><w>ακουομεν</w><w>γαρ</w><w>τινας</w><w>περι
+<lb n="P101rCL-1115" break="no"/>πατουντας</w><w>εν</w><w>υμιν</w><w>ατακτως</w><w>μηδεν</w><w>ερ
+<lb n="P101rCL-1115" break="no"/>γαζομενους</w><w>αλλα</w><w>περιεργαζομενους</w>
+<lb n="P101rCL-1115"/></ab><ab n="B14K3V12"><w>τοις</w><w>δε</w><w>τοιουτοις</w><w>παραγγελλομεν</w><w>και</w><w>παρα
+<lb n="P101rCL-1115" break="no"/>καλουμεν</w><w>δια</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>ινα</w><w>μετα</w>
+<lb n="P101rCL-1115"/><w>ησυχιας</w><w>εργαζομενοι</w><w>τον</w><w>εαυτων</w><w>αρ
+<lb n="P101rCL-1115" break="no"/>τον</w><w>εσθιωσιν</w></ab><ab n="B14K3V13"><w>υμεις</w><w>δε</w><w>αδελφοι</w><w>μη</w><w>εκ
+<lb n="P101rCL-1115" break="no"/>κακησητε</w><w>καλοποιουντες</w></ab><ab n="B14K3V14"><w>ει</w><w>δε</w><w>τις</w><w>ουχ</w><w>υ
+<lb n="P101rCL-1115" break="no"/>πακουει</w><w>τω</w><w>λογω</w><w>ημων</w><w>δια</w><w>της</w><w>επιστολης</w>
+<lb n="P101rCL-1115"/><w>τουτον</w><w>σημειουσθε</w><w>και</w><w>μη</w><w>συναναμιγνυσθε</w>
+<lb n="P101rCL-1115"/><w>αυτου</w><w>ινα</w><w>εντραπη</w></ab><ab n="B14K3V15"><w>και</w><w><unclear>μη</unclear></w><w>ως</w><w>εχθρον</w><w>ηγεισθε</w>
+<lb n="P101rCL-1115"/><w>αυτον</w><w>αλλα</w><w>νουθετειτε</w><w>ως</w><w>αδελφον</w></ab><ab n="B14K3V16"><w>αυτος</w>
+<lb n="P101rCL-1115"/><w>δε</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>της</w><w>ειρηνης</w><w>δωη</w><w>υμιν</w><w>την</w><w>ειρηνην</w><w>εν</w>
+<lb n="P101rCL-1115"/><w>παντι</w><w>τοπω</w><w>δια</w><w>παντος</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>μετα</w><w>π<unclear>αντων</unclear></w>
+<lb n="P101rCL-1115"/><w>υμων</w></ab><ab n="B14K3V17"><w>ο</w><w>ασπασμος</w><w>τη</w><w>εμη</w><w>χειρι</w><w>παυλου</w>
+<lb n="P101rCL-1115"/><w>ο</w><w>εστιν</w><w>σημειον</w><w>εν</w><w>παση</w><w>επιστολη</w><w>ουτως</w><w>γραφω</w>
+<lb n="P101rCL-1115"/></ab><ab n="B14K3V18"><w>η</w><w>χαρις</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>μετα</w><w>παντων</w><w>υμων</w>
+<lb n="P101rCL-1115"/><w>αμην</w></ab><ab/></div><div type="explicit" n="B14explicit"><ab><w>εγραφη</w><w>απο</w><w>ρωμης</w><note type="local" xml:id="B14KSubscriptioV18-1115-1">additional faded portion of the subscription may occur on the same line before αμην. </note></ab><ab/></div></div></body></text></TEI>

@@ -1,0 +1,780 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE TEI>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="GA1996"><teiHeader><fileDesc><titleStmt><title>A transcription of Galatians in 1996</title><title type="document" n="1996" key="31996">GA 1996</title><title type="collection" level="s" xml:lang="en">The New Testament</title><title type="collection" level="s" xml:lang="de">Das Neue Testament</title><title type="work" level="m" n="Gal" xml:lang="en">The Epistle to the Galatians</title><title type="short" level="m" n="Gal" xml:lang="en">Galatians</title><respStmt><resp>Created by</resp><name type="org">The International Greek New Testament Project</name></respStmt><respStmt><resp>Transcribed by</resp><name type="person">Maria Ester Portokali</name></respStmt><respStmt><resp>Transcribed by</resp><name type="person">Panagiota (Penny) Mantouvalou</name></respStmt><respStmt><resp>Reconciled by</resp><name type="person">Amy Myshrall</name></respStmt><sponsor><name type="org">The Institute for Textual Scholarship and Electronic Editing</name></sponsor></titleStmt><editionStmt><edition n="1.1">Version 1.1, created on <date>24.9.2019</date>, archived on the University of Birmingham eData repository on <date>13.5.2024</date>.</edition></editionStmt><publicationStmt><publisher><name type="org">The Institute for Textual Scholarship and Electronic Editing</name><name type="org">University of Birmingham</name></publisher>
+        <date>13.5.2024</date><availability><p>Available for noncommercial re-use provided attribution is made to the original creators and the subsequent derivative is licensed as ShareAlike (Creative Commons by-nc-sa)</p></availability></publicationStmt><sourceDesc><msDesc><msIdentifier><country>Vatican City</country><settlement>Città del Vaticano</settlement><repository>Biblioteca Apostolica Vaticana</repository><idno>Ottob. gr. 17</idno><altIdentifier type="GA"><idno>1996</idno></altIdentifier><altIdentifier type="Liste"><idno>31996</idno></altIdentifier></msIdentifier></msDesc><listWit><witness xml:id="firsthand"/><witness xml:id="corrector"/></listWit></sourceDesc></fileDesc><encodingDesc n="1.6"><projectDesc><p>This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior.</p></projectDesc><editorialDecl><p>This transcription was produced using the online transcription editor developed by the Center for Digital Humanities at the University of Trier as part of the Workspace for Collaborative Editing Project between 2010 and 2013 and made available for use by the Institute for Textual Scholarship and Electronic Editing and the University of Birmingham.</p><p>The XML specifications used are version 1.6 of the IGNTP Guidelines available at <ptr target="http://epapers.bham.ac.uk/4301/"/></p></editorialDecl><variantEncoding method="parallel-segmentation" location="internal"/></encodingDesc></teiHeader><text xml:lang="grc"><body>
+<pb n="153r" type="folio" xml:id="P153r-1996"/>
+<cb n="P153rC1-1996"/>
+<lb n="P153rC1L-1996"/><div type="book" n="Gal"><div type="inscriptio"><ab n="Gal.inscriptio"><note type="editorial">The inscription is attached to the hypothesis on F152r.</note></ab></div><div type="chapter" n="Gal.1"><ab n="Gal.1.1"><w>παυλος</w><w>αποστολος</w><w>ουκ</w><w>απ</w><w><abbr type="nomSac"><hi rend="overline">ανων</hi></abbr></w><w>ουδε</w><w>δι</w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P153rC1L-1996"/><w>αλλα</w><w>δια</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P153rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>και</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>του</w><w>εγειραντος</w><w>αυτον</w>
+<lb n="P153rC1L-1996"/><w>εκ</w><w>νεκρων</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P153rC1L-1996"/></ab><ab n="Gal.1.2"><w>και</w><w>οι</w><w>συν</w><w>εμοι</w><w>παντες</w><w>αδελφοι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P153rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>ταις</w><w>εκκλησιαις</w><w>της</w><w>γαλατιας</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P153rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.1.3"><w>χαρις</w><w>υμιν</w>
+<lb n="P153rC1L-1996"/><w>και</w><w>ειρηνη</w><w>απο</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="Gal.1.4"><w>του</w><w>δοντος</w><w>εαυτον</w><w>υπερ</w>
+<lb n="P153rC1L-1996"/><w>των</w><w>αμαρτιων</w><w>ημων</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P153rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>οπως</w><w>εξεληται</w><w>ημας</w><w>εκ</w><w>του</w><w>ενεστωτος</w>
+<lb n="P153rC1L-1996"/><w>αιωνος</w><w>πονηρου</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="153v" type="folio" xml:id="P153v-1996"/>
+<cb n="P153vC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P153vC1L-1996"/><w>κατα</w><w>το</w><w>θελημα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>ημων</w></ab><ab n="Gal.1.5"><w>ω</w><w>η</w><w>δοξα</w><w>εις</w><w>τους</w><w>αιωνας</w><w>των</w><w>αιωνων</w>
+<lb n="P153vC1L-1996"/><w>αμην</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P153vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.1.6"><w>θαυμαζω</w><w>οτι</w><w>ουτω</w><w>ταχεως</w>
+<lb n="P153vC1L-1996"/><w>μετατιθεσθε</w><w>απο</w><w>του</w><w>καλεσαντος</w><w>υμας</w><w>εν</w><w>χαριτι</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>εις</w><w>ετερον</w><w>ευαγ
+<lb n="P153vC1L-1996" break="no"/>γελιον</w></ab><ab n="Gal.1.7"><w>ο</w><w>ουκ</w><w>εστιν</w><app><rdg type="orig" hand="firsthand"><w>αλλοι</w></rdg><rdg type="corr" hand="corrector"><w>αλλο</w></rdg></app><w>ει</w><w>μη</w><w>τινες</w><w>εισιν</w><w>οι</w><w>ταρασσοντες</w><w>υμας</w><w>και</w><w>θε
+<lb n="P153vC1L-1996" break="no"/>λοντες</w><w>μεταστρεψαι</w><w>το</w><w>ευαγγελιον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="154r" type="folio" xml:id="P154r-1996"/>
+<cb n="P154rC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P154rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.1.8"><w>αλλα</w><w>και</w><w>εαν</w><w>ημεις</w><w>η</w><w>ο</w><w>αγγελος</w>
+<lb n="P154rC1L-1996"/><w>εξ</w><w><abbr type="nomSac"><hi rend="overline">ουνου</hi></abbr></w><w>ευαγγελιζεται</w><w>υμιν</w><w>παρ</w><w>ο</w><w>ευηγγελισαμεθα</w><w>αναθεμα</w><w>εστω</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P154rC1L-1996"/></ab><ab n="Gal.1.9"><w>ως</w><w>προειρηκαμεν</w><w>και</w><w>αρτι</w><w>παλιν</w><w>λεγομεν</w><w>ει</w><w>τις</w><w>υμας</w><w>ευαγγελιζεται</w><w>παρ</w><w>ο</w>
+<lb n="P154rC1L-1996"/><w>παρελαβετε</w><w>αναθεμα</w><w>εστω</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P154rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.1.10"><w>αρτι</w><w>γαρ</w><w><abbr type="nomSac"><hi rend="overline">ανους</hi></abbr></w>
+<lb n="P154rC1L-1996"/><w>πειθω</w><w>η</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w><w>η</w><w>ζητω</w><w><abbr type="nomSac"><hi rend="overline">ανοις</hi></abbr></w><w>αρεσκειν</w><w>ει</w><w>γαρ</w><w>ετι</w><w><abbr type="nomSac"><hi rend="overline">ανοις</hi></abbr></w><w>ηρεσκον</w>
+<lb n="P154rC1L-1996"/><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>δουλος</w><w>ουκ</w><w>αν</w><w>ημην</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="154v" type="folio" xml:id="P154v-1996"/>
+<cb n="P154vC1-1996"/>
+<lb n="P154vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.1.11"><w>γωριζω</w>
+<lb n="P154vC1L-1996"/><w>δε</w><w>υμιν</w><w>αδελφοι</w><w>το</w><w>ευαγγελιον</w><w>το</w><w>ευαγγελισθεν</w><w>υπ</w><w>εμου</w><w>οτι</w><w>ουκ</w><w>εστι</w><w>κατα</w>
+<lb n="P154vC1L-1996"/><w><abbr type="nomSac"><hi rend="overline">ανον</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.1.12"><w>ουδε</w><w>γαρ</w>
+<lb n="P154vC1L-1996"/><w>εγω</w><w>παρα</w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>παρελαβον</w><w>αυτο</w><w>ουδε</w><w>εδιδαχθην</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P154vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>αλλα</w><w>δι</w><w>αποκαλυψεως</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P154vC1L-1996"/></ab><ab n="Gal.1.13"><w>ηκουσατε</w><w>γαρ</w><w>την</w><w>εμην</w><w>αναστροφην</w><w>ποτε</w><w>εν</w><w>τω</w><w>ιουδαισμω</w><w>οτι</w>
+<lb n="P154vC1L-1996"/><w>καθ</w><w>υπερβολην</w><w>εδιωκον</w><w>την</w><w>εκκλησιαν</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>και</w><w>επορθουν</w><w>αυτην</w>
+<lb n="P154vC1L-1996"/></ab><ab n="Gal.1.14"><w>και</w><w>προεκοπτον</w><w>εν</w><w>τω</w><w>ιουδαισμω</w><w>υπερ</w><w>πολλους</w><w>συνηλικιωτας</w>
+<lb n="P154vC1L-1996"/><w>εν</w><w>τω</w><w>γενει</w><w>μου</w><w>περισσοτερως</w><w>ζηλωτης</w><w>υπαρχων</w><w>των</w><w><abbr type="nomSac"><hi rend="overline">πρικων</hi></abbr></w><w>μου</w>
+<lb n="P154vC1L-1996"/><w>παραδοσεων</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P154vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.1.15"><w>οτε</w><w>δε</w><app><rdg type="orig" hand="firsthand"><w>ην</w></rdg><rdg type="corr" hand="firsthand"><w>ηυδοκησεν</w></rdg></app><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>ο</w><w>αφωρισας</w><w>με</w>
+<lb n="P154vC1L-1996"/><w>εκ</w><w>κοιλιας</w><w><abbr type="nomSac"><hi rend="overline">μρς</hi></abbr></w><w>μου</w><w>και</w><w>καλεσας</w><w>δια</w><w>της</w><w>χαριτος</w><w>αυτου</w></ab><ab n="Gal.1.16"><w>αποκαλυψαι</w><w>τον</w>
+<lb n="P154vC1L-1996"/><w>υιον</w><w>αυτου</w><w>εν</w><w>εμοι</w><w>ινα</w><w>ευαγγελιζομαι</w><w>αυτον</w><w>εν</w><w>τοις</w><w>εθνεσι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P154vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>ευθεως</w><w>ου</w><w>προ
+<pb n="155r" type="folio" xml:id="P155r-1996" break="no"/>
+<cb n="P155rC1-1996"/>
+<lb n="P155rC1L-1996"/>σανεθεμην</w><w>σαρκι</w><w>και</w><w>αιματι</w></ab><ab n="Gal.1.17"><w>ουδε</w><w>ανηλθον</w><w>εις</w><w>ιεροσολυμα</w><w>προς</w><w>τους</w><w>προ</w>
+<lb n="P155rC1L-1996"/><w>εμου</w><w>αποστολους</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P155rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>αλλα</w><w>απηλθον</w><w>εις</w><w>αραβιαν</w><w>και</w>
+<lb n="P155rC1L-1996"/><w>παλιν</w><w>υπερεψα</w><w>εις</w><w>δαμασκον</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P155rC1L-1996"/></ab><ab n="Gal.1.18"><w>επειτα</w><w>μετα</w><w>ετη</w><w>τρια</w><w>ανηλθον</w><w>εις</w><w>ιεροσολυμα</w><w>ιστορησαι</w><w>πετρον</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P155rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>και</w><w>επεμεινα</w><w>προς</w><w>αυτον</w><w>ημερας</w>
+<lb n="P155rC1L-1996"/><w>δεκαπεντε</w></ab><ab n="Gal.1.19"><w>ετερον</w><w>δε</w><w>των</w><w>αποστολων</w><w>ουκ</w><w>ειδον</w><w>ει</w><w>μη</w><w>ιακωβον</w>
+<lb n="P155rC1L-1996"/><w>τον</w><w>αδελφον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P155rC1L-1996"/></ab><ab n="Gal.1.20"><w>α</w><w>δε</w><w>γραφω</w><w>υμιν</w><w>ενωπιον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>οτι</w><w>ου</w><w>ψευδομαι</w></ab><ab n="Gal.1.21"><w>επειτα</w><w>ηλθον</w><w>εις</w><w>τα</w>
+<lb n="P155rC1L-1996"/><w>κληματα</w><w>της</w><w>συριας</w><w>και</w><w>της</w><w>κιλικιας</w></ab><ab n="Gal.1.22"><w>ημην</w><w>δε</w><w>αγνοουμενος</w><w>τω</w>
+<lb n="P155rC1L-1996"/><w>προσωπω</w><w>ταις</w><w>εκκλησιαις</w><w>της</w><w>ιουδαιας</w><w>ταις</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w></ab><ab n="Gal.1.23"><w>μονον</w><w>δε</w><w>ακου
+<lb n="P155rC1L-1996" break="no"/>οντες</w><w>ησαν</w><w>οτι</w><w>ο</w><w>διωκων</w><w>ημας</w><w>ποτε</w><w>νυν</w><w>ευαγγελιζεται</w><w>την</w><w>πιστιν</w>
+<lb n="P155rC1L-1996"/><w>ην</w><w>ποτε</w><w>επορθει</w></ab><ab n="Gal.1.24"><w>και</w><w>εδοξαζον</w><w>εν</w><w>εμοι</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P155rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab></div><div type="chapter" n="Gal.2"><ab n="Gal.2.1"><w>επειτα</w><w>δια</w><w>δε
+<pb n="155v" type="folio" xml:id="P155v-1996" break="no"/>
+<cb n="P155vC1-1996"/>
+<lb n="P155vC1L-1996"/>σσαρων</w><w>ετων</w><w>παλιν</w><w>ανεβην</w><w>εις</w><w>ιεροσολυμα</w><w>μετα</w><w>βαρναβα</w><w>συμπαραλαβων</w>
+<lb n="P155vC1L-1996"/><w>και</w><w>τιτον</w></ab><ab n="Gal.2.2"><w>ανεβην</w><w>δε</w><w>κατα</w><w>αποκαλυψιν</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P155vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>και</w><w>ανεθεμην</w><w>αυτοις</w>
+<lb n="P155vC1L-1996"/><w>το</w><w>ευαγγελιον</w><w>ο</w><w>κηρυσσω</w><w>εν</w><w>τοις</w><w>εθνεσι</w><w>κατ</w><w>ιδιαν</w><w>δε</w><w>τοις</w><w>δοκουσι</w><w>μη</w><w>πως</w>
+<lb n="P155vC1L-1996"/><w>εις</w><w>κενον</w><w>τρεχω</w><w>η</w><w>εδραμον</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P155vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.2.3"><w>αλλ</w><w>ουδε</w><w>τιτος</w>
+<lb n="P155vC1L-1996"/><w>ο</w><w>συν</w><w>εμοι</w><w>ελλην</w><w>ων</w><w>ηναγκασθη</w><w>περιτμηθηναι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P155vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.2.4"><w>δια</w><w>δε</w><w>τους</w><app><rdg type="orig" hand="firsthand"><w>πασακτους</w></rdg><rdg type="corr" hand="corrector"><w>παρεισακτους</w></rdg></app><w>ψευδαδελφους</w><w>οι
+<lb n="P155vC1L-1996" break="no"/>τινες</w><w>παρεισηλθον</w><w>κατασκοπησαι</w><w>την</w><w>ελευθεριαν</w><w>ημων</w><w>ην</w><w>εχομεν</w>
+<lb n="P155vC1L-1996"/><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>ινα</w><w>ημας</w><w>καταδουλωσωνται</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="156r" type="folio" xml:id="P156r-1996"/>
+<cb n="P156rC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P156rC1L-1996"/></ab><ab n="Gal.2.5"><w>οις</w><w>ουδε</w><w>προς</w><w>ωραν</w><w>ειξαμεν</w><w>τη</w><w>υποταγη</w><w>ινα</w><w>η</w><w>αληθεια</w><w>του</w><w>ευαγγελιου</w><w>δια
+<lb n="P156rC1L-1996" break="no"/>μεινη</w><w>προς</w><w>υμας</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P156rC1L-1996"/></ab><ab n="Gal.2.6"><w>απο</w><w>δε</w><w>των</w><w>δοκουντων</w><w>ειναι</w><w>τι</w><w>οποιοι</w><app><rdg type="orig" hand="firsthand"><w>ο<unclear>υ</unclear></w></rdg><rdg type="corr" hand="corrector"/></app><w>ποτε</w><w>ησαν</w><w>ουδεν</w><w>μοι</w><w>δια
+<lb n="P156rC1L-1996" break="no"/>φερει</w><w>προσωπον</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>ου</w><w>λαμβανει</w><space unit="line" extent="14"/>
+<pb n="156v" type="folio" xml:id="P156v-1996"/>
+<cb n="P156vC1-1996"/>
+<lb n="P156vC1L-1996"/><space unit="Page" extent="1"/>
+<pb n="157r" type="folio" xml:id="P157r-1996"/>
+<cb n="P157rC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P157rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.2.14"><w>τι</w><w>τα</w><w>εθνη</w><w>αναγκαζεις</w><w>ιουδαιζειν</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P157rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.2.15"><w>ημεις</w><w>φυσει</w><w>ιουδαιοι</w><w>και</w>
+<lb n="P157rC1L-1996"/><w>ουκ</w><w>εξ</w><w>εθνων</w><w>αμαρτωλοι</w></ab><ab n="Gal.2.16"><w>ειδοτες</w><w>οτι</w><w>ου</w><w>δικαιουται</w><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>εξ</w><w>εργων</w>
+<lb n="P157rC1L-1996"/><w>νομου</w><w>εαν</w><w>μη</w><w>δια</w><w>πιστεως</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>και</w><w>ημεις</w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w><w>επιστευσαμεν</w>
+<lb n="P157rC1L-1996"/><w>ινα</w><w>εκ</w><w>πιστεως</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>δικαιωθωμεν</w><w>και</w><w>ουκ</w><w>εξ</w><w>εργων</w><w>νομου</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P157rC1L-1996"/><w><unclear>δ</unclear>ιοτι</w><w>ου</w><w>δικαιωθησεται</w><w>εξ</w><w>εργων</w><w>νομου</w><w>πασα</w><w>σαρξ</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="157v" type="folio" xml:id="P157v-1996"/>
+<cb n="P157vC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P157vC1L-1996"/></ab><ab n="Gal.2.17"><w>ει</w><w>δε</w><w>ζητουντες</w><w>δικαιωθηναι</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w>ευρεθημεν</w><w>και</w><w>αυτοι</w><w>αμαρτωλοι</w><w>ἆρα</w>
+<lb n="P157vC1L-1996"/><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>αμαρτιας</w><w>διακονος</w><w>μη</w><w>γενοιτο</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P157vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.2.18"><w>ει</w><w>γαρ</w><w>α</w><w>κα
+<lb n="P157vC1L-1996" break="no"/>τελυσα</w><w>ταυτα</w><w>παλιν</w><w>οικοδομω</w><w>παραβατην</w><w>εμαυτον</w><w>συνιστημοι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P157vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.2.19"><w>εγω</w><w>γαρ</w><w>δια</w><w>νομου</w><w>νομω</w><w>απεθανον</w><w>ινα</w>
+<lb n="P157vC1L-1996"/><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>ζησω</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P157vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w>συνεσταυρωμαι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P157vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.2.20"><w>ζω</w><w>δε</w><w>ουκετι</w><w>εγω</w><w>ζη</w><w>δε</w><w>εν</w><w>εμοι</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P157vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>ο</w><w>δε</w><w>νυν</w><w>ζω</w><w>εν</w><w>σαρκι</w><w>εν</w><w>πιστει</w><w>ζω</w><w>τη</w><w>του</w><w>υιου</w>
+<lb n="P157vC1L-1996"/><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>του</w><w>αγαπησαντος</w><w>με</w><w>και</w><w>παραδοντος</w><w>εαυτον</w><w>υπερ</w><w>εμου</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="158r" type="folio" xml:id="P158r-1996"/>
+<cb n="P158rC1-1996"/>
+<lb n="P158rC1L-1996"/></ab><ab n="Gal.2.21"><w>ουκ</w><w>αθετω</w><w>την</w><w>χαριν</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P158rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>ει</w><w>γαρ</w><w>δια</w><w>νομου</w><w>δικαιοσυνη</w><w>ἆρα</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w>
+<lb n="P158rC1L-1996"/><w>δωρεαν</w><w>απεθανε</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P158rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab></div><div type="chapter" n="Gal.3"><ab n="Gal.3.1"><w>ω</w><w>ανοητοι</w><w>γαλαται</w><w>τις</w><w>υμας</w><w>εβασκηνε</w><w>τη</w><w>αληθεια</w><w>μη</w>
+<lb n="P158rC1L-1996"/><w>πειθεσθαι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P158rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>οις</w><w>κατ</w><w>οφθαλμους</w><w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>προεγραφη</w>
+<lb n="P158rC1L-1996"/><w>εν</w><w>υμιν</w><w><abbr type="nomSac"><hi rend="overline">εστρωμενος</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P158rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.2"><w>τουτο</w><w>μονον</w><w>θελω</w><w>μαθειν</w><w>αφ</w><w>υμων</w><w>εξ</w><w>εργων</w><w>νομου</w>
+<lb n="P158rC1L-1996"/><w>το</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>ελαβετε</w><w>η</w><w>εξ</w><w>ακοης</w><w>πιστεως</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P158rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.3"><w>ουτως</w><w>ανοητοι</w><app><rdg type="orig" hand="firsthand"><w>εστει</w></rdg><rdg type="corr" hand="corrector"><w>εστε</w></rdg></app>
+<lb n="P158rC1L-1996"/><w>εναρξαμενοι</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>νυν</w><w>σαρκι</w><w>επιτελεισθε</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P158rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.4"><w>τοσαυτα</w><w>επαθετε</w><w>εικη</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P158rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>ει</w><w>γε</w><w>και</w><w>εικη</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="158v" type="folio" xml:id="P158v-1996"/>
+<cb n="P158vC1-1996"/>
+<lb n="P158vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.5"><app><rdg type="orig" hand="firsthand"/><rdg type="corr" hand="corrector"><w>ο</w></rdg></app><w>ουν</w><w>επι
+<lb n="P158vC1L-1996" break="no"/>χορηγων</w><w>ημιν</w><w>το</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>και</w><w>ενεργων</w><w>δυναμεις</w><w>εν</w><w>υμιν</w><w>εξ</w><w>εργων</w><w>νομου</w><w>η</w>
+<lb n="P158vC1L-1996"/><w>εξ</w><w>ακοης</w><w>πιστεως</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P158vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.6"><w>καθως</w><w>αβρααμ</w><w>επιστευσε</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>και</w><w>ελογισθη</w><w>αυτω</w>
+<lb n="P158vC1L-1996"/><w>εις</w><w>δικαιοσυνην</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P158vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.7"><w>γινωσκετε</w><w>αρα</w><app><rdg type="orig" hand="firsthand"/><rdg type="corr" hand="corrector"><w>οτι</w><w>οι</w></rdg></app><w>εκ</w><w>πιστεως</w><app><rdg type="orig" hand="firsthand"><w>δικ</w></rdg><rdg type="corr" hand="firsthand"><w>ουτοι</w></rdg></app><w>υιοι</w><w>εισιν</w><w>αβρααμ</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P158vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.8"><w>προιδουσα</w><w>δε</w><w>η</w><w>γραφη</w><w>οτι</w><w>εκ</w><w>πιστεως</w><w>δικαιοι</w><w>τα</w><w>εθνη</w>
+<lb n="P158vC1L-1996"/><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>προευηγγελισατο</w><w>τω</w><w>αβρααμ</w><w>οτι</w><w>ενευλογηθησονται</w><w>εν</w><w>σοι</w><w>παντα</w>
+<lb n="P158vC1L-1996"/><w>τα</w><w>εθνη</w></ab><ab n="Gal.3.9"><w>ωστε</w><w>οι</w><w>εκ</w><w>πιστεως</w><w>ευλογουνται</w><w>συν</w><w>τω</w><w>πιστω</w><w>αβρααμ</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P158vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.10"><w>οσοι</w><w>γαρ</w><w>εξ</w><w>εργων</w><w>νομου</w><w>εισιν</w><w>υπο</w><w>καταραν</w>
+<lb n="P158vC1L-1996"/><w>εισι</w><note type="commentary">Untranscribed commentary text within the line</note><w>γεγραπται</w><w>γαρ</w><w>επικαταρατος</w><w>πας</w><w>ους</w><w>ουκ</w><w>εμμενει</w><w>εν</w>
+<lb n="P158vC1L-1996"/><w>πασι</w><w>τοις</w><w>γεγραμμενοις</w><w>εν</w><w>τω</w><w>βιβλιω</w><w>του</w><w>νομου</w><w>του</w><w>ποιησαι</w><w>αυτα</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P158vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.11"><w>οτι</w><w>δε</w><w>εν</w><app><rdg type="orig" hand="firsthand"><w>ομω</w></rdg><rdg type="corr" hand="corrector"><w>νομω</w></rdg></app><w>ουδεις</w><w>δικαιουται</w><w>παρα</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w>
+<lb n="P158vC1L-1996"/><w>δηλον</w><note type="commentary">Untranscribed commentary text within the line</note><w>οτι</w><w>ο</w><w>δικαιος</w><w>εκ</w><w>πιστεως</w><w>ζησεται</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P158vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.12"><w>ο</w><w>δε</w><w>νομος</w><w>ουκ</w><w>εστιν</w><w>εκ</w><w>πι
+<lb n="P158vC1L-1996" break="no"/>στεως</w><w>αλλ</w><w>ο</w><w>ποιησας</w><w>αυτα</w><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>ζησεται</w><w>εν</w><w>αυτοις</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P158vC1L-1996"/></ab><ab n="Gal.3.13"><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>ημας</w><w>εξηγορασεν</w><w>εκ</w><w>της</w><w>καταρας</w><w>του</w><w>νομου</w><w>γενομενος</w><w>υπερ</w><w>ημων</w><w>καταρα</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="159r" type="folio" xml:id="P159r-1996"/>
+<cb n="P159rC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P159rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>γεγραπται</w><w>γαρ</w>
+<lb n="P159rC1L-1996"/><w>επικαταρατος</w><w>πας</w><w>ο</w><w>κρεμαμενος</w><w>επι</w><w>ξυλου</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P159rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.14"><w>ινα</w><w>εις</w><w>τα</w><w>εθνη</w><w>η</w><w>ευλογια</w><w>του</w>
+<lb n="P159rC1L-1996"/><w>αβρααμ</w><w>γενηται</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>ινα</w><w>την</w><w>επαγγελιαν</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>λαβωμεν</w><w>δια</w><w>της</w><w>πιστεως</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P159rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.15"><w>αδελφοι</w><w>κατα</w><w><abbr type="nomSac"><hi rend="overline">ανον</hi></abbr></w><w>λεγω</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P159rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>ομως</w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>κεκυρωμενην</w><w>διαθηκην</w><w>ουδεις</w><w>αθετει</w>
+<lb n="P159rC1L-1996"/><w>η</w><w>επιδιατασσεται</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P159rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.16"><w>τω</w><app><rdg type="orig" hand="firsthand"/><rdg type="corr" hand="corrector"><w>δε</w></rdg></app><w>αβρααμ</w>
+<lb n="P159rC1L-1996"/><w>ερρεθησαν</w><w>αι</w><w>επαγγελιαι</w><w>και</w><w>τω</w><w>σπερματι</w><w>αυτου</w><w>ου</w><w>λεγει</w><w>και</w><w>τοις</w><w>σπερμασιν</w>
+<lb n="P159rC1L-1996"/><w>αυτου</w><w>ως</w><w>επι</w><w>πολλων</w><w>αλλ</w><w>ως</w><w>αφ</w><w>ενος</w><w>και</w><w>τω</w><w>σπερματι</w><w>σου</w><w>ος</w><w>εστι</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w></ab><ab n="Gal.3.17"><w>τουτο</w>
+<lb n="P159rC1L-1996"/><w>δε</w><w>λεγω</w><w>διαθηκην</w><w>προκεκυρωμενην</w><w>υπο</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w>ο</w><w>μετα</w><w>ετη</w><w>τετρα
+<lb n="P159rC1L-1996" break="no"/>κοσια</w><w>και</w><w>τριακοντα</w><w>γεγονως</w><w>νομος</w><w>ουκ</w><app><rdg type="orig" hand="firsthand"><w>υροι</w></rdg><rdg type="corr" hand="corrector"><w>αχυροι</w></rdg></app><w>εις</w><w>το</w><app><rdg type="orig" hand="firsthand"><w>ταργησαι</w></rdg><rdg type="corr" hand="corrector"><w>καταργησαι</w></rdg></app><w>την</w><w>επαγγελιαν</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="159v" type="folio" xml:id="P159v-1996"/>
+<cb n="P159vC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P159vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.18"><w>ει</w><w>γαρ</w><w>εκ</w><w>νομου</w><w>η</w>
+<lb n="P159vC1L-1996"/><w>ρονομια</w><w>ουκετι</w><w>εξ</w><w>επαγγελιας</w><w>τω</w><w>δε</w><w>αβρααμ</w><w>δι</w><w>επαγγελιας</w><w>κε
+<lb n="P159vC1L-1996" break="no"/>χαρισται</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P159vC1L-1996"/></ab><ab n="Gal.3.19"><w>τι</w><w>ουν</w><w>ο</w><w>νομος</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P159vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>των</w><w>παραβασεων</w>
+<lb n="P159vC1L-1996"/><w>χαριν</w><w>προσετεθη</w><w>αχρις</w><w>ου</w><w>ελθη</w><w>το</w><w>σπερμα</w><w>ω</w><w>επηγγελται</w><w>διαταγεις</w><w>δι</w><w>α
+<lb n="P159vC1L-1996" break="no"/>γγελων</w><w>εν</w><w>χειρι</w><w>μεσιτου</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P159vC1L-1996"/></ab><ab n="Gal.3.20"><w>ο</w><w>δε</w><w>μεσιτης</w><w>ενος</w><w>ουκ</w><w>εστιν</w><note type="commentary">Untranscribed commentary text within the line</note><w>ο</w><w>δε</w>
+<lb n="P159vC1L-1996"/><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><app><rdg type="orig" hand="firsthand"><w>ει</w></rdg><rdg type="corr" hand="corrector"><w>εις</w></rdg></app><w>εστιν</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P159vC1L-1996"/></ab><ab n="Gal.3.21"><w>ο</w><w>ουν</w><w>νομος</w><w>κατα</w><w>των</w><w>επαγγελιων</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>μη</w><w>γενοιτο</w><w>ει</w><w>γαρ</w><w>εδοθη</w><w>νομος</w><w>ο</w><w>δυ
+<lb n="P159vC1L-1996" break="no"/>ναμενος</w><w>ζωοποιησαι</w><w>οντως</w><w>αν</w><w>εκ</w><w>νομου</w><w>ην</w><w>η</w><w>δικαιοσυνη</w><note type="commentary">Untranscribed commentary text within the line</note>
+<pb n="160r" type="folio" xml:id="P160r-1996"/>
+<cb n="P160rC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P160rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.22"><w>αλλα</w>
+<lb n="P160rC1L-1996"/><w>συνεκλεισεν</w><w>η</w><w>γραφη</w><w>τα</w><w>παντα</w><w>υπο</w><w>αμαρτιαν</w><w>ινα</w><w>η</w><w>δικαιοσυνη</w><w>εκ</w>
+<lb n="P160rC1L-1996"/><w>πιστεως</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>δοθη</w><w>τοις</w><w>πιστευουσι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P160rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.23"><w>προ</w><w>του</w><w>γαρ</w><w>ελθειν</w><w>την</w><w>πιστιν</w>
+<lb n="P160rC1L-1996"/><w>υπο</w><w>νομον</w><w>εφρουρουμεθα</w><w>συγκεκλεισμενοι</w><w>εις</w><w>την</w><w>μελλουσαν</w><w>πιστιν</w>
+<lb n="P160rC1L-1996"/><w>αποκαλυφθηναι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P160rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.24"><w>ωστε</w><w>ο</w><w>νομος</w>
+<lb n="P160rC1L-1996"/><w>παιδαγωγος</w><w>ημων</w><w>γεγονεν</w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w>ινα</w><w>εκ</w><w>πιστεως</w><w>δικαιωθωμεν</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P160rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.25"><w>ελθουσης</w><w>δε</w><w>της</w><w>πιστεως</w><w>ουκετι</w><w>υπο</w><w>παιδαγωγον</w><app><rdg type="orig" hand="firsthand"><w>ε<unclear>μ</unclear>μεν</w></rdg><rdg type="corr" hand="corrector"><w>εσμεν</w></rdg></app>
+<lb n="P160rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.26"><w>παντες</w><w>γαρ</w><w>υιοι</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w>
+<lb n="P160rC1L-1996"/><w>εστε</w><w>δια</w><w>της</w><w>πιστεως</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="160v" type="folio" xml:id="P160v-1996"/>
+<cb n="P160vC1-1996"/>
+<lb n="P160vC1L-1996"/></ab><ab n="Gal.3.27"><w>σοι</w><note type="editorial">Αn enlarged ο to make οσοι was probably intended but not completed.</note><w>γαρ</w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w>εβαπτισθητε</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w>ενεδυσασθε</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P160vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.28"><w>ουκ</w>
+<lb n="P160vC1L-1996"/><w>ενι</w><w>ιουδαιος</w><w>ουδε</w><w>ελλην</w><w>ουκ</w><w>ενι</w><w>δουλος</w><w>ουδε</w><w>ελευθερος</w><w>ουκ</w><w>ενι</w><w>αρσεν</w>
+<lb n="P160vC1L-1996"/><w>και</w><w>θηλυ</w><w>παντες</w><w>υμεις</w><w>εις</w><w>εστε</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P160vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.3.29"><w>ει</w><w>δε</w>
+<lb n="P160vC1L-1996"/><w>υμεις</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>ἆρα</w><w>του</w><w>αβρααμ</w><w>σπερμα</w><w>εστε</w><w>και</w><w>κατ</w><w>επαγγελιαν</w><w>κληρονομοι</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P160vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab></div><div type="chapter" n="Gal.4"><ab n="Gal.4.1"><app><rdg type="orig" hand="firsthand"><w>ο</w><w>κλη
+<lb n="P160vC1L-1996" break="no"/>ρονομος</w></rdg><rdg type="corr" hand="corrector"><note type="commentary">Untranscribed commentary text within the line</note><w>λεγω</w><w>δε</w><w>εφ</w><w>οσον</w><w>χρονον</w><w>ο</w><w>κληρονομος</w></rdg></app><w>νηπιος</w><w>εστιν</w><w>ουδεν</w><w>διαφερει</w><w>δουλου</w><w>κυριυς</w><w>παντων</w>
+<lb n="P160vC1L-1996"/><w>ων</w></ab><ab n="Gal.4.2"><w>αλλ</w><w>υπο</w><w>επιτροπους</w><w>εστι</w><w>και</w><w>οικονομους</w><w>αχρι</w><w>της</w><w>προθεσμιας</w>
+<lb n="P160vC1L-1996"/><w>του</w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w></ab><ab n="Gal.4.3"><w>ουτω</w><w>και</w><w>ημεις</w><w>οτε</w><w>ημεν</w><w>νηπιοι</w><w>υπο</w><w>τα</w><w>στοιχεια</w><w>του</w><w>κοσμου</w>
+<lb n="P160vC1L-1996"/><w>ημεν</w><w>δεδουλωμενοι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="161r" type="folio" xml:id="P161r-1996"/>
+<cb n="P161rC1-1996"/>
+<lb n="P161rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.4"><w>οτε</w><w>δε</w><w>ηλθε</w><w>το</w><w>πληρωμα</w>
+<lb n="P161rC1L-1996"/><w>του</w><w>χρονου</w><app><rdg type="orig" hand="firsthand"><w>ε</w></rdg><rdg type="corr" hand="corrector"/></app><w>εξαπεστειλεν</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>τον</w><w>υιον</w><w>αυτου</w><w>γεννωμενον</w><w>εκ</w><w>γυναικος</w>
+<lb n="P161rC1L-1996"/><w>γενομενον</w><w>υπο</w><w>νομον</w></ab><ab n="Gal.4.5"><w>ινα</w><w>τους</w><w>υπο</w><w>νομον</w><w>εξαγοραση</w><w>ινα</w><w>την</w><w>υιοθεσιαν</w>
+<lb n="P161rC1L-1996"/><w>απολαβομεν</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P161rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.6"><w>οτι</w><w>δε</w><w>εστε</w><w>υιοι</w><w>εξαπεστειλεν</w>
+<lb n="P161rC1L-1996"/><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>το</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>του</w><w>υιου</w><w>αυτου</w><w>εις</w><w>τας</w><w>καρδιας</w><w>υμων</w><w>κραζων</w><w>αββα</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">πηρ</hi></abbr></w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P161rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.7"><w>ωστε</w><w>ουκετι</w><w>ει</w><w>δουλος</w>
+<lb n="P161rC1L-1996"/><w>αλλα</w><w>υιος</w><w>ει</w><w>δε</w><w>υιος</w><app><rdg type="orig" hand="firsthand"><gap reason="illegible" unit="char" extent="2"/></rdg><rdg type="corr" hand="firsthand"><w>και</w></rdg></app><w>κληρονομος</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>δια</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P161rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.8"><w>αλλα</w><w>τοτε</w><w>μεν</w><w>ουκ</w><w>ειδοτες</w><app><rdg type="orig" hand="firsthand"><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w></rdg><rdg type="corr" hand="corrector"><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w></rdg></app><w>εδουλευσατε</w><w>τοις</w><w>μη</w>
+<lb n="P161rC1L-1996"/><app><rdg type="orig" hand="firsthand"><w>φυσι</w></rdg><rdg type="corr" hand="corrector"><w>φυσει</w></rdg></app><w>ουσι</w><w>θεοις</w></ab><ab n="Gal.4.9"><w>νυν</w><w>δε</w><w>γνοντες</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w><w>μαλλον</w><w>δε</w><w>γνωσθεντες</w><w>υπο</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>πως</w><w>επι
+<lb n="P161rC1L-1996" break="no"/>στρεφετε</w><w>παλιν</w><w>επι</w><w>τα</w><w>ασθενη</w><w>και</w><w>πτωχα</w><w>στοιχεια</w><w>οις</w><w>παλιν</w><w>ανωθεν</w><w>δου
+<lb n="P161rC1L-1996" break="no"/>λευειν</w><w>εθελετε</w><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.10"><w>ημερας</w><app><rdg type="orig" hand="firsthand"><w>παρατειρεισθαι</w></rdg><rdg type="corr" hand="corrector"><w>παρατηρεισθαι</w></rdg></app>
+<lb n="P161rC1L-1996"/><w>και</w><w>μηνας</w><w>και</w><w>καιρους</w><w>και</w><w>ενιαυτους</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="161v" type="folio" xml:id="P161v-1996"/>
+<cb n="P161vC1-1996"/>
+<lb n="P161vC1L-1996"/></ab><ab n="Gal.4.11"><w>φοβουμαι</w><w>υμας</w><w>μη</w><w>πως</w><w>εικη</w><w>κεκοπιακα</w><w>εις</w><w>υμας</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P161vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.12"><w>γινεσθε</w><w>ως</w><w>εγω</w>
+<lb n="P161vC1L-1996"/><w>οτι</w><w>και</w><w>εγω</w><w>ως</w><w>υμεις</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P161vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>αδελφοι</w><w>δεομαι</w><w>υμων</w><w>ουδε</w><w>με</w><w>ηδικη
+<lb n="P161vC1L-1996" break="no"/>σατε</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P161vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.13"><w>οιδατε</w><w>δε</w><w>οτι</w><w>ασθενειαν</w><w>της</w>
+<lb n="P161vC1L-1996"/><w>σαρκος</w><w>ευηγγελισαμην</w><w>υμιν</w><w>το</w><w>προτερον</w></ab><ab n="Gal.4.14"><w>και</w><w>τον</w><w>πειρασμον</w><w>μου</w><w>τον</w><w>εν</w>
+<lb n="P161vC1L-1996"/><w>τη</w><w>σαρκι</w><w>μου</w><w>ουκ</w><w>εξουθενησατε</w><w>ουδε</w><w>εξεπτυσατε</w><w>αλλ</w><w>ως</w><w>αγγελον</w>
+<lb n="P161vC1L-1996"/><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>εδεξασθε</w><w>με</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P161vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>ως</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P161vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.15"><w>τις</w><w>ουν</w><w>ο</w><w>μακαρισμος</w><w>υμων</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P161vC1L-1996"/><w>μαρτυρω</w><w>γαρ</w><w>υμιν</w><w>οτι</w><w>ει</w><w>δυνατον</w><w>τους</w><w>οφθαλμους</w><w>υμων</w><w>εξορυξαντες</w>
+<lb n="P161vC1L-1996"/><w>αν</w><w>εδωκατε</w><w>μοι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P161vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.16"><app><rdg type="orig" hand="firsthand"/><rdg type="corr" hand="corrector"><note type="commentary">Untranscribed commentary text within the line</note><w>ωστε</w><w>εχθρους</w><w>υμων</w></rdg></app><w>γεγονα</w><w>αληθευων</w><w>υμιν</w>
+<lb n="P161vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.17"><w>ζηλουσιν</w><w>υμας</w>
+<lb n="P161vC1L-1996"/><w>ου</w><w>καλως</w><w>αλλα</w><app><rdg type="orig" hand="firsthand"><w>εκλυσαι</w></rdg><rdg type="corr" hand="corrector"><w>εκκλ<unclear>ει</unclear>σαι</w></rdg></app><w>υμας</w><w>θελουσιν</w><w>ινα</w><w>αυτους</w><w>ζηλουτε</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P161vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.18"><w>καλον</w><w>δε</w><w>το</w><w>ζηλουσθαι</w><w>εν</w><w>καλω</w><w>παντοτε</w><note type="commentary">Untranscribed commentary text within the line</note>
+<pb n="162r" type="folio" xml:id="P162r-1996"/>
+<cb n="P162rC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P162rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>και</w><w>μη</w><app><rdg type="orig" hand="firsthand"><w>μονων</w></rdg><rdg type="corr" hand="corrector"><w>μονον</w></rdg></app><w>εν</w><w>τω</w><w>παρειναι</w><w>με</w><w>προς</w><w>υμας</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P162rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.19"><w>τεκνια</w><w>μου</w><w>ους</w><w>παλιν</w><w>ωδινω</w><w>αχρις</w><w>ου</w><w>μορφωθη</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>εν</w><w>υμιν</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P162rC1L-1996"/></ab><ab n="Gal.4.20"><w>ηθελον</w><w>δε</w><w>παρειναι</w><w>προς</w><w>υμας</w><w>αρτι</w><w>και</w><w>αλλαξαι</w><w>την</w><w>φωνην</w><w>μου</w><w>οτι</w>
+<lb n="P162rC1L-1996"/><w>απορουμαι</w><w>εν</w><w>υμιν</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P162rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.21"><w>λεγετε</w><w>μοι</w><w>οι</w><w>υπο</w><w>νομον</w><w>θελοντες</w><w>ειναι</w><w>τον</w><w>νομον</w><w>ουκ</w><w>ακου
+<lb n="P162rC1L-1996" break="no"/>ετε</w></ab><ab n="Gal.4.22"><w>γεγραπται</w><w>γαρ</w><w>οτι</w><w>αβρααμ</w><w>δυο</w><w>υιους</w><w>εσχεν</w><w>ενα</w><w>εκ</w><w>της</w><w>παιδισκης</w>
+<lb n="P162rC1L-1996"/><w>και</w><w>ενα</w><w>εκ</w><w>της</w><w>ελευθερας</w></ab><ab n="Gal.4.23"><w>αλλ</w><w>ο</w><w>μεν</w><w>εκ</w><w>της</w><w>παιδισκης</w><w>κατα</w><w>σαρκα</w>
+<lb n="P162rC1L-1996"/><w>γεγενηται</w><w>ο</w><w>δε</w><w>εκ</w><w>της</w><w>ελευθερας</w><w>δια</w><w>της</w><w>επαγγελιας</w></ab><ab n="Gal.4.24"><w>ατινα</w><w>εστιν</w><w>αλ
+<lb n="P162rC1L-1996" break="no"/>ληγορουμενα</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P162rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>αυται</w><w>γαρ</w><w>εισι</w><w>δυο</w><w>διαθηκαι</w>
+<lb n="P162rC1L-1996"/><w>μια</w><w>μεν</w><w>απο</w><w>ορους</w><w>σινα</w><w>εις</w><w>δουλειαν</w><w>γενωσα</w><w>ητις</w><w>εστιν</w><w>αγαρ</w></ab><ab n="Gal.4.25"><w>το</w><w>γαρ</w><w>αγαρ</w>
+<lb n="P162rC1L-1996"/><w>σινα</w><w>ορος</w><w>εστιν</w><w>εν</w><w>τη</w><w>αρραβια</w><w>συστοιχει</w><w>δε</w><w>τη</w><w>νυν</w><w><abbr type="nomSac"><hi rend="overline">ιλημ</hi></abbr></w><w>δουλευει</w><w>δε</w><w>με
+<lb n="P162rC1L-1996" break="no"/>τα</w><w>των</w><w>τεκνων</w><w>αυτης</w></ab><ab n="Gal.4.26"><w>η</w><w>δε</w><w>ανω</w><w><abbr type="nomSac"><hi rend="overline">ιλημ</hi></abbr></w><w>ελευθερα</w><w>εστιν</w><w>ητις</w><w>εστι</w><w><abbr type="nomSac"><hi rend="overline">μηρ</hi></abbr></w>
+<lb n="P162rC1L-1996"/><w>παντων</w><w>ημων</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="162v" type="folio" xml:id="P162v-1996"/>
+<cb n="P162vC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P162vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.27"><w>γεγραπται</w><w>γαρ</w><w>ευφρανθη
+<lb n="P162vC1L-1996" break="no"/>τι</w><w>στειρα</w><w>η</w><w>ου</w><w>τικτουσα</w><w>ρηξον</w><w>και</w><w>βοησον</w><w>η</w><w>ουκ</w><w>ωδινουσα</w><w>οτι</w><w>πολλα</w>
+<lb n="P162vC1L-1996"/><w>τα</w><w>τεκνα</w><w>της</w><w>ερημου</w><w>μαλλον</w><w>η</w><w>της</w><w>εχουσης</w><w>τον</w><w>ανδρα</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P162vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.28"><w>ημεις</w><w>δε</w>
+<lb n="P162vC1L-1996"/><w>αδελφοι</w><w>κατα</w><w>ισαακ</w><w>επαγγελιας</w><w>τεκνα</w><w>εσμεν</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P162vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.29"><w>αλλ</w><w>ωσπερ</w><w>τοτε</w><w>ο</w><w>κατα</w>
+<lb n="P162vC1L-1996"/><w>σαρκα</w><w>γεννηθεις</w><w>εδιωκε</w><w>τον</w><w>κατα</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>ουτω</w><w>και</w><w>νυν</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P162vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.30"><w>αλλα</w><w>τι</w><w>λεγει</w><w>η</w><w>γραφη</w><w>εκβαλε</w>
+<lb n="P162vC1L-1996"/><w>την</w><w>παιδισκην</w><w>και</w><w>τον</w><w>υιον</w><w>αυτης</w><w>ου</w><w>γαρ</w><w>μη</w><w>κληρονομηση</w><w>ο</w><w>υιος</w><w>της</w>
+<lb n="P162vC1L-1996"/><w>παιδισκης</w><w>μετα</w><w>του</w><w>υιου</w><w>της</w><w>ελευθερας</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P162vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.4.31"><w>αρα</w><w>ουν</w><w>αδελφοι</w><w>ουκ</w><w>εσμεν</w><w>παιδισκης</w><w>τεκνα</w><w>αλλα</w>
+<lb n="P162vC1L-1996"/><w>της</w><w>ελευθερας</w><note type="commentary">Untranscribed commentary text within the line</note></ab></div><div type="chapter" n="Gal.5"><ab n="Gal.5.1"><w>τη</w><w>ελευθερια</w><w>η</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>ημας</w><w>ηλευθερωσε</w>
+<lb n="P162vC1L-1996"/><w>στοκετε</w><w>και</w><w>μη</w><w>παλιν</w><w>ζυγω</w><w>δουλειας</w><w>ανεχεσθε</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="163r" type="folio" xml:id="P163r-1996"/>
+<cb n="P163rC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.2"><app><rdg type="orig" hand="firsthand"><w>ιδε</w></rdg><rdg type="corr" hand="corrector"><w>ην</w><w>δε</w></rdg></app><w>εγω</w><w>παυλος</w><w>λεγω</w><w>υμιν</w><w>οτι</w><w>εαν</w><w>περιτεμνησθε</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>υμας</w>
+<lb n="P163rC1L-1996"/><w>ουδεν</w><w>ωφελησει</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.3"><w>μαρτυρομαι</w><w>δε</w><w>παλιν</w><w>παντι</w><w><abbr type="nomSac"><hi rend="overline">ανω</hi></abbr></w><w>περιτεμνο
+<lb n="P163rC1L-1996" break="no"/>μενω</w><w>οτι</w><w>οφειλετης</w><w>εστιν</w><w>ολον</w><w>τον</w><w>νομον</w><w>ποιησαι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.4"><w>κατηργηθητε</w><w>απο</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note><w>οιτινες</w>
+<lb n="P163rC1L-1996"/><w>εν</w><w>νομω</w><w>δικαιουσθε</w><w>της</w><w>χαριτος</w><app><rdg type="orig" hand="firsthand"><w>εξεπεσατε</w></rdg><rdg type="corr" hand="corrector"><w>εξεπεσετε</w></rdg></app><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.5"><w>ημεις</w><w>γαρ</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>εκ</w><w>πιστεως</w><w>ελπιδα</w><w>δικαιοσυνης</w>
+<lb n="P163rC1L-1996"/><w>απεκδεχομεθα</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.6"><w>εν</w><w>γαρ</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>ουτε</w>
+<lb n="P163rC1L-1996"/><w>περιτομη</w><w>τι</w><w>ισχυει</w><w>ουτε</w><w>ακροβυστια</w><w>αλλα</w><w>πιστις</w><w>δι</w><w>αγαπης</w><w>ενεργου
+<lb n="P163rC1L-1996" break="no"/>μενη</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.7"><w>ετρεχετε</w><w>καλως</w><w>τις</w><w>υμας</w><w>ενεκοψε</w><w>τη</w><w>αληθεια</w><w>μη</w><w>πειθεσθαι</w>
+<lb n="P163rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.8"><w>η</w><w>πεισμονη</w><w>ουκ</w>
+<lb n="P163rC1L-1996"/><w>εκ</w><w>του</w><w>καλουντος</w><w>υμας</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P163rC1L-1996"/></ab><ab n="Gal.5.9"><w>μικρα</w><w>ζυμη</w><w>ολον</w><w>το</w><w>φυραμα</w><w>ζυμοι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P163rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.10"><w>εγω</w><w>πεποιθα</w><w>εις</w><w>υμας</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w><w>οτι</w><w>ουδεν</w><w>αλλο</w><w>φρονησετε</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>ο</w><w>δε</w><w>ταρασσων</w><w>υμας</w>
+<lb n="P163rC1L-1996"/><w>βαστασει</w><w>το</w><w>κριμα</w><app><rdg type="orig" hand="firsthand"><w>οστος</w></rdg><rdg type="corr" hand="corrector"><w>οστις</w></rdg></app><w>αν</w><w>η</w><note type="commentary">Untranscribed commentary text within the line</note>
+<pb n="163v" type="folio" xml:id="P163v-1996"/>
+<cb n="P163vC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.11"><w>εγω</w><w>δε</w><w>αδελφοι</w><w>ει</w><w>περιτομην</w>
+<lb n="P163vC1L-1996"/><w>ετι</w><w>κηρυσσω</w><w>τι</w><w>ετι</w><w>διωκομαι</w><w>ἄρα</w><w>κατηργηται</w><w>το</w><w>σκανδαλον</w>
+<lb n="P163vC1L-1996"/><w>του</w><w><abbr type="nomSac"><hi rend="overline">στρου</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163vC1L-1996"/></ab><ab n="Gal.5.12"><w>οφελον</w><w>και</w><w>αποκοψονται</w><w>οι</w><w>αναστατουντες</w><w>υμας</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P163vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.13"><w>υμεις</w>
+<lb n="P163vC1L-1996"/><w>δε</w><w>επ</w><w>ελευθερια</w><w>εκληθητε</w><w>αδελφοι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P163vC1L-1996"/><w>μονον</w><w>μη</w><w>την</w><w>ελευθεριαν</w><w>εις</w><w>αφορμην</w><w>τη</w><w>σαρκι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>αλλα</w><w>δια</w><w>της</w><w>αγαπης</w><w>δουλευετε</w><w>αλληλοις</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163vC1L-1996"/></ab><ab n="Gal.5.14"><w>ο</w><w>γαρ</w><w>πας</w><w>νομος</w><w>εν</w><w>ενι</w><w>λογω</w><w>πληρουται</w><app><rdg type="orig" hand="firsthand"><w>εν</w></rdg><rdg type="corr" hand="corrector"><w>αν</w></rdg></app><w>αγαπησεις</w><w>τον</w><w>πλησιον</w><w>σου</w><w>ως</w>
+<lb n="P163vC1L-1996"/><w>εαυτον</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P163vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.15"><w>ει</w><w>δε</w><w>αλληλους</w><w>δακνετε</w><w>και</w><w>κατεσθιετε</w><w>βλεπετε</w><w>μη</w><w>υπο</w><w>αλληλων</w>
+<lb n="P163vC1L-1996"/><w>αναλωθητε</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P163vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.16"><w>λεγω</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>περιπατειτε</w><w>και</w><w>επι
+<lb n="P163vC1L-1996" break="no"/>θυμιαν</w><w>σαρκος</w><w>ου</w><w>μη</w><w>τελεσητε</w><note type="commentary">Untranscribed commentary text within the line</note>
+<pb n="164r" type="folio" xml:id="P164r-1996"/>
+<cb n="P164rC1-1996"/>
+<lb n="P164rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.17"><w>η</w><w>γαρ</w><w>σαρξ</w><w>επιθυμει</w>
+<lb n="P164rC1L-1996"/><w>κατα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>το</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>κατα</w><w>της</w><w>σαρκος</w><w>ταυτα</w><w>δε</w><w>αντικειται</w><w>αλληλοις</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P164rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>ινα</w><w>μη</w><w>α</w><w>αν</w><w>θελητε</w><w>ταυτα</w><w>ποιητε</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P164rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.18"><w>ει</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>αγεσθε</w><w>ουκ</w><w>εστε</w><w>υπο</w><w>νομον</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P164rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.19"><w>φανερα</w><w>δε</w><w>εστι</w><w>τα</w>
+<lb n="P164rC1L-1996"/><w>εργα</w><w>της</w><w>σαρκος</w><note type="commentary">Untranscribed commentary text within the line</note><w>ατινα</w><w>εστι</w><w>μοι
+<lb n="P164rC1L-1996" break="no"/>χεια</w><w>πορνεια</w><w>ακαθαρσια</w><w>ασελγεια</w></ab><ab n="Gal.5.20"><w>ειδωλολατρια</w><w>φαρμακεια</w><w>εχθραι</w>
+<lb n="P164rC1L-1996"/><w>ερεις</w><w>ζηλοι</w><w>θυμοι</w><w>εριθειαι</w><w>διχοστασιαι</w><w>αιρεσεις</w></ab><ab n="Gal.5.21"><w>φθονοι</w><w>φονοι</w><w>μεθαι</w>
+<lb n="P164rC1L-1996"/><w>κωμοι</w><w>και</w><w>τα</w><w>ομοια</w><w>τουτοις</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P164rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>α</w><w>προλεγω</w><w>υμιν</w><w>κα
+<lb n="P164rC1L-1996" break="no"/>θως</w><w>και</w><w>προειπον</w><w>οτι</w><w>οι</w><w>τα</w><w>τοιαυτα</w><w>πρασσοντες</w><w>βασιλειαν</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>ου</w><w>κληρο
+<lb n="P164rC1L-1996" break="no"/>νομησουσι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P164rC1L-1996"/></ab><ab n="Gal.5.22"><w>ο</w><w>δε</w><w>καρπος</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>εστιν</w><w>αγαπη</w><w>χαρα</w><w>ειρηνη</w><w>μακροθυμια</w><w>χρηστοτης</w>
+<lb n="P164rC1L-1996"/><w>αγαθοσυνη</w><w>πιστις</w></ab><ab n="Gal.5.23"><w>πραοτης</w><app><rdg type="orig" hand="firsthand"><w>εκκρατεια</w></rdg><rdg type="corr" hand="corrector"><w>εγκρατεια</w></rdg></app><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P164rC1L-1996"/><w>κατα</w><w>των</w><w>τοιουτων</w><w>ουκ</w><w>εστι</w><w>νομος</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P164rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.24"><w>οι</w><w>δε</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>την</w><w>σαρκα</w><w><abbr type="nomSac"><hi rend="overline">εστρωσαν</hi></abbr></w>
+<lb n="P164rC1L-1996"/><w>συν</w><w>τοις</w><w>παθημασι</w><w>και</w><w>ταις</w><w>επιθυμιαις</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P164rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.25"><w>ει</w><app><rdg type="orig" hand="firsthand"><w>τω</w><w>μεν</w></rdg><rdg type="corr" hand="corrector"><w>ζωμεν</w></rdg></app><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>και</w><w>στοιχωμεν</w><note type="commentary">Untranscribed commentary text within the line</note>
+<pb n="164v" type="folio" xml:id="P164v-1996"/>
+<cb n="P164vC1-1996"/>
+<lb n="P164vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.5.26"><w>μη</w><w>γινομεθα</w><w>κενο
+<lb n="P164vC1L-1996" break="no"/>δοξοι</w><w>αλληλους</w><w>προκαλουμενοι</w><w>αλληλους</w><w>φθονουντες</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P164vC1L-1996"/></ab></div><div type="chapter" n="Gal.6"><ab n="Gal.6.1"><w>αδελφοι</w><w>εαν</w><w>και</w><w>προληφθη</w><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>εν</w><w>τινι</w><w>παραπτωματι</w><w>υμεις</w><w>οι</w><w><abbr type="nomSac"><hi rend="overline">πνικοι</hi></abbr></w>
+<lb n="P164vC1L-1996"/><w>καταρτιζετε</w><w>τον</w><w>τοιουτον</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P164vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>εν</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w>
+<lb n="P164vC1L-1996"/><w>πραοτητος</w><note type="commentary">Untranscribed commentary text within the line</note><w>σκοπων</w><w>σεαυτον</w>
+<lb n="P164vC1L-1996"/><w>μη</w><w>και</w><w>συ</w><w>πειρασθης</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P164vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.2"><w>αλληλων</w><w>τα</w><w>βαρη</w><w>βασταζετε</w><w>και</w><app><rdg type="orig" hand="firsthand"><w>ουτε</w></rdg><rdg type="corr" hand="firsthand"><w>ουτως</w></rdg></app><w>ανα
+<lb n="P164vC1L-1996" break="no"/>πληρωσατε</w><w>τον</w><w>νομον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P164vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.3"><w>ει</w><w>γαρ</w><w>δοκει</w><w>τις</w><w>ειναι</w><w>τι</w>
+<lb n="P164vC1L-1996"/><w>μηδεν</w><w>ων</w><w>εαυτον</w><w>φρεναπατα</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P164vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.4"><w>το</w><w>δε</w><w>εργων</w><w>εαυτου</w><w>δοκιμαζετω</w><w>ε
+<lb n="P164vC1L-1996" break="no"/>καστος</w><w>και</w><w>τοτε</w><w>εις</w><w>εαυτον</w><w>μονον</w><w>το</w><w>καυχημα</w><w>εξει</w><w>και</w><w>ουκ</w><w>εις</w><w>τον</w><w>ετερον</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P164vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.5"><w>εκαστος</w>
+<lb n="P164vC1L-1996"/><w>γαρ</w><w>το</w><w>ιδιον</w><w>φορτιον</w><w>βαστασει</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P164vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.6"><w>κοινωνειτω</w>
+<lb n="P164vC1L-1996"/><w>δε</w><w>ο</w><w>κατηχουμενος</w><w>τον</w><w>λογον</w><w>τω</w><w>κατηχουντι</w><w>εν</w><w>πασιν</w><w>αγαθοις</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P164vC1L-1996"/></ab><ab n="Gal.6.7"><w>μη</w><w>πλανασθε</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>ου</w><w>μυκτηριζεται</w><w>ο</w><w>γαρ</w><w>εαν</w><w>σπειρη</w><app><rdg type="orig" hand="firsthand"><w><abbr type="nomSac"><hi rend="overline">ανοις</hi></abbr></w></rdg><rdg type="corr" hand="corrector"><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w></rdg></app><w>τουτο</w>
+<lb n="P164vC1L-1996"/><w>και</w><w>θερησει</w><note type="commentary">Untranscribed commentary text within the line</note>
+<pb n="165r" type="folio" xml:id="P165r-1996"/>
+<cb n="P165rC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P165rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.8"><w>οτι</w><app><rdg type="orig" hand="firsthand"><w>ε</w></rdg><rdg type="corr" hand="corrector"><w>ο</w></rdg></app><w>σπειρων</w>
+<lb n="P165rC1L-1996"/><w>εις</w><w>την</w><w>σαρκα</w><w>αυτου</w><w>εκ</w><w>της</w><w>σαρκος</w><w>αυτου</w><w>θερισει</w><w>φθοραν</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P165rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note><w>ο</w><w>δε</w><w>σπειρων</w><w>εις</w><w>το</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>εκ</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>θερισει</w><w>ζωην</w>
+<lb n="P165rC1L-1996"/><w>αιωνιον</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb n="P165rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.9"><w>το</w><w>δε</w><w>καλον</w><w>ποιουντες</w><w>μη</w>
+<lb n="P165rC1L-1996"/><w>εκκακωμεν</w><w>καιρω</w><w>γαρ</w><w>ιδιω</w><w>θερισωμεν</w><w>μη</w><w>εκκλυομενοι</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P165rC1L-1996"/></ab><ab n="Gal.6.10"><w>ορα</w><w>ουν</w><w>ως</w><w>καιρον</w><w>εχομεν</w><w>εργαζομεθα</w><w>το</w><w>αγαθον</w><w>προς</w><w>παντα</w><w>μαλιστα</w>
+<lb n="P165rC1L-1996"/><w>προς</w><w>τους</w><w>οικειους</w><w>της</w><w>πιστεως</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P165rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.11"><w>ιδετε</w><w>πηλικοις</w><w>υμιν</w><w>γραμμασιν</w><w>εγραψα</w><w>τη</w><w>εμη</w><w>χειρι</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P165rC1L-1996"/></ab><ab n="Gal.6.12"><w>οσοι</w><w>θελουσιν</w><w>ευπροσωπησαι</w><w>εν</w><w>σαρκι</w><w>ουτοι</w><w>αναγκαζουσιν</w><w>υμας</w><w>περι
+<lb n="P165rC1L-1996" break="no"/>τεμνεσθαι</w><w>μονον</w><w>ινα</w><w>μη</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">στρω</hi></abbr></w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>διωκωνται</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P165rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.13"><w>ουδε</w>
+<lb n="P165rC1L-1996"/><w>γαρ</w><w>οι</w><w>περιτεμνομενοι</w><w>αυτοι</w><w>νομον</w><app><rdg type="orig" hand="firsthand"><w>φυλαττουιν</w></rdg><rdg type="corr" hand="corrector"><w>φυλαττουσιν</w></rdg></app><w>αλλα</w><w>θελουσιν</w><w>υμας</w>
+<pb n="165v" type="folio" xml:id="P165v-1996"/>
+<cb n="P165vC1-1996"/>
+<lb n="P165vC1L-1996"/><w>περιτεμνεσθαι</w><w>ινα</w><w>εν</w><w>τη</w><w>υμετερα</w><w>σαρκι</w><w>καυχησωνται</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P165vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.14"><w>εμοι</w><w>δε</w><w>μη</w><w>γενοιτο</w>
+<lb n="P165vC1L-1996"/><w>καυχασθαι</w><w>ει</w><w>μη</w><w>εν</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">στρω</hi></abbr></w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>δι</w><w>ου</w><w>εμοι</w><w>κοσμος</w><w>ε
+<lb n="P165vC1L-1996" break="no"/>σταυρωται</w><w>καγω</w><w>τω</w><w>κοσμω</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P165vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.15"><w>εν</w><w>γαρ</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>ουτε</w><w>περιτομη</w><w>τι</w><w>ισχυει</w>
+<lb n="P165vC1L-1996"/><w>ουτε</w><w>ακροβυστια</w><w>αλλα</w><w>καινη</w><w>κτισις</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P165vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.16"><w>και</w><w>οσοι</w><w>τω</w><w>κανονι</w><w>τουτω</w><w>στοιχησουσιν</w><w>ειρηνη</w><w>ε
+<lb n="P165vC1L-1996" break="no"/>π</w><w>αυτους</w><w>και</w><w>ελεος</w><w>και</w><w>επι</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">ιηλ</hi></abbr></w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P165vC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.17"><w>του</w><w>λοιπου</w><w>κοπους</w><w>μοι</w><w>μηδεις</w>
+<lb n="P165vC1L-1996"/><w>παρεχετω</w><w>εγω</w><w>γαρ</w><w>τα</w><w>στιγματα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>εν</w><w>τω</w><w>σωματι</w><w>μου</w><w>βασταζω</w>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<pb n="166r" type="folio" xml:id="P166r-1996"/>
+<cb n="P166rC1-1996"/>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P166rC1L-1996"/><note type="commentary">Untranscribed commentary text within the line</note></ab><ab n="Gal.6.18"><w>η</w><w>χαρις</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>με
+<lb n="P166rC1L-1996" break="no"/>τα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>υμων</w><w>αδελφοι</w><w>αμην</w><note type="commentary">Untranscribed commentary text within the line</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb/><note type="commentary">One line of untranscribed commentary text</note>
+<lb n="P166rC1L-1996"/></ab></div><div type="subscriptio"><ab n="Gal.subscriptio"><w>η</w><w>προς</w><w>γαλατας</w><w>επιστολη</w><w>εγραφη</w><w>απο</w><w>ρωμης</w></ab></div></div></body></text></TEI>

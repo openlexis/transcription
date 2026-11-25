@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="TEI-NTMSS.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title type="document" n="P140">P140</title>
+<respStmt xml:id="VMRCRE"><resp>edition metadata assembled by</resp><name type="org">VMRCRE (Virtual Manuscript Room Collaborative Research Environment), transcript/get</name></respStmt>
+      </titleStmt>
+      <!-- VMRCRE-generated: publicationStmt -->
+      <publicationStmt>
+        <publisher><name type="org">The Institut für neutestamentliche Textforschung</name></publisher>
+        <availability><p>
+<![CDATA[
+(C) 2026 Institut für Neutestamentliche Textforschung.
+]]>
+</p><p> <![CDATA[
+This work is licensed under a <a rel="license" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 Unported License<br/><span style="float:right;"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by/4.0/80x15.png" /></span></a>
+]]>
+</p><p> <![CDATA[
+
+]]>
+</p></availability>
+      </publicationStmt>
+<!-- VMRCRE-generated: sourceDesc -->
+      <sourceDesc>
+        <msDesc>
+		<msIdentifier>
+            <country>Italy</country>
+            <settlement>Florence</settlement>
+            <repository>Istituto Papirologico </repository>
+            <idno>PSI inv. 1971</idno>
+          </msIdentifier>
+        </msDesc>
+      </sourceDesc>
+</fileDesc>
+<!-- VMRCRE-generated: profileDesc -->
+    <profileDesc>
+      <langUsage>
+        <language ident="grc"></language>
+      </langUsage>
+      <handNotes>
+        <handNote>
+          <listWit>
+            <witness n="firsthand"></witness>
+</listWit>
+        </handNote>
+      </handNotes>
+    </profileDesc>
+</teiHeader>
+<text xml:lang="grc"><body>
+
+
+<pb n="1r" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="Acts"><div type="chapter" n="Acts.7"><ab n="Acts.7.54" part="F"><w>επ</w> <w><unclear>αυτ</unclear><supplied source="transcriber" reason="lacuna">ον</supplied></w></ab> <ab n="Acts.7.55" part="I"><w><supplied source="transcriber" reason="lacuna">στεφανος</supplied></w>
+<lb/><w>δε</w> <w>υ<unclear>π</unclear><supplied source="transcriber" reason="lacuna">αρχων</supplied></w> <w><supplied source="transcriber" reason="lacuna">πληρης</supplied></w>
+<lb/><w><abbr type="nomSac"><hi rend="overline">πν<unclear>ς</unclear></hi></abbr></w> <w><unclear>α</unclear><supplied source="transcriber" reason="lacuna">γιου</supplied></w> <w><supplied source="transcriber" reason="lacuna">ατε</supplied>
+<lb break="no"/>νισας</w> <w><supplied source="transcriber" reason="lacuna">εις</supplied></w> <w><supplied source="transcriber" reason="lacuna">τον</supplied></w>   <w><supplied source="transcriber" reason="lacuna"><abbr type="nomSac"><hi rend="overline">ουνον</hi></abbr></supplied></w>  </ab></div> </div>
+
+<pb n="1v" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="Acts"><div type="chapter" n="Acts.7"><ab n="Acts.7.57" part="F"><w><supplied source="na28" reason="illegible">ομοθ</supplied>υμαδο<supplied source="na28" reason="illegible">ν</supplied></w>
+<lb/><w><supplied source="na28" reason="illegible">επ</supplied></w> <w><supplied source="na28" reason="illegible">αυτ</supplied>ον</w></ab> <ab n="Acts.7.58" part="I"><w>εκ
+<lb break="no"/><supplied source="na28" reason="illegible">βαλον</supplied>τες</w> <w>δε</w>
+<lb/><w><supplied source="na28" reason="illegible">εξω</supplied></w> <w><supplied source="na28" reason="illegible">τη</supplied>ς</w> <w>πολ<unclear>ε</unclear>
+<lb break="no"/><supplied source="na28" reason="illegible">ως</supplied></w></ab></div> </div></body></text></TEI>

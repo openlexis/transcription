@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="TEI-NTMSS.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title type="document" n="L2208">L2208</title>
+<respStmt xml:id="VMRCRE"><resp>edition metadata assembled by</resp><name type="org">VMRCRE (Virtual Manuscript Room Collaborative Research Environment), transcript/get</name></respStmt>
+      </titleStmt>
+      <!-- VMRCRE-generated: publicationStmt -->
+      <publicationStmt>
+        <publisher><name type="org">The Institut für neutestamentliche Textforschung</name></publisher>
+        <availability><p>
+<![CDATA[
+(C) 2026 Institut für Neutestamentliche Textforschung.
+]]>
+</p><p> <![CDATA[
+This work is licensed under a <a rel="license" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 Unported License<br/><span style="float:right;"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by/4.0/80x15.png" /></span></a>
+]]>
+</p><p> <![CDATA[
+
+]]>
+</p></availability>
+      </publicationStmt>
+<!-- VMRCRE-generated: sourceDesc -->
+      <sourceDesc>
+        <msDesc>
+		<msIdentifier>
+            <country>Germany</country>
+            <settlement>Münster</settlement>
+            <repository>Bibelmuseum</repository>
+            <idno>Ms. 18</idno>
+          </msIdentifier>
+        </msDesc>
+      </sourceDesc>
+</fileDesc>
+<!-- VMRCRE-generated: profileDesc -->
+    <profileDesc>
+      <langUsage>
+        <language ident="grc"></language>
+      </langUsage>
+      <handNotes>
+        <handNote>
+          <listWit>
+            <witness n="firsthand"></witness>
+</listWit>
+        </handNote>
+      </handNotes>
+    </profileDesc>
+</teiHeader>
+<text xml:lang="grc"><body>
+
+<pb n="208r" type="folio"/><cb n="1"/><lb/><div type="book" n="B01"><div type="chapter" n="B01K17"><fw type="lectTitle"><w>ιακωβω</w> <w>τω</w> <w>δικαιω</w><lb/><w>ως</w> <w>ιωσηππος</w> <w>και</w> <w>κλη<lb break="no"/>μης</w> <w>ιστορουσι</w></fw><fw type="lectTitle"><w>τω</w> <w>μηνι</w> <w>ιουλιω</w> <w><abbr type="num"><hi rend="overline">κ</hi></abbr></w> <w>του</w><lb/><w>αγιου</w> <w>και</w> <w>προφητου</w> <w>ηλια</w><lb/><w>ευαγγελιον</w> <w>εκ</w> <w>του</w> <w>κατα</w> <w>ματθαιου</w></fw><ab n="B01K17V10"><w>τω</w> <w>καιρω</w> <w>εκεινω</w><lb/><w>επηρωτησαν</w> <w>τον</w><lb/><w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w> <w>οι</w> <w>μαθηται</w> <w>αυτου</w><lb/><w>λεγοντες</w> <w>τι</w> <w>οι</w> <w>γρα<lb break="no"/>μματεις</w> <w>λεγουσιν</w><lb/><w>οτι</w> <w>ηλιαν</w> <w>δει</w> <w>ελθειν</w><lb/><w>πρωτον</w></ab> <ab n="B01K17V11"><w>ο</w> <w>δε</w> <w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w> <w>α<lb break="no"/>ποκριθεις</w> <w>ειπεν</w><lb/><w>αυτοις</w> <w>ηλιας</w> <w>μεν</w><lb/><w>ερχεται</w> <w>πρωτον</w><lb/><w>και</w> <w>αποκαταστησει</w><lb/><w>παντα</w></ab> <ab n="B01K17V12"><w>λεγω</w> <w>δε</w><lb/><w>υμιν</w> <w>οτι</w> <w>ηλιας</w> <w>ηδει</w><lb/><w>ηλθε</w> <w>και</w> <w>ουκ</w> <w>επε<lb break="no"/>γνωσαν</w> <w>αυτον</w><lb/><w>αλλ</w> <w>εποιησαν</w> <w>εν</w> <w>αυτω</w><lb/><w>οσα</w> <w>ηθελησαν</w> <w>ου<lb break="no"/>τω</w> <w>και</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">υς</hi></abbr></w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><cb n="2"/><lb/><w>μελλει</w> <w>πασχειν</w> <w>υ<lb break="no"/>π</w> <w>αυτων</w></ab> <ab n="B01K17V22"><w>αναστρε<lb break="no"/>φομενων</w> <w>δε</w> <w>αυτων</w><lb/><w>εν</w> <w>τη</w> <w>γαλιλαια</w> <w>ει<lb break="no"/>πεν</w> <w>αυτοις</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w> <w>με<lb break="no"/>λλει</w> <w>ο</w> <w><abbr type="nomSac"><hi rend="overline">υς</hi></abbr></w> <w>του</w> <w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w> <w>πα<lb break="no"/>ραδιδοσθαι</w> <w>εις</w> <w>χειρας</w><lb/><w><abbr type="nomSac"><hi rend="overline">ανων</hi></abbr></w></ab> <ab n="B01K17V23"><w>και</w> <w>αποκτε<lb break="no"/>νουσιν</w> <w>αυτον</w> <w>και</w> <w>τη</w><lb/><w>τριτη</w> <w>ημερα</w> <w>ανα<lb break="no"/>στησται</w></ab></div> </div>
+</body></text></TEI>

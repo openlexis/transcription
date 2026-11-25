@@ -1,0 +1,73 @@
+
+<!DOCTYPE TEI>
+<?xml-model href="TEI-NTMSS.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"><teiHeader>
+    <fileDesc>      
+      <titleStmt>
+        <title>A Transcription of 2 Thessalonians</title>
+        <title type="document" key="10092" n="P92">GA P92</title>
+        <title type="collection" level="s" xml:lang="en">The New Testament</title>
+        <title type="collection" level="s" xml:lang="de">Das Neue Testament</title>
+        <title type="work" level="m" xml:lang="en" n="14">The Second Epistle to the Thessalonians</title>
+        <title type="short" level="m" xml:lang="en" n="14">2 Thessalonians</title>      
+        <respStmt>
+          <resp>Created by</resp>
+          <name type="persname">Grant Edwards</name>
+        </respStmt>       
+        <respStmt>
+          <resp>XML conversion by</resp>
+          <name type="org">the Institute for Textual Scholarship and Electronic Editing, Birmingham</name>
+        </respStmt>
+      </titleStmt>
+      <editionStmt>
+        <edition n="1.0">Version 1.0, created on <date>23.9.2015</date></edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>
+          <name type="persname">Grant Edwards</name>
+        </publisher>
+        <date>23.9.2015</date>
+      </publicationStmt>
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier>
+            <altIdentifier type="GA">
+              <idno>P92</idno>
+            </altIdentifier>
+            <altIdentifier type="Liste">
+              <idno>10092</idno>
+            </altIdentifier>
+          </msIdentifier>
+        </msDesc>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc n="1.4">
+      <projectDesc>
+        <p>This transcription was made as part of a doctoral research project</p>
+      </projectDesc>
+      <editorialDecl>
+       
+          
+      	<p>The XML specifications used are version 1.4 of the IGNTP Guidelines available at <ptr target="http://epapers.bham.ac.uk/1727/"/></p></editorialDecl>
+      <variantEncoding method="parallel-segmentation" location="internal"/>
+    	
+    </encodingDesc>
+  </teiHeader><text xml:lang="GRC"><body><div type="book" n="B14">
+<pb n="2r" type="folio" xml:id="P2r-P92"/>
+<cb n="P2rC-P92"/>
+<lb n="P2rCL-P92"/><div type="chapter" n="B14K1"><ab n="B14K1V4">
+<lb n="P2rCL-P92"/><w><supplied source="na28" reason="lacuna">εκκαυχασθαι</supplied></w><w><supplied source="na28" reason="lacuna">εν</supplied></w><w><supplied source="na28" reason="lacuna">ταις</supplied></w><w><supplied source="na28" reason="lacuna">εκκλησιαις</supplied></w><w><supplied source="na28" reason="lacuna">του</supplied></w><w><supplied source="na28" reason="lacuna"><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></supplied></w>
+<lb n="P2rCL-P92"/><w><supplied source="na28" reason="lacuna">υπερ</supplied></w><w><supplied source="na28" reason="lacuna">της</supplied></w><w><supplied source="na28" reason="lacuna">υπομονης</supplied></w><w><supplied source="na28" reason="lacuna">υμων</supplied></w><w><supplied source="na28" reason="lacuna">και</supplied></w><w><supplied source="na28" reason="lacuna">πιστεως</supplied></w>
+<lb n="P2rCL-P92"/><w><supplied source="na28" reason="lacuna">εν</supplied></w><w><supplied source="na28" reason="lacuna">πασιν</supplied></w><w><supplied source="na28" reason="lacuna">τοις</supplied></w><w><supplied source="na28" reason="lacuna">δ</supplied><unclear reason="damage to page">ι</unclear>ω<unclear reason="damage to page">γ</unclear><supplied source="na28" reason="lacuna">μοις</supplied></w><w><supplied source="na28" reason="lacuna">υμων</supplied></w><w><supplied source="na28" reason="lacuna">και</supplied></w><w><supplied source="na28" reason="lacuna">ταις</supplied></w>
+<lb n="P2rCL-P92"/><w><supplied source="na28" reason="lacuna">θλιψεσιν</supplied></w><w><unclear reason="damage to page">α</unclear>ις</w><w>αν<unclear reason="damage to page">ε</unclear><supplied source="na28" reason="illegible">χεσθε</supplied></w></ab><ab n="B14K1V5"><w><supplied source="na28" reason="illegible">ενδειγμα</supplied></w>
+<lb n="P2rCL-P92"/><w><supplied source="na28" reason="lacuna">της</supplied></w><w><supplied source="na28" reason="lacuna">δικαι</supplied><unclear reason="damage to page">α</unclear>ς</w><w>κρι<supplied source="na28" reason="lacuna">σεως</supplied></w><w><supplied source="na28" reason="lacuna">του</supplied></w><w><supplied source="na28" reason="lacuna"><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></supplied></w><w><supplied source="na28" reason="lacuna">εις</supplied></w>
+<lb n="P2rCL-P92"/><w><supplied source="na28" reason="illegible">το</supplied></w><w><gap reason="illegible" unit="char" extent="3-6"/><unclear reason="damage to page">ω</unclear>θη<gap reason="illegible" unit="char" extent="3"/></w><w><supplied source="na28" reason="illegible">υμας</supplied></w><w><supplied source="na28" reason="illegible">της</supplied></w><w><supplied source="na28" reason="illegible">βασιλειας</supplied></w>
+<pb n="2v" type="folio" xml:id="P2v-P92"/>
+<cb n="P2vC1-P92"/>
+<lb n="P2vC1L-P92"/></ab><ab n="B14K1V11"><w><supplied source="na28" reason="lacuna">κλη</supplied>
+<lb n="P2vC1L-P92" break="no"/><supplied source="na28" reason="lacuna">σεως</supplied></w><w><supplied source="na28" reason="lacuna">ο</supplied></w><w><supplied source="na28" reason="lacuna"><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></supplied></w><w><supplied source="na28" reason="lacuna">ημων</supplied></w><w><supplied source="na28" reason="lacuna">και</supplied></w><w><supplied source="na28" reason="lacuna">πληρ</supplied><unclear reason="damage to page">ω</unclear><supplied source="na28" reason="lacuna">ση</supplied></w><w><supplied source="na28" reason="lacuna">πασαν</supplied></w>
+<lb n="P2vC1L-P92"/><w><supplied source="na28" reason="lacuna">ευδοκιαν</supplied></w><w><supplied source="na28" reason="lacuna">αγαθωσ</supplied><unclear reason="damage to page">υ</unclear>ν<supplied source="na28" reason="lacuna">ης</supplied></w><w><supplied source="na28" reason="lacuna">και</supplied></w><w><supplied source="na28" reason="lacuna">εργον</supplied></w>
+<lb n="P2vC1L-P92"/><w><supplied source="na28" reason="lacuna">πιστεως</supplied></w><w><supplied source="na28" reason="lacuna">εν</supplied></w><w><supplied source="na28" reason="lacuna">δυν</supplied><unclear reason="damage to page">α</unclear>μ<unclear reason="damage to page">ει</unclear></w></ab><ab n="B14K1V12"><w><supplied source="na28" reason="lacuna">οπως</supplied></w><w><supplied source="na28" reason="lacuna">εν</supplied>
+<lb n="P2vC1L-P92" break="no"/><supplied source="na28" reason="lacuna">δοξασθη</supplied></w><w><supplied source="na28" reason="lacuna">το</supplied></w><w><supplied source="na28" reason="lacuna">ονο</supplied><unclear reason="damage to page">μ</unclear>α</w><w>του</w><w><supplied source="na28" reason="lacuna"><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></supplied></w><w><supplied source="na28" reason="lacuna">ημων</supplied></w><w><supplied source="na28" reason="lacuna"><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></supplied></w>
+<lb n="P2vC1L-P92"/><w><supplied source="na28" reason="lacuna">εν</supplied></w><w><supplied source="na28" reason="lacuna">υμιν</supplied></w><w><supplied source="na28" reason="lacuna">και</supplied></w><w><unclear reason="damage to page">υ</unclear>με<unclear reason="damage to page">ι</unclear><supplied source="na28" reason="lacuna">ς</supplied></w><w><supplied source="na28" reason="lacuna">εν</supplied></w><w><supplied source="na28" reason="lacuna">αυτω</supplied></w><w><supplied source="na28" reason="lacuna">κατα</supplied></w>
+<lb n="P2vC1L-P92"/><w><supplied source="na28" reason="lacuna">την</supplied></w><w><supplied source="na28" reason="lacuna">χαριν</supplied></w><w><supplied source="na28" reason="lacuna">το</supplied>υ</w><w><abbr type="nomSac"><hi rend="overline">θ<unclear reason="damage to page">υ</unclear></hi></abbr></w><w><supplied source="na28" reason="lacuna">ημων</supplied></w><w><supplied source="na28" reason="lacuna">και</supplied></w><w><supplied source="na28" reason="lacuna"><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></supplied></w><w><supplied source="na28" reason="lacuna"><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></supplied></w><w><supplied source="na28" reason="lacuna"><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></supplied></w></ab></div><div type="chapter" n="B14K2"/><div type="chapter" n="B14K3"/></div></body></text></TEI>

@@ -1,0 +1,79 @@
+<!DOCTYPE TEI>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title type="document" n="P92" key="10092">P92</title>
+      </titleStmt>
+            <editionStmt><edition n="1.0">Version 1.0, archived on the University of Birmingham eData repository on <date>13.5.2024</date>.</edition></editionStmt>
+      <publicationStmt>
+        <publisher>
+          <name type="org">The Institut für neutestamentliche Textforschung</name>
+        <name type="org">The University of Birmingham</name><date>13.5.2024</date>
+        </publisher>
+        <availability>
+          <p>(C) 2020 Institut für Neutestamentliche Textforschung.</p>
+          <p>This work is licensed under a Creative Commons Attribution 4.0 Unported License</p>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier>
+            <country>Egypt</country>
+            <settlement>Cairo</settlement>
+            <repository>Museum of Egyptian Antiquities</repository>
+            <idno>P. Narmuthis inv. 69.39a+69.229a</idno>
+          </msIdentifier>
+        </msDesc>
+      </sourceDesc>
+    </fileDesc>
+    <profileDesc>
+      <langUsage>
+        <language ident="grc"/>
+      </langUsage>
+      <handNotes>
+        <handNote>
+          <listWit>
+            <witness xml:id="firsthand"/>
+            <witness xml:id="corrector"/>
+          </listWit>
+        </handNote>
+      </handNotes>
+    </profileDesc>
+    <encodingDesc n="1.6">
+      <projectDesc>
+        <p>This transcription was made by the INTF and converted into XML by ITSEE. It was published
+          online in the NTVMR in 2017. </p>
+      </projectDesc>
+      <editorialDecl>
+        <p>The XML specifications used are version 1.6 of the IGNTP Guidelines available at <ptr
+            target="http://epapers.bham.ac.uk/4301/"/></p>
+      </editorialDecl>
+      <variantEncoding method="parallel-segmentation" location="internal"/>
+    </encodingDesc>
+    <revisionDesc>
+      <change n="1" when="2020-10-15">Downloaded from NTVMR and initial adjustments in encoding made
+        for inclusion in ECM by Hugh Houghton.</change>
+    </revisionDesc>
+  </teiHeader>
+<text xml:lang="grc"><body>
+<pb n="1r" type="folio"/>
+<cb n="1"/>
+<lb/><div type="book" n="Eph"><div type="chapter" n="Eph.1"><ab n="Eph.1.11"><gap reason="lacuna" unit="chapter" extent="part"/><w><supplied source="na28" reason="lacuna">εν</supplied></w><w>ω</w><app><rdg type="orig" hand="firsthand"/><rdg type="corr" hand="corrector"><seg type="line" subtype="above" n="@P0CL-P46"><w><unclear>και</unclear></w></seg></rdg></app><w><unclear>ε</unclear>κλ<unclear>ηρ</unclear>ω
+<lb break="no"/><supplied source="na28" reason="lacuna">θημεν</supplied></w><w><supplied source="na28" reason="lacuna">προορισθεντες</supplied></w><w><supplied source="na28" reason="lacuna">κ</supplied><unclear>ατα</unclear></w><w><unclear>πρ</unclear><supplied source="na28" reason="lacuna">ο</supplied><unclear>θ</unclear>ε
+<lb break="no"/><supplied source="na28" reason="lacuna">σιν</supplied></w><w><supplied source="na28" reason="lacuna">του</supplied></w><w><supplied source="na28" reason="lacuna">τα</supplied></w><w><supplied source="na28" reason="lacuna">παντα</supplied></w><w><supplied source="na28" reason="lacuna">ενεργο</supplied>υντος</w><w>κ<unclear>α</unclear>τα</w>
+<lb/><w><supplied source="na28" reason="lacuna">την</supplied></w><w><supplied source="na28" reason="lacuna">βουλην</supplied></w><w><supplied source="na28" reason="lacuna">του</supplied></w><w><supplied source="na28" reason="lacuna">θελη</supplied>ματος</w><w>αυτο<unclear>υ</unclear></w>
+<lb/></ab><ab n="Eph.1.12"><w><supplied source="na28" reason="lacuna">εις</supplied></w><w><supplied source="na28" reason="lacuna">το</supplied></w><w><supplied source="na28" reason="lacuna">ειναι</supplied></w><w><supplied source="na28" reason="lacuna">ημας</supplied></w><w><supplied source="na28" reason="lacuna">εις</supplied></w><w><supplied source="na28" reason="lacuna">επα</supplied><unclear>ι</unclear>νον</w><w>δοξ<unclear>η</unclear>ς</w>
+<lb/><w><supplied source="na28" reason="lacuna">αυτου</supplied></w><w><supplied source="na28" reason="lacuna">τους</supplied></w><w><supplied source="na28" reason="lacuna">προηλπικο</supplied><unclear>τ</unclear>ας</w><w>εν</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">χρ</hi><unclear><hi rend="overline">ω</hi></unclear></abbr></w>
+<lb/></ab><ab n="Eph.1.13"><w><supplied source="na28" reason="lacuna">εν</supplied></w><w><supplied source="na28" reason="lacuna">ω</supplied></w><w><supplied source="na28" reason="lacuna">και</supplied></w><w><supplied source="na28" reason="lacuna">υμεις</supplied></w><w><supplied source="na28" reason="lacuna">ακουσαν</supplied>τες</w><w>το<unclear>ν</unclear></w><w><supplied source="na28" reason="lacuna">λο</supplied>
+<lb break="no"/><supplied source="na28" reason="lacuna">γον</supplied></w><w><supplied source="na28" reason="lacuna">της</supplied></w><w><supplied source="na28" reason="lacuna">αληθειας</supplied></w><w><supplied source="na28" reason="lacuna">το</supplied></w><w><supplied source="na28" reason="lacuna">ευαγγ</supplied>ελιον</w><w><unclear>τ</unclear><supplied source="na28" reason="lacuna">ης</supplied></w><gap reason="lacuna" unit="verse" extent="part"/></ab>
+<pb n="1v" type="folio"/>
+<cb n="1"/>
+<lb/><ab n="Eph.1.19"><gap reason="lacuna" unit="verse" extent="part"/><app><rdg type="orig" hand="firsthand"><w><unclear>πλ</unclear>ουτο<supplied source="na28" reason="lacuna">ς</supplied></w></rdg><rdg type="corr" hand="corrector"><seg type="line" subtype="above" n="@P0CL-P46"><w><unclear>υπ</unclear>ερβαλλ<supplied source="na28" reason="lacuna">ον</supplied></w></seg></rdg></app><w><supplied source="na28" reason="lacuna">μεγεθος</supplied></w><w><supplied source="na28" reason="lacuna">της</supplied></w><w><supplied source="na28" reason="lacuna">δυναμεως</supplied></w>
+<lb/><w>αυτου</w><w>εις</w><w><supplied source="na28" reason="lacuna">ημας</supplied></w><w><supplied source="na28" reason="lacuna">τους</supplied></w><w><supplied source="na28" reason="lacuna">πιστευοντας</supplied></w>
+<lb/><w>κατα</w><w>τ<unclear>η</unclear><supplied source="na28" reason="lacuna">ν</supplied></w><w><supplied source="na28" reason="lacuna">ενεργειαν</supplied></w><w><supplied source="na28" reason="lacuna">του</supplied></w><w><supplied source="na28" reason="lacuna">κρατους</supplied></w>
+<lb/><w>της</w><w>ισχ<supplied source="na28" reason="lacuna">υος</supplied></w><w><supplied source="na28" reason="lacuna">αυτου</supplied></w></ab><ab n="Eph.1.20"><w><supplied source="na28" reason="lacuna">ην</supplied></w><w><supplied source="na28" reason="lacuna">ενηργησεν</supplied></w>
+<lb/><w>ε<unclear>ν</unclear></w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">χ</hi><unclear><hi rend="overline">ρ</hi></unclear><supplied source="na28" reason="lacuna"><hi rend="overline">ω</hi></supplied></abbr></w><w><supplied source="na28" reason="lacuna">εγειρας</supplied></w><w><supplied source="na28" reason="lacuna">αυτον</supplied></w><w><supplied source="na28" reason="lacuna">εκ</supplied></w><w><supplied source="na28" reason="lacuna">νεκρων</supplied></w>
+<lb/><w>και</w><w>καθι<supplied source="na28" reason="lacuna">σας</supplied></w><w><supplied source="na28" reason="lacuna">εν</supplied></w><w><supplied source="na28" reason="lacuna">δεξια</supplied></w><w><supplied source="na28" reason="lacuna">αυτου</supplied></w><w><supplied source="na28" reason="lacuna">εν</supplied></w><w><supplied source="na28" reason="lacuna">τοις</supplied></w>
+<lb/><w><supplied source="na28" reason="lacuna">ε</supplied><unclear>π</unclear>ουρα<unclear>ν</unclear><supplied source="na28" reason="lacuna">ιοις</supplied></w></ab><ab n="Eph.1.21"><w><supplied source="na28" reason="lacuna">υπερανω</supplied></w><w><supplied source="na28" reason="lacuna">πασης</supplied></w><w><supplied source="na28" reason="lacuna">αρ</supplied>
+<lb break="no"/><supplied source="na28" reason="lacuna">χης</supplied></w><w><unclear>κ</unclear>αι</w><w><supplied source="na28" reason="lacuna">εξουσιας</supplied></w><w><supplied source="na28" reason="lacuna">και</supplied></w><w><supplied source="na28" reason="lacuna">δυναμεως</supplied></w><gap reason="lacuna" unit="verse" extent="part"/></ab></div></div></body></text></TEI>

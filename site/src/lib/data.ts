@@ -9,6 +9,7 @@ export const REPO = "https://github.com/openlexis/transcription";
 /** The one specification of this repository, read at build time. */
 export const SPEC = readFileSync(`${ROOT}SPECIFICATION.md`, "utf8");
 export const SPEC_SHA = createHash("sha256").update(SPEC).digest("hex");
+export const SPEC_ULID = (SPEC.match(/\b([0-9A-HJKMNP-TV-Z]{26})\b/) ?? [])[1] ?? "";
 export const shortHash = (h?: string) => (h ? h.slice(0, 12) : "");
 
 export type Stats = { manuscripts: number; early: number; lines: number; uncoveredLines: number; words: number; columns: number; unanimousColumns: number; places: number; meanPlaceConfidence: number; meanWordConfidence: number; meanManuscriptsPerLine: number; aramaicLines?: number; aramaicWords?: number };

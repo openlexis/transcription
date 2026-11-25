@@ -1,0 +1,400 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE TEI>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"><teiHeader>
+    <fileDesc>      
+      <titleStmt>
+        <title>A Transcription of Galatians in 454</title>
+        <title type="document" key="30454" n="454">GA 454</title>
+        <title type="collection" level="s" xml:lang="en">The New Testament</title>
+        <title type="collection" level="s" xml:lang="de">Das Neue Testament</title>
+        <title type="work" level="m" xml:lang="de" n="Gal">The Epistle to the Galatians</title>
+        <title type="short" level="m" xml:lang="de" n="Gal">Galatians</title>      
+	<respStmt>
+		<resp>Created by</resp><name type="org">the International Greek New Testament Project</name></respStmt>
+	<respStmt><resp>Transcribed by</resp><name type="person">Tony Pope</name></respStmt>
+	<respStmt><resp when="2014-01-16">Transcribed by</resp><name type="person">Dora Panella</name></respStmt>
+	<respStmt><resp>Reconciled by</resp><name type="person">Rachel Kevern</name></respStmt>
+	<funder>Partly funded by the British Academy</funder>
+	<sponsor><name type="org">The Institute for Textual Scholarship and Electronic Editing</name></sponsor>
+      </titleStmt>
+      <editionStmt>
+        <edition n="1.0">Version 1.0, created on <date>8.10.2014</date>, archived on the University of Birmingham eData repository on <date>13.5.2024</date>.</edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>
+          <name type="org">The Institute for Textual Scholarship and Electronic Editing</name> 
+					<name type="org">University of Birmingham</name></publisher>
+        <date>13.5.2024</date>
+          <availability><p>Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further <ptr target="https://creativecommons.org/licenses/by/4.0/"/>.</p></availability>
+      </publicationStmt>
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier>
+            <country>Italy</country><settlement>Florence</settlement><repository>Biblioteca Medicea Laurenziana</repository><idno>Pluteo IV. 1</idno><altIdentifier type="GA">
+              <idno>454</idno>
+            </altIdentifier>
+            <altIdentifier type="Liste">
+              <idno>30454</idno>
+            </altIdentifier>
+          </msIdentifier>
+        </msDesc>
+      <listWit><witness xml:id="firsthand"/></listWit></sourceDesc>
+    </fileDesc>
+    <encodingDesc n="1.6">
+			<projectDesc><p>This transcription was made by the International Greek New Testament Project (IGNTP) between 2013 and 2014. </p></projectDesc>
+			<editorialDecl><p>The initial transcription file was a plain text file in Unicode.  The original transcription guidelines can be found at <ptr target="http://epapers.bham.ac.uk/1676/"/></p>
+				
+				<p>The initial transcriptions were reconciled by Rachel Kevern. The plain text file was converted to XML by Hugh Houghton and Catherine Smith using the project's Python conversion scripts 1.0.</p>
+				<p>The XML specifications used are version 1.6 of the IGNTP Guidelines available at <ptr target="http://epapers.bham.ac.uk/4301/"/></p></editorialDecl>
+			<variantEncoding method="parallel-segmentation" location="internal"/>
+	</encodingDesc>
+<revisionDesc>
+<change n="0" when="2014-10-08">Converted from plain text by Hugh Houghton and Catherine Smith using Python conversion scripts 1.0.</change>
+</revisionDesc>
+</teiHeader>
+
+  <text xml:lang="grc"><body><note type="editorial">General observations:   Iota adscript used frequently.Commentary manuscript.                                </note>
+<pb xml:id="P158r-454" n="158r" type="folio"/>
+<cb xml:id="P158rC1-454" n="1"/>
+<lb xml:id="P158rC1L1-454" n="1"/><div n="Gal" type="book"><div type="inscriptio"><ab n="Gal.inscriptio"><w>προς</w><w>γαλατας</w>
+<lb xml:id="P158rC1L2-454" n="2"/></ab></div><div n="Gal.1" type="chapter"><ab n="Gal.1.1"><w>παυλος</w><w>αποστολος</w><w>ουκ</w><w>απ</w><w><abbr type="nomSac"><hi rend="overline">ανων</hi></abbr></w><w>ουδε</w><w>δι</w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>αλ
+<lb break="no" xml:id="P158rC1L3-454" n="3"/>λα</w><w>δια</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>του</w><w>εγειραντος</w><w>αυτον</w>
+<lb xml:id="P158rC1L4-454" n="4"/><w>εκ</w><w>νεκρων</w></ab><ab n="Gal.1.2"><w>και</w><w>οι</w><w>συν</w><w>εμοι</w><w>παντες</w><w>αδελφοι</w><w>ταις</w>
+<lb xml:id="P158rC1L5-454" n="5"/><w>εκκλησιαις</w><w>της</w><w>γαλατιας</w></ab><ab n="Gal.1.3"><w>χαρις</w><w>υμιν</w><w>και</w><w>ει
+<lb break="no" xml:id="P158rC1L6-454" n="6"/>ρηνη</w><w>απο</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="Gal.1.4"><w>του</w><w>δοντος</w>
+<lb xml:id="P158rC1L7-454" n="7"/><w>εαυτον</w><w>υπερ</w><w>των</w><w>αμαρτιων</w><w>ημων</w><w>οπως</w><w>εξε
+<lb break="no" xml:id="P158rC1L8-454" n="8"/>ληται</w><w>ημας</w><w>εκ</w><w>του</w><w>ενεστωτος</w><w>αιωνος</w><w>πονηρου</w>
+<pb xml:id="P158v-454" n="158v" type="folio"/>
+<cb xml:id="P158vC1-454" n="1"/>
+<lb xml:id="P158vC1L1-454" n="1"/><w>κατα</w><w>το</w><w>θελημα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>και</w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w></ab><ab n="Gal.1.5"><w>ω</w><w>η</w><w>δοξα</w><w>εις</w><w>τους</w>
+<lb xml:id="P158vC1L2-454" n="2"/><w>αιωνας</w><w>των</w><w>αιωνων</w><w>αμην</w></ab><ab n="Gal.1.6"><w>θαυμαζω</w><w>οτι</w><w>ουτω</w>
+<lb xml:id="P158vC1L3-454" n="3"/><w>ταχεως</w><w>μετατιθεσθε</w><w>απο</w><w>του</w><w>καλεσαντος</w><w>υμας</w>
+<lb xml:id="P158vC1L4-454" n="4"/><w>εν</w><w>χαριτι</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>εις</w><w>ετερον</w><w>ευαγγελιον</w></ab><ab n="Gal.1.7"><w>ο</w><w>ουκ</w><w>εστιν</w><w>αλλο</w><w>ει</w>
+<lb xml:id="P158vC1L5-454" n="5"/><w>μη</w><w>τινες</w><w>εισιν</w><w>οι</w><w>ταρασσοντες</w><w>υμας</w><w>και</w><w>θελοντες</w>
+<lb xml:id="P158vC1L6-454" n="6"/><w>μεταστρεψαι</w><w>το</w><w>ευαγγελιον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="Gal.1.8"><w>αλλα</w><w>και</w><w>εαν</w><w>ημεις</w>
+<lb xml:id="P158vC1L7-454" n="7"/><w>η</w><w>αγγελος</w><w>εξ</w><w><abbr type="nomSac"><hi rend="overline">ουνου</hi></abbr></w><w>ευαγγελιζηται</w><w>υμιν</w><w>παρ</w><w>ο</w><w>ευ
+<lb break="no" xml:id="P158vC1L8-454" n="8"/>ηγγελισαμεθα</w><w>υμιν</w><w>αναθεμα</w><w>εστω</w></ab><ab n="Gal.1.9"><w>ως</w><w>προειρη
+<lb break="no" xml:id="P158vC1L9-454" n="9"/>καμεν</w><w>και</w><w>παλιν</w><w>αρτι</w><w>λεγω</w><w>ει</w><w>τις</w><w>υμας</w><w>ευαγγελι
+<lb break="no" xml:id="P158vC1L10-454" n="10"/>ζεται</w><w>παρ</w><w>ο</w><w>παρελαβετε</w><w>αναθεμα</w><w>εστω</w></ab><ab n="Gal.1.10"><w>αρτι</w>
+<lb xml:id="P158vC1L11-454" n="11"/><w>γαρ</w><w><abbr type="nomSac"><hi rend="overline">ανους</hi></abbr></w><w>πειθω</w><w>η</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w><w>η</w><w>ζητω</w><w><abbr type="nomSac"><hi rend="overline">ανοις</hi></abbr></w><w>αρεσκειν</w>
+<lb xml:id="P158vC1L12-454" n="12"/><w>ει</w><w>γαρ</w><w>ετι</w><w><abbr type="nomSac"><hi rend="overline">ανοις</hi></abbr></w><w>ηρεσκον</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>δουλος</w><w>ουκ</w><w>αν</w><w>ημην</w>
+<lb xml:id="P158vC1L13-454" n="13"/></ab><ab n="Gal.1.11"><w>γνωριζω</w><w>δε</w><w>υμιν</w><w>αδελφοι</w><w>το</w><w>ευαγγελιον</w><w>το</w><w>ευαγγελι
+<lb break="no" xml:id="P158vC1L14-454" n="14"/>σθεν</w><w>υπ</w><w>εμου</w><w>οτι</w><w>ουκ</w><w>εστι</w><w>κατα</w><w><abbr type="nomSac"><hi rend="overline">ανον</hi></abbr></w>
+<pb xml:id="P159r-454" n="159r" type="folio"/>
+<cb xml:id="P159rC1-454" n="1"/>
+<lb xml:id="P159rC1L1-454" n="1"/></ab><ab n="Gal.1.12"><w>ουδε</w><w>γαρ</w><w>εγω</w><w>παρα</w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>παρελαβον</w><w>αυτο</w><w>ουτε</w>
+<lb xml:id="P159rC1L2-454" n="2"/><w>εδιδαχθην</w><w>αλλα</w><w>δι</w><w>αποκαλυψεως</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="Gal.1.13"><w>ηκουσα
+<lb break="no" xml:id="P159rC1L3-454" n="3"/>τε</w><w>γαρ</w><w>την</w><w>εμην</w><w>αναστροφην</w><w>ποτε</w><w>εν</w><w>τω</w><w>ιου
+<lb break="no" xml:id="P159rC1L4-454" n="4"/>δαισμω</w><w>οτι</w><w>καθ</w><w>υπερβολην</w><w>εδιωκον</w><w>την</w>
+<lb xml:id="P159rC1L5-454" n="5"/><w>εκκλησιαν</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>και</w><w>επορθουν</w><w>αυτην</w></ab><ab n="Gal.1.14"><w>και</w><w>προ
+<lb break="no" xml:id="P159rC1L6-454" n="6"/>εκοπτον</w><w>εν</w><w>τω</w><w>ιουδαισμω</w><w>υπερ</w><w>πολλους</w><w>συν
+<lb break="no" xml:id="P159rC1L7-454" n="7"/>ηλικιωτας</w><w>εν</w><w>τω</w><w>γενει</w><w>μου</w><w>περισσοτερως</w><w>ζη
+<lb break="no" xml:id="P159rC1L8-454" n="8"/>λωτης</w><w>υπαρχων</w><w>των</w><w>πατρικων</w><w>μου</w><w>παραδοσε
+<lb break="no" xml:id="P159rC1L9-454" n="9"/>ων</w></ab><ab n="Gal.1.15"><w>οτε</w><w>δε</w><w>ευδοκησεν</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>ο</w><w>αφορισας</w><w>με</w><w>εκ</w><w>κοι
+<lb break="no" xml:id="P159rC1L10-454" n="10"/>λιας</w><w><abbr type="nomSac"><hi rend="overline">μρς</hi></abbr></w><w>μου</w><w>και</w><w>καλεσας</w><w>με</w><w>δια</w><w>της</w><w>χαριτος</w><w>αυ
+<lb break="no" xml:id="P159rC1L11-454" n="11"/>του</w></ab><ab n="Gal.1.16"><w>αποκαλυψαι</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">υν</hi></abbr></w><w>αυτου</w><w>εν</w><w>εμοι</w><w>ινα</w><w>ευαγ
+<lb break="no" xml:id="P159rC1L12-454" n="12"/>γελιζωμαι</w><w>αυτον</w><w>εν</w><w>τοις</w><w>εθνεσιν</w><w>ευθεως</w><w>ου</w><w>προσ
+<lb break="no" xml:id="P159rC1L13-454" n="13"/>ανεθεμην</w><w>σαρκι</w><w>και</w><w>αιματι</w></ab><ab n="Gal.1.17"><w>ουδε</w><w>ανηλθον</w><w>εις</w>
+<lb xml:id="P159rC1L14-454" n="14"/><w>ιεροσολυμα</w><w>προς</w><w>τους</w><w>προ</w><w>εμου</w><w>αποστολους</w>
+<pb xml:id="P159v-454" n="159v" type="folio"/>
+<cb xml:id="P159vC1-454" n="1"/>
+<lb xml:id="P159vC1L1-454" n="1"/><w>αλλα</w><w>απηλθον</w><w>εις</w><w>αραβιαν</w><w>και</w><w>παλιν</w><w>υπεστρεψα</w>
+<lb xml:id="P159vC1L2-454" n="2"/><w>εις</w><w>δαμασκον</w></ab><ab n="Gal.1.18"><w>επειτα</w><w>μετα</w><w>ετη</w><w>τρια</w><w>απηλθον</w><w>εις</w>
+<lb xml:id="P159vC1L3-454" n="3"/><w>ιεροσολυμα</w><w>ιστορησαι</w><w>πετρον</w><w>και</w><w>επεμεινα</w><w>προς</w>
+<lb xml:id="P159vC1L4-454" n="4"/><w>αυτον</w><w>ημερας</w><w>δεκαπεντε</w></ab><ab n="Gal.1.19"><w>ετερον</w><w>δε</w><w>των</w><w>απο
+<lb break="no" xml:id="P159vC1L5-454" n="5"/>στολων</w><w>ουκ</w><w>ειδον</w><w>ει</w><w>μη</w><w>ιακωβον</w><w>τον</w><w>αδελφον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w>
+<lb xml:id="P159vC1L6-454" n="6"/></ab><ab n="Gal.1.20"><w>α</w><w>δε</w><w>γραφω</w><w>υμιν</w><w>ιδου</w><w>ενωπιον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>οτι</w><w>ου</w><w>ψευ
+<lb break="no" xml:id="P159vC1L7-454" n="7"/>δομαι</w></ab><ab n="Gal.1.21"><w>επειτα</w><w>ηλθον</w><w>εις</w><w>τα</w><w>κλιματα</w><w>της</w><w>συριας</w>
+<lb xml:id="P159vC1L8-454" n="8"/><w>και</w><w>κιλικιας</w></ab><ab n="Gal.1.22"><w>ημην</w><w>δε</w><w>αγνοουμενος</w><w>τω</w><w>προσω
+<lb break="no" xml:id="P159vC1L9-454" n="9"/>πω</w><w>ταις</w><w>εκκλησιαις</w><w>της</w><w>ιουδαιας</w><w>ταις</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w>
+<lb xml:id="P159vC1L10-454" n="10"/></ab><ab n="Gal.1.23"><w>μονον</w><w>δε</w><w>ακουοντες</w><w>ησαν</w><w>οτι</w><w>ο</w><w>διωκων</w><w>ημας</w><w>πο
+<lb break="no" xml:id="P159vC1L11-454" n="11"/>τε</w><w>νυν</w><w>ευαγγελιζεται</w><w>την</w><w>πιστιν</w><w>ην</w><w>ποτε</w><w>επορθει</w>
+<lb xml:id="P159vC1L12-454" n="12"/></ab><ab n="Gal.1.24"><w>και</w><w>εδοξαζον</w><w>εν</w><w>εμοι</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w></ab></div><div n="Gal.2" type="chapter"><ab n="Gal.2.1"><w>επειτα</w><w>δια</w><w>δεκα
+<lb break="no" xml:id="P159vC1L13-454" n="13"/>τεσσαρων</w><w>ετων</w><w>παλιν</w><w>ανεβην</w><w>εις</w><w>ιεροσολυμα</w>
+<lb xml:id="P159vC1L14-454" n="14"/><w>μετα</w><w>βαρναβα</w><w>συμπαραλαβων</w><w>και</w><w>τιτον</w></ab><ab n="Gal.2.2"><w>ανε
+<lb break="no" xml:id="P159vC1L15-454" n="15"/>βην</w><w>δε</w><w>κατα</w><w>αποκαλυψιν</w><w>και</w><w>ανεθεμην</w><w>αυτοις</w>
+<lb xml:id="P159vC1L16-454" n="16"/><w>το</w><w>ευαγγελιον</w><w>ο</w><w>κηρυσσω</w><w>εν</w><w>τοις</w><w>εθνεσιν</w><w>κατ</w><w>ιδι
+<lb break="no" xml:id="P159vC1L17-454" n="17"/>αν</w><w>δε</w><w>τοις</w><w>δοκουσιν</w><w>μη</w><w>πως</w><w>εις</w><w>κενον</w><w>τρεχω</w><w>η</w>
+<lb xml:id="P159vC1L18-454" n="18"/><w>εδραμον</w>
+<pb xml:id="P160r-454" n="160r" type="folio"/>
+<cb xml:id="P160rC1-454" n="1"/>
+<lb xml:id="P160rC1L1-454" n="1"/></ab><ab n="Gal.2.3"><w>αλλ</w><w>ουδε</w><w>τιτος</w><w>ο</w><w>συν</w><w>εμοι</w><app><rdg type="orig" hand="firsthand"><w>ων</w><w>ελλην</w></rdg><rdg type="corr" hand="firsthand"><w>ελλην</w><w>ων</w></rdg></app><w>ηναγκασθη</w><w>περι
+<lb break="no" xml:id="P160rC1L2-454" n="2"/>ριτμηθηναι</w></ab><ab n="Gal.2.4"><w>δια</w><w>δε</w><w>τους</w><w>παρεισακτους</w><w>ψευδα
+<lb break="no" xml:id="P160rC1L3-454" n="3"/>δελφους</w><w>οιτινες</w><w>παρεισηλθον</w><w>κατασκοπησαι</w>
+<lb xml:id="P160rC1L4-454" n="4"/><w>την</w><w>ελευθεριαν</w><w>ημων</w><w>ην</w><w>εχομεν</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>ινα</w><w>η
+<lb break="no" xml:id="P160rC1L5-454" n="5"/>μας</w><w>καταδουλωσωνται</w></ab><ab n="Gal.2.5"><w>οις</w><w>ουδε</w><w>προς</w><w>ωραν</w><w>ει
+<lb break="no" xml:id="P160rC1L6-454" n="6"/>ξαμεν</w><w>τη</w><w>υποταγη</w><w>ινα</w><w>η</w><w>αληθεια</w><w>του</w><w>ευαγγελι
+<lb break="no" xml:id="P160rC1L7-454" n="7"/>ου</w><w>διαμεινη</w><w>προς</w><w>υμας</w></ab><ab n="Gal.2.6"><w>απο</w><w>δε</w><w>των</w><w>δοκουντων</w>
+<lb xml:id="P160rC1L8-454" n="8"/><w>ειναι</w><w>τι</w><w>οποιοι</w><w>ποτε</w><w>ησαν</w><w>ουδεν</w><w>μοι</w><w>διαφερει</w>
+<lb xml:id="P160rC1L9-454" n="9"/><w>προσωπον</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>ου</w><w>λαμβανει</w><w>εμοι</w><w>γαρ</w><w>οι</w><w>δο
+<lb break="no" xml:id="P160rC1L10-454" n="10"/>κουντες</w><w>ουδεν</w><w>προσανεθεντο</w></ab><ab n="Gal.2.7"><w>αλλα</w><w>τουναντι
+<lb break="no" xml:id="P160rC1L11-454" n="11"/>ον</w><w>ιδοντες</w><w>οτι</w><w>πεπιστευμαι</w><w>το</w><w>ευαγγελιον</w><w>της</w><w>α
+<lb break="no" xml:id="P160rC1L12-454" n="12"/>κροβυστιας</w><w>καθως</w><w>πετρος</w><w>της</w><w>περιτομης</w>
+<lb xml:id="P160rC1L13-454" n="13"/></ab><ab n="Gal.2.8"><w>ο</w><w>γαρ</w><w>ενεργησας</w><w>πετρω</w><w>εις</w><w>αποστολην</w><w>της</w><w>περι
+<lb break="no" xml:id="P160rC1L14-454" n="14"/>τομης</w><w>ενηργησε</w><w>και</w><w>εμοι</w><w>εις</w><w>τα</w><w>εθνη</w>
+<pb xml:id="P160v-454" n="160v" type="folio"/>
+<cb xml:id="P160vC1-454" n="1"/>
+<lb xml:id="P160vC1L1-454" n="1"/></ab><ab n="Gal.2.9"><w>και</w><w>γνοντες</w><w>την</w><w>χαριν</w><w>την</w><w>δοθεισαν</w><w>μοι</w><w>ιακωβος</w>
+<lb xml:id="P160vC1L2-454" n="2"/><w>και</w><w>κηφας</w><w>και</w><w>ιωαννης</w><w>οι</w><w>δοκουντες</w><w>στυλοι</w><w>ειναι</w>
+<lb xml:id="P160vC1L3-454" n="3"/><w>δεξιας</w><w>εδωκαν</w><w>εμοι</w><w>και</w><w>βαρναβα</w><w>κοινωνιας</w><w>ι
+<lb break="no" xml:id="P160vC1L4-454" n="4"/>να</w><w>ημεις</w><w>εις</w><w>τα</w><w>εθνη</w><w>αυτοι</w><w>δε</w><w>εις</w><w>την</w><w>περιτομην</w>
+<lb xml:id="P160vC1L5-454" n="5"/></ab><ab n="Gal.2.10"><w>μονον</w><w>των</w><w>πτωχων</w><w>ινα</w><w>μνημονευωμεν</w><w>ο</w><w>και</w><w>εσπου
+<lb break="no" xml:id="P160vC1L6-454" n="6"/>δασα</w><w>αυτω</w><w>τουτο</w><w>ποιησαι</w></ab><ab n="Gal.2.11"><w>οτε</w><w>δε</w><w>ηλθε</w><w>πετρος</w>
+<lb xml:id="P160vC1L7-454" n="7"/><w>εις</w><w>αντιοχειαν</w><w>κατα</w><w>προσωπον</w><w>αυτω</w><w>αντεστην</w><w>ο
+<lb break="no" xml:id="P160vC1L8-454" n="8"/>τι</w><w>κατεγνωσμενος</w><w>ην</w></ab><ab n="Gal.2.12"><w>προ</w><w>γαρ</w><w>του</w><w>ελθειν</w><w>τινας</w>
+<lb xml:id="P160vC1L9-454" n="9"/><w>απο</w><w>ιακωβου</w><w>μετα</w><w>των</w><w>εθνων</w><app><rdg type="orig" hand="firsthand"><w>ησθιεν</w></rdg><rdg type="corr" hand="firsthand"><w>συνησθιεν</w></rdg></app><w>οτε</w><w>δε</w><w>ηλ
+<lb break="no" xml:id="P160vC1L10-454" n="10"/>θον</w><w>υπεστελλεν</w><w>και</w><w>αφοριζεν</w><w>εαυτον</w><w>φοβουμενος</w>
+<lb xml:id="P160vC1L11-454" n="11"/><w>τους</w><w>εκ</w><w>περιτομης</w></ab><ab n="Gal.2.13"><w>και</w><w>συνυπεκριθησαν</w><w>αυτω</w><w>και</w>
+<lb xml:id="P160vC1L12-454" n="12"/><w>οι</w><w>λοιποι</w><w>ιουδαιοι</w><w>ωστε</w><w>και</w><w>βαρναβας</w><w>συναπηχθη</w>
+<lb xml:id="P160vC1L13-454" n="13"/><w>αυτω</w><w>τη</w><w>υποκρισει</w></ab><ab n="Gal.2.14"><w>αλλ</w><w>οτε</w><w>ειδον</w><w>οτι</w><w>ουκ</w><w>ορθοπο
+<lb break="no" xml:id="P160vC1L14-454" n="14"/>δουσιν</w><w>προς</w><w>την</w><w>αληθειαν</w><w>του</w><w>ευαγγελιου</w><w>ειπον</w>
+<lb xml:id="P160vC1L15-454" n="15"/><w>τω</w><w>πετρω</w><w>εμπροσθε</w><w>παντων</w><w>ει</w><w>συ</w><w>ιουδαιος</w>
+<lb xml:id="P160vC1L16-454" n="16"/><w>υπαρχων</w><w>εθνικως</w><w>ζης</w><w>και</w><w>ουκ</w><w>ιουδαικως</w>
+<pb xml:id="P161r-454" n="161r" type="folio"/>
+<cb xml:id="P161rC1-454" n="1"/>
+<lb xml:id="P161rC1L1-454" n="1"/><w>τι</w><w>τα</w><w>εθνη</w><w>αναγκαζεις</w><w>ιουδαιζειν</w></ab><ab n="Gal.2.15"><w>ημεις</w><w>φυσει</w>
+<lb xml:id="P161rC1L2-454" n="2"/><w>ιουδαιοι</w><w>και</w><w>ουκ</w><w>εξ</w><w>εθνων</w><w>αμαρτωλοι</w></ab><ab n="Gal.2.16"><w>ειδοτες</w><w>οτι</w>
+<lb xml:id="P161rC1L3-454" n="3"/><w>ου</w><w>δικαιουται</w><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>εξ</w><w>εργων</w><w>νομου</w><w>ει</w><w>μη</w><w>δια</w><w>πιστε
+<lb break="no" xml:id="P161rC1L4-454" n="4"/>ως</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>και</w><w>ημεις</w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w><w>επιστευσαμεν</w><w>ινα</w><w>δι
+<lb break="no" xml:id="P161rC1L5-454" n="5"/>καιωθωμεν</w><w>εκ</w><w>πιστεως</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>και</w><w>ουκ</w><w>εξ</w><w>εργων</w><w>νο
+<lb break="no" xml:id="P161rC1L6-454" n="6"/>μου</w><w>διοτι</w><w>ου</w><w>δικαιωθησεται</w><w>εξ</w><w>εργων</w><w>νομου</w><w>πα
+<lb break="no" xml:id="P161rC1L7-454" n="7"/>σα</w><w>σαρξ</w></ab><ab n="Gal.2.17"><w>ει</w><w>δε</w><w>ζητουντες</w><w>δικαιωθηναι</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w>
+<lb xml:id="P161rC1L8-454" n="8"/><w>ευρεθημεν</w><w>και</w><w>αυτοι</w><w>αμαρτωλοι</w><w>ἆρα</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>αμαρτι
+<lb break="no" xml:id="P161rC1L9-454" n="9"/>ας</w><w>διακονος</w><w>μη</w><w>γενοιτο</w></ab><ab n="Gal.2.18"><w>ει</w><w>γαρ</w><w>α</w><w>κατελυσα</w>
+<lb xml:id="P161rC1L10-454" n="10"/><w>ταυτα</w><w>παλιν</w><w>οικοδομω</w><w>παραβατην</w><w>εμαυτον</w>
+<lb xml:id="P161rC1L11-454" n="11"/><w>συνιστημι</w></ab><ab n="Gal.2.19"><w>εγω</w><w>γαρ</w><w>δια</w><w>νομου</w><w>νομω</w><w>απεθανον</w><w>ι
+<lb break="no" xml:id="P161rC1L12-454" n="12"/>να</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>ζησω</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">συνεστρωμαι</hi></abbr></w></ab><ab n="Gal.2.20"><w>ζω</w><w>δε</w><w>ουκετι</w><w>εγω</w>
+<lb xml:id="P161rC1L13-454" n="13"/><w>ζη</w><w>δε</w><w>εν</w><w>εμοι</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>ο</w><w>δε</w><w>νυν</w><w>ζω</w><w>εν</w><w>σαρκι</w><w>εν</w><w>πι
+<lb break="no" xml:id="P161rC1L14-454" n="14"/>στει</w><w>ζω</w><w>τη</w><w>του</w><w>υιου</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>αγαπησαντος</w><w>με</w>
+<pb xml:id="P161v-454" n="161v" type="folio"/>
+<cb xml:id="P161vC1-454" n="1"/>
+<lb xml:id="P161vC1L1-454" n="1"/><w>και</w><w>παραδοντος</w><w>εαυτον</w><w>υπερ</w><w>εμου</w></ab><ab n="Gal.2.21"><w>ουκ</w><w>αθετω</w>
+<lb xml:id="P161vC1L2-454" n="2"/><w>την</w><w>χαριν</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>ει</w><w>γαρ</w><w>δια</w><w>νομου</w><w>δικαιοσυνη</w>
+<lb xml:id="P161vC1L3-454" n="3"/><w><unclear>ἆ</unclear>ρα</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>δωρεαν</w><w>απεθανεν</w></ab></div><div n="Gal.3" type="chapter"><ab n="Gal.3.1"><w>ω</w><w>ανοητοι</w><w>γαλαται</w>
+<lb xml:id="P161vC1L4-454" n="4"/><w>τις</w><w>υμας</w><w>εβασκανε</w><w>τη</w><w>αληθεια</w><w>μη</w><w>πειθεσθαι</w>
+<lb xml:id="P161vC1L5-454" n="5"/><w>οις</w><w>κατ</w><w>οφθαλμους</w><w><abbr type="nomSac"><hi rend="overline">ις</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>προεγραφη</w><w><abbr type="nomSac"><hi rend="overline">εστρωμενος</hi></abbr></w>
+<lb xml:id="P161vC1L6-454" n="6"/></ab><ab n="Gal.3.2"><w>τουτο</w><w>μονον</w><w>θελω</w><w>μαθειν</w><w>αφ</w><w>υμων</w><w>εξ</w><w>εργων</w><w>νο
+<lb break="no" xml:id="P161vC1L7-454" n="7"/>μου</w><w>το</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>ελαβετε</w><w>η</w><w>εξ</w><w>ακοης</w><w>πιστεως</w></ab><ab n="Gal.3.3"><w>ουτως</w>
+<lb xml:id="P161vC1L8-454" n="8"/><w>ανοητοι</w><w>εστε</w><w>εναρξαμενοι</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>νυν</w><w>σαρκι</w><w>επιτε
+<lb break="no" xml:id="P161vC1L9-454" n="9"/>λεισθε</w></ab><ab n="Gal.3.4"><w>τοσαυτα</w><w>επαθετε</w><w>εικη</w><w>ει</w><w>γε</w><w>και</w><w>εικη</w></ab><ab n="Gal.3.5"><w>ο</w><w>ουν</w>
+<lb xml:id="P161vC1L10-454" n="10"/><w>επιχορηγων</w><w>υμιν</w><w>το</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>και</w><w>ενεργων</w><w>δυναμεις</w>
+<lb xml:id="P161vC1L11-454" n="11"/><w>εν</w><w>υμιν</w><w>εξ</w><w>εργων</w><w>νομου</w><w>η</w><w>εξ</w><w>ακοης</w><w>πιστεως</w>
+<lb xml:id="P161vC1L12-454" n="12"/></ab><ab n="Gal.3.6"><w>καθως</w><w>αβρααμ</w><w>επιστευσε</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>και</w><w>ελογισθη</w>
+<lb xml:id="P161vC1L13-454" n="13"/><w>αυτω</w><w>εις</w><w>δικαιοσυνην</w></ab><ab n="Gal.3.7"><w>γινωσκετε</w><w>αρα</w><w>οτι</w><w>οι</w><w>εκ</w>
+<lb xml:id="P161vC1L14-454" n="14"/><w>πιστεως</w><w>ουτοι</w><w>εισιν</w><w>υιοι</w><w>αβρααμ</w></ab><ab n="Gal.3.8"><w>προιδουσα</w>
+<lb xml:id="P161vC1L15-454" n="15"/><w>δε</w><w>η</w><w>γραφη</w><w>οτι</w><w>εκ</w><w>πιστεως</w><w>δικαιοι</w><w>τα</w><w>εθνη</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w>
+<lb xml:id="P161vC1L16-454" n="16"/><w>προευηγγελισατο</w><w>τω</w><w>αβρααμ</w><w>οτι</w><w>ενευλογη
+<lb break="no" xml:id="P161vC1L17-454" n="17"/>θησονται</w><w>εν</w><w>σοι</w><w>παντα</w><w>τα</w><w>εθνη</w>
+<pb xml:id="P162r-454" n="162r" type="folio"/>
+<cb xml:id="P162rC1-454" n="1"/>
+<lb xml:id="P162rC1L1-454" n="1"/></ab><ab n="Gal.3.9"><w>ωστε</w><w>οι</w><w>εκ</w><w>πιστεως</w><w>ευλογουνται</w><w>συν</w><w>τω</w><w>πιστω</w>
+<lb xml:id="P162rC1L2-454" n="2"/><w>αβρααμ</w></ab><ab n="Gal.3.10"><w>οσοι</w><w>γαρ</w><w>εξ</w><w>εργων</w><w>νομου</w><w>εισιν</w><w>υπο</w><w>κα
+<lb break="no" xml:id="P162rC1L3-454" n="3"/>ταραν</w><w>εισιν</w><w>γεγραπται</w><w>γαρ</w><w>επικαταρατος</w><w>πας</w>
+<lb xml:id="P162rC1L4-454" n="4"/><w>ος</w><w>ουκ</w><w>εμμενει</w><w>εν</w><w>πασι</w><w>τοις</w><w>γεγραμμενοις</w><w>εν</w>
+<lb xml:id="P162rC1L5-454" n="5"/><w>τω</w><w>βιβλιω</w><w>του</w><w>νομου</w><w>του</w><w>ποιησαι</w><w>αυτα</w></ab><ab n="Gal.3.11"><w>οτι</w><w>δε</w>
+<lb xml:id="P162rC1L6-454" n="6"/><w>εν</w><w>νομω</w><w>ουδεις</w><w>δικαιουται</w><w>παρα</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">θω</hi></abbr></w><w>δηλον</w><w>οτι</w>
+<lb xml:id="P162rC1L7-454" n="7"/><w>ο</w><w>δικαιος</w><w>εκ</w><w>πιστεως</w><w>ζησεται</w></ab><ab n="Gal.3.12"><w>ο</w><w>δε</w><w>νομος</w><w>ουκ</w><w>εστι</w>
+<lb xml:id="P162rC1L8-454" n="8"/><w>εκ</w><w>πιστεως</w><w>αλλ</w><w>ο</w><w>ποιησας</w><w>αυτα</w><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>ζησεται</w>
+<lb xml:id="P162rC1L9-454" n="9"/><w>εν</w><w>αυτοις</w></ab><ab n="Gal.3.13"><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>ημας</w><w>εξηγορασεν</w><w>εκ</w><w>της</w><w>κατα
+<lb break="no" xml:id="P162rC1L10-454" n="10"/>ρας</w><w>του</w><w>νομου</w><w>γενομενος</w><w>υπερ</w><w>ημων</w><w>καταρα</w>
+<lb xml:id="P162rC1L11-454" n="11"/><w>γεγραπται</w><w>γαρ</w><w>επικαταρατος</w><w>πας</w><w>ο</w><w>κρεμα
+<lb break="no" xml:id="P162rC1L12-454" n="12"/>μενος</w><w>επι</w><w>ξυλου</w></ab><ab n="Gal.3.14"><w>ινα</w><w>εις</w><w>τα</w><w>εθνη</w><w>η</w><w>ευλογια</w><w>του</w>
+<lb xml:id="P162rC1L13-454" n="13"/><w>αβρααμ</w><w>γενηται</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>ινα</w><w>την</w><w>επαγγελι
+<lb break="no" xml:id="P162rC1L14-454" n="14"/>αν</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>λαβωμεν</w><w>δια</w><w>της</w><w>πιστεως</w></ab><ab n="Gal.3.15"><w>αδελ
+<lb break="no" xml:id="P162rC1L15-454" n="15"/>φοι</w><w>κατα</w><w><abbr type="nomSac"><hi rend="overline">ανον</hi></abbr></w><w>λεγω</w><w>ομως</w><w><abbr type="nomSac"><hi rend="overline">ανου</hi></abbr></w><w>κεκυρωμενην</w>
+<lb xml:id="P162rC1L16-454" n="16"/><w>διαθηκην</w><w>ουδεις</w><w>αθετει</w>
+<pb xml:id="P162v-454" n="162v" type="folio"/>
+<cb xml:id="P162vC1-454" n="1"/>
+<lb xml:id="P162vC1L1-454" n="1"/><w>η</w><w>επιδιατασεται</w></ab><ab n="Gal.3.16"><w>τω</w><w>δε</w><w>αβρααμ</w><w>ερρεθησαν</w><w>αι</w>
+<lb xml:id="P162vC1L2-454" n="2"/><w>επαγγελιαι</w><w>και</w><w>τω</w><w>σπερματι</w><w>αυτου</w><w>ου</w><w>λεγει</w><w>και</w><w>τοις</w>
+<lb xml:id="P162vC1L3-454" n="3"/><w>σπερμασιν</w><w>ως</w><w>επι</w><w>πολλων</w><w>αλλ</w><w>ως</w><w>εφ</w><w>ενος</w><w>και</w>
+<lb xml:id="P162vC1L4-454" n="4"/><w>τω</w><w>σπερματι</w><w>σου</w><w>ος</w><w>εστι</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w></ab><ab n="Gal.3.17"><w>τουτο</w><w>δε</w><w>λεγω</w><w>διαθη
+<lb break="no" xml:id="P162vC1L5-454" n="5"/>κην</w><w>προκεκυρωμενην</w><w>υπο</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w>ο</w><w>μετα</w><w>ετη</w>
+<lb xml:id="P162vC1L6-454" n="6"/><w>τριακοσια</w><w>και</w><w>τριακοντα</w><w>γεγονως</w><w>νομος</w><w>ουκ</w><w>α
+<lb break="no" xml:id="P162vC1L7-454" n="7"/>κυροι</w><w>εις</w><w>το</w><w>καταργησαι</w><w>την</w><w>επαγγελιαν</w></ab><ab n="Gal.3.18"><w>ει</w><w>γαρ</w><w>εκ</w>
+<lb xml:id="P162vC1L8-454" n="8"/><w>νομου</w><w>η</w><w>κληρονομια</w><w>ουκετι</w><w>εξ</w><w>επαγγελιας</w><w>τω</w><w>δε</w>
+<lb xml:id="P162vC1L9-454" n="9"/><w>αβρααμ</w><w>εξ</w><w>επαγγελιας</w><w>κεχαρισται</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w></ab><ab n="Gal.3.19"><w>τι</w><w>ουν</w><w>ο</w>
+<lb xml:id="P162vC1L10-454" n="10"/><w>νομος</w><w>των</w><w>παραβασεων</w><w>χαριν</w><w>προσετεθη</w><w>αχρις</w>
+<lb xml:id="P162vC1L11-454" n="11"/><w>ου</w><w>ελθη</w><w>ω</w><w>επηγγελται</w><w>διαταγεις</w><w>δι</w><w>αγγελων</w><w>εν</w>
+<lb xml:id="P162vC1L12-454" n="12"/><w>χειρι</w><w>μεσιτου</w></ab><ab n="Gal.3.20"><w>ο</w><w>δε</w><w>μεσιτης</w><w>ενος</w><w>ουκ</w><w>εστιν</w><w>ο</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w>
+<lb xml:id="P162vC1L13-454" n="13"/><w>εις</w><w>εστιν</w></ab><ab n="Gal.3.21"><w>ο</w><w>ουν</w><w>νομος</w><w>κατα</w><w>των</w><w>επαγγελιων</w><w>του</w>
+<lb xml:id="P162vC1L14-454" n="14"/><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>μη</w><w>γενοιτο</w>
+<pb xml:id="P163r-454" n="163r" type="folio"/>
+<cb xml:id="P163rC1-454" n="1"/>
+<lb xml:id="P163rC1L1-454" n="1"/><w>ει</w><w>γαρ</w><w>εδοθη</w><w>νομος</w><w>ο</w><w>δυναμενος</w><w>ζωοποιησαι</w>
+<lb xml:id="P163rC1L2-454" n="2"/><w>οντως</w><w>αν</w><w>εκ</w><w>νομου</w><w>ην</w><w>η</w><w>δικαιοσυνη</w></ab><ab n="Gal.3.22"><w>αλλα</w><w>συ
+<lb break="no" xml:id="P163rC1L3-454" n="3"/>νεκλεισεν</w><w>η</w><w>γραφη</w><w>τα</w><w>παντα</w><w>υπο</w><w>αμαρτιαν</w>
+<lb xml:id="P163rC1L4-454" n="4"/><w>ινα</w><w>η</w><w>επαγγελια</w><w>εκ</w><w>πιστεως</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>δοθη</w><w>τοις</w>
+<lb xml:id="P163rC1L5-454" n="5"/><w>πιστευουσιν</w></ab><ab n="Gal.3.23"><w>προ</w><w>του</w><w>δε</w><w>ελθειν</w><w>την</w><w>πιστιν</w><w>υ
+<lb break="no" xml:id="P163rC1L6-454" n="6"/>πο</w><w>νομον</w><w>εφρουρουμεθα</w><w>συγκεκλεισμενοι</w><w>εις</w>
+<lb xml:id="P163rC1L7-454" n="7"/><w>την</w><w>μελλουσαν</w><w>πιστιν</w><w>αποκαλυφθηναι</w></ab><ab n="Gal.3.24"><w>ωστε</w>
+<lb xml:id="P163rC1L8-454" n="8"/><w>ο</w><w>νομος</w><w>παιδαγωγος</w><w>ημων</w><w>γεγονεν</w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w>ινα</w>
+<lb xml:id="P163rC1L9-454" n="9"/><w>εκ</w><w>πιστεως</w><w>δικαιωθωμεν</w></ab><ab n="Gal.3.25"><w>ελθουσης</w><w>δε</w><w>της</w>
+<lb xml:id="P163rC1L10-454" n="10"/><w>πιστεως</w><w>ουκετι</w><w>υπο</w><w>παιδαγωγον</w><w>εσμεν</w></ab><ab n="Gal.3.26"><w>παν
+<lb break="no" xml:id="P163rC1L11-454" n="11"/>τες</w><w>γαρ</w><w>υιοι</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>εστε</w><w>δια</w><w>της</w><w>πιστεως</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w>
+<lb xml:id="P163rC1L12-454" n="12"/></ab><ab n="Gal.3.27"><w>οσοι</w><w>γαρ</w><w>εις</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w><w>εβαπτισθητε</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w>ενεδυσα
+<lb break="no" xml:id="P163rC1L13-454" n="13"/>σθε</w></ab><ab n="Gal.3.28"><w>ουκ</w><w>ενι</w><w>ιουδαιος</w><w>ουδε</w><w>ελλην</w><w>ουκ</w><w>ενι</w><w>δου
+<lb break="no" xml:id="P163rC1L14-454" n="14"/>λος</w><w>ουδε</w><w>ελευθερος</w><w>ουκ</w><w>ενι</w><w>αρσεν</w><w>και</w><w>θηλυ</w>
+<pb xml:id="P163v-454" n="163v" type="folio"/>
+<cb xml:id="P163vC1-454" n="1"/>
+<lb xml:id="P163vC1L1-454" n="1"/><w>παντες</w><w>γαρ</w><w>υμεις</w><w>εις</w><w>εστε</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w></ab><ab n="Gal.3.29"><w>ει</w><w>δε</w><w>υμεις</w>
+<lb xml:id="P163vC1L2-454" n="2"/><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>ἆρα</w><w>του</w><w>αβρααμ</w><w>σπερμα</w><w>εστε</w><w>και</w><w>κατ</w><w>επαγ
+<lb break="no" xml:id="P163vC1L3-454" n="3"/>γελιαν</w><w>κληρονομοι</w></ab></div><div n="Gal.4" type="chapter"><ab n="Gal.4.1"><w>λεγω</w><w>δε</w><w>εφ</w><w>οσον</w><w>χρονον</w><w>ο</w>
+<lb xml:id="P163vC1L4-454" n="4"/><w>κληρονομος</w><w>νηπιος</w><w>εστιν</w><w>ουδεν</w><w>διαφερει</w><w>δου
+<lb break="no" xml:id="P163vC1L5-454" n="5"/>λου</w><w><abbr type="nomSac"><hi rend="overline">κς</hi></abbr></w><w>παντων</w><w>ων</w></ab><ab n="Gal.4.2"><w>αλλα</w><w>υπο</w><w>επιτροπους</w><w>εστι</w>
+<lb xml:id="P163vC1L6-454" n="6"/><w>και</w><w>οικονομους</w><w>αχρι</w><w>της</w><w>προθεσμιας</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πρς</hi></abbr></w>
+<lb xml:id="P163vC1L7-454" n="7"/></ab><ab n="Gal.4.3"><w>ουτως</w><w>και</w><w>ημεις</w><w>οτε</w><w>ημεν</w><w>νηπιοι</w><w>υπο</w><w>τα</w><w>στοι
+<lb break="no" xml:id="P163vC1L8-454" n="8"/>χεια</w><w>του</w><w>κοσμου</w><w>ημεν</w><w>δεδουλωμενοι</w></ab><ab n="Gal.4.4"><w>οτε</w><w>δε</w>
+<lb xml:id="P163vC1L9-454" n="9"/><w>ηλθε</w><w>το</w><w>πληρωμα</w><w>του</w><w>χρονου</w><w>εξαπεστειλεν</w><w>ο</w>
+<lb xml:id="P163vC1L10-454" n="10"/><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">υν</hi></abbr></w><w>αυτου</w><w>γενομενον</w><w>εκ</w><w>γυναικος</w><w>γενο
+<lb break="no" xml:id="P163vC1L11-454" n="11"/>μενον</w><w>υπο</w><w>νομον</w></ab><ab n="Gal.4.5"><w>ινα</w><w>τους</w><w>υπο</w><w>νομον</w><w>εξαγοραση</w>
+<lb xml:id="P163vC1L12-454" n="12"/><w>ινα</w><w>την</w><w>υιοθεσιαν</w><w>απολαβωμεν</w></ab><ab n="Gal.4.6"><w>οτι</w><w>δε</w><w>εστε</w><w>υιοι</w>
+<lb xml:id="P163vC1L13-454" n="13"/><w>εξαπεστειλεν</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>το</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>του</w><w><abbr type="nomSac"><hi rend="overline">υυ</hi></abbr></w><w>αυτου</w><w>εις</w><w>τας</w><w>καρ
+<lb break="no" xml:id="P163vC1L14-454" n="14"/>διας</w><w>ημων</w><w>κραζον</w><w>αββα</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">πηρ</hi></abbr></w></ab><ab n="Gal.4.7"><w>ωστε</w><w>ουκετι</w><w>ει</w>
+<lb xml:id="P163vC1L15-454" n="15"/><w>δουλος</w><w>αλλα</w><w><abbr type="nomSac"><hi rend="overline">υς</hi></abbr></w><w>ει</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">υς</hi></abbr></w><w>και</w><w>κληρονομος</w><app><rdg type="orig" hand="firsthand"><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w></rdg><rdg type="corr" hand="firsthand"><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></rdg></app><w>δια</w>
+<lb xml:id="P163vC1L16-454" n="16"/><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="Gal.4.8"><w>αλλα</w><w>τοτε</w><w>μεν</w><w>ουκ</w><w>ειδοτες</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w><w>εδουλευσατε</w>
+<lb xml:id="P163vC1L17-454" n="17"/><w>τοις</w><w>μη</w><w>φυσει</w><w>ουσι</w><w>θεοις</w></ab><ab n="Gal.4.9"><w>νυν</w><w>δε</w><w>γνοντες</w><w><abbr type="nomSac"><hi rend="overline">θν</hi></abbr></w>
+<pb xml:id="P164r-454" n="164r" type="folio"/>
+<cb xml:id="P164rC1-454" n="1"/>
+<lb xml:id="P164rC1L1-454" n="1"/><w>μαλλον</w><w>δε</w><w>γνωσθεντες</w><w>υπο</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>πως</w><w>επιστρε
+<lb break="no" xml:id="P164rC1L2-454" n="2"/>φετε</w><w>παλιν</w><w>επι</w><w>τα</w><w>ασθενη</w><w>και</w><w>πτωχα</w><w>στοιχεια</w>
+<lb xml:id="P164rC1L3-454" n="3"/><w>οις</w><w>παλιν</w><w>ανωθεν</w><w>δουλευειν</w><w>θελετε</w></ab><ab n="Gal.4.10"><w>ημερας</w>
+<lb xml:id="P164rC1L4-454" n="4"/><w>παρατηρεισθε</w><w>και</w><w>μηνας</w><w>και</w><w>καιρους</w><w>και</w><w>ενιαυ
+<lb break="no" xml:id="P164rC1L5-454" n="5"/>τους</w></ab><ab n="Gal.4.11"><w>φοβουμαι</w><w>υμας</w><w>μη</w><w>πως</w><w>εικη</w><w>καικοπια
+<lb break="no" xml:id="P164rC1L6-454" n="6"/>κα</w><w>εις</w><w>υμας</w></ab><ab n="Gal.4.12"><w>γινεσθε</w><w>ως</w><w>καγω</w><w>οτι</w><w>καγω</w><w>ως</w><w>υ
+<lb break="no" xml:id="P164rC1L7-454" n="7"/>μεις</w><w>αδελφοι</w><w>δεομαι</w><w>υμων</w><w>ουδεν</w><w>με</w><w>ηδικη
+<lb break="no" xml:id="P164rC1L8-454" n="8"/>σατε</w></ab><ab n="Gal.4.13"><w>οιδατε</w><w>δε</w><w>οτι</w><w>δι</w><w>ασθενειαν</w><w>σαρκος</w><w>ευηγ
+<lb break="no" xml:id="P164rC1L9-454" n="9"/>γελισαμην</w><w>υμιν</w><w>το</w><w>προτερον</w></ab><ab n="Gal.4.14"><w>και</w><w>τον</w><w>πειρασμον</w>
+<lb xml:id="P164rC1L10-454" n="10"/><w>μου</w><w>τον</w><w>εν</w><w>τη</w><w>σαρκι</w><w>μου</w><w>ουκ</w><w>εξουθενησατε</w><w>ου
+<lb break="no" xml:id="P164rC1L11-454" n="11"/>δε</w><w>εξεπτυσατε</w><w>αλλ</w><w>ως</w><w>αγγελον</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w><w>εδεξασθε</w>
+<lb xml:id="P164rC1L12-454" n="12"/><w>με</w><w>ως</w><w><abbr type="nomSac"><hi rend="overline">χν</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιν</hi></abbr></w></ab><ab n="Gal.4.15"><w>τις</w><w>ουν</w><w>ην</w><w>ο</w><w>μακαρισμος</w><w>υμων</w>
+<lb xml:id="P164rC1L13-454" n="13"/><w>μαρτυρω</w><w>γαρ</w><w>υμιν</w><w>οτι</w><w>ει</w><w>δυνατον</w><w>τους</w><w>οφθαλ
+<lb break="no" xml:id="P164rC1L14-454" n="14"/>μους</w><w>υμων</w><w>εξορυξαντες</w><w>εδοκατε</w><w>μοι</w><w>αν</w>
+<pb xml:id="P164v-454" n="164v" type="folio"/>
+<cb xml:id="P164vC1-454" n="1"/>
+<lb xml:id="P164vC1L1-454" n="1"/></ab><ab n="Gal.4.16"><w>ωστε</w><w>εχθρος</w><w>υμων</w><w>γεγονα</w><w>αληθευων</w><w>υμιν</w></ab><ab n="Gal.4.17"><w>ζηλου
+<lb break="no" xml:id="P164vC1L2-454" n="2"/>σιν</w><w>υμας</w><w>ου</w><w>καλως</w><w>αλλα</w><w>εκκλεισαι</w><w>υμας</w><w>θε
+<lb break="no" xml:id="P164vC1L3-454" n="3"/>λουσιν</w><w>ινα</w><w>αυτους</w><w>ζηλουτε</w></ab><ab n="Gal.4.18"><w>καλον</w><w>δε</w><w>το</w><w>ζηλου
+<lb break="no" xml:id="P164vC1L4-454" n="4"/>σθαι</w><w>εν</w><w>καλω</w><w>παντοτε</w><w>και</w><w>μη</w><w>μονον</w><w>εν</w><w>τω</w><w>πα
+<lb break="no" xml:id="P164vC1L5-454" n="5"/>ρειναι</w><w>με</w><w>προς</w><w>υμας</w></ab><ab n="Gal.4.19"><w>τεκνια</w><w>μου</w><w>ους</w><w>παλιν</w>
+<lb xml:id="P164vC1L6-454" n="6"/><w>ωδινω</w><w>αχρις</w><w>ου</w><w>μορφωθη</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>εν</w><w>υμιν</w></ab><ab n="Gal.4.20"><w>ηθελον</w>
+<lb xml:id="P164vC1L7-454" n="7"/><w>παρειναι</w><w>προς</w><w>υμας</w><w>αρτι</w><w>και</w><w>αλλαξαι</w><w>την</w><w>φω
+<lb break="no" xml:id="P164vC1L8-454" n="8"/>νην</w><w>μου</w><w>οτι</w><w>απορω</w><w>εν</w><w>υμιν</w></ab><ab n="Gal.4.21"><w>λεγετε</w><w>μοι</w><w>οι</w><w>υπο</w><w>νο
+<lb break="no" xml:id="P164vC1L9-454" n="9"/>μον</w><w>θελοντες</w><w>ειναι</w><w>τον</w><w>νομον</w><w>ουκ</w><w>ακουετε</w>
+<lb xml:id="P164vC1L10-454" n="10"/></ab><ab n="Gal.4.22"><w>γεγραπται</w><w>γαρ</w><w>οτι</w><w>αβρααμ</w><w>δυο</w><w>υιους</w><w>εσχεν</w><w>ε
+<lb break="no" xml:id="P164vC1L11-454" n="11"/>να</w><w>εκ</w><w>της</w><w>παιδισκης</w><w>και</w><w>ενα</w><w>εκ</w><w>της</w><w>ελευθε
+<lb break="no" xml:id="P164vC1L12-454" n="12"/>ρας</w></ab><ab n="Gal.4.23"><w>αλλ</w><w>ο</w><w>μεν</w><w>εκ</w><w>της</w><w>παιδισκης</w><w>κατα</w><w>σαρκα</w>
+<lb xml:id="P164vC1L13-454" n="13"/><w>γεγεννηται</w><w>ο</w><w>δε</w><w>εκ</w><w>της</w><w>ελευθερας</w><w>δια</w><w>της</w>
+<lb xml:id="P164vC1L14-454" n="14"/><w>επαγγελιας</w>
+<pb xml:id="P165r-454" n="165r" type="folio"/>
+<cb xml:id="P165rC1-454" n="1"/>
+<lb xml:id="P165rC1L1-454" n="1"/></ab><ab n="Gal.4.24"><w>ατινα</w><w>εστιν</w><w>αλληγορουμενα</w><w>αυται</w><w>γαρ</w><w>εισι</w><w>δυο</w><w>δι
+<lb break="no" xml:id="P165rC1L2-454" n="2"/>αθηκαι</w><w>μια</w><w>μεν</w><w>απο</w><w>ορους</w><w>σινα</w><w>εις</w><w>δουλειαν</w><w>γεν
+<lb break="no" xml:id="P165rC1L3-454" n="3"/>νωσα</w><w>ητις</w><w>εστιν</w><w>αγαρ</w></ab><ab n="Gal.4.25"><w>το</w><w>γαρ</w><w>αγαρ</w><w>σινα</w><w>ορος</w><w>εστιν</w><w>εν</w>
+<lb xml:id="P165rC1L4-454" n="4"/><w>τη</w><w>αραβια</w><w>συστοιχει</w><w>δε</w><w>την</w><w>νυν</w><w><abbr type="nomSac"><hi rend="overline">ιλημ</hi></abbr></w><w>δουλευει</w>
+<lb xml:id="P165rC1L5-454" n="5"/><w>δε</w><w>μετα</w><w>των</w><w>τεκνων</w><w>αυτης</w></ab><ab n="Gal.4.26"><w>η</w><w>δε</w><w>ανω</w><w><abbr type="nomSac"><hi rend="overline">ιλημ</hi></abbr></w><w>ελευ
+<lb break="no" xml:id="P165rC1L6-454" n="6"/>θερα</w><w>εστιν</w><w>ητις</w><w>εστι</w><w><abbr type="nomSac"><hi rend="overline">μηρ</hi></abbr></w><w>παντων</w><w>ημων</w></ab><ab n="Gal.4.27"><w>γεγρα
+<lb break="no" xml:id="P165rC1L7-454" n="7"/>πται</w><w>γαρ</w><w>ευφρανθητι</w><w>στειρα</w><w>η</w><w>ου</w><w>τικτουσα</w><w>ρηξον</w>
+<lb xml:id="P165rC1L8-454" n="8"/><w>και</w><w>βοησον</w><w>η</w><w>ουκ</w><w>ωδινουσα</w><w>οτι</w><w>πολλα</w><w>τα</w><w>τεκνα</w>
+<lb xml:id="P165rC1L9-454" n="9"/><w>της</w><w>ερημου</w><w>μαλλον</w><w>η</w><w>της</w><w>εχουσης</w><w>τον</w><w>ανδρα</w>
+<lb xml:id="P165rC1L10-454" n="10"/></ab><ab n="Gal.4.28"><w>ημεις</w><w>δε</w><w>αδελφοι</w><w>κατα</w><w>ισαακ</w><w>επαγγελιας</w>
+<lb xml:id="P165rC1L11-454" n="11"/><w>τεκνα</w><w>εσμεν</w></ab><ab n="Gal.4.29"><w>αλλ</w><w>ωσπερ</w><w>τοτε</w><w>ο</w><w>κατα</w><w>σαρκα</w>
+<lb xml:id="P165rC1L12-454" n="12"/><w>γεννηθεις</w><w>εδιωκε</w><w>τον</w><w>κατα</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>ουτως</w><w>και</w>
+<lb xml:id="P165rC1L13-454" n="13"/><w>νυν</w></ab><ab n="Gal.4.30"><w>αλλα</w><w>τι</w><w>λεγει</w><w>η</w><w>γραφη</w>
+<pb xml:id="P165v-454" n="165v" type="folio"/>
+<cb xml:id="P165vC1-454" n="1"/>
+<lb xml:id="P165vC1L1-454" n="1"/><w>εκβαλε</w><w>την</w><w>παιδισκην</w><w>και</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">υν</hi></abbr></w><w>αυτης</w><w>ου</w><w>γαρ</w>
+<lb xml:id="P165vC1L2-454" n="2"/><w>μη</w><w>κληρονομησει</w><w>ο</w><w><abbr type="nomSac"><hi rend="overline">υς</hi></abbr></w><w>της</w><w>παιδισκης</w><w>μετα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">υυ</hi></abbr></w>
+<lb xml:id="P165vC1L3-454" n="3"/><w>της</w><w>ελευθερας</w></ab><ab n="Gal.4.31"><w>αρα</w><w>αδελφοι</w><w>ουκ</w><w>εσμεν</w><w>παιδι
+<lb break="no" xml:id="P165vC1L4-454" n="4"/>σκης</w><w>τεκνα</w><w>αλλα</w><w>της</w><w>ελευθερας</w></ab></div><div n="Gal.5" type="chapter"><ab n="Gal.5.1"><w>τη</w><w>ελευθε
+<lb break="no" xml:id="P165vC1L5-454" n="5"/>ρια</w><w>ουν</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>ημας</w><w>ηλευθερωσεν</w><w>στηκετε</w><w>και</w><w>μη</w>
+<lb xml:id="P165vC1L6-454" n="6"/><w>παλιν</w><w>ζυγω</w><w>δουλειας</w><w>ενεχεσθε</w></ab><ab n="Gal.5.2"><w>ιδε</w><w>εγω</w><w>παυ
+<lb break="no" xml:id="P165vC1L7-454" n="7"/>λος</w><w>λεγω</w><w>υμιν</w><w>οτι</w><w>εαν</w><w>περιτεμνησθε</w><w><abbr type="nomSac"><hi rend="overline">χς</hi></abbr></w><w>υμας</w>
+<lb xml:id="P165vC1L8-454" n="8"/><w>ουδεν</w><w>ωφελησει</w></ab><ab n="Gal.5.3"><w>μαρτυρομαι</w><w>δε</w><w>παλιν</w><w>παντι</w>
+<lb xml:id="P165vC1L9-454" n="9"/><w><abbr type="nomSac"><hi rend="overline">ανω</hi></abbr></w><w>περιτεμνομενω</w><w>οτι</w><w>οφειλετης</w><w>εστιν</w><w>ολον</w>
+<lb xml:id="P165vC1L10-454" n="10"/><w>τον</w><w>νομον</w><w>ποιησαι</w></ab><ab n="Gal.5.4"><w>κατηργηθητε</w><w>απο</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w>
+<lb xml:id="P165vC1L11-454" n="11"/><w><unclear>οιτ</unclear><supplied reason="illegible">ιν</supplied>ε<unclear>ς</unclear></w><w>ε<unclear>ν</unclear></w><w><unclear>νομω</unclear></w><w>δικαιουσθε</w><w>της</w><w>χαριτος</w><w>εξεπε
+<lb break="no" xml:id="P165vC1L12-454" n="12"/><supplied reason="lacuna/illegible">σατε</supplied></w></ab><ab n="Gal.5.5"><w><supplied reason="lacuna/illegible">ημεις</supplied></w><w><supplied reason="lacuna/illegible">γαρ</supplied></w><w><abbr type="nomSac"><supplied reason="lacuna/illegible"><hi rend="overline">πν</hi></supplied><hi rend="overline">ι</hi></abbr></w><w>εκ</w><w>πιστεως</w><w>ελπιδα</w><w>δικαιο
+<lb break="no" xml:id="P165vC1L13-454" n="13"/><supplied reason="lacuna/illegible">συνης</supplied></w><w><supplied reason="lacuna/illegible">απεκδεχομε</supplied>θα</w></ab><ab n="Gal.5.6"><w>εν</w><w>γαρ</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>ουτε</w><w>περιτο
+<lb break="no" xml:id="P165vC1L14-454" n="14"/><supplied reason="lacuna/illegible">μη</supplied></w><w><supplied reason="lacuna/illegible">τι</supplied></w><w><supplied reason="lacuna/illegible">ισχυει</supplied></w><w><supplied reason="lacuna/illegible">ουτε</supplied></w><w><supplied reason="lacuna/illegible">ακροβυστ</supplied>ια</w><w>αλλα</w><w>πιστις</w><w>δι</w><w>αγα
+<lb break="no" xml:id="P165vC1L15-454" n="15"/><supplied reason="lacuna/illegible">πης</supplied></w><w><supplied reason="lacuna/illegible">ενεργουμενη</supplied></w></ab><ab n="Gal.5.7"><w><supplied reason="lacuna/illegible">ετρεχετ</supplied>ε</w><w>καλως</w><w>τις</w><w>υμας</w>
+<lb xml:id="P165vC1L16-454" n="16"/><w><supplied reason="lacuna/illegible">ενεκοψεν</supplied></w><w><supplied reason="lacuna/illegible">τη</supplied></w><w><supplied reason="lacuna/illegible">αληθεια</supplied></w><w><supplied reason="lacuna/illegible">μη</supplied></w><w>πειθεσθαι</w>
+<pb xml:id="P166r-454" n="166r" type="folio"/>
+<cb xml:id="P166rC1-454" n="1"/>
+<lb xml:id="P166rC1L1-454" n="1"/></ab><ab n="Gal.5.8"><w>η</w><w>πεισμονη</w><w>ουκ</w><w>εκ</w><w>του</w><w>καλουντος</w><w>υμας</w></ab><ab n="Gal.5.9"><w>μικρα</w><w>ζυ
+<lb break="no" xml:id="P166rC1L2-454" n="2"/>μη</w><w>ολον</w><w>το</w><w>φυραμα</w><w>ζυμοι</w></ab><ab n="Gal.5.10"><w>εγω</w><w>πεποιθα</w><w>εις</w><w>υμας</w>
+<lb xml:id="P166rC1L3-454" n="3"/><w>εν</w><w><abbr type="nomSac"><hi rend="overline">κω</hi></abbr></w><w>οτι</w><w>ουδεν</w><w>αλλο</w><w>φρονησετε</w><w>ο</w><w>δε</w><w>ταρασσων</w><w>υ
+<lb break="no" xml:id="P166rC1L4-454" n="4"/>μας</w><w>βαστασει</w><w>το</w><w>κριμα</w><w>οστις</w><w>αν</w><w>η</w></ab><ab n="Gal.5.11"><w>εγω</w><w>δε</w><w>αδελφοι</w>
+<lb xml:id="P166rC1L5-454" n="5"/><w>ει</w><w>περιτομην</w><w>ετι</w><w>κηρυσσω</w><w>τι</w><w>ετι</w><w>διωκομαι</w><w>ἆρα</w><w>κα
+<lb break="no" xml:id="P166rC1L6-454" n="6"/>τηργηται</w><w>το</w><w>σκανδαλον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">στρου</hi></abbr></w></ab><ab n="Gal.5.12"><w>ωφελον</w><w>και</w><w>α
+<lb break="no" xml:id="P166rC1L7-454" n="7"/>ποκοψονται</w><w>οι</w><w>αναστατουντες</w><w>υμας</w></ab><ab n="Gal.5.13"><w>υμεις</w><w>γαρ</w><w>επ</w><w>ε
+<lb break="no" xml:id="P166rC1L8-454" n="8"/>λευθερια</w><w>εκληθητε</w><w>αδελφοι</w><w>μονον</w><w>μη</w><w>την</w>
+<lb xml:id="P166rC1L9-454" n="9"/><w>ελευθεριαν</w><w>εις</w><w>αφορμην</w><w>τη</w><w>σαρκι</w><w>αλλα</w><w>δια</w><w>της</w>
+<lb xml:id="P166rC1L10-454" n="10"/><w>αγαπης</w><w>δουλευετε</w><w>αλληλοις</w></ab><ab n="Gal.5.14"><w>ο</w><w>γαρ</w><w>πας</w><w>νομος</w>
+<lb xml:id="P166rC1L11-454" n="11"/><w>εν</w><w>ενι</w><w>λογω</w><w>πληρουται</w><w>εν</w><w>τω</w><w>αγαπησεις</w><w>τον</w><w>πλησι
+<lb break="no" xml:id="P166rC1L12-454" n="12"/>ον</w><w>σου</w><w>ως</w><w>εαυτον</w></ab><ab n="Gal.5.15"><w>ει</w><w>δε</w><w>αλληλους</w><w>δακνετε</w><w>και</w><w>κα
+<lb break="no" xml:id="P166rC1L13-454" n="13"/>τεσθιετε</w><w>βλεπετε</w><w>μη</w><w>υπο</w><w>αλληλων</w><w>αναλωθητε</w>
+<pb xml:id="P166v-454" n="166v" type="folio"/>
+<cb xml:id="P166vC1-454" n="1"/>
+<lb xml:id="P166vC1L1-454" n="1"/></ab><ab n="Gal.5.16"><w>λεγω</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>περιπατειτε</w><w>και</w><w>επιθυμιαν</w><w>σαρκος</w>
+<lb xml:id="P166vC1L2-454" n="2"/><w>ου</w><w>μη</w><w>τελεσητε</w></ab><ab n="Gal.5.17"><w>η</w><w>γαρ</w><w>σαρξ</w><w>επιθυμει</w><w>κατα</w><w>του</w>
+<lb xml:id="P166vC1L3-454" n="3"/><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>το</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>κατα</w><w>της</w><w>σαρκος</w><w>ταυτα</w><w>δε</w><w>αν
+<lb break="no" xml:id="P166vC1L4-454" n="4"/>τικειται</w><w>αλληλοις</w><w>ινα</w><w>μη</w><w>α</w><w>αν</w><w>θελητε</w><w>ταυτα</w><w>ποι
+<lb break="no" xml:id="P166vC1L5-454" n="5"/>ητε</w></ab><ab n="Gal.5.18"><w>ει</w><w>δε</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>αγεσθε</w><w>ουκ</w><w>εστε</w><w>υπο</w><w>νομον</w></ab><ab n="Gal.5.19"><w>φανερα</w>
+<lb xml:id="P166vC1L6-454" n="6"/><w>δε</w><w>εστι</w><w>τα</w><w>εργα</w><w>της</w><w>σαρκος</w><w>ατινα</w><w>εστι</w><w>μοιχεια</w><w>πορ
+<lb break="no" xml:id="P166vC1L7-454" n="7"/>νεια</w><w>ακαθαρσια</w><w>ασελγεια</w></ab><ab n="Gal.5.20"><w>ειδωλολατρια</w><w>φαρ
+<lb break="no" xml:id="P166vC1L8-454" n="8"/>μακεια</w><w>εχθραι</w><w>ερεις</w><w>ζηλοι</w><w>θυμοι</w><w>εριθειαι</w><w>διχο
+<lb break="no" xml:id="P166vC1L9-454" n="9"/>στασιαι</w><w>αιρεσεις</w></ab><ab n="Gal.5.21"><w>φθονοι</w><w>φονοι</w><w>μεθαι</w><w>κωμοι</w><w>και</w>
+<lb xml:id="P166vC1L10-454" n="10"/><w>τα</w><w>ομοια</w><w>τουτοις</w><w>α</w><w>προλεγω</w><w>υμιν</w><w>καθως</w><w>και</w><w>προ
+<lb break="no" xml:id="P166vC1L11-454" n="11"/>ειπον</w><w>οτι</w><w>οι</w><w>τα</w><w>τοιαυτα</w><w>πρασσοντες</w><w>βασιλειαν</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w>
+<lb xml:id="P166vC1L12-454" n="12"/><w>ου</w><w>κληρονομησουσιν</w></ab><ab n="Gal.5.22"><w>ο</w><w>δε</w><w>καρπος</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>εστιν</w>
+<lb xml:id="P166vC1L13-454" n="13"/><w>αγαπη</w><w>χαρα</w><w>ειρηνη</w><w>μακροθυμια</w><w>χρηστοτης</w><w>α
+<lb break="no" xml:id="P166vC1L14-454" n="14"/>γαθωσυνη</w><w>πιστις</w></ab><ab n="Gal.5.23"><w>πραοτης</w><w>εγκρατεια</w><w>κατα</w>
+<lb xml:id="P166vC1L15-454" n="15"/><w>των</w><w>τοιουτων</w><w>ουκ</w><w>εστι</w><w>νομος</w></ab><ab n="Gal.5.24"><w>οι</w><w>δε</w><w>την</w><w>σαρκα</w><w>του</w>
+<lb xml:id="P166vC1L16-454" n="16"/><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">εστρωσαν</hi></abbr></w><w>συν</w><w>τοις</w><w>παθημασι</w><w>και</w><w>ταις</w><w>επιθυ
+<lb break="no" xml:id="P166vC1L17-454" n="17"/>μιαις</w></ab><ab n="Gal.5.25"><w>ει</w><w>ζωμεν</w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">πνι</hi></abbr></w><w>και</w><w>στοιχωμεν</w>
+<pb xml:id="P167r-454" n="167r" type="folio"/>
+<cb xml:id="P167rC1-454" n="1"/>
+<lb xml:id="P167rC1L1-454" n="1"/></ab><ab n="Gal.5.26"><w>μη</w><w>γινωμεθα</w><w>κενοδοξοι</w><w>αλληλους</w><w>προκαλου
+<lb break="no" xml:id="P167rC1L2-454" n="2"/>μενοι</w><w>αλληλοις</w><w>φθονουντες</w></ab></div><div n="Gal.6" type="chapter"><ab n="Gal.6.1"><w>αδελφοι</w><w>εαν</w><w>και</w>
+<lb xml:id="P167rC1L3-454" n="3"/><w>και</w><w>προληφθη</w><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>εν</w><w>τινι</w><w>παραπτωματι</w><w>υ
+<lb break="no" xml:id="P167rC1L4-454" n="4"/>μεις</w><w>οι</w><w><abbr type="nomSac"><hi rend="overline">πνικοι</hi></abbr></w><w>καταρτιζετε</w><w>τον</w><w>τοιουτον</w><w>εν</w><w><abbr type="nomSac"><hi rend="overline">πν</hi></abbr></w>
+<lb xml:id="P167rC1L5-454" n="5"/><w>πραοτητος</w><w>σκοπων</w><w>σεαυτον</w><w>μη</w><w>και</w><w>συ</w><w>πειρα
+<lb break="no" xml:id="P167rC1L6-454" n="6"/>σθης</w></ab><ab n="Gal.6.2"><w>αλληλων</w><w>τα</w><w>βαρη</w><w>βασταζετε</w><w>και</w><w>ουτως</w>
+<lb xml:id="P167rC1L7-454" n="7"/><w>αναπληρωσατε</w><w>τον</w><w>νομον</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w></ab><ab n="Gal.6.3"><w>ει</w><w>γαρ</w><w>δοκει</w>
+<lb xml:id="P167rC1L8-454" n="8"/><w>τις</w><w>ειναι</w><w>τι</w><w>μηδεν</w><w>ων</w><w>εαυτον</w><w>φρεναπατα</w></ab><ab n="Gal.6.4"><w>το</w>
+<lb xml:id="P167rC1L9-454" n="9"/><w>δε</w><w>εργον</w><w>εαυτου</w><w>δοκιμαζετω</w><w>εκαστος</w><w>και</w><w>τοτε</w>
+<lb xml:id="P167rC1L10-454" n="10"/><w>εις</w><w>εαυτον</w><w>μονον</w><w>το</w><w>καυχημα</w><w>εξει</w><w>και</w><w>ουκ</w><w>εις</w><w>τον</w>
+<lb xml:id="P167rC1L11-454" n="11"/><w>ετερον</w></ab><ab n="Gal.6.5"><w>εκαστος</w><w>γαρ</w><w>το</w><w>ιδιον</w><w>φορτιον</w><w>βαστασει</w>
+<lb xml:id="P167rC1L12-454" n="12"/></ab><ab n="Gal.6.6"><w>κοινωνειτω</w><w>δε</w><w>ο</w><w>κατηχουμενος</w><w>τον</w><w>λογον</w><w>τω</w>
+<lb xml:id="P167rC1L13-454" n="13"/><w>κατηχουντι</w><w>εν</w><w>πασιν</w><w>αγαθοις</w></ab><ab n="Gal.6.7"><w>μη</w><w>πλανασθε</w>
+<lb xml:id="P167rC1L14-454" n="14"/><w><abbr type="nomSac"><hi rend="overline">θς</hi></abbr></w><w>ου</w><w>μυκτηριζεται</w><w>ο</w><w>γαρ</w><w>ο</w><w>εαν</w><w>σπειρη</w><w><abbr type="nomSac"><hi rend="overline">ανος</hi></abbr></w><w>του
+<lb break="no" xml:id="P167rC1L15-454" n="15"/>το</w><w>και</w><w>θερισει</w></ab><ab n="Gal.6.8"><w>οτι</w><w>ο</w><w>σπειρων</w><w>εις</w><w>την</w><w>σαρκα</w><w>εαυτου</w>
+<lb xml:id="P167rC1L16-454" n="16"/><w>εκ</w><w>της</w><w>σαρκος</w><w>θερισει</w><w>φθοραν</w>
+<pb xml:id="P167v-454" n="167v" type="folio"/>
+<cb xml:id="P167vC1-454" n="1"/>
+<lb xml:id="P167vC1L1-454" n="1"/><w><supplied reason="lacuna/illegible">ο</supplied></w><w><supplied reason="lacuna/illegible">δ</supplied>ε</w><w>σπειρων</w><w>εις</w><w>το</w><w><abbr type="nomSac"><hi rend="overline">πνα</hi></abbr></w><w>εκ</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>θερισει</w><w>ζωην</w>
+<lb xml:id="P167vC1L2-454" n="2"/><w><supplied reason="lacuna/illegible">αι</supplied>ωνιον</w></ab><ab n="Gal.6.9"><w>το</w><w>δε</w><w>καλον</w><w>ποιουντες</w><w>μη</w><w>εκκακωμεν</w>
+<lb xml:id="P167vC1L3-454" n="3"/><w><supplied reason="lacuna/illegible">κα</supplied>ιρω</w><w>γαρ</w><w>ιδιω</w><w>θερισομεν</w><w>μη</w><w>εκλυομενοι</w></ab><ab n="Gal.6.10"><w>α
+<lb break="no" xml:id="P167vC1L4-454" n="4"/><supplied reason="lacuna/illegible">ρ</supplied><unclear>α</unclear></w><w>ουν</w><w>ως</w><w>καιρον</w><w>εχομεν</w><w>εργαζομεθα</w><w>το</w><w>αγα
+<lb break="no" xml:id="P167vC1L5-454" n="5"/><supplied reason="lacuna/illegible">θ</supplied>ον</w><w>προς</w><w>παντας</w><w>μαλιστα</w><w>δε</w><w>προς</w><w>τους</w><w>οι
+<lb break="no" xml:id="P167vC1L6-454" n="6"/><supplied reason="lacuna/illegible">κ</supplied>ειους</w><w>της</w><w>πιστεως</w></ab><ab n="Gal.6.11"><w>ιδετε</w><w>πηλικοις</w><w>υμιν</w>
+<lb xml:id="P167vC1L7-454" n="7"/><w><supplied reason="lacuna/illegible">γρ</supplied>αμμασιν</w><w>εγραψα</w><w>τη</w><w>εμη</w><w>χειρι</w></ab><ab n="Gal.6.12"><w>οσοι</w><w>θελου
+<lb break="no" xml:id="P167vC1L8-454" n="8"/><supplied reason="lacuna/illegible">σι</supplied>ν</w><w>ευπροσωπησαι</w><w>εν</w><w>σαρκι</w><w>ουτοι</w><w>αναγκαζου
+<lb break="no" xml:id="P167vC1L9-454" n="9"/><supplied reason="lacuna/illegible">σ</supplied>ιν</w><w>υμας</w><w>περιτεμνεσθαι</w><w>μονον</w><w>ινα</w><w>μη</w><w>τω</w>
+<lb xml:id="P167vC1L10-454" n="10"/><w><abbr type="nomSac"><supplied reason="lacuna/illegible"><hi rend="overline">στ</hi></supplied><hi rend="overline">ρω</hi></abbr></w><w>του</w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>διωκονται</w></ab><ab n="Gal.6.13"><w>ου</w><w>γαρ</w><w>οι</w><w>περιτετμημε
+<lb break="no" xml:id="P167vC1L11-454" n="11"/><supplied reason="lacuna/illegible">ν</supplied>οι</w><w>αυτοι</w><w>νομον</w><w>φυλασσουσιν</w><w>αλλα</w><w>θελουσιν</w><w>υ
+<lb break="no" xml:id="P167vC1L12-454" n="12"/>μας</w><w>περιτεμνεσθαι</w><w>ινα</w><w>εν</w><w>τη</w><w>υμετερα</w><w>σαρκι</w>
+<lb xml:id="P167vC1L13-454" n="13"/><w>καυχησωνται</w></ab><ab n="Gal.6.14"><w>εμοι</w><w>δε</w><w>μη</w><w>γενοιτο</w><w>καυχασθαι</w>
+<lb xml:id="P167vC1L14-454" n="14"/><w>ει</w><w>μη</w><w>εν</w><w>τω</w><w><abbr type="nomSac"><hi rend="overline">στρω</hi></abbr></w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>δι</w><w>ου</w><w>εμοι</w><w>κο
+<lb break="no" xml:id="P167vC1L15-454" n="15"/>σμος</w><w><abbr type="nomSac"><hi rend="overline">εστρωται</hi></abbr></w><w>καγω</w><w>τω</w><w>κοσμω</w></ab><ab n="Gal.6.15"><w>εν</w><w>γαρ</w><w><abbr type="nomSac"><hi rend="overline">χω</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>ουτε</w>
+<lb xml:id="P167vC1L16-454" n="16"/><w>περιτομη</w><w>τι</w><w>ισχυει</w><w>ουτε</w><w>ακροβυστια</w><w>αλλα</w><w>καινη</w>
+<lb xml:id="P167vC1L17-454" n="17"/><w>κτισις</w>
+<pb xml:id="P168r-454" n="168r" type="folio"/>
+<cb xml:id="P168rC1-454" n="1"/>
+<lb xml:id="P168rC1L1-454" n="1"/></ab><ab n="Gal.6.16"><w>και</w><w>οσοι</w><w>τω</w><w>κανονι</w><w>τουτω</w><w>στοιχησουσιν</w><w>ειρηνη</w>
+<lb xml:id="P168rC1L2-454" n="2"/><w>επ</w><w>αυτοις</w><w>και</w><w>ελεος</w><w>και</w><w>επι</w><w>τον</w><w><abbr type="nomSac"><hi rend="overline">ιηλ</hi></abbr></w><w>του</w><w><abbr type="nomSac"><hi rend="overline">θυ</hi></abbr></w></ab><ab n="Gal.6.17"><w>του</w>
+<lb xml:id="P168rC1L3-454" n="3"/><w>λοιπου</w><w>κοπους</w><w>μοι</w><w>μηδεις</w><w>παρεχετω</w><w>εγω</w><w>γαρ</w>
+<lb xml:id="P168rC1L4-454" n="4"/><w>τα</w><w>στιγματα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w>εν</w><w>τω</w><w>σωματι</w><w>μου</w><w>βαστα
+<lb break="no" xml:id="P168rC1L5-454" n="5"/>ζω</w></ab><ab n="Gal.6.18"><w>η</w><w>χαρις</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">κυ</hi></abbr></w><w>ημων</w><w><abbr type="nomSac"><hi rend="overline">ιυ</hi></abbr></w><w><abbr type="nomSac"><hi rend="overline">χυ</hi></abbr></w><w>μετα</w><w>του</w><w><abbr type="nomSac"><hi rend="overline">πνς</hi></abbr></w><w>υμων</w>
+<lb xml:id="P168rC1L6-454" n="6"/><w>αδελφοι</w><w>αμην</w></ab></div><div type="subscriptio"><ab n="Gal.subscriptio"/></div></div></body></text></TEI>
