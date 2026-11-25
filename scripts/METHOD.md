@@ -50,14 +50,18 @@ a place: its difference is shown with that manuscript, and the probability of th
 The model is a latent-class model of independent errors (Dawid and Skene, 1979), fitted by Bayesian methods (Gelman and
 others, 2013).
 
-**What it assumes.** At any place, the author wrote one reading. Each manuscript m copied that original reading with
-probability q_m, its reliability. Otherwise it has some other reading, and every alternative is equally likely: each of the
-other readings seen at the place, and also a reading that no surviving manuscript kept. Before looking at the manuscripts,
-every reading seen at the place, and "a reading no manuscript kept", is equally likely to be the original.
+**What it assumes.** At any point of the text, the author wrote one reading. It is either one of the readings the
+manuscripts show there, or one of 10 other readings that no surviving manuscript kept; before looking at the manuscripts,
+each of these candidates is equally likely. Each manuscript m copied the original reading with probability q_m, its
+reliability. Otherwise it has one of the other candidates, each equally likely. The number 10 is this compiler's assumption
+about how many different wrong readings a copyist could plausibly have made at one point; it makes agreement in error rare,
+as it is in practice. A word that one manuscript alone has is then exactly as likely to be original as that manuscript is
+reliable.
 
 **Bayes' rule.** For each possible original r, the chance of seeing what the manuscripts have is the product, over the
-manuscripts, of q_m (if m has r) or (1 − q_m) / K (if m has something else), where K is the number of alternatives. The
-probability of r is that product divided by the sum of the products for all possible originals.
+manuscripts, of q_m (if m has r) or (1 − q_m) / (N − 1) (if m has something else), where N is the number of candidates (the
+readings seen plus 10). The probability of r is that product divided by the sum of the products for all candidates. The 10
+unseen candidates are reported together as the chance that the original is in no manuscript we hold.
 
 **Copies that depend on each other.** Many late copies descend from the same exemplars, so their agreement is not
 independent evidence. Copies made within 400 years of the original count fully. Late copies that share a reading count as
@@ -77,8 +81,8 @@ only 1, so that the evidence of agreement decides.
 **Learning each manuscript's reliability from agreement.** Reliability is then learned from how often each manuscript agrees
 with what the other manuscripts make likely, by repeated estimation (the expectation–maximisation method of Dempster, Laird
 and Rubin, 1977, as used by Dawid and Skene). For each line where a manuscript and at least one other have words, the line
-counts as one observation: the share of that line's points where the manuscript has the reading the others make most likely,
-computed without the manuscript itself (so it does not confirm itself). Counting lines rather than single words allows for
+counts as one observation: the average, over that line's points, of the probability (given all the manuscripts there) that
+the manuscript's reading is the original. A point that only one manuscript has is not used, so no manuscript confirms itself. Counting lines rather than single words allows for
 errors coming in clusters (Kish, 1965). The prior and these observations combine as Beta(prior weight × expected reliability +
 agreements, prior weight × (1 − expected reliability) + disagreements). Five rounds are run.
 

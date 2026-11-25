@@ -1,10 +1,10 @@
 // The statistical model this compiler chose (scripts/METHOD.md, "How likely each reading is"). Every step here is
 // described there in plain words; the names below follow that description.
 //
-// Each manuscript m has a reliability q_m: the chance that, at a given place, it carries the original reading. If it does
-// not, it carries another reading, each of the K alternatives (the other readings seen there, or a reading no manuscript kept)
-// equally likely: (1 - q_m) / K. The original is, before looking at the manuscripts, equally likely to be any of the readings
-// seen or one that no manuscript kept. Bayes' rule then gives each reading's probability.
+// Each manuscript m has a reliability q_m: the chance that, at a given point, it carries the original reading. The original
+// is one of the readings seen there or one of UNSEEN readings that no manuscript kept, each equally likely before looking.
+// A manuscript that does not carry the original carries any one of the other candidates, equally likely. Bayes' rule then
+// gives each reading's probability.
 
 /** A small random number generator with a fixed seed, so every run draws the same numbers (mulberry32). */
 export function rng(seed: number) {
@@ -41,18 +41,24 @@ export function weights(u: Unit, late: boolean[], q: Float64Array) {
   return w;
 }
 
-/** Log-likelihood of each possible original (the options, then "a reading no manuscript kept") under reliabilities q. */
+/** How many readings, besides those the manuscripts show, a copyist who erred could have written at one point (method,
+ * section 3). The original is one of the readings seen or one of these; before looking, every one is equally likely. */
+export const UNSEEN = 10;
+/** Log-likelihood of each possible original (the options, then the unseen readings taken together, which also carry their
+ * larger share of the prior) under reliabilities q. A manuscript that errs writes any one of the other candidates, equally
+ * likely: (1 - q) / (candidates - 1). */
 export function loglik(u: Unit, w: Float64Array, q: (m: number) => number, skip = -1) {
-  const K = u.options; // alternatives for any one original: the K - 1 other readings seen, and one no manuscript kept
+  const K = u.options, alt = K + UNSEEN - 1;
   const L = new Float64Array(K + 1);
   u.voters.forEach(([m, o], i) => {
     if (i === skip) return;
-    const qm = Math.min(0.999999, Math.max(1e-6, q(m))), hit = Math.log(qm) * w[i], miss = Math.log((1 - qm) / K) * w[i];
+    const qm = Math.min(0.999999, Math.max(1e-6, q(m))), hit = Math.log(qm) * w[i], miss = Math.log((1 - qm) / alt) * w[i];
     for (let r = 0; r <= K; r++) L[r] += r === o ? hit : miss;
   });
+  L[K] += Math.log(UNSEEN);
   return L;
 }
-/** Bayes' rule with equal prior chances: turn log-likelihoods into probabilities. */
+/** Bayes' rule: turn log-likelihoods (with the prior already added) into probabilities. */
 export function posterior(L: Float64Array) {
   const mx = Math.max(...L); let s = 0; const p = new Float64Array(L.length);
   for (let i = 0; i < L.length; i++) { p[i] = Math.exp(L[i] - mx); s += p[i]; }

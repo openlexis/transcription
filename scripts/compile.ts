@@ -371,11 +371,10 @@ function model(R: Book, W: Wit[], lines: Ln[], places: Pl[], placeLine: number[]
       const sum = new Map<number, [number, number]>();
       for (const u of units) {
         if (u.voters.length < 2) continue;
-        const w = weights(u, late, q), L = loglik(u, w, (m) => q[m]), K = u.options;
-        u.voters.forEach(([m, o], i) => {
-          const qm = Math.min(0.999999, Math.max(1e-6, q[m])), hit = Math.log(qm) * w[i], miss = Math.log((1 - qm) / K) * w[i];
-          const Lm = L.map((x, r) => x - (r === o ? hit : miss));
-          const pr = posterior(Lm)[o];
+        const w = weights(u, late, q), L = loglik(u, w, (m) => q[m]);
+        const post = posterior(L);
+        u.voters.forEach(([m, o]) => {
+          const pr = post[o];
           const x = sum.get(m) ?? [0, 0]; x[0] += pr * u.mult; x[1] += u.mult; sum.set(m, x);
         });
       }
