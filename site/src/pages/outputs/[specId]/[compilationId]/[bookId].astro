@@ -1,4 +1,6 @@
 ---
+import { mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import Layout from "../../../../layouts/Layout.astro";
 import {
   displayLanguage,
@@ -236,6 +238,9 @@ const clientData = {
   g: buildBookGlossMap(bookWords, isHebrew),
   t: tokenPayloads,
 };
+const inspectorRel = `outputs/${c.specId}/${c.compilationId}/${b.id}/inspector.json`;
+mkdirSync(join(process.cwd(), "www", `outputs/${c.specId}/${c.compilationId}/${b.id}`), { recursive: true });
+writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientData));
 ---
 <Layout
   title={`${b.name} · ${c.manifest.modelAttribution.modelName}`}
@@ -370,6 +375,7 @@ const clientData = {
         class={`compiled-text ${isHebrew ? "script-hebrew" : "script-greek"}`}
         dir={isHebrew ? "rtl" : "ltr"}
         lang={isHebrew ? "hbo" : "grc"}
+        data-inspector={`/${inspectorRel}`}
       >
         {renderedChapters.map((ch) => (
           <section class="chapter-block" id={`ch-${ch.chapter}`}>
@@ -435,13 +441,13 @@ const clientData = {
     </div>
   </section>
 
-  <script id="book-inspector-data" type="application/json" set:html={JSON.stringify(clientData)}></script>
   <script>
     import { transliterateText, type DisplayScript } from "../../../../lib/transliterate";
 
-    const dataEl = document.getElementById("book-inspector-data");
-    const DATA = dataEl ? JSON.parse(dataEl.textContent || "{}") : { w: [], t: {} };
     const reader = document.getElementById("compiled-reader");
+    const inspectorUrl =
+      reader?.dataset.inspector || new URL("inspector.json", document.location.href).pathname;
+    const DATA = await fetch(inspectorUrl).then((r) => (r.ok ? r.json() : { w: [], t: {} }));
     const scriptBtns = [...document.querySelectorAll<HTMLButtonElement>("[data-script]")];
     const scriptCls = DATA.isHebrew ? "script-hebrew" : "script-greek";
     const STORAGE_KEY = "openlexis-display-script";
