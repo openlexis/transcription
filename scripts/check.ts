@@ -41,6 +41,8 @@ for (const d of readdirSync(`${ROOT}compilations`).sort()) {
   for (const l of T.lines) {
     if (l.uncovered) continue;
     const ws = l.words!;
+    const g = (l as { g?: string[] }).g;
+    if (!g || g.length !== l.witnesses.length || new Set(g.map((r) => r.length)).size > 1 || ws.some((w) => (w as { x?: number }).x === undefined || (w as { x: number }).x >= (g[0]?.length ?? 0))) fails.push(`${d} ${l.ref}: alignment rows do not match the line`);
     if (HEB) {
       const tr = l.witnesses.map((x) => T.witnesses[x] as { translation?: string });
       if (l.translation ? tr.some((w) => !w.translation) : tr.some((w) => w.translation)) fails.push(`${d} ${l.ref}: Greek and Hebrew or Aramaic witnesses mixed`);

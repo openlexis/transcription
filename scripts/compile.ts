@@ -194,7 +194,7 @@ export function compile(R: Book, under: { file: string; sha256: string }, by: Re
         });
         const all = [...rd.values()];
         if (!all.length) { // every manuscript is lost somewhere in the place: nothing is printed, and the place is listed
-          local.push({ ref, at: words.length, n: 0, confidence: 0, weight: 0, type: "lost text", severity: "high", readings: [], partlyLost: sortW(partial) });
+          local.push({ ref, at: words.length, n: 0, cols: [a, b], confidence: 0, weight: 0, type: "lost text", severity: "high", readings: [], partlyLost: sortW(partial) });
           return;
         }
         // a manuscript with a lacuna in the place votes with the one reading that agrees with every word it keeps there
@@ -252,11 +252,12 @@ export function compile(R: Book, under: { file: string; sha256: string }, by: Re
         const severity = conf < 0.6 ? "high" : runner >= 0.1 ? "medium" : runner >= 0.01 ? "low" : "settled";
         const pl = local.length;
         local.push({
-          ref, at: words.length, n: chosen.keys.length, confidence: r4(conf), weight: r4(runner), type, severity,
+          ref, at: words.length, n: chosen.keys.length, cols: [a, b], confidence: r4(conf), weight: r4(runner), type, severity,
           readings: all.map((r) => ({ text: r.forms.map(showGreek).join(" ") || "—", keys: id(r), witnesses: sortW(r.wits), ...(r.partly.length ? { partly: sortW(r.partly) } : {}), votes: r.voting.length, score: r4(r.score), share: r4(total > 0 ? r.score / total : r === chosen ? 1 : 0), ...(r.flags.size ? { flags: [...r.flags].sort() } : {}) })),
           ...(stillLost.length ? { partlyLost: sortW(stillLost) } : {}),
         });
-        chosen.keys.forEach((k, j) => words.push({ t: SHOW(chosen.forms[j] ?? k), k, c: r4(conf), p: pl, col: a, span: si }));
+        const pcols = chosen.segs[0].map((k, j) => (k ? a + j : -1)).filter((x) => x >= 0);
+        chosen.keys.forEach((k, j) => words.push({ t: SHOW(chosen.forms[j] ?? k), k, c: r4(conf), p: pl, col: pcols[j] ?? a, span: si }));
       });
       for (; ci < nC; ci++) {
         const n = new Map<string, number>(); for (const r of reads) { const x = r[ci]; if (x !== null) n.set(x, (n.get(x) ?? 0) + 1); }
@@ -293,7 +294,10 @@ export function compile(R: Book, under: { file: string; sha256: string }, by: Re
     }
     st.columns += nC;
     for (const w of res.words) if (w.p === undefined && !w.d && !w.l) st.unanimous++;
-    const words: Record<string, unknown>[] = res.words.map(({ col, span, ...w }) => (w.p !== undefined ? { ...w, p: w.p + base } : w));
+    // x: the column of each printed word in the line's alignment (see g below)
+    const words: Record<string, unknown>[] = res.words.map(({ col, span, ...w }) => (w.p !== undefined ? { ...w, p: w.p + base, x: col } : { ...w, x: col }));
+    // g: each manuscript's row in the alignment, one letter per column: w its next word, - no word there, ? lost there
+    const g = reads.map((row) => row.map((k) => (k === null ? "?" : k ? "w" : "-")).join(""));
     st.words += words.length;
     const extra: Record<string, string> = {};
     if (fallback) { for (const w of words) w.tr = 1; extra.translation = "Greek"; st.trLines++; st.trWords += words.length; }
@@ -304,7 +308,7 @@ export function compile(R: Book, under: { file: string; sha256: string }, by: Re
       if (n) { extra.aramaic = n === words.length ? "all" : "part"; st.arLines++; st.arWords += n; }
     }
     // where each manuscript's words come from: its transcription (index in its files) and the line number in that file
-    lines.push({ ref, witnesses: present.map((p) => WIDX.get(p.s)), src: present.map((p) => `${byMs.get(p.s)!.files.indexOf(p.x.file)}:${p.x.lineNo}`), ...extra, words });
+    lines.push({ ref, witnesses: present.map((p) => WIDX.get(p.s)), src: present.map((p) => `${byMs.get(p.s)!.files.indexOf(p.x.file)}:${p.x.lineNo}`), g, ...extra, words });
   }
   const stats = {
     name: R.name, book: R.book, section: R.section, language: R.language, origin: R.origin, lateAfter: R.lateAfter, manuscripts: witnesses.length, early: witnesses.filter((w) => w.early).length,
