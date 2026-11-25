@@ -10,7 +10,7 @@ import Base from "../layouts/Base.astro";
     <ol>
       <li>There is one <a href="/specification/">specification</a>, <code>SPECIFICATION.md</code>. It states the goal and what an output must contain, and nothing about how.</li>
       <li>The output uses a statistical model to estimate how likely each reading is to be original, with an uncertainty range, and describes that model in plain words.</li>
-      <li>Each compilation is one output, written in TEI P5 XML and filed under <code>outputs/&lt;the specification's ULID&gt;/</code>. The model that made the judgments identifies itself by its exact name and version. The same inputs always give the same output.</li>
+      <li>Each compilation is one output, written in TEI P5 XML and filed under <code>outputs/&lt;the specification's ULID&gt;/&lt;the compilation's ULID&gt;/</code>. The model that made the judgments identifies itself by its exact name and version. The same inputs always give the same output.</li>
       <li>A quick check, which takes about a second, confirms that there is one specification, that each output matches its recorded hashes, that every printed word is in a manuscript, that no word is doubled unless a manuscript doubles it, and that every chance lies inside its range.</li>
     </ol>
     <h2>What is used, and what is not</h2>

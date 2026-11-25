@@ -9,9 +9,9 @@ digits and letters, leaving out I, L, O and U so they are not mistaken for one a
 
 ## Goal
 
-Produce the text of each book of the Bible as its original authors wrote it, in its original language (Hebrew and
-Aramaic for the Old Testament, Greek for the New Testament), from all available manuscripts in that language that were
-copied in or near the era of the original.
+Produce the text of each book of the Bible as its original authors wrote it, in its original language, from all
+available manuscripts in that language that were copied in or near the era of the original. Each book's original
+language is the one it was written in, as recorded for that book in `transcriptions/books.json`.
 
 ## Evidence
 
@@ -85,8 +85,11 @@ The estimate for each reading is recorded with the `certainty` element in
 [chapter 22](https://tei-c.org/release/doc/tei-p5-doc/en/html/CE.html): its `degree` is a probability from 0 to 1. The
 Guidelines do not define a field for an uncertainty range, so that range is stated in a note on the same reading.
 
-The description of the model, the model's name and version, and this specification's ULID go in the TEI header.
+The description of the model, the model's name and version, this specification's ULID and the compilation's ULID go in
+the TEI header.
 
-Each compilation is one output: a TEI file for each book, filed together under `outputs/<this specification's ULID>/`,
-with a single record file in that folder that lists the book files, states the model's name and version, and states that
-the work was done under this ULID. Folders named with the full ULID sort by the time the specification was made.
+Each compilation is one output and has its own ULID. It is filed under
+`outputs/<this specification's ULID>/<the compilation's ULID>/`. Both names are the full ULID, so the folders sort by the
+time each was made. That compilation folder holds a TEI file for each book and a single record file. The record file
+lists the book files, states the model's name and version, states the compilation's ULID, and states that the work was
+done under this specification, giving this specification's ULID.

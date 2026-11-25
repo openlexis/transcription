@@ -5,7 +5,7 @@ const list = artifacts();
 ---
 <Base title="Outputs" tab="outputs" description="Every output artifact: one compilation, filed by the specification it was produced under and the compiler that made it.">
   <h1>Outputs</h1>
-  <p class="lede">Each compilation is one output: a bundle holding the text, the evidence for every reading and the method the compiler chose. Outputs are filed by the specification's hash and the compiler's name, in <code>outputs/&lt;specification&gt;/&lt;compiler&gt;/</code>. Any number can sit side by side; the site shows each one.</p>
+  <p class="lede">Each compilation is one output: a bundle holding the text, the evidence for every reading and the method the compiler chose. New outputs are filed by the specification's ULID and the compilation's own ULID, in <code>outputs/&lt;specification ULID&gt;/&lt;compilation ULID&gt;/</code>. Any number can sit side by side; the site shows each one.</p>
   <div class="scroll"><table>
     <thead><tr><th>Output</th><th>Specification</th><th>Compiler</th><th>Books</th><th>Method</th></tr></thead>
     <tbody>{list.map((a) => (

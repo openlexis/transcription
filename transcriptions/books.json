@@ -1,5 +1,5 @@
 {
- "note": "The books of the Old Testament (Hebrew and Aramaic) and the New Testament (Greek), with the identifiers the transcription files use. The transcriptions themselves are the files in the folder transcriptions/, listed in manuscripts.json.",
+ "note": "The books, with the identifiers the transcription files use. Each book's original language is recorded on that book.",
  "sections": {
   "ot": {
    "name": "Old Testament (Hebrew and Aramaic)",
@@ -21,397 +21,463 @@
    "section": "ot",
    "number": 1,
    "book": "Gen",
-   "name": "Genesis"
+   "name": "Genesis",
+   "language": "Hebrew and Aramaic"
   },
   {
    "section": "ot",
    "number": 2,
    "book": "Exod",
-   "name": "Exodus"
+   "name": "Exodus",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 3,
    "book": "Lev",
-   "name": "Leviticus"
+   "name": "Leviticus",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 4,
    "book": "Num",
-   "name": "Numbers"
+   "name": "Numbers",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 5,
    "book": "Deut",
-   "name": "Deuteronomy"
+   "name": "Deuteronomy",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 6,
    "book": "Josh",
-   "name": "Joshua"
+   "name": "Joshua",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 7,
    "book": "Judg",
-   "name": "Judges"
+   "name": "Judges",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 8,
    "book": "1Sam",
-   "name": "1 Samuel"
+   "name": "1 Samuel",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 9,
    "book": "2Sam",
-   "name": "2 Samuel"
+   "name": "2 Samuel",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 10,
    "book": "1Kgs",
-   "name": "1 Kings"
+   "name": "1 Kings",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 11,
    "book": "2Kgs",
-   "name": "2 Kings"
+   "name": "2 Kings",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 12,
    "book": "Isa",
-   "name": "Isaiah"
+   "name": "Isaiah",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 13,
    "book": "Jer",
-   "name": "Jeremiah"
+   "name": "Jeremiah",
+   "language": "Hebrew and Aramaic"
   },
   {
    "section": "ot",
    "number": 14,
    "book": "Ezek",
-   "name": "Ezekiel"
+   "name": "Ezekiel",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 15,
    "book": "Hos",
-   "name": "Hosea"
+   "name": "Hosea",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 16,
    "book": "Joel",
-   "name": "Joel"
+   "name": "Joel",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 17,
    "book": "Amos",
-   "name": "Amos"
+   "name": "Amos",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 18,
    "book": "Obad",
-   "name": "Obadiah"
+   "name": "Obadiah",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 19,
    "book": "Jonah",
-   "name": "Jonah"
+   "name": "Jonah",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 20,
    "book": "Mic",
-   "name": "Micah"
+   "name": "Micah",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 21,
    "book": "Nah",
-   "name": "Nahum"
+   "name": "Nahum",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 22,
    "book": "Hab",
-   "name": "Habakkuk"
+   "name": "Habakkuk",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 23,
    "book": "Zeph",
-   "name": "Zephaniah"
+   "name": "Zephaniah",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 24,
    "book": "Hag",
-   "name": "Haggai"
+   "name": "Haggai",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 25,
    "book": "Zech",
-   "name": "Zechariah"
+   "name": "Zechariah",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 26,
    "book": "Mal",
-   "name": "Malachi"
+   "name": "Malachi",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 27,
    "book": "1Chr",
-   "name": "1 Chronicles"
+   "name": "1 Chronicles",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 28,
    "book": "2Chr",
-   "name": "2 Chronicles"
+   "name": "2 Chronicles",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 29,
    "book": "Ps",
-   "name": "Psalms"
+   "name": "Psalms",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 30,
    "book": "Job",
-   "name": "Job"
+   "name": "Job",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 31,
    "book": "Prov",
-   "name": "Proverbs"
+   "name": "Proverbs",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 32,
    "book": "Ruth",
-   "name": "Ruth"
+   "name": "Ruth",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 33,
    "book": "Song",
-   "name": "Song of Songs"
+   "name": "Song of Songs",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 34,
    "book": "Eccl",
-   "name": "Ecclesiastes"
+   "name": "Ecclesiastes",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 35,
    "book": "Lam",
-   "name": "Lamentations"
+   "name": "Lamentations",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 36,
    "book": "Esth",
-   "name": "Esther"
+   "name": "Esther",
+   "language": "Hebrew"
   },
   {
    "section": "ot",
    "number": 37,
    "book": "Dan",
-   "name": "Daniel"
+   "name": "Daniel",
+   "language": "Hebrew and Aramaic"
   },
   {
    "section": "ot",
    "number": 38,
    "book": "Ezra",
-   "name": "Ezra"
+   "name": "Ezra",
+   "language": "Hebrew and Aramaic"
   },
   {
    "section": "ot",
    "number": 39,
    "book": "Neh",
-   "name": "Nehemiah"
+   "name": "Nehemiah",
+   "language": "Hebrew"
   },
   {
    "section": "nt",
    "number": 1,
    "book": "Matt",
-   "name": "Matthew"
+   "name": "Matthew",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 2,
    "book": "Mark",
-   "name": "Mark"
+   "name": "Mark",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 3,
    "book": "Luke",
-   "name": "Luke"
+   "name": "Luke",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 4,
    "book": "John",
-   "name": "John"
+   "name": "John",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 5,
    "book": "Acts",
-   "name": "Acts"
+   "name": "Acts",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 6,
    "book": "Rom",
-   "name": "Romans"
+   "name": "Romans",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 7,
    "book": "1Cor",
-   "name": "1 Corinthians"
+   "name": "1 Corinthians",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 8,
    "book": "2Cor",
-   "name": "2 Corinthians"
+   "name": "2 Corinthians",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 9,
    "book": "Gal",
-   "name": "Galatians"
+   "name": "Galatians",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 10,
    "book": "Eph",
-   "name": "Ephesians"
+   "name": "Ephesians",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 11,
    "book": "Phil",
-   "name": "Philippians"
+   "name": "Philippians",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 12,
    "book": "Col",
-   "name": "Colossians"
+   "name": "Colossians",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 13,
    "book": "1Thess",
-   "name": "1 Thessalonians"
+   "name": "1 Thessalonians",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 14,
    "book": "2Thess",
-   "name": "2 Thessalonians"
+   "name": "2 Thessalonians",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 15,
    "book": "1Tim",
-   "name": "1 Timothy"
+   "name": "1 Timothy",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 16,
    "book": "2Tim",
-   "name": "2 Timothy"
+   "name": "2 Timothy",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 17,
    "book": "Titus",
-   "name": "Titus"
+   "name": "Titus",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 18,
    "book": "Phlm",
-   "name": "Philemon"
+   "name": "Philemon",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 19,
    "book": "Heb",
-   "name": "Hebrews"
+   "name": "Hebrews",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 20,
    "book": "Jas",
-   "name": "James"
+   "name": "James",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 21,
    "book": "1Pet",
-   "name": "1 Peter"
+   "name": "1 Peter",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 22,
    "book": "2Pet",
-   "name": "2 Peter"
+   "name": "2 Peter",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 23,
    "book": "1John",
-   "name": "1 John"
+   "name": "1 John",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 24,
    "book": "2John",
-   "name": "2 John"
+   "name": "2 John",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 25,
    "book": "3John",
-   "name": "3 John"
+   "name": "3 John",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 26,
    "book": "Jude",
-   "name": "Jude"
+   "name": "Jude",
+   "language": "Greek"
   },
   {
    "section": "nt",
    "number": 27,
    "book": "Rev",
-   "name": "Revelation"
+   "name": "Revelation",
+   "language": "Greek"
   }
  ]
 }
