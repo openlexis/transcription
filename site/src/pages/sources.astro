@@ -23,11 +23,10 @@ const index = buildClientSourceIndex(spec);
       <div class="eyebrow">Referenced by {spec.file}</div>
       <h1>Primary Sources</h1>
       <p class="lead">
-        All {formatNum(stats.sourceCount)} primary sources ({formatNum(stats.totalXmlFiles)} XML files across {stats.provenanceCount} source institutions) referenced under <code>sources:</code> in <a href={githubBlob(spec.file)} target="_blank" rel="noopener"><code>{spec.file}</code></a> and indexed per institution in <code>src/&lt;institution&gt;/index.json</code>. Click any source to expand its full metadata, XML paths, provenance, license, and facsimile links.
+        All {formatNum(stats.sourceCount)} primary sources ({formatNum(stats.totalXmlFiles)} XML files across {stats.provenanceCount} source institutions) referenced under <code>sources:</code> in <a href={`/specifications/${spec.id}/`}>the specification</a> and indexed per institution in <code>src/&lt;institution&gt;/index.json</code>. Click any source to expand its full metadata, XML paths, provenance, license, and facsimile links.
       </p>
       <div class="actions">
-        <a href="/specifications/" class="btn btn-secondary">← Back to specification</a>
-        <a href={githubBlob(spec.file)} class="btn btn-secondary" target="_blank" rel="noopener">View on GitHub ↗</a>
+        <a href="/specifications/" class="btn btn-secondary">← Back to specifications</a>
       </div>
     </div>
   </section>

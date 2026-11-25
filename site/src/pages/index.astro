@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import {
+  formatAuthor,
   formatBytes,
   formatNum,
   getCompilations,
@@ -9,6 +10,7 @@ import {
   getSpecifications,
   githubBlob,
   githubTree,
+  shortUlid,
 } from "../lib/corpus";
 
 const specs = getSpecifications();
@@ -74,14 +76,13 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
             {specs.length === 1 ? "Specification" : `${specs.length} specifications`}
           </a>
           <a href="/sources/" class="btn btn-secondary">Explore {formatNum(stats.sourceCount)} sources</a>
-          <a href={githubTree("src")} class="btn btn-secondary" target="_blank" rel="noopener">Browse <code>src/</code> ↗</a>
         </div>
       </div>
 
       <div class="hero-metrics">
         <div class="metric-card">
           <div class="metric-value">{formatNum(stats.sourceCount)}</div>
-          <div class="metric-label">Primary sources <span style="display:block; font-size:0.76rem;">in spec <code>{spec.id.slice(0, 8)}…</code></span></div>
+          <div class="metric-label">Primary sources <span style="display:block; font-size:0.76rem;">in spec <code title={spec.id}>{shortUlid(spec.id)}</code></span></div>
         </div>
         <div class="metric-card">
           <div class="metric-value">{formatNum(stats.totalXmlFiles)}</div>
@@ -93,14 +94,14 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         </div>
         <div class="metric-card">
           <div class="metric-value">{specs.length}</div>
-          <div class="metric-label">{specs.length === 1 ? "Specification YAML" : "Specification YAMLs"} <span style="display:block; font-size:0.76rem;">self-contained file</span></div>
+          <div class="metric-label">{specs.length === 1 ? "Specification" : "Specifications"} <span style="display:block; font-size:0.76rem;">immutable snapshots</span></div>
         </div>
         <div class="metric-card wide">
           <div>
             <div class="metric-value">{(stats.totalWords / 1_000_000).toFixed(1)}M</div>
             <div class="metric-label">Transcribed words across {formatNum(stats.totalLines)} lines</div>
           </div>
-          <a href={githubBlob(spec.file)} target="_blank" rel="noopener" class="badge badge-indigo">1 YAML file ↗</a>
+          <a href="/specifications/" class="badge badge-indigo">View specifications →</a>
         </div>
       </div>
     </div>
@@ -112,7 +113,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         <div>
           <h2>Source Corpus Breakdown</h2>
           <p class="section-sub">
-            All {formatNum(stats.sourceCount)} primary sources and {stats.targetCount} target books for specification <code>{spec.id}</code> are referenced by <a href={githubBlob(spec.file)} target="_blank" rel="noopener"><code>{spec.file}</code></a>, with per-institution metadata in <code>src/&lt;institution&gt;/index.json</code> pointing to {formatNum(stats.totalXmlFiles)} XML files.
+            All {formatNum(stats.sourceCount)} primary sources and {stats.targetCount} target books for <a href={`/specifications/${spec.id}/`}>specification <code title={spec.id}>{shortUlid(spec.id)}</code></a>, indexed across {stats.provenanceCount} institutions totaling {formatNum(stats.totalXmlFiles)} XML files.
           </p>
         </div>
       </div>
@@ -270,14 +271,15 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
               <div class="callout" style="margin: 0;">
                 <div>
                   <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 6px;">
-                    <a href={`/outputs/${c.specId}/${c.compilationId}/`} style="font-weight: 700; font-size: 1.02rem;">
-                      <code>{c.compilationId}</code>
+                    <a href={`/outputs/${c.specId}/${c.compilationId}/`} style="font-weight: 700; font-size: 1.02rem; color: var(--ink);">
+                      {c.manifest.compilation.title || c.manifest.modelAttribution.modelName}
                     </a>
-                    <span class="badge badge-emerald">{c.manifest.totals.books} books · TEI P5 XML</span>
+                    <code title={c.compilationId}>{shortUlid(c.compilationId)}</code>
+                    <span class="badge badge-emerald">{c.manifest.totals.books} books</span>
                     <span class="badge badge-indigo">{c.manifest.modelAttribution.modelName}</span>
                   </div>
                   <p style="margin: 0; color: var(--ink-secondary); font-size: 0.9rem;">
-                    Spec <code>{c.specId}</code> · {formatNum(c.manifest.totals.lines)} lines · {formatNum(c.manifest.totals.words)} words · {formatNum(c.manifest.totals.variantPlaces)} variant <code>&lt;app&gt;</code> places · {formatBytes(c.manifest.totals.totalBytes)}
+                    {c.manifest.compilation.subtitle ? `${c.manifest.compilation.subtitle} · ` : ""}{formatAuthor(c.manifest.compilation.author) ? `${formatAuthor(c.manifest.compilation.author)} · ` : ""}Spec <code title={c.specId}>{shortUlid(c.specId)}</code> · {formatNum(c.manifest.totals.words)} words
                   </p>
                 </div>
                 <a href={`/outputs/${c.specId}/${c.compilationId}/`} class="btn btn-primary">Explore →</a>

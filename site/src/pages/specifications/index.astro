@@ -1,0 +1,81 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+  formatAuthor,
+  formatNum,
+  formatUlidDate,
+  getCompilationsForSpec,
+  getSpecifications,
+  shortUlid,
+  ulidTimestamp,
+} from "../../lib/corpus";
+
+const specs = [...getSpecifications()].sort(
+  (a, b) => (ulidTimestamp(b.id) ?? 0) - (ulidTimestamp(a.id) ?? 0) || (a.id < b.id ? 1 : -1),
+);
+---
+<Layout
+  title="Specifications"
+  active="specs"
+  description="Self-contained YAML specifications for compiling biblical texts from primary manuscript transcriptions."
+>
+  <section class="page-header">
+    <div class="container">
+      <div class="eyebrow">Specifications ({specs.length})</div>
+      <h1>Specifications</h1>
+      <p class="lead">
+        Immutable compilation specifications defining permitted primary sources, modeling principles, and output requirements. Select any specification to read it in full.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="spec-cards">
+        {specs.map((s, idx) => {
+          const comps = getCompilationsForSpec(s.id);
+          const dateStr = formatUlidDate(s.id);
+          const authorStr = formatAuthor(s.author);
+          return (
+            <a href={`/specifications/${s.id}/`} class="spec-card">
+              <div class="spec-card-top">
+                <div class="spec-card-title-row">
+                  <h2 class="spec-card-title">{s.title}</h2>
+                  {idx === 0 && specs.length > 1 && (
+                    <span class="badge badge-indigo">Latest</span>
+                  )}
+                </div>
+                <span class="spec-card-cta">Read specification →</span>
+              </div>
+              <p class="spec-card-summary">{s.summary}</p>
+              <div class="spec-card-meta">
+                {authorStr && (
+                  <span class="badge" title="Author">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    {authorStr}
+                  </span>
+                )}
+                {dateStr && (
+                  <span class="badge" title="Date created">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                    {dateStr}
+                  </span>
+                )}
+                <span class="badge">{formatNum(s.targets.length)} books</span>
+                <span class="badge badge-emerald">{formatNum(s.sources.length)} primary sources</span>
+                <span class={comps.length > 0 ? "badge badge-sky" : "badge"}>
+                  {comps.length === 0
+                    ? "No compilations yet"
+                    : `${comps.length} ${comps.length === 1 ? "compilation" : "compilations"}`}
+                </span>
+                <span class="spec-card-id" title={`Specification ID: ${s.id}`}>
+                  <code>{shortUlid(s.id)}</code>
+                </span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</Layout>

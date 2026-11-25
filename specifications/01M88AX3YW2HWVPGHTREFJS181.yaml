@@ -1,5 +1,6 @@
 id: 01M88AX3YW2HWVPGHTREFJS181
 title: Open Lexis Transcription Specification
+author: Open Lexis
 summary: Recover the original text of each target book represented in this specification as
   originally written, in its original language, by its original author, using only the immutable
   source references listed in this file.
@@ -98,17 +99,33 @@ output_requirements:
       point.
   - name: Variant apparatus
     description: For every point of disagreement (any span within a line where surviving witnesses do
-      not all agree), every attested reading, its supporting manuscripts, and how the readings
-      differ.
+      not all agree), every attested reading, its supporting manuscripts, how the readings differ,
+      and a model-defined severity/subcategory annotation (`<note type="severity" n="<level>"
+      subtype="<subcategory-id>">`) referencing a subcategory declared in `REPORT.md`. Illustrative
+      examples (non-prescriptive) include orthographic/scribal slips, stylistic or grammatical
+      nuances, sound-alike confusions (which may reduce local confidence in the erring witness while
+      strengthening confidence in its authenticity and increasing overall confidence in the better
+      competing witness that lacks the error), and unexplained lexical divergences. The
+      specification does not prescribe which subcategories, numeric scale, or statistical weighting
+      a model must use; it only requires the conforming data structure so downstream tools can parse
+      and display the model's choices.
   - name: Probabilities and uncertainty
     description: For every reading, the model's estimated probability of originality and its uncertainty
       interval.
   - name: Manuscript evidence record
     description: The documented metadata used for each manuscript (date range, dating method, and all
       other fields under `evidence`), explicitly noting which fields were unknown.
-  - name: Method description
-    description: A clear, plain-language explanation of the statistical model—what it is, why it was
-      chosen, its assumptions, and how it incorporates each category of evidence.
+  - name: Method description and structured compilation report
+    description: >-
+      A clear, plain-language Markdown report (`REPORT.md`) with structured YAML
+      frontmatter conforming to a parseable schema: `specification_id`, `compilation_id`,
+      `created_at`, `model_attribution`, `method_summary`, `disagreement_scale` (`min`, `max`,
+      `description`), `disagreement_categories` (`id`, `label`, `description`, `count`),
+      `disagreement_subcategories` (`id`, `label`, `level`, `level_label`, `description`,
+      `local_confidence_effect`, `corpus_authenticity_effect`, `count`), `authenticity_signal`,
+      `evidence_usage`, and `totals`. Each model chooses its own categories, subcategories, numeric
+      severity levels, and statistical weighting; the structure exists purely so parsers and
+      viewers can render any conforming compilation without foreknowledge of its taxonomy.
   - name: Model attribution
     description: Complete, maximally detailed identification of the system or model that made the
       non-deterministic judgments (selecting readings and estimating probabilities)—including lab or
@@ -138,9 +155,14 @@ output_format:
   directory_layout: outputs/<specification-id>/<compilation-id>/
   contents:
     - One TEI P5 XML file per compiled book.
-    - A single manifest (record) file listing all book files, full model attribution (lab, model,
-      version, variant, effort level, and relevant configuration), the compilation ID, and a
-      statement citing this specification's ID (`01M88AX3YW2HWVPGHTREFJS181`).
+    - A single manifest (record) file (`manifest.json`) listing all book files, full model
+      attribution (lab, model, version, variant, effort level, and relevant configuration), the
+      compilation ID, and a statement citing this specification's ID (`01M88AX3YW2HWVPGHTREFJS181`).
+    - A structured Markdown compilation report (`REPORT.md`) with YAML frontmatter containing
+      `specification_id`, `compilation_id`, `created_at`, `model_attribution`, `method_summary`,
+      model-defined `disagreement_categories` (unprescribed taxonomy with `id`, `label`,
+      `description`, `count`), `evidence_usage`, and `totals`, followed by a plain-language Markdown
+      narrative of what was performed.
 sources:
   - 01M88JMKVWP69THRDNQSVV1HH4
   - 01M88JMKVWP69THRDNQSVV1HH5

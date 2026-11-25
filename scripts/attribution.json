@@ -1,0 +1,14 @@
+{
+  "provider": "Google DeepMind",
+  "modelFamily": "Gemini 4",
+  "modelName": "Gemini 4 Neon",
+  "modelId": "gemini-4-neon",
+  "versionSnapshot": "unknown (the exact release snapshot was not exposed to the model at run time)",
+  "variant": "Neon",
+  "effortLevel": "medium",
+  "temperature": "unknown (not exposed to the model at run time)",
+  "thinkingBudget": "unknown (not exposed beyond the medium effort setting)",
+  "harness": "Antigravity",
+  "role": "Designed and implemented the decoupled edit-category vs. substantive-severity classifier (scripts/lib/severity.ts), refined word-level span alignment in scripts/compile.ts so unrelated adjacent variants and repeated genealogy words do not collapse into whole-verse blocks, and executed the compilation under specification 01M89WMZPKWMDPCWWDTAA9VN7D.",
+  "note": "Fields the model could not observe about itself are stated as unknown, never guessed."
+}

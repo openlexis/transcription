@@ -2,15 +2,20 @@
 import Layout from "../../../../layouts/Layout.astro";
 import {
   displayLanguage,
+  formatAuthor,
   formatBytes,
   formatNum,
   formatPct,
   getCompilations,
+  getWitnessViewersMap,
   githubBlob,
+  normalizeSeverityBucket,
   parseCompiledBookTei,
+  shortUlid,
   type CompilationRecord,
   type CompiledBookEntry,
 } from "../../../../lib/corpus";
+import { buildBookGlossMap } from "../../../../lib/gloss";
 
 export function getStaticPaths() {
   const paths: {
@@ -34,8 +39,81 @@ interface Props {
 }
 
 const { compilation: c, book: b } = Astro.props;
-const isHebrew = b.language.startsWith("Hebrew");
+const isHebrew = /Hebrew|Aramaic|Syriac|Arabic/i.test(b.language ?? "");
+const compDate = c.manifest.compilation.createdAt
+  ? new Date(c.manifest.compilation.createdAt).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  : "";
+const compTitle = c.manifest.compilation.title || c.manifest.modelAttribution.modelName;
+const compAuthor = formatAuthor(c.manifest.compilation.author);
+const modelLabel = [
+  c.manifest.modelAttribution.modelName,
+  c.manifest.modelAttribution.effortLevel,
+]
+  .filter(Boolean)
+  .join(" · ");
 const { witnesses, chapters } = parseCompiledBookTei(`${c.dir}/${b.file}`);
+const viewersMap = getWitnessViewersMap(c.specId);
+const reportScale = c.report?.frontmatter?.disagreement_scale;
+const reportSubcats =
+  c.report?.frontmatter?.disagreement_subcategories ??
+  c.report?.frontmatter?.disagreement_severities ??
+  [];
+const subcatById = Object.fromEntries(
+  reportSubcats.map((s) => [
+    s.id,
+    {
+      label: s.label,
+      level: s.level,
+      levelLabel: s.level_label ?? s.short_label ?? (reportScale ? `${s.level}/${reportScale.max}` : `Level ${s.level}`),
+      bucket: normalizeSeverityBucket(s.level, reportScale),
+      localEffect: s.local_confidence_effect ?? s.confidence_effect ?? "",
+      authEffect: s.corpus_authenticity_effect ?? "",
+    },
+  ]),
+);
+
+const SEV_COLORS: Record<number, string> = {
+  0: "rgba(16, 185, 129, 0.34)",
+  1: "rgba(148, 163, 184, 0.40)",
+  2: "rgba(100, 116, 139, 0.68)",
+  3: "rgba(234, 179, 8, 0.88)",
+  4: "rgba(249, 115, 22, 0.96)",
+  5: "#b91c1c",
+};
+
+function buildSeverityGradient(
+  bucketWeights: Map<number, number>,
+): { sevBucket: number; grad?: string } {
+  const all = [...bucketWeights.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+  if (all.length === 0) return { sevBucket: 1 };
+  if (all.length === 1) return { sevBucket: all[0][0] };
+
+  const totalW = all.reduce((sum, [, w]) => sum + w, 0);
+  // Drop zero-weight buckets when non-zero weights exist; if all rounded to 0, split equally.
+  const entries = totalW > 0 ? all.filter(([, w]) => w > 0) : all;
+  if (entries.length === 1) return { sevBucket: entries[0][0] };
+
+  const k = entries.length;
+  const probs = entries.map(([, w]) => (totalW > 0 ? w / totalW : 1 / k));
+
+  const stops: string[] = [];
+  let cumP = 0;
+  for (let i = 0; i < k; i++) {
+    const color = SEV_COLORS[entries[i][0]] ?? SEV_COLORS[1];
+    const start = cumP * 100;
+    cumP += probs[i];
+    const end = i === k - 1 ? 100 : cumP * 100;
+    stops.push(`${color} ${start.toFixed(2)}%`, `${color} ${end.toFixed(2)}%`);
+  }
+  return {
+    sevBucket: entries[0][0],
+    grad: `linear-gradient(90deg,${stops.join(",")})`,
+  };
+}
 
 // Build compact index of witnesses & clickable tokens so every word (unanimous OR variant) is inspectable
 const witIndex = new Map(witnesses.map((w, i) => [w.siglum, i]));
@@ -43,6 +121,11 @@ const toIdx = (list?: string[]) =>
   (list ?? []).map((s) => witIndex.get(s) ?? s);
 
 const tokenPayloads: Record<string, unknown> = {};
+const bookWords = new Set<string>();
+const collectWords = (s?: string) => {
+  if (!s || s.startsWith("—")) return;
+  for (const w of s.trim().split(/\s+/)) if (w) bookWords.add(w);
+};
 let tokSeq = 0;
 
 const renderedChapters = chapters.map((ch) => ({
@@ -54,21 +137,60 @@ const renderedChapters = chapters.map((ch) => ({
     tokens: v.tokens.map((tok) => {
       const key = String(tokSeq++);
       if (tok.kind === "app") {
+        let maxSev = 0;
+        const bucketWeights = new Map<number, number>();
+        const readings = tok.readings ?? [];
+        const selRdg = readings.find((r) => r.type === "selected");
+        const selP = Number(selRdg?.degree ?? 1);
+        collectWords(tok.text);
+        for (const r of readings) {
+          if (r.type !== "unseen") collectWords(r.text);
+          if (r.type !== "variant") continue;
+          const sev = r.severityLevel ?? 0;
+          if (sev > maxSev) maxSev = sev;
+          const bucket = sev > 0 ? normalizeSeverityBucket(sev, reportScale) : 1;
+          const rp = Number(r.degree ?? 0);
+          const weight = Number.isNaN(rp) ? 0 : Math.max(0, rp);
+          bucketWeights.set(bucket, (bucketWeights.get(bucket) ?? 0) + weight);
+        }
+        const conf = Number.isNaN(selP) ? 1 : selP;
+        const barWidth = Math.max(0, Math.min(1, (0.99 - conf) / (0.99 - 0.51)));
+        const { sevBucket, grad } = buildSeverityGradient(bucketWeights);
+        const maxSevBucket = maxSev > 0 ? normalizeSeverityBucket(maxSev, reportScale) : sevBucket;
         tokenPayloads[key] = {
           k: "a",
           ref: v.ref,
           t: tok.text,
+          sv: maxSev,
           lc: toIdx(tok.lacunaWits),
-          rd: (tok.readings ?? []).map((r) => [
+          rd: readings.map((r) => [
             r.type,
             r.text,
             r.degree,
             r.uncertainty,
             r.difference,
             toIdx(r.wits),
+            r.severityLevel ?? 0,
+            r.severitySubtype ?? "",
+            r.severityNote ?? "",
           ]),
         };
+        return {
+          key,
+          kind: tok.kind,
+          text: tok.text,
+          aramaic: tok.aramaic,
+          sevBucket,
+          maxSevBucket,
+          confPct: Math.round(conf * 1000) / 10,
+          grad,
+          barWidth,
+        };
       } else {
+        const wP = tok.degree ? Number(tok.degree) : 1;
+        collectWords(tok.text);
+        const conf = Number.isNaN(wP) ? 1 : wP;
+        const barWidth = Math.max(0, Math.min(1, (0.99 - conf) / (0.99 - 0.51)));
         tokenPayloads[key] = {
           k: "w",
           ref: v.ref,
@@ -79,105 +201,169 @@ const renderedChapters = chapters.map((ch) => ({
           at: toIdx(tok.attestedWits),
           lc: toIdx(tok.lacunaWits),
         };
+        return {
+          key,
+          kind: tok.kind,
+          text: tok.text,
+          aramaic: tok.aramaic,
+          sevBucket: 0,
+          maxSevBucket: 0,
+          confPct: Math.round(conf * 1000) / 10,
+          grad: undefined,
+          barWidth,
+        };
       }
-      return {
-        key,
-        kind: tok.kind,
-        text: tok.text,
-        aramaic: tok.aramaic,
-      };
     }),
   })),
 }));
 
 const clientData = {
+  bookId: b.id,
   isHebrew,
   compUrl: `/outputs/${c.specId}/${c.compilationId}/`,
-  w: witnesses.map((w) => [w.siglum, w.desc, w.dating, w.scribal, w.agreement, w.provenance, w.scientific]),
+  scale: reportScale ?? { min: 1, max: 5 },
+  subcats: subcatById,
+  w: witnesses.map((w) => [
+    w.siglum,
+    w.desc,
+    w.dating,
+    w.scribal,
+    w.agreement,
+    w.provenance,
+    w.scientific,
+    viewersMap.get(w.siglum)?.viewers ?? [],
+  ]),
+  g: buildBookGlossMap(bookWords, isHebrew),
   t: tokenPayloads,
 };
 ---
 <Layout
-  title={`${b.name} · ${c.compilationId}`}
+  title={`${b.name} · ${c.manifest.modelAttribution.modelName}`}
   active="outputs"
-  description={`Compiled original-language text of ${b.name} (${b.id}) under specification ${c.specId}.`}
+  description={`Compiled original-language text of ${b.name} by ${c.manifest.modelAttribution.modelName}.`}
 >
   <section class="page-header">
     <div class="container">
       <div class="eyebrow">{b.section} · {displayLanguage(b.language)}</div>
-      <h1>{b.name} <span style="color: var(--ink-muted); font-weight: 500;">({b.id})</span></h1>
+      <h1>{b.name}</h1>
+      <div class="compilation-provenance" aria-label="Compilation source">
+        <span class="prov-item">
+          <span class="prov-label">Compilation</span>
+          <a href={`/outputs/${c.specId}/${c.compilationId}/`} class="prov-value" title={`Compilation ID: ${c.compilationId}`}>
+            <strong>{compTitle}</strong>
+            <code>{shortUlid(c.compilationId)}</code>
+          </a>
+          <span class="prov-date">{modelLabel}{compAuthor ? ` · ${compAuthor}` : ""}{compDate ? ` · ${compDate}` : ""}</span>
+        </span>
+        <span class="prov-sep" aria-hidden="true">·</span>
+        <span class="prov-item">
+          <span class="prov-label">Specification</span>
+          <a href={`/specifications/${c.specId}/`} class="prov-value" title={`Specification ID: ${c.specId}`}><code>{shortUlid(c.specId)}</code></a>
+        </span>
+      </div>
       <p class="lead">
-        {formatNum(b.stats.manuscripts)} manuscripts ({formatNum(b.stats.early)} early) · {formatNum(b.stats.lines)} lines · {formatNum(b.stats.words)} words · {formatNum(b.stats.places)} variant places · mean word probability {formatPct(b.stats.meanWordConfidence)}
+        {formatNum(b.stats.manuscripts)} manuscripts ({formatNum(b.stats.early)} early) · {formatNum(b.stats.lines)} lines · {formatNum(b.stats.words)} words · {formatNum(b.stats.places)} points of disagreement · mean word probability {formatPct(b.stats.meanWordConfidence)}
       </p>
       <div class="ulid-bar">
-        <a href={`/outputs/${c.specId}/${c.compilationId}/`} class="btn btn-secondary">← Compilation {c.compilationId.slice(0, 10)}…</a>
-        <a href={`/outputs/${c.specId}/${c.compilationId}/#method`} class="btn btn-secondary">Method &amp; scenarios</a>
-        <a href={githubBlob(`${c.relDir}/${b.file}`)} target="_blank" rel="noopener" class="btn btn-primary">
-          Raw TEI P5 XML ({formatBytes(b.bytes)}) ↗
-        </a>
+        <a href={`/outputs/${c.specId}/${c.compilationId}/`} class="btn btn-secondary">← Back to compilation summary</a>
+        <a href={`/outputs/${c.specId}/${c.compilationId}/#method`} class="btn btn-secondary">Method &amp; scenarios →</a>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <details class="embed-accordion" style="margin-bottom: 20px;">
-        <summary>
-          <div class="embed-summary-left">
-            <span class="embed-summary-title">
-              Manuscript Evidence Record (<code>&lt;listWit&gt;</code>)
-              <span class="badge badge-indigo">{formatNum(witnesses.length)} witnesses</span>
-            </span>
-            <span class="embed-summary-sub">Dating, physical/scribal observations, posterior reliability, provenance, and scientific analysis</span>
-          </div>
-          <span class="embed-chevron" aria-hidden="true"></span>
-        </summary>
-        <div class="embed-body">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Siglum</th>
-                  <th>Dating</th>
-                  <th>Physical &amp; Scribal</th>
-                  <th>Textual Agreement &amp; Reliability</th>
-                  <th>Provenance / Scientific</th>
-                </tr>
-              </thead>
-              <tbody>
-                {witnesses.map((w) => (
-                  <tr id={`wit-${w.siglum}`}>
-                    <td>
-                      <strong><code>{w.siglum}</code></strong>
-                      <div class="ms-sub">{w.desc}</div>
-                    </td>
-                    <td style="font-size: 0.84rem;">{w.dating}</td>
-                    <td style="font-size: 0.84rem;">{w.scribal}</td>
-                    <td style="font-size: 0.84rem;">{w.agreement}</td>
-                    <td style="font-size: 0.84rem;">
-                      <div>{w.provenance}</div>
-                      <div class="ms-sub">Scientific dating: {w.scientific}</div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </details>
-
       {renderedChapters.length > 1 && (
         <div class="chapter-pills" aria-label="Jump to chapter">
           <span class="chapter-pills-label">Chapters:</span>
           {renderedChapters.map((ch) => (
-            <a href={`#ch-${ch.chapter}`} class="chapter-pill">{ch.chapter}</a>
+            <a href={`#ch-${ch.chapter}`} class="chapter-pill" data-ch-pill={ch.chapter}>{ch.chapter}</a>
           ))}
         </div>
       )}
 
-      <div class="reader-hint">
-        <strong>Every word is clickable.</strong> Plain words are unanimous across surviving witnesses; <span class="hint-app-sample">highlighted spans</span> mark points where witnesses disagree. Click any word to inspect its probability, 90% credible interval, and clickable witness chips.
+      <div class="reader-toolbar">
+        <div class="reader-hint" style="margin-bottom: 0; flex: 1 1 320px;">
+          <div class="reader-legend-row">
+            <strong>Every word is clickable.</strong>
+            <span class="legend-group">
+              <span class="legend-label">Severity:</span>
+              <span class="legend-item"><span class="legend-dot" data-sev="0"></span>Unanimous</span>
+              <span class="legend-item"><span class="legend-dot" data-sev="1"></span>Minor</span>
+              <span class="legend-item"><span class="legend-dot" data-sev="2"></span>Small</span>
+              <span class="legend-item"><span class="legend-dot" data-sev="3"></span>Moderate</span>
+              <span class="legend-item"><span class="legend-dot" data-sev="4"></span>Substantial</span>
+              <span class="legend-item"><span class="legend-dot" data-sev="5"></span>Major</span>
+            </span>
+            <span class="legend-group">
+              <span class="legend-label">Width = uncertainty:</span>
+              <span class="legend-item"><span class="legend-bar legend-bar-dot"></span>≥99%</span>
+              <span class="legend-item"><span class="legend-bar legend-bar-mid"></span>~75%</span>
+              <span class="legend-item"><span class="legend-bar legend-bar-full"></span>≤51%</span>
+            </span>
+            <span class="legend-group">
+              <span class="legend-item"><span class="legend-bar legend-bar-full" style="background:linear-gradient(90deg,rgba(148,163,184,0.40) 0%,rgba(148,163,184,0.40) 74%,rgba(249,115,22,0.96) 82%,rgba(249,115,22,0.96) 100%);"></span>Mixed severities = weighted gradient</span>
+            </span>
+          </div>
+        </div>
+        <div class="script-switcher" role="group" aria-label="Display script">
+          <span class="script-switcher-label">Display:</span>
+          <button type="button" class="filter-pill active" data-script="original">Original</button>
+          <button type="button" class="filter-pill" data-script="romanized">Romanized</button>
+          <button type="button" class="filter-pill" data-script="gloss" title="Basic literal US English word-for-word glosses (UI display aid only — not read by the compilation model)">Gloss</button>
+          <button type="button" class="filter-pill" data-script="interlinear" title="Original script stacked with romanization and basic literal US English gloss">Interlinear</button>
+        </div>
       </div>
+
+      <div class="reader-filter-bar" role="region" aria-label="Filter text by severity and confidence">
+        <label class="reader-filter-field">
+          <span class="pill-label">Min severity</span>
+          <select id="filter-min-sev" class="select-input select-sm">
+            <option value="0">All words</option>
+            <option value="1">1+ Minor &amp; up</option>
+            <option value="2">2+ Small &amp; up</option>
+            <option value="3">3+ Moderate &amp; up</option>
+            <option value="4">4+ Substantial &amp; up</option>
+            <option value="5">5 Major only</option>
+          </select>
+        </label>
+        <label class="reader-filter-field">
+          <span class="pill-label">Confidence</span>
+          <select id="filter-max-conf" class="select-input select-sm">
+            <option value="100">Any confidence</option>
+            <option value="99">&lt; 99% (any uncertainty)</option>
+            <option value="95">&lt; 95% (notable)</option>
+            <option value="80">&lt; 80% (high uncertainty)</option>
+            <option value="60">&lt; 60% (heavily contested)</option>
+          </select>
+        </label>
+        <button type="button" id="filter-only-lines" class="filter-pill" aria-pressed="false">
+          Only matching lines
+        </button>
+        <span id="filter-status" class="reader-filter-status"></span>
+        <button type="button" id="filter-reset" class="copy-btn" hidden>Reset</button>
+      </div>
+
+      <div id="filter-empty" class="reader-empty" hidden>
+        <p>No lines in {b.name} match the current severity and confidence filters.</p>
+        <button type="button" id="filter-empty-reset" class="btn btn-secondary">Reset filters</button>
+      </div>
+      <script is:inline>
+        (function () {
+          try {
+            var s = localStorage.getItem("openlexis-display-script");
+            if (s === "romanized" || s === "gloss" || s === "interlinear") {
+              document.documentElement.dataset.scriptPending = s;
+              document.querySelectorAll("[data-script]").forEach(function (b) {
+                b.classList.toggle("active", b.getAttribute("data-script") === s);
+              });
+              setTimeout(function () {
+                delete document.documentElement.dataset.scriptPending;
+              }, 2000);
+            }
+          } catch (e) {}
+        })();
+      </script>
 
       <div
         id="compiled-reader"
@@ -196,21 +382,48 @@ const clientData = {
                     {v.uncovered ? (
                       <span class="verse-uncovered" dir="ltr">[uncovered in surviving witnesses]</span>
                     ) : (
-                      v.tokens.map((tok) => (
-                        <button
-                          type="button"
-                          data-tok={tok.key}
-                          class={
-                            tok.kind === "app"
-                              ? tok.text
-                                ? "tok-btn tok-app"
-                                : "tok-btn tok-app tok-omit"
-                              : tok.aramaic
-                                ? "tok-btn tok-w tok-arc"
-                                : "tok-btn tok-w"
-                          }
-                        >{tok.text || "∅"}</button>
-                      ))
+                      v.tokens.flatMap((tok) => {
+                        const styleParts: string[] = [];
+                        if (tok.barWidth > 0.005) styleParts.push(`--bar:${tok.barWidth.toFixed(2)}`);
+                        if (tok.grad) styleParts.push(`--bar-bg:${tok.grad}`);
+                        const tokStyle = styleParts.length ? styleParts.join(";") : undefined;
+                        const maxSevAttr = tok.maxSevBucket > tok.sevBucket ? tok.maxSevBucket : undefined;
+                        const confAttr = tok.confPct < 99.95 ? tok.confPct : undefined;
+                        if (tok.kind === "app" && tok.text && tok.text.trim().includes(" ")) {
+                          const words = tok.text.trim().split(/\s+/).filter(Boolean);
+                          return words.map((word) => (
+                            <button
+                              type="button"
+                              data-tok={tok.key}
+                              data-w={word}
+                              data-sev={tok.sevBucket}
+                              data-max-sev={maxSevAttr}
+                              data-conf={confAttr}
+                              style={tokStyle}
+                              class="tok-btn tok-app"
+                            >{word}</button>
+                          ));
+                        }
+                        return (
+                          <button
+                            type="button"
+                            data-tok={tok.key}
+                            data-sev={tok.sevBucket}
+                            data-max-sev={maxSevAttr}
+                            data-conf={confAttr}
+                            style={tokStyle}
+                            class={
+                              tok.kind === "app"
+                                ? tok.text
+                                  ? "tok-btn tok-app"
+                                  : "tok-btn tok-app tok-omit"
+                                : tok.aramaic
+                                  ? "tok-btn tok-w tok-arc"
+                                  : "tok-btn tok-w"
+                            }
+                          >{tok.text || "∅"}</button>
+                        );
+                      })
                     )}
                   </div>
                 </div>
@@ -224,10 +437,15 @@ const clientData = {
 
   <script id="book-inspector-data" type="application/json" set:html={JSON.stringify(clientData)}></script>
   <script>
+    import { transliterateText, type DisplayScript } from "../../../../lib/transliterate";
+
     const dataEl = document.getElementById("book-inspector-data");
     const DATA = dataEl ? JSON.parse(dataEl.textContent || "{}") : { w: [], t: {} };
     const reader = document.getElementById("compiled-reader");
+    const scriptBtns = [...document.querySelectorAll<HTMLButtonElement>("[data-script]")];
     const scriptCls = DATA.isHebrew ? "script-hebrew" : "script-greek";
+    const STORAGE_KEY = "openlexis-display-script";
+    let currentScript: DisplayScript = "original";
     let activeBtn: HTMLButtonElement | null = null;
     let activePanel: HTMLElement | null = null;
 
@@ -237,6 +455,188 @@ const clientData = {
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;");
+
+    function romanOf(text: string): string {
+      return transliterateText(text, !!DATA.isHebrew, "romanized");
+    }
+
+    function glossWord(word: string): string {
+      return DATA.g?.[word] || "";
+    }
+
+    function glossPhrase(text: string): string {
+      const words = text.trim().split(/\s+/).filter(Boolean);
+      return words.map((w) => glossWord(w) || romanOf(w)).join(" ");
+    }
+
+    function applyDisplayScript(mode: DisplayScript) {
+      currentScript = mode;
+      try {
+        localStorage.setItem(STORAGE_KEY, mode);
+      } catch {}
+
+      scriptBtns.forEach((b) => b.classList.toggle("active", b.dataset.script === mode));
+
+      if (reader) {
+        reader.classList.toggle("mode-romanized", mode === "romanized");
+        reader.classList.toggle("mode-gloss", mode === "gloss");
+        reader.classList.toggle("mode-interlinear", mode === "interlinear");
+        // Pure romanized or English gloss reads naturally left-to-right even for Hebrew/Aramaic books
+        reader.setAttribute(
+          "dir",
+          mode === "romanized" || mode === "gloss" ? "ltr" : DATA.isHebrew ? "rtl" : "ltr",
+        );
+      }
+
+      const btns = reader?.querySelectorAll<HTMLButtonElement>("button.tok-btn") ?? [];
+      for (const btn of btns) {
+        const key = btn.dataset.tok;
+        if (!key) continue;
+        const item = DATA.t[key];
+        if (!item) continue;
+        const raw = btn.dataset.w || item.t || "";
+        const orig = raw || "∅";
+        if (mode === "original" || !raw) {
+          btn.textContent = orig;
+        } else if (mode === "romanized") {
+          btn.textContent = romanOf(raw);
+        } else if (mode === "gloss") {
+          const g = glossWord(raw);
+          if (g) {
+            btn.textContent = g;
+          } else {
+            btn.innerHTML = `<span class="gloss-fallback">${esc(romanOf(raw))}</span>`;
+          }
+        } else {
+          const g = glossWord(raw);
+          btn.innerHTML = `<span class="il-pair"><span class="il-orig">${esc(raw)}</span><span class="il-rom" dir="ltr">${esc(romanOf(raw))}</span>${g ? `<span class="il-gloss" dir="ltr">${esc(g)}</span>` : ""}</span>`;
+        }
+      }
+
+      // Refresh open inspector panel if one is visible
+      if (activeBtn) {
+        const btn = activeBtn;
+        activePanel?.remove();
+        activeBtn = null;
+        activePanel = null;
+        openInspector(btn);
+      }
+    }
+
+    scriptBtns.forEach((b) =>
+      b.addEventListener("click", () => {
+        const m = (b.dataset.script || "original") as DisplayScript;
+        applyDisplayScript(m);
+      })
+    );
+
+    // Threshold & line-limiting filters for scholarly drill-down
+    const minSevSel = document.getElementById("filter-min-sev") as HTMLSelectElement | null;
+    const maxConfSel = document.getElementById("filter-max-conf") as HTMLSelectElement | null;
+    const onlyLinesBtn = document.getElementById("filter-only-lines") as HTMLButtonElement | null;
+    const filterStatus = document.getElementById("filter-status");
+    const filterReset = document.getElementById("filter-reset") as HTMLButtonElement | null;
+    const filterEmpty = document.getElementById("filter-empty");
+    const filterEmptyReset = document.getElementById("filter-empty-reset") as HTMLButtonElement | null;
+    let onlyMatchingLines = false;
+
+    function applyReaderFilters() {
+      const minSev = Number(minSevSel?.value ?? 0);
+      const maxConf = Number(maxConfSel?.value ?? 100);
+      const hasThreshold = minSev > 0 || maxConf < 100;
+      const limitLines = onlyMatchingLines && hasThreshold;
+
+      let matchedLines = 0;
+      let totalLines = 0;
+      let matchedTokens = 0;
+      const matchedTokKeys = new Set<string>();
+      const chapters = reader?.querySelectorAll<HTMLElement>("section.chapter-block") ?? [];
+
+      for (const ch of chapters) {
+        const chId = ch.id.replace(/^ch-/, "");
+        const verses = ch.querySelectorAll<HTMLElement>(".verse-block");
+        let chVisible = 0;
+
+        for (const v of verses) {
+          totalLines++;
+          const btns = v.querySelectorAll<HTMLButtonElement>("button.tok-btn");
+          let verseMatches = false;
+
+          for (const btn of btns) {
+            if (!hasThreshold) {
+              btn.classList.remove("tok-dimmed");
+              continue;
+            }
+            const sev = Number(btn.dataset.maxSev ?? btn.dataset.sev ?? 0);
+            const conf = btn.dataset.conf !== undefined ? Number(btn.dataset.conf) : 100;
+            const ok = sev >= minSev && (maxConf >= 100 || conf < maxConf);
+            btn.classList.toggle("tok-dimmed", !ok);
+            if (ok) {
+              verseMatches = true;
+              if (btn.dataset.tok) matchedTokKeys.add(btn.dataset.tok);
+            }
+          }
+
+          if (verseMatches) matchedLines++;
+          const hideVerse = limitLines && !verseMatches;
+          v.hidden = hideVerse;
+          if (!hideVerse) chVisible++;
+        }
+
+        const hideChap = limitLines && chVisible === 0;
+        ch.hidden = hideChap;
+        const pill = document.querySelector<HTMLElement>(`[data-ch-pill="${chId}"]`);
+        if (pill) pill.classList.toggle("chapter-pill-empty", hideChap);
+      }
+
+      matchedTokens = matchedTokKeys.size;
+      if (filterReset) filterReset.hidden = !hasThreshold && !onlyMatchingLines;
+      if (filterEmpty) filterEmpty.hidden = !(limitLines && matchedLines === 0);
+
+      if (filterStatus) {
+        if (!hasThreshold) {
+          filterStatus.textContent = onlyMatchingLines
+            ? "Pick a severity or confidence threshold to filter lines"
+            : "";
+        } else {
+          filterStatus.textContent = `${matchedLines.toLocaleString()} of ${totalLines.toLocaleString()} lines · ${matchedTokens.toLocaleString()} ${matchedTokens === 1 ? "place" : "places"}`;
+        }
+      }
+    }
+
+    minSevSel?.addEventListener("change", applyReaderFilters);
+    maxConfSel?.addEventListener("change", applyReaderFilters);
+    onlyLinesBtn?.addEventListener("click", () => {
+      onlyMatchingLines = !onlyMatchingLines;
+      onlyLinesBtn.classList.toggle("active", onlyMatchingLines);
+      onlyLinesBtn.setAttribute("aria-pressed", String(onlyMatchingLines));
+      applyReaderFilters();
+    });
+
+    const resetFilters = () => {
+      if (minSevSel) minSevSel.value = "0";
+      if (maxConfSel) maxConfSel.value = "100";
+      onlyMatchingLines = false;
+      onlyLinesBtn?.classList.remove("active");
+      onlyLinesBtn?.setAttribute("aria-pressed", "false");
+      applyReaderFilters();
+    };
+    filterReset?.addEventListener("click", resetFilters);
+    filterEmptyReset?.addEventListener("click", resetFilters);
+
+    // Restore user's saved display script preference across books before revealing reader
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY) as DisplayScript | null;
+      if (saved === "romanized" || saved === "gloss" || saved === "interlinear") {
+        applyDisplayScript(saved);
+      }
+    } catch {}
+    const hadPending = Boolean(document.documentElement.dataset.scriptPending);
+    delete document.documentElement.dataset.scriptPending;
+    if (hadPending && location.hash) {
+      const hashTarget = document.getElementById(location.hash.slice(1));
+      if (hashTarget) hashTarget.scrollIntoView();
+    }
 
     function fmtPct(deg: string): string {
       const n = Number(deg);
@@ -252,31 +652,90 @@ const clientData = {
       return `90% range: ${fmtPct(m[1])} – ${fmtPct(m[2])}`;
     }
 
+    const CONF_ICON = `<svg class="conf-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`;
+    const CONF_ICON_SM = `<svg class="conf-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`;
+
+    function renderConfBadge(deg: string, unc: string, isUnseen = false): string {
+      const n = Number(deg);
+      const pct = fmtPct(deg);
+      const rangeStr = unc ? fmtInterval(unc) : "";
+      const tier = Number.isNaN(n) ? "low" : n >= 0.9 ? "high" : n >= 0.5 ? "mid" : "low";
+      const tooltip = isUnseen
+        ? `${pct} likely that the original text was not preserved in any surviving manuscript${rangeStr ? ` (${rangeStr})` : ""}`
+        : `${pct} likely to be the original text written by the original author${rangeStr ? ` (${rangeStr})` : ""}`;
+      return `<span class="conf-badge conf-${tier}" title="${esc(tooltip)}" aria-label="${esc(tooltip)}">${CONF_ICON}<span>${esc(pct)}</span></span>${rangeStr ? `<span class="ms-sub" title="${esc(tooltip)}">${esc(rangeStr)}</span>` : ""}`;
+    }
+
     function siglumOf(ref: number | string): string {
       return typeof ref === "number" ? DATA.w[ref]?.[0] ?? String(ref) : String(ref);
+    }
+
+    function renderWitChipBtn(r: number | string): string {
+      const info = witSummary(r);
+      const relStr = info.rel !== null ? `${Math.round(info.rel * 100)}%` : "";
+      const tipParts = [info.shortType, info.dateShort, relStr ? `${relStr} manuscript reliability` : "", "click for details"].filter(Boolean);
+      const relTip = `${relStr} manuscript reliability — estimated probability that ${info.sig} preserves the original reading at a given line`;
+      const relBadge = relStr
+        ? `<span class="wit-chip-rel" title="${esc(relTip)}">${CONF_ICON_SM}${esc(relStr)}</span>`
+        : "";
+      return `<button type="button" class="wit-chip" data-wit="${esc(r)}" title="${esc(tipParts.join(" · "))}"><span>${esc(info.sig)}</span>${relBadge}</button>`;
     }
 
     function renderWitChips(refs: (number | string)[], limit = 16): string {
       if (!refs.length) return "";
       const visible = refs.slice(0, limit);
       const rest = refs.slice(limit);
-      const chips = visible
-        .map((r) => {
-          const sig = siglumOf(r);
-          return `<button type="button" class="wit-chip" data-wit="${esc(r)}">${esc(sig)}</button>`;
-        })
-        .join("");
+      const chips = visible.map(renderWitChipBtn).join("");
       const more = rest.length
         ? `<button type="button" class="wit-chip wit-chip-more" data-more="${esc(JSON.stringify(rest))}">+${rest.length} more</button>`
         : "";
-      return `<div class="wit-chips">${chips}${more}</div>`;
+      return `<div class="wit-chips-wrap"><div class="wit-chips">${chips}${more}</div><div class="wit-detail-slot"></div></div>`;
     }
 
-    function renderWitnessDetail(ref: string): string {
+    function verseViewerUrl(url: string, verseRef: string): { href: string; isVerseLink: boolean } {
+      if (verseRef && url.includes("ntvmr.uni-muenster.de/manuscript-workspace")) {
+        const [ch, vs] = verseRef.split(":");
+        if (ch && vs && DATA.bookId) {
+          const sep = url.includes("?") ? "&" : "?";
+          return { href: `${url}${sep}indexContent=${encodeURIComponent(`${DATA.bookId}.${ch}.${vs}`)}`, isVerseLink: true };
+        }
+      }
+      return { href: url, isVerseLink: false };
+    }
+
+    function renderWitnessDetail(ref: string, verseRef = ""): string {
       const idx = Number(ref);
-      const w = !Number.isNaN(idx) ? DATA.w[idx] : DATA.w.find((x: string[]) => x[0] === ref);
+      const w = !Number.isNaN(idx) ? DATA.w[idx] : DATA.w.find((x: any[]) => x[0] === ref);
       if (!w) return `<div class="wit-detail-card">No witness record found for <code>${esc(ref)}</code>.</div>`;
-      const [sig, desc, dating, scribal, agreement, prov, sci] = w;
+      const [sig, desc, dating, scribal, agreement, prov, sci, viewers] = w as [
+        string, string, string, string, string, string, string, { name: string; url: string }[],
+      ];
+      const viewerLinks = Array.isArray(viewers) && viewers.length
+        ? viewers
+            .map((v) => {
+              const { href, isVerseLink } = verseViewerUrl(v.url, verseRef);
+              const label = isVerseLink ? `View ${DATA.bookId} ${verseRef} in NTVMR ↗` : `${v.name} ↗`;
+              return `<a href="${esc(href)}" target="_blank" rel="noopener" style="font-size:0.8rem;">${esc(label)}</a>`;
+            })
+            .join(`<span style="color:var(--border-strong);">·</span>`)
+        : "";
+      const info = witSummary(ref);
+      const weightParts: string[] = [];
+      if (info.rel !== null) {
+        weightParts.push(`${Math.round(info.rel * 100)}% posterior reliability`);
+      }
+      if (info.agreeShare !== null && info.linesCompared !== null && info.linesCompared > 0) {
+        weightParts.push(`agreed on ${Math.round(info.agreeShare * 100)}% of ${info.linesCompared.toLocaleString()} compared lines`);
+      }
+      if (info.priorMean !== null) {
+        weightParts.push(`started at ${Math.round(info.priorMean * 100)}% date-based prior`);
+      }
+      const weightTier = info.isEarly
+        ? "Early witness (within 400 yrs of composition) — receives full 1.0 model weight."
+        : "Later witness — subject to geometric cluster discounting when sharing a reading with other late copies.";
+      const weightSummaryHtml = weightParts.length
+        ? `<div class="wit-weight-note"><strong>Model weighting:</strong> ${esc(weightParts.join(" · "))}. ${esc(weightTier)}</div>`
+        : "";
       return `
         <div class="wit-detail-card">
           <div class="wit-detail-head">
@@ -284,11 +743,13 @@ const clientData = {
               <strong><code>${esc(sig)}</code></strong>
               <span class="ms-sub" style="margin-left: 8px;">${esc(desc)}</span>
             </div>
-            <div style="display:flex; gap:8px; align-items:center;">
-              <a href="/sources/?q=${encodeURIComponent(sig)}" style="font-size:0.8rem;">View in Sources →</a>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+              ${viewerLinks}
+              <a href="/sources/?q=${encodeURIComponent(sig)}" style="font-size:0.8rem;">Source record →</a>
               <button type="button" class="copy-btn" data-close-wit>Close</button>
             </div>
           </div>
+          ${weightSummaryHtml}
           <div class="source-meta-grid" style="margin-top:8px; padding-bottom:0; border-bottom:0;">
             <div><div class="source-meta-label">Dating</div><div class="source-meta-val">${esc(dating)}</div></div>
             <div><div class="source-meta-label">Reliability &amp; Agreement</div><div class="source-meta-val">${esc(agreement)}</div></div>
@@ -308,9 +769,340 @@ const clientData = {
             <p><strong>90% range:</strong> The 5th-to-95th percentile credible interval across 100 Monte Carlo draws from each witness's posterior reliability. Narrow ranges indicate strong independent agreement; wider ranges indicate thin, conflicting, or poorly dated evidence.</p>
             <p><strong>Witness chips (e.g., <code>01</code>, <code>03</code>, <code>P45</code>):</strong> Click any witness identifier to inspect its dating, posterior reliability, scribal notes, and provenance right here.</p>
             <p><strong>Difference labels:</strong> Categorize how a variant differs from the selected reading (<a href="${esc(DATA.compUrl)}#difference-categories">see full definitions on the compilation page →</a>).</p>
+            <p><strong>Word-for-word glosses:</strong> Basic literal US English word glosses from <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible.org / Tyndale House</a> (CC BY 4.0) shown strictly as a UI reading aid—never read by or exposed to compilation models.</p>
           </div>
         </details>
       `;
+    }
+
+    function humanizeDiff(raw: string): string {
+      if (!raw) return "";
+      return raw
+        .replace(/^substitution\s*\/\s*length difference/i, "Different wording & length")
+        .replace(/^substitution/i, "Different wording")
+        .replace(/^omission/i, "Words omitted")
+        .replace(/^addition\s*\/\s*insertion/i, "Extra words added")
+        .replace(/^addition/i, "Extra words added")
+        .replace(/^word-order\s*\/\s*transposition/i, "Word order changed")
+        .replace(/^transposition/i, "Word order changed");
+    }
+
+    /** Character-level LCS diff highlighting changed/inserted characters inside a single substituted word. */
+    function diffCharsHtml(baseWord: string, varWord: string): string {
+      const a = [...baseWord];
+      const b = [...varWord];
+      const m = a.length;
+      const n = b.length;
+      if (m * n > 4000) return `<mark class="diff-add">${esc(varWord)}</mark>`;
+      const dp: number[][] = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+      for (let i = m - 1; i >= 0; i--) {
+        for (let j = n - 1; j >= 0; j--) {
+          dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+        }
+      }
+      // If less than 40% of characters match, highlight the whole word rather than noisy fragments
+      if (dp[0][0] < Math.min(m, n) * 0.4) {
+        return `<mark class="diff-add">${esc(varWord)}</mark>`;
+      }
+      let out = "";
+      let i = 0;
+      let j = 0;
+      let buf = "";
+      const flushBuf = () => {
+        if (buf) {
+          out += `<mark class="diff-char">${esc(buf)}</mark>`;
+          buf = "";
+        }
+      };
+      while (i < m && j < n) {
+        if (a[i] === b[j]) {
+          flushBuf();
+          out += esc(b[j]);
+          i++;
+          j++;
+        } else if (dp[i][j + 1] >= dp[i + 1][j]) {
+          buf += b[j++];
+        } else {
+          i++;
+        }
+      }
+      while (j < n) buf += b[j++];
+      flushBuf();
+      return out;
+    }
+
+    type WordDiffOp =
+      | { kind: "eq"; word: string }
+      | { kind: "sub"; base: string; word: string }
+      | { kind: "del"; word: string }
+      | { kind: "ins"; word: string };
+
+    /** Compute aligned word-level diff ops between chosenText and varText. */
+    function computeWordDiff(chosenText: string, varText: string): WordDiffOp[] | null {
+      const a = chosenText.trim().split(/\s+/).filter(Boolean);
+      const b = varText.trim().split(/\s+/).filter(Boolean);
+      if (!a.length) return b.map((word) => ({ kind: "ins", word }));
+      if (!b.length) return a.map((word) => ({ kind: "del", word }));
+
+      const m = a.length;
+      const n = b.length;
+      if (m * n > 2500) return null;
+
+      const dp: number[][] = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+      for (let i = m - 1; i >= 0; i--) {
+        for (let j = n - 1; j >= 0; j--) {
+          dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+        }
+      }
+
+      type RawOp = { kind: "eq" | "del" | "ins"; word: string };
+      const raw: RawOp[] = [];
+      let i = 0;
+      let j = 0;
+      while (i < m && j < n) {
+        if (a[i] === b[j]) {
+          raw.push({ kind: "eq", word: b[j] });
+          i++;
+          j++;
+        } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+          raw.push({ kind: "del", word: a[i++] });
+        } else {
+          raw.push({ kind: "ins", word: b[j++] });
+        }
+      }
+      while (i < m) raw.push({ kind: "del", word: a[i++] });
+      while (j < n) raw.push({ kind: "ins", word: b[j++] });
+
+      const ops: WordDiffOp[] = [];
+      for (let k = 0; k < raw.length; ) {
+        if (raw[k].kind === "eq") {
+          ops.push({ kind: "eq", word: raw[k].word });
+          k++;
+          continue;
+        }
+        const dels: string[] = [];
+        const ins: string[] = [];
+        while (k < raw.length && raw[k].kind !== "eq") {
+          if (raw[k].kind === "del") dels.push(raw[k].word);
+          else ins.push(raw[k].word);
+          k++;
+        }
+        const paired = Math.min(dels.length, ins.length);
+        for (let p = 0; p < paired; p++) {
+          ops.push({ kind: "sub", base: dels[p], word: ins[p] });
+        }
+        for (let p = paired; p < dels.length; p++) {
+          ops.push({ kind: "del", word: dels[p] });
+        }
+        for (let p = paired; p < ins.length; p++) {
+          ops.push({ kind: "ins", word: ins[p] });
+        }
+      }
+      return ops;
+    }
+
+    /** Word-level + character-level visual diff of a variant reading against the chosen reading. */
+    function renderDiffReading(chosenText: string, varText: string): string {
+      const ops = computeWordDiff(chosenText, varText);
+      if (!ops) return esc(varText);
+      return ops
+        .map((op) => {
+          if (op.kind === "eq") return `<span class="diff-eq">${esc(op.word)}</span>`;
+          if (op.kind === "sub") return diffCharsHtml(op.base, op.word);
+          if (op.kind === "del") {
+            return `<del class="diff-del" title="Omitted compared to chosen reading">${esc(op.word)}</del>`;
+          }
+          return `<mark class="diff-add" title="Added compared to chosen reading">${esc(op.word)}</mark>`;
+        })
+        .join(" ");
+    }
+
+    /** Word-by-word interlinear HTML (original on top, romanized in middle, basic gloss below). */
+    function renderInterlinearWords(text: string): string {
+      const words = text.trim().split(/\s+/).filter(Boolean);
+      const origDir = DATA.isHebrew ? "rtl" : "ltr";
+      return `<div class="il-line ${scriptCls}" dir="${origDir}">${words
+        .map((w) => {
+          const g = glossWord(w);
+          return `<span class="il-pair"><span class="il-orig">${esc(w)}</span><span class="il-rom" dir="ltr">${esc(romanOf(w))}</span>${g ? `<span class="il-gloss" dir="ltr">${esc(g)}</span>` : ""}</span>`;
+        })
+        .join("")}</div>`;
+    }
+
+    /** Word-by-word interlinear diff HTML where each original word sits above its romanized & gloss counterparts. */
+    function renderInterlinearDiff(chosenOrig: string, varOrig: string): string {
+      const ops = computeWordDiff(chosenOrig, varOrig);
+      if (!ops) return renderInterlinearWords(varOrig);
+      const origDir = DATA.isHebrew ? "rtl" : "ltr";
+      const pairs = ops.map((op) => {
+        if (op.kind === "eq") {
+          const g = glossWord(op.word);
+          return `<span class="il-pair"><span class="il-orig"><span class="diff-eq">${esc(op.word)}</span></span><span class="il-rom" dir="ltr"><span class="diff-eq">${esc(romanOf(op.word))}</span></span>${g ? `<span class="il-gloss" dir="ltr"><span class="diff-eq">${esc(g)}</span></span>` : ""}</span>`;
+        }
+        if (op.kind === "sub") {
+          const origDiff = diffCharsHtml(op.base, op.word);
+          const romDiff = diffCharsHtml(romanOf(op.base), romanOf(op.word));
+          const g = glossWord(op.word);
+          return `<span class="il-pair"><span class="il-orig">${origDiff}</span><span class="il-rom" dir="ltr">${romDiff}</span>${g ? `<span class="il-gloss" dir="ltr">${esc(g)}</span>` : ""}</span>`;
+        }
+        if (op.kind === "del") {
+          const g = glossWord(op.word);
+          return `<span class="il-pair"><span class="il-orig"><del class="diff-del" title="Omitted compared to chosen reading">${esc(op.word)}</del></span><span class="il-rom" dir="ltr"><del class="diff-del" title="Omitted compared to chosen reading">${esc(romanOf(op.word))}</del></span>${g ? `<span class="il-gloss" dir="ltr"><del class="diff-del">${esc(g)}</del></span>` : ""}</span>`;
+        }
+        const g = glossWord(op.word);
+        return `<span class="il-pair"><span class="il-orig"><mark class="diff-add" title="Added compared to chosen reading">${esc(op.word)}</mark></span><span class="il-rom" dir="ltr"><mark class="diff-add" title="Added compared to chosen reading">${esc(romanOf(op.word))}</mark></span>${g ? `<span class="il-gloss" dir="ltr"><mark class="diff-add">${esc(g)}</mark></span>` : ""}</span>`;
+      });
+      return `<div class="il-line ${scriptCls}" dir="${origDir}">${pairs.join("")}</div>`;
+    }
+
+    function parseReliability(agreementStr: string): number | null {
+      const m = agreementStr.match(/Posterior reliability:\s*([0-9.]+)/i);
+      return m ? Number(m[1]) : null;
+    }
+
+    function formatYearShort(y: number): string {
+      return y < 0 ? `${Math.abs(y)} BC` : `AD ${y}`;
+    }
+
+    function shortWitnessType(desc: string, sig: string): string {
+      const paren = desc.match(/\(([^)]+)\)/)?.[1]?.trim();
+      if (paren) {
+        if (/^Dead Sea Scroll/i.test(paren)) return "Dead Sea Scroll";
+        const beforeComma = paren.split(",")[0].trim();
+        // Strip redundant trailing siglum/number on generic labels like "Papyrus 104" or "Majuscule 0171"
+        const generic = beforeComma.match(/^(Papyrus|Majuscule|Minuscule|Lectionary)\b/i);
+        if (generic) return generic[1];
+        return beforeComma;
+      }
+      return desc.replace(/;\s*shelfmark:.*$/i, "").replace(new RegExp(`^${sig.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*`), "").trim();
+    }
+
+    interface WitInfo {
+      ref: number | string;
+      sig: string;
+      shortType: string;
+      dateShort: string;
+      rel: number | null;
+      priorMean: number | null;
+      linesCompared: number | null;
+      agreeShare: number | null;
+      isScroll: boolean;
+      isEarly: boolean;
+    }
+
+    function witSummary(ref: number | string): WitInfo {
+      const idx = typeof ref === "number" ? ref : Number(ref);
+      const w = !Number.isNaN(idx) ? DATA.w[idx] : DATA.w.find((x: any[]) => x[0] === ref);
+      if (!w) {
+        return {
+          ref,
+          sig: String(ref),
+          shortType: "",
+          dateShort: "",
+          rel: null,
+          priorMean: null,
+          linesCompared: null,
+          agreeShare: null,
+          isScroll: false,
+          isEarly: false,
+        };
+      }
+      const [sig, desc, dating, scribal, agreement] = w as string[];
+      const rel = parseReliability(agreement || "");
+      const priorM = (agreement || "").match(/prior mean:\s*([0-9.]+)/i);
+      const linesM = (agreement || "").match(/lines compared:\s*(\d+)/i);
+      const agreeM = (agreement || "").match(/agreement share:\s*([0-9.]+)/i);
+      const isScroll = /scroll/i.test(scribal || "") || /scroll/i.test(desc || "");
+      const rangeM = (dating || "").match(/Range:\s*(-?\d+)\s+to\s+(-?\d+)/i);
+      let dateShort = "";
+      let mid: number | null = null;
+      if (rangeM) {
+        const y1 = Number(rangeM[1]);
+        const y2 = Number(rangeM[2]);
+        mid = (y1 + y2) / 2;
+        dateShort = y1 === y2 ? formatYearShort(y1) : `${formatYearShort(y1)}–${formatYearShort(y2)}`;
+      }
+      const origin = DATA.isHebrew ? -400 : 100;
+      const isEarly = mid !== null && mid <= origin + 400;
+      return {
+        ref,
+        sig,
+        shortType: shortWitnessType(desc || "", sig),
+        dateShort,
+        rel,
+        priorMean: priorM ? Number(priorM[1]) : null,
+        linesCompared: linesM ? Number(linesM[1]) : null,
+        agreeShare: agreeM ? Number(agreeM[1]) : null,
+        isScroll,
+        isEarly,
+      };
+    }
+
+    function formatInlineWit(info: WitInfo): string {
+      const meta: string[] = [];
+      if (info.shortType) meta.push(info.shortType);
+      if (info.dateShort) meta.push(info.dateShort);
+      if (info.rel !== null) meta.push(`${Math.round(info.rel * 100)}% reliability`);
+      const btn = `<button type="button" class="wit-inline-btn" data-wit="${esc(info.ref)}" title="Click to inspect ${esc(info.sig)}">${esc(info.sig)}</button>`;
+      return meta.length ? `${btn} <span class="wit-inline-meta">(${esc(meta.join(", "))})</span>` : btn;
+    }
+
+    function formatWitnessGroupHtml(infos: WitInfo[], maxShow = 4): string {
+      const sorted = [...infos].sort((a, b) => {
+        if (a.isEarly !== b.isEarly) return a.isEarly ? -1 : 1;
+        return (b.rel ?? 0) - (a.rel ?? 0);
+      });
+      const shown = sorted.slice(0, maxShow).map(formatInlineWit);
+      const rest = sorted.length - shown.length;
+      if (rest > 0) {
+        const rels = sorted.map((x) => x.rel).filter((x): x is number => x !== null);
+        const avg = rels.length ? Math.round((rels.reduce((a, b) => a + b, 0) / rels.length) * 100) : null;
+        return `${shown.join(", ")}, and ${rest} ${rest === 1 ? "other" : "others"}${avg !== null ? ` (avg ${avg}% reliability overall)` : ""}`;
+      }
+      if (shown.length === 1) return shown[0];
+      if (shown.length === 2) return `${shown[0]} and ${shown[1]}`;
+      return `${shown.slice(0, -1).join(", ")}, and ${shown[shown.length - 1]}`;
+    }
+
+    /** Plain-English explanation (with clickable witness links) of why the model gave an alternative reading its weight. */
+    function explainWeightingHtml(
+      rType: string,
+      deg: string,
+      wits: (number | string)[],
+      chosenWits: (number | string)[],
+      chosenDeg: string,
+    ): string {
+      const p = Number(deg);
+      if (rType === "unseen") {
+        if (p < 0.01) {
+          return `Very unlikely (${esc(fmtPct(deg))}) because ${chosenWits.length} surviving ${chosenWits.length === 1 ? "manuscript agrees" : "manuscripts agree"} on the chosen reading.`;
+        }
+        return `Estimated ${esc(fmtPct(deg))} chance that none of the surviving witnesses preserved the original wording, reflecting thin or conflicting evidence here.`;
+      }
+      if (rType !== "variant" || !wits.length) return "";
+
+      const vInfos = wits.map(witSummary);
+      const cInfos = chosenWits.map(witSummary);
+      const cGroupHtml = `${chosenWits.length} ${chosenWits.length === 1 ? "opposing manuscript" : "opposing manuscripts"}: ${formatWitnessGroupHtml(cInfos, 4)}`;
+
+      if (wits.length === 1) {
+        const lone = vInfos[0];
+        const loneHtml = formatInlineWit(lone);
+        if (p < 0.01) {
+          return `${loneHtml} stands alone against ${cGroupHtml}. Under this model, independent agreement across those opposing witnesses makes a single-manuscript divergence far more likely than all opposing witnesses erring identically. <span class="wit-inline-hint">Click any manuscript name to inspect its full record and weight.</span>`;
+        }
+        return `Supported only by ${loneHtml}, weighed against ${cGroupHtml} (${esc(fmtPct(chosenDeg))}). <span class="wit-inline-hint">Click any manuscript name to inspect its full record and weight.</span>`;
+      }
+
+      const vGroupHtml = `${wits.length} manuscripts (${formatWitnessGroupHtml(vInfos, 3)})`;
+      if (p < 0.01) {
+        return `Supported by ${vGroupHtml}, but outweighed by ${cGroupHtml} (${esc(fmtPct(chosenDeg))}). Late copies sharing a reading are also geometrically down-weighted so dependent clusters cannot act as a simple majority vote. <span class="wit-inline-hint">Click any manuscript name to inspect its full record and weight.</span>`;
+      }
+      return `Supported by ${vGroupHtml} versus ${cGroupHtml} (${esc(fmtPct(chosenDeg))}). Both groups carry meaningful weight, leaving genuine statistical uncertainty (${esc(fmtPct(deg))} vs ${esc(fmtPct(chosenDeg))}). <span class="wit-inline-hint">Click any manuscript name to inspect its full record and weight.</span>`;
+    }
+
+    function clearActiveTokens() {
+      reader?.querySelectorAll("button.tok-active").forEach((b) => b.classList.remove("tok-active"));
     }
 
     function openInspector(btn: HTMLButtonElement) {
@@ -319,17 +1111,17 @@ const clientData = {
       const item = DATA.t[key];
       if (!item) return;
 
-      // Toggle off if clicking the same active token
-      if (activeBtn === btn) {
+      // Toggle off if clicking any word in the same active token/group
+      if (activeBtn && activeBtn.dataset.tok === key) {
         activePanel?.remove();
-        activeBtn.classList.remove("tok-active");
+        clearActiveTokens();
         activeBtn = null;
         activePanel = null;
         return;
       }
 
       activePanel?.remove();
-      activeBtn?.classList.remove("tok-active");
+      clearActiveTokens();
 
       const verseBlock = btn.closest(".verse-block");
       if (!verseBlock) return;
@@ -339,88 +1131,195 @@ const clientData = {
       panel.setAttribute("dir", "ltr");
 
       if (item.k === "w") {
+        const origDir = DATA.isHebrew ? "rtl" : "ltr";
+        const gText = glossPhrase(item.t);
+        const heroHtml =
+          currentScript === "original"
+            ? `<span class="inspector-word ${scriptCls}" dir="${origDir}">${esc(item.t)}</span>${gText ? `<span class="inspector-gloss-inline" title="Basic literal word gloss (UI display aid only)">${esc(gText)}</span>` : ""}`
+            : currentScript === "romanized"
+              ? `<span class="inspector-word-rom" dir="ltr">${esc(romanOf(item.t))}</span>${gText ? `<span class="inspector-gloss-inline" title="Basic literal word gloss (UI display aid only)">${esc(gText)}</span>` : ""}`
+              : currentScript === "gloss"
+                ? `<span class="inspector-word-rom" dir="ltr">${esc(gText)}</span><span class="inspector-rom" dir="${origDir}">${esc(item.t)}</span>`
+                : renderInterlinearWords(item.t);
         const lacHtml = item.lc.length
           ? `<div style="margin-top: 8px;"><span class="source-meta-label">Lacunose / damaged (${item.lc.length}):</span>${renderWitChips(item.lc, 12)}</div>`
           : "";
         panel.innerHTML = `
           <div class="inspector-head">
             <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
-              <span class="inspector-word ${scriptCls}">${esc(item.t)}</span>
-              <span class="badge badge-emerald">Unanimous reading</span>
-              <code>${esc(item.ref)}</code>
+              <span class="badge badge-emerald">✓ Unanimous reading</span>
+              <span class="ms-sub">${esc(item.ref)}</span>
               ${item.ar ? `<span class="badge badge-violet">Biblical Aramaic</span>` : ""}
             </div>
             <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
           </div>
+          <div class="inspector-reading-hero">
+            ${heroHtml}
+          </div>
           <div class="inspector-prob-row">
-            <strong>${esc(fmtPct(item.d))} probability</strong>
-            ${item.u ? `<span class="ms-sub">(${esc(fmtInterval(item.u))})</span>` : ""}
+            ${renderConfBadge(item.d, item.u, false)}
           </div>
           <div style="margin-top: 8px;">
             <span class="source-meta-label">Attested by ${item.at.length} ${item.at.length === 1 ? "witness" : "witnesses"} (click any siglum for details):</span>
             ${renderWitChips(item.at, 20)}
           </div>
           ${lacHtml}
-          <div class="wit-detail-slot"></div>
           ${buildGlossary()}
         `;
       } else {
-        const rdgsHtml = item.rd
-          .map((r: [string, string, string, string, string, (number | string)[]]) => {
-            const [rType, rText, deg, unc, diff, wits] = r;
-            const roleBadge =
+        const chosenEntry = item.rd.find((x: any[]) => x[0] === "selected");
+        const chosenOrig = chosenEntry && !String(chosenEntry[1] || "").startsWith("—") ? String(chosenEntry[1]) : "";
+        const chosenRom = chosenOrig ? romanOf(chosenOrig) : "";
+        const chosenWits = (chosenEntry?.[5] ?? []) as (number | string)[];
+        const chosenDeg = String(chosenEntry?.[2] ?? "");
+
+        type RdgTuple = [string, string, string, string, string, (number | string)[], number, string, string];
+        const allRdgs = item.rd as RdgTuple[];
+        const realRdgs = allRdgs.filter((r) => r[0] !== "unseen");
+        const unseenRdg = allRdgs.find((r) => r[0] === "unseen");
+
+        const rdgsHtml = realRdgs
+          .map((r: RdgTuple) => {
+            const [rType, rText, deg, unc, diff, wits, sevLevel, sevSub, sevNote] = r;
+            const pNum = Number(deg);
+            const isOverruled = rType === "variant" && !Number.isNaN(pNum) && pNum < 0.01;
+            const roleLabel =
               rType === "selected"
-                ? `<span class="badge badge-indigo">Selected</span>`
-                : rType === "unseen"
-                  ? `<span class="badge">Unattested</span>`
-                  : `<span class="badge">Variant</span>`;
+                ? `<span class="rdg-chosen-tag">✓ Chosen reading</span>`
+                : isOverruled
+                  ? `<span class="rdg-overruled-tag" title="Estimated below 1% probability of being the original text">Very unlikely</span>`
+                  : "";
+            const displayText =
+              rType === "unseen"
+                ? "Not found in surviving manuscripts"
+                : rText;
+            const scMeta = sevSub ? DATA.subcats?.[sevSub] : undefined;
+            const bucket =
+              scMeta?.bucket ??
+              (sevLevel > 0
+                ? Math.max(
+                    1,
+                    Math.min(
+                      5,
+                      Math.round(
+                        1 +
+                          4 *
+                            ((sevLevel - (DATA.scale?.min ?? 1)) /
+                              Math.max(1e-9, (DATA.scale?.max ?? 5) - (DATA.scale?.min ?? 1))),
+                      ),
+                    ),
+                  )
+                : 0);
+            const diffScaleWord =
+              bucket === 5
+                ? "Major"
+                : bucket === 4
+                  ? "Substantial"
+                  : bucket === 3
+                    ? "Moderate"
+                    : bucket === 2
+                      ? "Small"
+                      : "Minor";
+            const sevLabel = scMeta
+              ? `${diffScaleWord} (${sevLevel}/${DATA.scale?.max ?? 5}) · ${scMeta.label}`
+              : sevLevel > 0
+                ? `${diffScaleWord} (${sevLevel}/${DATA.scale?.max ?? 5}) · ${sevSub.replace(/_/g, " ")}`
+                : "";
+            const sevBadge =
+              sevLabel
+                ? `<a href="${esc(DATA.compUrl)}#disagreement-severities" class="sev-badge sev-badge-${bucket}${isOverruled ? " sev-muted" : ""}" title="${esc(sevNote)}">${esc(sevLabel)}</a>`
+                : "";
             const diffHtml = diff
-              ? `<div class="ms-sub" style="margin-top:4px;">Category: <a href="${esc(DATA.compUrl)}#difference-categories" title="View explicit definition on compilation page"><code>${esc(diff)}</code></a></div>`
+              ? `<div class="ms-sub" style="margin-top:4px;"><a href="${esc(DATA.compUrl)}#difference-categories" style="color: var(--ink-secondary);">${esc(humanizeDiff(diff))}</a></div>`
+              : "";
+            const whyBody = explainWeightingHtml(rType, deg, wits, chosenWits, chosenDeg);
+            const whyHtml = whyBody
+              ? `<div class="rdg-why wit-chips-wrap"><div><strong>Why ${esc(fmtPct(deg))}:</strong> ${whyBody}</div><div class="wit-detail-slot"></div></div>`
               : "";
             const witsHtml = wits.length
-              ? `<div style="margin-top:6px;"><span class="source-meta-label">Witnesses (${wits.length}):</span>${renderWitChips(wits, 14)}</div>`
+              ? `<div style="margin-top:6px;"><span class="source-meta-label">Manuscripts (${wits.length}):</span>${renderWitChips(wits, 14)}</div>`
               : "";
+            const isRealReading = rType !== "unseen" && !rText.startsWith("—");
+            const isVariantDiff = rType === "variant" && isRealReading && Boolean(chosenOrig);
+            const origDir = DATA.isHebrew ? "rtl" : "ltr";
+            const gLine = isRealReading ? glossPhrase(rText) : "";
+            const chosenGloss = chosenOrig ? glossPhrase(chosenOrig) : "";
+            let bodyHtml = "";
+            if (!isRealReading) {
+              bodyHtml = `<div class="app-rdg-text app-rdg-unseen-text">${esc(displayText)}</div>`;
+            } else if (currentScript === "original") {
+              const origHtml = isVariantDiff ? renderDiffReading(chosenOrig, rText) : esc(rText);
+              bodyHtml = `<div class="app-rdg-text ${scriptCls}" dir="${origDir}">${origHtml}</div>${gLine ? `<div class="inspector-gloss-line" dir="ltr" title="Basic literal word-for-word gloss (UI display aid only)">${esc(gLine)}</div>` : ""}`;
+            } else if (currentScript === "romanized") {
+              const romHtml =
+                isVariantDiff && chosenRom ? renderDiffReading(chosenRom, romanOf(rText)) : esc(romanOf(rText));
+              bodyHtml = `<div class="app-rdg-text app-rdg-rom-only" dir="ltr">${romHtml}</div>${gLine ? `<div class="inspector-gloss-line" dir="ltr" title="Basic literal word-for-word gloss (UI display aid only)">${esc(gLine)}</div>` : ""}`;
+            } else if (currentScript === "gloss") {
+              const glossHtml =
+                isVariantDiff && chosenGloss ? renderDiffReading(chosenGloss, gLine) : esc(gLine);
+              bodyHtml = `<div class="app-rdg-text app-rdg-rom-only" dir="ltr">${glossHtml}</div>`;
+            } else {
+              bodyHtml = isVariantDiff
+                ? renderInterlinearDiff(chosenOrig, rText)
+                : renderInterlinearWords(rText);
+            }
             return `
-              <li class="app-rdg app-rdg-${esc(rType)}">
+              <li class="app-rdg app-rdg-${esc(rType)}${isOverruled ? " app-rdg-overruled" : ""}">
                 <div class="app-rdg-top">
-                  <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-                    ${roleBadge}
-                    <span class="app-rdg-text ${rType === "unseen" ? "" : scriptCls}">${esc(rText)}</span>
-                  </div>
-                  <div class="app-rdg-prob">
-                    <strong>${esc(fmtPct(deg))}</strong>
-                    ${unc ? `<span class="ms-sub"> · ${esc(fmtInterval(unc))}</span>` : ""}
-                  </div>
+                  ${renderConfBadge(deg, unc, rType === "unseen")}
+                  ${roleLabel}
+                  ${sevBadge}
+                </div>
+                <div class="app-rdg-body">
+                  ${bodyHtml}
                 </div>
                 ${diffHtml}
+                ${whyHtml}
                 ${witsHtml}
               </li>
             `;
           })
           .join("");
 
-        const lacHtml = item.lc.length
-          ? `<div style="margin-top: 10px;"><span class="source-meta-label">Lacunose / damaged at this point (${item.lc.length}):</span>${renderWitChips(item.lc, 12)}</div>`
+        const unseenHtml = unseenRdg
+          ? (() => {
+              const [, , deg, unc] = unseenRdg;
+              const p = Number(deg);
+              const note =
+                !Number.isNaN(p) && p < 0.01
+                  ? `Chance that the original wording is not in any surviving manuscript: ${fmtPct(deg)}.`
+                  : `Chance that the original wording is not in any surviving manuscript: ${fmtPct(deg)} (${fmtInterval(unc)}).`;
+              return `<div class="app-unseen-note">${esc(note)}</div>`;
+            })()
           : "";
+
+        const lacHtml = item.lc.length
+          ? `<div style="margin-top: 10px;"><span class="source-meta-label">Damaged or missing here (${item.lc.length}):</span>${renderWitChips(item.lc, 12)}</div>`
+          : "";
+
+        const groupNote =
+          item.t && item.t.trim().includes(" ")
+            ? `<span class="ms-sub">Grouped phrase (these words vary together across manuscripts)</span>`
+            : "";
 
         panel.innerHTML = `
           <div class="inspector-head">
             <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
-              <strong>Variant Apparatus</strong>
-              <code>${esc(item.ref)}</code>
-              <span class="badge badge-indigo">${item.rd.length} readings</span>
+              <strong>Manuscript Differences</strong>
+              <span class="ms-sub">${esc(item.ref)} · ${realRdgs.length} ${realRdgs.length === 1 ? "reading" : "readings"}</span>
+              ${groupNote}
             </div>
             <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
           </div>
           <ul class="app-rdg-list">${rdgsHtml}</ul>
+          ${unseenHtml}
           ${lacHtml}
-          <div class="wit-detail-slot"></div>
           ${buildGlossary()}
         `;
       }
 
       verseBlock.appendChild(panel);
-      btn.classList.add("tok-active");
+      verseBlock.querySelectorAll(`button[data-tok="${key}"]`).forEach((b) => b.classList.add("tok-active"));
       activeBtn = btn;
       activePanel = panel;
     }
@@ -436,35 +1335,43 @@ const clientData = {
 
       if (target.closest("[data-close-inspector]")) {
         activePanel?.remove();
-        activeBtn?.classList.remove("tok-active");
+        clearActiveTokens();
         activeBtn = null;
         activePanel = null;
         return;
       }
 
       if (target.closest("[data-close-wit]")) {
-        const slot = activePanel?.querySelector(".wit-detail-slot");
+        const wrap = target.closest(".wit-chips-wrap");
+        const slot = wrap?.querySelector(".wit-detail-slot");
         if (slot) slot.innerHTML = "";
+        wrap?.querySelectorAll("button.wit-chip-active").forEach((b) => b.classList.remove("wit-chip-active"));
         return;
       }
 
       const moreBtn = target.closest<HTMLButtonElement>("button.wit-chip-more");
       if (moreBtn && moreBtn.dataset.more) {
         const rest = JSON.parse(moreBtn.dataset.more) as (number | string)[];
-        const frag = rest
-          .map((r) => `<button type="button" class="wit-chip" data-wit="${esc(r)}">${esc(siglumOf(r))}</button>`)
-          .join("");
+        const frag = rest.map(renderWitChipBtn).join("");
         moreBtn.insertAdjacentHTML("beforebegin", frag);
         moreBtn.remove();
         return;
       }
 
-      const witBtn = target.closest<HTMLButtonElement>("button.wit-chip[data-wit]");
+      const witBtn = target.closest<HTMLButtonElement>("button[data-wit]");
       if (witBtn && activePanel) {
-        const slot = activePanel.querySelector(".wit-detail-slot");
-        if (slot) {
-          slot.innerHTML = renderWitnessDetail(witBtn.dataset.wit || "");
-          slot.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        const wrap = witBtn.closest(".wit-chips-wrap");
+        const slot = wrap?.querySelector(".wit-detail-slot");
+        if (wrap && slot) {
+          const alreadyActive = witBtn.classList.contains("wit-chip-active");
+          wrap.querySelectorAll("button.wit-chip-active").forEach((b) => b.classList.remove("wit-chip-active"));
+          if (alreadyActive) {
+            slot.innerHTML = "";
+          } else {
+            witBtn.classList.add("wit-chip-active");
+            const activeItem = activeBtn?.dataset.tok ? DATA.t[activeBtn.dataset.tok] : null;
+            slot.innerHTML = renderWitnessDetail(witBtn.dataset.wit || "", activeItem?.ref || "");
+          }
         }
       }
     });

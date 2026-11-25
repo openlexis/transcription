@@ -1,0 +1,2320 @@
+{
+  "specification": {
+    "id": "01M89WMZPKWMDPCWWDTAA9VN7D",
+    "file": "specifications/01M89WMZPKWMDPCWWDTAA9VN7D.yaml",
+    "sha256": "f333a4670ea2250582733e3634e2d59ec8f3b9a2d4d543e2dd9c15e4fdc6138d",
+    "statement": "This compilation was produced under Open Lexis Transcription Specification 01M89WMZPKWMDPCWWDTAA9VN7D."
+  },
+  "compilation": {
+    "id": "01M89Y5BQ0Q5D9TC2SPK1GRFKQ",
+    "title": "Granular Word-Level Critical Text",
+    "subtitle": "Decoupled severity & word-level Dawid–Skene compilation by Gemini 4 Neon",
+    "summary": "Full 66-book compilation with granular word-level alignment (preventing unrelated variants from collapsing into whole-verse blocks) and decoupled edit-category vs. substantive-severity scoring.",
+    "author": "Open Lexis",
+    "createdAt": "2026-11-25T18:05:52.756Z",
+    "outputDirectory": "outputs/01M89WMZPKWMDPCWWDTAA9VN7D/01M89Y5BQ0Q5D9TC2SPK1GRFKQ/",
+    "outputFormat": "TEI P5 XML",
+    "reportFile": "REPORT.md"
+  },
+  "modelAttribution": {
+    "provider": "Google DeepMind",
+    "modelFamily": "Gemini 4",
+    "modelName": "Gemini 4 Neon",
+    "modelId": "gemini-4-neon",
+    "versionSnapshot": "unknown (the exact release snapshot was not exposed to the model at run time)",
+    "variant": "Neon",
+    "effortLevel": "medium",
+    "temperature": "unknown (not exposed to the model at run time)",
+    "thinkingBudget": "unknown (not exposed beyond the medium effort setting)",
+    "harness": "Antigravity",
+    "role": "Designed and implemented the decoupled edit-category vs. substantive-severity classifier (scripts/lib/severity.ts), refined word-level span alignment in scripts/compile.ts so unrelated adjacent variants and repeated genealogy words do not collapse into whole-verse blocks, and executed the compilation under specification 01M89WMZPKWMDPCWWDTAA9VN7D.",
+    "note": "Fields the model could not observe about itself are stated as unknown, never guessed.",
+    "deterministicEngine": {
+      "program": "scripts/compile.ts",
+      "runtime": "Bun 1.4.4",
+      "repository": "https://github.com/openlexis/transcription",
+      "commit": "b797e834d022e9e302c47178cf556fecf752533d",
+      "codeSha256": "f5800e72f0dd61352329799b3cf026d3d6d2bb1a2b401c78eac4a1085f3f38a0"
+    }
+  },
+  "method": {
+    "summary": "Word-level Bayesian Dawid-Skene latent-class model with granular span alignment, decoupled edit-category vs. substantive-severity scoring, composite-likelihood late-witness discounting, and 100-draw Beta posterior Monte Carlo uncertainty intervals.",
+    "description": "Statistical Method: Bayesian Dawid-Skene Latent-Class Model with Composite Likelihood and Scribal Evidence.\n\n1. Objective and Witness Consolidation. Each target book is reconstructed strictly from the allowlisted primary transcriptions in specification 01M88AX3YW2HWVPGHTREFJS181. Multiple transcriptions of the same physical manuscript (and known split leaves: P64/P67, P77/P103) are consolidated into a single witness so no manuscript votes twice; per verse, the transcription with the most readable words is used (ties broken by specification listing order). Only the first hand (original copyist) is read; damaged or editorially supplied words are treated as lacunae rather than votes.\n\n2. Alignment and Orthographic Normalization. For each numbered line (chapter:line), witnesses are aligned oldest-first via Needleman-Wunsch global alignment. Orthographic spelling habits (Greek itacism ei/i, doubled letters, movable nu, final sigma of outos/achris/mechris, expanded nomina sacra and letter-numerals; Hebrew consonantal skeleton ignoring final forms and internal matres lectionis vav/yod) are folded for comparison so spelling conventions do not inflate substantive variation. The displayed surface spelling is taken from the oldest attesting witness. Non-continuous witnesses (scrolls, lectionaries, catenae) treat absent positions as lacunae rather than omissions. Every column where surviving non-lacunose witnesses disagree—including singular readings—is represented as a TEI <app> element. Adjacent variant columns are merged into a single <app> only when structurally coupled (an omission/insertion, a multi-word variant by the same witness, or a shared/transposed word within two columns), preventing unrelated single-word substitutions in large witness pools from collapsing into giant spans.\n\n3. Prior Reliability from Dating and Scribal Evidence. Before measuring textual agreement, each witness receives a Beta prior on its reliability q_m (probability of preserving the original reading at a point). Expected reliability decays with age after composition (origin = 400 BC for Old Testament, AD 100 for New Testament): mu(t) = 0.5 + 0.45 * 2^(-max(0, t - origin) / 100), averaged uniformly across the documented date range [yearFrom, yearTo]. Prior strength is 4 * 100 / max(100, yearTo - yearFrom) pseudo-observations, so wide date ranges yield weaker priors and wider uncertainty intervals. Where dating metadata is undocumented in the specification, it remains explicitly unknown and receives a diffuse prior (mu(1500) ≈ 0.50, strength = 1) so measured agreement governs and uncertainty remains wide where coverage is sparse. Observed scribal corrections in a manuscript's own transcription (when >= 100 transcribed words are present and correction rate exceeds 1%) apply a gentle bounded prior penalty up to 0.08 (floor 0.50) reflecting less stable copying. Physical deterioration (lacunae, damaged parchment, missing text in ancient scrolls) never penalizes credibility, though absent words leave local uncertainty.\n\n4. Dependence Discounting (Composite Likelihood) and EM Estimation. To avoid simple majority voting by large clusters of late dependent copies, witnesses within 400 years of composition receive full weight (1.0), whereas later witnesses sharing a reading are geometrically down-weighted in descending order of reliability (1, 1/2, 1/4, ..., sum < 2). At each unit with K attested readings plus U = 10 unseen candidate readings (uniform prior over K + U candidates), a witness with reliability q_m attests the original with probability q_m and each alternative with probability (1 - q_m)/(K + U - 1). Five rounds of Expectation-Maximization (EM) update each witness's posterior Beta(alpha_m, beta_m) using line-level mean agreement (accounting for clustered errors and excluding single-witness units from self-confirmation).\n\n5. Uncertainty Intervals and Reading Selection. One hundred deterministic Monte Carlo draws (seeded by book ID) are sampled from each witness's posterior Beta distribution. For every reading (selected, variant, and unseen-original) and every unanimous word, the posterior median is recorded in <certainty degree=\"...\"/> and the 90% credible interval (5th to 95th percentile) in <note type=\"uncertainty\">. At each <app>, the reading with highest point-estimate posterior probability is selected as <lem> (ties broken by earliest witness, then witness count, then lexicographical order).\n\n6. Unknowns and Limitations. Place of origin/writing (manuscript provenance) and scientific dating (e.g. radiocarbon) are undocumented for all manuscripts in the specification and are explicitly recorded as unknown in every <witness> entry without imputation. Limitations: uniform error distribution across alternatives does not model specific scribal error mechanisms (e.g., homoioteleuton), and geometric down-weighting of late witnesses is a statistical proxy for a full stemma codicum."
+  },
+  "disagreementCategories": [
+    {
+      "id": "lexical_substitution",
+      "label": "Lexical Substitution",
+      "description": "Witnesses attest different word(s) of equal word count at the same position (non-transposition).",
+      "count": 41101
+    },
+    {
+      "id": "omission",
+      "label": "Omission",
+      "description": "Competing witness(es) omit word(s) present in the selected reading.",
+      "count": 10087
+    },
+    {
+      "id": "addition",
+      "label": "Addition",
+      "description": "Competing witness(es) include extra word(s) where the selected reading is empty.",
+      "count": 16857
+    },
+    {
+      "id": "transposition",
+      "label": "Transposition (Word Order)",
+      "description": "Witnesses attest the same words in a different sequence.",
+      "count": 277
+    },
+    {
+      "id": "phrase_length_variation",
+      "label": "Phrase & Length Variation",
+      "description": "Multi-word phrase differences where both the selected and competing readings are non-empty but differ in word count.",
+      "count": 9053
+    },
+    {
+      "id": "unresolved_lacuna",
+      "label": "Unresolved Lacuna",
+      "description": "All covering witnesses are partially lacunose across the span so no complete reading could be reconstructed.",
+      "count": 0
+    }
+  ],
+  "totals": {
+    "books": 66,
+    "lines": 31186,
+    "words": 443827,
+    "variantPlaces": 77375,
+    "totalBytes": 351354059
+  },
+  "books": [
+    {
+      "id": "Gen",
+      "name": "Genesis",
+      "section": "Old Testament",
+      "number": 1,
+      "language": "Hebrew and Aramaic",
+      "file": "Gen.xml",
+      "format": "TEI P5 XML",
+      "sha256": "8f5dadacf1e8979ff817157ffa63b868090693be736bc3dc79144c063a359eab",
+      "bytes": 3508469,
+      "stats": {
+        "manuscripts": 27,
+        "early": 25,
+        "lines": 1533,
+        "uncoveredLines": 0,
+        "words": 20613,
+        "places": 1204,
+        "meanPlaceConfidence": 0.5815,
+        "meanWordConfidence": 0.9764,
+        "meanManuscriptsPerLine": 2.2159
+      },
+      "categoryCounts": {
+        "lexical_substitution": 917,
+        "phrase_length_variation": 42,
+        "addition": 197,
+        "omission": 38,
+        "transposition": 10
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 205,
+        "substantive_structural_variation": 208,
+        "phonetic_or_confusable_form": 189,
+        "orthographic_or_scribal_slip": 511,
+        "particle_or_article_variation": 77,
+        "grammatical_or_stylistic_nuance": 18
+      }
+    },
+    {
+      "id": "Exod",
+      "name": "Exodus",
+      "section": "Old Testament",
+      "number": 2,
+      "language": "Hebrew",
+      "file": "Exod.xml",
+      "format": "TEI P5 XML",
+      "sha256": "72b3132f0ed955b7b5f0230396c86a4adad66d06ffbd64f02f38bb118d259cf0",
+      "bytes": 4058100,
+      "stats": {
+        "manuscripts": 42,
+        "early": 40,
+        "lines": 1213,
+        "uncoveredLines": 0,
+        "words": 16749,
+        "places": 1805,
+        "meanPlaceConfidence": 0.6668,
+        "meanWordConfidence": 0.9722,
+        "meanManuscriptsPerLine": 2.8937
+      },
+      "categoryCounts": {
+        "lexical_substitution": 1120,
+        "addition": 510,
+        "omission": 83,
+        "phrase_length_variation": 85,
+        "transposition": 7
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 529,
+        "unexplained_lexical_divergence": 421,
+        "phonetic_or_confusable_form": 201,
+        "substantive_structural_variation": 623,
+        "particle_or_article_variation": 70,
+        "grammatical_or_stylistic_nuance": 19
+      }
+    },
+    {
+      "id": "Lev",
+      "name": "Leviticus",
+      "section": "Old Testament",
+      "number": 3,
+      "language": "Hebrew",
+      "file": "Lev.xml",
+      "format": "TEI P5 XML",
+      "sha256": "aab1cf1e64d127a4011930a7b0ec455d10b018da22262efd934594077b076a09",
+      "bytes": 2015684,
+      "stats": {
+        "manuscripts": 19,
+        "early": 17,
+        "lines": 859,
+        "uncoveredLines": 0,
+        "words": 11954,
+        "places": 632,
+        "meanPlaceConfidence": 0.7028,
+        "meanWordConfidence": 0.9852,
+        "meanManuscriptsPerLine": 2.5681
+      },
+      "categoryCounts": {
+        "phrase_length_variation": 49,
+        "addition": 90,
+        "lexical_substitution": 440,
+        "omission": 45,
+        "transposition": 8
+      },
+      "severityCounts": {
+        "substantive_structural_variation": 148,
+        "particle_or_article_variation": 45,
+        "orthographic_or_scribal_slip": 233,
+        "phonetic_or_confusable_form": 86,
+        "unexplained_lexical_divergence": 121,
+        "grammatical_or_stylistic_nuance": 13
+      }
+    },
+    {
+      "id": "Num",
+      "name": "Numbers",
+      "section": "Old Testament",
+      "number": 4,
+      "language": "Hebrew",
+      "file": "Num.xml",
+      "format": "TEI P5 XML",
+      "sha256": "44aa7db777fa2b69f83cfe2aecbb1e0ffd788ce8c4e140232e07a94b5339a18c",
+      "bytes": 2981088,
+      "stats": {
+        "manuscripts": 13,
+        "early": 11,
+        "lines": 1289,
+        "uncoveredLines": 0,
+        "words": 16422,
+        "places": 1084,
+        "meanPlaceConfidence": 0.5699,
+        "meanWordConfidence": 0.9771,
+        "meanManuscriptsPerLine": 2.3289
+      },
+      "categoryCounts": {
+        "omission": 38,
+        "lexical_substitution": 717,
+        "transposition": 2,
+        "phrase_length_variation": 32,
+        "addition": 295
+      },
+      "severityCounts": {
+        "particle_or_article_variation": 37,
+        "orthographic_or_scribal_slip": 395,
+        "grammatical_or_stylistic_nuance": 19,
+        "substantive_structural_variation": 334,
+        "phonetic_or_confusable_form": 116,
+        "unexplained_lexical_divergence": 192
+      }
+    },
+    {
+      "id": "Deut",
+      "name": "Deuteronomy",
+      "section": "Old Testament",
+      "number": 5,
+      "language": "Hebrew",
+      "file": "Deut.xml",
+      "format": "TEI P5 XML",
+      "sha256": "c4070cff739e8283c034b50e6b1967f7633c45322243d8b0dbaa44f7386611ac",
+      "bytes": 3470021,
+      "stats": {
+        "manuscripts": 65,
+        "early": 62,
+        "lines": 959,
+        "uncoveredLines": 0,
+        "words": 14310,
+        "places": 1451,
+        "meanPlaceConfidence": 0.7498,
+        "meanWordConfidence": 0.9755,
+        "meanManuscriptsPerLine": 3.269
+      },
+      "categoryCounts": {
+        "lexical_substitution": 1125,
+        "phrase_length_variation": 65,
+        "omission": 69,
+        "transposition": 5,
+        "addition": 187
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 420,
+        "phonetic_or_confusable_form": 221,
+        "orthographic_or_scribal_slip": 560,
+        "substantive_structural_variation": 283,
+        "particle_or_article_variation": 59,
+        "grammatical_or_stylistic_nuance": 20
+      }
+    },
+    {
+      "id": "Josh",
+      "name": "Joshua",
+      "section": "Old Testament",
+      "number": 6,
+      "language": "Hebrew",
+      "file": "Josh.xml",
+      "format": "TEI P5 XML",
+      "sha256": "7b632f57b81c19458dfdeca303761b8b90129f463777ea8948906ea87915f3f8",
+      "bytes": 1057328,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 659,
+        "uncoveredLines": 0,
+        "words": 10065,
+        "places": 20,
+        "meanPlaceConfidence": 0.57,
+        "meanWordConfidence": 0.924,
+        "meanManuscriptsPerLine": 1.085
+      },
+      "categoryCounts": {
+        "lexical_substitution": 18,
+        "omission": 2
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 8,
+        "substantive_structural_variation": 2,
+        "phonetic_or_confusable_form": 5,
+        "orthographic_or_scribal_slip": 5
+      }
+    },
+    {
+      "id": "Judg",
+      "name": "Judges",
+      "section": "Old Testament",
+      "number": 7,
+      "language": "Hebrew",
+      "file": "Judg.xml",
+      "format": "TEI P5 XML",
+      "sha256": "f7eea079bfd4e30517f059b7cc3fdef5845aebbbf2dd819aca05c1d808b96c4c",
+      "bytes": 1021938,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 618,
+        "uncoveredLines": 0,
+        "words": 9885,
+        "places": 12,
+        "meanPlaceConfidence": 0.6002,
+        "meanWordConfidence": 0.9285,
+        "meanManuscriptsPerLine": 1.0777
+      },
+      "categoryCounts": {
+        "lexical_substitution": 12
+      },
+      "severityCounts": {
+        "phonetic_or_confusable_form": 4,
+        "unexplained_lexical_divergence": 5,
+        "orthographic_or_scribal_slip": 3
+      }
+    },
+    {
+      "id": "1Sam",
+      "name": "1 Samuel",
+      "section": "Old Testament",
+      "number": 8,
+      "language": "Hebrew",
+      "file": "1Sam.xml",
+      "format": "TEI P5 XML",
+      "sha256": "f205dcd4745f2f20ee75af142f762090d1a4559a85610063dee75f0db46dbc04",
+      "bytes": 1577494,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 811,
+        "uncoveredLines": 0,
+        "words": 13336,
+        "places": 171,
+        "meanPlaceConfidence": 0.5426,
+        "meanWordConfidence": 0.9014,
+        "meanManuscriptsPerLine": 1.312
+      },
+      "categoryCounts": {
+        "lexical_substitution": 138,
+        "omission": 29,
+        "phrase_length_variation": 4
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 47,
+        "unexplained_lexical_divergence": 71,
+        "phonetic_or_confusable_form": 16,
+        "substantive_structural_variation": 31,
+        "grammatical_or_stylistic_nuance": 2,
+        "particle_or_article_variation": 4
+      }
+    },
+    {
+      "id": "2Sam",
+      "name": "2 Samuel",
+      "section": "Old Testament",
+      "number": 9,
+      "language": "Hebrew",
+      "file": "2Sam.xml",
+      "format": "TEI P5 XML",
+      "sha256": "f99dd37949cc90c1c574496af775665a4f848f0089acb177c207e154774de9de",
+      "bytes": 1363256,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 695,
+        "uncoveredLines": 0,
+        "words": 11038,
+        "places": 181,
+        "meanPlaceConfidence": 0.5965,
+        "meanWordConfidence": 0.9204,
+        "meanManuscriptsPerLine": 1.4129
+      },
+      "categoryCounts": {
+        "lexical_substitution": 172,
+        "phrase_length_variation": 3,
+        "addition": 6
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 94,
+        "orthographic_or_scribal_slip": 47,
+        "grammatical_or_stylistic_nuance": 4,
+        "phonetic_or_confusable_form": 27,
+        "substantive_structural_variation": 9,
+        "particle_or_article_variation": 3
+      }
+    },
+    {
+      "id": "1Kgs",
+      "name": "1 Kings",
+      "section": "Old Testament",
+      "number": 10,
+      "language": "Hebrew",
+      "file": "1Kgs.xml",
+      "format": "TEI P5 XML",
+      "sha256": "503bbf0006047e7c32b4f926f98a42978367885daac236180d21eb49737d0196",
+      "bytes": 1352449,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 817,
+        "uncoveredLines": 0,
+        "words": 13140,
+        "places": 9,
+        "meanPlaceConfidence": 0.6306,
+        "meanWordConfidence": 0.9344,
+        "meanManuscriptsPerLine": 1.0575
+      },
+      "categoryCounts": {
+        "lexical_substitution": 9
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 3,
+        "orthographic_or_scribal_slip": 6
+      }
+    },
+    {
+      "id": "2Kgs",
+      "name": "2 Kings",
+      "section": "Old Testament",
+      "number": 11,
+      "language": "Hebrew",
+      "file": "2Kgs.xml",
+      "format": "TEI P5 XML",
+      "sha256": "2b509e7b649d0176b3f90318427d4048a65f3f40ffb078f07255d84a62975c99",
+      "bytes": 1243218,
+      "stats": {
+        "manuscripts": 2,
+        "early": 1,
+        "lines": 719,
+        "uncoveredLines": 0,
+        "words": 12280,
+        "places": 7,
+        "meanPlaceConfidence": 0.746,
+        "meanWordConfidence": 0.7774,
+        "meanManuscriptsPerLine": 1.0181
+      },
+      "categoryCounts": {
+        "lexical_substitution": 7
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 3,
+        "orthographic_or_scribal_slip": 2,
+        "phonetic_or_confusable_form": 2
+      }
+    },
+    {
+      "id": "Isa",
+      "name": "Isaiah",
+      "section": "Old Testament",
+      "number": 12,
+      "language": "Hebrew",
+      "file": "Isa.xml",
+      "format": "TEI P5 XML",
+      "sha256": "15def8896d011d74a8341f098864f6aa14a39ca761dc2230252d167cca9bf3ba",
+      "bytes": 4967830,
+      "stats": {
+        "manuscripts": 23,
+        "early": 22,
+        "lines": 1291,
+        "uncoveredLines": 0,
+        "words": 16939,
+        "places": 2710,
+        "meanPlaceConfidence": 0.8181,
+        "meanWordConfidence": 0.968,
+        "meanManuscriptsPerLine": 2.8885
+      },
+      "categoryCounts": {
+        "lexical_substitution": 2519,
+        "phrase_length_variation": 65,
+        "addition": 118,
+        "omission": 7,
+        "transposition": 1
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 1365,
+        "unexplained_lexical_divergence": 581,
+        "phonetic_or_confusable_form": 569,
+        "substantive_structural_variation": 167,
+        "grammatical_or_stylistic_nuance": 34,
+        "particle_or_article_variation": 44
+      }
+    },
+    {
+      "id": "Jer",
+      "name": "Jeremiah",
+      "section": "Old Testament",
+      "number": 13,
+      "language": "Hebrew and Aramaic",
+      "file": "Jer.xml",
+      "format": "TEI P5 XML",
+      "sha256": "c454799159ed297422539ea3cf89f0af5d48e423906c16a75751046bd20002ff",
+      "bytes": 2317727,
+      "stats": {
+        "manuscripts": 7,
+        "early": 6,
+        "lines": 1364,
+        "uncoveredLines": 0,
+        "words": 21835,
+        "places": 89,
+        "meanPlaceConfidence": 0.8597,
+        "meanWordConfidence": 0.9814,
+        "meanManuscriptsPerLine": 1.1877
+      },
+      "categoryCounts": {
+        "lexical_substitution": 86,
+        "addition": 3
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 37,
+        "orthographic_or_scribal_slip": 35,
+        "phonetic_or_confusable_form": 14,
+        "substantive_structural_variation": 3,
+        "grammatical_or_stylistic_nuance": 1
+      }
+    },
+    {
+      "id": "Ezek",
+      "name": "Ezekiel",
+      "section": "Old Testament",
+      "number": 14,
+      "language": "Hebrew",
+      "file": "Ezek.xml",
+      "format": "TEI P5 XML",
+      "sha256": "2ac92d62fedf1c4cb05a53c1e4c35f17c90554a77cb1c46e7423647ddbf206e0",
+      "bytes": 1993592,
+      "stats": {
+        "manuscripts": 8,
+        "early": 7,
+        "lines": 1273,
+        "uncoveredLines": 0,
+        "words": 18730,
+        "places": 14,
+        "meanPlaceConfidence": 0.6148,
+        "meanWordConfidence": 0.9704,
+        "meanManuscriptsPerLine": 1.0872
+      },
+      "categoryCounts": {
+        "lexical_substitution": 14
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 7,
+        "unexplained_lexical_divergence": 3,
+        "phonetic_or_confusable_form": 4
+      }
+    },
+    {
+      "id": "Hos",
+      "name": "Hosea",
+      "section": "Old Testament",
+      "number": 15,
+      "language": "Hebrew",
+      "file": "Hos.xml",
+      "format": "TEI P5 XML",
+      "sha256": "b702d03d7e76242c372ad5cc124c66252ebb8fae4e8bec5541a75ce430865a65",
+      "bytes": 296966,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 197,
+        "uncoveredLines": 0,
+        "words": 2381,
+        "places": 29,
+        "meanPlaceConfidence": 0.657,
+        "meanWordConfidence": 0.9298,
+        "meanManuscriptsPerLine": 1.4721
+      },
+      "categoryCounts": {
+        "lexical_substitution": 29
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 20,
+        "orthographic_or_scribal_slip": 7,
+        "phonetic_or_confusable_form": 2,
+        "grammatical_or_stylistic_nuance": 1
+      }
+    },
+    {
+      "id": "Joel",
+      "name": "Joel",
+      "section": "Old Testament",
+      "number": 16,
+      "language": "Hebrew",
+      "file": "Joel.xml",
+      "format": "TEI P5 XML",
+      "sha256": "e93e48b5ec06b92665c71b5c7fdb52df29bf96c7bc1b0a7f979b8abc7a1f1d9e",
+      "bytes": 159968,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 73,
+        "uncoveredLines": 0,
+        "words": 957,
+        "places": 38,
+        "meanPlaceConfidence": 0.9487,
+        "meanWordConfidence": 0.9737,
+        "meanManuscriptsPerLine": 2.0959
+      },
+      "categoryCounts": {
+        "lexical_substitution": 37,
+        "addition": 1
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 22,
+        "phonetic_or_confusable_form": 4,
+        "orthographic_or_scribal_slip": 10,
+        "particle_or_article_variation": 2
+      }
+    },
+    {
+      "id": "Amos",
+      "name": "Amos",
+      "section": "Old Testament",
+      "number": 17,
+      "language": "Hebrew",
+      "file": "Amos.xml",
+      "format": "TEI P5 XML",
+      "sha256": "58b27852d74abb90fc2a48fb3c26177645a19f16751ec925edc3eaf0c5de757e",
+      "bytes": 290420,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 146,
+        "uncoveredLines": 0,
+        "words": 2042,
+        "places": 48,
+        "meanPlaceConfidence": 0.9272,
+        "meanWordConfidence": 0.9738,
+        "meanManuscriptsPerLine": 1.9247
+      },
+      "categoryCounts": {
+        "lexical_substitution": 48
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 35,
+        "orthographic_or_scribal_slip": 8,
+        "phonetic_or_confusable_form": 6,
+        "particle_or_article_variation": 1
+      }
+    },
+    {
+      "id": "Obad",
+      "name": "Obadiah",
+      "section": "Old Testament",
+      "number": 18,
+      "language": "Hebrew",
+      "file": "Obad.xml",
+      "format": "TEI P5 XML",
+      "sha256": "d3b78445e035cc9383b7116104f42dff34f89266f1a5eeb0998fb602dc6d04b3",
+      "bytes": 52784,
+      "stats": {
+        "manuscripts": 3,
+        "early": 2,
+        "lines": 21,
+        "uncoveredLines": 0,
+        "words": 291,
+        "places": 8,
+        "meanPlaceConfidence": 0.9393,
+        "meanWordConfidence": 0.9789,
+        "meanManuscriptsPerLine": 2.3333
+      },
+      "categoryCounts": {
+        "lexical_substitution": 8
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 6,
+        "phonetic_or_confusable_form": 2
+      }
+    },
+    {
+      "id": "Jonah",
+      "name": "Jonah",
+      "section": "Old Testament",
+      "number": 19,
+      "language": "Hebrew",
+      "file": "Jonah.xml",
+      "format": "TEI P5 XML",
+      "sha256": "66f3f27e6fad1c35bbfb6ba959bc9e7837c9a04ff5aba89a933699c96130deb4",
+      "bytes": 142243,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 48,
+        "uncoveredLines": 0,
+        "words": 688,
+        "places": 40,
+        "meanPlaceConfidence": 0.9295,
+        "meanWordConfidence": 0.9831,
+        "meanManuscriptsPerLine": 2.9792
+      },
+      "categoryCounts": {
+        "lexical_substitution": 38,
+        "addition": 2
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 31,
+        "orthographic_or_scribal_slip": 3,
+        "phonetic_or_confusable_form": 5,
+        "substantive_structural_variation": 2
+      }
+    },
+    {
+      "id": "Mic",
+      "name": "Micah",
+      "section": "Old Testament",
+      "number": 20,
+      "language": "Hebrew",
+      "file": "Mic.xml",
+      "format": "TEI P5 XML",
+      "sha256": "dfa1a72b599b538798e502f2b1bb89c2396a39421864079609ce8e6c0045be00",
+      "bytes": 177651,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 105,
+        "uncoveredLines": 0,
+        "words": 1396,
+        "places": 12,
+        "meanPlaceConfidence": 0.9068,
+        "meanWordConfidence": 0.9854,
+        "meanManuscriptsPerLine": 2.0286
+      },
+      "categoryCounts": {
+        "lexical_substitution": 12
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 2,
+        "unexplained_lexical_divergence": 8,
+        "phonetic_or_confusable_form": 2
+      }
+    },
+    {
+      "id": "Nah",
+      "name": "Nahum",
+      "section": "Old Testament",
+      "number": 21,
+      "language": "Hebrew",
+      "file": "Nah.xml",
+      "format": "TEI P5 XML",
+      "sha256": "a5d369af473b0cc0fcb8f138a28b7599105f762629b022963f0f7352a5539435",
+      "bytes": 80609,
+      "stats": {
+        "manuscripts": 3,
+        "early": 2,
+        "lines": 47,
+        "uncoveredLines": 0,
+        "words": 558,
+        "places": 5,
+        "meanPlaceConfidence": 0.8664,
+        "meanWordConfidence": 0.973,
+        "meanManuscriptsPerLine": 2.0851
+      },
+      "categoryCounts": {
+        "lexical_substitution": 5
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 1,
+        "unexplained_lexical_divergence": 3,
+        "phonetic_or_confusable_form": 1
+      }
+    },
+    {
+      "id": "Hab",
+      "name": "Habakkuk",
+      "section": "Old Testament",
+      "number": 22,
+      "language": "Hebrew",
+      "file": "Hab.xml",
+      "format": "TEI P5 XML",
+      "sha256": "0371d7c0bae11936502ec267a444424bb391b2a004fb3beeff13cf7d35af9df8",
+      "bytes": 86123,
+      "stats": {
+        "manuscripts": 3,
+        "early": 2,
+        "lines": 56,
+        "uncoveredLines": 0,
+        "words": 671,
+        "places": 2,
+        "meanPlaceConfidence": 0.901,
+        "meanWordConfidence": 0.9747,
+        "meanManuscriptsPerLine": 1.7321
+      },
+      "categoryCounts": {
+        "lexical_substitution": 2
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 1,
+        "unexplained_lexical_divergence": 1
+      }
+    },
+    {
+      "id": "Zeph",
+      "name": "Zephaniah",
+      "section": "Old Testament",
+      "number": 23,
+      "language": "Hebrew",
+      "file": "Zeph.xml",
+      "format": "TEI P5 XML",
+      "sha256": "efd3cf0416675e10dfb3d0b0e425c072c54b38a2e9d3e2ec850cd1f0376fc338",
+      "bytes": 108103,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 53,
+        "uncoveredLines": 0,
+        "words": 767,
+        "places": 10,
+        "meanPlaceConfidence": 0.861,
+        "meanWordConfidence": 0.9651,
+        "meanManuscriptsPerLine": 1.9623
+      },
+      "categoryCounts": {
+        "lexical_substitution": 10
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 6,
+        "orthographic_or_scribal_slip": 3,
+        "phonetic_or_confusable_form": 2
+      }
+    },
+    {
+      "id": "Hag",
+      "name": "Haggai",
+      "section": "Old Testament",
+      "number": 24,
+      "language": "Hebrew",
+      "file": "Hag.xml",
+      "format": "TEI P5 XML",
+      "sha256": "956c0097d55b6cc7af0096e4eab29996cdfab296f8b2b50ce0d55566c348de40",
+      "bytes": 83767,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 38,
+        "uncoveredLines": 0,
+        "words": 600,
+        "places": 8,
+        "meanPlaceConfidence": 0.9826,
+        "meanWordConfidence": 0.9603,
+        "meanManuscriptsPerLine": 2
+      },
+      "categoryCounts": {
+        "lexical_substitution": 8
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 1,
+        "unexplained_lexical_divergence": 7
+      }
+    },
+    {
+      "id": "Zech",
+      "name": "Zechariah",
+      "section": "Old Testament",
+      "number": 25,
+      "language": "Hebrew",
+      "file": "Zech.xml",
+      "format": "TEI P5 XML",
+      "sha256": "e82840a65f5d806a10dd0300b126c8166111a6525f2345d35f32870231635765",
+      "bytes": 338645,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 211,
+        "uncoveredLines": 0,
+        "words": 3128,
+        "places": 7,
+        "meanPlaceConfidence": 0.603,
+        "meanWordConfidence": 0.8962,
+        "meanManuscriptsPerLine": 1.1943
+      },
+      "categoryCounts": {
+        "lexical_substitution": 7
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 2,
+        "unexplained_lexical_divergence": 3,
+        "phonetic_or_confusable_form": 2
+      }
+    },
+    {
+      "id": "Mal",
+      "name": "Malachi",
+      "section": "Old Testament",
+      "number": 26,
+      "language": "Hebrew",
+      "file": "Mal.xml",
+      "format": "TEI P5 XML",
+      "sha256": "06350ac9aff6320b450d1f39ed5e433f90c21d4095807d038b406ea7c16918d6",
+      "bytes": 121829,
+      "stats": {
+        "manuscripts": 3,
+        "early": 2,
+        "lines": 55,
+        "uncoveredLines": 0,
+        "words": 877,
+        "places": 23,
+        "meanPlaceConfidence": 0.7412,
+        "meanWordConfidence": 0.899,
+        "meanManuscriptsPerLine": 1.5636
+      },
+      "categoryCounts": {
+        "lexical_substitution": 22,
+        "phrase_length_variation": 1
+      },
+      "severityCounts": {
+        "phonetic_or_confusable_form": 3,
+        "orthographic_or_scribal_slip": 10,
+        "substantive_structural_variation": 1,
+        "unexplained_lexical_divergence": 9,
+        "particle_or_article_variation": 1
+      }
+    },
+    {
+      "id": "1Chr",
+      "name": "1 Chronicles",
+      "section": "Old Testament",
+      "number": 27,
+      "language": "Hebrew",
+      "file": "1Chr.xml",
+      "format": "TEI P5 XML",
+      "sha256": "2552043bc830a9dacbb1a0257be60af9b9565a7838c36c5c2ede8860d71d82f7",
+      "bytes": 1157001,
+      "stats": {
+        "manuscripts": 1,
+        "early": 0,
+        "lines": 943,
+        "uncoveredLines": 0,
+        "words": 10745,
+        "places": 0,
+        "meanPlaceConfidence": 1,
+        "meanWordConfidence": 0.527,
+        "meanManuscriptsPerLine": 1
+      },
+      "categoryCounts": {},
+      "severityCounts": {}
+    },
+    {
+      "id": "2Chr",
+      "name": "2 Chronicles",
+      "section": "Old Testament",
+      "number": 28,
+      "language": "Hebrew",
+      "file": "2Chr.xml",
+      "format": "TEI P5 XML",
+      "sha256": "57da2c8d026a4cfaf75c12fa0b795e256751cf975e5013730e7908b186e214cb",
+      "bytes": 1363908,
+      "stats": {
+        "manuscripts": 2,
+        "early": 1,
+        "lines": 822,
+        "uncoveredLines": 0,
+        "words": 13312,
+        "places": 2,
+        "meanPlaceConfidence": 0.697,
+        "meanWordConfidence": 0.6903,
+        "meanManuscriptsPerLine": 1.0049
+      },
+      "categoryCounts": {
+        "lexical_substitution": 2
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 1,
+        "phonetic_or_confusable_form": 1
+      }
+    },
+    {
+      "id": "Ps",
+      "name": "Psalms",
+      "section": "Old Testament",
+      "number": 29,
+      "language": "Hebrew",
+      "file": "Ps.xml",
+      "format": "TEI P5 XML",
+      "sha256": "95437f25fb74fb2c0d53f445c9dcc7057e6cd3c6afbb5edf72b6e172be867698",
+      "bytes": 3292854,
+      "stats": {
+        "manuscripts": 39,
+        "early": 38,
+        "lines": 2527,
+        "uncoveredLines": 0,
+        "words": 19589,
+        "places": 784,
+        "meanPlaceConfidence": 0.908,
+        "meanWordConfidence": 0.9784,
+        "meanManuscriptsPerLine": 1.4943
+      },
+      "categoryCounts": {
+        "lexical_substitution": 679,
+        "phrase_length_variation": 15,
+        "addition": 88,
+        "omission": 2
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 213,
+        "phonetic_or_confusable_form": 113,
+        "orthographic_or_scribal_slip": 347,
+        "grammatical_or_stylistic_nuance": 15,
+        "substantive_structural_variation": 89,
+        "particle_or_article_variation": 17
+      }
+    },
+    {
+      "id": "Job",
+      "name": "Job",
+      "section": "Old Testament",
+      "number": 30,
+      "language": "Hebrew",
+      "file": "Job.xml",
+      "format": "TEI P5 XML",
+      "sha256": "61b880bdc74a100deb90a63990d10ef7488d3fe45df8e99151ff8a597def4e66",
+      "bytes": 981794,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 1070,
+        "uncoveredLines": 0,
+        "words": 8343,
+        "places": 18,
+        "meanPlaceConfidence": 0.6663,
+        "meanWordConfidence": 0.9267,
+        "meanManuscriptsPerLine": 1.0551
+      },
+      "categoryCounts": {
+        "lexical_substitution": 16,
+        "addition": 2
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 7,
+        "substantive_structural_variation": 1,
+        "orthographic_or_scribal_slip": 7,
+        "phonetic_or_confusable_form": 2,
+        "particle_or_article_variation": 1
+      }
+    },
+    {
+      "id": "Prov",
+      "name": "Proverbs",
+      "section": "Old Testament",
+      "number": 31,
+      "language": "Hebrew",
+      "file": "Prov.xml",
+      "format": "TEI P5 XML",
+      "sha256": "e533235a0b23f56728cfd6cd77ead4e9de4e27e416059f1ade00214785fdb759",
+      "bytes": 827442,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 915,
+        "uncoveredLines": 0,
+        "words": 6915,
+        "places": 3,
+        "meanPlaceConfidence": 0.664,
+        "meanWordConfidence": 0.9536,
+        "meanManuscriptsPerLine": 1.0404
+      },
+      "categoryCounts": {
+        "lexical_substitution": 3
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 2,
+        "orthographic_or_scribal_slip": 1
+      }
+    },
+    {
+      "id": "Ruth",
+      "name": "Ruth",
+      "section": "Old Testament",
+      "number": 32,
+      "language": "Hebrew",
+      "file": "Ruth.xml",
+      "format": "TEI P5 XML",
+      "sha256": "212a2e8a7f9a172bb2d946646aedce17ef96678eac3e9aa8455a294e37048b93",
+      "bytes": 159332,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 85,
+        "uncoveredLines": 0,
+        "words": 1294,
+        "places": 12,
+        "meanPlaceConfidence": 0.7673,
+        "meanWordConfidence": 0.9525,
+        "meanManuscriptsPerLine": 1.4706
+      },
+      "categoryCounts": {
+        "lexical_substitution": 11,
+        "addition": 1
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 2,
+        "unexplained_lexical_divergence": 9,
+        "phonetic_or_confusable_form": 1,
+        "substantive_structural_variation": 1
+      }
+    },
+    {
+      "id": "Song",
+      "name": "Song of Songs",
+      "section": "Old Testament",
+      "number": 33,
+      "language": "Hebrew",
+      "file": "Song.xml",
+      "format": "TEI P5 XML",
+      "sha256": "2c162498cd13804d2170f0d455b003f10905a756e969b2286d1625c2a9a31069",
+      "bytes": 198535,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 117,
+        "uncoveredLines": 0,
+        "words": 1251,
+        "places": 44,
+        "meanPlaceConfidence": 0.6587,
+        "meanWordConfidence": 0.9032,
+        "meanManuscriptsPerLine": 1.4188
+      },
+      "categoryCounts": {
+        "lexical_substitution": 37,
+        "phrase_length_variation": 2,
+        "addition": 5
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 14,
+        "unexplained_lexical_divergence": 18,
+        "substantive_structural_variation": 7,
+        "phonetic_or_confusable_form": 5
+      }
+    },
+    {
+      "id": "Eccl",
+      "name": "Ecclesiastes",
+      "section": "Old Testament",
+      "number": 34,
+      "language": "Hebrew",
+      "file": "Eccl.xml",
+      "format": "TEI P5 XML",
+      "sha256": "3a24c3a55cc5598f7503f78dfbdd04a5a92608bb17dc4bef3822c8f4d7f3ab2f",
+      "bytes": 334770,
+      "stats": {
+        "manuscripts": 3,
+        "early": 2,
+        "lines": 222,
+        "uncoveredLines": 0,
+        "words": 2990,
+        "places": 21,
+        "meanPlaceConfidence": 0.4856,
+        "meanWordConfidence": 0.8157,
+        "meanManuscriptsPerLine": 1.1306
+      },
+      "categoryCounts": {
+        "lexical_substitution": 18,
+        "omission": 2,
+        "phrase_length_variation": 1
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 9,
+        "phonetic_or_confusable_form": 6,
+        "orthographic_or_scribal_slip": 3,
+        "substantive_structural_variation": 3
+      }
+    },
+    {
+      "id": "Lam",
+      "name": "Lamentations",
+      "section": "Old Testament",
+      "number": 35,
+      "language": "Hebrew",
+      "file": "Lam.xml",
+      "format": "TEI P5 XML",
+      "sha256": "e7ae821c99b1e754f1c22f74d5834dd569837b0b3571ea9e86098d273f9fab23",
+      "bytes": 230096,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 154,
+        "uncoveredLines": 0,
+        "words": 1544,
+        "places": 47,
+        "meanPlaceConfidence": 0.6419,
+        "meanWordConfidence": 0.9219,
+        "meanManuscriptsPerLine": 1.3377
+      },
+      "categoryCounts": {
+        "lexical_substitution": 43,
+        "addition": 3,
+        "omission": 1
+      },
+      "severityCounts": {
+        "phonetic_or_confusable_form": 9,
+        "particle_or_article_variation": 1,
+        "unexplained_lexical_divergence": 17,
+        "orthographic_or_scribal_slip": 17,
+        "substantive_structural_variation": 3
+      }
+    },
+    {
+      "id": "Esth",
+      "name": "Esther",
+      "section": "Old Testament",
+      "number": 36,
+      "language": "Hebrew",
+      "file": "Esth.xml",
+      "format": "TEI P5 XML",
+      "sha256": "cc6d23e5eeb39e28b5604a63553563a11019d579f085734c679d2facf25a2f9e",
+      "bytes": 300028,
+      "stats": {
+        "manuscripts": 1,
+        "early": 0,
+        "lines": 167,
+        "uncoveredLines": 0,
+        "words": 3045,
+        "places": 0,
+        "meanPlaceConfidence": 1,
+        "meanWordConfidence": 0.526,
+        "meanManuscriptsPerLine": 1
+      },
+      "categoryCounts": {},
+      "severityCounts": {}
+    },
+    {
+      "id": "Dan",
+      "name": "Daniel",
+      "section": "Old Testament",
+      "number": 37,
+      "language": "Hebrew and Aramaic",
+      "file": "Dan.xml",
+      "format": "TEI P5 XML",
+      "sha256": "81f53b53662db8891967c8130771849744c60ad595eebc1a80583461d315ed5c",
+      "bytes": 807109,
+      "stats": {
+        "manuscripts": 9,
+        "early": 8,
+        "lines": 357,
+        "uncoveredLines": 0,
+        "words": 5919,
+        "places": 128,
+        "meanPlaceConfidence": 0.7703,
+        "meanWordConfidence": 0.9558,
+        "meanManuscriptsPerLine": 1.5098
+      },
+      "categoryCounts": {
+        "lexical_substitution": 124,
+        "addition": 3,
+        "transposition": 1
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 53,
+        "orthographic_or_scribal_slip": 51,
+        "phonetic_or_confusable_form": 22,
+        "substantive_structural_variation": 2,
+        "grammatical_or_stylistic_nuance": 1,
+        "particle_or_article_variation": 1
+      }
+    },
+    {
+      "id": "Ezra",
+      "name": "Ezra",
+      "section": "Old Testament",
+      "number": 38,
+      "language": "Hebrew and Aramaic",
+      "file": "Ezra.xml",
+      "format": "TEI P5 XML",
+      "sha256": "b497331ef891de7e112c875de978defbbdf6c4b38ed3160ad1ec4aa54f5edf55",
+      "bytes": 417135,
+      "stats": {
+        "manuscripts": 2,
+        "early": 1,
+        "lines": 280,
+        "uncoveredLines": 0,
+        "words": 3753,
+        "places": 5,
+        "meanPlaceConfidence": 0.702,
+        "meanWordConfidence": 0.7959,
+        "meanManuscriptsPerLine": 1.0393
+      },
+      "categoryCounts": {
+        "lexical_substitution": 5
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 4,
+        "unexplained_lexical_divergence": 1
+      }
+    },
+    {
+      "id": "Neh",
+      "name": "Nehemiah",
+      "section": "Old Testament",
+      "number": 39,
+      "language": "Hebrew",
+      "file": "Neh.xml",
+      "format": "TEI P5 XML",
+      "sha256": "d8c928e3b6d89993267c5d9c0c43f3a1c19ee6bce49da9ea829aeb6b773d1127",
+      "bytes": 540295,
+      "stats": {
+        "manuscripts": 1,
+        "early": 0,
+        "lines": 405,
+        "uncoveredLines": 0,
+        "words": 5312,
+        "places": 0,
+        "meanPlaceConfidence": 1,
+        "meanWordConfidence": 0.464,
+        "meanManuscriptsPerLine": 1
+      },
+      "categoryCounts": {},
+      "severityCounts": {}
+    },
+    {
+      "id": "Matt",
+      "name": "Matthew",
+      "section": "New Testament",
+      "number": 1,
+      "language": "Greek",
+      "file": "Matt.xml",
+      "format": "TEI P5 XML",
+      "sha256": "27c0da93d141284cb8513d6f9b48b8f25afe929507b849a21cbc3f2cd017d988",
+      "bytes": 53814672,
+      "stats": {
+        "manuscripts": 194,
+        "early": 34,
+        "lines": 1071,
+        "uncoveredLines": 0,
+        "words": 18475,
+        "places": 10756,
+        "meanPlaceConfidence": 0.9912,
+        "meanWordConfidence": 0.9858,
+        "meanManuscriptsPerLine": 126.7077
+      },
+      "categoryCounts": {
+        "lexical_substitution": 5755,
+        "phrase_length_variation": 1178,
+        "omission": 1384,
+        "addition": 2389,
+        "transposition": 50
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 12355,
+        "substantive_structural_variation": 10128,
+        "phonetic_or_confusable_form": 4653,
+        "particle_or_article_variation": 3661,
+        "grammatical_or_stylistic_nuance": 1608,
+        "unexplained_lexical_divergence": 1585
+      }
+    },
+    {
+      "id": "Mark",
+      "name": "Mark",
+      "section": "New Testament",
+      "number": 2,
+      "language": "Greek",
+      "file": "Mark.xml",
+      "format": "TEI P5 XML",
+      "sha256": "231dd055dfe2057a4caa5134b0c1c0698361ca445da0bee2e78bf6aab1409cd4",
+      "bytes": 50531567,
+      "stats": {
+        "manuscripts": 233,
+        "early": 17,
+        "lines": 678,
+        "uncoveredLines": 0,
+        "words": 11292,
+        "places": 7275,
+        "meanPlaceConfidence": 0.9883,
+        "meanWordConfidence": 0.9799,
+        "meanManuscriptsPerLine": 187.0605
+      },
+      "categoryCounts": {
+        "lexical_substitution": 2921,
+        "phrase_length_variation": 1463,
+        "addition": 1818,
+        "omission": 1050,
+        "transposition": 23
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 10382,
+        "particle_or_article_variation": 3729,
+        "substantive_structural_variation": 14613,
+        "unexplained_lexical_divergence": 1819,
+        "phonetic_or_confusable_form": 4812,
+        "grammatical_or_stylistic_nuance": 1413
+      }
+    },
+    {
+      "id": "Luke",
+      "name": "Luke",
+      "section": "New Testament",
+      "number": 3,
+      "language": "Greek",
+      "file": "Luke.xml",
+      "format": "TEI P5 XML",
+      "sha256": "d9b25edf2331f6f12a051fe30967998ae23cc754feca2258dd7a35f9c95c5eee",
+      "bytes": 15620895,
+      "stats": {
+        "manuscripts": 47,
+        "early": 19,
+        "lines": 1151,
+        "uncoveredLines": 0,
+        "words": 19599,
+        "places": 7712,
+        "meanPlaceConfidence": 0.9888,
+        "meanWordConfidence": 0.9905,
+        "meanManuscriptsPerLine": 16.4361
+      },
+      "categoryCounts": {
+        "lexical_substitution": 3838,
+        "addition": 1541,
+        "phrase_length_variation": 937,
+        "omission": 1361,
+        "transposition": 35
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 3432,
+        "grammatical_or_stylistic_nuance": 698,
+        "particle_or_article_variation": 1926,
+        "substantive_structural_variation": 4214,
+        "phonetic_or_confusable_form": 1608,
+        "unexplained_lexical_divergence": 1030
+      }
+    },
+    {
+      "id": "John",
+      "name": "John",
+      "section": "New Testament",
+      "number": 4,
+      "language": "Greek",
+      "file": "John.xml",
+      "format": "TEI P5 XML",
+      "sha256": "f465a323e6c711a3b188c7f87a5e346be123ad71c781d13b19a8b3b52312e7fb",
+      "bytes": 55357133,
+      "stats": {
+        "manuscripts": 251,
+        "early": 39,
+        "lines": 879,
+        "uncoveredLines": 0,
+        "words": 15442,
+        "places": 9604,
+        "meanPlaceConfidence": 0.9933,
+        "meanWordConfidence": 0.9879,
+        "meanManuscriptsPerLine": 162.967
+      },
+      "categoryCounts": {
+        "omission": 1138,
+        "lexical_substitution": 4888,
+        "addition": 2351,
+        "phrase_length_variation": 1196,
+        "transposition": 31
+      },
+      "severityCounts": {
+        "substantive_structural_variation": 10236,
+        "orthographic_or_scribal_slip": 11380,
+        "particle_or_article_variation": 3966,
+        "grammatical_or_stylistic_nuance": 1253,
+        "unexplained_lexical_divergence": 1398,
+        "phonetic_or_confusable_form": 4671
+      }
+    },
+    {
+      "id": "Acts",
+      "name": "Acts",
+      "section": "New Testament",
+      "number": 5,
+      "language": "Greek",
+      "file": "Acts.xml",
+      "format": "TEI P5 XML",
+      "sha256": "659ebea39a9a1bfb8a44aafb50c26b83be68b167e5de6b4ffd858a22872cff9b",
+      "bytes": 56850870,
+      "stats": {
+        "manuscripts": 167,
+        "early": 28,
+        "lines": 1010,
+        "uncoveredLines": 4,
+        "words": 18422,
+        "places": 11673,
+        "meanPlaceConfidence": 0.9961,
+        "meanWordConfidence": 0.9943,
+        "meanManuscriptsPerLine": 122.2922
+      },
+      "categoryCounts": {
+        "lexical_substitution": 5707,
+        "phrase_length_variation": 1657,
+        "addition": 2671,
+        "omission": 1591,
+        "transposition": 47
+      },
+      "severityCounts": {
+        "phonetic_or_confusable_form": 5187,
+        "substantive_structural_variation": 11980,
+        "orthographic_or_scribal_slip": 11593,
+        "grammatical_or_stylistic_nuance": 1583,
+        "particle_or_article_variation": 4286,
+        "unexplained_lexical_divergence": 1788
+      }
+    },
+    {
+      "id": "Rom",
+      "name": "Romans",
+      "section": "New Testament",
+      "number": 6,
+      "language": "Greek",
+      "file": "Rom.xml",
+      "format": "TEI P5 XML",
+      "sha256": "7434d81724c2556a7733f828ecaf852585ec46733238df4a91c68f95de5e7cde",
+      "bytes": 22445422,
+      "stats": {
+        "manuscripts": 167,
+        "early": 18,
+        "lines": 439,
+        "uncoveredLines": 0,
+        "words": 7204,
+        "places": 4551,
+        "meanPlaceConfidence": 0.996,
+        "meanWordConfidence": 0.9925,
+        "meanManuscriptsPerLine": 130.6651
+      },
+      "categoryCounts": {
+        "lexical_substitution": 2170,
+        "addition": 1245,
+        "omission": 672,
+        "phrase_length_variation": 453,
+        "transposition": 11
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 4395,
+        "substantive_structural_variation": 4297,
+        "particle_or_article_variation": 1792,
+        "unexplained_lexical_divergence": 583,
+        "phonetic_or_confusable_form": 1543,
+        "grammatical_or_stylistic_nuance": 468
+      }
+    },
+    {
+      "id": "1Cor",
+      "name": "1 Corinthians",
+      "section": "New Testament",
+      "number": 7,
+      "language": "Greek",
+      "file": "1Cor.xml",
+      "format": "TEI P5 XML",
+      "sha256": "df7814417dd6913ec77f5f057be7aedd250de8ff38c5566781cfc97027088343",
+      "bytes": 2342245,
+      "stats": {
+        "manuscripts": 19,
+        "early": 11,
+        "lines": 437,
+        "uncoveredLines": 0,
+        "words": 6815,
+        "places": 1166,
+        "meanPlaceConfidence": 0.9908,
+        "meanWordConfidence": 0.9977,
+        "meanManuscriptsPerLine": 7.0664
+      },
+      "categoryCounts": {
+        "omission": 273,
+        "addition": 227,
+        "lexical_substitution": 566,
+        "phrase_length_variation": 96,
+        "transposition": 4
+      },
+      "severityCounts": {
+        "substantive_structural_variation": 480,
+        "orthographic_or_scribal_slip": 273,
+        "particle_or_article_variation": 261,
+        "unexplained_lexical_divergence": 135,
+        "phonetic_or_confusable_form": 166,
+        "grammatical_or_stylistic_nuance": 103
+      }
+    },
+    {
+      "id": "2Cor",
+      "name": "2 Corinthians",
+      "section": "New Testament",
+      "number": 8,
+      "language": "Greek",
+      "file": "2Cor.xml",
+      "format": "TEI P5 XML",
+      "sha256": "c8125cb0647b7551c3d3e9ede4eaa82e32750102acffc9262751be980548d1ad",
+      "bytes": 1436814,
+      "stats": {
+        "manuscripts": 15,
+        "early": 6,
+        "lines": 256,
+        "uncoveredLines": 0,
+        "words": 4473,
+        "places": 745,
+        "meanPlaceConfidence": 0.9848,
+        "meanWordConfidence": 0.9971,
+        "meanManuscriptsPerLine": 6.1016
+      },
+      "categoryCounts": {
+        "omission": 154,
+        "addition": 131,
+        "lexical_substitution": 391,
+        "phrase_length_variation": 66,
+        "transposition": 3
+      },
+      "severityCounts": {
+        "substantive_structural_variation": 275,
+        "particle_or_article_variation": 174,
+        "orthographic_or_scribal_slip": 219,
+        "grammatical_or_stylistic_nuance": 53,
+        "phonetic_or_confusable_form": 98,
+        "unexplained_lexical_divergence": 75
+      }
+    },
+    {
+      "id": "Gal",
+      "name": "Galatians",
+      "section": "New Testament",
+      "number": 9,
+      "language": "Greek",
+      "file": "Gal.xml",
+      "format": "TEI P5 XML",
+      "sha256": "1f35b5c9b5b2b8cc59b3a375e45fcdca65cdccf98f1d9aa1c66684254f8d81e5",
+      "bytes": 10556241,
+      "stats": {
+        "manuscripts": 217,
+        "early": 14,
+        "lines": 150,
+        "uncoveredLines": 1,
+        "words": 2232,
+        "places": 1617,
+        "meanPlaceConfidence": 0.9963,
+        "meanWordConfidence": 0.993,
+        "meanManuscriptsPerLine": 200.8456
+      },
+      "categoryCounts": {
+        "phrase_length_variation": 172,
+        "addition": 544,
+        "omission": 222,
+        "lexical_substitution": 674,
+        "transposition": 5
+      },
+      "severityCounts": {
+        "substantive_structural_variation": 2133,
+        "particle_or_article_variation": 620,
+        "orthographic_or_scribal_slip": 1670,
+        "unexplained_lexical_divergence": 247,
+        "phonetic_or_confusable_form": 578,
+        "grammatical_or_stylistic_nuance": 170
+      }
+    },
+    {
+      "id": "Eph",
+      "name": "Ephesians",
+      "section": "New Testament",
+      "number": 10,
+      "language": "Greek",
+      "file": "Eph.xml",
+      "format": "TEI P5 XML",
+      "sha256": "4734de2ec0ecd8a291d5328b0d2a4a61922a153b55a64df1b73052bf61a4a2e4",
+      "bytes": 8658919,
+      "stats": {
+        "manuscripts": 175,
+        "early": 11,
+        "lines": 155,
+        "uncoveredLines": 0,
+        "words": 2417,
+        "places": 1601,
+        "meanPlaceConfidence": 0.9966,
+        "meanWordConfidence": 0.9932,
+        "meanManuscriptsPerLine": 153.5097
+      },
+      "categoryCounts": {
+        "lexical_substitution": 642,
+        "phrase_length_variation": 170,
+        "omission": 226,
+        "addition": 558,
+        "transposition": 5
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 1545,
+        "substantive_structural_variation": 1831,
+        "unexplained_lexical_divergence": 199,
+        "particle_or_article_variation": 579,
+        "phonetic_or_confusable_form": 544,
+        "grammatical_or_stylistic_nuance": 143
+      }
+    },
+    {
+      "id": "Phil",
+      "name": "Philippians",
+      "section": "New Testament",
+      "number": 11,
+      "language": "Greek",
+      "file": "Phil.xml",
+      "format": "TEI P5 XML",
+      "sha256": "a132fd65014d7d53c17d19dda27b6f9d4a1f57053b6460090c7fc6dfab97b659",
+      "bytes": 498632,
+      "stats": {
+        "manuscripts": 10,
+        "early": 7,
+        "lines": 104,
+        "uncoveredLines": 0,
+        "words": 1630,
+        "places": 244,
+        "meanPlaceConfidence": 0.988,
+        "meanWordConfidence": 0.9976,
+        "meanManuscriptsPerLine": 6.5481
+      },
+      "categoryCounts": {
+        "transposition": 3,
+        "phrase_length_variation": 19,
+        "addition": 47,
+        "lexical_substitution": 126,
+        "omission": 49
+      },
+      "severityCounts": {
+        "grammatical_or_stylistic_nuance": 18,
+        "substantive_structural_variation": 82,
+        "particle_or_article_variation": 63,
+        "phonetic_or_confusable_form": 29,
+        "orthographic_or_scribal_slip": 65,
+        "unexplained_lexical_divergence": 29
+      }
+    },
+    {
+      "id": "Col",
+      "name": "Colossians",
+      "section": "New Testament",
+      "number": 12,
+      "language": "Greek",
+      "file": "Col.xml",
+      "format": "TEI P5 XML",
+      "sha256": "44471e57d6b031f67a9834aec82ce83ce67273b2a7c0175d3737e1be75eb5282",
+      "bytes": 594078,
+      "stats": {
+        "manuscripts": 14,
+        "early": 5,
+        "lines": 95,
+        "uncoveredLines": 0,
+        "words": 1586,
+        "places": 309,
+        "meanPlaceConfidence": 0.9909,
+        "meanWordConfidence": 0.9988,
+        "meanManuscriptsPerLine": 7.5368
+      },
+      "categoryCounts": {
+        "addition": 64,
+        "phrase_length_variation": 44,
+        "lexical_substitution": 147,
+        "omission": 54
+      },
+      "severityCounts": {
+        "substantive_structural_variation": 138,
+        "unexplained_lexical_divergence": 67,
+        "orthographic_or_scribal_slip": 61,
+        "particle_or_article_variation": 67,
+        "phonetic_or_confusable_form": 23,
+        "grammatical_or_stylistic_nuance": 23
+      }
+    },
+    {
+      "id": "1Thess",
+      "name": "1 Thessalonians",
+      "section": "New Testament",
+      "number": 13,
+      "language": "Greek",
+      "file": "1Thess.xml",
+      "format": "TEI P5 XML",
+      "sha256": "91c363c246194fe96159e3da7641c930c3c719af399911140306bec3ec0899bb",
+      "bytes": 1975487,
+      "stats": {
+        "manuscripts": 52,
+        "early": 9,
+        "lines": 91,
+        "uncoveredLines": 0,
+        "words": 1523,
+        "places": 686,
+        "meanPlaceConfidence": 0.9941,
+        "meanWordConfidence": 0.9869,
+        "meanManuscriptsPerLine": 37.9341
+      },
+      "categoryCounts": {
+        "lexical_substitution": 284,
+        "addition": 167,
+        "omission": 121,
+        "phrase_length_variation": 113,
+        "transposition": 1
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 471,
+        "substantive_structural_variation": 738,
+        "particle_or_article_variation": 152,
+        "phonetic_or_confusable_form": 112,
+        "unexplained_lexical_divergence": 99,
+        "grammatical_or_stylistic_nuance": 56
+      }
+    },
+    {
+      "id": "2Thess",
+      "name": "2 Thessalonians",
+      "section": "New Testament",
+      "number": 14,
+      "language": "Greek",
+      "file": "2Thess.xml",
+      "format": "TEI P5 XML",
+      "sha256": "b014d5109f5ee87533fb523adee3f62e3a392b4b8251c8e762fea48d0255a0ca",
+      "bytes": 2663191,
+      "stats": {
+        "manuscripts": 154,
+        "early": 6,
+        "lines": 48,
+        "uncoveredLines": 0,
+        "words": 844,
+        "places": 423,
+        "meanPlaceConfidence": 0.9862,
+        "meanWordConfidence": 0.9714,
+        "meanManuscriptsPerLine": 142.7083
+      },
+      "categoryCounts": {
+        "omission": 56,
+        "lexical_substitution": 189,
+        "phrase_length_variation": 69,
+        "addition": 109
+      },
+      "severityCounts": {
+        "particle_or_article_variation": 146,
+        "phonetic_or_confusable_form": 148,
+        "orthographic_or_scribal_slip": 655,
+        "grammatical_or_stylistic_nuance": 41,
+        "substantive_structural_variation": 685,
+        "unexplained_lexical_divergence": 51
+      }
+    },
+    {
+      "id": "1Tim",
+      "name": "1 Timothy",
+      "section": "New Testament",
+      "number": 15,
+      "language": "Greek",
+      "file": "1Tim.xml",
+      "format": "TEI P5 XML",
+      "sha256": "f4f83440867009a471f6da520a5450e0d0e08e5ecb2a2a11855cc8d8d041a68d",
+      "bytes": 610892,
+      "stats": {
+        "manuscripts": 18,
+        "early": 4,
+        "lines": 113,
+        "uncoveredLines": 0,
+        "words": 1612,
+        "places": 278,
+        "meanPlaceConfidence": 0.9535,
+        "meanWordConfidence": 0.9868,
+        "meanManuscriptsPerLine": 12.4779
+      },
+      "categoryCounts": {
+        "addition": 36,
+        "omission": 51,
+        "lexical_substitution": 168,
+        "phrase_length_variation": 23
+      },
+      "severityCounts": {
+        "substantive_structural_variation": 110,
+        "unexplained_lexical_divergence": 30,
+        "phonetic_or_confusable_form": 35,
+        "orthographic_or_scribal_slip": 118,
+        "grammatical_or_stylistic_nuance": 26,
+        "particle_or_article_variation": 35
+      }
+    },
+    {
+      "id": "2Tim",
+      "name": "2 Timothy",
+      "section": "New Testament",
+      "number": 16,
+      "language": "Greek",
+      "file": "2Tim.xml",
+      "format": "TEI P5 XML",
+      "sha256": "9a004ec9b7932cc20c23723a39663f621d396dfd064e73caef9a6a03158f8b39",
+      "bytes": 339856,
+      "stats": {
+        "manuscripts": 6,
+        "early": 3,
+        "lines": 83,
+        "uncoveredLines": 0,
+        "words": 1242,
+        "places": 169,
+        "meanPlaceConfidence": 0.9895,
+        "meanWordConfidence": 0.9987,
+        "meanManuscriptsPerLine": 5.4578
+      },
+      "categoryCounts": {
+        "addition": 26,
+        "omission": 35,
+        "lexical_substitution": 97,
+        "phrase_length_variation": 10,
+        "transposition": 1
+      },
+      "severityCounts": {
+        "substantive_structural_variation": 55,
+        "orthographic_or_scribal_slip": 46,
+        "unexplained_lexical_divergence": 22,
+        "phonetic_or_confusable_form": 31,
+        "particle_or_article_variation": 23,
+        "grammatical_or_stylistic_nuance": 11
+      }
+    },
+    {
+      "id": "Titus",
+      "name": "Titus",
+      "section": "New Testament",
+      "number": 17,
+      "language": "Greek",
+      "file": "Titus.xml",
+      "format": "TEI P5 XML",
+      "sha256": "b0787c3bb21a8dc8c7427e05fddfebdbd5019df7e793219885b8fdba5cd499f4",
+      "bytes": 224243,
+      "stats": {
+        "manuscripts": 9,
+        "early": 4,
+        "lines": 46,
+        "uncoveredLines": 0,
+        "words": 657,
+        "places": 101,
+        "meanPlaceConfidence": 0.9769,
+        "meanWordConfidence": 0.9957,
+        "meanManuscriptsPerLine": 5.2174
+      },
+      "categoryCounts": {
+        "lexical_substitution": 55,
+        "omission": 18,
+        "addition": 23,
+        "phrase_length_variation": 5
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 25,
+        "substantive_structural_variation": 34,
+        "phonetic_or_confusable_form": 5,
+        "particle_or_article_variation": 18,
+        "orthographic_or_scribal_slip": 26,
+        "grammatical_or_stylistic_nuance": 7
+      }
+    },
+    {
+      "id": "Phlm",
+      "name": "Philemon",
+      "section": "New Testament",
+      "number": 18,
+      "language": "Greek",
+      "file": "Phlm.xml",
+      "format": "TEI P5 XML",
+      "sha256": "d489eb0910d73bc2f30a147dffdc2a21caf3d0dad02bb52760cab8235dff202e",
+      "bytes": 104089,
+      "stats": {
+        "manuscripts": 9,
+        "early": 5,
+        "lines": 25,
+        "uncoveredLines": 0,
+        "words": 336,
+        "places": 37,
+        "meanPlaceConfidence": 0.9934,
+        "meanWordConfidence": 0.9993,
+        "meanManuscriptsPerLine": 5.8
+      },
+      "categoryCounts": {
+        "lexical_substitution": 15,
+        "omission": 12,
+        "phrase_length_variation": 2,
+        "addition": 8
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 6,
+        "substantive_structural_variation": 17,
+        "grammatical_or_stylistic_nuance": 2,
+        "particle_or_article_variation": 7,
+        "phonetic_or_confusable_form": 4,
+        "unexplained_lexical_divergence": 3
+      }
+    },
+    {
+      "id": "Heb",
+      "name": "Hebrews",
+      "section": "New Testament",
+      "number": 19,
+      "language": "Greek",
+      "file": "Heb.xml",
+      "format": "TEI P5 XML",
+      "sha256": "8c042d909f7d81136182fcb1558ff15d9158e30247dd2c16604ea58ffbe5f4d8",
+      "bytes": 1781280,
+      "stats": {
+        "manuscripts": 24,
+        "early": 15,
+        "lines": 304,
+        "uncoveredLines": 0,
+        "words": 4982,
+        "places": 927,
+        "meanPlaceConfidence": 0.9935,
+        "meanWordConfidence": 0.997,
+        "meanManuscriptsPerLine": 6.8717
+      },
+      "categoryCounts": {
+        "addition": 115,
+        "lexical_substitution": 560,
+        "omission": 167,
+        "phrase_length_variation": 82,
+        "transposition": 3
+      },
+      "severityCounts": {
+        "substantive_structural_variation": 296,
+        "unexplained_lexical_divergence": 115,
+        "particle_or_article_variation": 155,
+        "phonetic_or_confusable_form": 157,
+        "orthographic_or_scribal_slip": 361,
+        "grammatical_or_stylistic_nuance": 49
+      }
+    },
+    {
+      "id": "Jas",
+      "name": "James",
+      "section": "New Testament",
+      "number": 20,
+      "language": "Greek",
+      "file": "Jas.xml",
+      "format": "TEI P5 XML",
+      "sha256": "110af765a1af4b1164cccab0fa7a5b79dcf751422a5a5d700c64cf7b9b337389",
+      "bytes": 713470,
+      "stats": {
+        "manuscripts": 12,
+        "early": 9,
+        "lines": 108,
+        "uncoveredLines": 0,
+        "words": 1740,
+        "places": 372,
+        "meanPlaceConfidence": 0.9625,
+        "meanWordConfidence": 0.9901,
+        "meanManuscriptsPerLine": 5.7778
+      },
+      "categoryCounts": {
+        "lexical_substitution": 211,
+        "omission": 67,
+        "addition": 61,
+        "phrase_length_variation": 29,
+        "transposition": 4
+      },
+      "severityCounts": {
+        "phonetic_or_confusable_form": 48,
+        "grammatical_or_stylistic_nuance": 49,
+        "orthographic_or_scribal_slip": 103,
+        "substantive_structural_variation": 128,
+        "particle_or_article_variation": 81,
+        "unexplained_lexical_divergence": 46
+      }
+    },
+    {
+      "id": "1Pet",
+      "name": "1 Peter",
+      "section": "New Testament",
+      "number": 21,
+      "language": "Greek",
+      "file": "1Pet.xml",
+      "format": "TEI P5 XML",
+      "sha256": "1cefe3097e88093601baf2fe3f69ea7c572e4edec79e079bab8c991685660cc0",
+      "bytes": 766167,
+      "stats": {
+        "manuscripts": 10,
+        "early": 8,
+        "lines": 105,
+        "uncoveredLines": 0,
+        "words": 1688,
+        "places": 436,
+        "meanPlaceConfidence": 0.9871,
+        "meanWordConfidence": 0.995,
+        "meanManuscriptsPerLine": 5.7429
+      },
+      "categoryCounts": {
+        "addition": 64,
+        "omission": 65,
+        "lexical_substitution": 260,
+        "phrase_length_variation": 47
+      },
+      "severityCounts": {
+        "particle_or_article_variation": 79,
+        "substantive_structural_variation": 152,
+        "unexplained_lexical_divergence": 43,
+        "orthographic_or_scribal_slip": 149,
+        "phonetic_or_confusable_form": 100,
+        "grammatical_or_stylistic_nuance": 37
+      }
+    },
+    {
+      "id": "2Pet",
+      "name": "2 Peter",
+      "section": "New Testament",
+      "number": 22,
+      "language": "Greek",
+      "file": "2Pet.xml",
+      "format": "TEI P5 XML",
+      "sha256": "e6ce3043d1f4bec705b61a3fd0ee70c7bc6c3406095c3535861d63e8f6256833",
+      "bytes": 532460,
+      "stats": {
+        "manuscripts": 9,
+        "early": 5,
+        "lines": 61,
+        "uncoveredLines": 0,
+        "words": 1102,
+        "places": 299,
+        "meanPlaceConfidence": 0.988,
+        "meanWordConfidence": 0.9949,
+        "meanManuscriptsPerLine": 7.2131
+      },
+      "categoryCounts": {
+        "lexical_substitution": 182,
+        "omission": 45,
+        "phrase_length_variation": 31,
+        "addition": 41
+      },
+      "severityCounts": {
+        "unexplained_lexical_divergence": 40,
+        "grammatical_or_stylistic_nuance": 27,
+        "phonetic_or_confusable_form": 70,
+        "substantive_structural_variation": 114,
+        "orthographic_or_scribal_slip": 104,
+        "particle_or_article_variation": 41
+      }
+    },
+    {
+      "id": "1John",
+      "name": "1 John",
+      "section": "New Testament",
+      "number": 23,
+      "language": "Greek",
+      "file": "1John.xml",
+      "format": "TEI P5 XML",
+      "sha256": "c981978bd4c8b2493d57858e4613e87a0fdb0f66aa9d333f9cd0d385dd3adc8a",
+      "bytes": 1115577,
+      "stats": {
+        "manuscripts": 21,
+        "early": 6,
+        "lines": 105,
+        "uncoveredLines": 0,
+        "words": 2146,
+        "places": 539,
+        "meanPlaceConfidence": 0.9861,
+        "meanWordConfidence": 0.9911,
+        "meanManuscriptsPerLine": 15.6762
+      },
+      "categoryCounts": {
+        "lexical_substitution": 275,
+        "phrase_length_variation": 55,
+        "omission": 103,
+        "addition": 105,
+        "transposition": 1
+      },
+      "severityCounts": {
+        "orthographic_or_scribal_slip": 202,
+        "substantive_structural_variation": 246,
+        "particle_or_article_variation": 109,
+        "grammatical_or_stylistic_nuance": 29,
+        "phonetic_or_confusable_form": 101,
+        "unexplained_lexical_divergence": 52
+      }
+    },
+    {
+      "id": "2John",
+      "name": "2 John",
+      "section": "New Testament",
+      "number": 24,
+      "language": "Greek",
+      "file": "2John.xml",
+      "format": "TEI P5 XML",
+      "sha256": "f3a7f3335edba2fa6f6080dcabedc5f74e8c55e34ac57f9de8ee41ffe1fd59e1",
+      "bytes": 206128,
+      "stats": {
+        "manuscripts": 20,
+        "early": 5,
+        "lines": 13,
+        "uncoveredLines": 0,
+        "words": 245,
+        "places": 80,
+        "meanPlaceConfidence": 0.9958,
+        "meanWordConfidence": 0.9977,
+        "meanManuscriptsPerLine": 16.3077
+      },
+      "categoryCounts": {
+        "lexical_substitution": 42,
+        "omission": 15,
+        "addition": 11,
+        "phrase_length_variation": 11,
+        "transposition": 1
+      },
+      "severityCounts": {
+        "phonetic_or_confusable_form": 16,
+        "particle_or_article_variation": 27,
+        "substantive_structural_variation": 34,
+        "orthographic_or_scribal_slip": 28,
+        "grammatical_or_stylistic_nuance": 13,
+        "unexplained_lexical_divergence": 13
+      }
+    },
+    {
+      "id": "3John",
+      "name": "3 John",
+      "section": "New Testament",
+      "number": 25,
+      "language": "Greek",
+      "file": "3John.xml",
+      "format": "TEI P5 XML",
+      "sha256": "555966702908641a286ffe4ca8bc225f5903a9d39c1f19998a0db040a79aeb74",
+      "bytes": 305599,
+      "stats": {
+        "manuscripts": 48,
+        "early": 5,
+        "lines": 15,
+        "uncoveredLines": 0,
+        "words": 216,
+        "places": 94,
+        "meanPlaceConfidence": 0.9918,
+        "meanWordConfidence": 0.9974,
+        "meanManuscriptsPerLine": 25.6
+      },
+      "categoryCounts": {
+        "lexical_substitution": 54,
+        "addition": 19,
+        "phrase_length_variation": 9,
+        "omission": 10,
+        "transposition": 2
+      },
+      "severityCounts": {
+        "phonetic_or_confusable_form": 33,
+        "particle_or_article_variation": 25,
+        "grammatical_or_stylistic_nuance": 14,
+        "orthographic_or_scribal_slip": 51,
+        "substantive_structural_variation": 40,
+        "unexplained_lexical_divergence": 8
+      }
+    },
+    {
+      "id": "Jude",
+      "name": "Jude",
+      "section": "New Testament",
+      "number": 26,
+      "language": "Greek",
+      "file": "Jude.xml",
+      "format": "TEI P5 XML",
+      "sha256": "dc245ce9cb564b324de10200502d8468c4a4e74b107df467c276ed33bbeb3f43",
+      "bytes": 1657025,
+      "stats": {
+        "manuscripts": 138,
+        "early": 6,
+        "lines": 25,
+        "uncoveredLines": 0,
+        "words": 459,
+        "places": 285,
+        "meanPlaceConfidence": 0.9952,
+        "meanWordConfidence": 0.9935,
+        "meanManuscriptsPerLine": 129.92
+      },
+      "categoryCounts": {
+        "addition": 59,
+        "transposition": 3,
+        "omission": 45,
+        "phrase_length_variation": 41,
+        "lexical_substitution": 137
+      },
+      "severityCounts": {
+        "substantive_structural_variation": 341,
+        "grammatical_or_stylistic_nuance": 42,
+        "unexplained_lexical_divergence": 42,
+        "particle_or_article_variation": 94,
+        "orthographic_or_scribal_slip": 332,
+        "phonetic_or_confusable_form": 140
+      }
+    },
+    {
+      "id": "Rev",
+      "name": "Revelation",
+      "section": "New Testament",
+      "number": 27,
+      "language": "Greek",
+      "file": "Rev.xml",
+      "format": "TEI P5 XML",
+      "sha256": "68cf485851bfde7efa13bfd8b231126d39d8a06a62f5ca63537d7c3ffa7aee74",
+      "bytes": 14173506,
+      "stats": {
+        "manuscripts": 65,
+        "early": 13,
+        "lines": 405,
+        "uncoveredLines": 0,
+        "words": 9784,
+        "places": 4713,
+        "meanPlaceConfidence": 0.9847,
+        "meanWordConfidence": 0.9798,
+        "meanManuscriptsPerLine": 44.2395
+      },
+      "categoryCounts": {
+        "addition": 916,
+        "phrase_length_variation": 711,
+        "lexical_substitution": 2289,
+        "omission": 787,
+        "transposition": 10
+      },
+      "severityCounts": {
+        "substantive_structural_variation": 4453,
+        "orthographic_or_scribal_slip": 3384,
+        "particle_or_article_variation": 1520,
+        "unexplained_lexical_divergence": 816,
+        "grammatical_or_stylistic_nuance": 469,
+        "phonetic_or_confusable_form": 1634
+      }
+    }
+  ]
+}

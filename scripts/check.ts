@@ -3,6 +3,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { parseXml } from "./lib/tei";
+import { loadSpecWithSources } from "./sources";
 
 const t0 = performance.now();
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -22,7 +23,7 @@ for (const specId of readdirSync(`${ROOT}outputs`).sort()) {
     fails.push(`outputs/${specId}: no matching specifications/${specId}.yaml`);
     continue;
   }
-  const spec = Bun.YAML.parse(readFileSync(specPath, "utf8")) as { id: string; targets: { id: string }[] };
+  const { targets: specTargets } = loadSpecWithSources(specId);
   for (const compId of readdirSync(`${ROOT}outputs/${specId}`).sort()) {
     const dir = `${ROOT}outputs/${specId}/${compId}`, at = `outputs/${specId}/${compId}`;
     const mfPath = `${dir}/manifest.json`;
@@ -36,8 +37,57 @@ for (const specId of readdirSync(`${ROOT}outputs`).sort()) {
     if (M.compilation?.id !== compId) fails.push(`${at}: manifest compilation.id mismatch`);
     if (!M.modelAttribution?.modelName) fails.push(`${at}: missing modelAttribution`);
     if (!M.method?.description) fails.push(`${at}: missing method description`);
+
+    // Validate structured REPORT.md with YAML frontmatter
+    const reportPath = `${dir}/REPORT.md`;
+    if (!existsSync(reportPath)) {
+      fails.push(`${at}: missing REPORT.md`);
+    } else {
+      const repRaw = readFileSync(reportPath, "utf8");
+      const fmMatch = repRaw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+      if (!fmMatch) {
+        fails.push(`${at}/REPORT.md: missing YAML frontmatter (--- ... ---)`);
+      } else {
+        try {
+          const fm = Bun.YAML.parse(fmMatch[1]) as Record<string, any>;
+          if (fm.specification_id !== specId) fails.push(`${at}/REPORT.md: frontmatter specification_id mismatch`);
+          if (fm.compilation_id !== compId) fails.push(`${at}/REPORT.md: frontmatter compilation_id mismatch`);
+          if (!fm.model_attribution?.model_name) fails.push(`${at}/REPORT.md: frontmatter missing model_attribution.model_name`);
+          if (!fm.method_summary || typeof fm.method_summary !== "string") fails.push(`${at}/REPORT.md: frontmatter missing method_summary`);
+          if (!Array.isArray(fm.disagreement_categories) || !fm.disagreement_categories.length) {
+            fails.push(`${at}/REPORT.md: frontmatter missing non-empty disagreement_categories`);
+          } else {
+            for (const cat of fm.disagreement_categories) {
+              if (!cat.id || !cat.label || !cat.description || typeof cat.count !== "number" || cat.count < 0) {
+                fails.push(`${at}/REPORT.md: invalid disagreement_categories entry ${JSON.stringify(cat)}`);
+              }
+            }
+          }
+          const subcats = fm.disagreement_subcategories ?? fm.disagreement_severities;
+          if (subcats !== undefined) {
+            if (!Array.isArray(subcats) || !subcats.length) {
+              fails.push(`${at}/REPORT.md: disagreement_subcategories must be a non-empty array`);
+            } else {
+              const scaleMin = typeof fm.disagreement_scale?.min === "number" ? fm.disagreement_scale.min : undefined;
+              const scaleMax = typeof fm.disagreement_scale?.max === "number" ? fm.disagreement_scale.max : undefined;
+              for (const sc of subcats) {
+                if (!sc.id || !sc.label || typeof sc.level !== "number" || !sc.description) {
+                  fails.push(`${at}/REPORT.md: invalid disagreement_subcategories entry ${JSON.stringify(sc)}`);
+                }
+                if (scaleMin !== undefined && scaleMax !== undefined && (sc.level < scaleMin || sc.level > scaleMax)) {
+                  fails.push(`${at}/REPORT.md: subcategory ${sc.id} level ${sc.level} outside disagreement_scale [${scaleMin}, ${scaleMax}]`);
+                }
+              }
+            }
+          }
+          if (!fmMatch[2].trim()) fails.push(`${at}/REPORT.md: empty Markdown body`);
+        } catch (err) {
+          fails.push(`${at}/REPORT.md: invalid YAML frontmatter (${err})`);
+        }
+      }
+    }
     const listedIds = new Set((M.books ?? []).map((b: any) => b.id));
-    for (const t of spec.targets) {
+    for (const t of specTargets) {
       if (!listedIds.has(t.id)) fails.push(`${at}: missing target book ${t.id} in manifest`);
     }
 

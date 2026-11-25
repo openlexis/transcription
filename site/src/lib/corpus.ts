@@ -56,10 +56,20 @@ export interface SourceItem {
   files: SourceFileEntry[];
 }
 
+export type AuthorInfo = string | { name: string; organization?: string };
+
+export function formatAuthor(a?: AuthorInfo): string {
+  if (!a) return "";
+  if (typeof a === "string") return a.trim();
+  if (!a.name) return a.organization ?? "";
+  return a.organization && a.organization !== a.name ? `${a.name} · ${a.organization}` : a.name;
+}
+
 export interface SpecFile {
   file: string;
   id: string;
   title: string;
+  author?: AuthorInfo;
   summary: string;
   objective: {
     mission: string;
@@ -287,6 +297,31 @@ export function getPrimarySpec(): SpecFile {
 
 export const formatNum = (n: number) => n.toLocaleString("en-US");
 export const formatEra = (y: number) => (y < 0 ? `${-y} BC` : `AD ${y}`);
+export const shortUlid = (id: string) => (id.length > 6 ? id.slice(-6) : id);
+
+const CROCKFORD = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+
+/** Decode the 48-bit millisecond timestamp embedded in the first 10 chars of a ULID. */
+export function ulidTimestamp(id: string): number | null {
+  if (!ULID_RE.test(id)) return null;
+  let ms = 0;
+  for (let i = 0; i < 10; i++) {
+    const v = CROCKFORD.indexOf(id[i]);
+    if (v < 0) return null;
+    ms = ms * 32 + v;
+  }
+  return ms;
+}
+
+export function formatUlidDate(id: string): string {
+  const ms = ulidTimestamp(id);
+  if (ms === null) return "";
+  return new Date(ms).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
 
 /** Escapes HTML, formats `code`, and makes mentions of `targets` / `sources` clickable links to their expandable sections. */
 export function formatSpecText(s: string, linkEmbeds = false): string {
@@ -461,9 +496,10 @@ export function buildClientSourceIndex(spec: SpecFile) {
 export interface CompiledBookEntry {
   id: string;
   name: string;
-  section: string;
-  number: number;
-  language: string;
+  section?: string;
+  number?: number;
+  language?: string;
+  attributes?: Record<string, string | string[]>;
   file: string;
   format: string;
   sha256: string;
@@ -481,6 +517,25 @@ export interface CompiledBookEntry {
   };
 }
 
+/** Normalize a book's open-ended attributes (merging explicit `attributes` with any top-level `section`/`language`). */
+export function getBookAttributes(book: CompiledBookEntry): Record<string, string[]> {
+  const out: Record<string, string[]> = {};
+  const add = (k: string, v: string | string[] | undefined) => {
+    if (!v) return;
+    const vals = (Array.isArray(v) ? v : [v]).map((x) => String(x).trim()).filter(Boolean);
+    if (!vals.length) return;
+    const cur = out[k] ?? [];
+    for (const val of vals) if (!cur.includes(val)) cur.push(val);
+    out[k] = cur;
+  };
+  if (book.section) add("section", book.section);
+  if (book.language) add("language", book.language);
+  if (book.attributes) {
+    for (const [k, v] of Object.entries(book.attributes)) add(k, v);
+  }
+  return out;
+}
+
 export interface CompilationManifest {
   specification: {
     id: string;
@@ -490,6 +545,10 @@ export interface CompilationManifest {
   };
   compilation: {
     id: string;
+    title?: string;
+    subtitle?: string;
+    summary?: string;
+    author?: AuthorInfo;
     createdAt: string;
     outputDirectory: string;
     outputFormat: string;
@@ -528,12 +587,92 @@ export interface CompilationManifest {
   books: CompiledBookEntry[];
 }
 
+export interface DisagreementCategory {
+  id: string;
+  label: string;
+  description: string;
+  count: number;
+}
+
+export interface DisagreementScale {
+  min: number;
+  max: number;
+  description?: string;
+}
+
+export interface DisagreementSubcategory {
+  id: string;
+  label: string;
+  category_id?: string;
+  level: number;
+  level_label?: string;
+  short_label?: string;
+  description: string;
+  local_confidence_effect?: string;
+  corpus_authenticity_effect?: string;
+  confidence_effect?: string;
+  count?: number;
+  variant_readings_count?: number;
+  app_places_count?: number;
+}
+
+export interface CompilationReport {
+  file: string;
+  frontmatter: {
+    specification_id?: string;
+    compilation_id?: string;
+    created_at?: string;
+    model_attribution?: Record<string, string>;
+    method_summary?: string;
+    disagreement_scale?: DisagreementScale;
+    disagreement_categories?: DisagreementCategory[];
+    disagreement_subcategories?: DisagreementSubcategory[];
+    disagreement_severities?: DisagreementSubcategory[];
+    authenticity_signal?: string;
+    evidence_usage?: Record<string, string>;
+    totals?: Record<string, number>;
+  };
+  body: string;
+}
+
+/** Normalize any model-defined numeric severity level onto a 1..5 visual styling bucket. */
+export function normalizeSeverityBucket(level: number, scale?: DisagreementScale): 1 | 2 | 3 | 4 | 5 {
+  const min = scale?.min ?? 1;
+  const max = scale?.max ?? 5;
+  if (max <= min) return 3;
+  const ratio = Math.max(0, Math.min(1, (level - min) / (max - min)));
+  return Math.max(1, Math.min(5, Math.round(1 + ratio * 4))) as 1 | 2 | 3 | 4 | 5;
+}
+
 export interface CompilationRecord {
   specId: string;
   compilationId: string;
   dir: string;
   relDir: string;
   manifest: CompilationManifest;
+  report?: CompilationReport;
+}
+
+function parseReportMd(reportPath: string): CompilationReport | undefined {
+  if (!existsSync(reportPath)) return undefined;
+  const raw = readFileSync(reportPath, "utf8");
+  const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!m) return { file: "REPORT.md", frontmatter: {}, body: raw.trim() };
+  try {
+    const frontmatter = (parse(m[1]) ?? {}) as CompilationReport["frontmatter"];
+    return { file: "REPORT.md", frontmatter, body: m[2].trim() };
+  } catch {
+    return { file: "REPORT.md", frontmatter: {}, body: m[2].trim() };
+  }
+}
+
+export function getWitnessViewersMap(specId: string): Map<string, { viewers: { name: string; url: string }[]; shelfmark?: string; name?: string }> {
+  const spec = getSpecifications().find((s) => s.id === specId) ?? getPrimarySpec();
+  const map = new Map<string, { viewers: { name: string; url: string }[]; shelfmark?: string; name?: string }>();
+  for (const s of spec.sources) {
+    map.set(s.id, { viewers: s.viewers ?? [], shelfmark: s.shelfmark, name: s.name });
+  }
+  return map;
 }
 
 let _compilations: CompilationRecord[] | undefined;
@@ -559,12 +698,14 @@ export function getCompilations(): CompilationRecord[] {
       if (!existsSync(mfPath)) continue;
       try {
         const manifest = JSON.parse(readFileSync(mfPath, "utf8")) as CompilationManifest;
+        const report = parseReportMd(`${dir}/REPORT.md`);
         records.push({
           specId,
           compilationId,
           dir,
           relDir: `outputs/${specId}/${compilationId}`,
           manifest,
+          report,
         });
       } catch {
         continue;
@@ -617,6 +758,9 @@ export interface ParsedAppReading {
   degree: string;
   uncertainty: string;
   difference: string;
+  severityLevel?: number;
+  severitySubtype?: string;
+  severityNote?: string;
 }
 
 export interface ParsedVerseToken {
@@ -772,6 +916,17 @@ export function parseCompiledBookTei(xmlPath: string): { witnesses: ParsedWitnes
           const degM = rBody.match(/degree="([^"]+)"/);
           const uncM = rBody.match(/<note type="uncertainty">([\s\S]*?)<\/note>/);
           const diffM = rBody.match(/<note type="difference">([\s\S]*?)<\/note>/);
+          const sevM = rBody.match(/<note type="severity"([^>]*)>([\s\S]*?)<\/note>/);
+          let severityLevel: number | undefined;
+          let severitySubtype: string | undefined;
+          let severityNote: string | undefined;
+          if (sevM) {
+            const nM = sevM[1].match(/\bn="(\d+)"/);
+            const stM = sevM[1].match(/\bsubtype="([^"]+)"/);
+            if (nM) severityLevel = Number(nM[1]);
+            if (stM) severitySubtype = stM[1];
+            severityNote = unentXml(sevM[2]);
+          }
           const plain = unentXml(rBody.replace(/<[^>]+>[\s\S]*?<\/[^>]+>|<[^>]+>/g, "")).trim();
           readings.push({
             type: rType,
@@ -781,6 +936,9 @@ export function parseCompiledBookTei(xmlPath: string): { witnesses: ParsedWitnes
             degree: degM ? degM[1] : "",
             uncertainty: uncM ? unentXml(uncM[1]) : "",
             difference: diffM ? unentXml(diffM[1]) : "",
+            severityLevel,
+            severitySubtype,
+            severityNote,
           });
         }
         tokens.push({

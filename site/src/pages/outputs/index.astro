@@ -1,11 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import {
+  formatAuthor,
   formatBytes,
   formatNum,
   getCompilations,
-  githubBlob,
-  githubTree,
+  shortUlid,
 } from "../../lib/corpus";
 
 const compilations = getCompilations();
@@ -41,41 +41,50 @@ const compilations = getCompilations();
         <div class="item-list">
           {compilations.map((c) => {
             const m = c.manifest;
-            const dateStr = m.compilation.createdAt ? m.compilation.createdAt.slice(0, 10) : "—";
+            const dateStr = m.compilation.createdAt
+              ? new Date(m.compilation.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })
+              : "—";
+            const title = m.compilation.title || `${m.modelAttribution.modelName} · ${dateStr}`;
+            const subtitle = m.compilation.subtitle || `${m.modelAttribution.modelName} (${m.modelAttribution.provider})`;
+            const summary = m.compilation.summary || m.method.summary;
+            const authorStr = formatAuthor(m.compilation.author);
             return (
               <div class="panel">
                 <div class="panel-head">
                   <div>
-                    <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 6px;">
-                      <a href={`/outputs/${c.specId}/${c.compilationId}/`} style="font-size: 1.12rem; font-weight: 700;">
-                        <code>{c.compilationId}</code>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 4px;">
+                      <a href={`/outputs/${c.specId}/${c.compilationId}/`} style="font-size: 1.15rem; font-weight: 700; color: var(--ink);">
+                        {title}
                       </a>
+                      <code title={c.compilationId}>{shortUlid(c.compilationId)}</code>
                       <span class="badge badge-emerald">{m.totals.books} books</span>
-                      <span class="badge badge-indigo">{m.modelAttribution.provider} · {m.modelAttribution.modelName}</span>
+                      <span class="badge badge-indigo">{m.modelAttribution.modelName}</span>
                       {m.modelAttribution.effortLevel && (
-                        <span class="badge">effort: {m.modelAttribution.effortLevel}</span>
+                        <span class="badge">{m.modelAttribution.effortLevel} effort</span>
                       )}
                     </div>
-                    <p class="panel-sub">
-                      Specification <a href="/specifications/"><code>{c.specId}</code></a> · Created {dateStr} · {m.compilation.outputFormat} · {formatBytes(m.totals.totalBytes)}
+                    <p class="panel-sub" style="margin-top: 2px;">
+                      {subtitle}{authorStr ? ` · ${authorStr}` : ""}{dateStr !== "—" ? ` · ${dateStr}` : ""} · <a href={`/specifications/${c.specId}/`}>Specification <code title={c.specId}>{shortUlid(c.specId)}</code></a>
                     </p>
                   </div>
                   <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <a href={`/outputs/${c.specId}/${c.compilationId}/`} class="btn btn-primary">Explore books →</a>
-                    <a href={githubTree(c.relDir)} target="_blank" rel="noopener" class="btn btn-secondary">GitHub ↗</a>
+                    <a href={`/outputs/${c.specId}/${c.compilationId}/`} class="btn btn-primary">Read books →</a>
                   </div>
                 </div>
 
                 <p style="margin: 0 0 14px; color: var(--ink-secondary); font-size: 0.92rem;">
-                  {m.method.summary}
+                  {summary}
                 </p>
 
                 <div style="display: flex; flex-wrap: wrap; gap: 18px; font-size: 0.88rem; color: var(--ink-muted); padding-top: 12px; border-top: 1px solid var(--border);">
                   <span><strong style="color: var(--ink);">{formatNum(m.totals.books)}</strong> books</span>
                   <span><strong style="color: var(--ink);">{formatNum(m.totals.lines)}</strong> lines</span>
                   <span><strong style="color: var(--ink);">{formatNum(m.totals.words)}</strong> words</span>
-                  <span><strong style="color: var(--ink);">{formatNum(m.totals.variantPlaces)}</strong> variant <code>&lt;app&gt;</code> places</span>
-                  <a href={githubBlob(`${c.relDir}/manifest.json`)} target="_blank" rel="noopener"><code>manifest.json</code> ↗</a>
+                  <span><strong style="color: var(--ink);">{formatNum(m.totals.variantPlaces)}</strong> points of disagreement</span>
                 </div>
               </div>
             );
