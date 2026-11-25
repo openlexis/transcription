@@ -319,7 +319,7 @@ export function compile(R: Book, under: { file: string; sha256: string }, by: Re
   writeFileSync(`${dir}/transcription.json`, tj);
   writeFileSync(`${dir}/disagreements.json`, dj);
   // a readable copy of the text, chapter by chapter
-  let md = `# ${R.name}: the compiled transcription\n\nMade under [SPECIFICATION.md](../../SPECIFICATION.md); `stats.json` records the specification's hash and what did the work. Each line is printed as the rules decide it; a word in a place where the manuscripts disagree is marked with its confidence in disagreements.json. Lines that no manuscript covers are listed as not covered.\n`;
+  let md = `# ${R.name}: the compiled transcription\n\nMade under [SPECIFICATION.md](../../SPECIFICATION.md); stats.json records the specification's hash and what did the work. Each line is printed as the rules decide it; a word in a place where the manuscripts disagree is marked with its confidence in disagreements.json. Lines that no manuscript covers are listed as not covered.\n`;
   let chap = "";
   for (const l of lines as { ref: string; uncovered?: boolean; words?: { t: string }[] }[]) {
     const c = l.ref.split(":")[0]; if (c !== chap) { chap = c; md += `\n## Chapter ${c}\n\n`; }
