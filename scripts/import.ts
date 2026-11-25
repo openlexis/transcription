@@ -7,12 +7,13 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { parseXml, teiUnits, type TeiUnit } from "../src/tei";
-import { HEB_BOOKS, LXX_BOOKS, NT_BOOKS, numeral, sacred, skel } from "../src/text";
+import { HEB_BOOKS, NT_BOOKS, numeral, sacred, skel } from "../src/text";
 
 const SRC = process.argv[2];
 if (!SRC || !existsSync(SRC)) throw new Error("usage: bun scripts/import.ts <folder with the holders' files>");
 const ROOT = new URL("..", import.meta.url).pathname;
-for (const d of ["greek", "greek-translation", "hebrew"]) { rmSync(`${ROOT}transcriptions/${d}`, { recursive: true, force: true }); mkdirSync(`${ROOT}transcriptions/${d}`, { recursive: true }); }
+rmSync(`${ROOT}transcriptions/greek-translation`, { recursive: true, force: true });
+for (const d of ["greek", "hebrew"]) { rmSync(`${ROOT}transcriptions/${d}`, { recursive: true, force: true }); mkdirSync(`${ROOT}transcriptions/${d}`, { recursive: true }); }
 
 const snap = (p: string) => { const d = readdirSync(`${SRC}/${p}`).filter((x) => /^\d{4}-\d\d-\d\d$/.test(x)).sort().pop()!; return `${SRC}/${p}/${d}`; };
 const zipList = (zip: string) => spawnSync("unzip", ["-Z1", zip], { maxBuffer: 1 << 26 }).stdout.toString().split("\n").filter(Boolean).sort();
@@ -48,14 +49,14 @@ const HOLDERS: Record<string, Holder> = {
   "etcbc-dss": { id: "etcbc-dss", name: "ETCBC and CACCHT, biblical Dead Sea Scrolls", web: "https://github.com/ETCBC/dss", license: "CC BY-NC 4.0" },
   cntr: { id: "cntr", name: "Center for New Testament Restoration (CNTR)", web: "https://github.com/Center-for-New-Testament-Restoration/transcriptions/tree/4e743a41a4b2ca010ece53229cd272aa59b1efe6", license: "CC BY-SA 4.0 (the repository's LICENSE.md)" },
 };
-/** The order in which transcriptions of one manuscript are listed (and break a tie, SPECIFICATION.md rule 4). */
+/** The order in which transcriptions of one manuscript are listed (and break a tie, scripts/METHOD.md). */
 export const HOLDER_ORDER = Object.keys(HOLDERS);
 
 // ---------- manuscripts ----------
 type Transcription = { holder: string; file: string; source: string; member?: string; format: string; license: string; lines: number; words: number };
 /** kind: a continuous-text manuscript; a lectionary (readings in the order of the church year); a catena (commentary with the
  * biblical text in pieces); a scroll (a fragmentary scroll from the Judaean desert). Only a continuous-text manuscript can show
- * that a word is absent (SPECIFICATION.md, rule 13). */
+ * that a word is absent (scripts/METHOD.md). */
 type Kind = "continuous" | "lectionary" | "catena" | "scroll";
 type Manuscript = { siglum: string; kind: Kind; language: string; name?: string; shelfmark?: string; century?: string; year?: number; dateSource?: string; viewer?: { name: string; url: string }[]; transcriptions: Transcription[] };
 const MSS = new Map<string, Manuscript>();
@@ -70,7 +71,7 @@ const NT_ORDER = NT_BOOKS.map((b) => b.id);
 const OSIS = NT_ORDER;
 /** Writes one transcription: units in book, chapter, line order. */
 type Unit = { book: string; ref: string; words: { w: string; gap: boolean }[]; gapEnd: boolean; absent?: boolean };
-type Opts = { member?: string; format?: string; dir?: string; order?: string[]; kind?: Kind; language?: string; date?: { century: string; year?: number; source: string }; name?: string; shelfmark?: string; viewer?: { name: string; url: string }[] };
+type Opts = { member?: string; format?: string; dir?: string; order?: string[]; kind?: Kind; language?: string; date?: { century: string; year?: number; from?: number; to?: number; basis?: string; source: string }; name?: string; shelfmark?: string; viewer?: { name: string; url: string }[] };
 function save(siglum: string, holder: string, source: string, license: string, units: Unit[], faxKey?: string, o: Opts = {}) {
   siglum = gaSiglum(siglum) ?? siglum;
   const OSIS = o.order ?? NT_ORDER;
@@ -90,15 +91,15 @@ function save(siglum: string, holder: string, source: string, license: string, u
   writeFileSync(`${ROOT}${file}`, text.join("\n") + "\n");
   let m = MSS.get(siglum);
   if (!m) {
-    const c = o.language && o.language !== "Greek" || o.dir === "greek-translation" ? undefined : CAT.get(docOf(siglum));
+    const c = o.language && o.language !== "Greek" ? undefined : CAT.get(docOf(siglum));
     const f = (faxKey && FAX[faxKey]) || FAX[`intf-ntvmr/${siglum}`] || FAX[`cntr-mss/${siglum}`];
     const viewer: { name: string; url: string }[] = [];
     if (!o.dir && IMAGES.has(docOf(siglum))) viewer.push({ name: "INTF New Testament Virtual Manuscript Room", url: `https://ntvmr.uni-muenster.de/manuscript-workspace?docID=${docOf(siglum)}` });
     for (const x of f?.facsimiles ?? []) if (!viewer.some((v) => v.url === x.url)) viewer.push({ name: x.provider, url: x.url });
     for (const v of o.viewer ?? []) if (!viewer.some((x) => x.url === v.url)) viewer.push(v);
     const name = o.name ?? f?.name, shelfmark = o.shelfmark ?? f?.shelfmark;
-    const date = o.date ?? (c?.origEarly ? { century: String(c.orig), year: Math.round((c.origEarly + c.origLate) / 2), source: "INTF catalogue (catalogue.json in the holder's metadata)" } : f?.century ? { century: f.century, source: "not stated in the held records" } : undefined);
-    m = { siglum, kind: o.kind ?? "continuous", language: o.language ?? "Greek", ...(name ? { name } : {}), ...(shelfmark ? { shelfmark } : {}), ...(date ? { century: date.century, ...(date.year !== undefined ? { year: date.year } : {}), dateSource: date.source } : {}), viewer, transcriptions: [] };
+    const date = o.date ?? (c?.origEarly ? { century: String(c.orig), year: Math.round((c.origEarly + c.origLate) / 2), from: c.origEarly, to: c.origLate, basis: "catalogue date range (the catalogue does not state its method)", source: "INTF catalogue (catalogue.json in the holder's metadata)" } : f?.century ? { century: f.century, source: "not stated in the held records" } : undefined);
+    m = { siglum, kind: o.kind ?? "continuous", language: o.language ?? "Greek", ...(name ? { name } : {}), ...(shelfmark ? { shelfmark } : {}), ...(date ? { century: date.century, ...(date.year !== undefined ? { year: date.year } : {}), ...(date.from !== undefined ? { yearFrom: date.from, yearTo: date.to } : {}), ...(date.basis ? { dateBasis: date.basis } : {}), dateSource: date.source } : {}), viewer, transcriptions: [] };
     MSS.set(siglum, m);
   }
   m.transcriptions.push({ holder, file, source, ...(o.member ? { member: o.member } : {}), format: o.format ?? "TEI XML", license, lines: text.length, words });
@@ -265,7 +266,7 @@ const hebWords = (raw: string) => raw.normalize("NFD").replace(/[\u0591-\u05AF\u
     }
   }
   save("L", "uxlc", "https://github.com/nerd-bible/tanach.us/tree/a89d77f15771e885038015c20d425c04ee2", "Tanach.us: \"All biblical Hebrew text, in any format, may be viewed or copied without restriction\"", units, "uxlc",
-    { member: "downloads/Books/<book>.xml", format: "XML (UXLC), one file per book", dir: "hebrew", order: HEB, language: "Hebrew", date: { century: "11th (1008 or 1009)", year: 1008, source: "the colophon date as recorded with the Internet Archive images (forensics/facsimiles.json in the evidence repository)" } });
+    { member: "downloads/Books/<book>.xml", format: "XML (UXLC), one file per book", dir: "hebrew", order: HEB, language: "Hebrew", date: { century: "11th (1008 or 1009)", year: 1008, from: 1008, to: 1009, basis: "colophon (a date written in the manuscript by its copyist)", source: "the colophon date as recorded with the Internet Archive images (forensics/facsimiles.json in the evidence repository)" } });
 }
 { // the Samaritan Pentateuch: MS Dublin, Chester Beatty Library 751, and MS Garizim 1 from Deuteronomy 32:36b to the end
   const d = `${snap("sp")}/tf/7.5.0`, word = tf(`${d}/g_cons_utf8.tf`), trail = tf(`${d}/trailer.tf`), os = tf(`${d}/oslots.tf`);
@@ -287,7 +288,7 @@ const hebWords = (raw: string) => raw.normalize("NFD").replace(/[\u0591-\u05AF\u
     }
   }
   const lic = "CC BY-NC 4.0 (the dataset's README and LICENSE)", src = "https://github.com/DT-UCPH/sp/tree/e8a120f2e92b6558fd39bbe72f830ded871a0a47";
-  save("CBL751", "dt-ucph-sp", src, lic, D1, undefined, { format: "Text-Fabric data, tf/7.5.0 (the holder publishes no XML)", dir: "hebrew", order: HEB, language: "Hebrew", name: "Samaritan Pentateuch, Chester Beatty Library MS 751", shelfmark: "Dublin, Chester Beatty Library, MS 751", date: { century: "13th (1225)", year: 1225, source: "http://schorch.at/html/samaritanus_english.html (the Samaritanus project, which made the transcription)" } });
+  save("CBL751", "dt-ucph-sp", src, lic, D1, undefined, { format: "Text-Fabric data, tf/7.5.0 (the holder publishes no XML)", dir: "hebrew", order: HEB, language: "Hebrew", name: "Samaritan Pentateuch, Chester Beatty Library MS 751", shelfmark: "Dublin, Chester Beatty Library, MS 751", date: { century: "13th (1225)", year: 1225, from: 1225, to: 1225, basis: "date stated by the project that made the transcription (its method is not stated there)", source: "http://schorch.at/html/samaritanus_english.html (the Samaritanus project, which made the transcription)" } });
   save("Garizim1", "dt-ucph-sp", src, lic, G1, undefined, { format: "Text-Fabric data, tf/7.5.0 (the holder publishes no XML)", dir: "hebrew", order: HEB, language: "Hebrew", name: "Samaritan Pentateuch, MS Garizim 1 (Deuteronomy 32:36b to the end)", shelfmark: "Mount Gerizim, MS Garizim 1" });
 }
 { // the biblical scrolls from the Judaean desert (ETCBC dss): a word with a letter a modern editor reconstructed is lost
@@ -323,36 +324,11 @@ const hebWords = (raw: string) => raw.normalize("NFD").replace(/[\u0591-\u05AF\u
     for (const u of units) { const k = `${u.book} ${u.ref}`, o = by.get(k); if (!o) by.set(k, { ...u, words: [...u.words] }); else { if (u.words[0]) u.words[0] = { ...u.words[0], gap: true }; o.words.push(...u.words); } }
     save(scroll, "etcbc-dss", "https://github.com/ETCBC/dss/tree/0b7774a72b6d0e91712aa2156d2a1d354f1f5e6d", "CC BY-NC 4.0 (the dataset's README and LICENSE)", [...by.values()], undefined,
       { format: "Text-Fabric data, tf/2.0.5 (the holder publishes no XML)", dir: "hebrew", order: HEB, language: "Hebrew", kind: "scroll", name: `Dead Sea Scroll ${scroll.replace(/-/g, "/")}`, viewer: [{ name: "Leon Levy Dead Sea Scrolls Digital Library", url: "https://www.deadseascrolls.org.il/" }],
-        date: { century: "3rd century BC to 1st century AD (the span stated for the scrolls; this data gives no date for each scroll)", year: -100, source: "http://dss.collections.imj.org.il/significance (Israel Museum): the scrolls are ascribed to the third century BCE to the first century CE; the middle, 100 BC, is used for every scroll" } });
+        date: { century: "3rd century BC to 1st century AD (the span stated for the scrolls; this data gives no date for each scroll)", year: -100, from: -250, to: 70, basis: "the span stated for the scrolls as a group, not a date for this scroll", source: "http://dss.collections.imj.org.il/significance (Israel Museum): the scrolls are ascribed to the third century BCE to the first century CE; the middle, 100 BC, is used for every scroll" } });
   }
   console.log(`dss: ${out.size} scrolls`);
 }
 
-// ---------- the Greek translation of the Old Testament: read only where no Hebrew or Aramaic manuscript has a line ----------
-// Each Greek line is filed under the Hebrew book and number it stands for. Books are left out where the Greek numbers or
-// orders the lines differently from the Hebrew (Psalms, Proverbs, Jeremiah, Joel, Malachi, Esther), and so are books
-// that have no Hebrew text held (Judith, Tobit, 1 and 4 Maccabees, Wisdom, Sirach).
-const SAME = new Set(["Gen", "Lev", "Num", "Deut", "Josh", "Judg", "1Chr", "Eccl", "Song", "Job", "Obad", "Jonah", "Nah", "Hab", "Zeph", "Hag", "Zech", "Isa", "Lam"]);
-const toHebrew = (u: Unit): Unit | undefined => {
-  const [c, l] = u.ref.split(":").map(Number);
-  if (SAME.has(u.book)) return u;
-  if (u.book === "2Kgdms") return { ...u, book: "2Sam" };
-  if (u.book === "2Esd") return c <= 10 ? { ...u, book: "Ezra" } : { ...u, book: "Neh", ref: `${c - 10}:${l}` };
-  return undefined;
-};
-const heb = (us: Unit[]) => us.map(toHebrew).filter((u): u is Unit => !!u);
-{
-  const H = HOLDERS["sinaiticus-project"], zip = `${snap("sinaiticus-project")}/FINAL_TRANSCRIPTION_version105.xml.zip`;
-  const byNum = new Map(LXX_BOOKS.map((b) => [b.n, b.id]));
-  const units = heb(teiUnits(member(zip, "FINAL_TRANSCRIPTION_version105.xml"), SP).filter((u) => u.lxx && byNum.has(u.lxx)).map((u) => ({ book: byNum.get(u.lxx!)!, ref: u.ref, words: u.words, gapEnd: u.gapEnd })));
-  save("01", H.id, "https://epapers.bham.ac.uk/id/eprint/3306/1/FINAL_TRANSCRIPTION_version105.xml.zip", H.license, units, "sinaiticus-project/lxx", { member: "FINAL_TRANSCRIPTION_version105.xml", format: "TEI XML, in a zip file", dir: "greek-translation", order: HEB, date: { century: "IV", year: 350, source: "INTF catalogue (catalogue.json in the holder's metadata)" } });
-  // INTF's Septuagint transcriptions: 2 Kingdoms 1 to 5 in two manuscripts (book 10 in the room's numbering)
-  for (const [d, siglum, o] of [[8100004, "M", { name: "Codex Coislinianus 1 (M)", shelfmark: "Paris, Bibliothèque nationale de France, Coislin 1", date: { century: "VII (601-700)", year: 650, source: "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc25169m (BnF Archives et manuscrits)" }, viewer: [{ name: "Gallica, Bibliothèque nationale de France", url: "https://gallica.bnf.fr/ark:/12148/btv1b84683074" }] }], [8000046, "46", { name: "Septuagint manuscript 46 (Rahlfs)" }]] as const) {
-    const xml = readFileSync(`${intf}/transcriptions/${d}.xml`, "utf8");
-    const us = teiUnits(xml, SP).filter((u) => u.book === 10).map((u) => ({ book: "2Sam", ref: u.ref, words: u.words, gapEnd: u.gapEnd }));
-    save(siglum, "intf", `https://ntvmr.uni-muenster.de/community/api/transcript/get/?docID=${d}&pageID=ALL&format=teiraw`, /creativecommons\.org\/licenses\/by\/4\.0/.test(xml.slice(0, 20000)) ? "CC BY 4.0 (the file's header)" : "the file's header states no license", us, undefined, { dir: "greek-translation", order: HEB, ...o });
-  }
-}
 
 const list = [...MSS.values()].sort((a, b) => (a.siglum < b.siglum ? -1 : a.siglum > b.siglum ? 1 : 0));
 for (const m of list) m.transcriptions.sort((a, b) => HOLDER_ORDER.indexOf(a.holder) - HOLDER_ORDER.indexOf(b.holder));

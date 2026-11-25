@@ -1,4 +1,4 @@
-// Letters and keys. Every rule here is named in SPECIFICATION.md.
+// Letters and keys. Each choice here is described in scripts/METHOD.md.
 
 /** Greek letters only: no accents or breathings, lower case, every sigma written σ. */
 export const skel = (w: string) => w.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().replace(/[ςϲ]/g, "σ").replace(/[^α-ωϛϟ]/g, "");
@@ -61,23 +61,14 @@ export const HEB_BOOKS = [
   ["Lam", "Lamentations", "Lamentations"], ["Esth", "Esther", "Esther"], ["Dan", "Daniel", "Daniel"], ["Ezra", "Ezra", "Ezra"], ["Neh", "Nehemiah", "Nehemiah"],
 ].map(([id, name, uxlc], i) => ({ id, name, uxlc, n: i + 1 }));
 
-/** The books of the Greek translation of the Old Testament in the Codex Sinaiticus transcription, by First1KGreek work number. */
-export const LXX_BOOKS = [
-  ["001", "Gen", "Genesis"], ["003", "Lev", "Leviticus"], ["004", "Num", "Numbers"], ["005", "Deut", "Deuteronomy"], ["006", "Josh", "Joshua"], ["008", "Judg", "Judges"],
-  ["012", "2Kgdms", "2 Kingdoms"], ["015", "1Chr", "1 Chronicles"], ["018", "2Esd", "2 Esdras"], ["019", "Esth", "Esther"], ["020", "Jdt", "Judith"], ["021", "Tob", "Tobit"],
-  ["023", "1Macc", "1 Maccabees"], ["026", "4Macc", "4 Maccabees"], ["027", "Ps", "Psalms"], ["029", "Prov", "Proverbs"], ["030", "Eccl", "Ecclesiastes"], ["031", "Song", "Song of Songs"],
-  ["032", "Job", "Job"], ["033", "Wis", "Wisdom"], ["034", "Sir", "Sirach"], ["039", "Joel", "Joel"], ["040", "Obad", "Obadiah"], ["041", "Jonah", "Jonah"], ["042", "Nah", "Nahum"],
-  ["043", "Hab", "Habakkuk"], ["044", "Zeph", "Zephaniah"], ["045", "Hag", "Haggai"], ["046", "Zech", "Zechariah"], ["047", "Mal", "Malachi"], ["048", "Isa", "Isaiah"], ["049", "Jer", "Jeremiah"], ["051", "Lam", "Lamentations"],
-].map(([n, id, name], i) => ({ n, id, name, i: i + 1 }));
-
-/** Hebrew key (SPECIFICATION.md, rule 5): the consonants; final letter forms written as the plain letters; a ו or י inside a word
+/** Hebrew key (scripts/METHOD.md): the consonants; final letter forms written as the plain letters; a ו or י inside a word
  * (not its first or last letter), the letters copyists added or left out to mark vowels, is not compared. */
 export const hebrewSpell = (w: string) => {
   const c = w.replace(/[^\u05D0-\u05EA]/g, "").replace(/ך/g, "כ").replace(/ם/g, "מ").replace(/ן/g, "נ").replace(/ף/g, "פ").replace(/ץ/g, "צ");
   return c.length > 2 ? c[0] + c.slice(1, -1).replace(/[וי]/g, "") + c[c.length - 1] : c;
 };
 
-/** The parts of the Old Testament written in Aramaic (SPECIFICATION.md, rule 14): whole stretches of lines, the rest of Daniel 2:4
+/** The parts of the Old Testament written in Aramaic (scripts/METHOD.md): whole stretches of lines, the rest of Daniel 2:4
  * after the word ארמית ("in Aramaic"), and the two words יגר שהדותא of Genesis 31:47. */
 const ARAMAIC: Record<string, [string, string][]> = { Dan: [["2:5", "7:28"]], Ezra: [["4:8", "6:18"], ["7:12", "7:26"]], Jer: [["10:11", "10:11"]] };
 const cl = (r: string) => r.split(":").map(Number) as [number, number];
