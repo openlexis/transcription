@@ -1,13 +1,6 @@
 ---
-import Base from "../../../layouts/Base.astro";
-import Disagreements from "../../../components/Disagreements.astro";
-import { compilations } from "../../../lib/data";
-export function getStaticPaths() { return compilations().map((c) => ({ params: { id: c.id } })); }
-const { id } = Astro.params;
-const c = compilations().find((x) => x.id === id)!;
+import Places from "../../../views/Places.astro";
+import { defaultArtifact } from "../../../lib/data";
+export function getStaticPaths() { return defaultArtifact().manifest.books.map((b) => ({ params: { id: b.id } })); }
 ---
-<Base title={`${c.stats.name}: disagreements`} current={id} tab="cdis">
-  <h1>Disagreements in {c.stats.name}</h1>
-  <p class="lede">Severity: <b>high</b> means the printed reading has under 60% of the votes; <b>medium</b> means another reading has at least 10%; <b>low</b> at least 1%; <b>settled</b> below that. Weight is the share of the strongest other reading.</p>
-  <Disagreements fixed={id} />
-</Base>
+<Places art={defaultArtifact()} id={Astro.params.id} />

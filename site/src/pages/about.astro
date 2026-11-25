@@ -5,35 +5,32 @@ import Base from "../layouts/Base.astro";
   <h1>About these compilations</h1>
   <div class="rules">
     <h2>What this is</h2>
-    <p>A <strong>compiled transcription</strong> is one text in the original language, built from the transcriptions of the surviving manuscripts. It aims at the text most likely to match the original.</p>
+    <p>A <strong>compiled transcription</strong> is one text of a book in the language it was written in, built from the transcriptions of its surviving manuscripts, aiming at the words as the author wrote them.</p>
     <h2>How it is made</h2>
     <ol>
-      <li>There is one <a href="/specification/">specification</a>, <code>SPECIFICATION.md</code>, for every book. It lists the books, the files each book reads, and the rules.</li>
-      <li>Whatever model or program does the work follows the specification in one pass and identifies itself in the output, with its exact name and version. The output records that, and the hash of the specification it was produced under. The same inputs always give the same output.</li>
-      <li>A quick check, which takes about a second, confirms three things: every printed word is read by a manuscript, no word is doubled unless a manuscript doubles it, and the output matches its recorded hash.</li>
+      <li>There is one <a href="/specification/">specification</a>, <code>SPECIFICATION.md</code>. It states the goal and what an output must contain, and nothing about how.</li>
+      <li>The compiler chooses its own method, including a statistical model for how likely each reading is to be original, and writes that method into its output with the evidence for every reading.</li>
+      <li>Each compilation is one output, filed by the specification's hash and the compiler's name. The compiler identifies itself in it. The same inputs always give the same output.</li>
+      <li>A quick check, which takes about a second, confirms that there is one specification, that each output matches its recorded hashes, that every printed word is in a manuscript, that no word is doubled unless a manuscript doubles it, and that every chance lies inside its range.</li>
     </ol>
     <h2>What is used, and what is not</h2>
     <ul>
-      <li><strong>Used:</strong> transcriptions of ancient manuscripts in the original language, each one weighted by its <strong>proximity</strong>, meaning how close it was copied in time to the original.</li>
-      <li><strong>Not used:</strong> printed or critical editions, recent reconstructions, translations, quotations, or images. Where no manuscript covers a line, the line is marked as not covered. It is never filled in from another source.</li>
-      <li><strong>Images</strong> stay with the libraries that hold them. Each manuscript links to its holder's viewer where one exists.</li>
+      <li><strong>Used:</strong> transcriptions of ancient manuscripts in the original languages, and the facts their holders record about them (such as a date range), listed in <code>transcriptions/manuscripts.json</code>. The books and the folders each section reads are listed in <code>transcriptions/books.json</code>.</li>
+      <li><strong>Not used:</strong> printed or critical editions, modern reconstructions, translations into other languages, quotations by later writers, or images. A line no manuscript has is shown as missing, never filled in.</li>
+      <li><strong>Images</strong> stay with the libraries that hold them. Each manuscript links to its holder's viewer where one exists, and to the holder's own transcription file.</li>
     </ul>
     <h2>What each section reads</h2>
     <ul>
-      <li><strong>Old Testament (Hebrew and Aramaic):</strong> the Leningrad Codex (read as written in its lines, not as its margin says to read), two Samaritan Pentateuch manuscripts, and the Dead Sea Scrolls. The parts written in Aramaic (Daniel 2:4 to 7:28, Ezra 4:8 to 6:18 and 7:12 to 26, Jeremiah 10:11, two words of Genesis 31:47) are compiled the same way and marked Aramaic. Greek manuscripts of the translation are read only for a line that no Hebrew or Aramaic manuscript has, and each such word is marked as from a translation; at present the Leningrad Codex has every line, so no Greek is printed. Hebrew is shown right to left; a switch on each chapter shows the consonants only.</li>
-      <li><strong>New Testament (Greek):</strong> Greek continuous-text manuscripts, Greek lectionaries (the text read in lessons), and the biblical text of Greek catena manuscripts (the text cut into pieces between comments).</li>
-      <li>A lectionary, a catena or a scroll may give only part of a line. It never counts as reading that a word is absent: a word it does not have counts as lost.</li>
-      <li>Quotations by later writers are not read: the held files of them are reconstructions made by modern editors, not manuscripts.</li>
+      <li><strong>Old Testament (Hebrew and Aramaic):</strong> the Leningrad Codex, two Samaritan Pentateuch manuscripts, and the Dead Sea Scrolls. The parts in Aramaic are compiled the same way and marked. Hebrew is shown right to left; a switch on each chapter shows the consonants only.</li>
+      <li><strong>New Testament (Greek):</strong> Greek continuous-text manuscripts, Greek lectionaries and the biblical text of Greek catena manuscripts.</li>
     </ul>
-    <h2>Terms</h2>
+    <h2>Words used on this site</h2>
     <ul>
-      <li>A <strong>manuscript</strong> is any surviving handwritten source, whole or fragmentary.</li>
-      <li>A <strong>transcription</strong> is the characters of one manuscript in typed form.</li>
-      <li><strong>Alignment</strong> means lining up each word of each transcription with the same word in the others.</li>
-      <li>A <strong>variant</strong> is a place where the transcriptions read differently. A <strong>place</strong> is one stretch of the text where they disagree.</li>
-      <li>A <strong>singular reading</strong> is found in one manuscript alone. It has no vote.</li>
-      <li>An <strong>eye-skip</strong> happens when a copyist's eye jumps from one word to a similar word further on and leaves out the words between. It counts as a copying slip.</li>
-      <li>A <strong>line</strong> is the numbered unit used for reference, written as chapter:line.</li>
+      <li>A <strong>manuscript</strong> is a surviving handwritten copy, whole or in pieces.</li>
+      <li>A <strong>transcription</strong> is the letters of one manuscript, typed.</li>
+      <li>A <strong>line</strong> is the numbered unit used for reference, written chapter:line.</li>
+      <li>A <strong>reading</strong> is what one manuscript has at one point; a <strong>place</strong> is a stretch where the manuscripts do not all agree.</li>
+      <li>A <strong>chance</strong> is how likely a reading is to be what the author wrote, by the output's own method; its <strong>90% range</strong> shows how sure that estimate is.</li>
     </ul>
   </div>
 </Base>

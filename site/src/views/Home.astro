@@ -1,0 +1,34 @@
+---
+import Base from "../layouts/Base.astro";
+import ProducedBy from "../components/ProducedBy.astro";
+import { bookUrl, num, pct, type Artifact } from "../lib/data";
+interface Props { art: Artifact }
+const { art } = Astro.props;
+const books = art.manifest.books;
+const tot = books.reduce((a, b) => ({ words: a.words + b.stats.words, places: a.places + b.stats.places }), { words: 0, places: 0 });
+---
+<Base title={art.isDefault ? "Compiled transcriptions" : `Output ${art.compiler}`} tab="home" art={art}>
+  <h1>{art.isDefault ? "The books as their authors wrote them, from the oldest hands" : `Output ${art.compiler}`}</h1>
+  <p class="lede">Each book below is compiled from every manuscript we hold that was copied in the language the book was written in. Every word lists the manuscripts that have it, and how likely it is to be what the author wrote. Tap a word to see the evidence.</p>
+  <p class="meta"><ProducedBy compact art={art} /> {art.isDefault ? <a href="/outputs/">All outputs</a> : <a href="/">Back to the default output</a>}</p>
+  <div class="kpis">
+    <div class="kpi"><b>{books.length}</b><span>books</span></div>
+    <div class="kpi"><b>{num(tot.words)}</b><span>words compiled</span></div>
+    <div class="kpi"><b>{num(tot.places)}</b><span>places where manuscripts differ</span></div>
+  </div>
+  {Object.entries(art.manifest.sections).map(([k, s]) => (
+    <section>
+      <h2>{s.name}</h2>
+      <div class="grid">
+        {books.filter((b) => b.section === k).map((b) => (
+          <a class="card" href={bookUrl(art, b.id)}>
+            <h3>{b.name}</h3>
+            <div class="meta">{num(b.stats.manuscripts)} manuscripts · {num(b.stats.words)} words</div>
+            <div class="meta">{num(b.stats.places)} places where they differ</div>
+            <div class="meta">average chance a word is original: {pct(b.stats.meanWordConfidence)}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+</Base>

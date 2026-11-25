@@ -1,0 +1,31 @@
+---
+import Base from "../layouts/Base.astro";
+import { base, book, era, holderFile, num, type Artifact } from "../lib/data";
+interface Props { art: Artifact; id: string }
+const { art, id } = Astro.props;
+const B = book(art, id), e = art.manifest.books.find((b) => b.id === id)!;
+const lines = new Map<number, number>(); for (const l of B.lines) for (const w of l.witnesses) lines.set(w, (lines.get(w) ?? 0) + 1);
+const ws = B.witnesses.map((w, i) => ({ ...w, i, lines: lines.get(i) ?? 0 }));
+const r = (x: number) => x.toFixed(2);
+---
+<Base title={`${e.name}: manuscripts`} art={art} current={id} tab="inputs">
+  <h1>Manuscripts</h1>
+  <p class="lede">The {num(ws.length)} manuscripts this output reads for {e.name}, oldest first. Reliability is the compiler's estimate of how often a manuscript has the original reading, with its 90% range; <a href={`${base(art)}/method/#3-how-likely-each-reading-is-the-model`}>how it is estimated</a>. Links go to the holders' own files and page viewers.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Manuscript</th><th>Date (holder's record)</th><th>Reliability</th><th class="num">Lines</th><th>Holder's file</th><th>Page images</th></tr></thead>
+      <tbody>
+        {ws.map((w) => (
+          <tr id={`ms-${w.siglum}`}>
+            <td><b>{w.siglum}</b>{w.leaves ? ` (with ${w.leaves.join(", ")})` : ""}<br /><span class="meta">{w.name ?? ""}{w.kind !== "continuous" ? ` · ${w.kind}` : ""}</span></td>
+            <td>{w.date.estimate !== null ? <>{era(w.date.estimate)} ± {w.date.margin} years<br /><span class="meta">{era(w.date.from!)} to {era(w.date.to!)} · {w.date.method}</span></> : <>unknown<br /><span class="meta">{w.date.method}</span></>}</td>
+            <td>{r(w.reliability.estimate)}<br /><span class="meta">{r(w.reliability.low)} to {r(w.reliability.high)} · {num(w.reliability.linesCompared)} lines compared</span></td>
+            <td class="num">{w.lines}</td>
+            <td>{w.files.map((f) => { const h = holderFile(f); return h ? <div><a href={h.source} rel="noopener">{h.holderName}</a><br /><span class="meta">{h.format}{h.member ? ` · ${h.member}` : ""} · {h.license}</span></div> : <div class="meta">not in the inventory</div>; })}</td>
+            <td>{w.viewer.length ? w.viewer.map((v) => <div><a href={v.url} rel="noopener">{v.name}</a></div>) : <span class="meta">no viewer known</span>}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Base>

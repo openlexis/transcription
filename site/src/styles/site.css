@@ -128,7 +128,7 @@ body.marks-off .w { border-bottom-color: transparent !important; }
 .place .r { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; padding: 5px 0; border-top: 1px dashed #eee6d6; }
 .place .r:first-child { border-top: 0; }
 .place .r .g { font-family: var(--greek); font-size: 1.12rem; }
-.place .r .n { font-size: .8rem; color: var(--soft); text-align: right; white-space: nowrap; }
+.place .r .n { font-size: .8rem; color: var(--soft); text-align: right; }
 .place .r .sig { grid-column: 1 / -1; font-size: .78rem; color: var(--faint); }
 .place .r.win .g { color: var(--accent); font-weight: 700; }
 .more-btn { display: block; margin: 16px auto; padding: 10px 18px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); font: 600 .95rem var(--ui); cursor: pointer; }
@@ -153,3 +153,40 @@ body.marks-off .w { border-bottom-color: transparent !important; }
 .switchbar { position: sticky; top: 0; z-index: 19; background: rgba(247, 243, 234, .96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-top: 8px; }
 @media (min-width: 641px) { .top { position: static; border-bottom: 0; } }
 @media (max-width: 640px) { .switch-row { position: static; } }
+
+/* the inline panel under a line */
+.ln .no { border: 0; background: none; font: inherit; font-size: .8rem; cursor: pointer; color: var(--faint); text-align: start; padding: .55em 0 0; }
+.ln .no.sel { color: var(--accent); font-weight: 700; }
+.panel { direction: ltr; font: 15px/1.5 var(--ui); background: var(--card); border: 1.5px solid var(--accent); border-radius: var(--r); padding: 10px 12px 12px; margin: 4px 0 10px; box-shadow: 0 6px 18px rgba(40, 30, 10, .08); max-width: 100%; overflow: hidden; }
+.panel .ph { display: flex; align-items: center; gap: 6px; font-size: 1rem; margin-bottom: 6px; }
+.panel .ph .greek, .panel .ph .hebrew { font-size: 1.3rem; }
+.panel .x { margin-left: auto; border: 0; background: var(--paper); width: 32px; height: 32px; border-radius: 99px; font-size: 1.2rem; cursor: pointer; color: var(--soft); flex: none; }
+.panel p { margin: 6px 0; }
+.panel h4 { margin: 14px 0 4px; font-size: .95rem; }
+.panel .greek { font-family: var(--greek); font-size: 1.08em; }
+.panel .hebrew { font-family: var(--hebrew); font-size: 1.08em; }
+.panel .why { color: var(--soft); font-size: .9rem; }
+.panel .rd { padding: 6px 0; border-top: 1px dashed #eee6d6; }
+.panel .rd:first-of-type { border-top: 0; }
+.panel .rd.win .rh > span:first-child { color: var(--accent); font-weight: 700; }
+.panel .rd .bar { margin-top: 4px; height: 5px; } .panel .rd .bar i { background: var(--accent); }
+.panel .alone { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; } .panel .alone .chips { margin: 0; }
+.panel details.adds { margin-top: 8px; } .panel details.adds summary { cursor: pointer; font-weight: 600; }
+table.mini { font-size: .82rem; } table.mini td, table.mini th { padding: 3px 6px; }
+.mscard { background: var(--paper); border-radius: 10px; padding: 8px 10px; margin: 8px 0; font-size: .88rem; }
+.mscard .front { margin: 6px 0; font-size: .86rem; } .mscard .front dd { font-weight: 500; }
+.al-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: 10px; max-height: 60vh; overflow-y: auto; }
+table.al { border-collapse: separate; border-spacing: 0; font-size: 1rem; width: max-content; }
+table.al td, table.al th { padding: 3px 7px; white-space: nowrap; border-bottom: 1px solid #f1ece1; text-align: start; }
+table.al th { position: sticky; inset-inline-start: 0; background: var(--card); z-index: 1; font: 600 .74rem var(--ui); max-width: 7.5em; overflow: hidden; text-overflow: ellipsis; }
+table.al tr.pr td, table.al tr.pr th { background: #eef6f4; font-weight: 700; position: sticky; top: 0; z-index: 2; }
+table.al tr.pr th { z-index: 3; }
+table.al td.fc { background: #fff3cf; } table.al tr.pr td.fc { background: #ffe8a3; }
+table.al .grp { border: 0; background: none; font: inherit; color: var(--accent); cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 2px; }
+mark.dx { background: #f6c9b6; color: #6b1e00; border-radius: 3px; padding: 0 2px; }
+mark.dm { background: #f6c9b6; color: #6b1e00; border-radius: 3px; padding: 0 4px; }
+mark.ds { background: #f7e3a3; color: inherit; border-radius: 2px; }
+.lost { color: var(--faint); }
+.al-note { margin: 4px 0 6px; font-size: .8rem; }
+mark.dsm { background: #f7e3a3; color: #8c6a00; text-decoration: line-through; border-radius: 2px; font-size: .85em; }
+table.al td, table.al th { vertical-align: middle; }

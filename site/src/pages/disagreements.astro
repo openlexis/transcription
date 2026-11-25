@@ -1,9 +1,5 @@
 ---
-import Base from "../layouts/Base.astro";
-import Disagreements from "../components/Disagreements.astro";
+import Places from "../views/Places.astro";
+import { defaultArtifact } from "../lib/data";
 ---
-<Base title="Disagreements" tab="dis">
-  <h1>Disagreements</h1>
-  <p class="lede">Every place where the manuscripts that cover a line do not all read the same. Filter by book, severity, type and weight. Tap a reference to read it in context.</p>
-  <Disagreements />
-</Base>
+<Places art={defaultArtifact()} />

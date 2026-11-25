@@ -1,0 +1,15 @@
+---
+import Base from "../layouts/Base.astro";
+import ProducedBy from "../components/ProducedBy.astro";
+import { md, shortHash, type Artifact } from "../lib/data";
+interface Props { art: Artifact }
+const { art } = Astro.props;
+const m = art.manifest.method;
+const body = m.text.replace(/^# .*\n/, "");
+---
+<Base title="Method" tab="method" art={art} description="The method this output's compiler chose for the goal of the specification, in its own words.">
+  <h1>The method of this output</h1>
+  <p class="lede">The specification states only the goal. The compiler chose this method to reach it, and wrote it down; the text below is copied from the output itself ({m.file}, SHA-256 <code>{shortHash(m.sha256)}…</code>). Another compiler may choose another method, and its output would carry its own.</p>
+  <ProducedBy art={art} />
+  <div class="rules" set:html={md(body)} />
+</Base>

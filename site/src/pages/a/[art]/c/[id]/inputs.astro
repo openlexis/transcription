@@ -1,0 +1,6 @@
+---
+import Manuscripts from "../../../../../views/Manuscripts.astro";
+import { artifactBySlug, artifacts } from "../../../../../lib/data";
+export function getStaticPaths() { return artifacts().filter((a) => !a.isDefault).flatMap((a) => a.manifest.books.map((b) => ({ params: { art: a.slug, id: b.id } }))); }
+---
+<Manuscripts art={artifactBySlug(Astro.params.art)} id={Astro.params.id} />

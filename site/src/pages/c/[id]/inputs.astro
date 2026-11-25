@@ -1,36 +1,6 @@
 ---
-import Base from "../../../layouts/Base.astro";
-import { compilations, full, blob, num } from "../../../lib/data";
-import { readFileSync } from "node:fs";
-import { ROOT } from "../../../lib/data";
-export function getStaticPaths() { return compilations().map((c) => ({ params: { id: c.id } })); }
-const { id } = Astro.params;
-const c = compilations().find((x) => x.id === id)!;
-const t = full(id);
-const CAT = JSON.parse(readFileSync(`${ROOT}transcriptions/manuscripts.json`, "utf8"));
-const FILE = new Map<string, any>(); for (const m of CAT.manuscripts) for (const x of m.transcriptions) FILE.set(x.file, x);
-const lines = new Map<number, number>(); for (const l of t.lines) for (const w of l.witnesses) lines.set(w, (lines.get(w) ?? 0) + 1);
-const origin = c.stats.origin, era = (y: number) => (y < 0 ? `${-y} BC` : `${y}`);
-const ws = t.witnesses.map((w, i) => ({ ...w, i, lines: lines.get(i) ?? 0 }));
+import Manuscripts from "../../../views/Manuscripts.astro";
+import { defaultArtifact } from "../../../lib/data";
+export function getStaticPaths() { return defaultArtifact().manifest.books.map((b) => ({ params: { id: b.id } })); }
 ---
-<Base title={`${c.stats.name}: manuscripts`} current={id} tab="inputs">
-  <h1>Manuscripts</h1>
-  <p class="lede">The {num(ws.length)} manuscripts this compilation reads, oldest first. Proximity is the share of a full vote a manuscript carries for its date. Copies made after {era(origin + c.stats.lateAfter)} are late: late copies that agree vote together as one witness.</p>
-  <div class="scroll">
-    <table>
-      <thead><tr><th>Manuscript</th><th>Date</th><th class="num">Proximity</th><th class="num">Lines</th><th>Transcriptions</th><th>Page images</th></tr></thead>
-      <tbody>
-        {ws.map((w) => (
-          <tr id={`ms-${w.siglum}`}>
-            <td><b>{w.siglum}</b>{w.leaves ? ` (with ${w.leaves.join(", ")})` : ""}<br /><span class="meta">{w.name ?? ""}</span>{(w as { translation?: string }).translation && <><br /><b class="tag tr">Greek translation</b> <span class="meta">read only for lines no Hebrew or Aramaic manuscript has</span></>}</td>
-            <td>{w.century ?? "?"}<br /><span class="meta">{w.dated ? `about ${era(w.year)}` : "undated"} · {w.early ? "early" : "late"}</span></td>
-            <td class="num">{w.proximity < 0.001 ? w.proximity.toExponential(1) : w.proximity}</td>
-            <td class="num">{w.lines}</td>
-            <td>{w.files.map((f) => { const x = FILE.get(f); return <div><a href={blob(f)}>{x?.holder ?? f}</a> · <a href={x?.source}>holder's file</a><br /><span class="meta">{x?.license}</span></div>; })}</td>
-            <td>{w.viewer.length ? w.viewer.map((v) => <div><a href={v.url} rel="noopener">{v.name}</a></div>) : <span class="meta">no viewer known</span>}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</Base>
+<Manuscripts art={defaultArtifact()} id={Astro.params.id} />

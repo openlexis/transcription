@@ -1,0 +1,40 @@
+---
+import Base from "../layouts/Base.astro";
+import { base, type Artifact } from "../lib/data";
+interface Props { art: Artifact; id?: string }
+const { art, id } = Astro.props;
+const e = id ? art.manifest.books.find((b) => b.id === id) : undefined;
+---
+<Base title={e ? `${e.name}: disagreements` : "Disagreements"} art={art} current={id} tab={id ? "cdis" : "dis"}>
+  <h1>{e ? `${e.name}: where the manuscripts differ` : "Where the manuscripts differ"}</h1>
+  <p class="lede">Every place where the manuscripts do not all have the same words, with each reading's chance of being what the author wrote and its 90% range. Tap a place to open it in the text. <a href={`${base(art)}/method/`}>How the chances are worked out</a>.</p>
+  <form class="filters" id="filters" data-fixed={id ?? ""} data-slug={art.slug} data-base={base(art)} onsubmit="return false">
+    {!id && (
+      <fieldset><legend>Book</legend>
+        <select name="book" aria-label="Book">
+          <option value="">All books</option>
+          {Object.entries(art.manifest.sections).map(([k, s]) => <optgroup label={s.name}>{art.manifest.books.filter((b) => b.section === k).map((b) => <option value={b.id}>{b.name}</option>)}</optgroup>)}
+        </select>
+      </fieldset>
+    )}
+    <fieldset><legend>Printed reading's chance at most</legend>
+      <label><input type="range" name="max" min="50" max="100" step="1" value="100" /> <span id="maxv">any</span></label>
+    </fieldset>
+    <fieldset><legend>Strongest other reading's chance at least</legend>
+      <label><input type="range" name="other" min="0" max="50" step="1" value="1" /> <span id="otherv">1%</span></label>
+    </fieldset>
+    <fieldset><legend>Sort and search</legend>
+      <select name="sort" aria-label="Sort">
+        <option value="pos">In text order</option>
+        <option value="other">Strongest other reading first</option>
+        <option value="least">Least certain first</option>
+        <option value="size">Most readings first</option>
+      </select>
+      <input type="search" name="q" placeholder="A word or 3:16" aria-label="Search" />
+    </fieldset>
+  </form>
+  <p class="count" id="count">Loading…</p>
+  <div id="list"></div>
+  <button class="more-btn" id="more" hidden>Show more</button>
+  <script src="../scripts/places.ts"></script>
+</Base>
