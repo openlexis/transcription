@@ -67,7 +67,19 @@ export const SAME_MANUSCRIPT: Record<string, string> = { P67: "P64", P103: "P77"
 type Tok = { k: string; t: string; gap: boolean };
 type LineText = { absent: boolean; words: Tok[]; gapEnd: boolean; file: string; lineNo: number };
 
+/** A book, compiled. Where the model's choice at a place prints a word twice in a row across the place's edge and no manuscript
+ * of the line has that word twice there, the columns are joined into one place and the book is compiled again (method,
+ * section 2). */
 export function compile(R: Book) {
+  const force = new Map<string, [number, number][]>();
+  for (let round = 0; ; round++) {
+    const { result, doubles } = compileOnce(R, force);
+    if (!doubles.size || round >= 5) return result;
+    for (const [ref, xs] of doubles) force.set(ref, [...(force.get(ref) ?? []), ...xs]);
+  }
+}
+function compileOnce(R: Book, force: Map<string, [number, number][]>) {
+  const dbl = new Map<string, Set<string>>();
   const HEB = R.language.startsWith("Hebrew");
   const SHOW = HEB ? (w: string) => w : showGreek;
   /** only a continuous-text manuscript can show that a word is absent (method, section 2) */
@@ -222,6 +234,13 @@ export function compile(R: Book) {
     // joined places: where the printed line has the same word twice in a row across a place's edge and no manuscript of
     // the line has it twice there, the place is joined with its neighbour and decided again as one place
     const doubled = present.map((p) => new Set(p.x.words.map((w) => w.k).filter((k, j, a) => j > 0 && a[j - 1] === k)));
+    dbl.set(ref, new Set(doubled.flatMap((x) => [...x])));
+    // columns joined after an earlier round
+    for (const [a0, b0] of force.get(ref) ?? []) {
+      const touch = spans.filter(([a, b]) => !(b < a0 || a > b0));
+      const lo = Math.min(a0, ...touch.map((x) => x[0])), hi = Math.max(b0, ...touch.map((x) => x[1]));
+      spans = [...spans.filter((x) => !touch.includes(x)), [lo, hi] as [number, number]].sort((x, y) => x[0] - y[0]);
+    }
     let res = decide(spans);
     for (let guard = 0; guard < 50; guard++) {
       const ws = res.words;
@@ -254,6 +273,17 @@ export function compile(R: Book) {
     lines.push({ ref, witnesses: present.map((p) => WIDX.get(p.s)), src: present.map((p) => `${byMs.get(p.s)!.files.indexOf(p.x.file)}:${p.x.lineNo}`), g, ...extra, words });
   }
   model(R, witnesses as Wit[], lines as Ln[], places as Pl[], placeLine, st);
+  // words printed twice in a row across a place's edge that no manuscript of the line has twice
+  const doubles = new Map<string, [number, number][]>();
+  for (const l of lines as Ln[]) {
+    const ws = l.words ?? [];
+    for (let i = 1; i < ws.length; i++) {
+      const x = ws[i - 1], y = ws[i];
+      if (x.k !== y.k || (x.p !== undefined && x.p === y.p) || dbl.get(l.ref)?.has(y.k)) continue;
+      const P = places as Pl[], lo = x.p !== undefined ? P[x.p].cols[0] : x.x, hi = y.p !== undefined ? P[y.p].cols[1] : y.x;
+      (doubles.get(l.ref) ?? doubles.set(l.ref, []).get(l.ref)!).push([Math.min(lo, hi), Math.max(lo, hi)]);
+    }
+  }
   let cs = 0, cn = 0; for (const l of lines as { words?: { c?: number }[] }[]) for (const w of l.words ?? []) { cs += w.c ?? 1; cn++; }
   const stats = {
     manuscripts: witnesses.length, early: witnesses.filter((w) => w.early).length,
@@ -262,7 +292,7 @@ export function compile(R: Book) {
     meanManuscriptsPerLine: r4(st.witnessesPerLine / Math.max(1, st.lines - st.uncovered)),
     ...(HEB ? { aramaicLines: st.arLines, aramaicWords: st.arWords } : {}),
   };
-  return { id: R.id, book: R.book, name: R.name, section: R.section, language: R.language, settings: { origin: R.origin, halfLife: R.halfLife, lateAfter: R.lateAfter, undated: R.undated }, inputs: R.inputs, stats, witnesses, lines, places };
+  return { doubles, result: { id: R.id, book: R.book, name: R.name, section: R.section, language: R.language, settings: { origin: R.origin, halfLife: R.halfLife, lateAfter: R.lateAfter, undated: R.undated }, inputs: R.inputs, stats, witnesses, lines, places } };
 }
 
 if (import.meta.main) {
@@ -304,7 +334,7 @@ type Wit = { siglum: string; year: number; early: boolean; reliability?: unknown
 type Wd = { t: string; k: string; c?: number; lo?: number; hi?: number; p?: number; l?: number[]; d?: number[]; x: number; a?: number };
 type Ln = { ref: string; uncovered?: boolean; witnesses: number[]; words?: Wd[] };
 type PR = { text: string; keys: string; xs: number[]; witnesses: number[]; partly?: number[]; p?: number; lo?: number; hi?: number };
-type Pl = { id: number; ref: string; at: number; n: number; confidence: number; weight: number; lost?: boolean; readings: PR[]; lostEverywhere?: { p: number; lo: number; hi: number } };
+type Pl = { id: number; ref: string; at: number; n: number; cols: [number, number]; confidence: number; weight: number; lost?: boolean; readings: PR[]; lostEverywhere?: { p: number; lo: number; hi: number } };
 function model(R: Book, W: Wit[], lines: Ln[], places: Pl[], placeLine: number[], st: Record<string, any>) {
   const M = W.length, S = 100;
   const late = W.map((w) => !w.early);
