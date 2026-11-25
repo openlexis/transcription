@@ -16,7 +16,9 @@ const sha = (...xs: (string | Buffer)[]) => { const h = createHash("sha256"); fo
 // ---------- the specification ----------
 export const SPEC_FILE = "SPECIFICATION.md";
 const table = (md: string, heading: string) => {
-  const part = md.slice(md.indexOf(`## ${heading}`)).split("\n").filter((l) => l.startsWith("|")).slice(2);
+  const from = md.indexOf(`\n## ${heading}\n`); if (from < 0) throw new Error(`${SPEC_FILE}: no ${heading} section`);
+  const rest = md.slice(from + 1), end = rest.indexOf("\n## ", 1);
+  const part = (end < 0 ? rest : rest.slice(0, end)).split("\n").filter((l) => l.startsWith("|")).slice(2);
   const rows: string[][] = [];
   for (const l of part) rows.push(l.slice(1, -1).split("|").map((c) => c.trim()));
   return rows;
