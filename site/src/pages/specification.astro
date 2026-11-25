@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import { md, SPEC, shortHash } from "../lib/data";
+import { createHash } from "node:crypto";
+const hash = createHash("sha256").update(SPEC).digest("hex");
+const body = SPEC.replace(/^# .*\n/, "");
+---
+<Base title="Specification" tab="spec" description="The one specification that every compiled transcription is produced under, in full.">
+  <h1>The specification</h1>
+  <p class="lede">Every compiled transcription on this site is produced under one specification, <code>SPECIFICATION.md</code>. It lists the books, says which manuscript transcriptions each book reads, and gives the numbered rules. It names no model or program: whatever does the work identifies itself in the output, and each book's overview shows that record.</p>
+  <div class="rulebox">
+    <p><strong>In short:</strong> line up the words of every ancient manuscript of the book that we hold, in the language it was written in (Hebrew and Aramaic for the Old Testament, Greek for the New); where they differ, each manuscript votes for its reading, older copies counting more; readings found in one manuscript alone and copying slips get no vote; the strongest reading is printed, and every word lists the manuscripts that read it. In the Old Testament, Greek manuscripts of the translation are read only for a line no Hebrew or Aramaic manuscript has, and every such word is marked as from a translation.</p>
+    <p class="meta">This file: SHA-256 <code>{shortHash(hash)}…</code> · <a href="https://github.com/openlexis/transcription/blob/main/SPECIFICATION.md">SPECIFICATION.md on GitHub</a></p>
+  </div>
+  <div class="rules" set:html={md(body)} />
+</Base>

@@ -1,0 +1,23 @@
+---
+// Shows the record an output keeps of how it was made: the specification's hash, and whatever the compiler reported
+// about itself when it ran. Nothing here is assumed; every value comes from the output's stats.json.
+import { shortHash, SPEC } from "../lib/data";
+import { createHash } from "node:crypto";
+interface Props { under: { file: string; sha256: string }; by: Record<string, string | boolean | undefined>; compact?: boolean }
+const { under, by, compact } = Astro.props;
+const current = createHash("sha256").update(SPEC).digest("hex") === under.sha256;
+const repo = typeof by.repository === "string" ? by.repository.replace(/\.git$/, "") : undefined;
+const LABEL: Record<string, string> = { program: "Program", model: "Model", version: "Version", repository: "Repository", commit: "Commit", codeMatchesCommit: "Code unchanged since that commit", codeSha256: "Hash of its code (SHA-256)", runtime: "Runtime" };
+const val = (k: string, v: string | boolean | undefined) => (v === undefined ? "not reported" : typeof v === "boolean" ? (v ? "yes" : "no") : v);
+const who = typeof by.model === "string" ? by.model : typeof by.program === "string" ? by.program : "not reported";
+---
+{compact ? (
+  <span>Produced under <a href="/specification/">the specification</a> (SHA-256 {shortHash(under.sha256)}…), by {who}{typeof by.commit === "string" && <> at commit {repo ? <a href={`${repo}/commit/${by.commit}`}>{shortHash(by.commit)}</a> : shortHash(by.commit)}</>}, as recorded in the output.</span>
+) : (
+  <dl class="front">
+    <dt>Produced under</dt><dd><a href="/specification/">{under.file}</a>, SHA-256 <code>{shortHash(under.sha256)}…</code>{current ? " (the current file)" : " (an earlier version of the file)"}</dd>
+    {Object.entries(by).map(([k, v]) => (
+      <><dt>{LABEL[k] ?? k}</dt><dd>{k === "commit" && repo && typeof v === "string" ? <a href={`${repo}/commit/${v}`}><code>{shortHash(v)}</code></a> : k === "repository" && repo ? <a href={repo}>{repo.replace(/^https:\/\//, "")}</a> : k.endsWith("Sha256") && typeof v === "string" ? <code>{shortHash(v)}…</code> : val(k, v)}</dd></>
+    ))}
+  </dl>
+)}

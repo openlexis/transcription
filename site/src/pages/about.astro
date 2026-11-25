@@ -8,8 +8,8 @@ import Base from "../layouts/Base.astro";
     <p>A <strong>compiled transcription</strong> is one text in the original language, built from the transcriptions of the surviving manuscripts. It aims at the text most likely to match the original.</p>
     <h2>How it is made</h2>
     <ol>
-      <li>Each compilation has one folder and one rule file, <code>RULES.md</code>. It lists the files to read, the rules, and the model that does the work.</li>
-      <li>The model reads the rule file and runs one pass. The same inputs always give the same output, and the output is saved in the same folder, next to the rule file.</li>
+      <li>There is one <a href="/specification/">specification</a>, <code>SPECIFICATION.md</code>, for every book. It lists the books, the files each book reads, and the rules.</li>
+      <li>Whatever model or program does the work follows the specification in one pass and identifies itself in the output, with its exact name and version. The output records that, and the hash of the specification it was produced under. The same inputs always give the same output.</li>
       <li>A quick check, which takes about a second, confirms three things: every printed word is read by a manuscript, no word is doubled unless a manuscript doubles it, and the output matches its recorded hash.</li>
     </ol>
     <h2>What is used, and what is not</h2>

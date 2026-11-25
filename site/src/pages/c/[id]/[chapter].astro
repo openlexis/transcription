@@ -1,5 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import ProducedBy from "../../../components/ProducedBy.astro";
 import { compilations, full, placesOf, script } from "../../../lib/data";
 export function getStaticPaths() { return compilations().flatMap((c) => c.chapters.map((ch) => ({ params: { id: c.id, chapter: ch } }))); }
 const { id, chapter } = Astro.params;
@@ -28,7 +29,7 @@ const sevOf = (p?: number) => (p === undefined ? "" : `v-${P[p].severity}`);
     <label><input type="checkbox" id="marks" checked /> show marks</label>
     {S.cls === "hebrew" && <label><input type="checkbox" id="points" /> consonants only</label>}
   </div>
-  <p class="meta" style="margin-top:0">Tap any word to see which manuscripts read it. This text was made by {c.stats.model} following <a href={`/c/${id}/rules/`}>these rules</a>.</p>
+  <p class="meta" style="margin-top:0">Tap any word to see which manuscripts read it. <ProducedBy compact under={c.stats.producedUnder} by={c.stats.producedBy} /></p>
   <article class={`text ${S.cls}-text`} lang={S.lang} dir={S.dir}>
     {lines.map((l, li) => (
       <div class="ln" id={`l${l.ref.replace(":", "-")}`}>

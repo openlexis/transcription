@@ -1,5 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import ProducedBy from "../../../components/ProducedBy.astro";
 import { compilations, full, pct, num } from "../../../lib/data";
 export function getStaticPaths() { return compilations().map((c) => ({ params: { id: c.id } })); }
 const { id } = Astro.params;
@@ -7,13 +8,13 @@ const c = compilations().find((x) => x.id === id)!;
 const s = c.stats, t = full(id);
 const early = t.witnesses.filter((w) => w.early).sort((a, b) => a.year - b.year);
 const sev = ["high", "medium", "low", "settled"];
-const origin = +(c.rules.match(/\*\*Origin year:\*\* (-?\d+)/)?.[1] ?? 100), lateYear = origin + 400;
+const lateYear = s.origin + s.lateAfter;
 const era = (y: number) => (y < 0 ? `${-y} BC` : y === 0 ? "the year 0" : `${y}`);
 ---
 <Base title={s.name} current={id} tab="overview">
   <h1>{s.name}</h1>
-  <p class="lede">The compiled transcription of {s.name}, from {num(s.manuscripts)} {s.language ?? "Greek"} manuscripts. Made by {s.model} following this folder's <a href={`/c/${id}/rules/`}>rule file</a>.</p>
-  <div class="rulebox"><p><strong>How this text was made:</strong> {s.model} followed one rule file in one pass: {s.manuscripts} manuscripts lined up word by word, older copies counting more, the strongest reading printed.</p><a class="go" href={`/c/${id}/rules/`}>Read the rules →</a></div>
+  <p class="lede">The compiled transcription of {s.name}, from {num(s.manuscripts)} {s.language ?? "Greek"} manuscripts. Produced under <a href="/specification/">the specification</a>.</p>
+  <div class="rulebox"><p><strong>How this text was made:</strong> one pass under the specification: {s.manuscripts} manuscripts lined up word by word, older copies counting more, the strongest reading printed. The output records what did the work, as that compiler reported itself when it ran:</p><ProducedBy under={s.producedUnder} by={s.producedBy} /><a class="go" href="/specification/">Read the specification →</a></div>
   <div class="kpis">
     <div class="kpi"><b>{num(s.manuscripts)}</b><span>manuscripts ({s.early} copied by {era(lateYear)})</span></div>
     <div class="kpi"><b>{num(s.lines - s.uncoveredLines)}</b><span>lines covered of {num(s.lines)}</span></div>
@@ -31,11 +32,11 @@ const era = (y: number) => (y < 0 ? `${-y} BC` : y === 0 ? "the year 0" : `${y}`
     {sev.map((k) => <a class="kpi card" href={`/c/${id}/disagreements/?severity=${k}`}><b>{num(s.bySeverity[k] ?? 0)}</b><span><span class={`pill ${k}`}>{k}</span></span></a>)}
     {Object.entries(s.byType).sort((a, b) => b[1] - a[1]).map(([k, v]) => <a class="kpi card" href={`/c/${id}/disagreements/?type=${encodeURIComponent(k)}`}><b>{num(v)}</b><span>{k}</span></a>)}
   </div>
-  <p class="meta">{num(s.singularReadingsWithoutVote)} singular readings and {num(s.eyeSkipsWithoutVote)} eye-skips were set aside without a vote, as the rules say.</p>
+  <p class="meta">{num(s.singularReadingsWithoutVote)} singular readings and {num(s.eyeSkipsWithoutVote)} eye-skips were set aside without a vote, as the specification says.</p>
   {early.length > 0 && (<>
     <h2>The earliest witnesses</h2>
     <div class="chips">{early.map((w) => <a class="chip early" href={`/c/${id}/inputs/#ms-${w.siglum}`} title={w.name ?? ""}>{w.siglum} · {w.century}</a>)}</div>
   </>)}
   <h2>Output files</h2>
-  <p class="meta">Saved next to the rule file: <a href={`https://github.com/openlexis/transcription/tree/main/compilations/${id}`}>compilations/{id}</a>. Hash of this output: <code>{s.sha256.slice(0, 16)}…</code></p>
+  <p class="meta">Output: <a href={`https://github.com/openlexis/transcription/tree/main/compilations/${id}`}>compilations/{id}</a>. Hash of this output: <code>{s.sha256.slice(0, 16)}…</code></p>
 </Base>

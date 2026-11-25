@@ -1,4 +1,4 @@
-// Lining up the manuscripts of one line (RULES.md, rule 5). Manuscripts are added one at a time, oldest first, by a global
+// Lining up the manuscripts of one line (SPECIFICATION.md, rule 5). Manuscripts are added one at a time, oldest first, by a global
 // alignment of the manuscript's words against the columns made so far:
 //   a word whose key a column already holds        +3
 //   a word spelled almost like the column           +1 (letter pairs in common, Dice share at least one half)

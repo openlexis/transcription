@@ -26,7 +26,7 @@ const groups = Object.entries(SECTIONS).map(([k, name]) => ({ name, items: list.
       <a class="brand" href="/"><span class="mark">Λ</span><span>Open Lexis <em>compiled transcriptions</em></span></a>
       <nav class="nav">
         <a href="/" class={tab === "home" ? "on" : ""}>Compilations</a>
-        <a href="/rules/" class={tab === "allrules" ? "on" : ""}>Rules</a>
+        <a href="/specification/" class={tab === "spec" ? "on" : ""}>Specification</a>
         <a href="/disagreements/" class={tab === "dis" ? "on" : ""}>Disagreements</a>
         <a href="/stats/" class={tab === "stats" ? "on" : ""}>Statistics</a>
         <a href="/about/" class={tab === "about" ? "on" : ""}>About</a>
@@ -45,7 +45,7 @@ const groups = Object.entries(SECTIONS).map(([k, name]) => ({ name, items: list.
           ))}
         </select>
       </label>
-      {cur && <a class={`rules-btn${tab === "rules" ? " on" : ""}`} href={`/c/${cur.id}/rules/`}>Rules</a>}
+      {cur && <a class="rules-btn" href="/specification/">Specification</a>}
       {cur && (
         <nav class="subnav" aria-label="This compilation">
           <a href={`/c/${cur.id}/`} class={tab === "overview" ? "on" : ""}>Overview</a>
@@ -64,7 +64,7 @@ const groups = Object.entries(SECTIONS).map(([k, name]) => ({ name, items: list.
     const s = document.getElementById("switch") as HTMLSelectElement | null;
     s?.addEventListener("change", () => {
       if (!s.value) return;
-      const m = location.pathname.match(/^\/c\/[^/]+\/(rules|inputs|disagreements)\//);
+      const m = location.pathname.match(/^\/c\/[^/]+\/(inputs|disagreements)\//);
       location.href = `/c/${s.value}/${m ? m[1] + "/" : ""}`;
     });
   </script>

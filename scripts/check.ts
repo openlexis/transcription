@@ -2,7 +2,8 @@
 //   bun run check
 // 1. every printed word is read by at least one manuscript;  2. no doubled word that no manuscript has;
 // 3. the shares of each place add up to 1;  4. the output's hash matches the one in stats.json;
-// 5. in the Old Testament, a word from the Greek translation stands only in a line no Hebrew or Aramaic manuscript has words in.
+// 5. each output was produced under the current SPECIFICATION.md (its hash) and records what produced it, and there is
+//    exactly one specification file and no other rule file;  6. in the Old Testament, a word from the Greek translation stands only in a line no Hebrew or Aramaic manuscript has words in.
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { greekKey, hebrewSpell } from "../src/text";
@@ -16,6 +17,10 @@ const fails: string[] = [];
 const cache = new Map<string, string[]>();
 const lines = (f: string) => cache.get(f) ?? cache.set(f, readFileSync(`${ROOT}${f}`, "utf8").split("\n")).get(f)!;
 let words = 0, places = 0, n = 0;
+const SPEC = readFileSync(`${ROOT}SPECIFICATION.md`, "utf8"), SPEC_SHA = createHash("sha256").update(SPEC).digest("hex");
+const ruleFiles = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? (["node_modules", ".git", "www", "transcriptions"].includes(e.name) ? [] : ruleFiles(`${dir}/${e.name}`)) : /^(RULES|SPECIFICATION)/i.test(e.name) ? [`${dir}/${e.name}`.slice(ROOT.length)] : []);
+const found = ruleFiles(ROOT.replace(/\/$/, ""));
+if (found.length !== 1 || found[0] !== "SPECIFICATION.md") fails.push(`specification files: expected only SPECIFICATION.md, found ${found.join(", ") || "none"}`);
 for (const d of readdirSync(`${ROOT}compilations`).sort()) {
   const dir = `${ROOT}compilations/${d}`;
   if (!existsSync(`${dir}/transcription.json`)) { fails.push(`${d}: no output`); continue; }
@@ -23,6 +28,8 @@ for (const d of readdirSync(`${ROOT}compilations`).sort()) {
   const tj = readFileSync(`${dir}/transcription.json`, "utf8"), dj = readFileSync(`${dir}/disagreements.json`, "utf8");
   const stats = JSON.parse(readFileSync(`${dir}/stats.json`, "utf8"));
   if (createHash("sha256").update(tj).update(dj).digest("hex") !== stats.sha256) fails.push(`${d}: hash differs from stats.json`);
+  if (stats.producedUnder?.file !== "SPECIFICATION.md" || stats.producedUnder?.sha256 !== SPEC_SHA) fails.push(`${d}: not produced under the current SPECIFICATION.md`);
+  if (!stats.producedBy?.program && !stats.producedBy?.model) fails.push(`${d}: does not record what produced it`);
   const T = JSON.parse(tj) as { book: string; language?: string; witnesses: { siglum: string; files: string[] }[]; lines: Line[] };
   const HEB = (T.language ?? "").startsWith("Hebrew");
   const P = (JSON.parse(dj) as { places: Place[] }).places;

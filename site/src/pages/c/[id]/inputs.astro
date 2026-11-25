@@ -10,12 +10,12 @@ const t = full(id);
 const CAT = JSON.parse(readFileSync(`${ROOT}transcriptions/manuscripts.json`, "utf8"));
 const FILE = new Map<string, any>(); for (const m of CAT.manuscripts) for (const x of m.transcriptions) FILE.set(x.file, x);
 const lines = new Map<number, number>(); for (const l of t.lines) for (const w of l.witnesses) lines.set(w, (lines.get(w) ?? 0) + 1);
-const origin = +(c.rules.match(/\*\*Origin year:\*\* (-?\d+)/)?.[1] ?? 100), era = (y: number) => (y < 0 ? `${-y} BC` : `${y}`);
+const origin = c.stats.origin, era = (y: number) => (y < 0 ? `${-y} BC` : `${y}`);
 const ws = t.witnesses.map((w, i) => ({ ...w, i, lines: lines.get(i) ?? 0 }));
 ---
 <Base title={`${c.stats.name}: manuscripts`} current={id} tab="inputs">
   <h1>Manuscripts</h1>
-  <p class="lede">The {num(ws.length)} manuscripts this compilation reads, oldest first. Proximity is the share of a full vote a manuscript carries for its date. Copies made after {era(origin + 400)} are late: late copies that agree vote together as one witness.</p>
+  <p class="lede">The {num(ws.length)} manuscripts this compilation reads, oldest first. Proximity is the share of a full vote a manuscript carries for its date. Copies made after {era(origin + c.stats.lateAfter)} are late: late copies that agree vote together as one witness.</p>
   <div class="scroll">
     <table>
       <thead><tr><th>Manuscript</th><th>Date</th><th class="num">Proximity</th><th class="num">Lines</th><th>Transcriptions</th><th>Page images</th></tr></thead>

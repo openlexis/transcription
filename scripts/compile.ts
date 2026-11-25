@@ -1,22 +1,58 @@
-// Carries out the rules of one compilation's RULES.md, literally and in order, and saves the output next to it.
-//   bun run compile compilations/<name>       one compilation
-//   bun run compile all                       every compilation, one at a time
-// The rule file is the source of truth: the inputs are the files it lists, and each step below names the rule it carries out.
+// Carries out SPECIFICATION.md, the one specification of this repository, literally and in order, for each book in its
+// book list, and saves each book's output in compilations/<section>-<number>-<book>/.
+//   bun run compile all          every book, one at a time
+//   bun run compile Gen          one book (its id in the book list)
+// Each step below names the rule it carries out. The program identifies itself in the output as the specification requires.
 import { createHash } from "node:crypto";
-import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
 import { align } from "../src/align";
 import { aramaic, greekKey, hebrewSpell, showGreek } from "../src/text";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const r4 = (x: number) => Math.round(x * 10000) / 10000;
+const sha = (...xs: (string | Buffer)[]) => { const h = createHash("sha256"); for (const x of xs) h.update(x); return h.digest("hex"); };
 
-// ---------- the rule file ----------
-export type RuleFile = { model: string; book: string; name: string; language: string; inputs: string[]; origin: number; halfLife: number; lateAfter: number; undated: number };
-export function readRules(dir: string): RuleFile {
-  const md = readFileSync(`${dir}/RULES.md`, "utf8");
-  const field = (k: string) => { const m = md.match(new RegExp(`^- \\*\\*${k}:\\*\\* (.+)$`, "m")); if (!m) throw new Error(`${dir}/RULES.md: no ${k}`); return m[1].replace(/`/g, "").trim(); };
-  const inputs = [...md.slice(md.indexOf("## Inputs")).matchAll(/^- `(transcriptions\/[^`]+)`/gm)].map((m) => m[1]);
-  return { model: field("Model"), book: field("Book"), name: field("Name"), language: field("Language"), inputs, origin: +field("Origin year"), halfLife: +field("Half-life"), lateAfter: +field("Late after"), undated: +field("Undated year") };
+// ---------- the specification ----------
+export const SPEC_FILE = "SPECIFICATION.md";
+const table = (md: string, heading: string) => {
+  const part = md.slice(md.indexOf(`## ${heading}`)).split("\n").filter((l) => l.startsWith("|")).slice(2);
+  const rows: string[][] = [];
+  for (const l of part) rows.push(l.slice(1, -1).split("|").map((c) => c.trim()));
+  return rows;
+};
+export type Book = { id: string; dir: string; book: string; name: string; section: string; sectionName: string; language: string; folders: string[]; origin: number; halfLife: number; lateAfter: number; undated: number; inputs: string[] };
+export function readSpec() {
+  const text = readFileSync(`${ROOT}${SPEC_FILE}`, "utf8");
+  const sections = new Map(table(text, "Sections").map(([k, name, language, folders, origin, half, late, undated]) => [k, { name, language, folders: folders.split(",").map((f) => f.trim()), origin: +origin, halfLife: +half, lateAfter: +late, undated: +undated }]));
+  // rule 1: a book's inputs are the listed transcriptions in its section's folders that hold a line of it
+  const cat = JSON.parse(readFileSync(`${ROOT}transcriptions/manuscripts.json`, "utf8")) as { manuscripts: { transcriptions: { file: string }[] }[] };
+  const holds = new Map<string, Set<string>>();
+  for (const f of cat.manuscripts.flatMap((m) => m.transcriptions.map((t) => t.file))) {
+    holds.set(f, new Set(readFileSync(`${ROOT}${f}`, "utf8").split("\n").map((l) => l.split(" ")[0]).filter(Boolean)));
+  }
+  const files = [...holds.keys()].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+  const books: Book[] = table(text, "Books").map(([section, n, book, name]) => {
+    const S = sections.get(section); if (!S) throw new Error(`${SPEC_FILE}: unknown section ${section}`);
+    const inputs = S.folders.flatMap((d) => files.filter((f) => f.startsWith(`${d}/`) && holds.get(f)!.has(book)));
+    return { id: `${section}-${n.padStart(2, "0")}-${book.toLowerCase()}`, dir: "", book, name, section, sectionName: S.name, language: S.language, folders: S.folders, origin: S.origin, halfLife: S.halfLife, lateAfter: S.lateAfter, undated: S.undated, inputs };
+  }).map((b) => ({ ...b, dir: `${ROOT}compilations/${b.id}` }));
+  return { text, sha256: sha(text), books };
+}
+
+// ---------- who does the work: this program reports what it is, as it runs ----------
+export function selfIdentify() {
+  const git = (...a: string[]) => { const r = spawnSync("git", a, { cwd: ROOT }); return r.status === 0 ? r.stdout.toString().trim() : undefined; };
+  const code = ["scripts/compile.ts", "src/align.ts", "src/text.ts"];
+  const changed = git("status", "--porcelain", "--", ...code);
+  return {
+    program: "scripts/compile.ts",
+    repository: git("remote", "get-url", "origin"),
+    commit: git("rev-parse", "HEAD"),
+    codeMatchesCommit: changed === undefined ? undefined : changed === "",
+    codeSha256: sha(...code.map((f) => readFileSync(`${ROOT}${f}`))),
+    runtime: typeof Bun !== "undefined" ? `Bun ${Bun.version}` : `Node ${process.version}`,
+  };
 }
 
 // ---------- manuscripts ----------
@@ -29,8 +65,8 @@ export const SAME_MANUSCRIPT: Record<string, string> = { P67: "P64", P103: "P77"
 type Tok = { k: string; t: string; gap: boolean };
 type LineText = { absent: boolean; words: Tok[]; gapEnd: boolean; file: string; lineNo: number };
 
-export function compile(dir: string) {
-  const R = readRules(dir);
+export function compile(R: Book, under: { file: string; sha256: string }, by: ReturnType<typeof selfIdentify>) {
+  const dir = R.dir; if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
   const HEB = R.language.startsWith("Hebrew");
   /** rule 15: a Greek manuscript in a Hebrew and Aramaic compilation is a translation, read only where no original-language manuscript has the line */
   const isTr = (s: string) => HEB && INFO.get(s)?.language === "Greek";
@@ -269,7 +305,7 @@ export function compile(dir: string) {
     lines.push({ ref, witnesses: present.map((p) => WIDX.get(p.s)), src: present.map((p) => `${byMs.get(p.s)!.files.indexOf(p.x.file)}:${p.x.lineNo}`), ...extra, words });
   }
   const stats = {
-    name: R.name, book: R.book, language: R.language, model: R.model, manuscripts: witnesses.length, early: witnesses.filter((w) => w.early).length,
+    name: R.name, book: R.book, section: R.section, language: R.language, origin: R.origin, lateAfter: R.lateAfter, manuscripts: witnesses.length, early: witnesses.filter((w) => w.early).length,
     lines: st.lines, uncoveredLines: st.uncovered, words: st.words, columns: st.columns, unanimousColumns: st.unanimous,
     places: st.places, settled: st.settled, contested: st.contested, meanPlaceConfidence: r4(st.places ? st.confidenceSum / st.places : 1),
     meanWordConfidence: 0, singularReadingsWithoutVote: st.singularNoVote, eyeSkipsWithoutVote: st.eyeSkipNoVote, byType: st.byType, bySeverity: st.bySeverity,
@@ -283,7 +319,7 @@ export function compile(dir: string) {
   writeFileSync(`${dir}/transcription.json`, tj);
   writeFileSync(`${dir}/disagreements.json`, dj);
   // a readable copy of the text, chapter by chapter
-  let md = `# ${R.name}: the compiled transcription\n\nMade by following [RULES.md](RULES.md). Each line is printed as the rules decide it; a word in a place where the manuscripts disagree is marked with its confidence in disagreements.json. Lines that no manuscript covers are listed as not covered.\n`;
+  let md = `# ${R.name}: the compiled transcription\n\nMade under [SPECIFICATION.md](../../SPECIFICATION.md); `stats.json` records the specification's hash and what did the work. Each line is printed as the rules decide it; a word in a place where the manuscripts disagree is marked with its confidence in disagreements.json. Lines that no manuscript covers are listed as not covered.\n`;
   let chap = "";
   for (const l of lines as { ref: string; uncovered?: boolean; words?: { t: string }[] }[]) {
     const c = l.ref.split(":")[0]; if (c !== chap) { chap = c; md += `\n## Chapter ${c}\n\n`; }
@@ -291,16 +327,20 @@ export function compile(dir: string) {
   }
   writeFileSync(`${dir}/transcription.md`, md);
   const hash = createHash("sha256").update(tj).update(dj).digest("hex");
-  writeFileSync(`${dir}/stats.json`, JSON.stringify({ ...stats, sha256: hash }, null, 1) + "\n");
+  writeFileSync(`${dir}/stats.json`, JSON.stringify({ ...stats, sha256: hash, producedUnder: under, producedBy: by }, null, 1) + "\n");
   return stats;
 }
 
 if (import.meta.main) {
   const arg = process.argv[2];
-  if (!arg) throw new Error("usage: bun run compile compilations/<name> | all");
-  const dirs = arg === "all" ? readdirSync(`${ROOT}compilations`).filter((d) => existsSync(`${ROOT}compilations/${d}/RULES.md`)).sort().map((d) => `${ROOT}compilations/${d}`) : [arg.startsWith("/") ? arg : `${process.cwd()}/${arg}`];
-  for (const d of dirs) {
-    const t = performance.now(); const s = compile(d);
+  if (!arg) throw new Error("usage: bun run compile all | <book>");
+  const spec = readSpec(), by = selfIdentify(), under = { file: SPEC_FILE, sha256: spec.sha256 };
+  const books = arg === "all" ? spec.books : spec.books.filter((b) => b.book === arg || b.id === arg);
+  if (!books.length) throw new Error(`no book ${arg} in ${SPEC_FILE}`);
+  console.log(`under ${SPEC_FILE} (sha256 ${spec.sha256.slice(0, 12)}), by ${by.program} at ${by.commit?.slice(0, 12) ?? "no commit"}${by.codeMatchesCommit === false ? " (code changed since that commit)" : ""}, ${by.runtime}`);
+  for (const b of books) {
+    if (!b.inputs.length) { console.log(`${b.name}: no inputs held`); continue; }
+    const t = performance.now(); const s = compile(b, under, by);
     console.log(`${s.name}: ${s.manuscripts} manuscripts, ${s.lines} lines, ${s.words} words, ${s.places} places, mean place confidence ${s.meanPlaceConfidence} (${((performance.now() - t) / 1000).toFixed(1)} s)`);
   }
 }

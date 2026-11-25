@@ -48,14 +48,14 @@ const HOLDERS: Record<string, Holder> = {
   "etcbc-dss": { id: "etcbc-dss", name: "ETCBC and CACCHT, biblical Dead Sea Scrolls", web: "https://github.com/ETCBC/dss", license: "CC BY-NC 4.0" },
   cntr: { id: "cntr", name: "Center for New Testament Restoration (CNTR)", web: "https://github.com/Center-for-New-Testament-Restoration/transcriptions/tree/4e743a41a4b2ca010ece53229cd272aa59b1efe6", license: "CC BY-SA 4.0 (the repository's LICENSE.md)" },
 };
-/** The order in which transcriptions of one manuscript are listed (and break a tie, RULES.md). */
+/** The order in which transcriptions of one manuscript are listed (and break a tie, SPECIFICATION.md rule 4). */
 export const HOLDER_ORDER = Object.keys(HOLDERS);
 
 // ---------- manuscripts ----------
 type Transcription = { holder: string; file: string; source: string; license: string; lines: number; words: number };
 /** kind: a continuous-text manuscript; a lectionary (readings in the order of the church year); a catena (commentary with the
  * biblical text in pieces); a scroll (a fragmentary scroll from the Judaean desert). Only a continuous-text manuscript can show
- * that a word is absent (RULES.md, rule 13). */
+ * that a word is absent (SPECIFICATION.md, rule 13). */
 type Kind = "continuous" | "lectionary" | "catena" | "scroll";
 type Manuscript = { siglum: string; kind: Kind; language: string; name?: string; shelfmark?: string; century?: string; year?: number; dateSource?: string; viewer?: { name: string; url: string }[]; transcriptions: Transcription[] };
 const MSS = new Map<string, Manuscript>();
