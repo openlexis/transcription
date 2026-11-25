@@ -20,7 +20,7 @@ function gamma(k: number, u: () => number): number {
 }
 export const betaDraw = (a: number, b: number, u: () => number) => { const x = gamma(a, u), y = gamma(b, u); return x / (x + y); };
 
-/** The prior for a manuscript's reliability from its date (the Prior section of the specification). */
+/** The prior for a manuscript's reliability from its date (scripts/METHOD.md, "Dates and the prior"). */
 export function prior(o: { from?: number; to?: number; origin: number; halfLife: number; undated: number }) {
   const mu = (year: number) => 0.5 + 0.45 * Math.pow(2, -Math.max(0, year - o.origin) / o.halfLife);
   if (o.from === undefined || o.to === undefined) return { mean: mu(o.undated), strength: 1, rangeKnown: false };
@@ -32,7 +32,7 @@ export function prior(o: { from?: number; to?: number; origin: number; halfLife:
 /** One unit of evidence: the readings seen at a place (options) and who reads which (voters: [witness, option]). */
 export type Unit = { options: number; voters: [number, number][] };
 
-/** Weights (the Dependence section): early copies 1 each; late copies that share a reading 1, 1/2, 1/4, ... by reliability. */
+/** Weights (scripts/METHOD.md, "Copies that depend on each other"): early copies 1 each; late copies that share a reading 1, 1/2, 1/4, ... by reliability. */
 export function weights(u: Unit, late: boolean[], q: Float64Array) {
   const w = new Float64Array(u.voters.length);
   const byOpt = new Map<number, number[]>();
