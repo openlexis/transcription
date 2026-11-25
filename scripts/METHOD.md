@@ -17,7 +17,7 @@ specification does not prescribe it; another compiler may choose differently. Ea
 
 ## 1. Which transcriptions are read
 
-For each book in `source/books.json`, every transcription in `source/manuscripts.json` that has at least one line of the book. Several transcriptions of one manuscript are one manuscript; for each line the one with the most
+For each book in `src/books.json`, every transcription in `src/manuscripts.json` that has at least one line of the book. Several transcriptions of one manuscript are one manuscript; for each line the one with the most
 words is read (a tie goes to the first by file path). Leaves of one manuscript that carry separate numbers are one manuscript
 (P64 with P67, P77 with P103). A word the transcriber marks as damaged, supplied or unread is treated as lost. Translations
 into other languages are not read.

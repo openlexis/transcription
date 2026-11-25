@@ -1,27 +1,22 @@
-# Open Lexis: compiled transcriptions
+# Open Lexis: Biblical Manuscript Transcriptions
 
-Each book of the Old Testament in Hebrew and Aramaic and of the New Testament in Greek, compiled only from ancient manuscripts in the language the book was written in, with the evidence for every word.
+Primary ancient manuscript transcriptions for the Old Testament (Biblical Hebrew and Biblical Aramaic) and New Testament (Koine Greek), paired with self-contained YAML specifications for recovering each book's original text.
 
-- **One specification, `SPECIFICATION.md`,** states the goal and what every output must contain. It has its own ULID and prescribes no statistical model: the output must use one, describe it, and name the model that made the judgments.
-- **Each compilation is one output,** written in TEI P5 XML and filed under `outputs/<the specification's ULID>/<the compilation's ULID>/`. The record file in that folder gives both ULIDs, the model's name and version, the evidence for every reading, and the method that was used.
-- **The manuscripts** are listed in `source/manuscripts.json`, which is part of the specification. Each transcription is a file in `source/<holder>/` (for example `source/intf/`, `source/uxlc/`), named `{manuscript}.xml` (or `{manuscript}.{part}.xml` when one manuscript and holder give more than one file). Where the holder publishes TEI XML, or other XML, that file is stored as they published it. Where they publish no XML, the file is a TEI P5 document and the inventory says so. The books are listed in `source/books.json`.
-- **No printed editions, modern reconstructions, translations or images are used.** A line no manuscript has is shown as missing.
+## Repository Structure
+
+- **[`specifications/`](specifications/)** — Self-contained specification YAML files (currently [`specifications/01M88AX3YW2HWVPGHTREFJS181.yaml`](specifications/01M88AX3YW2HWVPGHTREFJS181.yaml)). Each specification embeds its full rules, target `books`, provenance `institutions`, and explicit allowlist of `manuscripts` in a single file.
+- **[`src/`](src/)** — The primary XML manuscript corpus, organized by source institution (`src/<institution>/`, 2,028 XML files across 14 institutions).
+- **[`scripts/`](scripts/)** — Data import, compilation, and verification utilities (with shared libraries in `scripts/lib/`).
+- **[`site/`](site/)** — Static Astro website that parses `specifications/*.yaml` to present specifications, corpus breakdowns, canonical books, provenance institutions, and a searchable manuscript inventory.
 
 ## Commands (Bun)
 
-| Command | What it does |
+| Command | Description |
 |---|---|
-| `bun run import <folder>` | Reads the holders' downloaded files into `source/<holder>/` |
-| `bun run compile all` (or one book, `bun run compile Gen`) | Compiles every book into one output; the same inputs always give the same output |
-| `bun run check` | Quick check of every output, about one second |
-| `bun run site` | Builds the website in `site/www` |
-
-## Website
-
-https://openlexis-transcription.pages.dev
-
-The [specification](https://openlexis-transcription.pages.dev/specification/) and the [list of manuscripts](https://openlexis-transcription.pages.dev/specification/manuscripts/) are on the site. Read any book by chapter and line. Tap a word or a line number: a panel opens under the line with the chance that each reading is original and its range, the manuscripts behind each reading, and every manuscript's own text of the line, lined up word by word.
+| `bun run site` | Build the static website into `site/www` |
+| `cd site && bun run preview` | Preview the built website locally |
+| `cd site && bun run dev` | Run the Astro dev server with live reload |
 
 ## Licenses
 
-The ancient texts are in the public domain. Each transcription keeps the license its holder states, as listed in `source/manuscripts.json`; most are CC BY 4.0, CNTR's files are CC BY-SA 4.0, the Codex Sinaiticus Project's are CC BY-NC-SA 3.0, UXLC states its Hebrew text may be copied without restriction, and the Samaritan Pentateuch and Dead Sea Scrolls data are CC BY-NC 4.0.
+The ancient texts themselves are in the public domain. Each transcription retains the license stated by its source institution in the specification YAML (primarily CC BY 4.0, with CC BY-SA 4.0 for CNTR, CC BY-NC-SA 3.0 for the Codex Sinaiticus Project, unrestricted copying for UXLC, and CC BY-NC 4.0 for the Samaritan Pentateuch and Dead Sea Scrolls datasets).

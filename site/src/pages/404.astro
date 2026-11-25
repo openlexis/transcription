@@ -1,4 +1,16 @@
 ---
-import Base from "../layouts/Base.astro";
+import Layout from "../layouts/Layout.astro";
 ---
-<Base title="Not found"><h1>Not found</h1><p class="lede">That page does not exist. <a href="/">See all compilations</a>.</p></Base>
+<Layout title="Page not found">
+  <section class="hero" style="border-bottom: 0;">
+    <div class="container">
+      <div class="eyebrow">404</div>
+      <h1>Page not found</h1>
+      <p class="lead">The requested page does not exist on this site.</p>
+      <div class="actions">
+        <a href="/" class="btn btn-primary">Return to overview</a>
+        <a href="/specifications/" class="btn btn-secondary">View specifications</a>
+      </div>
+    </div>
+  </section>
+</Layout>

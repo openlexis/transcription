@@ -7,7 +7,7 @@
 // lies between 0 and 1 inside its uncertainty range;  6. each line's alignment rows match the line.
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { greekKey, hebrewSpell } from "../src/text";
+import { greekKey, hebrewSpell } from "./lib/text";
 
 const t0 = performance.now();
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -15,7 +15,7 @@ const sha = (x: string | Buffer) => createHash("sha256").update(x).digest("hex")
 const fails: string[] = [];
 const cache = new Map<string, string[]>();
 const lines = (f: string) => cache.get(f) ?? cache.set(f, existsSync(`${ROOT}${f}`) ? readFileSync(`${ROOT}${f}`, "utf8").split("\n") : []).get(f)!;
-const ruleFiles = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? (["node_modules", ".git", "www", "source", "transcriptions", "outputs"].includes(e.name) ? [] : ruleFiles(`${dir}/${e.name}`)) : /^(RULES|SPECIFICATION).*\.(md|json|ya?ml|txt|xml|toml)$/i.test(e.name) ? [`${dir}/${e.name}`.slice(ROOT.length)] : []);
+const ruleFiles = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? (["node_modules", ".git", "www", "src", "transcriptions", "outputs"].includes(e.name) ? [] : ruleFiles(`${dir}/${e.name}`)) : /^(RULES|SPECIFICATION).*\.(md|json|ya?ml|txt|xml|toml)$/i.test(e.name) ? [`${dir}/${e.name}`.slice(ROOT.length)] : []);
 const found = ruleFiles(ROOT.replace(/\/$/, ""));
 if (found.length !== 1 || found[0] !== "SPECIFICATION.md") fails.push(`specification files: expected only SPECIFICATION.md, found ${found.join(", ") || "none"}`);
 const SPEC_SHA = sha(readFileSync(`${ROOT}SPECIFICATION.md`));

@@ -1,6 +1,0 @@
----
-import Places from "../../../views/Places.astro";
-import { artifactBySlug, artifacts } from "../../../lib/data";
-export function getStaticPaths() { return artifacts().filter((a) => !a.isDefault).map((a) => ({ params: { art: a.slug } })); }
----
-<Places art={artifactBySlug(Astro.params.art)} />

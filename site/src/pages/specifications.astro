@@ -1,0 +1,431 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {
+  REPO,
+  buildClientSourceIndex,
+  displayLanguage,
+  formatNum,
+  formatSpecText,
+  getCorpusStats,
+  getSpecifications,
+  githubBlob,
+} from "../lib/corpus";
+
+const specs = getSpecifications();
+const single = specs.length === 1 ? specs[0] : null;
+const stats = single ? getCorpusStats(single) : null;
+const otTargets = single ? single.targets.filter((t) => t.section === "Old Testament") : [];
+const ntTargets = single ? single.targets.filter((t) => t.section === "New Testament") : [];
+const clientSources = single ? buildClientSourceIndex(single) : [];
+
+const toc = [
+  { id: "objective", text: "1. Objective" },
+  { id: "evidence", text: "2. Permitted Evidence" },
+  { id: "corpus-layout", text: "3. Source Corpus Layout" },
+  { id: "statistical-modeling", text: "4. Statistical Modeling" },
+  { id: "output-requirements", text: "5. Required Output Contents" },
+  { id: "output-format", text: "6. Output Format & Packaging" },
+  { id: "embedded-data", text: "7. Embedded Targets & Sources" },
+];
+---
+<Layout
+  title="Specifications"
+  active="specs"
+  description="Self-contained YAML specifications for compiling biblical texts from primary manuscript transcriptions."
+>
+  {single && stats ? (
+    <>
+      <section class="page-header">
+        <div class="container">
+          <div class="eyebrow">Single-File YAML Specification</div>
+          <h1>{single.title}</h1>
+          <p class="lead">{single.summary}</p>
+          <div class="ulid-bar">
+            <div class="ulid-pill">
+              <span style="color: var(--ink-muted);">ID</span>
+              <strong id="spec-id">{single.id}</strong>
+              <button type="button" class="copy-btn" id="copy-id">Copy</button>
+            </div>
+            <a href={githubBlob(single.file)} class="btn btn-primary" target="_blank" rel="noopener">View on GitHub ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="container spec-layout">
+        <aside class="toc" aria-label="On this page">
+          <div class="toc-title">On this page</div>
+          <ul>
+            {toc.map((h) => (
+              <li><a href={`#${h.id}`}>{h.text}</a></li>
+            ))}
+          </ul>
+          <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--ink-muted);">
+            Everything on this page—rules, target books, and all {formatNum(stats.sourceCount)} sources—comes from the single file <code>{single.file}</code>.
+          </div>
+        </aside>
+
+        <article class="prose">
+          <h2 id="objective" style="margin-top: 0; padding-top: 0; border-top: 0;">1. Objective</h2>
+          <p set:html={formatSpecText(single.objective.mission, true)} />
+          <ul>
+            {single.objective.scope.map((item) => (
+              <li set:html={formatSpecText(item, true)} />
+            ))}
+          </ul>
+
+          <h2 id="evidence">2. Permitted Evidence</h2>
+          <p set:html={formatSpecText(single.evidence.allowlist_rule, true)} />
+          <h3>Documented Metadata Fields</h3>
+          <ul>
+            {single.evidence.metadata_fields.map((f) => (
+              <li><strong>{f.name}:</strong> <span set:html={formatSpecText(f.description, true)} /></li>
+            ))}
+          </ul>
+          <h3>Handling Unknowns</h3>
+          <p set:html={formatSpecText(single.evidence.unknowns, true)} />
+          <h3>Exclusion Rule</h3>
+          <p><strong>Everything not explicitly included in this specification is excluded and must be ignored.</strong></p>
+          <p set:html={formatSpecText(single.evidence.exclusion_rule, true)} />
+
+          <h2 id="corpus-layout">3. Source Corpus Layout</h2>
+          <p set:html={formatSpecText(single.corpus_layout.structure, true)} />
+          <ul>
+            <li><strong>Single-file sources:</strong> <code>{single.corpus_layout.naming.single_file}</code></li>
+            <li><strong>Multi-file sources:</strong> <code>{single.corpus_layout.naming.multi_file}</code></li>
+          </ul>
+          <h3>File Formats</h3>
+          <ul>
+            {single.corpus_layout.formats.map((f) => (
+              <li><strong>{f.name}:</strong> <span set:html={formatSpecText(f.description, true)} /></li>
+            ))}
+          </ul>
+
+          <h2 id="statistical-modeling">4. Statistical Modeling of Variant Readings</h2>
+          <p set:html={formatSpecText(single.statistical_modeling.mission_principle, true)} />
+          <p set:html={formatSpecText(single.statistical_modeling.rationale, true)} />
+          <h3>Guidance on Uncertainty</h3>
+          <ul>
+            {single.statistical_modeling.uncertainty_guidance.map((g) => (
+              <li set:html={formatSpecText(g, true)} />
+            ))}
+          </ul>
+          {single.statistical_modeling.source_assessment?.length ? (
+            <>
+              <h3>Assessing Source Credibility</h3>
+              <ul>
+                {single.statistical_modeling.source_assessment.map((item) => (
+                  <li><strong>{item.name}:</strong> <span set:html={formatSpecText(item.description, true)} /></li>
+                ))}
+              </ul>
+            </>
+          ) : null}
+          <p set:html={formatSpecText(single.statistical_modeling.model_freedom, true)} />
+
+          <h2 id="output-requirements">5. Required Output Contents</h2>
+          <ol>
+            {single.output_requirements.map((req) => (
+              <li><strong>{req.name}:</strong> <span set:html={formatSpecText(req.description, true)} /></li>
+            ))}
+          </ol>
+
+          <h2 id="output-format">6. Output Format &amp; Packaging</h2>
+          <p>
+            Outputs must be encoded in <strong>{single.output_format.standard}</strong>, following the
+            <a href={single.output_format.references.critical_apparatus} target="_blank" rel="noopener">TEI Critical Apparatus (Ch. 13) ↗</a>
+            and
+            <a href={single.output_format.references.certainty} target="_blank" rel="noopener">TEI Certainty (Ch. 22) ↗</a>
+            guidelines:
+          </p>
+          <ul>
+            {single.output_format.encoding.map((line) => (
+              <li set:html={formatSpecText(line, true)} />
+            ))}
+          </ul>
+          <h3>Directory Layout</h3>
+          <pre><code>{single.output_format.directory_layout}</code></pre>
+          <ul>
+            {single.output_format.contents.map((c) => (
+              <li set:html={formatSpecText(c, true)} />
+            ))}
+          </ul>
+
+          <h2 id="embedded-data">7. Embedded Targets &amp; Sources</h2>
+          <p>
+            There are no separate JSON manifest files. Both the target books to reconstruct and the complete list of permitted primary sources (with inline provenance, dating, licenses, and <code>src/</code> XML paths) are embedded directly inside <a href={githubBlob(single.file)} target="_blank" rel="noopener"><code>{single.file}</code></a>. Expand either section below to inspect them inline.
+          </p>
+
+          <details class="embed-accordion" id="embedded-targets">
+            <summary>
+              <div class="embed-summary-left">
+                <span class="embed-summary-title">
+                  <code>targets</code>
+                  <span class="badge badge-indigo">{stats.targetCount} biblical books</span>
+                </span>
+                <span class="embed-summary-sub">The exact books this specification aims to reconstruct ({stats.otCount} Old Testament · {stats.ntCount} New Testament)</span>
+              </div>
+              <span class="embed-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="embed-body">
+              <h3 style="margin-top: 0;">Old Testament ({otTargets.length} books · Biblical Hebrew &amp; Biblical Aramaic)</h3>
+              <div class="books-grid" style="margin-top: 12px;">
+                {otTargets.map((b) => {
+                  const n = stats.targetSourceCounts[b.id] ?? 0;
+                  return (
+                    <a href={`/sources/?target=${encodeURIComponent(b.id)}`} class="book-tile book-tile-link">
+                      <div class="book-top">
+                        <span class="book-name">{b.name}</span>
+                        <span class="book-code">{b.id}</span>
+                      </div>
+                      <div class="book-meta">
+                        <span class="book-sources">{formatNum(n)} {n === 1 ? "source" : "sources"}</span>
+                        <span class={b.language.includes("Aramaic") ? "badge badge-violet" : "badge badge-amber"}>
+                          {displayLanguage(b.language)}
+                        </span>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+
+              <h3 style="margin-top: 24px;">New Testament ({ntTargets.length} books · Koine Greek)</h3>
+              <div class="books-grid" style="margin-top: 12px;">
+                {ntTargets.map((b) => {
+                  const n = stats.targetSourceCounts[b.id] ?? 0;
+                  return (
+                    <a href={`/sources/?target=${encodeURIComponent(b.id)}`} class="book-tile book-tile-link">
+                      <div class="book-top">
+                        <span class="book-name">{b.name}</span>
+                        <span class="book-code">{b.id}</span>
+                      </div>
+                      <div class="book-meta">
+                        <span class="book-sources">{formatNum(n)} {n === 1 ? "source" : "sources"}</span>
+                        <span class="badge badge-sky">{displayLanguage(b.language)}</span>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          </details>
+
+          <details class="embed-accordion" id="embedded-sources">
+            <summary>
+              <div class="embed-summary-left">
+                <span class="embed-summary-title">
+                  <code>sources</code>
+                  <span class="badge badge-emerald">{formatNum(stats.sourceCount)} primary sources</span>
+                  <span class="badge">{formatNum(stats.totalXmlFiles)} XML files</span>
+                </span>
+                <span class="embed-summary-sub">Self-contained allowlist of every permitted witness and its inline metadata inside <code>{single.file}</code></span>
+              </div>
+              <span class="embed-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="embed-body">
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px;">
+                <input
+                  type="search"
+                  id="inline-src-search"
+                  class="search-input"
+                  placeholder="Search sources by ID, name, provenance, or XML path (e.g., 01, Sinaiticus, P46, 4Q1)…"
+                  aria-label="Search embedded sources"
+                />
+                <a href="/sources/" class="btn btn-secondary">Open full explorer →</a>
+              </div>
+              <div class="results-meta" style="margin-bottom: 10px;">
+                <span id="inline-src-count">Showing 25 of {formatNum(stats.sourceCount)} sources</span>
+              </div>
+              <div class="source-list" id="inline-src-list"></div>
+              <div style="text-align: center; margin-top: 14px;">
+                <button type="button" id="inline-src-more" class="btn btn-secondary" hidden>Load more</button>
+              </div>
+            </div>
+          </details>
+        </article>
+      </div>
+
+      <script id="inline-src-data" type="application/json" set:html={JSON.stringify(clientSources)}></script>
+      <script define:vars={{ REPO }}>
+        // Copy ID button
+        const copyBtn = document.getElementById("copy-id");
+        const idText = document.getElementById("spec-id")?.textContent?.trim();
+        copyBtn?.addEventListener("click", async () => {
+          if (!idText) return;
+          try {
+            await navigator.clipboard.writeText(idText);
+            copyBtn.textContent = "Copied";
+            setTimeout(() => (copyBtn.textContent = "Copy"), 1500);
+          } catch {
+            copyBtn.textContent = "Copy failed";
+          }
+        });
+
+        // Clicking any `targets` or `sources` mention auto-opens that embedded accordion
+        function openTargetById(targetId) {
+          const el = document.getElementById(targetId);
+          if (el && el.tagName === "DETAILS") {
+            el.open = true;
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
+        document.querySelectorAll("[data-open-target]").forEach((a) => {
+          a.addEventListener("click", (e) => {
+            const targetId = a.getAttribute("data-open-target");
+            if (targetId) {
+              e.preventDefault();
+              history.replaceState(null, "", `#${targetId}`);
+              openTargetById(targetId);
+            }
+          });
+        });
+        if (location.hash === "#embedded-targets" || location.hash === "#embedded-sources") {
+          openTargetById(location.hash.slice(1));
+        }
+
+        // Inline expandable source list
+        const dataEl = document.getElementById("inline-src-data");
+        const ALL = dataEl ? JSON.parse(dataEl.textContent || "[]") : [];
+        const listEl = document.getElementById("inline-src-list");
+        const countEl = document.getElementById("inline-src-count");
+        const moreBtn = document.getElementById("inline-src-more");
+        const searchInput = document.getElementById("inline-src-search");
+        let query = "";
+        let limit = 25;
+        let filtered = ALL;
+
+        const esc = (s) =>
+          String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+        const blob = (f) => `${REPO}/blob/main/${f.split("/").map(encodeURIComponent).join("/")}`;
+        const num = (n) => Number(n).toLocaleString("en-US");
+        const typeBadge = (t) =>
+          t === "scroll" ? "badge badge-amber" : t === "catena" ? "badge badge-violet" : t === "lectionary" ? "badge badge-emerald" : "badge badge-indigo";
+
+        function renderItem(s) {
+          const filesHtml = s.fl
+            .map((f) => {
+              const links = f.ps
+                .map((p) => `<a href="${blob(p)}" target="_blank" rel="noopener"><code>${esc(p)}</code></a>`)
+                .join(" ");
+              const statsTxt = f.ln ? ` · ${num(f.ln)} lines, ${num(f.wd)} words` : "";
+              return `
+                <div class="tr-item">
+                  <div><a href="${esc(f.pu)}" target="_blank" rel="noopener" style="font-weight:600;">${esc(f.pn)} ↗</a></div>
+                  <div class="tr-links">${links}</div>
+                  <div class="ms-sub">${esc(f.fmt)} · ${esc(f.lic)}${statsTxt} · <a href="${esc(f.url)}" target="_blank" rel="noopener">original source ↗</a></div>
+                </div>
+              `;
+            })
+            .join("");
+
+          const viewersHtml = s.vw.length
+            ? `<div><span class="source-meta-label">Facsimiles:</span> ${s.vw.map((v) => `<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.name)} ↗</a>`).join(" · ")}</div>`
+            : "";
+
+          return `
+            <details class="source-item">
+              <summary>
+                <span class="ms-siglum">${esc(s.id)}</span>
+                <div>
+                  <span style="font-weight: 600; color: var(--ink);">${esc(s.name || s.id)}</span>
+                  <span style="color: var(--ink-muted); font-size: 0.82rem; margin-left: 8px;">${esc(s.ds)}</span>
+                </div>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;">
+                  <span class="${typeBadge(s.ty)}">${esc(s.ty)}</span>
+                  <span class="badge">${esc(s.ld)}</span>
+                </div>
+              </summary>
+              <div class="source-detail">
+                <div class="source-meta-grid">
+                  <div><div class="source-meta-label">Date</div><div class="source-meta-val">${esc(s.ds)}<div class="ms-sub">${esc(s.dd)}</div></div></div>
+                  ${s.sh ? `<div><div class="source-meta-label">Shelfmark</div><div class="source-meta-val">${esc(s.sh)}</div></div>` : ""}
+                </div>
+                <div><div class="source-meta-label" style="margin-bottom: 4px;">XML Files &amp; Provenance</div>${filesHtml}</div>
+                ${viewersHtml}
+              </div>
+            </details>
+          `;
+        }
+
+        function render() {
+          const slice = filtered.slice(0, limit);
+          if (listEl) {
+            listEl.innerHTML = slice.length
+              ? slice.map(renderItem).join("")
+              : `<div style="padding: 20px; text-align: center; color: var(--ink-muted);">No matching sources.</div>`;
+          }
+          if (countEl) {
+            countEl.textContent = `Showing ${num(slice.length)} of ${num(filtered.length)} matching sources (${num(ALL.length)} total in this YAML)`;
+          }
+          if (moreBtn) {
+            moreBtn.hidden = slice.length >= filtered.length;
+            moreBtn.textContent = `Load more (${num(filtered.length - slice.length)} remaining)`;
+          }
+        }
+
+        searchInput?.addEventListener("input", () => {
+          query = searchInput.value.trim().toLowerCase();
+          limit = 25;
+          filtered = query
+            ? ALL.filter((s) =>
+                `${s.id} ${s.name} ${s.sh} ${s.ld} ${s.ty} ${s.fl.map((f) => `${f.pid} ${f.pn} ${f.ps.join(" ")}`).join(" ")}`
+                  .toLowerCase()
+                  .includes(query)
+              )
+            : ALL;
+          render();
+        });
+
+        moreBtn?.addEventListener("click", () => {
+          limit += 40;
+          render();
+        });
+
+        render();
+      </script>
+    </>
+  ) : (
+    <>
+      <section class="page-header">
+        <div class="container">
+          <div class="eyebrow">Specifications ({specs.length})</div>
+          <h1>Specifications</h1>
+          <p class="lead">
+            All self-contained YAML specifications in <code>specifications/</code>. Each file embeds its own rules, target books, and permitted primary sources.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Specification ID</th>
+                  <th class="num">Target Books</th>
+                  <th class="num">Primary Sources</th>
+                  <th>YAML File</th>
+                </tr>
+              </thead>
+              <tbody>
+                {specs.map((s) => (
+                  <tr>
+                    <td><strong>{s.title}</strong></td>
+                    <td><code>{s.id}</code></td>
+                    <td class="num">{s.targets.length}</td>
+                    <td class="num">{formatNum(s.sources.length)}</td>
+                    <td><a href={githubBlob(s.file)} target="_blank" rel="noopener"><code>{s.file}</code> ↗</a></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </>
+  )}
+</Layout>

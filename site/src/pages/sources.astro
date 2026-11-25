@@ -1,0 +1,271 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {
+  REPO,
+  buildClientSourceIndex,
+  formatNum,
+  getCorpusStats,
+  getPrimarySpec,
+  githubBlob,
+} from "../lib/corpus";
+
+const spec = getPrimarySpec();
+const stats = getCorpusStats(spec);
+const index = buildClientSourceIndex(spec);
+---
+<Layout
+  title="Sources"
+  active="sources"
+  description="Searchable, expandable list of all primary sources embedded in the specification YAML."
+>
+  <section class="page-header">
+    <div class="container">
+      <div class="eyebrow">Embedded in {spec.file}</div>
+      <h1>Primary Sources</h1>
+      <p class="lead">
+        All {formatNum(stats.sourceCount)} primary sources ({formatNum(stats.totalXmlFiles)} XML files across {stats.provenanceCount} source institutions) embedded under <code>sources:</code> in <a href={githubBlob(spec.file)} target="_blank" rel="noopener"><code>{spec.file}</code></a>. Click any source to expand its full metadata, XML paths, provenance, license, and facsimile links.
+      </p>
+      <div class="actions">
+        <a href="/specifications/" class="btn btn-secondary">← Back to specification</a>
+        <a href={githubBlob(spec.file)} class="btn btn-secondary" target="_blank" rel="noopener">View single YAML file ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 24px;">
+    <div class="container">
+      <div class="filter-bar">
+        <div class="filter-top">
+          <input
+            type="search"
+            id="src-search"
+            class="search-input"
+            placeholder="Search by ID, name, shelfmark, provenance, or XML file (e.g., 01, Sinaiticus, P46, 4Q1, Leningrad)…"
+            aria-label="Search sources"
+          />
+          <select id="src-target" class="select-input" aria-label="Filter by target book">
+            <option value="">All target books ({spec.targets.length})</option>
+            {spec.targets.map((t) => (
+              <option value={t.id}>{t.name} ({formatNum(stats.targetSourceCounts[t.id] ?? 0)})</option>
+            ))}
+          </select>
+          <select id="src-prov" class="select-input" aria-label="Filter by provenance">
+            <option value="">All provenance sources ({stats.provenances.length})</option>
+            {stats.provenances.map((p) => (
+              <option value={p.id}>{p.name} ({formatNum(p.sourceCount)})</option>
+            ))}
+          </select>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center;">
+          <div class="pill-group" role="group" aria-label="Filter by ancient language">
+            <span class="pill-label">Language</span>
+            <button type="button" class="filter-pill active" data-lang="">All</button>
+            <button type="button" class="filter-pill" data-lang="Greek">Koine Greek</button>
+            <button type="button" class="filter-pill" data-lang="Hebrew">Biblical Hebrew &amp; Aramaic</button>
+          </div>
+
+          <div class="pill-group" role="group" aria-label="Filter by witness type">
+            <span class="pill-label">Type</span>
+            <button type="button" class="filter-pill active" data-type="">All</button>
+            <button type="button" class="filter-pill" data-type="continuous">Continuous</button>
+            <button type="button" class="filter-pill" data-type="scroll">Scroll</button>
+            <button type="button" class="filter-pill" data-type="lectionary">Lectionary</button>
+            <button type="button" class="filter-pill" data-type="catena">Catena</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-meta">
+        <span id="src-count">Showing {formatNum(Math.min(60, index.length))} of {formatNum(index.length)} sources</span>
+        <button type="button" id="src-reset" class="copy-btn" hidden>Reset filters</button>
+      </div>
+
+      <div class="source-list" id="src-list"></div>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button type="button" id="src-more" class="btn btn-secondary" hidden>Load more sources</button>
+      </div>
+    </div>
+  </section>
+
+  <script id="src-data" type="application/json" set:html={JSON.stringify(index)}></script>
+  <script define:vars={{ REPO }}>
+    const dataEl = document.getElementById("src-data");
+    const ALL = dataEl ? JSON.parse(dataEl.textContent || "[]") : [];
+    const listEl = document.getElementById("src-list");
+    const countEl = document.getElementById("src-count");
+    const moreBtn = document.getElementById("src-more");
+    const resetBtn = document.getElementById("src-reset");
+    const searchInput = document.getElementById("src-search");
+    const targetSelect = document.getElementById("src-target");
+    const provSelect = document.getElementById("src-prov");
+    const langBtns = [...document.querySelectorAll("[data-lang]")];
+    const typeBtns = [...document.querySelectorAll("[data-type]")];
+
+    let state = { q: "", lang: "", type: "", prov: "", target: "", limit: 60 };
+    let filtered = ALL;
+
+    const esc = (s) =>
+      String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    const blob = (f) => `${REPO}/blob/main/${f.split("/").map(encodeURIComponent).join("/")}`;
+    const num = (n) => Number(n).toLocaleString("en-US");
+    const typeBadge = (t) =>
+      t === "scroll" ? "badge badge-amber" : t === "catena" ? "badge badge-violet" : t === "lectionary" ? "badge badge-emerald" : "badge badge-indigo";
+
+    function renderItem(s) {
+      const filesHtml = s.fl
+        .map((f) => {
+          const links = f.ps
+            .map((p) => `<a href="${blob(p)}" target="_blank" rel="noopener"><code>${esc(p)}</code></a>`)
+            .join(" ");
+          const statsTxt = f.ln ? ` · ${num(f.ln)} lines, ${num(f.wd)} words` : "";
+          return `
+            <div class="tr-item">
+              <div><a href="${esc(f.pu)}" target="_blank" rel="noopener" style="font-weight: 600;">${esc(f.pn)} ↗</a></div>
+              <div class="tr-links">${links}</div>
+              <div class="ms-sub">${esc(f.fmt)} · ${esc(f.lic)}${statsTxt} · <a href="${esc(f.url)}" target="_blank" rel="noopener">original source ↗</a></div>
+            </div>
+          `;
+        })
+        .join("");
+
+      const viewersHtml = s.vw.length
+        ? `<div><span class="source-meta-label">Facsimiles:</span> ${s.vw.map((v) => `<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.name)} ↗</a>`).join(" · ")}</div>`
+        : "";
+
+      const fileCount = s.fl.reduce((n, f) => n + f.ps.length, 0);
+
+      return `
+        <details class="source-item">
+          <summary>
+            <span class="ms-siglum">${esc(s.id)}</span>
+            <div>
+              <span style="font-weight: 600; color: var(--ink);">${esc(s.name || s.id)}</span>
+              <span style="color: var(--ink-muted); font-size: 0.82rem; margin-left: 8px;">${esc(s.ds)} · ${fileCount} XML ${fileCount === 1 ? "file" : "files"}</span>
+            </div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;">
+              <span class="${typeBadge(s.ty)}">${esc(s.ty)}</span>
+              <span class="badge">${esc(s.ld)}</span>
+            </div>
+          </summary>
+          <div class="source-detail">
+            <div class="source-meta-grid">
+              <div><div class="source-meta-label">Date</div><div class="source-meta-val">${esc(s.ds)}<div class="ms-sub">${esc(s.dd)}</div></div></div>
+              ${s.sh ? `<div><div class="source-meta-label">Shelfmark</div><div class="source-meta-val">${esc(s.sh)}</div></div>` : ""}
+            </div>
+            <div><div class="source-meta-label" style="margin-bottom: 4px;">XML Files &amp; Provenance</div>${filesHtml}</div>
+            ${viewersHtml}
+          </div>
+        </details>
+      `;
+    }
+
+    function applyFilters() {
+      const q = state.q.trim().toLowerCase();
+      filtered = ALL.filter((s) => {
+        if (state.lang && s.lg !== state.lang) return false;
+        if (state.type && s.ty !== state.type) return false;
+        if (state.target && !(s.tg || []).includes(state.target)) return false;
+        if (state.prov && !s.fl.some((f) => f.pid === state.prov)) return false;
+        if (q) {
+          const hay = `${s.id} ${s.name} ${s.sh} ${s.ld} ${s.ty} ${(s.tg || []).join(" ")} ${s.fl.map((f) => `${f.pid} ${f.pn} ${f.ps.join(" ")}`).join(" ")}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+      render();
+    }
+
+    function render() {
+      const slice = filtered.slice(0, state.limit);
+      if (listEl) {
+        listEl.innerHTML = slice.length
+          ? slice.map(renderItem).join("")
+          : `<div style="padding: 36px; text-align: center; color: var(--ink-muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);">No sources match the current filters.</div>`;
+      }
+      if (countEl) {
+        countEl.textContent = `Showing ${num(slice.length)} of ${num(filtered.length)} matching sources (${num(ALL.length)} total in this YAML)`;
+      }
+      if (moreBtn) {
+        moreBtn.hidden = slice.length >= filtered.length;
+        moreBtn.textContent = `Load more (${num(filtered.length - slice.length)} remaining)`;
+      }
+      if (resetBtn) {
+        resetBtn.hidden = !(state.q || state.lang || state.type || state.prov || state.target);
+      }
+    }
+
+    // Apply URL params (?type=, ?language=, ?provenance=, ?target=)
+    const params = new URLSearchParams(location.search);
+    if (params.get("target") && targetSelect) {
+      state.target = params.get("target");
+      targetSelect.value = state.target;
+    }
+    if (params.get("type")) {
+      state.type = params.get("type");
+      typeBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-type") === state.type));
+    }
+    if (params.get("language")) {
+      state.lang = params.get("language");
+      langBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-lang") === state.lang));
+    }
+    if (params.get("provenance") && provSelect) {
+      state.prov = params.get("provenance");
+      provSelect.value = state.prov;
+    }
+
+    searchInput?.addEventListener("input", () => {
+      state.q = searchInput.value;
+      state.limit = 60;
+      applyFilters();
+    });
+    targetSelect?.addEventListener("change", () => {
+      state.target = targetSelect.value;
+      state.limit = 60;
+      applyFilters();
+    });
+    provSelect?.addEventListener("change", () => {
+      state.prov = provSelect.value;
+      state.limit = 60;
+      applyFilters();
+    });
+    langBtns.forEach((b) =>
+      b.addEventListener("click", () => {
+        langBtns.forEach((x) => x.classList.remove("active"));
+        b.classList.add("active");
+        state.lang = b.getAttribute("data-lang") || "";
+        state.limit = 60;
+        applyFilters();
+      })
+    );
+    typeBtns.forEach((b) =>
+      b.addEventListener("click", () => {
+        typeBtns.forEach((x) => x.classList.remove("active"));
+        b.classList.add("active");
+        state.type = b.getAttribute("data-type") || "";
+        state.limit = 60;
+        applyFilters();
+      })
+    );
+    moreBtn?.addEventListener("click", () => {
+      state.limit += 80;
+      render();
+    });
+    resetBtn?.addEventListener("click", () => {
+      state = { q: "", lang: "", type: "", prov: "", target: "", limit: 60 };
+      if (searchInput) searchInput.value = "";
+      if (targetSelect) targetSelect.value = "";
+      if (provSelect) provSelect.value = "";
+      langBtns.forEach((x, i) => x.classList.toggle("active", i === 0));
+      typeBtns.forEach((x, i) => x.classList.toggle("active", i === 0));
+      applyFilters();
+    });
+
+    applyFilters();
+  </script>
+</Layout>

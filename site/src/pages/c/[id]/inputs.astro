@@ -1,6 +1,0 @@
----
-import Manuscripts from "../../../views/Manuscripts.astro";
-import { defaultArtifact } from "../../../lib/data";
-export function getStaticPaths() { return defaultArtifact().manifest.books.map((b) => ({ params: { id: b.id } })); }
----
-<Manuscripts art={defaultArtifact()} id={Astro.params.id} />

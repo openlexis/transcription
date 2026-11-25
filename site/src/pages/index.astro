@@ -1,5 +1,255 @@
 ---
-import Home from "../views/Home.astro";
-import { defaultArtifact } from "../lib/data";
+import Layout from "../layouts/Layout.astro";
+import {
+  formatNum,
+  getCorpusStats,
+  getPrimarySpec,
+  getSpecifications,
+  githubBlob,
+  githubTree,
+} from "../lib/corpus";
+
+const specs = getSpecifications();
+const spec = getPrimarySpec();
+const stats = getCorpusStats(spec);
+
+const witnessTypes = [
+  {
+    key: "continuous",
+    label: "Continuous-text manuscripts",
+    desc: "Complete or fragmentary copies of biblical books written in normal reading order.",
+    count: stats.types.continuous ?? 0,
+    color: "indigo",
+  },
+  {
+    key: "scroll",
+    label: "Dead Sea Scrolls",
+    desc: "Ancient parchment and papyrus scrolls discovered in the Judaean Desert (c. 3rd century BC – 1st century AD).",
+    count: stats.types.scroll ?? 0,
+    color: "amber",
+  },
+  {
+    key: "lectionary",
+    label: "Lectionaries",
+    desc: "Church service books containing selected biblical passages arranged for liturgical readings.",
+    count: stats.types.lectionary ?? 0,
+    color: "emerald",
+  },
+  {
+    key: "catena",
+    label: "Catenae",
+    desc: "Biblical passages preserved alongside running commentary compiled from early Christian writers.",
+    count: stats.types.catena ?? 0,
+    color: "violet",
+  },
+];
+
+const greekCount = stats.languages.Greek ?? 0;
+const hebrewCount = stats.languages.Hebrew ?? 0;
 ---
-<Home art={defaultArtifact()} />
+<Layout title="Open Lexis" active="home">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Open Biblical Manuscript Corpus</div>
+        <h1>Ancient manuscript transcriptions in their original languages.</h1>
+        <p class="lead">
+          An open archive of primary biblical manuscript transcriptions in Koine Greek, Biblical Hebrew, and Biblical Aramaic—paired with self-contained YAML specifications that bundle rules, target books, and permitted source metadata into a single file.
+        </p>
+        <div class="actions">
+          <a href="/specifications/" class="btn btn-primary">
+            {specs.length === 1 ? "Read specification" : `View ${specs.length} specifications`}
+          </a>
+          <a href="/sources/" class="btn btn-secondary">Explore {formatNum(stats.sourceCount)} sources</a>
+          <a href={githubTree("src")} class="btn btn-secondary" target="_blank" rel="noopener">Browse <code>src/</code> ↗</a>
+        </div>
+      </div>
+
+      <div class="hero-metrics">
+        <div class="metric-card">
+          <div class="metric-value">{formatNum(stats.sourceCount)}</div>
+          <div class="metric-label">Primary sources <span style="display:block; font-size:0.76rem;">in spec <code>{spec.id.slice(0, 8)}…</code></span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">{formatNum(stats.totalXmlFiles)}</div>
+          <div class="metric-label">XML files in <code>src/</code> <span style="display:block; font-size:0.76rem;">across {stats.provenanceCount} institutions</span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">{stats.targetCount}</div>
+          <div class="metric-label">Target biblical books <span style="display:block; font-size:0.76rem;">to reconstruct</span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">{specs.length}</div>
+          <div class="metric-label">{specs.length === 1 ? "Specification YAML" : "Specification YAMLs"} <span style="display:block; font-size:0.76rem;">self-contained file</span></div>
+        </div>
+        <div class="metric-card wide">
+          <div>
+            <div class="metric-value">{(stats.totalWords / 1_000_000).toFixed(1)}M</div>
+            <div class="metric-label">Transcribed words across {formatNum(stats.totalLines)} lines</div>
+          </div>
+          <a href={githubBlob(spec.file)} target="_blank" rel="noopener" class="badge badge-indigo">1 YAML file ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Source Corpus Breakdown</h2>
+          <p class="section-sub">
+            All {formatNum(stats.sourceCount)} primary sources and {stats.targetCount} target books for specification <code>{spec.id}</code> are defined inside the single file <a href={githubBlob(spec.file)} target="_blank" rel="noopener"><code>{spec.file}</code></a>, pointing to {formatNum(stats.totalXmlFiles)} XML files under <code>src/</code>.
+          </p>
+        </div>
+      </div>
+
+      <div class="breakdown-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h3>By Witness Type</h3>
+              <p class="panel-sub">How the {formatNum(stats.sourceCount)} primary sources preserve the biblical text.</p>
+            </div>
+          </div>
+
+          <div class="item-list">
+            {witnessTypes.map((row) => {
+              const pct = Math.round((row.count / stats.sourceCount) * 100);
+              return (
+                <div class="breakdown-item">
+                  <div class={`icon-box icon-${row.color}`} aria-hidden="true">
+                    {row.key === "continuous" && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                      </svg>
+                    )}
+                    {row.key === "scroll" && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4"/>
+                        <path d="M19 17V5a2 2 0 0 0-2-2H4"/>
+                      </svg>
+                    )}
+                    {row.key === "lectionary" && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2"/>
+                        <path d="M16 2v4M8 2v4M3 10h18M8 14h8M8 18h5"/>
+                      </svg>
+                    )}
+                    {row.key === "catena" && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <path d="M14 2v6h6M8 13h8M8 17h5"/>
+                      </svg>
+                    )}
+                  </div>
+                  <div>
+                    <div class="item-top">
+                      <a href={`/sources/?type=${row.key}`} class="item-title">{row.label}</a>
+                      <span class="item-count">{formatNum(row.count)} <span>({pct}%)</span></span>
+                    </div>
+                    <p class="item-desc">{row.desc}</p>
+                    <div class="bar-track">
+                      <div class={`bar-fill fill-${row.color}`} style={`width: ${Math.max(pct, 2)}%`}></div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h3>By Ancient Language</h3>
+              <p class="panel-sub">Original languages of the {stats.targetCount} target books and {formatNum(stats.sourceCount)} sources.</p>
+            </div>
+          </div>
+
+          <div class="item-list">
+            <div class="breakdown-item">
+              <div class="icon-box icon-sky" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 20h16M7 16V6a5 5 0 0 1 10 0v10"/>
+                </svg>
+              </div>
+              <div>
+                <div class="item-top">
+                  <a href="/sources/?language=Greek" class="item-title">Koine Greek</a>
+                  <span class="item-count">{formatNum(greekCount)} sources <span>· {stats.ntCount} target books</span></span>
+                </div>
+                <p class="item-desc">
+                  The common ancient Greek of the Hellenistic and Roman Mediterranean (1st–4th centuries AD), in which the New Testament was written.
+                </p>
+                <div class="bar-track">
+                  <div class="bar-fill fill-sky" style={`width: ${Math.round((greekCount / stats.sourceCount) * 100)}%`}></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="breakdown-item">
+              <div class="icon-box icon-amber" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 6h14M17 6v12M8 10v8"/>
+                </svg>
+              </div>
+              <div>
+                <div class="item-top">
+                  <a href="/sources/?language=Hebrew" class="item-title">Biblical Hebrew</a>
+                  <span class="item-count">{formatNum(hebrewCount)} sources <span>· {stats.otCount} target books</span></span>
+                </div>
+                <p class="item-desc">
+                  Ancient Classical Hebrew of the Old Testament, preserved in the Leningrad Codex, Samaritan Pentateuch, and Dead Sea Scrolls.
+                </p>
+                <div class="bar-track">
+                  <div class="bar-fill fill-amber" style={`width: ${Math.round((hebrewCount / stats.sourceCount) * 100)}%`}></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="breakdown-item">
+              <div class="icon-box icon-violet" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3.6 9h16.8M3.6 15h16.8M12 3a14.5 14.5 0 0 0 0 18M12 3a14.5 14.5 0 0 1 0 18"/>
+                </svg>
+              </div>
+              <div>
+                <div class="item-top">
+                  <a href="/specifications/#embedded-targets" class="item-title">Biblical Aramaic</a>
+                  <span class="item-count">{stats.aramaicTargetCount} target books <span>(OT sections)</span></span>
+                </div>
+                <p class="item-desc">
+                  Ancient Imperial Aramaic closely related to Hebrew, used in passages of {stats.aramaicTargetNames.join(", ")} and preserved within the Old Testament sources.
+                </p>
+                <div class="bar-track">
+                  <div class="bar-fill fill-violet" style="width: 6%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-foot">
+            <a href="/specifications/#embedded-targets" class="btn btn-secondary">Inspect {stats.targetCount} target books</a>
+            <a href="/sources/" class="btn btn-secondary">Explore all {formatNum(stats.sourceCount)} sources</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout">
+        <div>
+          <h3>Compiled Outputs: Not Yet Published</h3>
+          <p>
+            This site currently presents the primary XML corpus in <code>src/</code> and the self-contained specification YAML in <code>specifications/</code>. Compiled outputs under <code>outputs/</code> will appear here once published.
+          </p>
+        </div>
+        <a href="/specifications/" class="btn btn-secondary">View specification →</a>
+      </div>
+    </div>
+  </section>
+</Layout>

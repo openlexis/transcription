@@ -1,5 +1,5 @@
-// The website of the compiled transcriptions: a static site built from the compilations/ folders.
 import { defineConfig } from "astro/config";
+
 export default defineConfig({
   output: "static",
   outDir: "./www",

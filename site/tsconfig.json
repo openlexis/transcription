@@ -1,1 +1,4 @@
-{ "extends": "astro/tsconfigs/strict", "include": ["src", "prepare.ts"] }
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": ["src"]
+}

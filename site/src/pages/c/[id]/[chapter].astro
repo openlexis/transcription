@@ -1,6 +1,0 @@
----
-import Chapter from "../../../views/Chapter.astro";
-import { chapters, defaultArtifact } from "../../../lib/data";
-export function getStaticPaths() { const a = defaultArtifact(); return a.manifest.books.flatMap((b) => chapters(a, b.id).map((chapter) => ({ params: { id: b.id, chapter } }))); }
----
-<Chapter art={defaultArtifact()} id={Astro.params.id} chapter={Astro.params.chapter} />

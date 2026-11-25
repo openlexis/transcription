@@ -1,0 +1,71 @@
+---
+import "../styles/site.css";
+import { REPO } from "../lib/corpus";
+
+interface Props {
+  title: string;
+  description?: string;
+  active?: "home" | "specs" | "sources";
+}
+
+const {
+  title,
+  description = "Primary ancient manuscript transcriptions for the Old and New Testaments in Koine Greek, Biblical Hebrew, and Biblical Aramaic.",
+  active,
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title === "Open Lexis" ? "Open Lexis · Biblical Manuscript Transcriptions" : `${title} · Open Lexis`}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 5.5C4.8 4.8 8.4 5.3 12 7.5c3.6-2.2 7.2-2.7 10-2v13c-2.8-.7-6.4-.2-10 2-3.6-2.2-7.2-2.7-10-2v-13z"/>
+            <path d="M12 7.5v13"/>
+          </svg>
+        </span>
+        <span>Open Lexis <span class="brand-sub">Transcriptions</span></span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/" class={active === "home" ? "active" : ""}>Overview</a>
+        <a href="/specifications/" class={active === "specs" ? "active" : ""}>Specifications</a>
+        <a href="/sources/" class={active === "sources" ? "active" : ""}>Sources</a>
+        <a href={REPO} class="nav-ext" target="_blank" rel="noopener">GitHub ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color: var(--ink);">Open Lexis</strong> · Ancient Biblical Manuscript Corpus
+        <div style="margin-top: 4px;">
+          Primary manuscript transcriptions in Koine Greek, Biblical Hebrew, and Biblical Aramaic.
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="/specifications/">Specifications</a>
+        <a href="/sources/">Sources</a>
+        <a href={REPO} target="_blank" rel="noopener">Repository ↗</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
