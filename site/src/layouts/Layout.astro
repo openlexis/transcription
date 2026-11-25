@@ -5,7 +5,7 @@ import { REPO } from "../lib/corpus";
 interface Props {
   title: string;
   description?: string;
-  active?: "home" | "specs" | "sources";
+  active?: "home" | "specs" | "sources" | "outputs";
 }
 
 const {
@@ -43,6 +43,7 @@ const {
         <a href="/" class={active === "home" ? "active" : ""}>Overview</a>
         <a href="/specifications/" class={active === "specs" ? "active" : ""}>Specifications</a>
         <a href="/sources/" class={active === "sources" ? "active" : ""}>Sources</a>
+        <a href="/outputs/" class={active === "outputs" ? "active" : ""}>Outputs</a>
         <a href={REPO} class="nav-ext" target="_blank" rel="noopener">GitHub ↗</a>
       </nav>
     </div>
@@ -63,6 +64,7 @@ const {
       <div class="footer-links">
         <a href="/specifications/">Specifications</a>
         <a href="/sources/">Sources</a>
+        <a href="/outputs/">Outputs</a>
         <a href={REPO} target="_blank" rel="noopener">Repository ↗</a>
       </div>
     </div>

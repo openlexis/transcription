@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "sets": "bun scripts/sets.ts",
+    "sources": "bun scripts/sources.ts",
     "import": "bun scripts/import.ts",
     "compile": "bun --smol scripts/compile.ts",
     "check": "bun scripts/check.ts",

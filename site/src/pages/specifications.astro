@@ -6,6 +6,7 @@ import {
   displayLanguage,
   formatNum,
   formatSpecText,
+  getCompilationsForSpec,
   getCorpusStats,
   getSpecifications,
   githubBlob,
@@ -14,6 +15,7 @@ import {
 const specs = getSpecifications();
 const single = specs.length === 1 ? specs[0] : null;
 const stats = single ? getCorpusStats(single) : null;
+const specCompilations = single ? getCompilationsForSpec(single.id) : [];
 const otTargets = single ? single.targets.filter((t) => t.section === "Old Testament") : [];
 const ntTargets = single ? single.targets.filter((t) => t.section === "New Testament") : [];
 const clientSources = single ? buildClientSourceIndex(single) : [];
@@ -47,6 +49,11 @@ const toc = [
               <button type="button" class="copy-btn" id="copy-id">Copy</button>
             </div>
             <a href={githubBlob(single.file)} class="btn btn-primary" target="_blank" rel="noopener">View on GitHub ↗</a>
+            {specCompilations.length > 0 && (
+              <a href={`/outputs/${single.id}/${specCompilations[0].compilationId}/`} class="btn btn-secondary">
+                View {specCompilations.length === 1 ? "compiled output" : `${specCompilations.length} compiled outputs`} →
+              </a>
+            )}
           </div>
         </div>
       </section>
@@ -89,7 +96,14 @@ const toc = [
 
           <h2 id="corpus-layout">3. Source Corpus Layout</h2>
           <p set:html={formatSpecText(single.corpus_layout.structure, true)} />
+          <h3>File Layout</h3>
           <ul>
+            {single.corpus_layout.naming.sets && (
+              <li><strong>Immutable source sets:</strong> <code>{single.corpus_layout.naming.sets}</code></li>
+            )}
+            {single.corpus_layout.naming.index && (
+              <li><strong>Institutional catalog:</strong> <code>{single.corpus_layout.naming.index}</code></li>
+            )}
             <li><strong>Single-file sources:</strong> <code>{single.corpus_layout.naming.single_file}</code></li>
             <li><strong>Multi-file sources:</strong> <code>{single.corpus_layout.naming.multi_file}</code></li>
           </ul>
@@ -149,9 +163,9 @@ const toc = [
             ))}
           </ul>
 
-          <h2 id="embedded-data">7. Embedded Targets &amp; Sources</h2>
+          <h2 id="embedded-data">7. Pinned Books &amp; Sources</h2>
           <p>
-            There are no separate JSON manifest files. Both the target books to reconstruct and the complete list of permitted primary sources (with inline provenance, dating, licenses, and <code>src/</code> XML paths) are embedded directly inside <a href={githubBlob(single.file)} target="_blank" rel="noopener"><code>{single.file}</code></a>. Expand either section below to inspect them inline.
+            <a href={githubBlob(single.file)} target="_blank" rel="noopener"><code>{single.file}</code></a> defines its entire scope in a single <code>sources</code> list of immutable ULID snapshots (<code>src/sets/&lt;ULID&gt;.json</code>), eliminating any split between books and sources. If new manuscripts are added to <code>src/</code> later, <code>bun run sets</code> mints a new ULID while older specifications remain pinned to their exact historical set. Use <code>bun run sources</code> to resolve metadata and XML paths programmatically.
           </p>
 
           <details class="embed-accordion" id="embedded-targets">

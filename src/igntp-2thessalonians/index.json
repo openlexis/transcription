@@ -1,0 +1,4611 @@
+{
+  "institution": {
+    "id": "igntp-2thessalonians",
+    "name": "ITSEE, 2 Thessalonians",
+    "url": "https://edata.bham.ac.uk/510/"
+  },
+  "items": [
+    {
+      "id": "01",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Codex Sinaiticus",
+      "shelfmark": "London, British Library, Add MS 43725 (with Leipzig, St Catherine's Monastery, Saint Petersburg)",
+      "century": "IV",
+      "year": 350,
+      "yearFrom": 300,
+      "yearTo": 399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20001"
+        },
+        {
+          "name": "Codex Sinaiticus Project",
+          "url": "https://codexsinaiticus.org/en/manuscript.aspx"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "2Tim",
+        "Titus",
+        "Phlm",
+        "Heb",
+        "Jas",
+        "1Pet",
+        "2Pet",
+        "1John",
+        "2John",
+        "3John",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/01.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_01.xml",
+      "lines": 47,
+      "words": 818
+    },
+    {
+      "id": "010",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20010"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/010.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_010.xml",
+      "lines": 47,
+      "words": 809
+    },
+    {
+      "id": "0111",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "VII",
+      "year": 650,
+      "yearFrom": 600,
+      "yearTo": 699,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20111"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/0111.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_0111.xml",
+      "lines": 14,
+      "words": 141
+    },
+    {
+      "id": "012",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20012"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/012.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_012.xml",
+      "lines": 47,
+      "words": 812
+    },
+    {
+      "id": "0142",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 0142",
+      "shelfmark": "München, Bayerische Staatsbibliothek (BSB), Cod. graec. 375",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20142"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/0142.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_0142.xml",
+      "lines": 47,
+      "words": 826
+    },
+    {
+      "id": "0150",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20150"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/0150.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_0150.xml",
+      "lines": 46,
+      "words": 823
+    },
+    {
+      "id": "0151",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20151"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/0151.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_0151.xml",
+      "lines": 47,
+      "words": 828
+    },
+    {
+      "id": "016",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "V",
+      "year": 450,
+      "yearFrom": 400,
+      "yearTo": 499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20016"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/016.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_016.xml",
+      "lines": 16,
+      "words": 163
+    },
+    {
+      "id": "018",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 018",
+      "shelfmark": "Moscow, State Historical Museum, Sinod. gr. 97 (Vlad. 093)",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20018"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/018.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_018.xml",
+      "lines": 47,
+      "words": 832
+    },
+    {
+      "id": "02",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Codex Alexandrinus",
+      "shelfmark": "London, British Library, Royal MS 1 D VIII (the New Testament volume)",
+      "century": "V",
+      "year": 450,
+      "yearFrom": 400,
+      "yearTo": 499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20002"
+        },
+        {
+          "name": "British Library, Digitised Manuscripts",
+          "url": "https://www.bl.uk/manuscripts/FullDisplay.aspx?ref=Royal_MS_1_D_VIII"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "2Tim",
+        "Titus",
+        "Phlm",
+        "Heb",
+        "Jas",
+        "1Pet",
+        "2Pet",
+        "1John",
+        "2John",
+        "3John",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/02.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_02.xml",
+      "lines": 47,
+      "words": 796
+    },
+    {
+      "id": "020",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 020",
+      "shelfmark": "Rome, Biblioteca Angelica, Ang. gr. 39",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20020"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/020.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_020.xml",
+      "lines": 47,
+      "words": 835
+    },
+    {
+      "id": "025",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "1John",
+        "2John",
+        "3John",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/025.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_025.xml",
+      "lines": 47,
+      "words": 817
+    },
+    {
+      "id": "0278",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20278"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/0278.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_0278.xml",
+      "lines": 47,
+      "words": 827
+    },
+    {
+      "id": "03",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Codex Vaticanus",
+      "shelfmark": "Vatican City, Biblioteca Apostolica Vaticana, Vat. gr. 1209",
+      "century": "IV",
+      "year": 350,
+      "yearFrom": 300,
+      "yearTo": 399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20003"
+        },
+        {
+          "name": "DigiVatLib, Biblioteca Apostolica Vaticana",
+          "url": "https://digi.vatlib.it/view/MSS_Vat.gr.1209"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "Heb",
+        "Jas",
+        "1Pet",
+        "2Pet",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/03.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_03.xml",
+      "lines": 47,
+      "words": 819
+    },
+    {
+      "id": "044",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 044",
+      "shelfmark": "Athos, Great Lavra Monastery, B' 52",
+      "century": "IX/X",
+      "year": 900,
+      "yearFrom": 800,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20044"
+        }
+      ],
+      "targets": [
+        "Mark",
+        "John",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/044.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_044.xml",
+      "lines": 46,
+      "words": 815
+    },
+    {
+      "id": "056",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20056"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/056.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_056.xml",
+      "lines": 47,
+      "words": 833
+    },
+    {
+      "id": "06",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "VI",
+      "year": 550,
+      "yearFrom": 500,
+      "yearTo": 599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20006"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/06.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_06.xml",
+      "lines": 47,
+      "words": 819
+    },
+    {
+      "id": "075",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20075"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/075.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_075.xml",
+      "lines": 47,
+      "words": 825
+    },
+    {
+      "id": "103",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 103",
+      "shelfmark": "Moscow, State Historical Museum, Sinod. gr. 347 (Vlad. 096)",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30103"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/103.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_103.xml",
+      "lines": 47,
+      "words": 844
+    },
+    {
+      "id": "104",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 104",
+      "shelfmark": "London, British Library, Harley 5537",
+      "century": "1087",
+      "year": 1087,
+      "yearFrom": 1087,
+      "yearTo": 1087,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30104"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/104.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_104.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "1101",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1101",
+      "shelfmark": "Athos, Dionysiou Monastery, 382 (Monastery 383)",
+      "century": "1660",
+      "year": 1660,
+      "yearFrom": 1660,
+      "yearTo": 1660,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31101"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1101.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1101.xml",
+      "lines": 47,
+      "words": 836
+    },
+    {
+      "id": "1115",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31115"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1115.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1115.xml",
+      "lines": 47,
+      "words": 815
+    },
+    {
+      "id": "1127",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1127",
+      "shelfmark": "Athos, Philotheou Monastery, 48",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31127"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1127.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1127.xml",
+      "lines": 47,
+      "words": 829
+    },
+    {
+      "id": "1241",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1241",
+      "shelfmark": "Sinai, Saint Catherine's Monastery, Gr. 260",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31241"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "John",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1241.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1241.xml",
+      "lines": 47,
+      "words": 837
+    },
+    {
+      "id": "131",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 131",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Vat. gr. 360",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30131"
+        }
+      ],
+      "targets": [
+        "Mark",
+        "Luke",
+        "John",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/131.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_131.xml",
+      "lines": 47,
+      "words": 824
+    },
+    {
+      "id": "1311",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1090",
+      "year": 1090,
+      "yearFrom": 1090,
+      "yearTo": 1090,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31311"
+        }
+      ],
+      "targets": [
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1311.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1311.xml",
+      "lines": 47,
+      "words": 827
+    },
+    {
+      "id": "1352",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31352"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1352.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1352.xml",
+      "lines": 47,
+      "words": 836
+    },
+    {
+      "id": "1354",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31354"
+        }
+      ],
+      "targets": [
+        "Mark",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1354.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1354.xml",
+      "lines": 47,
+      "words": 832
+    },
+    {
+      "id": "1390",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1390",
+      "shelfmark": "Athos, Stavronikita Monastery, 45",
+      "century": "XIII/XIV",
+      "year": 1300,
+      "yearFrom": 1280,
+      "yearTo": 1320,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31390"
+        }
+      ],
+      "targets": [
+        "2Thess",
+        "1Tim"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1390.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1390.xml",
+      "lines": 47,
+      "words": 832
+    },
+    {
+      "id": "1398",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31398"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1398.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1398.xml",
+      "lines": 47,
+      "words": 825
+    },
+    {
+      "id": "1409",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1409",
+      "shelfmark": "Athos, Xeropotamou Monastery, 244",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31409"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1409.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1409.xml",
+      "lines": 47,
+      "words": 823
+    },
+    {
+      "id": "142",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30142"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/142.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_142.xml",
+      "lines": 47,
+      "words": 828
+    },
+    {
+      "id": "1448",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1448",
+      "shelfmark": "Athos, Great Lavra Monastery, A' 13",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31448"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1448.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1448.xml",
+      "lines": 47,
+      "words": 828
+    },
+    {
+      "id": "1456",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31456"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1456.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1456.xml",
+      "lines": 47,
+      "words": 830
+    },
+    {
+      "id": "1524",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1524",
+      "shelfmark": "Wien, Österreichische Nationalbibliothek, Theol. gr. 150",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31524"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1524.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1524.xml",
+      "lines": 47,
+      "words": 836
+    },
+    {
+      "id": "1573",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1573",
+      "shelfmark": "Athos, Vatopedi Monastery, 939",
+      "century": "XII/XIII",
+      "year": 1200,
+      "yearFrom": 1100,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31573"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "Col",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1573.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1573.xml",
+      "lines": 47,
+      "words": 827
+    },
+    {
+      "id": "1609",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1609",
+      "shelfmark": "Athos, Great Lavra Monastery, A' 90",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31609"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1609.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1609.xml",
+      "lines": 47,
+      "words": 832
+    },
+    {
+      "id": "1661",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1661",
+      "shelfmark": "Athos, Great Lavra Monastery, H' 163",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31661"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1661.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1661.xml",
+      "lines": 47,
+      "words": 820
+    },
+    {
+      "id": "1678",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1678",
+      "shelfmark": "Athos, St. Panteleimon Monastery, 770",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31678"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1678.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1678.xml",
+      "lines": 47,
+      "words": 824
+    },
+    {
+      "id": "1729",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1729",
+      "shelfmark": "Athos, Vatopedi Monastery, 968",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31729"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1729.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1729.xml",
+      "lines": 27,
+      "words": 459
+    },
+    {
+      "id": "1739",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1739",
+      "shelfmark": "Athos, Great Lavra Monastery, B' 64",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31739"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "1Cor",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1739.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1739.xml",
+      "lines": 47,
+      "words": 813
+    },
+    {
+      "id": "1751",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1751",
+      "shelfmark": "Athos, Great Lavra Monastery, K' 190, fol. 1-168",
+      "century": "1479",
+      "year": 1479,
+      "yearFrom": 1479,
+      "yearTo": 1479,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31751"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1751.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1751.xml",
+      "lines": 47,
+      "words": 817
+    },
+    {
+      "id": "1798",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31798"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1798.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1798.xml",
+      "lines": 47,
+      "words": 825
+    },
+    {
+      "id": "1830",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31830"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1830.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1830.xml",
+      "lines": 47,
+      "words": 839
+    },
+    {
+      "id": "1838",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1838",
+      "shelfmark": "Grottaferrata, Biblioteca Statale del Monumento Nazionale, A. β. 6",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31838"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1838.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1838.xml",
+      "lines": 33,
+      "words": 539
+    },
+    {
+      "id": "1845",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1845",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Vat. gr. 1971",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31845"
+        }
+      ],
+      "targets": [
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1845.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1845.xml",
+      "lines": 47,
+      "words": 827
+    },
+    {
+      "id": "1867",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31867"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1867.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1867.xml",
+      "lines": 47,
+      "words": 830
+    },
+    {
+      "id": "1881",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1881",
+      "shelfmark": "Sinai, Saint Catherine's Monastery, Gr. 300",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31881"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1881.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1881.xml",
+      "lines": 47,
+      "words": 809
+    },
+    {
+      "id": "1890",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1890",
+      "shelfmark": "Jerusalem, Patriarchate of Jerusalem, Taphu 462",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31890"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1890.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1890.xml",
+      "lines": 30,
+      "words": 538
+    },
+    {
+      "id": "1899",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31899"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1899.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1899.xml",
+      "lines": 47,
+      "words": 830
+    },
+    {
+      "id": "1908",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31908"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1908.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1908.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "1910",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XI/XII",
+      "year": 1100,
+      "yearFrom": 1000,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31910"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1910.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1910.xml",
+      "lines": 47,
+      "words": 791
+    },
+    {
+      "id": "1912",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31912"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1912.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1912.xml",
+      "lines": 47,
+      "words": 825
+    },
+    {
+      "id": "1918",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31918"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1918.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1918.xml",
+      "lines": 47,
+      "words": 807
+    },
+    {
+      "id": "1935",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31935"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1935.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1935.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "1942",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31942"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1942.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1942.xml",
+      "lines": 23,
+      "words": 342
+    },
+    {
+      "id": "1943",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31943"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1943.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1943.xml",
+      "lines": 47,
+      "words": 815
+    },
+    {
+      "id": "1945",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31945"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1945.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1945.xml",
+      "lines": 47,
+      "words": 839
+    },
+    {
+      "id": "1947",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31947"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1947.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1947.xml",
+      "lines": 47,
+      "words": 813
+    },
+    {
+      "id": "1950",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1394",
+      "year": 1394,
+      "yearFrom": 1394,
+      "yearTo": 1394,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31950"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1950.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1950.xml",
+      "lines": 47,
+      "words": 837
+    },
+    {
+      "id": "1961",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31961"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1961.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1961.xml",
+      "lines": 47,
+      "words": 808
+    },
+    {
+      "id": "1962",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XI/XII",
+      "year": 1100,
+      "yearFrom": 1000,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31962"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1962.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1962.xml",
+      "lines": 47,
+      "words": 798
+    },
+    {
+      "id": "1969",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31969"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1969.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1969.xml",
+      "lines": 47,
+      "words": 834
+    },
+    {
+      "id": "1973",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31973"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1973.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1973.xml",
+      "lines": 47,
+      "words": 832
+    },
+    {
+      "id": "1976",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31976"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1976.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1976.xml",
+      "lines": 47,
+      "words": 813
+    },
+    {
+      "id": "1977",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31977"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1977.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1977.xml",
+      "lines": 47,
+      "words": 825
+    },
+    {
+      "id": "1984",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31984"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1984.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1984.xml",
+      "lines": 47,
+      "words": 828
+    },
+    {
+      "id": "1985",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1561",
+      "year": 1561,
+      "yearFrom": 1561,
+      "yearTo": 1561,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31985"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1985.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1985.xml",
+      "lines": 47,
+      "words": 824
+    },
+    {
+      "id": "1987",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31987"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1987.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1987.xml",
+      "lines": 47,
+      "words": 834
+    },
+    {
+      "id": "1991",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31991"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1991.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1991.xml",
+      "lines": 47,
+      "words": 813
+    },
+    {
+      "id": "1995",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31995"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/1995.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_1995.xml",
+      "lines": 47,
+      "words": 826
+    },
+    {
+      "id": "2000",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32000"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2000.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2000.xml",
+      "lines": 47,
+      "words": 826
+    },
+    {
+      "id": "2002",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32002"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2002.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2002.xml",
+      "lines": 47,
+      "words": 815
+    },
+    {
+      "id": "2003",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32003"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2003.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2003.xml",
+      "lines": 47,
+      "words": 825
+    },
+    {
+      "id": "2004",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII       ",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32004"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2004.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2004.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "2005",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32005"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2005.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2005.xml",
+      "lines": 33,
+      "words": 556
+    },
+    {
+      "id": "203",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1111",
+      "year": 1111,
+      "yearFrom": 1111,
+      "yearTo": 1111,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30203"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/203.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_203.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "2102",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1451",
+      "year": 1451,
+      "yearFrom": 1451,
+      "yearTo": 1451,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32102"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2102.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2102.xml",
+      "lines": 47,
+      "words": 824
+    },
+    {
+      "id": "2104",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32104"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2104.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2104.xml",
+      "lines": 47,
+      "words": 829
+    },
+    {
+      "id": "2105",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32105"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2105.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2105.xml",
+      "lines": 47,
+      "words": 833
+    },
+    {
+      "id": "2127",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32127"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2127.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2127.xml",
+      "lines": 47,
+      "words": 829
+    },
+    {
+      "id": "2138",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 2138",
+      "shelfmark": "Moscow, Moscow State University Library, Gr. 2 (Inv. 2280)",
+      "century": "1072",
+      "year": 1072,
+      "yearFrom": 1072,
+      "yearTo": 1072,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32138"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2138.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2138.xml",
+      "lines": 35,
+      "words": 615
+    },
+    {
+      "id": "218",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 218",
+      "shelfmark": "Wien, Österreichische Nationalbibliothek, Theol. gr. 23, fol. 486-623",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30218"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "Heb",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/218.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_218.xml",
+      "lines": 42,
+      "words": 728
+    },
+    {
+      "id": "2197",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32197"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2197.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2197.xml",
+      "lines": 47,
+      "words": 832
+    },
+    {
+      "id": "2248",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32248"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2248.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2248.xml",
+      "lines": 47,
+      "words": 818
+    },
+    {
+      "id": "2298",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 2298",
+      "shelfmark": "Paris, Bibliothèque Nationale, Gr. 102",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32298"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2298.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2298.xml",
+      "lines": 47,
+      "words": 832
+    },
+    {
+      "id": "2400",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32400"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2400.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2400.xml",
+      "lines": 47,
+      "words": 829
+    },
+    {
+      "id": "2464",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 2464",
+      "shelfmark": "Patmos, St. John the Theologian Monastery, 742",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32464"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2464.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2464.xml",
+      "lines": 47,
+      "words": 793
+    },
+    {
+      "id": "2482",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32482"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2482.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2482.xml",
+      "lines": 47,
+      "words": 817
+    },
+    {
+      "id": "2492",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 2492",
+      "shelfmark": "Sinai, Saint Catherine's Monastery, Gr. 1342, fol. 1-178",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32492"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "2Thess",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2492.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2492.xml",
+      "lines": 47,
+      "words": 815
+    },
+    {
+      "id": "2516",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32516"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2516.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2516.xml",
+      "lines": 47,
+      "words": 830
+    },
+    {
+      "id": "2523",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1453",
+      "year": 1453,
+      "yearFrom": 1453,
+      "yearTo": 1453,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32523"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2523.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2523.xml",
+      "lines": 47,
+      "words": 833
+    },
+    {
+      "id": "254",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 254",
+      "shelfmark": "Athens, National Library, EBE 490",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30254"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Gal",
+        "2Thess",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/254.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_254.xml",
+      "lines": 47,
+      "words": 834
+    },
+    {
+      "id": "2544",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 2544",
+      "shelfmark": "St. Petersburg, National Library of Russia, Ф. № 351 /120.125",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32544"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2544.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2544.xml",
+      "lines": 47,
+      "words": 830
+    },
+    {
+      "id": "2558",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32558"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2558.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2558.xml",
+      "lines": 47,
+      "words": 699
+    },
+    {
+      "id": "256",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XI/XII",
+      "year": 1100,
+      "yearFrom": 1000,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30256"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/256.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_256.xml",
+      "lines": 47,
+      "words": 827
+    },
+    {
+      "id": "2576",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1286",
+      "year": 1286,
+      "yearFrom": 1286,
+      "yearTo": 1286,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32576"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2576.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2576.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "2625",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32625"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2625.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2625.xml",
+      "lines": 16,
+      "words": 311
+    },
+    {
+      "id": "263",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30263"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/263.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_263.xml",
+      "lines": 47,
+      "words": 834
+    },
+    {
+      "id": "2674",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1651",
+      "year": 1651,
+      "yearFrom": 1651,
+      "yearTo": 1651,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32674"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2674.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2674.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "2736",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32736"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2736.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2736.xml",
+      "lines": 35,
+      "words": 601
+    },
+    {
+      "id": "2772",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32772"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2772.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2772.xml",
+      "lines": 37,
+      "words": 631
+    },
+    {
+      "id": "2805",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 2805",
+      "shelfmark": "Woodbury, NY, Daniel P. Buttafuoco Library, s.n",
+      "century": "XII/ XIII",
+      "year": 1200,
+      "yearFrom": 1100,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32805"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/2805.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_2805.xml",
+      "lines": 47,
+      "words": 828
+    },
+    {
+      "id": "33",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 33",
+      "shelfmark": "Paris, Bibliothèque Nationale, Gr. 14, fol. 51r-143v",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30033"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Titus",
+        "Phlm",
+        "Heb",
+        "Jas",
+        "1Pet",
+        "2Pet",
+        "1John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/33.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_33.xml",
+      "lines": 47,
+      "words": 750
+    },
+    {
+      "id": "330",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 330",
+      "shelfmark": "St. Petersburg, National Library of Russia, Ф. № 906 /Gr. 101",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30330"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/330.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_330.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "35",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 35",
+      "shelfmark": "Paris, Bibliothèque Nationale, Coislin Grec 199",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30035"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "John",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/35.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_35.xml",
+      "lines": 47,
+      "words": 835
+    },
+    {
+      "id": "365",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 365",
+      "shelfmark": "Florence, Biblioteca Medicea Laurenziana, Pluteo VI. 36",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30365"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/365.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_365.xml",
+      "lines": 47,
+      "words": 822
+    },
+    {
+      "id": "38",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 38",
+      "shelfmark": "Paris, Bibliothèque Nationale, Coislin Grec 200",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30038"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Rom",
+        "Gal",
+        "Eph",
+        "Col",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/38.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_38.xml",
+      "lines": 47,
+      "words": 828
+    },
+    {
+      "id": "384",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30384"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/384.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_384.xml",
+      "lines": 47,
+      "words": 823
+    },
+    {
+      "id": "425",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 425",
+      "shelfmark": "Wien, Österreichische Nationalbibliothek, Theol. gr. 221, fol. 1-159",
+      "century": "1330",
+      "year": 1330,
+      "yearFrom": 1330,
+      "yearTo": 1330,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30425"
+        }
+      ],
+      "targets": [
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/425.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_425.xml",
+      "lines": 47,
+      "words": 834
+    },
+    {
+      "id": "436",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 436",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Vat. gr. 367",
+      "century": "XI/XII",
+      "year": 1100,
+      "yearFrom": 1000,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30436"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/436.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_436.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "442",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 442",
+      "shelfmark": "Uppsala, Uppsala University Library, Gr. 1, p. 183-440",
+      "century": "XII/XIII",
+      "year": 1200,
+      "yearFrom": 1100,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30442"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/442.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_442.xml",
+      "lines": 47,
+      "words": 835
+    },
+    {
+      "id": "451",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 451",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Urb. gr. 3",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30451"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/451.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_451.xml",
+      "lines": 47,
+      "words": 830
+    },
+    {
+      "id": "454",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 454",
+      "shelfmark": "Florence, Biblioteca Medicea Laurenziana, Pluteo IV. 1",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30454"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "1Thess",
+        "2Thess",
+        "1Tim"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/454.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_454.xml",
+      "lines": 47,
+      "words": 836
+    },
+    {
+      "id": "455",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII/XIV",
+      "year": 1300,
+      "yearFrom": 1200,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30455"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/455.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_455.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "459",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 459",
+      "shelfmark": "Florence, Biblioteca Medicea Laurenziana, Pluteo IV. 32",
+      "century": "1092",
+      "year": 1092,
+      "yearFrom": 1092,
+      "yearTo": 1092,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30459"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/459.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_459.xml",
+      "lines": 47,
+      "words": 820
+    },
+    {
+      "id": "506",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 506",
+      "shelfmark": "Oxford, Christ Church, Wake 12",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30506"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Rev"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/506.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_506.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "517",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 517",
+      "shelfmark": "Oxford, Christ Church, Wake 34",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30517"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/517.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_517.xml",
+      "lines": 47,
+      "words": 833
+    },
+    {
+      "id": "582",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 582",
+      "shelfmark": "Ferrara, Biblioteca Comunale Ariostea, Cl. II, 187",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30582"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/582.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_582.xml",
+      "lines": 47,
+      "words": 829
+    },
+    {
+      "id": "6",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 6",
+      "shelfmark": "Paris, Bibliothèque Nationale, Gr. 112",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30006"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "2Tim",
+        "Titus",
+        "Phlm",
+        "Heb",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/6.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_6.xml",
+      "lines": 47,
+      "words": 823
+    },
+    {
+      "id": "606",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 606",
+      "shelfmark": "Paris, Bibliothèque Nationale, Gr. 217",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30606"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/606.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_606.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "608",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30608"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/608.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_608.xml",
+      "lines": 46,
+      "words": 815
+    },
+    {
+      "id": "61",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 61",
+      "shelfmark": "Dublin, Trinity College, MS 30",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30061"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/61.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_61.xml",
+      "lines": 47,
+      "words": 829
+    },
+    {
+      "id": "620",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 620",
+      "shelfmark": "Florence, Biblioteca Medicea Laurenziana, Conv. Soppr. 150",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30620"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "Rev"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/620.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_620.xml",
+      "lines": 47,
+      "words": 829
+    },
+    {
+      "id": "629",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 629",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Ottob. gr. 298",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30629"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/629.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_629.xml",
+      "lines": 46,
+      "words": 813
+    },
+    {
+      "id": "630",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 630",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Ottob. gr. 325",
+      "century": "XII/XIII",
+      "year": 1200,
+      "yearFrom": 1100,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30630"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "2Thess",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/630.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_630.xml",
+      "lines": 47,
+      "words": 821
+    },
+    {
+      "id": "720",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 720",
+      "shelfmark": "Wien, Österreichische Nationalbibliothek, Theol. gr. 79; Wien, Österreichische Nationalbibliothek, Theol. gr. 80",
+      "century": "1138/39",
+      "year": 1139,
+      "yearFrom": 1138,
+      "yearTo": 1139,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30720"
+        }
+      ],
+      "targets": [
+        "Gal",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/720.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_720.xml",
+      "lines": 47,
+      "words": 834
+    },
+    {
+      "id": "81",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 81",
+      "shelfmark": "Alexandria, Greek Orthodox Patriarchate of Alexandria, 477; London, British Library, Add. 20003",
+      "century": "1044",
+      "year": 1044,
+      "yearFrom": 1044,
+      "yearTo": 1044,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30081"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Heb",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/81.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_81.xml",
+      "lines": 47,
+      "words": 831
+    },
+    {
+      "id": "858",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30858"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/858.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_858.xml",
+      "lines": 47,
+      "words": 832
+    },
+    {
+      "id": "88",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 88",
+      "shelfmark": "Naples, Biblioteca Nazionale, Ms. II. A. 7",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30088"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/88.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_88.xml",
+      "lines": 47,
+      "words": 804
+    },
+    {
+      "id": "886",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 886",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Reg. gr. 6",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30886"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/886.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_886.xml",
+      "lines": 47,
+      "words": 822
+    },
+    {
+      "id": "90",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 90",
+      "shelfmark": "Amsterdam, University Library, Remonstr. 186",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30090"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/90.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_90.xml",
+      "lines": 47,
+      "words": 827
+    },
+    {
+      "id": "915",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 915",
+      "shelfmark": "El Escorial, Real Biblioteca del Monasterio de El Escorial, T-III-12",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30915"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/915.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_915.xml",
+      "lines": 47,
+      "words": 809
+    },
+    {
+      "id": "941",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30941"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/941.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_941.xml",
+      "lines": 47,
+      "words": 826
+    },
+    {
+      "id": "999",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30999"
+        }
+      ],
+      "targets": [
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/999.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_999.xml",
+      "lines": 47,
+      "words": 832
+    },
+    {
+      "id": "P30",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 30",
+      "shelfmark": "Ghent, Ghent University Library, Inv. 61",
+      "century": "E II - A III",
+      "year": 250,
+      "yearFrom": 200,
+      "yearTo": 299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10030"
+        }
+      ],
+      "targets": [
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/P30.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_P30.xml",
+      "lines": 2,
+      "words": 1
+    },
+    {
+      "id": "P92",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 92",
+      "shelfmark": "Cairo, The Egyptian Museum, P. Narmuthis inv. 69.39a+69.229a",
+      "century": "III/IV",
+      "year": 300,
+      "yearFrom": 200,
+      "yearTo": 399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10092"
+        }
+      ],
+      "targets": [
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "src/igntp-2thessalonians/P92.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/510/1/transcriptions.zip",
+      "member": "14_P92.xml",
+      "lines": 4,
+      "words": 3
+    }
+  ]
+}

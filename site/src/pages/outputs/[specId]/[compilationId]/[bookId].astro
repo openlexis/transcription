@@ -1,0 +1,472 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+import {
+  displayLanguage,
+  formatBytes,
+  formatNum,
+  formatPct,
+  getCompilations,
+  githubBlob,
+  parseCompiledBookTei,
+  type CompilationRecord,
+  type CompiledBookEntry,
+} from "../../../../lib/corpus";
+
+export function getStaticPaths() {
+  const paths: {
+    params: { specId: string; compilationId: string; bookId: string };
+    props: { compilation: CompilationRecord; book: CompiledBookEntry };
+  }[] = [];
+  for (const c of getCompilations()) {
+    for (const b of c.manifest.books) {
+      paths.push({
+        params: { specId: c.specId, compilationId: c.compilationId, bookId: b.id },
+        props: { compilation: c, book: b },
+      });
+    }
+  }
+  return paths;
+}
+
+interface Props {
+  compilation: CompilationRecord;
+  book: CompiledBookEntry;
+}
+
+const { compilation: c, book: b } = Astro.props;
+const isHebrew = b.language.startsWith("Hebrew");
+const { witnesses, chapters } = parseCompiledBookTei(`${c.dir}/${b.file}`);
+
+// Build compact index of witnesses & clickable tokens so every word (unanimous OR variant) is inspectable
+const witIndex = new Map(witnesses.map((w, i) => [w.siglum, i]));
+const toIdx = (list?: string[]) =>
+  (list ?? []).map((s) => witIndex.get(s) ?? s);
+
+const tokenPayloads: Record<string, unknown> = {};
+let tokSeq = 0;
+
+const renderedChapters = chapters.map((ch) => ({
+  chapter: ch.chapter,
+  verses: ch.verses.map((v) => ({
+    ref: v.ref,
+    verseNum: v.verseNum,
+    uncovered: v.uncovered,
+    tokens: v.tokens.map((tok) => {
+      const key = String(tokSeq++);
+      if (tok.kind === "app") {
+        tokenPayloads[key] = {
+          k: "a",
+          ref: v.ref,
+          t: tok.text,
+          lc: toIdx(tok.lacunaWits),
+          rd: (tok.readings ?? []).map((r) => [
+            r.type,
+            r.text,
+            r.degree,
+            r.uncertainty,
+            r.difference,
+            toIdx(r.wits),
+          ]),
+        };
+      } else {
+        tokenPayloads[key] = {
+          k: "w",
+          ref: v.ref,
+          t: tok.text,
+          ar: tok.aramaic ? 1 : 0,
+          d: tok.degree ?? "",
+          u: tok.uncertainty ?? "",
+          at: toIdx(tok.attestedWits),
+          lc: toIdx(tok.lacunaWits),
+        };
+      }
+      return {
+        key,
+        kind: tok.kind,
+        text: tok.text,
+        aramaic: tok.aramaic,
+      };
+    }),
+  })),
+}));
+
+const clientData = {
+  isHebrew,
+  compUrl: `/outputs/${c.specId}/${c.compilationId}/`,
+  w: witnesses.map((w) => [w.siglum, w.desc, w.dating, w.scribal, w.agreement, w.provenance, w.scientific]),
+  t: tokenPayloads,
+};
+---
+<Layout
+  title={`${b.name} · ${c.compilationId}`}
+  active="outputs"
+  description={`Compiled original-language text of ${b.name} (${b.id}) under specification ${c.specId}.`}
+>
+  <section class="page-header">
+    <div class="container">
+      <div class="eyebrow">{b.section} · {displayLanguage(b.language)}</div>
+      <h1>{b.name} <span style="color: var(--ink-muted); font-weight: 500;">({b.id})</span></h1>
+      <p class="lead">
+        {formatNum(b.stats.manuscripts)} manuscripts ({formatNum(b.stats.early)} early) · {formatNum(b.stats.lines)} lines · {formatNum(b.stats.words)} words · {formatNum(b.stats.places)} variant places · mean word probability {formatPct(b.stats.meanWordConfidence)}
+      </p>
+      <div class="ulid-bar">
+        <a href={`/outputs/${c.specId}/${c.compilationId}/`} class="btn btn-secondary">← Compilation {c.compilationId.slice(0, 10)}…</a>
+        <a href={`/outputs/${c.specId}/${c.compilationId}/#method`} class="btn btn-secondary">Method &amp; scenarios</a>
+        <a href={githubBlob(`${c.relDir}/${b.file}`)} target="_blank" rel="noopener" class="btn btn-primary">
+          Raw TEI P5 XML ({formatBytes(b.bytes)}) ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <details class="embed-accordion" style="margin-bottom: 20px;">
+        <summary>
+          <div class="embed-summary-left">
+            <span class="embed-summary-title">
+              Manuscript Evidence Record (<code>&lt;listWit&gt;</code>)
+              <span class="badge badge-indigo">{formatNum(witnesses.length)} witnesses</span>
+            </span>
+            <span class="embed-summary-sub">Dating, physical/scribal observations, posterior reliability, provenance, and scientific analysis</span>
+          </div>
+          <span class="embed-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="embed-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Siglum</th>
+                  <th>Dating</th>
+                  <th>Physical &amp; Scribal</th>
+                  <th>Textual Agreement &amp; Reliability</th>
+                  <th>Provenance / Scientific</th>
+                </tr>
+              </thead>
+              <tbody>
+                {witnesses.map((w) => (
+                  <tr id={`wit-${w.siglum}`}>
+                    <td>
+                      <strong><code>{w.siglum}</code></strong>
+                      <div class="ms-sub">{w.desc}</div>
+                    </td>
+                    <td style="font-size: 0.84rem;">{w.dating}</td>
+                    <td style="font-size: 0.84rem;">{w.scribal}</td>
+                    <td style="font-size: 0.84rem;">{w.agreement}</td>
+                    <td style="font-size: 0.84rem;">
+                      <div>{w.provenance}</div>
+                      <div class="ms-sub">Scientific dating: {w.scientific}</div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      {renderedChapters.length > 1 && (
+        <div class="chapter-pills" aria-label="Jump to chapter">
+          <span class="chapter-pills-label">Chapters:</span>
+          {renderedChapters.map((ch) => (
+            <a href={`#ch-${ch.chapter}`} class="chapter-pill">{ch.chapter}</a>
+          ))}
+        </div>
+      )}
+
+      <div class="reader-hint">
+        <strong>Every word is clickable.</strong> Plain words are unanimous across surviving witnesses; <span class="hint-app-sample">highlighted spans</span> mark points where witnesses disagree. Click any word to inspect its probability, 90% credible interval, and clickable witness chips.
+      </div>
+
+      <div
+        id="compiled-reader"
+        class={`compiled-text ${isHebrew ? "script-hebrew" : "script-greek"}`}
+        dir={isHebrew ? "rtl" : "ltr"}
+        lang={isHebrew ? "hbo" : "grc"}
+      >
+        {renderedChapters.map((ch) => (
+          <section class="chapter-block" id={`ch-${ch.chapter}`}>
+            <h2 class="chapter-heading" dir="ltr">Chapter {ch.chapter}</h2>
+            <div class="verses-list">
+              {ch.verses.map((v) => (
+                <div class="verse-block" id={`v-${v.ref.replace(":", "-")}`}>
+                  <div class="verse-line">
+                    <span class="verse-num" dir="ltr">{v.verseNum}</span>
+                    {v.uncovered ? (
+                      <span class="verse-uncovered" dir="ltr">[uncovered in surviving witnesses]</span>
+                    ) : (
+                      v.tokens.map((tok) => (
+                        <button
+                          type="button"
+                          data-tok={tok.key}
+                          class={
+                            tok.kind === "app"
+                              ? tok.text
+                                ? "tok-btn tok-app"
+                                : "tok-btn tok-app tok-omit"
+                              : tok.aramaic
+                                ? "tok-btn tok-w tok-arc"
+                                : "tok-btn tok-w"
+                          }
+                        >{tok.text || "∅"}</button>
+                      ))
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script id="book-inspector-data" type="application/json" set:html={JSON.stringify(clientData)}></script>
+  <script>
+    const dataEl = document.getElementById("book-inspector-data");
+    const DATA = dataEl ? JSON.parse(dataEl.textContent || "{}") : { w: [], t: {} };
+    const reader = document.getElementById("compiled-reader");
+    const scriptCls = DATA.isHebrew ? "script-hebrew" : "script-greek";
+    let activeBtn: HTMLButtonElement | null = null;
+    let activePanel: HTMLElement | null = null;
+
+    const esc = (s: unknown) =>
+      String(s ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+
+    function fmtPct(deg: string): string {
+      const n = Number(deg);
+      if (Number.isNaN(n)) return deg;
+      if (n >= 0.9995) return ">99.9%";
+      if (n <= 0.0005) return "<0.1%";
+      return `${(n * 100).toFixed(1)}%`;
+    }
+
+    function fmtInterval(raw: string): string {
+      const m = raw.match(/\[([0-9.]+),\s*([0-9.]+)\]/);
+      if (!m) return raw;
+      return `90% range: ${fmtPct(m[1])} – ${fmtPct(m[2])}`;
+    }
+
+    function siglumOf(ref: number | string): string {
+      return typeof ref === "number" ? DATA.w[ref]?.[0] ?? String(ref) : String(ref);
+    }
+
+    function renderWitChips(refs: (number | string)[], limit = 16): string {
+      if (!refs.length) return "";
+      const visible = refs.slice(0, limit);
+      const rest = refs.slice(limit);
+      const chips = visible
+        .map((r) => {
+          const sig = siglumOf(r);
+          return `<button type="button" class="wit-chip" data-wit="${esc(r)}">${esc(sig)}</button>`;
+        })
+        .join("");
+      const more = rest.length
+        ? `<button type="button" class="wit-chip wit-chip-more" data-more="${esc(JSON.stringify(rest))}">+${rest.length} more</button>`
+        : "";
+      return `<div class="wit-chips">${chips}${more}</div>`;
+    }
+
+    function renderWitnessDetail(ref: string): string {
+      const idx = Number(ref);
+      const w = !Number.isNaN(idx) ? DATA.w[idx] : DATA.w.find((x: string[]) => x[0] === ref);
+      if (!w) return `<div class="wit-detail-card">No witness record found for <code>${esc(ref)}</code>.</div>`;
+      const [sig, desc, dating, scribal, agreement, prov, sci] = w;
+      return `
+        <div class="wit-detail-card">
+          <div class="wit-detail-head">
+            <div>
+              <strong><code>${esc(sig)}</code></strong>
+              <span class="ms-sub" style="margin-left: 8px;">${esc(desc)}</span>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <a href="/sources/?q=${encodeURIComponent(sig)}" style="font-size:0.8rem;">View in Sources →</a>
+              <button type="button" class="copy-btn" data-close-wit>Close</button>
+            </div>
+          </div>
+          <div class="source-meta-grid" style="margin-top:8px; padding-bottom:0; border-bottom:0;">
+            <div><div class="source-meta-label">Dating</div><div class="source-meta-val">${esc(dating)}</div></div>
+            <div><div class="source-meta-label">Reliability &amp; Agreement</div><div class="source-meta-val">${esc(agreement)}</div></div>
+            <div><div class="source-meta-label">Physical &amp; Scribal</div><div class="source-meta-val">${esc(scribal)}</div></div>
+            <div><div class="source-meta-label">Provenance / Scientific</div><div class="source-meta-val">${esc(prov)} · Scientific: ${esc(sci)}</div></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildGlossary(): string {
+      return `
+        <details class="inspector-help">
+          <summary>What do these numbers and labels mean?</summary>
+          <div class="inspector-help-body">
+            <p><strong>Probability (%):</strong> The model's posterior median estimate that this reading is what the original author wrote, given the attesting witnesses, their dating priors, scribal correction rates, and dependence discounting.</p>
+            <p><strong>90% range:</strong> The 5th-to-95th percentile credible interval across 100 Monte Carlo draws from each witness's posterior reliability. Narrow ranges indicate strong independent agreement; wider ranges indicate thin, conflicting, or poorly dated evidence.</p>
+            <p><strong>Witness chips (e.g., <code>01</code>, <code>03</code>, <code>P45</code>):</strong> Click any witness identifier to inspect its dating, posterior reliability, scribal notes, and provenance right here.</p>
+            <p><strong>Difference labels:</strong> Categorize how a variant differs from the selected reading (<a href="${esc(DATA.compUrl)}#difference-categories">see full definitions on the compilation page →</a>).</p>
+          </div>
+        </details>
+      `;
+    }
+
+    function openInspector(btn: HTMLButtonElement) {
+      const key = btn.dataset.tok;
+      if (!key) return;
+      const item = DATA.t[key];
+      if (!item) return;
+
+      // Toggle off if clicking the same active token
+      if (activeBtn === btn) {
+        activePanel?.remove();
+        activeBtn.classList.remove("tok-active");
+        activeBtn = null;
+        activePanel = null;
+        return;
+      }
+
+      activePanel?.remove();
+      activeBtn?.classList.remove("tok-active");
+
+      const verseBlock = btn.closest(".verse-block");
+      if (!verseBlock) return;
+
+      const panel = document.createElement("div");
+      panel.className = "inspector-panel";
+      panel.setAttribute("dir", "ltr");
+
+      if (item.k === "w") {
+        const lacHtml = item.lc.length
+          ? `<div style="margin-top: 8px;"><span class="source-meta-label">Lacunose / damaged (${item.lc.length}):</span>${renderWitChips(item.lc, 12)}</div>`
+          : "";
+        panel.innerHTML = `
+          <div class="inspector-head">
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
+              <span class="inspector-word ${scriptCls}">${esc(item.t)}</span>
+              <span class="badge badge-emerald">Unanimous reading</span>
+              <code>${esc(item.ref)}</code>
+              ${item.ar ? `<span class="badge badge-violet">Biblical Aramaic</span>` : ""}
+            </div>
+            <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
+          </div>
+          <div class="inspector-prob-row">
+            <strong>${esc(fmtPct(item.d))} probability</strong>
+            ${item.u ? `<span class="ms-sub">(${esc(fmtInterval(item.u))})</span>` : ""}
+          </div>
+          <div style="margin-top: 8px;">
+            <span class="source-meta-label">Attested by ${item.at.length} ${item.at.length === 1 ? "witness" : "witnesses"} (click any siglum for details):</span>
+            ${renderWitChips(item.at, 20)}
+          </div>
+          ${lacHtml}
+          <div class="wit-detail-slot"></div>
+          ${buildGlossary()}
+        `;
+      } else {
+        const rdgsHtml = item.rd
+          .map((r: [string, string, string, string, string, (number | string)[]]) => {
+            const [rType, rText, deg, unc, diff, wits] = r;
+            const roleBadge =
+              rType === "selected"
+                ? `<span class="badge badge-indigo">Selected</span>`
+                : rType === "unseen"
+                  ? `<span class="badge">Unattested</span>`
+                  : `<span class="badge">Variant</span>`;
+            const diffHtml = diff
+              ? `<div class="ms-sub" style="margin-top:4px;">Category: <a href="${esc(DATA.compUrl)}#difference-categories" title="View explicit definition on compilation page"><code>${esc(diff)}</code></a></div>`
+              : "";
+            const witsHtml = wits.length
+              ? `<div style="margin-top:6px;"><span class="source-meta-label">Witnesses (${wits.length}):</span>${renderWitChips(wits, 14)}</div>`
+              : "";
+            return `
+              <li class="app-rdg app-rdg-${esc(rType)}">
+                <div class="app-rdg-top">
+                  <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                    ${roleBadge}
+                    <span class="app-rdg-text ${rType === "unseen" ? "" : scriptCls}">${esc(rText)}</span>
+                  </div>
+                  <div class="app-rdg-prob">
+                    <strong>${esc(fmtPct(deg))}</strong>
+                    ${unc ? `<span class="ms-sub"> · ${esc(fmtInterval(unc))}</span>` : ""}
+                  </div>
+                </div>
+                ${diffHtml}
+                ${witsHtml}
+              </li>
+            `;
+          })
+          .join("");
+
+        const lacHtml = item.lc.length
+          ? `<div style="margin-top: 10px;"><span class="source-meta-label">Lacunose / damaged at this point (${item.lc.length}):</span>${renderWitChips(item.lc, 12)}</div>`
+          : "";
+
+        panel.innerHTML = `
+          <div class="inspector-head">
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
+              <strong>Variant Apparatus</strong>
+              <code>${esc(item.ref)}</code>
+              <span class="badge badge-indigo">${item.rd.length} readings</span>
+            </div>
+            <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
+          </div>
+          <ul class="app-rdg-list">${rdgsHtml}</ul>
+          ${lacHtml}
+          <div class="wit-detail-slot"></div>
+          ${buildGlossary()}
+        `;
+      }
+
+      verseBlock.appendChild(panel);
+      btn.classList.add("tok-active");
+      activeBtn = btn;
+      activePanel = panel;
+    }
+
+    reader?.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+
+      const tokBtn = target.closest<HTMLButtonElement>("button.tok-btn");
+      if (tokBtn) {
+        openInspector(tokBtn);
+        return;
+      }
+
+      if (target.closest("[data-close-inspector]")) {
+        activePanel?.remove();
+        activeBtn?.classList.remove("tok-active");
+        activeBtn = null;
+        activePanel = null;
+        return;
+      }
+
+      if (target.closest("[data-close-wit]")) {
+        const slot = activePanel?.querySelector(".wit-detail-slot");
+        if (slot) slot.innerHTML = "";
+        return;
+      }
+
+      const moreBtn = target.closest<HTMLButtonElement>("button.wit-chip-more");
+      if (moreBtn && moreBtn.dataset.more) {
+        const rest = JSON.parse(moreBtn.dataset.more) as (number | string)[];
+        const frag = rest
+          .map((r) => `<button type="button" class="wit-chip" data-wit="${esc(r)}">${esc(siglumOf(r))}</button>`)
+          .join("");
+        moreBtn.insertAdjacentHTML("beforebegin", frag);
+        moreBtn.remove();
+        return;
+      }
+
+      const witBtn = target.closest<HTMLButtonElement>("button.wit-chip[data-wit]");
+      if (witBtn && activePanel) {
+        const slot = activePanel.querySelector(".wit-detail-slot");
+        if (slot) {
+          slot.innerHTML = renderWitnessDetail(witBtn.dataset.wit || "");
+          slot.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+      }
+    });
+  </script>
+</Layout>

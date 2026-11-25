@@ -1,72 +1,105 @@
-// Quick check of every output artifact in outputs/<specification>/<compiler>/ (reads the outputs, and an input line only
-// where a doubled word needs one).
+// Validator for TEI P5 XML compilation artifacts in outputs/<specification-id>/<compilation-id>/.
 //   bun run check
-// 1. there is exactly one specification file and no other rule file;  2. each artifact is filed under its specification's
-// hash and its compiler, records who did the work and its method, and each book file matches the hash in compilation.json;
-// 3. every printed word is read by at least one manuscript;  4. no doubled word that no manuscript has;  5. every probability
-// lies between 0 and 1 inside its uncertainty range;  6. each line's alignment rows match the line.
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { greekKey, hebrewSpell } from "./lib/text";
+import { parseXml } from "./lib/tei";
 
 const t0 = performance.now();
 const ROOT = new URL("..", import.meta.url).pathname;
 const sha = (x: string | Buffer) => createHash("sha256").update(x).digest("hex");
 const fails: string[] = [];
-const cache = new Map<string, string[]>();
-const lines = (f: string) => cache.get(f) ?? cache.set(f, existsSync(`${ROOT}${f}`) ? readFileSync(`${ROOT}${f}`, "utf8").split("\n") : []).get(f)!;
-const ruleFiles = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? (["node_modules", ".git", "www", "src", "transcriptions", "outputs"].includes(e.name) ? [] : ruleFiles(`${dir}/${e.name}`)) : /^(RULES|SPECIFICATION).*\.(md|json|ya?ml|txt|xml|toml)$/i.test(e.name) ? [`${dir}/${e.name}`.slice(ROOT.length)] : []);
-const found = ruleFiles(ROOT.replace(/\/$/, ""));
-if (found.length !== 1 || found[0] !== "SPECIFICATION.md") fails.push(`specification files: expected only SPECIFICATION.md, found ${found.join(", ") || "none"}`);
-const SPEC_SHA = sha(readFileSync(`${ROOT}SPECIFICATION.md`));
-let artifacts = 0, current = 0, books = 0, words = 0, places = 0;
-const ok01 = (x: unknown) => typeof x === "number" && x >= 0 && x <= 1;
-for (const spec of existsSync(`${ROOT}outputs`) ? readdirSync(`${ROOT}outputs`).sort() : []) for (const comp of readdirSync(`${ROOT}outputs/${spec}`).sort()) {
-  const dir = `${ROOT}outputs/${spec}/${comp}`, at = `outputs/${spec}/${comp}`;
-  if (!existsSync(`${dir}/compilation.json`)) { fails.push(`${at}: no compilation.json`); continue; }
-  artifacts++;
-  const M = JSON.parse(readFileSync(`${dir}/compilation.json`, "utf8"));
-  if (M.specification?.sha256?.slice(0, 12) !== spec) fails.push(`${at}: filed under the wrong specification hash`);
-  if (M.specification?.sha256 === SPEC_SHA) current++;
-  if (M.compiler?.id !== comp || !(M.compiler.program || M.compiler.model)) fails.push(`${at}: the compiler does not identify itself as ${comp}`);
-  if (!M.method?.text) fails.push(`${at}: no method`);
-  for (const b of M.books ?? []) {
-    books++;
-    const raw = readFileSync(`${dir}/${b.file}`, "utf8");
-    if (sha(raw) !== b.sha256) fails.push(`${at} ${b.id}: file differs from its hash in compilation.json`);
-    const B = JSON.parse(raw), HEB = String(B.language).startsWith("Hebrew"), KEY = HEB ? hebrewSpell : greekKey;
-    const P = B.places as { id: number; at: number; n: number; confidence: number; readings: { keys: string; witnesses: number[]; p: number; lo: number; hi: number }[] }[];
-    for (const p of P) { places++; for (const r of p.readings) if (!ok01(r.p) || r.lo > r.p + 1e-9 || r.hi < r.p - 1e-9) fails.push(`${at} ${b.id} place ${p.id}: probability out of range`); }
-    for (const l of B.lines as { ref: string; uncovered?: boolean; witnesses: number[]; g?: string[]; words?: { t: string; k: string; c?: number; lo?: number; hi?: number; p?: number; l?: number[]; d?: number[]; x?: number }[] }[]) {
-      if (l.uncovered) continue;
-      const ws = l.words!, g = l.g;
-      if (!g || g.length !== l.witnesses.length || new Set(g.map((r) => r.length)).size > 1 || ws.some((w) => w.x === undefined || w.x >= (g[0]?.length ?? 0))) fails.push(`${at} ${b.id} ${l.ref}: alignment rows do not match the line`);
-      ws.forEach((w, i) => {
-        words++;
-        if (!ok01(w.c) || (w.lo ?? 0) > (w.c ?? 0) + 1e-9 || (w.hi ?? 1) < (w.c ?? 0) - 1e-9) fails.push(`${at} ${b.id} ${l.ref}: word ${i + 1} probability out of range`);
-        if (w.p !== undefined) {
-          const p = P[w.p], r = p?.readings[0];
-          if (!r || !r.witnesses.length || r.keys.split(" ")[i - p.at] !== w.k) fails.push(`${at} ${b.id} ${l.ref}: word ${i + 1} (${w.t}) is not the printed reading of its place`);
-        } else {
-          const out = new Set([...(w.l ?? []), ...(w.d ?? [])]);
-          if (!l.witnesses.some((x) => !out.has(x))) fails.push(`${at} ${b.id} ${l.ref}: word ${i + 1} (${w.t}) has no manuscript`);
+
+if (!existsSync(`${ROOT}outputs`)) {
+  console.error("FAILED: no outputs/ directory found");
+  process.exit(1);
+}
+
+let compilations = 0, booksChecked = 0, appsChecked = 0, certChecked = 0, witsChecked = 0;
+
+for (const specId of readdirSync(`${ROOT}outputs`).sort()) {
+  const specPath = `${ROOT}specifications/${specId}.yaml`;
+  if (!existsSync(specPath)) {
+    fails.push(`outputs/${specId}: no matching specifications/${specId}.yaml`);
+    continue;
+  }
+  const spec = Bun.YAML.parse(readFileSync(specPath, "utf8")) as { id: string; targets: { id: string }[] };
+  for (const compId of readdirSync(`${ROOT}outputs/${specId}`).sort()) {
+    const dir = `${ROOT}outputs/${specId}/${compId}`, at = `outputs/${specId}/${compId}`;
+    const mfPath = `${dir}/manifest.json`;
+    if (!existsSync(mfPath)) {
+      fails.push(`${at}: missing manifest.json`);
+      continue;
+    }
+    compilations++;
+    const M = JSON.parse(readFileSync(mfPath, "utf8"));
+    if (M.specification?.id !== specId) fails.push(`${at}: manifest specification.id mismatch`);
+    if (M.compilation?.id !== compId) fails.push(`${at}: manifest compilation.id mismatch`);
+    if (!M.modelAttribution?.modelName) fails.push(`${at}: missing modelAttribution`);
+    if (!M.method?.description) fails.push(`${at}: missing method description`);
+    const listedIds = new Set((M.books ?? []).map((b: any) => b.id));
+    for (const t of spec.targets) {
+      if (!listedIds.has(t.id)) fails.push(`${at}: missing target book ${t.id} in manifest`);
+    }
+
+    for (const b of M.books ?? []) {
+      booksChecked++;
+      const fPath = `${dir}/${b.file}`;
+      if (!existsSync(fPath)) {
+        fails.push(`${at}/${b.file}: file missing`);
+        continue;
+      }
+      const xml = readFileSync(fPath, "utf8");
+      if (sha(xml) !== b.sha256) fails.push(`${at}/${b.file}: SHA-256 mismatch vs manifest`);
+      if (!xml.includes('xmlns="http://www.tei-c.org/ns/1.0"')) fails.push(`${at}/${b.file}: missing TEI P5 namespace`);
+      if (!xml.includes(specId)) fails.push(`${at}/${b.file}: missing specification ID ${specId}`);
+      if (!xml.includes(compId)) fails.push(`${at}/${b.file}: missing compilation ID ${compId}`);
+
+      // Parse XML to verify well-formedness & structural invariants
+      const root = parseXml(xml);
+      const declaredWits = new Set<string>();
+      let hasHeader = false, hasListWit = false;
+      const walk = (n: any) => {
+        if (typeof n === "string") return;
+        if (n.t === "teiHeader") hasHeader = true;
+        if (n.t === "listWit") hasListWit = true;
+        if (n.t === "witness" && n.a.id) {
+          declaredWits.add(`#${n.a.id}`);
+          witsChecked++;
         }
-        if (i && ws[i - 1].k === w.k && !(w.p !== undefined && w.p === ws[i - 1].p)) {
-          const files = l.witnesses.flatMap((x) => (B.witnesses[x].files as string[]) ?? []);
-          if (files.some((f) => existsSync(`${ROOT}${f}`))) {
-            const has = l.witnesses.some((x) => (B.witnesses[x].files as string[]).some((f) => lines(f).some((ln) => {
-              if (!ln.startsWith(`${B.book} ${l.ref}\t`)) return false;
-              const ks = ln.split("\t")[1].split(" ").filter((q) => q !== "…").map(KEY);
-              return ks.some((k, j) => j && k === w.k && ks[j - 1] === w.k);
-            })));
-            if (!has) fails.push(`${at} ${b.id} ${l.ref}: doubled word ${w.t} that no manuscript has`);
+        if (n.t === "app") {
+          appsChecked++;
+          const hasLem = n.c.some((c: any) => typeof c !== "string" && c.t === "lem");
+          const rdgs = n.c.filter((c: any) => typeof c !== "string" && c.t === "rdg");
+          if (!hasLem) fails.push(`${at}/${b.file}: <app ${n.a.id}> missing <lem>`);
+          if (!rdgs.length) fails.push(`${at}/${b.file}: <app ${n.a.id}> missing <rdg>`);
+          for (const r of rdgs) {
+            if (r.a.wit) {
+              for (const ref of r.a.wit.split(/\s+/).filter(Boolean)) {
+                if (!declaredWits.has(ref)) fails.push(`${at}/${b.file}: undeclared witness ref ${ref} in <app ${n.a.id}>`);
+              }
+            }
           }
         }
-      });
+        if (n.t === "certainty") {
+          certChecked++;
+          const d = Number(n.a.degree);
+          if (Number.isNaN(d) || d < 0 || d > 1) fails.push(`${at}/${b.file}: invalid certainty degree ${n.a.degree}`);
+        }
+        for (const c of n.c) walk(c);
+      };
+      walk(root);
+      if (!hasHeader) fails.push(`${at}/${b.file}: missing <teiHeader>`);
+      if (!hasListWit || !declaredWits.size) fails.push(`${at}/${b.file}: missing or empty <listWit>`);
     }
   }
 }
-if (!current) fails.push("no artifact is filed under the current SPECIFICATION.md");
+
 const s = ((performance.now() - t0) / 1000).toFixed(2);
-if (fails.length) { console.log(fails.slice(0, 50).join("\n")); console.log(`FAILED: ${fails.length} problems (${artifacts} artifacts, ${s} s)`); process.exit(1); }
-console.log(`OK: one specification; ${artifacts} artifact(s), ${current} under the current specification; ${books} books, ${words} words, ${places} places checked in ${s} s`);
+if (fails.length) {
+  console.log(fails.slice(0, 50).join("\n"));
+  console.log(`FAILED: ${fails.length} problems (${compilations} compilations, ${booksChecked} books, ${s} s)`);
+  process.exit(1);
+}
+console.log(
+  `OK: ${compilations} compilation(s), ${booksChecked} books, ${witsChecked} witness records, ${appsChecked} <app> elements, ${certChecked} <certainty> elements verified in ${s} s`,
+);

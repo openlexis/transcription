@@ -1,436 +1,1127 @@
-// The compiler: works toward the goal of SPECIFICATION.md (the one specification of this repository) for every book listed in
-// src/books.json, by the method it describes in scripts/METHOD.md, and writes one output artifact:
-//   outputs/<first 12 characters of the specification's SHA-256>/<compiler>/compilation.json   the method, who did the work, the books
-//   outputs/<...>/<compiler>/books/<book>.json                                                   each book: text, evidence, estimates
-//   bun run compile all          every book, one at a time
-//   bun run compile Gen          one book (its identifier in books.json); the artifact's other books are kept
-import { createHash } from "node:crypto";
+// Transcription compiler for Open Lexis YAML specifications (TEI P5 XML output).
+// Usage:
+//   bun --smol scripts/compile.ts [spec-id] [all | <book-id>] [--compilation-id <ulid>]
+// Defaults: spec-id = 01M88AX3YW2HWVPGHTREFJS181, book = all.
+import { createHash, randomBytes } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { align } from "./lib/align";
-import { aramaic, greekKey, hebrewSpell, showGreek } from "./lib/text";
 import { betaDraw, loglik, posterior, prior, quantile, rng, type Unit, weights } from "./lib/model";
+import { readTranscriptionFile, type ParsedUnit } from "./lib/readers";
+import { aramaic, greekKey, hebrewSpell, showGreek } from "./lib/text";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const r4 = (x: number) => Math.round(x * 10000) / 10000;
-const sha = (...xs: (string | Buffer)[]) => { const h = createHash("sha256"); for (const x of xs) h.update(x); return h.digest("hex"); };
-
-// ---------- the specification, the books and the compiler's own settings ----------
-export const SPEC_FILE = "SPECIFICATION.md", METHOD_FILE = "scripts/METHOD.md";
-/** The compiler's settings for each section, explained in scripts/METHOD.md ("Dates and the prior"). They are this compiler's
- * choices, not requirements of the specification. */
-const SETTINGS: Record<string, { origin: number; halfLife: number; lateAfter: number; undated: number }> = {
-  ot: { origin: -400, halfLife: 100, lateAfter: 400, undated: 1500 },
-  nt: { origin: 100, halfLife: 100, lateAfter: 400, undated: 1500 },
+const r3 = (x: number) => Math.round(x * 1000) / 1000;
+const sha = (...xs: (string | Buffer)[]) => {
+  const h = createHash("sha256");
+  for (const x of xs) h.update(x);
+  return h.digest("hex");
 };
-export type Book = { id: string; book: string; name: string; section: string; sectionName: string; language: string; origin: number; halfLife: number; lateAfter: number; undated: number; inputs: string[] };
-export function readBooks() {
-  const text = readFileSync(`${ROOT}${SPEC_FILE}`, "utf8");
-  const B = JSON.parse(readFileSync(`${ROOT}src/books.json`, "utf8")) as { sections: Record<string, { name: string; languages: string; folders: string[] }>; books: { section: string; number: number; book: string; name: string }[] };
-  // a book's inputs: every transcription in the inventory, in its section's folders, that holds a line of the book (by file path)
-  const cat = JSON.parse(readFileSync(`${ROOT}src/manuscripts.json`, "utf8")) as { manuscripts: { transcriptions: { file: string }[] }[] };
-  const holds = new Map<string, Set<string>>();
-  for (const f of cat.manuscripts.flatMap((m) => m.transcriptions.flatMap((t) => t.files ?? (t.file ? [t.file] : [])))) {
-    holds.set(f, new Set(readFileSync(`${ROOT}${f}`, "utf8").split("\n").map((l) => l.split(" ")[0]).filter(Boolean)));
+
+// Crockford Base32 ULID generator (26 chars: 10 timestamp + 16 randomness)
+const CROCKFORD = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+export function generateUlid(now = Date.now()): string {
+  let t = now;
+  const timeChars = new Array<string>(10);
+  for (let i = 9; i >= 0; i--) {
+    timeChars[i] = CROCKFORD[t % 32];
+    t = Math.floor(t / 32);
   }
-  const files = [...holds.keys()].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
-  const books: Book[] = B.books.map(({ section, number, book, name }) => {
-    const S = B.sections[section], P = SETTINGS[section];
-    const inputs = S.folders.flatMap((d) => files.filter((f) => f.startsWith(`${d}/`) && holds.get(f)!.has(book)));
-    return { id: `${section}-${String(number).padStart(2, "0")}-${book.toLowerCase()}`, book, name, section, sectionName: S.name, language: S.languages, ...P, inputs };
-  });
-  return { text, sha256: sha(text), books, sections: B.sections };
+  const rand = randomBytes(10); // 80 bits = 16 * 5 bits
+  let bits = 0n;
+  for (const b of rand) bits = (bits << 8n) | BigInt(b);
+  const randChars = new Array<string>(16);
+  for (let i = 15; i >= 0; i--) {
+    randChars[i] = CROCKFORD[Number(bits & 31n)];
+    bits >>= 5n;
+  }
+  return timeChars.join("") + randChars.join("");
 }
 
-// ---------- who does the work: this program reports what it is, as it runs ----------
-export function selfIdentify() {
-  const git = (...a: string[]) => { const r = spawnSync("git", a, { cwd: ROOT }); return r.status === 0 ? r.stdout.toString().trim() : undefined; };
-  const code = ["scripts/compile.ts", "scripts/METHOD.md", "scripts/lib/align.ts", "scripts/lib/model.ts", "scripts/lib/text.ts"];
-  const changed = git("status", "--porcelain", "--", ...code);
-  return {
+const escXml = (s: string) =>
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const witXmlId = (siglum: string) => `wit-${siglum.replace(/[^A-Za-z0-9._-]/g, "_")}`;
+
+// ---------- specification types ----------
+type TargetBook = { id: string; name: string; section: string; number: number; language: string };
+type SourceFileEntry = {
+  paths: string[];
+  format: string;
+  license: string;
+  sourceUrl: string;
+  member?: string;
+  lines?: number;
+  words?: number;
+  provenance: { id: string; name: string; url: string };
+};
+type SourceItem = {
+  id: string;
+  type: "continuous" | "scroll" | "lectionary" | "catena";
+  language: string;
+  name?: string;
+  shelfmark?: string;
+  century?: string;
+  year?: number;
+  yearFrom?: number;
+  yearTo?: number;
+  dateBasis?: string;
+  dateSource?: string;
+  viewers?: { name: string; url: string }[];
+  targets?: string[];
+  files: SourceFileEntry[];
+};
+type Spec = {
+  id: string;
+  title: string;
+  summary: string;
+  targets: TargetBook[];
+  sources: SourceItem[];
+};
+
+const SETTINGS: Record<string, { origin: number; halfLife: number; lateAfter: number; undated: number }> = {
+  "Old Testament": { origin: -400, halfLife: 100, lateAfter: 400, undated: 1500 },
+  "New Testament": { origin: 100, halfLife: 100, lateAfter: 400, undated: 1500 },
+};
+
+/** Physical leaves of one manuscript catalogued under separate Gregory-Aland numbers. */
+const SAME_MANUSCRIPT: Record<string, string> = { P67: "P64", P103: "P77" };
+
+const MODEL_ATTRIBUTION = {
+  provider: "Google DeepMind",
+  modelFamily: "Gemini 4",
+  modelName: "Gemini 4 Neon",
+  modelId: "gemini-4-neon",
+  effortLevel: "medium",
+  harness: "T3 Code (Antigravity harness)",
+  role: "Designed, configured, and executed the Bayesian Dawid-Skene latent-class compilation pipeline and TEI P5 encoder under specification 01M88AX3YW2HWVPGHTREFJS181.",
+  deterministicEngine: {
     program: "scripts/compile.ts",
+    runtime: typeof Bun !== "undefined" ? `Bun ${Bun.version}` : `Node ${process.version}`,
+  },
+};
+
+function gitInfo() {
+  const git = (...a: string[]) => {
+    const r = spawnSync("git", a, { cwd: ROOT });
+    return r.status === 0 ? r.stdout.toString().trim() : undefined;
+  };
+  const codeFiles = [
+    "scripts/compile.ts",
+    "scripts/lib/align.ts",
+    "scripts/lib/model.ts",
+    "scripts/lib/readers.ts",
+    "scripts/lib/tei.ts",
+    "scripts/lib/text.ts",
+  ];
+  return {
     repository: git("remote", "get-url", "origin"),
     commit: git("rev-parse", "HEAD"),
-    codeMatchesCommit: changed === undefined ? undefined : changed === "",
-    codeSha256: sha(...code.map((f) => readFileSync(`${ROOT}${f}`))),
-    runtime: typeof Bun !== "undefined" ? `Bun ${Bun.version}` : `Node ${process.version}`,
+    codeSha256: sha(...codeFiles.map((f) => readFileSync(`${ROOT}${f}`))),
   };
 }
 
-// ---------- manuscripts ----------
-type MsInfo = { siglum: string; yearFrom?: number; yearTo?: number; dateBasis?: string; kind?: string; language?: string; dateSource?: string; name?: string; shelfmark?: string; century?: string; year?: number; viewer?: { name: string; url: string }[]; transcriptions: { holder: string; file?: string; files?: string[]; source: string; license: string }[] };
-const CAT = JSON.parse(readFileSync(`${ROOT}src/manuscripts.json`, "utf8")) as { holders: Record<string, { name: string; web: string; license: string }>; manuscripts: MsInfo[] };
-const INFO = new Map(CAT.manuscripts.map((m) => [m.siglum, m]));
-/** Leaves of one manuscript that were given separate numbers are one manuscript. */
-export const SAME_MANUSCRIPT: Record<string, string> = { P67: "P64", P103: "P77" };
+const METHOD_DESCRIPTION = `Statistical Method: Bayesian Dawid-Skene Latent-Class Model with Composite Likelihood and Scribal Evidence.
 
+1. Objective and Witness Consolidation. Each target book is reconstructed strictly from the allowlisted primary transcriptions in specification 01M88AX3YW2HWVPGHTREFJS181. Multiple transcriptions of the same physical manuscript (and known split leaves: P64/P67, P77/P103) are consolidated into a single witness so no manuscript votes twice; per verse, the transcription with the most readable words is used (ties broken by specification listing order). Only the first hand (original copyist) is read; damaged or editorially supplied words are treated as lacunae rather than votes.
+
+2. Alignment and Orthographic Normalization. For each numbered line (chapter:line), witnesses are aligned oldest-first via Needleman-Wunsch global alignment. Orthographic spelling habits (Greek itacism ei/i, doubled letters, movable nu, final sigma of outos/achris/mechris, expanded nomina sacra and letter-numerals; Hebrew consonantal skeleton ignoring final forms and internal matres lectionis vav/yod) are folded for comparison so spelling conventions do not inflate substantive variation. The displayed surface spelling is taken from the oldest attesting witness. Non-continuous witnesses (scrolls, lectionaries, catenae) treat absent positions as lacunae rather than omissions. Every column where surviving non-lacunose witnesses disagree—including singular readings—is represented as a TEI <app> element. Adjacent variant columns are merged into a single <app> only when structurally coupled (an omission/insertion, a multi-word variant by the same witness, or a shared/transposed word within two columns), preventing unrelated single-word substitutions in large witness pools from collapsing into giant spans.
+
+3. Prior Reliability from Dating and Scribal Evidence. Before measuring textual agreement, each witness receives a Beta prior on its reliability q_m (probability of preserving the original reading at a point). Expected reliability decays with age after composition (origin = 400 BC for Old Testament, AD 100 for New Testament): mu(t) = 0.5 + 0.45 * 2^(-max(0, t - origin) / 100), averaged uniformly across the documented date range [yearFrom, yearTo]. Prior strength is 4 * 100 / max(100, yearTo - yearFrom) pseudo-observations, so wide date ranges yield weaker priors and wider uncertainty intervals. Where dating metadata is undocumented in the specification, it remains explicitly unknown and receives a diffuse prior (mu(1500) ≈ 0.50, strength = 1) so measured agreement governs and uncertainty remains wide where coverage is sparse. Observed scribal corrections in a manuscript's own transcription (when >= 100 transcribed words are present and correction rate exceeds 1%) apply a gentle bounded prior penalty up to 0.08 (floor 0.50) reflecting less stable copying. Physical deterioration (lacunae, damaged parchment, missing text in ancient scrolls) never penalizes credibility, though absent words leave local uncertainty.
+
+4. Dependence Discounting (Composite Likelihood) and EM Estimation. To avoid simple majority voting by large clusters of late dependent copies, witnesses within 400 years of composition receive full weight (1.0), whereas later witnesses sharing a reading are geometrically down-weighted in descending order of reliability (1, 1/2, 1/4, ..., sum < 2). At each unit with K attested readings plus U = 10 unseen candidate readings (uniform prior over K + U candidates), a witness with reliability q_m attests the original with probability q_m and each alternative with probability (1 - q_m)/(K + U - 1). Five rounds of Expectation-Maximization (EM) update each witness's posterior Beta(alpha_m, beta_m) using line-level mean agreement (accounting for clustered errors and excluding single-witness units from self-confirmation).
+
+5. Uncertainty Intervals and Reading Selection. One hundred deterministic Monte Carlo draws (seeded by book ID) are sampled from each witness's posterior Beta distribution. For every reading (selected, variant, and unseen-original) and every unanimous word, the posterior median is recorded in <certainty degree="..."/> and the 90% credible interval (5th to 95th percentile) in <note type="uncertainty">. At each <app>, the reading with highest point-estimate posterior probability is selected as <lem> (ties broken by earliest witness, then witness count, then lexicographical order).
+
+6. Unknowns and Limitations. Place of origin/writing (manuscript provenance) and scientific dating (e.g. radiocarbon) are undocumented for all manuscripts in the specification and are explicitly recorded as unknown in every <witness> entry without imputation. Limitations: uniform error distribution across alternatives does not model specific scribal error mechanisms (e.g., homoioteleuton), and geometric down-weighting of late witnesses is a statistical proxy for a full stemma codicum.`;
+
+// ---------- data structures ----------
 type Tok = { k: string; t: string; gap: boolean };
-type LineText = { absent: boolean; words: Tok[]; gapEnd: boolean; file: string; lineNo: number };
+type LineText = { absent: boolean; words: Tok[]; gapEnd: boolean; file: string; fileIdx: number };
+type WitnessEvidence = {
+  siglum: string;
+  xmlId: string;
+  leaves: string[];
+  source: SourceItem;
+  files: string[];
+  provenances: string[];
+  corrections: number;
+  lacunae: number;
+  transcribedWords: number;
+  corrPenalty: number;
+  year: number;
+  early: boolean;
+  reliability?: {
+    estimate: number;
+    low: number;
+    high: number;
+    linesCompared: number;
+    agreementShare: number | null;
+    priorMean: number;
+    priorStrength: number;
+    dateRangeKnown: boolean;
+  };
+};
 
-/** A book, compiled. Where the model's choice at a place prints a word twice in a row across the place's edge and no manuscript
- * of the line has that word twice there, the columns are joined into one place and the book is compiled again (method,
- * section 2). */
-export function compile(R: Book) {
+type WordOut = { t: string; k: string; c?: number; lo?: number; hi?: number; p?: number; l?: number[]; x: number; a?: number };
+type ReadingOut = { text: string; keys: string; xs: number[]; witnesses: number[]; partly?: number[]; p: number; lo: number; hi: number; diffNote?: string };
+type PlaceOut = {
+  id: number;
+  ref: string;
+  at: number;
+  n: number;
+  cols: [number, number];
+  confidence: number;
+  lost?: boolean;
+  readings: ReadingOut[];
+  partlyLost?: number[];
+  lostEverywhere?: { p: number; lo: number; hi: number };
+};
+type LineOut = { ref: string; uncovered?: boolean; witnesses: number[]; words?: WordOut[] };
+
+function describeDifference(selKeys: string[], rdgKeys: string[]): string {
+  if (rdgKeys.length === 0 && selKeys.length > 0) {
+    return `omission of ${selKeys.length} word${selKeys.length === 1 ? "" : "s"} relative to selected reading`;
+  }
+  if (selKeys.length === 0 && rdgKeys.length > 0) {
+    return `addition of ${rdgKeys.length} word${rdgKeys.length === 1 ? "" : "s"} relative to selected reading`;
+  }
+  if (rdgKeys.length === selKeys.length) {
+    const a = [...selKeys].sort().join("\0");
+    const b = [...rdgKeys].sort().join("\0");
+    if (a === b) return `transposition (word-order difference of ${rdgKeys.length} words)`;
+    return `substitution (${rdgKeys.length} word${rdgKeys.length === 1 ? "" : "s"})`;
+  }
+  return `substitution/length difference (${rdgKeys.length} word${rdgKeys.length === 1 ? "" : "s"} vs ${selKeys.length} in selected reading)`;
+}
+
+type BookIndexEntry = {
+  siglum: string;
+  file: string;
+  fileIdx: number;
+  units: ParsedUnit[];
+};
+
+type SourceScribalStats = {
+  corrections: number;
+  lacunae: number;
+  words: number;
+  files: string[];
+  provenances: Set<string>;
+};
+
+function compileBook(
+  target: TargetBook,
+  bookEntries: BookIndexEntry[],
+  sourceMap: Map<string, SourceItem>,
+  scribalStats: Map<string, SourceScribalStats>,
+) {
+  const S = SETTINGS[target.section];
+  const HEB = target.language.startsWith("Hebrew");
+  const SHOW = HEB ? (w: string) => w : showGreek;
+  const KEY = HEB ? hebrewSpell : greekKey;
+
+  const byMs = new Map<string, { files: string[]; lines: Map<string, LineText[]> }>();
+  for (const entry of bookEntries) {
+    const ms = byMs.get(entry.siglum) ?? { files: [], lines: new Map() };
+    byMs.set(entry.siglum, ms);
+    if (!ms.files.includes(entry.file)) ms.files.push(entry.file);
+    for (const u of entry.units) {
+      const arr = ms.lines.get(u.ref) ?? [];
+      arr.push({
+        absent: !!u.absent,
+        words: u.words.map((w) => ({ k: KEY(w.w), t: w.w, gap: w.gap })),
+        gapEnd: u.gapEnd,
+        file: entry.file,
+        fileIdx: entry.fileIdx,
+      });
+      ms.lines.set(u.ref, arr);
+    }
+  }
+
+  const yearOfSiglum = (s: string) => sourceMap.get(s)?.year ?? S.undated;
+  const earlyOfSiglum = (s: string) => yearOfSiglum(s) - S.origin <= S.lateAfter;
+  const partialKind = (s: string) => (sourceMap.get(s)?.type ?? "continuous") !== "continuous";
+
+  const sigla = [...byMs.keys()].sort((a, b) => yearOfSiglum(a) - yearOfSiglum(b) || (a < b ? -1 : a > b ? 1 : 0));
+  const WIDX = new Map(sigla.map((s, i) => [s, i]));
+
+  const witnesses: WitnessEvidence[] = sigla.map((s) => {
+    const src = sourceMap.get(s)!;
+    const sc = scribalStats.get(s) ?? { corrections: 0, lacunae: 0, words: 0, files: [], provenances: new Set<string>() };
+    const leaves = Object.entries(SAME_MANUSCRIPT)
+      .filter(([, v]) => v === s)
+      .map(([k]) => k);
+    const corrRate = sc.words >= 100 ? sc.corrections / sc.words : 0;
+    const corrPenalty = corrRate > 0.01 ? Math.min(0.08, 0.5 * (corrRate - 0.01)) : 0;
+    return {
+      siglum: s,
+      xmlId: witXmlId(s),
+      leaves,
+      source: src,
+      files: byMs.get(s)!.files,
+      provenances: [...sc.provenances],
+      corrections: sc.corrections,
+      lacunae: sc.lacunae,
+      transcribedWords: sc.words,
+      corrPenalty: r4(corrPenalty),
+      year: yearOfSiglum(s),
+      early: earlyOfSiglum(s),
+    };
+  });
+
+  const refs = [...new Set(sigla.flatMap((s) => [...byMs.get(s)!.lines.keys()]))].sort((a, b) => {
+    const [x, y] = [a, b].map((r) => r.split(":").map(Number));
+    return x[0] - y[0] || x[1] - y[1];
+  });
+
+  const compileOnce = (force: Map<string, [number, number][]>) => {
+    const dbl = new Map<string, Set<string>>();
+    const lines: LineOut[] = [];
+    const places: PlaceOut[] = [];
+    const placeLine: number[] = [];
+    const st = { lines: 0, uncovered: 0, words: 0, unanimous: 0, places: 0, confidenceSum: 0, witnessesPerLine: 0 };
+
+    for (const ref of refs) {
+      const present: { s: string; x: LineText }[] = [];
+      for (const s of sigla) {
+        const xs = byMs.get(s)!.lines.get(ref);
+        if (!xs) continue;
+        const x = [...xs].sort((a, b) => b.words.length - a.words.length || a.fileIdx - b.fileIdx)[0];
+        if (!x.absent && !x.words.length) continue;
+        present.push({ s, x });
+      }
+      st.lines++;
+      if (!present.some((p) => p.x.words.length)) {
+        st.uncovered++;
+        lines.push({ ref, uncovered: true, witnesses: present.map((p) => WIDX.get(p.s)!) });
+        continue;
+      }
+      st.witnessesPerLine += present.length;
+
+      const withWords = present.filter((p) => p.x.words.length);
+      const cols = align(withWords.map((p) => p.x.words.map((w) => w.k)));
+      const nC = cols.length;
+
+      const reads: (string | null)[][] = present.map((p) => {
+        const wi = withWords.indexOf(p);
+        const out: (string | null)[] = new Array(nC).fill("");
+        const partial = partialKind(p.s);
+        if (wi < 0) return out;
+        const at: number[] = [];
+        cols.forEach((c, ci) => {
+          const j = c.cells.get(wi);
+          if (j !== undefined) at[j] = ci;
+        });
+        const ws = p.x.words;
+        for (let j = 0; j < ws.length; j++) out[at[j]] = ws[j].k;
+        for (let ci = 0; ci < nC; ci++) {
+          if (cols[ci].cells.has(wi)) continue;
+          const next = ws.findIndex((_, j) => at[j] > ci);
+          const lostBefore = next >= 0 ? ws[next].gap : p.x.gapEnd;
+          if (lostBefore || partial) out[ci] = null;
+        }
+        return out;
+      });
+
+      const form = (pi: number, ci: number) => {
+        const wi = withWords.indexOf(present[pi]);
+        const j = cols[ci].cells.get(wi);
+        return j === undefined ? undefined : present[pi].x.words[j].t;
+      };
+
+      // Every column where non-lacunose witnesses do not all agree (including singular readings!)
+      const colStats = cols.map((_, ci) => {
+        const counts = new Map<string, number>();
+        for (const r of reads) {
+          const k = r[ci];
+          if (k !== null) counts.set(k, (counts.get(k) ?? 0) + 1);
+        }
+        let modal = "", modalCount = -1;
+        for (const [k, c] of counts) {
+          if (c > modalCount || (c === modalCount && k < modal)) { modal = k; modalCount = c; }
+        }
+        const hasOmission = counts.has("");
+        const minorityWits = new Set<number>();
+        reads.forEach((r, pi) => {
+          if (r[ci] !== null && r[ci] !== modal) minorityWits.add(pi);
+        });
+        return { isVariant: counts.size > 1, hasOmission, minorityWits };
+      });
+
+      // Group adjacent variant columns ONLY when structurally coupled:
+      // omission/insertion present, or same witness deviates in both adjacent columns.
+      let spans: [number, number][] = [];
+      for (let ci = 0; ci < nC; ci++) {
+        if (!colStats[ci].isVariant) continue;
+        const last = spans[spans.length - 1];
+        if (last && last[1] === ci - 1) {
+          const prev = colStats[ci - 1], cur = colStats[ci];
+          let sharedDeviator = false;
+          for (const pi of cur.minorityWits) if (prev.minorityWits.has(pi)) { sharedDeviator = true; break; }
+          if (prev.hasOmission || cur.hasOmission || sharedDeviator) {
+            last[1] = ci;
+            continue;
+          }
+        }
+        spans.push([ci, ci]);
+      }
+
+      // Join two spans at most 2 columns apart if they share a word (transposition)
+      const keysIn = (a: number, b: number) => new Set(reads.flatMap((r) => r.slice(a, b + 1)).filter((k): k is string => !!k));
+      for (let i = 0; i + 1 < spans.length; ) {
+        const [a, b] = spans[i], [c, d] = spans[i + 1];
+        if (c - b - 1 <= 2) {
+          const A = keysIn(a, b), B = keysIn(c, d);
+          if ([...A].some((k) => B.has(k))) {
+            spans.splice(i, 2, [a, d]);
+            continue;
+          }
+        }
+        i++;
+      }
+
+      const sortW = (xs: number[]) => xs.map((pi) => WIDX.get(present[pi].s)!).sort((x, y) => x - y);
+      type W = { t: string; k: string; c?: number; p?: number; l?: number[]; col: number; span?: number };
+      type Rd = { keys: string[]; forms: string[]; wits: number[]; segs: (string | null)[][]; partly: number[]; earliest: number };
+
+      const decide = (curSpans: [number, number][]) => {
+        const words: W[] = [];
+        const local: Omit<PlaceOut, "id">[] = [];
+        let ci = 0;
+        const emitUnanimous = (colIdx: number) => {
+          const n = new Map<string, number>();
+          for (const r of reads) {
+            const x = r[colIdx];
+            if (x !== null) n.set(x, (n.get(x) ?? 0) + 1);
+          }
+          const k = [...n].sort((x, y) => y[1] - x[1] || (x[0] < y[0] ? -1 : 1))[0]?.[0];
+          if (!k) return;
+          const lost = present.map((_, pi) => pi).filter((pi) => reads[pi][colIdx] === null);
+          const by = present
+            .map((_, pi) => pi)
+            .filter((pi) => reads[pi][colIdx] === k)
+            .sort((x, y) => yearOfSiglum(present[x].s) - yearOfSiglum(present[y].s) || (present[x].s < present[y].s ? -1 : 1));
+          words.push({ t: SHOW(form(by[0], colIdx)!), k, ...(lost.length ? { l: sortW(lost) } : {}), col: colIdx });
+        };
+
+        curSpans.forEach(([a, b], si) => {
+          for (; ci < a; ci++) emitUnanimous(ci);
+          ci = b + 1;
+          const rd = new Map<string, Rd>();
+          const partial: number[] = [];
+          present.forEach((p, pi) => {
+            const seg = reads[pi].slice(a, b + 1);
+            if (seg.some((k) => k === null)) {
+              partial.push(pi);
+              return;
+            }
+            const keys = seg.filter((k): k is string => !!k), id = keys.join(" ");
+            const r = rd.get(id) ?? { keys, forms: [], wits: [], segs: [], partly: [], earliest: Infinity };
+            rd.set(id, r);
+            r.wits.push(pi);
+            r.segs.push(seg);
+            r.earliest = Math.min(r.earliest, yearOfSiglum(p.s));
+            if (!r.forms.length) r.forms = seg.map((_, j) => form(pi, a + j)).filter((x): x is string => !!x);
+          });
+          const all = [...rd.values()];
+          if (!all.length) {
+            local.push({ ref, at: words.length, n: 0, cols: [a, b], confidence: 0, lost: true, readings: [], partlyLost: sortW(partial) });
+            return;
+          }
+          const stillLost: number[] = [];
+          for (const pi of partial) {
+            const seg = reads[pi].slice(a, b + 1);
+            const ok = all.filter((r) => r.segs.some((s) => seg.every((k, j) => k === null || k === s[j])));
+            if (ok.length === 1) {
+              ok[0].partly.push(pi);
+              ok[0].earliest = Math.min(ok[0].earliest, yearOfSiglum(present[pi].s));
+            } else stillLost.push(pi);
+          }
+          const count = (r: Rd) => r.wits.length + r.partly.length;
+          const id = (r: Rd) => r.keys.join(" ");
+          all.sort((x, y) => count(y) - count(x) || x.earliest - y.earliest || (id(x) < id(y) ? -1 : id(x) > id(y) ? 1 : 0));
+          const chosen = all[0];
+          const pl = local.length;
+          local.push({
+            ref,
+            at: words.length,
+            n: chosen.keys.length,
+            cols: [a, b],
+            confidence: 0,
+            readings: all.map((r) => ({
+              text: r.forms.map(SHOW).join(" "),
+              keys: id(r),
+              xs: r.segs[0].map((k, j) => (k ? a + j : -1)).filter((x) => x >= 0),
+              witnesses: sortW(r.wits),
+              ...(r.partly.length ? { partly: sortW(r.partly) } : {}),
+              p: 0,
+              lo: 0,
+              hi: 0,
+            })),
+            ...(stillLost.length ? { partlyLost: sortW(stillLost) } : {}),
+          });
+          const pcols = chosen.segs[0].map((k, j) => (k ? a + j : -1)).filter((x) => x >= 0);
+          chosen.keys.forEach((k, j) => words.push({ t: SHOW(chosen.forms[j] ?? k), k, c: 0, p: pl, col: pcols[j] ?? a, span: si }));
+        });
+        for (; ci < nC; ci++) emitUnanimous(ci);
+        return { words, local };
+      };
+
+      const doubled = present.map((p) => new Set(p.x.words.map((w) => w.k).filter((k, j, a) => j > 0 && a[j - 1] === k)));
+      dbl.set(ref, new Set(doubled.flatMap((x) => [...x])));
+      for (const [a0, b0] of force.get(ref) ?? []) {
+        const touch = spans.filter(([a, b]) => !(b < a0 || a > b0));
+        const lo = Math.min(a0, ...touch.map((x) => x[0]));
+        const hi = Math.max(b0, ...touch.map((x) => x[1]));
+        spans = [...spans.filter((x) => !touch.includes(x)), [lo, hi] as [number, number]].sort((x, y) => x[0] - y[0]);
+      }
+
+      let res = decide(spans);
+      for (let guard = 0; guard < 50; guard++) {
+        const ws = res.words;
+        const j = ws.findIndex(
+          (w, i) => i > 0 && ws[i - 1].k === w.k && !(w.span !== undefined && w.span === ws[i - 1].span) && !doubled.some((s) => s.has(w.k)),
+        );
+        if (j < 0) break;
+        const x = ws[j - 1], y = ws[j];
+        const lo = x.span !== undefined ? spans[x.span][0] : x.col;
+        const hi = y.span !== undefined ? spans[y.span][1] : y.col;
+        const touch = spans.filter(([a, b]) => !(b < lo || a > hi));
+        spans = [
+          ...spans.filter(([a, b]) => b < lo || a > hi),
+          [Math.min(lo, ...touch.map((s) => s[0])), Math.max(hi, ...touch.map((s) => s[1]))] as [number, number],
+        ].sort((p, q) => p[0] - q[0]);
+        res = decide(spans);
+      }
+
+      const base = places.length;
+      for (const _ of res.local) placeLine.push(lines.length);
+      for (const pl of res.local) {
+        places.push({ id: places.length, ...pl });
+        st.places++;
+      }
+      const words: WordOut[] = res.words.map(({ col, span, ...w }) =>
+        w.p !== undefined ? { ...w, p: w.p + base, x: col } : { ...w, x: col },
+      );
+      if (HEB) {
+        const mask = aramaic(target.id, ref, words.map((w) => w.k));
+        mask.forEach((a, i) => { if (a) words[i].a = 1; });
+      }
+      lines.push({ ref, witnesses: present.map((p) => WIDX.get(p.s)!), words });
+    }
+
+    // ---------- Bayesian Dawid-Skene EM + Composite Likelihood + Monte Carlo ----------
+    const M = witnesses.length, SAMPLES = 100;
+    const late = witnesses.map((w) => !w.early);
+    const pri = witnesses.map((w) => {
+      const p = prior({ from: w.source.yearFrom, to: w.source.yearTo, origin: S.origin, halfLife: S.halfLife, undated: S.undated });
+      const adjustedMean = Math.max(0.5, p.mean - w.corrPenalty);
+      return { mean: adjustedMean, strength: p.strength, rangeKnown: p.rangeKnown };
+    });
+
+    type U = Unit & { mult: number; place?: number; words?: number[] };
+    const byLine: U[][] = lines.map(() => []);
+    places.forEach((p, pid) => {
+      if (!p.readings.length) return;
+      const voters: [number, number][] = [];
+      p.readings.forEach((r, ri) => {
+        for (const m of [...r.witnesses, ...(r.partly ?? [])]) voters.push([m, ri]);
+      });
+      byLine[placeLine[pid]].push({ options: p.readings.length, voters, mult: 1, place: pid });
+    });
+    lines.forEach((l, li) => {
+      if (l.uncovered) return;
+      const groups = new Map<string, U>();
+      l.words!.forEach((w, wi) => {
+        if (w.p !== undefined) return;
+        const out = new Set(w.l ?? []);
+        const readers = l.witnesses.filter((m) => !out.has(m));
+        const key = readers.join(",");
+        const g = groups.get(key);
+        if (g) { g.mult++; g.words!.push(wi); return; }
+        const voters: [number, number][] = readers.map((m) => [m, 0]);
+        groups.set(key, { options: 1, voters, mult: 1, words: [wi] });
+      });
+      byLine[li].push(...groups.values());
+    });
+
+    const q = new Float64Array(M), A = new Float64Array(M), N = new Float64Array(M);
+    for (let m = 0; m < M; m++) q[m] = pri[m].mean;
+    for (let it = 0; it < 5; it++) {
+      A.fill(0);
+      N.fill(0);
+      for (const units of byLine) {
+        const sum = new Map<number, [number, number]>();
+        for (const u of units) {
+          if (u.voters.length < 2) continue;
+          const w = weights(u, late, q);
+          const L = loglik(u, w, (m) => q[m]);
+          const post = posterior(L);
+          u.voters.forEach(([m, o]) => {
+            const pr = post[o];
+            const x = sum.get(m) ?? [0, 0];
+            x[0] += pr * u.mult;
+            x[1] += u.mult;
+            sum.set(m, x);
+          });
+        }
+        for (const [m, [a, n]] of sum) { A[m] += a / n; N[m] += 1; }
+      }
+      for (let m = 0; m < M; m++) q[m] = (pri[m].strength * pri[m].mean + A[m]) / (pri[m].strength + N[m]);
+    }
+
+    let seed = 0;
+    for (const ch of target.id) seed = (seed * 31 + ch.charCodeAt(0)) >>> 0;
+    const u01 = rng(seed);
+    const a0 = witnesses.map((_, m) => pri[m].strength * pri[m].mean + A[m]);
+    const b0 = witnesses.map((_, m) => pri[m].strength * (1 - pri[m].mean) + (N[m] - A[m]));
+    const Q: Float64Array[] = [];
+    for (let s2 = 0; s2 < SAMPLES; s2++) {
+      const row = new Float64Array(M);
+      for (let m = 0; m < M; m++) row[m] = betaDraw(a0[m], b0[m], u01);
+      Q.push(row);
+    }
+    witnesses.forEach((w, m) => {
+      const xs = Q.map((row) => row[m]);
+      w.reliability = {
+        estimate: r3(q[m]),
+        low: r3(quantile(xs, 0.05)),
+        high: r3(quantile(xs, 0.95)),
+        linesCompared: N[m],
+        agreementShare: N[m] ? r3(A[m] / N[m]) : null,
+        priorMean: r3(pri[m].mean),
+        priorStrength: r3(pri[m].strength),
+        dateRangeKnown: pri[m].rangeKnown,
+      };
+    });
+
+    const judge = (u: U) => {
+      const w = weights(u, late, q);
+      const per: number[][] = Array.from({ length: u.options + 1 }, () => []);
+      for (const row of Q) {
+        const p = posterior(loglik(u, w, (m) => row[m]));
+        p.forEach((x, i) => per[i].push(x));
+      }
+      const point = posterior(loglik(u, w, (m) => q[m]));
+      return per.map((xs, i) => ({
+        p: r3(quantile(xs, 0.5)),
+        lo: r3(quantile(xs, 0.05)),
+        hi: r3(quantile(xs, 0.95)),
+        point: point[i],
+      }));
+    };
+
+    const yearOfIdx = (m: number) => witnesses[m].year;
+
+    for (let li = 0; li < lines.length; li++) {
+      for (const u of byLine[li]) {
+        if (u.place !== undefined) continue;
+        const j = judge(u)[0];
+        for (const wi of u.words!) Object.assign(lines[li].words![wi], { c: j.p, lo: j.lo, hi: j.hi });
+      }
+    }
+
+    const offset = new Map<number, number>();
+    for (let li = 0; li < lines.length; li++) {
+      for (const u of byLine[li]) {
+        if (u.place === undefined) continue;
+        const p = places[u.place], J = judge(u);
+        p.readings.forEach((r, ri) => { r.p = J[ri].p; r.lo = J[ri].lo; r.hi = J[ri].hi; });
+        p.lostEverywhere = { p: J[u.options].p, lo: J[u.options].lo, hi: J[u.options].hi };
+        const order = p.readings.map((_, ri) => ri).sort((x, y) => {
+          const X = p.readings[x], Y = p.readings[y];
+          const ex = Math.min(...[...X.witnesses, ...(X.partly ?? [])].map(yearOfIdx));
+          const ey = Math.min(...[...Y.witnesses, ...(Y.partly ?? [])].map(yearOfIdx));
+          return (
+            (Math.abs(J[y].point - J[x].point) > 1e-9 ? J[y].point - J[x].point : 0) ||
+            ex - ey ||
+            Y.witnesses.length + (Y.partly?.length ?? 0) - (X.witnesses.length + (X.partly?.length ?? 0)) ||
+            (X.keys < Y.keys ? -1 : X.keys > Y.keys ? 1 : 0)
+          );
+        });
+        p.readings = order.map((i) => p.readings[i]);
+        const chosen = p.readings[0];
+        const selKeys = chosen.keys ? chosen.keys.split(" ") : [];
+        for (let ri = 1; ri < p.readings.length; ri++) {
+          const rKeys = p.readings[ri].keys ? p.readings[ri].keys.split(" ") : [];
+          p.readings[ri].diffNote = describeDifference(selKeys, rKeys);
+        }
+        p.confidence = chosen.p;
+
+        const l = lines[li], off = offset.get(li) ?? 0, at = p.at + off;
+        const ts = chosen.text ? chosen.text.split(" ") : [];
+        const nw: WordOut[] = selKeys.map((k, j) => ({
+          t: ts[j] ?? k,
+          k,
+          c: chosen.p,
+          lo: chosen.lo,
+          hi: chosen.hi,
+          p: p.id,
+          x: chosen.xs[j],
+        }));
+        const old = l.words!.slice(at, at + p.n);
+        const isAr = old.some((w) => w.a);
+        if (isAr) for (const w of nw) w.a = 1;
+        l.words!.splice(at, p.n, ...nw);
+        offset.set(li, off + nw.length - p.n);
+        p.at = at;
+        p.n = nw.length;
+      }
+    }
+
+    // Check for edge-doubled words
+    const doubles = new Map<string, [number, number][]>();
+    for (const l of lines) {
+      const ws = l.words ?? [];
+      for (let i = 1; i < ws.length; i++) {
+        const x = ws[i - 1], y = ws[i];
+        if (x.k !== y.k || (x.p !== undefined && x.p === y.p) || dbl.get(l.ref)?.has(y.k)) continue;
+        const lo = x.p !== undefined ? places[x.p].cols[0] : x.x;
+        const hi = y.p !== undefined ? places[y.p].cols[1] : y.x;
+        (doubles.get(l.ref) ?? doubles.set(l.ref, []).get(l.ref)!).push([Math.min(lo, hi), Math.max(lo, hi)]);
+      }
+    }
+
+    let wordCount = 0, wordConfSum = 0, placeCount = 0, placeConfSum = 0;
+    for (const l of lines) {
+      for (const w of l.words ?? []) {
+        wordCount++;
+        wordConfSum += w.c ?? 1;
+      }
+    }
+    for (const p of places) {
+      if (!p.lost) {
+        placeCount++;
+        placeConfSum += p.confidence;
+      }
+    }
+
+    return {
+      doubles,
+      result: {
+        witnesses,
+        lines,
+        places,
+        stats: {
+          manuscripts: witnesses.length,
+          early: witnesses.filter((w) => w.early).length,
+          lines: st.lines,
+          uncoveredLines: st.uncovered,
+          words: wordCount,
+          places: placeCount,
+          meanPlaceConfidence: r4(placeCount ? placeConfSum / placeCount : 1),
+          meanWordConfidence: r4(wordCount ? wordConfSum / wordCount : 1),
+          meanManuscriptsPerLine: r4(st.witnessesPerLine / Math.max(1, st.lines - st.uncovered)),
+        },
+      },
+    };
+  };
+
   const force = new Map<string, [number, number][]>();
   for (let round = 0; ; round++) {
-    const { result, doubles } = compileOnce(R, force);
+    const { result, doubles } = compileOnce(force);
     if (!doubles.size || round >= 5) return result;
     for (const [ref, xs] of doubles) force.set(ref, [...(force.get(ref) ?? []), ...xs]);
   }
 }
-function compileOnce(R: Book, force: Map<string, [number, number][]>) {
-  const dbl = new Map<string, Set<string>>();
-  const HEB = R.language.startsWith("Hebrew");
-  const SHOW = HEB ? (w: string) => w : showGreek;
-  /** only a continuous-text manuscript can show that a word is absent (method, section 2) */
-  const partialKind = (s: string) => (INFO.get(s)?.kind ?? "continuous") !== "continuous";
-  // read every input transcription; group them by manuscript (method, section 1)
-  const byMs = new Map<string, { files: string[]; lines: Map<string, LineText[]> }>();
-  for (const file of R.inputs) {
-    const siglum0 = file.replace(/^.*\//, "").replace(/\.[^.]+\.txt$/, ""), siglum = SAME_MANUSCRIPT[siglum0] ?? siglum0;
-    const ms = byMs.get(siglum) ?? { files: [], lines: new Map() }; byMs.set(siglum, ms); ms.files.push(file);
-    const KEY = HEB ? hebrewSpell : greekKey;
-    readFileSync(`${ROOT}${file}`, "utf8").split("\n").forEach((l, i) => {
-      const m = l.match(/^(\S+) (\d+:\d+)\t(.*)$/); if (!m || m[1] !== R.book) return;
-      const words: Tok[] = []; let gap = false, gapEnd = false;
-      const parts = m[3].split(" ").filter(Boolean);
-      if (m[3] === "-") { const x = ms.lines.get(m[2]) ?? []; x.push({ absent: true, words: [], gapEnd: false, file, lineNo: i + 1 }); ms.lines.set(m[2], x); return; }
-      parts.forEach((p, j) => { if (p === "…") { if (j === parts.length - 1) gapEnd = true; else gap = true; return; } words.push({ k: KEY(p), t: p, gap }); gap = false; });
-      const x = ms.lines.get(m[2]) ?? []; x.push({ absent: false, words, gapEnd, file, lineNo: i + 1 }); ms.lines.set(m[2], x);
-    });
-  }
-  // the date used for order, and copies counted as early (method, section 3)
-  const year = (s: string) => INFO.get(s)?.year ?? R.undated;
-  const early = (s: string) => year(s) - R.origin <= R.lateAfter;
-  // witnesses in alignment order: oldest first, then by siglum
-  const sigla = [...byMs.keys()].sort((a, b) => year(a) - year(b) || (a < b ? -1 : a > b ? 1 : 0));
-  const WIDX = new Map(sigla.map((s, i) => [s, i]));
-  const witnesses = sigla.map((s) => {
-    const i = INFO.get(SAME_MANUSCRIPT[s] ?? s) ?? INFO.get(s);
-    const leaves = Object.entries(SAME_MANUSCRIPT).filter(([, v]) => v === s).map(([k]) => k);
-    return { siglum: s, ...(leaves.length ? { leaves } : {}), kind: i?.kind ?? "continuous", name: i?.name, century: i?.century, dateSource: i?.dateSource, date: i?.yearFrom !== undefined ? { estimate: Math.round((i.yearFrom + i.yearTo!) / 2), margin: Math.round((i.yearTo! - i.yearFrom) / 2), from: i.yearFrom, to: i.yearTo, method: i.dateBasis ?? "not stated", source: i.dateSource } : { estimate: null, margin: null, method: "no date range given by the holder", source: i?.dateSource ?? null }, year: year(s), early: early(s), viewer: i?.viewer ?? [], files: byMs.get(s)!.files };
-  });
-  // the lines: every line any manuscript has, in chapter and line order
-  const refs = [...new Set(sigla.flatMap((s) => [...byMs.get(s)!.lines.keys()]))].sort((a, b) => { const [x, y] = [a, b].map((r) => r.split(":").map(Number)); return x[0] - y[0] || x[1] - y[1]; });
 
-  const lines: unknown[] = [], places: unknown[] = [], placeLine: number[] = [];
-  const st = { lines: 0, uncovered: 0, words: 0, columns: 0, unanimous: 0, places: 0, confidenceSum: 0, witnessesPerLine: 0, arLines: 0, arWords: 0 };
-  for (const ref of refs) {
-    // of several transcriptions of one manuscript, the one with the most words in the line; a tie goes to the one listed first
-    const present: { s: string; x: LineText }[] = [];
-    for (const s of sigla) {
-      const xs = byMs.get(s)!.lines.get(ref); if (!xs) continue;
-      const order = byMs.get(s)!.files;
-      const x = [...xs].sort((a, b) => b.words.length - a.words.length || order.indexOf(a.file) - order.indexOf(b.file))[0];
-      if (!x.absent && !x.words.length) continue; // only a lacuna: the manuscript does not cover the line
-      present.push({ s, x });
-    }
-    st.lines++;
-    if (!present.some((p) => p.x.words.length)) { st.uncovered++; lines.push({ ref, uncovered: true, witnesses: present.map((p) => WIDX.get(p.s)) }); continue; }
-    st.witnessesPerLine += present.length;
-    // line up the words (method, section 2)
-    const withWords = present.filter((p) => p.x.words.length);
-    const cols = align(withWords.map((p) => p.x.words.map((w) => w.k)));
-    const nC = cols.length;
-    // what each manuscript reads at each column: a key, "" (no word: it does not have one here), or null (lost: no vote)
-    const reads: (string | null)[][] = present.map((p) => {
-      const wi = withWords.indexOf(p), out: (string | null)[] = new Array(nC).fill(""), partial = partialKind(p.s);
-      if (wi < 0) return out; // the manuscript marks the line as not having it
-      const at: number[] = []; cols.forEach((c, ci) => { const j = c.cells.get(wi); if (j !== undefined) at[j] = ci; });
-      const ws = p.x.words;
-      for (let j = 0; j < ws.length; j++) out[at[j]] = ws[j].k;
-      for (let ci = 0; ci < nC; ci++) {
-        if (cols[ci].cells.has(wi)) continue;
-        let next = ws.findIndex((_, j) => at[j] > ci);
-        const lostBefore = next >= 0 ? ws[next].gap : p.x.gapEnd;
-        if (lostBefore || partial) out[ci] = null;
-      }
-      return out;
-    });
-    const form = (pi: number, ci: number) => { const wi = withWords.indexOf(present[pi]); const j = cols[ci].cells.get(wi); return j === undefined ? undefined : present[pi].x.words[j].t; };
-    // variant columns: the manuscripts that cover the column do not all read the same
-    // a column is a variant when, setting aside singular readings (one manuscript alone where another reading has two
-    // or more), two or more different readings are left
-    const variant = cols.map((_, ci) => {
-      const n = new Map<string, number>(); for (const r of reads) { const k = r[ci]; if (k !== null) n.set(k, (n.get(k) ?? 0) + 1); }
-      const most = Math.max(0, ...n.values());
-      return [...n.values()].filter((c) => !(c === 1 && most >= 2)).length > 1;
-    });
-    // places. Neighbouring variant columns are one place; two places at most two columns apart that share a word
-    // (a word moved) are one place with the columns between them
-    let spans: [number, number][] = [];
-    for (let ci = 0; ci < nC; ci++) if (variant[ci]) { const l = spans[spans.length - 1]; if (l && l[1] === ci - 1) l[1] = ci; else spans.push([ci, ci]); }
-    const keysIn = (a: number, b: number) => new Set(reads.flatMap((r) => r.slice(a, b + 1)).filter((k): k is string => !!k));
-    for (let i = 0; i + 1 < spans.length;) {
-      const [a, b] = spans[i], [c, d] = spans[i + 1];
-      if (c - b - 1 <= 2) { const A = keysIn(a, b), B = keysIn(c, d); if ([...A].some((k) => B.has(k))) { spans.splice(i, 2, [a, d]); continue; } }
-      i++;
-    }
-    const sortW = (xs: number[]) => xs.map((pi) => WIDX.get(present[pi].s)!).sort((x, y) => x - y);
-    type W = { t: string; k: string; c?: number; p?: number; l?: number[]; d?: number[]; col: number; span?: number };
-    type Rd = { keys: string[]; forms: string[]; wits: number[]; segs: (string | null)[][]; partly: number[]; earliest: number };
-    /** The printed line for a set of places. */
-    const decide = (spans: [number, number][]) => {
-      const words: W[] = [], local: Record<string, unknown>[] = [];
-      let ci = 0;
-      spans.forEach(([a, b], si) => {
-        for (; ci < a; ci++) {
-          // outside a place every covering manuscript reads alike, apart from singular readings
-          const n = new Map<string, number>(); for (const r of reads) { const x = r[ci]; if (x !== null) n.set(x, (n.get(x) ?? 0) + 1); }
-          const k = [...n].sort((x, y) => y[1] - x[1] || (x[0] < y[0] ? -1 : 1))[0]?.[0];
-          if (!k) continue; // the word is in one manuscript alone: it is not printed
-          const diff = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] !== null && reads[pi][ci] !== k);
-          const lost = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] === null);
-          const by = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] === k).sort((x, y) => year(present[x].s) - year(present[y].s) || (present[x].s < present[y].s ? -1 : 1));
-          words.push({ t: SHOW(form(by[0], ci)!), k, ...(lost.length ? { l: sortW(lost) } : {}), ...(diff.length ? { d: sortW(diff) } : {}), col: ci });
-        }
-        ci = b + 1;
-        // each manuscript's reading of the place is its words across all the place's columns
-        const rd = new Map<string, Rd>(); const partial: number[] = [];
-        present.forEach((p, pi) => {
-          const seg = reads[pi].slice(a, b + 1);
-          if (seg.some((k) => k === null)) { partial.push(pi); return; }
-          const keys = seg.filter((k): k is string => !!k), id = keys.join(" ");
-          const r = rd.get(id) ?? { keys, forms: [], wits: [], segs: [], partly: [], earliest: Infinity }; rd.set(id, r);
-          r.wits.push(pi); r.segs.push(seg); r.earliest = Math.min(r.earliest, year(p.s));
-          if (!r.forms.length) r.forms = seg.map((_, j) => form(pi, a + j)).filter((x): x is string => !!x);
-        });
-        const all = [...rd.values()];
-        if (!all.length) { // every manuscript is lost somewhere in the place: nothing is printed, and the place is listed
-          local.push({ ref, at: words.length, n: 0, cols: [a, b], lost: true, readings: [], partlyLost: sortW(partial) });
-          return;
-        }
-        // a manuscript with a lacuna in the place votes with the one reading that agrees with every word it keeps there
-        const stillLost: number[] = [];
-        for (const pi of partial) {
-          const seg = reads[pi].slice(a, b + 1);
-          const ok = all.filter((r) => r.segs.some((s) => seg.every((k, j) => k === null || k === s[j])));
-          if (ok.length === 1) { ok[0].partly.push(pi); ok[0].earliest = Math.min(ok[0].earliest, year(present[pi].s)); } else stillLost.push(pi);
-        }
-        // the first order of the readings: most manuscripts, then the oldest; the model (section 3 of the method) orders them again
-        const count = (r: Rd) => r.wits.length + r.partly.length, id = (r: Rd) => r.keys.join(" ");
-        all.sort((x, y) => count(y) - count(x) || x.earliest - y.earliest || (id(x) < id(y) ? -1 : id(x) > id(y) ? 1 : 0));
-        const chosen = all[0];
-        const pl = local.length;
-        local.push({
-          ref, at: words.length, n: chosen.keys.length, cols: [a, b], confidence: 0, weight: 0,
-          readings: all.map((r) => ({ text: r.forms.map(showGreek).join(" ") || "—", keys: id(r), xs: r.segs[0].map((k, j) => (k ? a + j : -1)).filter((x) => x >= 0), witnesses: sortW(r.wits), ...(r.partly.length ? { partly: sortW(r.partly) } : {}) })),
-          ...(stillLost.length ? { partlyLost: sortW(stillLost) } : {}),
-        });
-        const pcols = chosen.segs[0].map((k, j) => (k ? a + j : -1)).filter((x) => x >= 0);
-        chosen.keys.forEach((k, j) => words.push({ t: SHOW(chosen.forms[j] ?? k), k, c: 0, p: pl, col: pcols[j] ?? a, span: si }));
-      });
-      for (; ci < nC; ci++) {
-        const n = new Map<string, number>(); for (const r of reads) { const x = r[ci]; if (x !== null) n.set(x, (n.get(x) ?? 0) + 1); }
-        const k = [...n].sort((x, y) => y[1] - x[1] || (x[0] < y[0] ? -1 : 1))[0]?.[0];
-        if (!k) continue;
-        const diff = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] !== null && reads[pi][ci] !== k);
-        const lost = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] === null);
-        const by = present.map((_, pi) => pi).filter((pi) => reads[pi][ci] === k).sort((x, y) => year(present[x].s) - year(present[y].s) || (present[x].s < present[y].s ? -1 : 1));
-        words.push({ t: SHOW(form(by[0], ci)!), k, ...(lost.length ? { l: sortW(lost) } : {}), ...(diff.length ? { d: sortW(diff) } : {}), col: ci });
-      }
-      return { words, local };
-    };
-    // joined places: where the printed line has the same word twice in a row across a place's edge and no manuscript of
-    // the line has it twice there, the place is joined with its neighbour and decided again as one place
-    const doubled = present.map((p) => new Set(p.x.words.map((w) => w.k).filter((k, j, a) => j > 0 && a[j - 1] === k)));
-    dbl.set(ref, new Set(doubled.flatMap((x) => [...x])));
-    // columns joined after an earlier round
-    for (const [a0, b0] of force.get(ref) ?? []) {
-      const touch = spans.filter(([a, b]) => !(b < a0 || a > b0));
-      const lo = Math.min(a0, ...touch.map((x) => x[0])), hi = Math.max(b0, ...touch.map((x) => x[1]));
-      spans = [...spans.filter((x) => !touch.includes(x)), [lo, hi] as [number, number]].sort((x, y) => x[0] - y[0]);
-    }
-    let res = decide(spans);
-    for (let guard = 0; guard < 50; guard++) {
-      const ws = res.words;
-      const j = ws.findIndex((w, i) => i > 0 && ws[i - 1].k === w.k && !(w.span !== undefined && w.span === ws[i - 1].span) && !doubled.some((s) => s.has(w.k)));
-      if (j < 0) break;
-      const x = ws[j - 1], y = ws[j];
-      const lo = x.span !== undefined ? spans[x.span][0] : x.col, hi = y.span !== undefined ? spans[y.span][1] : y.col;
-      spans = [...spans.filter(([a, b]) => b < lo || a > hi), [Math.min(lo, ...spans.filter(([a, b]) => !(b < lo || a > hi)).map((s) => s[0])), Math.max(hi, ...spans.filter(([a, b]) => !(b < lo || a > hi)).map((s) => s[1]))] as [number, number]].sort((p, q) => p[0] - q[0]);
-      res = decide(spans);
-    }
-    // the place ids, the statistics
-    const base = places.length;
-    for (const _ of res.local) placeLine.push(lines.length);
-    for (const pl of res.local) { places.push({ id: places.length, ...pl }); st.places++; }
-    st.columns += nC;
-    for (const w of res.words) if (w.p === undefined && !w.d && !w.l) st.unanimous++;
-    // x: the column of each printed word in the line's alignment (see g below)
-    const words: Record<string, unknown>[] = res.words.map(({ col, span, ...w }) => (w.p !== undefined ? { ...w, p: w.p + base, x: col } : { ...w, x: col }));
-    // g: each manuscript's row in the alignment, one letter per column: w its next word, - no word there, ? lost there
-    const g = reads.map((row) => row.map((k) => (k === null ? "?" : k ? "w" : "-")).join(""));
-    st.words += words.length;
-    const extra: Record<string, string> = {};
-    if (HEB) {
-      const mask = aramaic(R.book, ref, words.map((w) => w.k as string));
-      mask.forEach((a, i) => { if (a) words[i].a = 1; });
-      const n = mask.filter(Boolean).length;
-      if (n) { extra.aramaic = n === words.length ? "all" : "part"; st.arLines++; st.arWords += n; }
-    }
-    // where each manuscript's words come from: its transcription (index in its files) and the line number in that file
-    lines.push({ ref, witnesses: present.map((p) => WIDX.get(p.s)), src: present.map((p) => `${byMs.get(p.s)!.files.indexOf(p.x.file)}:${p.x.lineNo}`), g, ...extra, words });
+// ---------- TEI P5 XML serializer ----------
+function renderTeiXml(
+  specId: string,
+  compilationId: string,
+  timestampIso: string,
+  git: ReturnType<typeof gitInfo>,
+  target: TargetBook,
+  compiled: ReturnType<typeof compileBook>,
+): string {
+  const { witnesses, lines, places, stats } = compiled;
+  const langCode = target.language.startsWith("Hebrew") ? "hbo" : "grc";
+  const witRef = (idx: number) => `#${witnesses[idx].xmlId}`;
+  const witRefs = (idxs: number[]) => idxs.map(witRef).join(" ");
+
+  const out: string[] = [];
+  out.push('<?xml version="1.0" encoding="UTF-8"?>');
+  out.push('<TEI xmlns="http://www.tei-c.org/ns/1.0">');
+  out.push("  <teiHeader>");
+  out.push("    <fileDesc>");
+  out.push("      <titleStmt>");
+  out.push(`        <title>${escXml(target.name)} (${escXml(target.id)}) — Compiled Original-Language Text</title>`);
+  out.push("        <respStmt>");
+  out.push("          <resp>Statistical modeling, reading selection, and probability estimation</resp>");
+  out.push(`          <name>${escXml(`${MODEL_ATTRIBUTION.provider} — ${MODEL_ATTRIBUTION.modelName} (${MODEL_ATTRIBUTION.modelId}), effort: ${MODEL_ATTRIBUTION.effortLevel}, harness: ${MODEL_ATTRIBUTION.harness}`)}</name>`);
+  out.push("        </respStmt>");
+  out.push("        <respStmt>");
+  out.push("          <resp>Deterministic XML parsing, alignment, and TEI P5 serialization</resp>");
+  out.push(`          <name>${escXml(`${MODEL_ATTRIBUTION.deterministicEngine.program} (${MODEL_ATTRIBUTION.deterministicEngine.runtime}, commit ${git.commit ?? "unknown"}, code SHA-256 ${git.codeSha256.slice(0, 16)})`)}</name>`);
+  out.push("        </respStmt>");
+  out.push("      </titleStmt>");
+  out.push("      <publicationStmt>");
+  out.push(`        <p>This compilation was produced under Open Lexis Transcription Specification ${escXml(specId)}.</p>`);
+  out.push(`        <idno type="specification-id">${escXml(specId)}</idno>`);
+  out.push(`        <idno type="compilation-id">${escXml(compilationId)}</idno>`);
+  out.push(`        <date when="${escXml(timestampIso)}">${escXml(timestampIso)}</date>`);
+  out.push("        <availability><p>The ancient texts are in the public domain. Source transcriptions retain their respective licenses as documented in the specification.</p></availability>");
+  out.push("      </publicationStmt>");
+  out.push("      <sourceDesc>");
+  out.push(`        <p>Primary manuscript witnesses allowlisted in specification ${escXml(specId)} for ${escXml(target.name)} (${stats.manuscripts} manuscripts, ${stats.early} early).</p>`);
+  out.push("        <listWit>");
+  for (const w of witnesses) {
+    const s = w.source;
+    const dateDesc =
+      s.yearFrom !== undefined && s.yearTo !== undefined
+        ? `Range: ${s.yearFrom} to ${s.yearTo} (midpoint ${Math.round((s.yearFrom + s.yearTo) / 2)}, margin ±${Math.round((s.yearTo - s.yearFrom) / 2)} years); century: ${s.century ?? "unknown"}; method: ${s.dateBasis ?? "unknown"}; source: ${s.dateSource ?? "unknown"}.`
+        : `Date range: unknown (not documented in specification); century: ${s.century ?? "unknown"}; method: ${s.dateBasis ?? "unknown"}; source: ${s.dateSource ?? "unknown"}.`;
+    const rel = w.reliability!;
+    const label = `${w.siglum}${s.name ? ` (${s.name})` : ""}${w.leaves.length ? ` [includes leaves: ${w.leaves.join(", ")}]` : ""}`;
+    out.push(`          <witness xml:id="${escXml(w.xmlId)}">`);
+    out.push(`            <abbr type="siglum">${escXml(w.siglum)}</abbr>`);
+    out.push(`            <desc>${escXml(label)}${s.shelfmark ? `; shelfmark: ${escXml(s.shelfmark)}` : ""}</desc>`);
+    out.push(`            <note type="dating">${escXml(dateDesc)}</note>`);
+    out.push(`            <note type="provenance">${escXml(`Place of origin/writing: unknown (not documented in specification). Transcription holder(s): ${w.provenances.join(", ") || "unknown"}.`)}</note>`);
+    out.push('            <note type="scientific-analysis">unknown (not documented in specification)</note>');
+    out.push(`            <note type="physical-scribal">${escXml(`Manuscript type: ${s.type}; transcribed words observed: ${w.transcribedWords}; scribal corrections observed: ${w.corrections}; lacunae/damaged tokens observed: ${w.lacunae} (not penalized); scribal prior penalty: ${w.corrPenalty}.`)}</note>`);
+    out.push(`            <note type="textual-agreement">${escXml(`Posterior reliability: ${rel.estimate} (90% interval: [${rel.low}, ${rel.high}]); lines compared: ${rel.linesCompared}; agreement share: ${rel.agreementShare ?? "n/a"}; prior mean: ${rel.priorMean}; prior strength: ${rel.priorStrength}; date range known: ${rel.dateRangeKnown}.`)}</note>`);
+    out.push(`            <note type="source-files">${escXml(w.files.join(", "))}</note>`);
+    out.push("          </witness>");
   }
-  model(R, witnesses as Wit[], lines as Ln[], places as Pl[], placeLine, st);
-  // words printed twice in a row across a place's edge that no manuscript of the line has twice
-  const doubles = new Map<string, [number, number][]>();
-  for (const l of lines as Ln[]) {
+  out.push("        </listWit>");
+  out.push("      </sourceDesc>");
+  out.push("    </fileDesc>");
+  out.push("    <encodingDesc>");
+  out.push("      <projectDesc>");
+  out.push(`        <p>Compiled strictly under specification ${escXml(specId)} (compilation ${escXml(compilationId)}). Model attribution: ${escXml(MODEL_ATTRIBUTION.provider)} ${escXml(MODEL_ATTRIBUTION.modelName)} (${escXml(MODEL_ATTRIBUTION.modelId)}), effort ${escXml(MODEL_ATTRIBUTION.effortLevel)}, via ${escXml(MODEL_ATTRIBUTION.harness)}.</p>`);
+  out.push("      </projectDesc>");
+  out.push("      <editorialDecl>");
+  for (const para of METHOD_DESCRIPTION.split("\n\n")) {
+    out.push(`        <p>${escXml(para)}</p>`);
+  }
+  out.push("      </editorialDecl>");
+  out.push('      <variantEncoding method="parallel-segmentation" location="internal"/>');
+  out.push("    </encodingDesc>");
+  out.push("  </teiHeader>");
+  out.push(`  <text xml:lang="${langCode}">`);
+  out.push("    <body>");
+  out.push(`      <div type="book" n="${escXml(target.id)}">`);
+
+  // Index places by verse ref for O(1) lookup
+  const placesByRef = new Map<string, PlaceOut[]>();
+  for (const p of places) {
+    const arr = placesByRef.get(p.ref) ?? [];
+    arr.push(p);
+    placesByRef.set(p.ref, arr);
+  }
+
+  let curChapter = "";
+  let wSeq = 0;
+
+  for (const l of lines) {
+    const [ch, vs] = l.ref.split(":");
+    if (ch !== curChapter) {
+      if (curChapter) out.push("        </div>");
+      out.push(`        <div type="chapter" n="${escXml(ch)}">`);
+      curChapter = ch;
+    }
+
+    if (l.uncovered) {
+      out.push(`          <ab n="${escXml(l.ref)}" type="uncovered"><gap reason="lost"/><note type="coverage">Uncovered line; witnesses present without readable words: ${escXml(witRefs(l.witnesses))}</note></ab>`);
+      continue;
+    }
+
     const ws = l.words ?? [];
-    for (let i = 1; i < ws.length; i++) {
-      const x = ws[i - 1], y = ws[i];
-      if (x.k !== y.k || (x.p !== undefined && x.p === y.p) || dbl.get(l.ref)?.has(y.k)) continue;
-      const P = places as Pl[], lo = x.p !== undefined ? P[x.p].cols[0] : x.x, hi = y.p !== undefined ? P[y.p].cols[1] : y.x;
-      (doubles.get(l.ref) ?? doubles.set(l.ref, []).get(l.ref)!).push([Math.min(lo, hi), Math.max(lo, hi)]);
+    const linePlaces = placesByRef.get(l.ref) ?? [];
+    // Map word index -> place(s) that start at that word index (including 0-word omissions!)
+    const placesAtWord = new Map<number, PlaceOut[]>();
+    for (const p of linePlaces) {
+      const arr = placesAtWord.get(p.at) ?? [];
+      arr.push(p);
+      placesAtWord.set(p.at, arr);
     }
-  }
-  let cs = 0, cn = 0; for (const l of lines as { words?: { c?: number }[] }[]) for (const w of l.words ?? []) { cs += w.c ?? 1; cn++; }
-  const stats = {
-    manuscripts: witnesses.length, early: witnesses.filter((w) => w.early).length,
-    lines: st.lines, uncoveredLines: st.uncovered, words: st.words, columns: st.columns, unanimousColumns: st.unanimous,
-    places: st.places, meanPlaceConfidence: r4(st.places ? st.confidenceSum / st.places : 1), meanWordConfidence: r4(cn ? cs / cn : 1),
-    meanManuscriptsPerLine: r4(st.witnessesPerLine / Math.max(1, st.lines - st.uncovered)),
-    ...(HEB ? { aramaicLines: st.arLines, aramaicWords: st.arWords } : {}),
-  };
-  return { doubles, result: { id: R.id, book: R.book, name: R.name, section: R.section, language: R.language, settings: { origin: R.origin, halfLife: R.halfLife, lateAfter: R.lateAfter, undated: R.undated }, inputs: R.inputs, stats, witnesses, lines, places } };
-}
 
-if (import.meta.main) {
-  const arg = process.argv[2];
-  if (!arg) throw new Error("usage: bun run compile all | <book>");
-  const spec = readBooks(), by = selfIdentify();
-  const compiler = `${by.program.replace(/^.*\//, "").replace(/\.[^.]+$/, "")}-${by.commit?.slice(0, 12) ?? "nocommit"}${by.codeMatchesCommit === false ? `-modified-${by.codeSha256.slice(0, 8)}` : ""}`;
-  const out = `${ROOT}outputs/${spec.sha256.slice(0, 12)}/${compiler}`;
-  mkdirSync(`${out}/books`, { recursive: true });
-  const books = arg === "all" ? spec.books : spec.books.filter((b) => b.book === arg || b.id === arg);
-  if (!books.length) throw new Error(`no book ${arg} in src/books.json`);
-  console.log(`under ${SPEC_FILE} (sha256 ${spec.sha256.slice(0, 12)}), by ${by.program} at ${by.commit?.slice(0, 12) ?? "no commit"}${by.codeMatchesCommit === false ? " (code changed since that commit)" : ""}, ${by.runtime} -> ${out.slice(ROOT.length)}`);
-  const manifestFile = `${out}/compilation.json`;
-  const old = existsSync(manifestFile) ? JSON.parse(readFileSync(manifestFile, "utf8")) : { books: [] };
-  const entries = new Map<string, unknown>((old.books as { id: string }[]).map((b) => [b.id, b]));
-  for (const b of books) {
-    if (!b.inputs.length) { console.log(`${b.name}: no inputs held`); continue; }
-    const t = performance.now(); const res = compile(b);
-    const json = JSON.stringify(res) + "\n";
-    writeFileSync(`${out}/books/${b.id}.json`, json);
-    entries.set(b.id, { id: b.id, book: b.book, name: b.name, section: b.section, language: b.language, file: `books/${b.id}.json`, sha256: sha(json), stats: res.stats });
-    console.log(`${b.name}: ${res.stats.manuscripts} manuscripts, ${res.stats.lines} lines, ${res.stats.words} words, ${res.stats.places} places (${((performance.now() - t) / 1000).toFixed(1)} s)`);
-  }
-  const method = readFileSync(`${ROOT}${METHOD_FILE}`, "utf8");
-  const order = spec.books.map((b) => b.id);
-  const manifest = {
-    specification: { file: SPEC_FILE, sha256: spec.sha256, statement: `This compilation was produced under ${SPEC_FILE} (SHA-256 ${spec.sha256}).` },
-    compiler: { id: compiler, ...by },
-    method: { file: METHOD_FILE, sha256: sha(method), text: method },
-    evidence: { inventory: "src/manuscripts.json", inventorySha256: sha(readFileSync(`${ROOT}src/manuscripts.json`)), books: "src/books.json" },
-    sections: spec.sections,
-    books: [...entries.values()].sort((x, y) => order.indexOf((x as { id: string }).id) - order.indexOf((y as { id: string }).id)),
-  };
-  writeFileSync(manifestFile, JSON.stringify(manifest, null, 1) + "\n");
-}
+    const bodyParts: string[] = [];
+    // Track unanimous word coverage groups for <spanGrp type="word-coverage">
+    type CovGroup = { ids: string[]; attested: number[]; lacuna: number[]; p: number; lo: number; hi: number };
+    const covGroups: CovGroup[] = [];
+    const covMap = new Map<string, CovGroup>();
 
-// ---------- how likely each reading is to be the original (scripts/METHOD.md, section 3) ----------
-type Wit = { siglum: string; year: number; early: boolean; reliability?: unknown; date?: unknown };
-type Wd = { t: string; k: string; c?: number; lo?: number; hi?: number; p?: number; l?: number[]; d?: number[]; x: number; a?: number };
-type Ln = { ref: string; uncovered?: boolean; witnesses: number[]; words?: Wd[] };
-type PR = { text: string; keys: string; xs: number[]; witnesses: number[]; partly?: number[]; p?: number; lo?: number; hi?: number };
-type Pl = { id: number; ref: string; at: number; n: number; cols: [number, number]; confidence: number; weight: number; lost?: boolean; readings: PR[]; lostEverywhere?: { p: number; lo: number; hi: number } };
-function model(R: Book, W: Wit[], lines: Ln[], places: Pl[], placeLine: number[], st: Record<string, any>) {
-  const M = W.length, S = 100;
-  const late = W.map((w) => !w.early);
-  const pri = W.map((w) => { const i = INFO.get(w.siglum); return prior({ from: i?.yearFrom, to: i?.yearTo, origin: R.origin, halfLife: R.halfLife, undated: R.undated }); });
-  // the units of evidence, line by line: each place, and each run of other words read by the same manuscripts
-  type U = Unit & { mult: number; place?: number; words?: number[] };
-  const byLine: U[][] = lines.map(() => []);
-  places.forEach((p, pid) => {
-    if (!p.readings.length) return;
-    const voters: [number, number][] = [];
-    p.readings.forEach((r, ri) => { for (const m of [...r.witnesses, ...(r.partly ?? [])]) voters.push([m, ri]); });
-    byLine[placeLine[pid]].push({ options: p.readings.length, voters, mult: 1, place: pid });
-  });
-  lines.forEach((l, li) => {
-    if (l.uncovered) return;
-    const groups = new Map<string, U>();
-    l.words!.forEach((w, wi) => {
-      if (w.p !== undefined) return;
-      const out = new Set([...(w.l ?? []), ...(w.d ?? [])]), readers = l.witnesses.filter((m) => !out.has(m)), diff = w.d ?? [];
-      const key = `${readers.join(",")}|${diff.join(",")}`;
-      const g = groups.get(key);
-      if (g) { g.mult++; g.words!.push(wi); return; }
-      const voters: [number, number][] = [...readers.map((m) => [m, 0] as [number, number]), ...diff.map((m, j) => [m, j + 1] as [number, number])];
-      groups.set(key, { options: 1 + diff.length, voters, mult: 1, words: [wi] });
-    });
-    byLine[li].push(...groups.values());
-  });
-  // reliability, step by step (expectation-maximisation): agreement of each manuscript with what the others make likely
-  const q = new Float64Array(M), A = new Float64Array(M), N = new Float64Array(M);
-  for (let m = 0; m < M; m++) q[m] = pri[m].mean;
-  for (let it = 0; it < 5; it++) {
-    A.fill(0); N.fill(0);
-    for (const units of byLine) {
-      const sum = new Map<number, [number, number]>();
-      for (const u of units) {
-        if (u.voters.length < 2) continue;
-        const w = weights(u, late, q), L = loglik(u, w, (m) => q[m]);
-        const post = posterior(L);
-        u.voters.forEach(([m, o]) => {
-          const pr = post[o];
-          const x = sum.get(m) ?? [0, 0]; x[0] += pr * u.mult; x[1] += u.mult; sum.set(m, x);
+    const emitPlace = (p: PlaceOut) => {
+      const appId = `app-${target.id}-${ch}-${vs}-${p.id}`;
+      const rdgParts: string[] = [];
+      if (p.lost) {
+        rdgParts.push("<lem/>");
+        if (p.partlyLost?.length) rdgParts.push(`<rdg type="lacuna" wit="${witRefs(p.partlyLost)}"><gap reason="lost"/></rdg>`);
+      } else {
+        const chosen = p.readings[0];
+        const chosenWits = [...chosen.witnesses, ...(chosen.partly ?? [])].sort((a, b) => a - b);
+        const lemWords: string[] = [];
+        for (let j = 0; j < p.n; j++) {
+          const wObj = ws[p.at + j];
+          wSeq++;
+          const wid = `w-${target.id}-${ch}-${vs}-${wSeq}`;
+          lemWords.push(`<w xml:id="${wid}"${wObj?.a ? ' xml:lang="arc"' : ""}>${escXml(wObj?.t ?? "")}</w>`);
+        }
+        rdgParts.push(
+          lemWords.length
+            ? `<lem wit="${witRefs(chosenWits)}">${lemWords.join(" ")}</lem>`
+            : `<lem wit="${witRefs(chosenWits)}"/>`,
+        );
+
+        p.readings.forEach((r, ri) => {
+          const rId = `rdg-${target.id}-${ch}-${vs}-${p.id}-${ri + 1}`;
+          const allWits = [...r.witnesses, ...(r.partly ?? [])].sort((a, b) => a - b);
+          const rType = ri === 0 ? "selected" : "variant";
+          const textPart = r.text ? escXml(r.text) : "";
+          const cert = `<certainty target="#${rId}" locus="value" degree="${r.p.toFixed(3)}"/>`;
+          const unc = `<note type="uncertainty">90% interval: [${r.lo.toFixed(3)}, ${r.hi.toFixed(3)}]</note>`;
+          const diff = r.diffNote ? `<note type="difference">${escXml(r.diffNote)}</note>` : "";
+          rdgParts.push(`<rdg xml:id="${rId}" wit="${witRefs(allWits)}" type="${rType}">${textPart}${cert}${unc}${diff}</rdg>`);
         });
+
+        // Lacunose witnesses at this place: witnesses in verse that didn't vote for any reading
+        const voted = new Set<number>();
+        for (const r of p.readings) {
+          for (const m of r.witnesses) voted.add(m);
+          for (const m of r.partly ?? []) voted.add(m);
+        }
+        const lacWits = l.witnesses.filter((m) => !voted.has(m));
+        if (lacWits.length) {
+          rdgParts.push(`<rdg type="lacuna" wit="${witRefs(lacWits)}"><gap reason="lost"/></rdg>`);
+        }
+        if (p.lostEverywhere) {
+          const uId = `rdg-${target.id}-${ch}-${vs}-${p.id}-unseen`;
+          rdgParts.push(
+            `<rdg xml:id="${uId}" type="unseen"><certainty target="#${uId}" locus="value" degree="${p.lostEverywhere.p.toFixed(3)}"/><note type="uncertainty">90% interval: [${p.lostEverywhere.lo.toFixed(3)}, ${p.lostEverywhere.hi.toFixed(3)}]; probability original is unattested in surviving witnesses</note></rdg>`,
+          );
+        }
       }
-      for (const [m, [a, n]] of sum) { A[m] += a / n; N[m] += 1; }
+      bodyParts.push(`<app xml:id="${appId}">${rdgParts.join("")}</app>`);
+    };
+
+    let wi = 0;
+    while (wi < ws.length) {
+      const psHere = placesAtWord.get(wi);
+      if (psHere) {
+        let consumed = 0;
+        for (const p of psHere) {
+          emitPlace(p);
+          consumed += p.n;
+        }
+        if (consumed > 0) {
+          wi += consumed;
+          continue;
+        }
+      }
+      const wObj = ws[wi];
+      wSeq++;
+      const wid = `w-${target.id}-${ch}-${vs}-${wSeq}`;
+      bodyParts.push(`<w xml:id="${wid}"${wObj.a ? ' xml:lang="arc"' : ""}>${escXml(wObj.t)}</w>`);
+
+      const lacSet = new Set(wObj.l ?? []);
+      const attested = l.witnesses.filter((m) => !lacSet.has(m));
+      const lacuna = wObj.l ?? [];
+      const pVal = wObj.c ?? 1, loVal = wObj.lo ?? pVal, hiVal = wObj.hi ?? pVal;
+      const gKey = `${attested.join(",")}|${lacuna.join(",")}|${pVal}|${loVal}|${hiVal}`;
+      let grp = covMap.get(gKey);
+      if (!grp) {
+        grp = { ids: [], attested, lacuna, p: pVal, lo: loVal, hi: hiVal };
+        covMap.set(gKey, grp);
+        covGroups.push(grp);
+      }
+      grp.ids.push(`#${wid}`);
+      wi++;
     }
-    for (let m = 0; m < M; m++) q[m] = (pri[m].strength * pri[m].mean + A[m]) / (pri[m].strength + N[m]);
+    // Any trailing 0-word omission <app> at the end of the verse
+    const trailing = placesAtWord.get(ws.length);
+    if (trailing) for (const p of trailing) emitPlace(p);
+
+    if (covGroups.length) {
+      const spansXml = covGroups.map((g) => {
+        const targets = g.ids.join(" ");
+        const att = `<note type="attested">${witRefs(g.attested)}</note>`;
+        const lac = g.lacuna.length ? `<note type="lacuna">${witRefs(g.lacuna)}</note>` : "";
+        const cert = `<certainty target="${targets}" locus="value" degree="${g.p.toFixed(3)}"/>`;
+        const unc = `<note type="uncertainty">90% interval: [${g.lo.toFixed(3)}, ${g.hi.toFixed(3)}]</note>`;
+        return `<span target="${targets}">${att}${lac}${cert}${unc}</span>`;
+      });
+      bodyParts.push(`<spanGrp type="word-coverage">${spansXml.join("")}</spanGrp>`);
+    }
+
+    out.push(`          <ab n="${escXml(l.ref)}">${bodyParts.join(" ")}</ab>`);
   }
-  // the uncertainty: draw reliabilities from their distributions, a fixed number of times with a fixed seed
-  let seed = 0; for (const ch of R.id) seed = (seed * 31 + ch.charCodeAt(0)) >>> 0;
-  const u01 = rng(seed);
-  const a0 = W.map((_, m) => pri[m].strength * pri[m].mean + A[m]), b0 = W.map((_, m) => pri[m].strength * (1 - pri[m].mean) + (N[m] - A[m]));
-  const Q: Float64Array[] = []; for (let s2 = 0; s2 < S; s2++) { const row = new Float64Array(M); for (let m = 0; m < M; m++) row[m] = betaDraw(a0[m], b0[m], u01); Q.push(row); }
-  const r3 = (x: number) => Math.round(x * 1000) / 1000;
-  W.forEach((w, m) => {
-    const xs = Q.map((row) => row[m]);
-    w.reliability = { estimate: r3(q[m]), low: r3(quantile(xs, 0.05)), high: r3(quantile(xs, 0.95)), linesCompared: N[m], agreementShare: N[m] ? r3(A[m] / N[m]) : null, priorMean: r3(pri[m].mean), priorStrength: r3(pri[m].strength), dateRangeKnown: pri[m].rangeKnown };
-  });
-  const judge = (u: U) => {
-    const w = weights(u, late, q), per: number[][] = Array.from({ length: u.options + 1 }, () => []);
-    for (const row of Q) { const p = posterior(loglik(u, w, (m) => row[m])); p.forEach((x, i) => per[i].push(x)); }
-    const point = posterior(loglik(u, w, (m) => q[m]));
-    return per.map((xs, i) => ({ p: r3(quantile(xs, 0.5)), lo: r3(quantile(xs, 0.05)), hi: r3(quantile(xs, 0.95)), point: point[i] }));
+
+  if (curChapter) out.push("        </div>");
+  out.push("      </div>");
+  out.push("    </body>");
+  out.push("  </text>");
+  out.push("</TEI>");
+  out.push("");
+  return out.join("\n");
+}
+
+// ---------- main CLI ----------
+if (import.meta.main) {
+  const args = process.argv.slice(2);
+  let specId = "01M88AX3YW2HWVPGHTREFJS181";
+  let bookArg = "all";
+  let compilationId = "";
+  let skipSite = false;
+
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === "--compilation-id" && args[i + 1]) {
+      compilationId = args[++i];
+    } else if (args[i] === "--no-site") {
+      skipSite = true;
+    } else if (/^[0-9A-HJKMNP-TV-Z]{26}$/.test(args[i])) {
+      specId = args[i];
+    } else {
+      bookArg = args[i];
+    }
+  }
+  if (!compilationId) compilationId = generateUlid();
+
+  const specPath = `${ROOT}specifications/${specId}.yaml`;
+  if (!existsSync(specPath)) throw new Error(`Specification not found: ${specPath}`);
+  const specRaw = readFileSync(specPath, "utf8");
+  const spec = Bun.YAML.parse(specRaw) as Spec;
+  if (spec.id !== specId) throw new Error(`Specification ID mismatch: ${spec.id} !== ${specId}`);
+
+  const selectedTargets =
+    bookArg === "all" ? spec.targets : spec.targets.filter((t) => t.id === bookArg || t.name === bookArg);
+  if (!selectedTargets.length) throw new Error(`No target book matching "${bookArg}" in specification ${specId}`);
+
+  const outDir = `${ROOT}outputs/${specId}/${compilationId}`;
+  mkdirSync(outDir, { recursive: true });
+  const timestampIso = new Date().toISOString();
+  const git = gitInfo();
+
+  console.log(`Compiling under specification ${specId} -> outputs/${specId}/${compilationId}/ (${selectedTargets.length} target books)`);
+
+  // Build consolidated source map (handling SAME_MANUSCRIPT merges)
+  const sourceMap = new Map<string, SourceItem>();
+  for (const s of spec.sources) {
+    const canon = SAME_MANUSCRIPT[s.id] ?? s.id;
+    if (!sourceMap.has(canon) || s.id === canon) sourceMap.set(canon, s);
+  }
+
+  const manifestFile = `${outDir}/manifest.json`;
+  const oldManifest = existsSync(manifestFile) ? JSON.parse(readFileSync(manifestFile, "utf8")) : { books: [] };
+  const bookManifestMap = new Map<string, any>((oldManifest.books ?? []).map((b: any) => [b.id, b]));
+
+  // Process by section (Old Testament, then New Testament) so we only keep one section's parsed units in RAM at a time
+  const sections = [...new Set(selectedTargets.map((t) => t.section))];
+  const tStart = performance.now();
+
+  for (const section of sections) {
+    const secTargets = selectedTargets.filter((t) => t.section === section);
+    const secTargetIds = new Set(secTargets.map((t) => t.id));
+    const byBook = new Map<string, BookIndexEntry[]>();
+    for (const t of secTargets) byBook.set(t.id, []);
+    const scribalStats = new Map<string, SourceScribalStats>();
+
+    const tRead = performance.now();
+    let filesRead = 0;
+    for (const s of spec.sources) {
+      if (!(s.targets ?? []).some((tid) => secTargetIds.has(tid))) continue;
+      const siglum = SAME_MANUSCRIPT[s.id] ?? s.id;
+      const sc = scribalStats.get(siglum) ?? { corrections: 0, lacunae: 0, words: 0, files: [], provenances: new Set<string>() };
+      scribalStats.set(siglum, sc);
+      let fileIdx = sc.files.length;
+      for (const f of s.files) {
+        sc.provenances.add(f.provenance.name);
+        for (const relPath of f.paths) {
+          const absPath = `${ROOT}${relPath}`;
+          const { units, stats } = readTranscriptionFile(absPath, f.provenance.id);
+          filesRead++;
+          sc.corrections += stats.corrections;
+          sc.lacunae += stats.lacunae;
+          sc.words += stats.words;
+          sc.files.push(relPath);
+          const grouped = new Map<string, ParsedUnit[]>();
+          for (const u of units) {
+            if (!secTargetIds.has(u.book)) continue;
+            const arr = grouped.get(u.book) ?? [];
+            arr.push(u);
+            grouped.set(u.book, arr);
+          }
+          for (const [bId, bUnits] of grouped) {
+            byBook.get(bId)!.push({ siglum, file: relPath, fileIdx, units: bUnits });
+          }
+          fileIdx++;
+        }
+      }
+    }
+    console.log(`[${section}] Read ${filesRead} allowlisted XML files in ${((performance.now() - tRead) / 1000).toFixed(1)} s`);
+
+    for (const target of secTargets) {
+      const tBook = performance.now();
+      const entries = byBook.get(target.id)!;
+      const compiled = compileBook(target, entries, sourceMap, scribalStats);
+      const xml = renderTeiXml(specId, compilationId, timestampIso, git, target, compiled);
+      const fileName = `${target.id}.xml`;
+      writeFileSync(`${outDir}/${fileName}`, xml);
+      bookManifestMap.set(target.id, {
+        id: target.id,
+        name: target.name,
+        section: target.section,
+        number: target.number,
+        language: target.language,
+        file: fileName,
+        format: "TEI P5 XML",
+        sha256: sha(xml),
+        bytes: Buffer.byteLength(xml, "utf8"),
+        stats: compiled.stats,
+      });
+      console.log(
+        `  ${target.name} (${target.id}): ${compiled.stats.manuscripts} mss, ${compiled.stats.lines} lines, ${compiled.stats.words} words, ${compiled.stats.places} apps, mean conf ${compiled.stats.meanWordConfidence} (${((performance.now() - tBook) / 1000).toFixed(2)} s)`,
+      );
+    }
+  }
+
+  const targetOrder = spec.targets.map((t) => t.id);
+  const booksList = [...bookManifestMap.values()].sort(
+    (a, b) => targetOrder.indexOf(a.id) - targetOrder.indexOf(b.id),
+  );
+  const manifest = {
+    specification: {
+      id: specId,
+      file: `specifications/${specId}.yaml`,
+      sha256: sha(specRaw),
+      statement: `This compilation was produced under Open Lexis Transcription Specification ${specId}.`,
+    },
+    compilation: {
+      id: compilationId,
+      createdAt: timestampIso,
+      outputDirectory: `outputs/${specId}/${compilationId}/`,
+      outputFormat: "TEI P5 XML",
+    },
+    modelAttribution: {
+      ...MODEL_ATTRIBUTION,
+      deterministicEngine: {
+        ...MODEL_ATTRIBUTION.deterministicEngine,
+        ...git,
+      },
+    },
+    method: {
+      summary: "Bayesian Dawid-Skene latent-class model with composite likelihood dependence discounting, dating and scribal-correction priors, and 100-draw Beta posterior Monte Carlo uncertainty intervals.",
+      description: METHOD_DESCRIPTION,
+    },
+    totals: {
+      books: booksList.length,
+      lines: booksList.reduce((s, b) => s + b.stats.lines, 0),
+      words: booksList.reduce((s, b) => s + b.stats.words, 0),
+      variantPlaces: booksList.reduce((s, b) => s + b.stats.places, 0),
+      totalBytes: booksList.reduce((s, b) => s + b.bytes, 0),
+    },
+    books: booksList,
   };
-  const yearOf = (m: number) => W[m].year;
-  // apply: other words, then places (whose printed reading may change)
-  for (let li = 0; li < lines.length; li++) for (const u of byLine[li]) {
-    if (u.place !== undefined) continue;
-    const j = judge(u)[0];
-    for (const wi of u.words!) Object.assign(lines[li].words![wi], { c: j.p, lo: j.lo, hi: j.hi });
+  writeFileSync(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
+  console.log(`Done: ${booksList.length} books written to outputs/${specId}/${compilationId}/ in ${((performance.now() - tStart) / 1000).toFixed(1)} s`);
+
+  if (!skipSite) {
+    console.log("Rebuilding Astro site (site/www) to include the new compilation...");
+    const res = spawnSync("bun", ["run", "site"], { cwd: ROOT, stdio: "inherit" });
+    if (res.status !== 0) {
+      throw new Error(`Site rebuild failed with exit code ${res.status}`);
+    }
   }
-  const offset = new Map<number, number>();
-  for (let li = 0; li < lines.length; li++) for (const u of byLine[li]) {
-    if (u.place === undefined) continue;
-    const p = places[u.place], J = judge(u);
-    p.readings.forEach((r, ri) => { r.p = J[ri].p; r.lo = J[ri].lo; r.hi = J[ri].hi; });
-    p.lostEverywhere = { p: J[u.options].p, lo: J[u.options].lo, hi: J[u.options].hi };
-    const order = p.readings.map((r, ri) => ri).sort((x, y) => {
-      const X = p.readings[x], Y = p.readings[y], ex = Math.min(...[...X.witnesses, ...(X.partly ?? [])].map(yearOf)), ey = Math.min(...[...Y.witnesses, ...(Y.partly ?? [])].map(yearOf));
-      return (Math.abs(J[y].point - J[x].point) > 1e-9 ? J[y].point - J[x].point : 0) || ex - ey || (Y.witnesses.length + (Y.partly?.length ?? 0)) - (X.witnesses.length + (X.partly?.length ?? 0)) || (X.keys < Y.keys ? -1 : X.keys > Y.keys ? 1 : 0);
-    });
-    p.readings = order.map((i) => p.readings[i]);
-    const chosen = p.readings[0], runner = p.readings[1];
-    p.confidence = chosen.p!; p.weight = runner ? runner.p! : 0;
-    const A2 = chosen.keys ? chosen.keys.split(" ") : [];
-    // the printed words of the place
-    const l = lines[li], off = offset.get(li) ?? 0, at = p.at + off;
-    const ts = chosen.text === "—" ? [] : chosen.text.split(" ");
-    const nw: Wd[] = A2.map((k, j) => ({ t: ts[j] ?? k, k, c: chosen.p, lo: chosen.lo, hi: chosen.hi, p: p.id, x: chosen.xs[j] }));
-    const old = l.words!.slice(at, at + p.n), ar = (l as { aramaic?: string }).aramaic === "all" || old.some((w) => w.a);
-    for (const w of nw) if (ar) w.a = 1;
-    l.words!.splice(at, p.n, ...nw);
-    offset.set(li, off + nw.length - p.n);
-    p.at = at; p.n = nw.length;
-  }
-  // statistics again, from the model's choices
-  Object.assign(st, { places: 0, confidenceSum: 0 });
-  for (const p of places) if (!p.lost) { st.places++; st.confidenceSum += p.confidence; }
-  st.words = lines.reduce((s, l) => s + (l.words?.length ?? 0), 0);
 }

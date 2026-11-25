@@ -1,0 +1,40 @@
+{
+  "institution": {
+    "id": "zacynthius",
+    "name": "ITSEE, University of Birmingham (Codex Zacynthius project)",
+    "url": "https://edata.bham.ac.uk/496/"
+  },
+  "items": [
+    {
+      "id": "040",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Codex Zacynthius",
+      "shelfmark": "Cambridge, University Library, MS Add. 10062",
+      "century": "VIII",
+      "year": 750,
+      "yearFrom": 700,
+      "yearTo": 799,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the holder's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20040"
+        }
+      ],
+      "targets": [
+        "Luke"
+      ],
+      "paths": [
+        "src/zacynthius/040.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record)",
+      "sourceUrl": "https://edata.bham.ac.uk/496/",
+      "member": "Zacynthius-gospel_2-0.xml",
+      "lines": 359,
+      "words": 5901
+    }
+  ]
+}

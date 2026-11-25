@@ -56,20 +56,22 @@ export function unitRef(n: string): { book: number; lxx?: string; ref: string } 
 }
 export type Spell = { sacred: (w: string) => string; numeral: (letters: string) => string[] | undefined };
 const FIRST = (r: Node) => r.a.type === "orig" || r.a.type === "main-corr" || r.a.hand === "firsthand" || r.a.hand === "*" || r.a.hand === "firsthand*";
-/** Reads one transcription file into its line units in text order (several units can share a ref when a unit is split by a page). */
-export function teiUnits(xml: string, sp: Spell): TeiUnit[] {
+export type TeiStats = { corrections: number; lacunae: number; words: number };
+/** Reads one transcription file into its line units in text order, plus scribal correction and lacuna counts. */
+export function teiUnitsWithStats(xml: string, sp: Spell): { units: TeiUnit[]; stats: TeiStats } {
   const body = xml.replace(/<teiHeader[\s\S]*?<\/teiHeader>/, "");
   const root = parseXml(body), units: TeiUnit[] = [], CONT = new Set<TeiUnit>();
   let cur: TeiUnit | undefined, gap = false, page = true, last = "";
+  let corrections = 0, lacunae = 0, totalWords = 0;
   type W = { text: string; damaged: boolean; sacred: boolean; num: boolean };
   let word: W | undefined, pending: W | undefined;
   const emit = (x: W) => {
     if (!cur) return;
     let ws = [skel(x.text)];
     if (x.num) ws = sp.numeral(ws[0]) ?? ws; else if (x.sacred) ws = [sp.sacred(ws[0])];
-    if (x.damaged) { gap = true; return; }
+    if (x.damaged) { gap = true; lacunae++; return; }
     if (!ws[0]) return; // punctuation only
-    for (const [i, w] of ws.entries()) cur.words.push({ w, gap: i === 0 && gap });
+    for (const [i, w] of ws.entries()) { cur.words.push({ w, gap: i === 0 && gap }); totalWords++; }
     gap = false;
   };
   const endUnit = () => { if (cur) { cur.gapEnd = cur.gapEnd || gap; } };
@@ -80,7 +82,7 @@ export function teiUnits(xml: string, sp: Spell): TeiUnit[] {
       case "pb": if (!word) page = true; return;
       case "seg": if (!inRdg && !word) return; break;
       case "div": if (/^(incipit|explicit|inscriptio|subscriptio|title)/.test(n.a.type ?? "")) return; break;
-      case "gap": if (word) word.damaged = true; else gap = true; return;
+      case "gap": if (word) word.damaged = true; else { gap = true; lacunae++; } return;
       case "supplied": if (word) word.damaged = true; break;
       case "abbr": if (word && n.a.type === "nomSac") word.sacred = true; break;
       case "hi": if (word && n.a.rend === "ol2") word.sacred = true; break; // the Codex Sinaiticus Project's overline of a sacred name
@@ -109,6 +111,7 @@ export function teiUnits(xml: string, sp: Spell): TeiUnit[] {
       }
       case "app": {
         const rdgs = n.c.filter((x): x is Node => typeof x !== "string" && x.t === "rdg");
+        if (rdgs.length > 1) corrections++;
         const pick = rdgs.find(FIRST) ?? rdgs[0];
         if (pick) for (const x of pick.c) walk(x, true);
         return;
@@ -119,9 +122,6 @@ export function teiUnits(xml: string, sp: Spell): TeiUnit[] {
   walk(root, false);
   if (pending) emit(pending);
   endUnit();
-  // a unit split by a page (<ab part="F">) is one unit: its pieces are joined. A unit written again further on (a lemma
-  // repeated before its commentary, a lectionary reading, the other language of a bilingual page) is another copy of the
-  // same text: the copy with the most words is read (the first of equal ones).
   const occ: TeiUnit[] = [];
   for (const u of units) {
     const o = occ[occ.length - 1];
@@ -133,6 +133,10 @@ export function teiUnits(xml: string, sp: Spell): TeiUnit[] {
     const k = `${u.book} ${u.lxx ?? ""} ${u.ref}`, i = at.get(k);
     if (i === undefined) { at.set(k, out.length); out.push(u); } else if (u.words.length > out[i].words.length) out[i] = u;
   }
-  return out.filter((u) => u.words.length || u.gapEnd);
+  return { units: out.filter((u) => u.words.length || u.gapEnd), stats: { corrections, lacunae, words: totalWords } };
+}
+/** Reads one transcription file into its line units in text order (several units can share a ref when a unit is split by a page). */
+export function teiUnits(xml: string, sp: Spell): TeiUnit[] {
+  return teiUnitsWithStats(xml, sp).units;
 }
 export const OSIS_BOOKS = OSIS;

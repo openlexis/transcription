@@ -1,7 +1,6 @@
 # Method of this compiler
 
-This is the method that the program `scripts/compile.ts` chose for the goal in `SPECIFICATION.md`, and why. The
-specification does not prescribe it; another compiler may choose differently. Each compilation it writes includes this text.
+This is the statistical method implemented in `scripts/compile.ts` for specifications under `specifications/<specification-id>.yaml` (such as `specifications/01M88AX3YW2HWVPGHTREFJS181.yaml`). The specification does not prescribe a single model; another compiler may choose differently. Each compilation records its full method description in `manifest.json` and every book's `<teiHeader>`.
 
 ## Words used here
 
@@ -17,10 +16,7 @@ specification does not prescribe it; another compiler may choose differently. Ea
 
 ## 1. Which transcriptions are read
 
-For each book in `src/books.json`, every transcription in `src/manuscripts.json` that has at least one line of the book. Several transcriptions of one manuscript are one manuscript; for each line the one with the most
-words is read (a tie goes to the first by file path). Leaves of one manuscript that carry separate numbers are one manuscript
-(P64 with P67, P77 with P103). A word the transcriber marks as damaged, supplied or unread is treated as lost. Translations
-into other languages are not read.
+For each target book listed under `targets` in `specifications/<specification-id>.yaml`, only the primary XML files explicitly listed under `sources` in that specification are read (strict allowlist). Several transcriptions of one manuscript are consolidated into one witness; for each line the one with the most words is read (ties broken by specification listing order). Leaves of one manuscript that carry separate numbers are one witness (P64 with P67, P77 with P103). Only the first hand (original copyist) is read; damaged, supplied, or unread words are treated as lacunae. Translations into other languages are never read.
 
 ## 2. Lining up the words
 

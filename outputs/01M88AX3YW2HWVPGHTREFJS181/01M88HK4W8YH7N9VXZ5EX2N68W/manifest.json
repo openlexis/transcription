@@ -1,0 +1,1578 @@
+{
+  "specification": {
+    "id": "01M88AX3YW2HWVPGHTREFJS181",
+    "file": "specifications/01M88AX3YW2HWVPGHTREFJS181.yaml",
+    "sha256": "78dfc8e59695d9d0ce7b2e4413cb90f07344151f3e902572b0f058d5970928d3",
+    "statement": "This compilation was produced under Open Lexis Transcription Specification 01M88AX3YW2HWVPGHTREFJS181."
+  },
+  "compilation": {
+    "id": "01M88HK4W8YH7N9VXZ5EX2N68W",
+    "createdAt": "2026-11-25T05:06:58.590Z",
+    "outputDirectory": "outputs/01M88AX3YW2HWVPGHTREFJS181/01M88HK4W8YH7N9VXZ5EX2N68W/",
+    "outputFormat": "TEI P5 XML"
+  },
+  "modelAttribution": {
+    "provider": "Google DeepMind",
+    "modelFamily": "Gemini 4",
+    "modelName": "Gemini 4 Neon",
+    "modelId": "gemini-4-neon",
+    "effortLevel": "medium",
+    "harness": "T3 Code (Antigravity harness)",
+    "role": "Designed, configured, and executed the Bayesian Dawid-Skene latent-class compilation pipeline and TEI P5 encoder under specification 01M88AX3YW2HWVPGHTREFJS181.",
+    "deterministicEngine": {
+      "program": "scripts/compile.ts",
+      "runtime": "Bun 1.4.4",
+      "repository": "https://github.com/openlexis/transcription",
+      "commit": "a6fd2bbaae31834d29545202110a07670b06441a",
+      "codeSha256": "580b6bcc215b1ab1b09cdf69e251cec2691dc5b869d5ddc4ea2d4342af88171a"
+    }
+  },
+  "method": {
+    "summary": "Bayesian Dawid–Skene latent-class model with composite-likelihood dependence discounting, dating and scribal-correction priors, and 100-draw Beta posterior Monte Carlo uncertainty intervals.",
+    "description": "Bayesian Dawid–Skene latent-class model combining witness dating priors, scribal correction rates, dependence discounting for late copies, and line-level Expectation–Maximization to estimate originality probabilities and 90% credible intervals.",
+    "steps": [
+      {
+        "title": "1. Witness Consolidation",
+        "body": "Each target book is reconstructed strictly from the allowlisted primary transcriptions in specification 01M88AX3YW2HWVPGHTREFJS181. Multiple transcriptions of the same physical manuscript (including known split leaves P64/P67 and P77/P103) are consolidated into a single witness so no manuscript votes twice. Per verse, the transcription with the most readable words is selected (ties broken by specification order). Only the first hand (original copyist) is read."
+      },
+      {
+        "title": "2. Alignment & Spelling Normalization",
+        "body": "Witnesses are aligned oldest-first for each verse using Needleman–Wunsch global alignment. Purely orthographic habits—Greek itacism (ει/ι), doubled letters, movable ν, final σ of οὕτως/ἄχρις/μέχρις, expanded nomina sacra and letter-numerals, and Hebrew final forms and internal matres lectionis (ו/י)—are normalized during comparison so spelling conventions are not counted as substantive variants. The displayed spelling is taken from the oldest attesting witness."
+      },
+      {
+        "title": "3. Dating & Scribal Priors",
+        "body": "Before measuring agreement, each witness receives a Beta prior on its reliability (the probability it preserves the original reading at a given point). Expected reliability starts at 95% at the era of composition (400 BC for Old Testament, AD 100 for New Testament) and decays halfway toward 50% every 100 years, averaged uniformly across the documented date range. Wider date ranges produce weaker priors and wider uncertainty intervals. Manuscripts with at least 100 transcribed words and a scribal correction rate above 1% receive a bounded prior penalty of up to 8 percentage points (floor 50%)."
+      },
+      {
+        "title": "4. Dependence Discounting & EM Learning",
+        "body": "To prevent large clusters of late dependent copies from acting as a simple majority vote, witnesses dated within 400 years of composition receive full weight (1.0), while later witnesses sharing a reading are geometrically down-weighted in descending reliability order (1, 1/2, 1/4, …; total weight capped below 2). At each unit with K attested readings plus 10 unseen candidate readings, five rounds of Expectation–Maximization (EM) update each witness's Beta posterior from line-level mean agreement (excluding single-witness positions from self-confirmation)."
+      },
+      {
+        "title": "5. Uncertainty Intervals & Reading Selection",
+        "body": "One hundred deterministic Monte Carlo draws (seeded by book ID) are sampled from each witness's posterior Beta distribution. Every reading—selected, variant, and unattested-original—and every unanimous word records its posterior median probability and 90% credible interval (5th to 95th percentile). At each variant place, the reading with the highest point-estimate posterior probability is printed as the lemma (ties broken by earliest witness, witness count, then alphabetical order)."
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "Unanimous agreement",
+        "treatment": "All surviving non-lacunose witnesses agree on the word. It is printed directly without a variant apparatus, while its word-level witness list, probability, and 90% interval are still recorded and inspectable."
+      },
+      {
+        "scenario": "Late majority vs. early independent witnesses",
+        "treatment": "Witnesses within 400 years of composition receive full weight (1.0); later witnesses sharing a reading are geometrically down-weighted (1, 1/2, 1/4, …) so hundreds of late dependent copies never outweigh two independent early witnesses."
+      },
+      {
+        "scenario": "Physical damage, tattered scrolls & lacunae",
+        "treatment": "Damaged, editorially supplied, or missing words—and absent positions in scrolls, lectionaries, or catenae—are treated as lacunae rather than omissions. Physical deterioration never penalizes a witness's credibility, though missing text leaves local uncertainty."
+      },
+      {
+        "scenario": "Scribal corrections & copying errors",
+        "treatment": "Only the first hand is read. Frequent corrections (>1% across ≥100 words) apply a bounded prior reliability penalty (up to 8 percentage points), and copying errors further lower measured reliability through reduced agreement during EM."
+      },
+      {
+        "scenario": "Undated or partially documented manuscripts",
+        "treatment": "Missing metadata is never invented or imputed. Undated witnesses receive a weak diffuse prior (~50% reliability, strength 1) so measured agreement governs and uncertainty intervals remain wide when evidence is thin."
+      },
+      {
+        "scenario": "Orthographic spelling variations",
+        "treatment": "Routine scribal spelling habits (Greek itacism, movable ν, nomina sacra; Hebrew matres lectionis and final letter forms) are folded during alignment so they do not create artificial variants."
+      },
+      {
+        "scenario": "Singular readings (one witness differs)",
+        "treatment": "Every position where at least one non-lacunose witness differs is recorded as a TEI <app> so singular readings remain visible and auditable rather than hidden."
+      },
+      {
+        "scenario": "Unattested original reading",
+        "treatment": "Ten unseen candidate readings are included in the uniform prior at every variant place, allowing the model to report the probability that none of the surviving witnesses preserved the original text."
+      }
+    ],
+    "differenceCategories": [
+      {
+        "label": "substitution",
+        "meaning": "The variant reading has the same number of words as the selected reading, with one or more words replaced by different words."
+      },
+      {
+        "label": "omission",
+        "meaning": "The variant reading omits the word(s) present in the selected reading (recorded only for continuous-text witnesses; gaps in scrolls/lectionaries/catenae are lacunae)."
+      },
+      {
+        "label": "addition / insertion",
+        "meaning": "The variant reading contains one or more words where the selected reading has none."
+      },
+      {
+        "label": "word-order / transposition",
+        "meaning": "The variant reading contains the same words as the selected reading arranged in a different order."
+      },
+      {
+        "label": "substitution / length difference",
+        "meaning": "The variant reading differs in both wording and word count compared to the selected reading (for example, 13 words vs. 14 words in a coupled span)."
+      }
+    ],
+    "unknownsAndLimitations": [
+      "Place of writing (manuscript provenance) and scientific dating (e.g., radiocarbon) are undocumented for all manuscripts in the specification and are explicitly recorded as unknown in every witness entry without imputation.",
+      "The uniform error distribution across alternative readings does not model specific scribal error mechanisms (such as homoioteleuton or parablepsis).",
+      "Geometric down-weighting of late witnesses is a statistical proxy for a full stemma codicum rather than a reconstructed genealogical tree."
+    ]
+  },
+  "totals": {
+    "books": 66,
+    "lines": 31195,
+    "words": 444338,
+    "variantPlaces": 34634,
+    "totalBytes": 181239050
+  },
+  "books": [
+    {
+      "id": "Gen",
+      "name": "Genesis",
+      "section": "Old Testament",
+      "number": 1,
+      "language": "Hebrew and Aramaic",
+      "file": "Gen.xml",
+      "format": "TEI P5 XML",
+      "sha256": "10a73c379dab0fd5611abeb0b9e130f9ab04bde1824a5a48f5eca5c4fe36fef3",
+      "bytes": 3081529,
+      "stats": {
+        "manuscripts": 27,
+        "early": 25,
+        "lines": 1533,
+        "uncoveredLines": 0,
+        "words": 20613,
+        "places": 1111,
+        "meanPlaceConfidence": 0.5863,
+        "meanWordConfidence": 0.9764,
+        "meanManuscriptsPerLine": 2.2159
+      }
+    },
+    {
+      "id": "Exod",
+      "name": "Exodus",
+      "section": "Old Testament",
+      "number": 2,
+      "language": "Hebrew",
+      "file": "Exod.xml",
+      "format": "TEI P5 XML",
+      "sha256": "b41b6a97030ea6f81e971a52626c4d78e7c9eb65b0f48a7fea93cc9b0fada9a7",
+      "bytes": 3089047,
+      "stats": {
+        "manuscripts": 42,
+        "early": 40,
+        "lines": 1213,
+        "uncoveredLines": 0,
+        "words": 16741,
+        "places": 1304,
+        "meanPlaceConfidence": 0.6992,
+        "meanWordConfidence": 0.9718,
+        "meanManuscriptsPerLine": 2.8937
+      }
+    },
+    {
+      "id": "Lev",
+      "name": "Leviticus",
+      "section": "Old Testament",
+      "number": 3,
+      "language": "Hebrew",
+      "file": "Lev.xml",
+      "format": "TEI P5 XML",
+      "sha256": "1c881bb95389343d552544d6d44f28bb078c34ef5037b07b6b20b148138e0b10",
+      "bytes": 1792509,
+      "stats": {
+        "manuscripts": 19,
+        "early": 17,
+        "lines": 859,
+        "uncoveredLines": 0,
+        "words": 11951,
+        "places": 588,
+        "meanPlaceConfidence": 0.7058,
+        "meanWordConfidence": 0.9852,
+        "meanManuscriptsPerLine": 2.5681
+      }
+    },
+    {
+      "id": "Num",
+      "name": "Numbers",
+      "section": "Old Testament",
+      "number": 4,
+      "language": "Hebrew",
+      "file": "Num.xml",
+      "format": "TEI P5 XML",
+      "sha256": "d613caffc64391e203766df58bbb8e3b2363150f11f4322bbc6d5cf7996b36ca",
+      "bytes": 2452636,
+      "stats": {
+        "manuscripts": 13,
+        "early": 11,
+        "lines": 1289,
+        "uncoveredLines": 0,
+        "words": 16417,
+        "places": 824,
+        "meanPlaceConfidence": 0.5781,
+        "meanWordConfidence": 0.9762,
+        "meanManuscriptsPerLine": 2.3289
+      }
+    },
+    {
+      "id": "Deut",
+      "name": "Deuteronomy",
+      "section": "Old Testament",
+      "number": 5,
+      "language": "Hebrew",
+      "file": "Deut.xml",
+      "format": "TEI P5 XML",
+      "sha256": "8188168ec9adf1c99fc4a9789565a5789646ff54ce115877cd77d2ad3633781e",
+      "bytes": 2832179,
+      "stats": {
+        "manuscripts": 65,
+        "early": 62,
+        "lines": 959,
+        "uncoveredLines": 0,
+        "words": 14313,
+        "places": 1258,
+        "meanPlaceConfidence": 0.7584,
+        "meanWordConfidence": 0.9753,
+        "meanManuscriptsPerLine": 3.269
+      }
+    },
+    {
+      "id": "Josh",
+      "name": "Joshua",
+      "section": "Old Testament",
+      "number": 6,
+      "language": "Hebrew",
+      "file": "Josh.xml",
+      "format": "TEI P5 XML",
+      "sha256": "f928dba118d1c509034e02eb2f6603e2495e608b4cf834631cdf79781db20b12",
+      "bytes": 1050623,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 659,
+        "uncoveredLines": 0,
+        "words": 10065,
+        "places": 20,
+        "meanPlaceConfidence": 0.57,
+        "meanWordConfidence": 0.924,
+        "meanManuscriptsPerLine": 1.085
+      }
+    },
+    {
+      "id": "Judg",
+      "name": "Judges",
+      "section": "Old Testament",
+      "number": 7,
+      "language": "Hebrew",
+      "file": "Judg.xml",
+      "format": "TEI P5 XML",
+      "sha256": "bf679ac93ec6a82b80b367ed14944313f7fb431ebc2fde815f7cafab6f71f62c",
+      "bytes": 1017521,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 618,
+        "uncoveredLines": 0,
+        "words": 9885,
+        "places": 12,
+        "meanPlaceConfidence": 0.6002,
+        "meanWordConfidence": 0.9285,
+        "meanManuscriptsPerLine": 1.0777
+      }
+    },
+    {
+      "id": "1Sam",
+      "name": "1 Samuel",
+      "section": "Old Testament",
+      "number": 8,
+      "language": "Hebrew",
+      "file": "1Sam.xml",
+      "format": "TEI P5 XML",
+      "sha256": "78e16635c6faf2acb7d40f0e83bf9918e927d4f326e4983adf614832c1f84167",
+      "bytes": 1511311,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 811,
+        "uncoveredLines": 0,
+        "words": 13336,
+        "places": 150,
+        "meanPlaceConfidence": 0.5466,
+        "meanWordConfidence": 0.9033,
+        "meanManuscriptsPerLine": 1.312
+      }
+    },
+    {
+      "id": "2Sam",
+      "name": "2 Samuel",
+      "section": "Old Testament",
+      "number": 9,
+      "language": "Hebrew",
+      "file": "2Sam.xml",
+      "format": "TEI P5 XML",
+      "sha256": "5e0a80435d53f12a7f5b0e609db824ed5321c18710962a8cc0ee50c4b63ea29a",
+      "bytes": 1305002,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 695,
+        "uncoveredLines": 0,
+        "words": 11038,
+        "places": 175,
+        "meanPlaceConfidence": 0.5984,
+        "meanWordConfidence": 0.9205,
+        "meanManuscriptsPerLine": 1.4129
+      }
+    },
+    {
+      "id": "1Kgs",
+      "name": "1 Kings",
+      "section": "Old Testament",
+      "number": 10,
+      "language": "Hebrew",
+      "file": "1Kgs.xml",
+      "format": "TEI P5 XML",
+      "sha256": "9049fd67ad514e0b151448a11b7b71073151df8bc298b51e5fb8b87dbaabfcd1",
+      "bytes": 1348958,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 817,
+        "uncoveredLines": 0,
+        "words": 13140,
+        "places": 9,
+        "meanPlaceConfidence": 0.6306,
+        "meanWordConfidence": 0.9344,
+        "meanManuscriptsPerLine": 1.0575
+      }
+    },
+    {
+      "id": "2Kgs",
+      "name": "2 Kings",
+      "section": "Old Testament",
+      "number": 11,
+      "language": "Hebrew",
+      "file": "2Kgs.xml",
+      "format": "TEI P5 XML",
+      "sha256": "a0ec4565625e49232393b2b96cb41894f93edaa5e66124baf862aac693e212b6",
+      "bytes": 1240283,
+      "stats": {
+        "manuscripts": 2,
+        "early": 1,
+        "lines": 719,
+        "uncoveredLines": 0,
+        "words": 12280,
+        "places": 7,
+        "meanPlaceConfidence": 0.746,
+        "meanWordConfidence": 0.7774,
+        "meanManuscriptsPerLine": 1.0181
+      }
+    },
+    {
+      "id": "Isa",
+      "name": "Isaiah",
+      "section": "Old Testament",
+      "number": 12,
+      "language": "Hebrew",
+      "file": "Isa.xml",
+      "format": "TEI P5 XML",
+      "sha256": "e2d7ac2cf8a63b8f95df9eb802b3fe1662d72bcfb8ab929b43f395cc7a6987bb",
+      "bytes": 4102384,
+      "stats": {
+        "manuscripts": 23,
+        "early": 22,
+        "lines": 1291,
+        "uncoveredLines": 0,
+        "words": 16937,
+        "places": 2649,
+        "meanPlaceConfidence": 0.8182,
+        "meanWordConfidence": 0.9678,
+        "meanManuscriptsPerLine": 2.8885
+      }
+    },
+    {
+      "id": "Jer",
+      "name": "Jeremiah",
+      "section": "Old Testament",
+      "number": 13,
+      "language": "Hebrew and Aramaic",
+      "file": "Jer.xml",
+      "format": "TEI P5 XML",
+      "sha256": "0a9857b9f4398f613a80555999601195bea12bca860b7c31eda5fba136cbc4a9",
+      "bytes": 2289980,
+      "stats": {
+        "manuscripts": 7,
+        "early": 6,
+        "lines": 1364,
+        "uncoveredLines": 0,
+        "words": 21835,
+        "places": 88,
+        "meanPlaceConfidence": 0.859,
+        "meanWordConfidence": 0.9814,
+        "meanManuscriptsPerLine": 1.1877
+      }
+    },
+    {
+      "id": "Ezek",
+      "name": "Ezekiel",
+      "section": "Old Testament",
+      "number": 14,
+      "language": "Hebrew",
+      "file": "Ezek.xml",
+      "format": "TEI P5 XML",
+      "sha256": "6ed38d5f24d9ba1e380eccf4c050d7ef8d1a4b20ffac4029052c3885eba37da4",
+      "bytes": 1988531,
+      "stats": {
+        "manuscripts": 8,
+        "early": 7,
+        "lines": 1273,
+        "uncoveredLines": 0,
+        "words": 18730,
+        "places": 14,
+        "meanPlaceConfidence": 0.6148,
+        "meanWordConfidence": 0.9704,
+        "meanManuscriptsPerLine": 1.0872
+      }
+    },
+    {
+      "id": "Hos",
+      "name": "Hosea",
+      "section": "Old Testament",
+      "number": 15,
+      "language": "Hebrew",
+      "file": "Hos.xml",
+      "format": "TEI P5 XML",
+      "sha256": "3af3e80f382f5ecd5a3c4680b88bfa0fdcd534e0f1bb6bd0a2e0fb8c4f223dc7",
+      "bytes": 287607,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 197,
+        "uncoveredLines": 0,
+        "words": 2381,
+        "places": 29,
+        "meanPlaceConfidence": 0.657,
+        "meanWordConfidence": 0.9298,
+        "meanManuscriptsPerLine": 1.4721
+      }
+    },
+    {
+      "id": "Joel",
+      "name": "Joel",
+      "section": "Old Testament",
+      "number": 16,
+      "language": "Hebrew",
+      "file": "Joel.xml",
+      "format": "TEI P5 XML",
+      "sha256": "4f476d98cfec2b602dde7f7e3b3b4c87fedb1e8444d708af0b9d61c08a040904",
+      "bytes": 148229,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 73,
+        "uncoveredLines": 0,
+        "words": 957,
+        "places": 38,
+        "meanPlaceConfidence": 0.9487,
+        "meanWordConfidence": 0.9737,
+        "meanManuscriptsPerLine": 2.0959
+      }
+    },
+    {
+      "id": "Amos",
+      "name": "Amos",
+      "section": "Old Testament",
+      "number": 17,
+      "language": "Hebrew",
+      "file": "Amos.xml",
+      "format": "TEI P5 XML",
+      "sha256": "5b6760f60cf89f7e6580910e89684714e678c3f4fc5080c3ad752c08d009fda6",
+      "bytes": 274559,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 146,
+        "uncoveredLines": 0,
+        "words": 2042,
+        "places": 47,
+        "meanPlaceConfidence": 0.923,
+        "meanWordConfidence": 0.9734,
+        "meanManuscriptsPerLine": 1.9247
+      }
+    },
+    {
+      "id": "Obad",
+      "name": "Obadiah",
+      "section": "Old Testament",
+      "number": 18,
+      "language": "Hebrew",
+      "file": "Obad.xml",
+      "format": "TEI P5 XML",
+      "sha256": "689cc7b53561b5332524251ec843ee0949f6c274f01da4386f706a740528698f",
+      "bytes": 49623,
+      "stats": {
+        "manuscripts": 3,
+        "early": 2,
+        "lines": 21,
+        "uncoveredLines": 0,
+        "words": 291,
+        "places": 8,
+        "meanPlaceConfidence": 0.9393,
+        "meanWordConfidence": 0.9789,
+        "meanManuscriptsPerLine": 2.3333
+      }
+    },
+    {
+      "id": "Jonah",
+      "name": "Jonah",
+      "section": "Old Testament",
+      "number": 19,
+      "language": "Hebrew",
+      "file": "Jonah.xml",
+      "format": "TEI P5 XML",
+      "sha256": "6bdbb3bb0d5dc547935663cd2b95d6215bf40ab1ef236f967af3bdd2664ba7ee",
+      "bytes": 129832,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 48,
+        "uncoveredLines": 0,
+        "words": 688,
+        "places": 40,
+        "meanPlaceConfidence": 0.9295,
+        "meanWordConfidence": 0.9831,
+        "meanManuscriptsPerLine": 2.9792
+      }
+    },
+    {
+      "id": "Mic",
+      "name": "Micah",
+      "section": "Old Testament",
+      "number": 20,
+      "language": "Hebrew",
+      "file": "Mic.xml",
+      "format": "TEI P5 XML",
+      "sha256": "6b468d764c37b51dafb5d1f27efb1dec53dbb439bc929ba77b4dbf9a49a83185",
+      "bytes": 173346,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 105,
+        "uncoveredLines": 0,
+        "words": 1396,
+        "places": 12,
+        "meanPlaceConfidence": 0.9068,
+        "meanWordConfidence": 0.9854,
+        "meanManuscriptsPerLine": 2.0286
+      }
+    },
+    {
+      "id": "Nah",
+      "name": "Nahum",
+      "section": "Old Testament",
+      "number": 21,
+      "language": "Hebrew",
+      "file": "Nah.xml",
+      "format": "TEI P5 XML",
+      "sha256": "823f9f66fccdde7bfe51ec85f30588b186cdd349af718b986a42a19feae86b11",
+      "bytes": 78290,
+      "stats": {
+        "manuscripts": 3,
+        "early": 2,
+        "lines": 47,
+        "uncoveredLines": 0,
+        "words": 558,
+        "places": 5,
+        "meanPlaceConfidence": 0.8664,
+        "meanWordConfidence": 0.973,
+        "meanManuscriptsPerLine": 2.0851
+      }
+    },
+    {
+      "id": "Hab",
+      "name": "Habakkuk",
+      "section": "Old Testament",
+      "number": 22,
+      "language": "Hebrew",
+      "file": "Hab.xml",
+      "format": "TEI P5 XML",
+      "sha256": "f9d54c8095c315d779b8bece9babf61d24c2b10480570815adcf6d0419a5e3be",
+      "bytes": 84670,
+      "stats": {
+        "manuscripts": 3,
+        "early": 2,
+        "lines": 56,
+        "uncoveredLines": 0,
+        "words": 671,
+        "places": 2,
+        "meanPlaceConfidence": 0.901,
+        "meanWordConfidence": 0.9747,
+        "meanManuscriptsPerLine": 1.7321
+      }
+    },
+    {
+      "id": "Zeph",
+      "name": "Zephaniah",
+      "section": "Old Testament",
+      "number": 23,
+      "language": "Hebrew",
+      "file": "Zeph.xml",
+      "format": "TEI P5 XML",
+      "sha256": "fa239a15c9cf75c40e8e70a837a019a0249d00b8d713902c60e5fc217c8678b9",
+      "bytes": 104048,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 53,
+        "uncoveredLines": 0,
+        "words": 767,
+        "places": 10,
+        "meanPlaceConfidence": 0.861,
+        "meanWordConfidence": 0.9651,
+        "meanManuscriptsPerLine": 1.9623
+      }
+    },
+    {
+      "id": "Hag",
+      "name": "Haggai",
+      "section": "Old Testament",
+      "number": 24,
+      "language": "Hebrew",
+      "file": "Hag.xml",
+      "format": "TEI P5 XML",
+      "sha256": "bd1a0b47e23a37373090a9733ec5d179c1db1e40b41fa21b775f1bf694de2077",
+      "bytes": 80670,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 38,
+        "uncoveredLines": 0,
+        "words": 600,
+        "places": 8,
+        "meanPlaceConfidence": 0.9826,
+        "meanWordConfidence": 0.9603,
+        "meanManuscriptsPerLine": 2
+      }
+    },
+    {
+      "id": "Zech",
+      "name": "Zechariah",
+      "section": "Old Testament",
+      "number": 25,
+      "language": "Hebrew",
+      "file": "Zech.xml",
+      "format": "TEI P5 XML",
+      "sha256": "c9e4d8911f0d6aea56ca7017c46ff0b315423dc2c271b4cb8065cdad051abed0",
+      "bytes": 335710,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 211,
+        "uncoveredLines": 0,
+        "words": 3128,
+        "places": 7,
+        "meanPlaceConfidence": 0.603,
+        "meanWordConfidence": 0.8962,
+        "meanManuscriptsPerLine": 1.1943
+      }
+    },
+    {
+      "id": "Mal",
+      "name": "Malachi",
+      "section": "Old Testament",
+      "number": 26,
+      "language": "Hebrew",
+      "file": "Mal.xml",
+      "format": "TEI P5 XML",
+      "sha256": "88a95c52a4473f15058c7b899474564bfe08d914340da8409a64c6b0217b039a",
+      "bytes": 113988,
+      "stats": {
+        "manuscripts": 3,
+        "early": 2,
+        "lines": 55,
+        "uncoveredLines": 0,
+        "words": 877,
+        "places": 23,
+        "meanPlaceConfidence": 0.7412,
+        "meanWordConfidence": 0.899,
+        "meanManuscriptsPerLine": 1.5636
+      }
+    },
+    {
+      "id": "1Chr",
+      "name": "1 Chronicles",
+      "section": "Old Testament",
+      "number": 27,
+      "language": "Hebrew",
+      "file": "1Chr.xml",
+      "format": "TEI P5 XML",
+      "sha256": "ede88307822039e64e8747701895cdab0a95fef4d99146201245d8f8a4da0e98",
+      "bytes": 1156120,
+      "stats": {
+        "manuscripts": 1,
+        "early": 0,
+        "lines": 943,
+        "uncoveredLines": 0,
+        "words": 10745,
+        "places": 0,
+        "meanPlaceConfidence": 1,
+        "meanWordConfidence": 0.527,
+        "meanManuscriptsPerLine": 1
+      }
+    },
+    {
+      "id": "2Chr",
+      "name": "2 Chronicles",
+      "section": "Old Testament",
+      "number": 28,
+      "language": "Hebrew",
+      "file": "2Chr.xml",
+      "format": "TEI P5 XML",
+      "sha256": "fe58959afe1f05a39911ebaae12526f354219a755a16a1d80865726ae96d22ac",
+      "bytes": 1362435,
+      "stats": {
+        "manuscripts": 2,
+        "early": 1,
+        "lines": 822,
+        "uncoveredLines": 0,
+        "words": 13312,
+        "places": 2,
+        "meanPlaceConfidence": 0.697,
+        "meanWordConfidence": 0.6903,
+        "meanManuscriptsPerLine": 1.0049
+      }
+    },
+    {
+      "id": "Ps",
+      "name": "Psalms",
+      "section": "Old Testament",
+      "number": 29,
+      "language": "Hebrew",
+      "file": "Ps.xml",
+      "format": "TEI P5 XML",
+      "sha256": "d03d8c9bcc03b4f2cca86531a548e757910c1aeaa74580b66f5a3c4a52a796ff",
+      "bytes": 3017853,
+      "stats": {
+        "manuscripts": 39,
+        "early": 38,
+        "lines": 2527,
+        "uncoveredLines": 0,
+        "words": 19604,
+        "places": 728,
+        "meanPlaceConfidence": 0.9039,
+        "meanWordConfidence": 0.9781,
+        "meanManuscriptsPerLine": 1.4943
+      }
+    },
+    {
+      "id": "Job",
+      "name": "Job",
+      "section": "Old Testament",
+      "number": 30,
+      "language": "Hebrew",
+      "file": "Job.xml",
+      "format": "TEI P5 XML",
+      "sha256": "eb1bd859e4ce7baff4b4864380c201e8686dbc18ec9f47861b05dc4ee3b3ff58",
+      "bytes": 975707,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 1070,
+        "uncoveredLines": 0,
+        "words": 8343,
+        "places": 18,
+        "meanPlaceConfidence": 0.6663,
+        "meanWordConfidence": 0.9267,
+        "meanManuscriptsPerLine": 1.0551
+      }
+    },
+    {
+      "id": "Prov",
+      "name": "Proverbs",
+      "section": "Old Testament",
+      "number": 31,
+      "language": "Hebrew",
+      "file": "Prov.xml",
+      "format": "TEI P5 XML",
+      "sha256": "f3eeb172779783fbff0346d44bfa3566bb4247f847fcb65af3c2c698b1c6be17",
+      "bytes": 825715,
+      "stats": {
+        "manuscripts": 4,
+        "early": 3,
+        "lines": 915,
+        "uncoveredLines": 0,
+        "words": 6915,
+        "places": 3,
+        "meanPlaceConfidence": 0.664,
+        "meanWordConfidence": 0.9536,
+        "meanManuscriptsPerLine": 1.0404
+      }
+    },
+    {
+      "id": "Ruth",
+      "name": "Ruth",
+      "section": "Old Testament",
+      "number": 32,
+      "language": "Hebrew",
+      "file": "Ruth.xml",
+      "format": "TEI P5 XML",
+      "sha256": "10f17987477c07c9ff7ae8211fe3a83514bd77dbdbefb00af3beccf61b5c73bf",
+      "bytes": 154795,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 85,
+        "uncoveredLines": 0,
+        "words": 1294,
+        "places": 12,
+        "meanPlaceConfidence": 0.7673,
+        "meanWordConfidence": 0.9525,
+        "meanManuscriptsPerLine": 1.4706
+      }
+    },
+    {
+      "id": "Song",
+      "name": "Song of Songs",
+      "section": "Old Testament",
+      "number": 33,
+      "language": "Hebrew",
+      "file": "Song.xml",
+      "format": "TEI P5 XML",
+      "sha256": "cf68ba32e9d021c2e3c0ebc270c87db8c69ba2a27442d4c5f6903b6f93b6564a",
+      "bytes": 178706,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 117,
+        "uncoveredLines": 0,
+        "words": 1251,
+        "places": 36,
+        "meanPlaceConfidence": 0.6797,
+        "meanWordConfidence": 0.9073,
+        "meanManuscriptsPerLine": 1.4188
+      }
+    },
+    {
+      "id": "Eccl",
+      "name": "Ecclesiastes",
+      "section": "Old Testament",
+      "number": 34,
+      "language": "Hebrew",
+      "file": "Eccl.xml",
+      "format": "TEI P5 XML",
+      "sha256": "5643ea370bc4d97fe8f16c380b4235558d3c20505ded22a445947d2dc191e9ff",
+      "bytes": 327039,
+      "stats": {
+        "manuscripts": 3,
+        "early": 2,
+        "lines": 222,
+        "uncoveredLines": 0,
+        "words": 2990,
+        "places": 20,
+        "meanPlaceConfidence": 0.4889,
+        "meanWordConfidence": 0.8167,
+        "meanManuscriptsPerLine": 1.1306
+      }
+    },
+    {
+      "id": "Lam",
+      "name": "Lamentations",
+      "section": "Old Testament",
+      "number": 35,
+      "language": "Hebrew",
+      "file": "Lam.xml",
+      "format": "TEI P5 XML",
+      "sha256": "3e290cf24bc0866708ac5f9aa81e61bff8e9d3f3c5d784c5c3d6b483809db32e",
+      "bytes": 214052,
+      "stats": {
+        "manuscripts": 5,
+        "early": 4,
+        "lines": 154,
+        "uncoveredLines": 0,
+        "words": 1544,
+        "places": 45,
+        "meanPlaceConfidence": 0.6484,
+        "meanWordConfidence": 0.9238,
+        "meanManuscriptsPerLine": 1.3377
+      }
+    },
+    {
+      "id": "Esth",
+      "name": "Esther",
+      "section": "Old Testament",
+      "number": 36,
+      "language": "Hebrew",
+      "file": "Esth.xml",
+      "format": "TEI P5 XML",
+      "sha256": "d6689627b4aace163e33effd7528860e782b6f5fb9f5bc61df1896410ff6f0f5",
+      "bytes": 299147,
+      "stats": {
+        "manuscripts": 1,
+        "early": 0,
+        "lines": 167,
+        "uncoveredLines": 0,
+        "words": 3045,
+        "places": 0,
+        "meanPlaceConfidence": 1,
+        "meanWordConfidence": 0.526,
+        "meanManuscriptsPerLine": 1
+      }
+    },
+    {
+      "id": "Dan",
+      "name": "Daniel",
+      "section": "Old Testament",
+      "number": 37,
+      "language": "Hebrew and Aramaic",
+      "file": "Dan.xml",
+      "format": "TEI P5 XML",
+      "sha256": "7433945b18eb77baf0230e4c2d2f1369fe070e62ef6f6ff319c326f0a1accee6",
+      "bytes": 767645,
+      "stats": {
+        "manuscripts": 9,
+        "early": 8,
+        "lines": 357,
+        "uncoveredLines": 0,
+        "words": 5919,
+        "places": 127,
+        "meanPlaceConfidence": 0.7703,
+        "meanWordConfidence": 0.9558,
+        "meanManuscriptsPerLine": 1.5098
+      }
+    },
+    {
+      "id": "Ezra",
+      "name": "Ezra",
+      "section": "Old Testament",
+      "number": 38,
+      "language": "Hebrew and Aramaic",
+      "file": "Ezra.xml",
+      "format": "TEI P5 XML",
+      "sha256": "b876961ad13e0046b797004f1dd71d98a5bce82a5f8d71c6abd686cfa95ca98f",
+      "bytes": 414788,
+      "stats": {
+        "manuscripts": 2,
+        "early": 1,
+        "lines": 280,
+        "uncoveredLines": 0,
+        "words": 3753,
+        "places": 5,
+        "meanPlaceConfidence": 0.702,
+        "meanWordConfidence": 0.7959,
+        "meanManuscriptsPerLine": 1.0393
+      }
+    },
+    {
+      "id": "Neh",
+      "name": "Nehemiah",
+      "section": "Old Testament",
+      "number": 39,
+      "language": "Hebrew",
+      "file": "Neh.xml",
+      "format": "TEI P5 XML",
+      "sha256": "efd8f30728622efae775dd582f6e6fadce1b8699698765ab08d2bd68ce1b7784",
+      "bytes": 539414,
+      "stats": {
+        "manuscripts": 1,
+        "early": 0,
+        "lines": 405,
+        "uncoveredLines": 0,
+        "words": 5312,
+        "places": 0,
+        "meanPlaceConfidence": 1,
+        "meanWordConfidence": 0.464,
+        "meanManuscriptsPerLine": 1
+      }
+    },
+    {
+      "id": "Matt",
+      "name": "Matthew",
+      "section": "New Testament",
+      "number": 1,
+      "language": "Greek",
+      "file": "Matt.xml",
+      "format": "TEI P5 XML",
+      "sha256": "d0b32ffede46ef5ac09399db1959e5f7627b5af01f30a8a048fe13e3a91a5af2",
+      "bytes": 25669008,
+      "stats": {
+        "manuscripts": 193,
+        "early": 33,
+        "lines": 1071,
+        "uncoveredLines": 0,
+        "words": 18536,
+        "places": 3827,
+        "meanPlaceConfidence": 0.9749,
+        "meanWordConfidence": 0.944,
+        "meanManuscriptsPerLine": 126.7068
+      }
+    },
+    {
+      "id": "Mark",
+      "name": "Mark",
+      "section": "New Testament",
+      "number": 2,
+      "language": "Greek",
+      "file": "Mark.xml",
+      "format": "TEI P5 XML",
+      "sha256": "23fef745de4edc7c9a7514b7cb8b925eba7f8a20a2e7c81a68c3db633f64d978",
+      "bytes": 21510680,
+      "stats": {
+        "manuscripts": 233,
+        "early": 17,
+        "lines": 678,
+        "uncoveredLines": 0,
+        "words": 11446,
+        "places": 1340,
+        "meanPlaceConfidence": 0.9242,
+        "meanWordConfidence": 0.8708,
+        "meanManuscriptsPerLine": 187.0605
+      }
+    },
+    {
+      "id": "Luke",
+      "name": "Luke",
+      "section": "New Testament",
+      "number": 3,
+      "language": "Greek",
+      "file": "Luke.xml",
+      "format": "TEI P5 XML",
+      "sha256": "8fb977a48b65c19d8157d6918419e7ef831ad528d1d39f9944c18d28f432cf90",
+      "bytes": 9326981,
+      "stats": {
+        "manuscripts": 47,
+        "early": 19,
+        "lines": 1151,
+        "uncoveredLines": 0,
+        "words": 19626,
+        "places": 4768,
+        "meanPlaceConfidence": 0.9825,
+        "meanWordConfidence": 0.9804,
+        "meanManuscriptsPerLine": 16.4353
+      }
+    },
+    {
+      "id": "John",
+      "name": "John",
+      "section": "New Testament",
+      "number": 4,
+      "language": "Greek",
+      "file": "John.xml",
+      "format": "TEI P5 XML",
+      "sha256": "7dd31b31f0e29a5a9e012db8f704950ebfa9852bba5ebfced4956ce15d5a93ee",
+      "bytes": 23750605,
+      "stats": {
+        "manuscripts": 251,
+        "early": 39,
+        "lines": 879,
+        "uncoveredLines": 0,
+        "words": 15510,
+        "places": 2972,
+        "meanPlaceConfidence": 0.9694,
+        "meanWordConfidence": 0.9197,
+        "meanManuscriptsPerLine": 162.967
+      }
+    },
+    {
+      "id": "Acts",
+      "name": "Acts",
+      "section": "New Testament",
+      "number": 5,
+      "language": "Greek",
+      "file": "Acts.xml",
+      "format": "TEI P5 XML",
+      "sha256": "9391f444ff8eec3ab68cecd0d3823d4669ed5e65adb0dd7fcdce4b7d7848cca3",
+      "bytes": 25624890,
+      "stats": {
+        "manuscripts": 167,
+        "early": 28,
+        "lines": 1010,
+        "uncoveredLines": 4,
+        "words": 18440,
+        "places": 3557,
+        "meanPlaceConfidence": 0.9759,
+        "meanWordConfidence": 0.9412,
+        "meanManuscriptsPerLine": 122.2922
+      }
+    },
+    {
+      "id": "Rom",
+      "name": "Romans",
+      "section": "New Testament",
+      "number": 6,
+      "language": "Greek",
+      "file": "Rom.xml",
+      "format": "TEI P5 XML",
+      "sha256": "86ae3539ad00c422bc9e3c36393cad576e337505994ec7e37e85e51b48d449bc",
+      "bytes": 7980692,
+      "stats": {
+        "manuscripts": 174,
+        "early": 18,
+        "lines": 448,
+        "uncoveredLines": 0,
+        "words": 7365,
+        "places": 840,
+        "meanPlaceConfidence": 0.9763,
+        "meanWordConfidence": 0.95,
+        "meanManuscriptsPerLine": 132.779
+      }
+    },
+    {
+      "id": "1Cor",
+      "name": "1 Corinthians",
+      "section": "New Testament",
+      "number": 7,
+      "language": "Greek",
+      "file": "1Cor.xml",
+      "format": "TEI P5 XML",
+      "sha256": "e44da761bb0f4681975b030efbd675513cf10c5d1f5aa3302726fab4da588bd6",
+      "bytes": 1809499,
+      "stats": {
+        "manuscripts": 19,
+        "early": 11,
+        "lines": 437,
+        "uncoveredLines": 0,
+        "words": 6810,
+        "places": 986,
+        "meanPlaceConfidence": 0.9806,
+        "meanWordConfidence": 0.9833,
+        "meanManuscriptsPerLine": 7.0664
+      }
+    },
+    {
+      "id": "2Cor",
+      "name": "2 Corinthians",
+      "section": "New Testament",
+      "number": 8,
+      "language": "Greek",
+      "file": "2Cor.xml",
+      "format": "TEI P5 XML",
+      "sha256": "e024048ffaa6d75ddc183d8ef19ac1ca74749d69c5f48ab519940702c258e779",
+      "bytes": 1112919,
+      "stats": {
+        "manuscripts": 15,
+        "early": 6,
+        "lines": 256,
+        "uncoveredLines": 0,
+        "words": 4462,
+        "places": 644,
+        "meanPlaceConfidence": 0.978,
+        "meanWordConfidence": 0.9923,
+        "meanManuscriptsPerLine": 6.1016
+      }
+    },
+    {
+      "id": "Gal",
+      "name": "Galatians",
+      "section": "New Testament",
+      "number": 9,
+      "language": "Greek",
+      "file": "Gal.xml",
+      "format": "TEI P5 XML",
+      "sha256": "fffb3e7c633b50de23cae0cf13e0103e0ec9fea28f7c1c585e970259d2d2701a",
+      "bytes": 3899861,
+      "stats": {
+        "manuscripts": 217,
+        "early": 14,
+        "lines": 150,
+        "uncoveredLines": 1,
+        "words": 2236,
+        "places": 356,
+        "meanPlaceConfidence": 0.976,
+        "meanWordConfidence": 0.9368,
+        "meanManuscriptsPerLine": 200.8456
+      }
+    },
+    {
+      "id": "Eph",
+      "name": "Ephesians",
+      "section": "New Testament",
+      "number": 10,
+      "language": "Greek",
+      "file": "Eph.xml",
+      "format": "TEI P5 XML",
+      "sha256": "d38fbf61e7337469a78afae2c0dc6f2d85ae43f1cfcda1feff273be45d7c9a8e",
+      "bytes": 3341117,
+      "stats": {
+        "manuscripts": 175,
+        "early": 11,
+        "lines": 155,
+        "uncoveredLines": 0,
+        "words": 2420,
+        "places": 390,
+        "meanPlaceConfidence": 0.9761,
+        "meanWordConfidence": 0.9413,
+        "meanManuscriptsPerLine": 153.5097
+      }
+    },
+    {
+      "id": "Phil",
+      "name": "Philippians",
+      "section": "New Testament",
+      "number": 11,
+      "language": "Greek",
+      "file": "Phil.xml",
+      "format": "TEI P5 XML",
+      "sha256": "a2b50807556411b0592d0ced412961ffc4a937a56ae1a72385ac0d584147a503",
+      "bytes": 415814,
+      "stats": {
+        "manuscripts": 10,
+        "early": 7,
+        "lines": 104,
+        "uncoveredLines": 0,
+        "words": 1630,
+        "places": 238,
+        "meanPlaceConfidence": 0.9853,
+        "meanWordConfidence": 0.9956,
+        "meanManuscriptsPerLine": 6.5481
+      }
+    },
+    {
+      "id": "Col",
+      "name": "Colossians",
+      "section": "New Testament",
+      "number": 12,
+      "language": "Greek",
+      "file": "Col.xml",
+      "format": "TEI P5 XML",
+      "sha256": "6f682417b50d6515e8d5381f9c7caa00125fee4fdf206b80ef995a124baed51e",
+      "bytes": 416862,
+      "stats": {
+        "manuscripts": 14,
+        "early": 5,
+        "lines": 95,
+        "uncoveredLines": 0,
+        "words": 1589,
+        "places": 224,
+        "meanPlaceConfidence": 0.9854,
+        "meanWordConfidence": 0.997,
+        "meanManuscriptsPerLine": 7.5368
+      }
+    },
+    {
+      "id": "1Thess",
+      "name": "1 Thessalonians",
+      "section": "New Testament",
+      "number": 13,
+      "language": "Greek",
+      "file": "1Thess.xml",
+      "format": "TEI P5 XML",
+      "sha256": "0979b7507431c24e6ea60406b080c31417e1b87723026e312af693676d2e47c5",
+      "bytes": 958532,
+      "stats": {
+        "manuscripts": 52,
+        "early": 9,
+        "lines": 91,
+        "uncoveredLines": 0,
+        "words": 1543,
+        "places": 230,
+        "meanPlaceConfidence": 0.9674,
+        "meanWordConfidence": 0.924,
+        "meanManuscriptsPerLine": 37.9341
+      }
+    },
+    {
+      "id": "2Thess",
+      "name": "2 Thessalonians",
+      "section": "New Testament",
+      "number": 14,
+      "language": "Greek",
+      "file": "2Thess.xml",
+      "format": "TEI P5 XML",
+      "sha256": "5f7fa21a02f5db978e9b75ab865908adb75043b05fddc38aa611f2b8ada1ad63",
+      "bytes": 1224754,
+      "stats": {
+        "manuscripts": 154,
+        "early": 6,
+        "lines": 48,
+        "uncoveredLines": 0,
+        "words": 848,
+        "places": 92,
+        "meanPlaceConfidence": 0.8977,
+        "meanWordConfidence": 0.8242,
+        "meanManuscriptsPerLine": 142.7083
+      }
+    },
+    {
+      "id": "1Tim",
+      "name": "1 Timothy",
+      "section": "New Testament",
+      "number": 15,
+      "language": "Greek",
+      "file": "1Tim.xml",
+      "format": "TEI P5 XML",
+      "sha256": "b7e873c293ae2bc70acc5a98f39799858f418a3249d41536eb4f23196d7677ad",
+      "bytes": 498177,
+      "stats": {
+        "manuscripts": 18,
+        "early": 4,
+        "lines": 113,
+        "uncoveredLines": 0,
+        "words": 1612,
+        "places": 260,
+        "meanPlaceConfidence": 0.9615,
+        "meanWordConfidence": 0.9862,
+        "meanManuscriptsPerLine": 12.4779
+      }
+    },
+    {
+      "id": "2Tim",
+      "name": "2 Timothy",
+      "section": "New Testament",
+      "number": 16,
+      "language": "Greek",
+      "file": "2Tim.xml",
+      "format": "TEI P5 XML",
+      "sha256": "29e3572e727c382b4f5db4b784dcce7ea6294218e70a492b2492e541939fac0c",
+      "bytes": 284289,
+      "stats": {
+        "manuscripts": 6,
+        "early": 3,
+        "lines": 83,
+        "uncoveredLines": 0,
+        "words": 1242,
+        "places": 166,
+        "meanPlaceConfidence": 0.991,
+        "meanWordConfidence": 0.9986,
+        "meanManuscriptsPerLine": 5.4578
+      }
+    },
+    {
+      "id": "Titus",
+      "name": "Titus",
+      "section": "New Testament",
+      "number": 17,
+      "language": "Greek",
+      "file": "Titus.xml",
+      "format": "TEI P5 XML",
+      "sha256": "27861be4fb9210cab893bff54219a544a9209124988bd2404364392b983e5015",
+      "bytes": 174669,
+      "stats": {
+        "manuscripts": 9,
+        "early": 4,
+        "lines": 46,
+        "uncoveredLines": 0,
+        "words": 657,
+        "places": 82,
+        "meanPlaceConfidence": 0.9575,
+        "meanWordConfidence": 0.9813,
+        "meanManuscriptsPerLine": 5.2174
+      }
+    },
+    {
+      "id": "Phlm",
+      "name": "Philemon",
+      "section": "New Testament",
+      "number": 18,
+      "language": "Greek",
+      "file": "Phlm.xml",
+      "format": "TEI P5 XML",
+      "sha256": "cce3fece74b962af7b167a5caec2fbd3c6dd978c8937ab4fca8d17a2d91dd7e4",
+      "bytes": 91316,
+      "stats": {
+        "manuscripts": 9,
+        "early": 5,
+        "lines": 25,
+        "uncoveredLines": 0,
+        "words": 336,
+        "places": 35,
+        "meanPlaceConfidence": 0.975,
+        "meanWordConfidence": 0.9955,
+        "meanManuscriptsPerLine": 5.8
+      }
+    },
+    {
+      "id": "Heb",
+      "name": "Hebrews",
+      "section": "New Testament",
+      "number": 19,
+      "language": "Greek",
+      "file": "Heb.xml",
+      "format": "TEI P5 XML",
+      "sha256": "4935653740975f983dc0b6b66d5136193baaa9a592306bd711fff222dbbc360a",
+      "bytes": 1405320,
+      "stats": {
+        "manuscripts": 24,
+        "early": 15,
+        "lines": 304,
+        "uncoveredLines": 0,
+        "words": 4987,
+        "places": 842,
+        "meanPlaceConfidence": 0.9883,
+        "meanWordConfidence": 0.9901,
+        "meanManuscriptsPerLine": 6.8717
+      }
+    },
+    {
+      "id": "Jas",
+      "name": "James",
+      "section": "New Testament",
+      "number": 20,
+      "language": "Greek",
+      "file": "Jas.xml",
+      "format": "TEI P5 XML",
+      "sha256": "68219c3740f3c08c02c3107924bd155842fa43817009063b50af8f27f9834f03",
+      "bytes": 518172,
+      "stats": {
+        "manuscripts": 12,
+        "early": 9,
+        "lines": 108,
+        "uncoveredLines": 0,
+        "words": 1740,
+        "places": 291,
+        "meanPlaceConfidence": 0.9465,
+        "meanWordConfidence": 0.9562,
+        "meanManuscriptsPerLine": 5.7778
+      }
+    },
+    {
+      "id": "1Pet",
+      "name": "1 Peter",
+      "section": "New Testament",
+      "number": 21,
+      "language": "Greek",
+      "file": "1Pet.xml",
+      "format": "TEI P5 XML",
+      "sha256": "05bffa660fe2e75a6a8cf8f164de1e565fa57693cb46e98e0060eb182e50d593",
+      "bytes": 578054,
+      "stats": {
+        "manuscripts": 10,
+        "early": 8,
+        "lines": 105,
+        "uncoveredLines": 0,
+        "words": 1687,
+        "places": 391,
+        "meanPlaceConfidence": 0.9754,
+        "meanWordConfidence": 0.9866,
+        "meanManuscriptsPerLine": 5.7429
+      }
+    },
+    {
+      "id": "2Pet",
+      "name": "2 Peter",
+      "section": "New Testament",
+      "number": 22,
+      "language": "Greek",
+      "file": "2Pet.xml",
+      "format": "TEI P5 XML",
+      "sha256": "666438677369fde799ff672c7fbb761b24f6aa82c46a54b7e1bd1a85a4234c16",
+      "bytes": 375287,
+      "stats": {
+        "manuscripts": 9,
+        "early": 5,
+        "lines": 61,
+        "uncoveredLines": 0,
+        "words": 1104,
+        "places": 237,
+        "meanPlaceConfidence": 0.9827,
+        "meanWordConfidence": 0.9863,
+        "meanManuscriptsPerLine": 7.2131
+      }
+    },
+    {
+      "id": "1John",
+      "name": "1 John",
+      "section": "New Testament",
+      "number": 23,
+      "language": "Greek",
+      "file": "1John.xml",
+      "format": "TEI P5 XML",
+      "sha256": "d694a213303c95af1595f2842e2bc0f9a849b12c2e60cf17aa250737547729de",
+      "bytes": 788647,
+      "stats": {
+        "manuscripts": 21,
+        "early": 6,
+        "lines": 105,
+        "uncoveredLines": 0,
+        "words": 2145,
+        "places": 405,
+        "meanPlaceConfidence": 0.9843,
+        "meanWordConfidence": 0.9902,
+        "meanManuscriptsPerLine": 15.6762
+      }
+    },
+    {
+      "id": "2John",
+      "name": "2 John",
+      "section": "New Testament",
+      "number": 24,
+      "language": "Greek",
+      "file": "2John.xml",
+      "format": "TEI P5 XML",
+      "sha256": "60941ef4206a29ed85a2575d5955a496f431f62e0e0befa94f50a8038798b80d",
+      "bytes": 150989,
+      "stats": {
+        "manuscripts": 20,
+        "early": 5,
+        "lines": 13,
+        "uncoveredLines": 0,
+        "words": 245,
+        "places": 60,
+        "meanPlaceConfidence": 0.9874,
+        "meanWordConfidence": 0.9892,
+        "meanManuscriptsPerLine": 16.3077
+      }
+    },
+    {
+      "id": "3John",
+      "name": "3 John",
+      "section": "New Testament",
+      "number": 25,
+      "language": "Greek",
+      "file": "3John.xml",
+      "format": "TEI P5 XML",
+      "sha256": "1ca33eb9d85fa50131bd99ec2b1737d6a072664e47e1ab734cadc10592ff8d95",
+      "bytes": 208602,
+      "stats": {
+        "manuscripts": 48,
+        "early": 5,
+        "lines": 15,
+        "uncoveredLines": 0,
+        "words": 216,
+        "places": 54,
+        "meanPlaceConfidence": 0.9831,
+        "meanWordConfidence": 0.9907,
+        "meanManuscriptsPerLine": 25.6
+      }
+    },
+    {
+      "id": "Jude",
+      "name": "Jude",
+      "section": "New Testament",
+      "number": 26,
+      "language": "Greek",
+      "file": "Jude.xml",
+      "format": "TEI P5 XML",
+      "sha256": "10113c0b4e34d2c58f0d4eb351c0cf89568218abb8a783228cd54d743334efa7",
+      "bytes": 893618,
+      "stats": {
+        "manuscripts": 138,
+        "early": 6,
+        "lines": 25,
+        "uncoveredLines": 0,
+        "words": 459,
+        "places": 96,
+        "meanPlaceConfidence": 0.9734,
+        "meanWordConfidence": 0.9378,
+        "meanManuscriptsPerLine": 129.92
+      }
+    },
+    {
+      "id": "Rev",
+      "name": "Revelation",
+      "section": "New Testament",
+      "number": 27,
+      "language": "Greek",
+      "file": "Rev.xml",
+      "format": "TEI P5 XML",
+      "sha256": "659e8048ff531c6e69248f7875abfb6dfb2bd953a0b41f4f10a12c898af1e875",
+      "bytes": 7033215,
+      "stats": {
+        "manuscripts": 65,
+        "early": 13,
+        "lines": 405,
+        "uncoveredLines": 0,
+        "words": 9783,
+        "places": 1817,
+        "meanPlaceConfidence": 0.9471,
+        "meanWordConfidence": 0.8751,
+        "meanManuscriptsPerLine": 44.2395
+      }
+    }
+  ]
+}

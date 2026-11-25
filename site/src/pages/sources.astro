@@ -20,14 +20,14 @@ const index = buildClientSourceIndex(spec);
 >
   <section class="page-header">
     <div class="container">
-      <div class="eyebrow">Embedded in {spec.file}</div>
+      <div class="eyebrow">Referenced by {spec.file}</div>
       <h1>Primary Sources</h1>
       <p class="lead">
-        All {formatNum(stats.sourceCount)} primary sources ({formatNum(stats.totalXmlFiles)} XML files across {stats.provenanceCount} source institutions) embedded under <code>sources:</code> in <a href={githubBlob(spec.file)} target="_blank" rel="noopener"><code>{spec.file}</code></a>. Click any source to expand its full metadata, XML paths, provenance, license, and facsimile links.
+        All {formatNum(stats.sourceCount)} primary sources ({formatNum(stats.totalXmlFiles)} XML files across {stats.provenanceCount} source institutions) referenced under <code>sources:</code> in <a href={githubBlob(spec.file)} target="_blank" rel="noopener"><code>{spec.file}</code></a> and indexed per institution in <code>src/&lt;institution&gt;/index.json</code>. Click any source to expand its full metadata, XML paths, provenance, license, and facsimile links.
       </p>
       <div class="actions">
         <a href="/specifications/" class="btn btn-secondary">← Back to specification</a>
-        <a href={githubBlob(spec.file)} class="btn btn-secondary" target="_blank" rel="noopener">View single YAML file ↗</a>
+        <a href={githubBlob(spec.file)} class="btn btn-secondary" target="_blank" rel="noopener">View on GitHub ↗</a>
       </div>
     </div>
   </section>
@@ -200,8 +200,12 @@ const index = buildClientSourceIndex(spec);
       }
     }
 
-    // Apply URL params (?type=, ?language=, ?provenance=, ?target=)
+    // Apply URL params (?q=, ?type=, ?language=, ?provenance=, ?target=)
     const params = new URLSearchParams(location.search);
+    if (params.get("q") && searchInput) {
+      state.q = params.get("q");
+      searchInput.value = state.q;
+    }
     if (params.get("target") && targetSelect) {
       state.target = params.get("target");
       targetSelect.value = state.target;
