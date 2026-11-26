@@ -1,0 +1,55 @@
+/* Cite boxes and TEI downloads */
+.cite-box {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.cite-box > summary {
+  cursor: pointer;
+  padding: 8px 12px;
+  font: 600 0.84rem var(--font-sans);
+  color: var(--ink-secondary);
+}
+.cite-box[open] > summary { border-bottom: 1px solid var(--border); }
+.cite-body { padding: 10px 12px 12px; display: grid; gap: 12px; }
+.cite-formats { display: flex; gap: 6px; }
+.cite-fmt {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink-secondary);
+  font: 600 0.74rem var(--font-sans);
+  padding: 4px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.cite-fmt.active { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.cite-block-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px; }
+.cite-label { font: 600 0.72rem var(--font-sans); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-muted); }
+.cite-pre {
+  margin: 0;
+  padding: 10px 12px;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font: 0.78rem/1.5 var(--font-mono);
+  color: var(--ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 320px;
+  overflow: auto;
+}
+.cite-pre[hidden] { display: none; }
+.download-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 14px; font-size: 0.84rem; color: var(--ink-muted); }
+.license-line { margin-top: 4px; font-size: 0.82rem; color: var(--ink-secondary); }
+.license-line .license-label { font-weight: 600; color: var(--ink); margin-right: 4px; }
+.adapted-note {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-left: 3px solid var(--border-strong);
+  background: var(--surface-subtle);
+  font-size: 0.82rem;
+  color: var(--ink-secondary);
+}
+.adapted-note strong { color: var(--ink); }
+.adapted-note p { margin: 2px 0; }

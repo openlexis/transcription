@@ -5,10 +5,15 @@ import Layout from "../../../layouts/Layout.astro";
 import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
 import Pill from "../../../components/Pill.astro";
 import Byline from "../../../components/Byline.astro";
+import CiteBox from "../../../components/CiteBox.astro";
+import { bookCredit, creditOf, perManuscript, witnessFiles } from "../../../lib/credits";
+import { bookDownload } from "../../../lib/downloads";
+import { groupCredits } from "../../../lib/cite";
 import {
   bookUrl,
   compUrl,
   formatAuthor,
+  formatBytes,
   formatNum,
   getCompilations,
   getSpecifications,
@@ -61,8 +66,18 @@ const compDate = c.manifest.compilation.createdAt
   : "";
 const compTitle = c.manifest.compilation.title || c.manifest.modelAttribution.modelName;
 const compAuthor = formatAuthor(c.manifest.compilation.author);
-const license = getSpecifications().find((s) => s.id === c.specId)?.license;
+const spec = getSpecifications().find((s) => s.id === c.specId);
+const license = spec?.license;
 const { witnesses, chapters } = parseCompiledBookTei(`${c.dir}/${b.file}`);
+const download = bookDownload(c, b);
+const witnessUsed = witnesses.map((w) => (spec ? witnessFiles(spec, w.siglum, w.files) : []));
+const ourBookCredit = bookCredit(c, b, compTitle, spec);
+const citeData = {
+  heading: "Cite this book",
+  ours: ourBookCredit,
+  sources: groupCredits(perManuscript(witnessUsed.flat())),
+  sourcesHeading: "How to credit each source (its own credit, license and link), grouped by source and license",
+};
 const viewersMap = getWitnessViewersMap(c.specId);
 const reportScale = c.report?.frontmatter?.disagreement_scale;
 const reportSubcats =
@@ -289,7 +304,8 @@ const clientData = {
   compUrl: compUrl(c.compilationId),
   scale: reportScale ?? { min: 1, max: 5 },
   subcats: subcatById,
-  w: witnesses.map((w) => [
+  cite: ourBookCredit,
+  w: witnesses.map((w, wi) => [
     w.siglum,
     w.desc,
     w.dating,
@@ -299,6 +315,7 @@ const clientData = {
     w.scientific,
     viewersMap.get(w.siglum)?.viewers ?? [],
     w.filledIn,
+    witnessUsed[wi].map((u) => creditOf(u)),
   ]),
   g: glossMap,
   t: tokenPayloads,
@@ -350,6 +367,13 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           context={b.name}
         />
       </div>
+      {download && (
+        <div class="download-row">
+          <a href={download.href} class="btn btn-secondary" download>Download TEI (zip, {formatBytes(download.bytes)})</a>
+          <span>{b.file}, unchanged, with {b.file.replace(/\.xml$/, ".sources.xml")}, which lists each source's credit, license and link.</span>
+        </div>
+      )}
+      <CiteBox data={citeData} />
     </div>
   </section>
 
@@ -618,6 +642,8 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       formatProbabilityPct,
       renderConfidenceBadgeHtml,
     } from "../../../lib/confidence";
+    import "../../../lib/cite-ui";
+    import { citeBoxHtml, tm, type SourceCredit } from "../../../lib/cite";
 
     const reader = document.getElementById("compiled-reader");
     const inspectorUrl =
@@ -824,9 +850,42 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       const idx = Number(ref);
       const w = !Number.isNaN(idx) ? DATA.w[idx] : DATA.w.find((x: any[]) => x[0] === ref);
       if (!w) return `<div class="wit-detail-card">No witness record found for <code>${esc(ref)}</code>.</div>`;
-      const [sig, desc, dating, scribal, agreement, prov, sci, viewers, filledIn] = w as [
-        string, string, string, string, string, string, string, { name: string; url: string }[], string,
+      const [sig, desc, dating, scribal, agreement, prov, sci, viewers, filledIn, credits] = w as [
+        string, string, string, string, string, string, string, { name: string; url: string }[], string, SourceCredit[] | undefined,
       ];
+      const srcCredits = Array.isArray(credits) ? credits : [];
+      const seenLic = new Set<string>();
+      const srcLicenses = srcCredits
+        .filter((cr) => {
+          const k = `${cr.project}|${cr.license.name}|${cr.license.url}`;
+          if (seenLic.has(k)) return false;
+          seenLic.add(k);
+          return true;
+        })
+        .map(
+          (cr) =>
+            `<div><a href="${esc(cr.license.url)}" target="_blank" rel="noopener">${esc(cr.license.name)}</a> <span class="ms-sub">(${esc(cr.project)}${cr.license.where ? `; terms found in ${esc(cr.license.where)}` : ""})</span></div>`,
+        )
+        .join("");
+      const ours = DATA.cite;
+      const licenseHtml = `<div style="grid-column: 1 / -1;"><div class="source-meta-label">License</div><div class="source-meta-val">${
+        srcLicenses ? `<div class="ms-sub" style="margin-bottom:2px;">This manuscript's source ${srcCredits.length === 1 ? "transcription" : "transcriptions"}:</div>${srcLicenses}` : ""
+      }${
+        ours?.licenseName
+          ? `<div class="ms-sub" style="margin:6px 0 2px;">This transcription:</div><div><a href="${esc(ours.licenseUrl)}" target="_blank" rel="noopener">${esc(ours.licenseName)}</a> <span class="ms-sub">(${esc(tm(ours.copyright))})</span></div>`
+          : ""
+      }</div></div>`;
+      const citeHtml = ours
+        ? citeBoxHtml(
+            {
+              heading: "Cite this manuscript in this book",
+              ours: { ...ours, key: `${ours.key}-${String(sig).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`, title: `${ours.title}, manuscript ${sig}` },
+              sources: srcCredits,
+            },
+            location.origin,
+            new Date(),
+          )
+        : "";
       const viewerLinks = Array.isArray(viewers) && viewers.length
         ? viewers
             .map((v) => {
@@ -873,7 +932,9 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             <div><div class="source-meta-label">Physical &amp; Scribal</div><div class="source-meta-val">${esc(scribal)}</div></div>
             <div><div class="source-meta-label">Provenance / Scientific</div><div class="source-meta-val">${esc(prov)} · Scientific: ${esc(sci)}</div></div>
             ${filledIn ? `<div><div class="source-meta-label">Filled-in text (not counted)</div><div class="source-meta-val">${esc(filledIn)}</div></div>` : ""}
+            ${licenseHtml}
           </div>
+          ${citeHtml}
         </div>
       `;
     }

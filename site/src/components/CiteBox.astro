@@ -1,0 +1,17 @@
+---
+// A cite box: how to credit Open Lexis, and each source's own credit, license and link, as plain text or BibTeX.
+import "../styles/cite.css";
+import { SITE_ORIGIN, citeBodyHtml, type CiteBoxData } from "../lib/cite";
+
+interface Props {
+  data: CiteBoxData;
+}
+const { data } = Astro.props;
+---
+<details class="cite-box" data-cite={JSON.stringify(data)}>
+  <summary>{data.heading}</summary>
+  <div class="cite-body" set:html={citeBodyHtml(data, SITE_ORIGIN)} />
+</details>
+<script>
+  import "../lib/cite-ui";
+</script>

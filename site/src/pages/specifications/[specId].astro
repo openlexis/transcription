@@ -1,5 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import CiteBox from "../../components/CiteBox.astro";
+import { allSpecFiles, perManuscript, specCredit } from "../../lib/credits";
+import { groupCredits } from "../../lib/cite";
 import {
   REPO,
   buildClientSourceIndex,
@@ -48,6 +51,13 @@ const clientSources = buildClientSourceIndex(single);
 const isFolder = single.file.endsWith("/specification.yaml");
 const sourcesFile = single.file.replace(/specification\.yaml$/, "sources.json");
 const isEmbedded = !isFolder && Array.isArray(single.sourceRefs) && single.sourceRefs[0] === single.file;
+
+const citeData = {
+  heading: "Cite this specification",
+  ours: specCredit(single),
+  sources: groupCredits(perManuscript(allSpecFiles(single))),
+  sourcesHeading: "How to credit each source (its own credit, license and link), grouped by source and license",
+};
 
 const toc = [
   { id: "objective", text: "1. Objective" },
@@ -106,6 +116,7 @@ const toc = [
           </a>
         )}
       </div>
+      <CiteBox data={citeData} />
     </div>
   </section>
 
