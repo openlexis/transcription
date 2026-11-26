@@ -1,6 +1,6 @@
 ---
 import "../styles/site.css";
-import { REPO, withTrademark } from "../lib/corpus";
+import { REPO } from "../lib/corpus";
 
 interface Props {
   title: string;
@@ -13,7 +13,7 @@ const {
   description = "Open-source transcriptions assembled directly from primary ancient manuscripts, word by word, with immutable specifications, statistical probabilities, and full auditability.",
   active,
 } = Astro.props;
-const pageTitle = withTrademark(title === "Open Lexis" ? "Open Lexis · Transcriptions Assembled from Ancient Manuscripts" : `${title} · Open Lexis`);
+const pageTitle = title === "Open Lexis" ? "Open Lexis · Transcriptions Assembled from Ancient Manuscripts" : `${title} · Open Lexis`;
 ---
 <!doctype html>
 <html lang="en">
@@ -45,7 +45,7 @@ const pageTitle = withTrademark(title === "Open Lexis" ? "Open Lexis · Transcri
             <path d="M12 7.5v13"/>
           </svg>
         </span>
-        <span>Open Lexis™ <span class="brand-sub">Transcriptions</span></span>
+        <span>Open Lexis <span class="brand-sub">Transcriptions</span></span>
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="/" class={active === "home" ? "active" : ""}>Overview</a>
