@@ -111,6 +111,41 @@ interface ShowcaseReading {
   contextForHover: string;
 }
 
+interface CaptionRun {
+  t: string;
+  b?: boolean;
+}
+
+type StoryAction =
+  | "reveal-lane-0"
+  | "reveal-lane-1"
+  | "reveal-lane-2"
+  | "timeline"
+  | "spot-early"
+  | "spot-late"
+  | "spot-early-a"
+  | "spot-early-b"
+  | "spot-lacuna"
+  | "decide"
+  | "readings-open"
+  | "readings-circle"
+  | "readings-note";
+
+interface StoryCue {
+  runs?: CaptionRun[];
+  cueTone?: "lane-0" | "lane-1" | "lane-2" | "accent" | "emerald";
+  action?: StoryAction;
+  actionMs?: number;
+  holdMs?: number;
+}
+
+interface CaseStepScript {
+  id: string;
+  refLabel: string;
+  hitRuns: CaptionRun[];
+  steps: [StoryCue[], StoryCue[], StoryCue[]];
+}
+
 interface ShowcaseCase {
   id: string;
   refLabel: string;
@@ -125,6 +160,8 @@ interface ShowcaseCase {
   laneLabels: [string, string];
   verseHref: string;
   focalHref: string;
+  focalWordText: string;
+  focalWordGloss: string;
   hasTrailingEllipsis: boolean;
   words: ShowcaseWord[];
   readings: ShowcaseReading[];
@@ -133,7 +170,9 @@ interface ShowcaseCase {
   earlyZoneWidthPct: number;
   earlyZoneLabel: string;
   showEarlyFocus: boolean;
-  beatCaptions: [string, string, string];
+  stepScripts: [StoryCue[], StoryCue[], StoryCue[]];
+  hitRuns: CaptionRun[];
+  fallbackSummary: string;
 }
 
 function buildShowcaseCase(opts: {
@@ -154,7 +193,7 @@ function buildShowcaseCase(opts: {
   tickYears: number[];
   eraSummaries: [string, string];
   discountLateInBeat3: boolean;
-  beatCaptions: [string, string, string];
+  stepScripts: [StoryCue[], StoryCue[], StoryCue[]];
   extraNote: string;
   laneLabels: [string, string];
   wordGlossOverrides?: Record<string, string>;
@@ -354,10 +393,10 @@ function buildShowcaseCase(opts: {
       const early = entry.mid <= opts.earlyCutoff;
       const discounted = opts.discountLateInBeat3 && !early && lane === 1;
       const fillDelayMs = denseDots
-        ? Math.round((idx / Math.max(1, witEntries.length - 1)) * 680) + lane * 140
+        ? Math.round((idx / Math.max(1, witEntries.length - 1)) * 720)
         : canvasSize === "medium"
-          ? idx * 70 + lane * 150
-          : idx * 130 + lane * 180;
+          ? idx * 95
+          : idx * 140;
       const relNorm = entry.rel !== null ? Math.max(0, Math.min(1, (entry.rel - 0.72) / 0.25)) : 0.75;
       const qScale = Number((0.76 + relNorm * 0.42).toFixed(2));
       const qAlpha = Number((0.42 + relNorm * 0.58).toFixed(2));
@@ -398,7 +437,7 @@ function buildShowcaseCase(opts: {
         y1: 48,
         x2: Number(yearToPct(mid).toFixed(2)),
         y2: 48,
-        fillDelayMs: 360,
+        fillDelayMs: 60,
         qScale: 1,
         qAlpha: 1,
         relPct: null,
@@ -420,6 +459,23 @@ function buildShowcaseCase(opts: {
     Math.max(12, Math.min(45, yearToPct(opts.earlyCutoff) - 2)).toFixed(2),
   );
 
+  const focalWord = words.find((w) => w.isFocal);
+  const focalWordText = focalWord?.text ?? readings[0]?.text ?? "";
+  const focalWordGloss = readings[0]?.gloss ?? focalWord?.gloss ?? "";
+
+  const hitRuns: CaptionRun[] = [
+    { t: "Disagreement spotted at " },
+    { t: `“${focalWordGloss}”`, b: true },
+    { t: " in " },
+    { t: opts.refLabel, b: true },
+    { t: ": manuscripts split right here." },
+  ];
+
+  const fallbackSummary = opts.stepScripts[2]
+    .flatMap((c) => c.runs ?? [])
+    .map((r) => r.t)
+    .join("");
+
   return {
     id: opts.id,
     refLabel: opts.refLabel,
@@ -434,6 +490,8 @@ function buildShowcaseCase(opts: {
     laneLabels: opts.laneLabels,
     verseHref: `${baseBookUrl}#${verseId}`,
     focalHref: `${baseBookUrl}#${verseId}-w${focalTokIdx + 1}`,
+    focalWordText,
+    focalWordGloss,
     hasTrailingEllipsis,
     words,
     readings,
@@ -442,7 +500,9 @@ function buildShowcaseCase(opts: {
     earlyZoneWidthPct,
     earlyZoneLabel: opts.earlyZoneLabel,
     showEarlyFocus: opts.discountLateInBeat3,
-    beatCaptions: opts.beatCaptions,
+    stepScripts: opts.stepScripts,
+    hitRuns,
+    fallbackSummary,
   };
 }
 
@@ -468,10 +528,64 @@ const showcaseCases: ShowcaseCase[] = [
       "Mostly medieval (AD 750–1550); earliest: 02 (c. AD 450)",
     ],
     discountLateInBeat3: true,
-    beatCaptions: [
-      "Surviving Greek manuscripts disagree: <strong>153 copies</strong> write “Son,” while only <strong>7</strong> write “God.” By raw majority count, “Son” dominates.",
-      "Sorted by date, a sharp divide appears: the earliest surviving manuscripts (AD 200–450) write “God,” while the 153 “Son” copies arrive centuries later across medieval traditions.",
-      "Under the published specification, this model prioritizes early independent witnesses and discounts late dependent clusters, selecting “God” at <strong>&gt;99.9% original-text likelihood</strong>.",
+    stepScripts: [
+      [
+        { runs: [{ t: "Surviving Greek manuscripts disagree: " }] },
+        {
+          runs: [{ t: "153 copies", b: true }, { t: " write “Son,”" }],
+          cueTone: "lane-1",
+          action: "reveal-lane-1",
+          actionMs: 2100,
+        },
+        { runs: [{ t: " while only " }] },
+        {
+          runs: [{ t: "7", b: true }, { t: " write “God.”" }],
+          cueTone: "lane-0",
+          action: "reveal-lane-0",
+          actionMs: 1650,
+        },
+        {
+          runs: [{ t: " By raw majority count, “Son” dominates." }],
+          holdMs: 2900,
+        },
+      ],
+      [
+        {
+          runs: [{ t: "Sorted by date, a sharp divide appears:" }],
+          cueTone: "accent",
+          action: "timeline",
+          actionMs: 2450,
+        },
+        {
+          runs: [{ t: " the earliest surviving manuscripts (AD 200–450) write “God,”" }],
+          cueTone: "accent",
+          action: "spot-early",
+          actionMs: 1700,
+        },
+        {
+          runs: [{ t: " while the 153 “Son” copies arrive centuries later across medieval traditions." }],
+          cueTone: "accent",
+          action: "spot-late",
+          actionMs: 1700,
+          holdMs: 2800,
+        },
+      ],
+      [
+        {
+          runs: [{ t: "Under the published specification, this model prioritizes early independent witnesses and discounts late dependent clusters," }],
+          cueTone: "emerald",
+          action: "decide",
+          actionMs: 2300,
+        },
+        {
+          runs: [{ t: " selecting “God” at " }, { t: ">99.9% original-text likelihood", b: true }, { t: "." }],
+          cueTone: "emerald",
+          holdMs: 850,
+        },
+        { action: "readings-open", actionMs: 700 },
+        { action: "readings-circle", actionMs: 1600 },
+        { action: "readings-note", actionMs: 6000 },
+      ],
     ],
     extraNote: "Plus 4 medieval copies with a minor plural spelling (υιοις) and 1 damaged witness (L252), for 165 manuscripts total at this word.",
     laneLabels: ["“God” (7)", "“Son” (153)"],
@@ -497,10 +611,61 @@ const showcaseCases: ShowcaseCase[] = [
       "Samaritan Pentateuch (CBL751 · AD 1225)",
     ],
     discountLateInBeat3: false,
-    beatCaptions: [
-      "Only <strong>2 intact manuscripts</strong> preserve this word: 1 writes “seventh” and 1 writes “sixth.” The ancient Dead Sea Scroll (4Q10) is torn right at this spot.",
-      "Sorted by date, both intact witnesses come from the Middle Ages (AD 1009 &amp; AD 1225), leaving a millennium-wide gap where timeline alone cannot break the tie.",
-      "Weighing whole-book consistency across all 1,533 verses of Genesis (97.1% vs 96.6% manuscript reliability) rather than forcing false certainty, this model leans toward “seventh” at <strong>54.3% vs 44.1%</strong> and keeps the uncertainty visible.",
+    stepScripts: [
+      [
+        { runs: [{ t: "Only " }, { t: "2 intact manuscripts", b: true }, { t: " preserve this word: " }] },
+        {
+          runs: [{ t: "1", b: true }, { t: " writes “seventh”" }],
+          cueTone: "lane-0",
+          action: "reveal-lane-0",
+          actionMs: 1500,
+        },
+        { runs: [{ t: " and " }] },
+        {
+          runs: [{ t: "1", b: true }, { t: " writes “sixth.”" }],
+          cueTone: "lane-1",
+          action: "reveal-lane-1",
+          actionMs: 1500,
+        },
+        {
+          runs: [{ t: " The ancient Dead Sea Scroll (4Q10) is torn right at this spot." }],
+          cueTone: "lane-2",
+          action: "reveal-lane-2",
+          actionMs: 1800,
+          holdMs: 2600,
+        },
+      ],
+      [
+        {
+          runs: [{ t: "Sorted by date, both intact witnesses come from the Middle Ages (AD 1009 & AD 1225)," }],
+          cueTone: "accent",
+          action: "timeline",
+          actionMs: 2400,
+        },
+        {
+          runs: [{ t: " leaving a millennium-wide gap where timeline alone cannot break the tie." }],
+          cueTone: "lane-2",
+          action: "spot-lacuna",
+          actionMs: 1750,
+          holdMs: 2800,
+        },
+      ],
+      [
+        {
+          runs: [{ t: "Weighing whole-book consistency across all 1,533 verses of Genesis (97.1% vs 96.6% manuscript reliability) rather than forcing false certainty," }],
+          cueTone: "emerald",
+          action: "decide",
+          actionMs: 2150,
+        },
+        {
+          runs: [{ t: " this model leans toward “seventh” at " }, { t: "54.3% vs 44.1%", b: true }, { t: " and keeps the uncertainty visible." }],
+          cueTone: "emerald",
+          holdMs: 900,
+        },
+        { action: "readings-open", actionMs: 700 },
+        { action: "readings-circle", actionMs: 1600 },
+        { action: "readings-note", actionMs: 6000 },
+      ],
     ],
     extraNote: "Dead Sea Scroll 4Q10 is physically damaged at this word; 1.4% estimated chance that the original wording is unattested.",
     laneLabels: ["“seventh” (1)", "“sixth” (1)"],
@@ -526,10 +691,59 @@ const showcaseCases: ShowcaseCase[] = [
       "Leningrad Codex (L · AD 1009)",
     ],
     discountLateInBeat3: true,
-    beatCaptions: [
-      "<strong>3 manuscripts</strong> include the word “light” (“see light and be satisfied”), while <strong>1</strong> (the medieval Leningrad Codex behind older translations) omits it.",
-      "Sorted by date, those 3 manuscripts are <strong>Dead Sea Scrolls (c. 90 BC)</strong>, predating the Leningrad Codex (AD 1009) by more than a millennium.",
-      "Under the published specification, this model weights three ancient scrolls over a single copy written a millennium later, selecting “light” at <strong>&gt;99.9% original-text likelihood</strong>.",
+    stepScripts: [
+      [
+        {
+          runs: [{ t: "3 manuscripts", b: true }, { t: " include the word “light” (“see light and be satisfied”)," }],
+          cueTone: "lane-0",
+          action: "reveal-lane-0",
+          actionMs: 1700,
+        },
+        {
+          runs: [{ t: " while " }, { t: "1", b: true }, { t: " (the medieval Leningrad Codex behind older translations) omits it." }],
+          cueTone: "lane-1",
+          action: "reveal-lane-1",
+          actionMs: 1600,
+          holdMs: 2800,
+        },
+      ],
+      [
+        {
+          runs: [{ t: "Sorted by date," }],
+          cueTone: "accent",
+          action: "timeline",
+          actionMs: 2350,
+        },
+        {
+          runs: [{ t: " those 3 manuscripts are " }, { t: "Dead Sea Scrolls (c. 90 BC)", b: true }, { t: "," }],
+          cueTone: "accent",
+          action: "spot-early",
+          actionMs: 1650,
+        },
+        {
+          runs: [{ t: " predating the Leningrad Codex (AD 1009) by more than a millennium." }],
+          cueTone: "accent",
+          action: "spot-late",
+          actionMs: 1650,
+          holdMs: 2800,
+        },
+      ],
+      [
+        {
+          runs: [{ t: "Under the published specification, this model weights three ancient scrolls over a single copy written a millennium later," }],
+          cueTone: "emerald",
+          action: "decide",
+          actionMs: 2250,
+        },
+        {
+          runs: [{ t: " selecting “light” at " }, { t: ">99.9% original-text likelihood", b: true }, { t: "." }],
+          cueTone: "emerald",
+          holdMs: 850,
+        },
+        { action: "readings-open", actionMs: 700 },
+        { action: "readings-circle", actionMs: 1600 },
+        { action: "readings-note", actionMs: 6000 },
+      ],
     ],
     extraNote: "All 4 surviving witnesses at Isaiah 53:11 are intact at this phrase.",
     laneLabels: ["Includes “light” (3)", "Omits “light” (1)"],
@@ -559,10 +773,64 @@ const showcaseCases: ShowcaseCase[] = [
       "P46 (c. AD 213; 91.9% reliability), 01 (c. AD 350), plus 6 (AD 1250)",
     ],
     discountLateInBeat3: false,
-    beatCaptions: [
-      "In Koine Greek, “let us have” (εχωμεν) and “we have” (εχομεν) sounded identical and differ by a single vowel (ω vs ο). Surviving witnesses split evenly: <strong>3</strong> write “let us have” and <strong>3</strong> write “we have.”",
-      "Sorted by date, the two oldest copies (P46, c. AD 213 &amp; 01, c. AD 350) actually read “we have,” while “let us have” starts later (02 &amp; 04, c. AD 450). Neither headcount nor date alone settles a sound-alike slip.",
-      "Weighing whole-book manuscript reliability (where 04 scores higher across Hebrews than P46) alongside witness independence, this model selects “let us have” at <strong>66.1%</strong> while preserving <strong>33.9%</strong> for “we have.”",
+    stepScripts: [
+      [
+        { runs: [{ t: "In Koine Greek, “let us have” (εχωμεν) and “we have” (εχομεν) sounded identical and differ by a single vowel (ω vs ο). Surviving witnesses split evenly: " }] },
+        {
+          runs: [{ t: "3", b: true }, { t: " write “let us have”" }],
+          cueTone: "lane-0",
+          action: "reveal-lane-0",
+          actionMs: 1650,
+        },
+        { runs: [{ t: " and " }] },
+        {
+          runs: [{ t: "3", b: true }, { t: " write “we have.”" }],
+          cueTone: "lane-1",
+          action: "reveal-lane-1",
+          actionMs: 1650,
+          holdMs: 2800,
+        },
+      ],
+      [
+        {
+          runs: [{ t: "Sorted by date," }],
+          cueTone: "accent",
+          action: "timeline",
+          actionMs: 2350,
+        },
+        {
+          runs: [{ t: " the two oldest copies (P46, c. AD 213 & 01, c. AD 350) actually read “we have,”" }],
+          cueTone: "accent",
+          action: "spot-early-b",
+          actionMs: 1750,
+        },
+        {
+          runs: [{ t: " while “let us have” starts later (02 & 04, c. AD 450)." }],
+          cueTone: "accent",
+          action: "spot-early-a",
+          actionMs: 1700,
+        },
+        {
+          runs: [{ t: " Neither headcount nor date alone settles a sound-alike slip." }],
+          holdMs: 2900,
+        },
+      ],
+      [
+        {
+          runs: [{ t: "Weighing whole-book manuscript reliability (where 04 scores higher across Hebrews than P46) alongside witness independence," }],
+          cueTone: "emerald",
+          action: "decide",
+          actionMs: 2200,
+        },
+        {
+          runs: [{ t: " this model selects “let us have” at " }, { t: "66.1%", b: true }, { t: " while preserving " }, { t: "33.9%", b: true }, { t: " for “we have.”" }],
+          cueTone: "emerald",
+          holdMs: 900,
+        },
+        { action: "readings-open", actionMs: 700 },
+        { action: "readings-circle", actionMs: 1600 },
+        { action: "readings-note", actionMs: 6000 },
+      ],
     ],
     extraNote: "All 6 surviving manuscripts at Hebrews 12:28 are intact here. Specifications can also model phonetic confusion and surrounding exhortation context directly.",
     laneLabels: ["“let us have” (3)", "“we have” (3)"],
@@ -578,6 +846,15 @@ const showcaseCases: ShowcaseCase[] = [
     readingGlossOverrides: ["let us have", "we have"],
   }),
 ].filter((x): x is ShowcaseCase => x !== null);
+
+const showcaseScriptsJson = JSON.stringify(
+  showcaseCases.map<CaseStepScript>((sc) => ({
+    id: sc.id,
+    refLabel: sc.refLabel,
+    hitRuns: sc.hitRuns,
+    steps: sc.stepScripts,
+  })),
+);
 
 const latestCompBase = latest ? compUrl(latest.compilationId).replace(/\/$/, "") : "/transcriptions";
 
@@ -676,55 +953,68 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
               class="showcase-pane"
               data-case-pane={sc.id}
               data-step="0"
-              data-visual="0"
+              data-focus="verse"
               hidden={idx !== 0}
             >
               <div class="showcase-pane-head">
                 <h2 class="showcase-title">{sc.headline}</h2>
               </div>
 
-              <!-- Single-Line Verse Strip (puck scans word-by-word in authentic LTR/RTL reading direction) -->
-              <div class={`showcase-verse-box ${sc.isHebrew ? "verse-is-rtl" : "verse-is-ltr"}`}>
-                <div
-                  class={`showcase-stage ${sc.isHebrew ? "script-hebrew" : "script-greek"}`}
-                  dir={sc.isHebrew ? "rtl" : "ltr"}
-                >
-                  <span class="verse-scan-puck" aria-hidden="true"></span>
-                  <span class="sw-verse-num" dir="ltr" title={`Start of ${sc.refLabel}`}>{sc.verseNum}</span>
-                  {sc.words.map((w, wIdx) =>
-                    w.isFocal ? (
-                      <a
-                        href={w.href}
-                        class="showcase-word showcase-word-focal"
-                        data-word-idx={wIdx}
-                        data-focal="true"
-                        style={`--bar:${w.barWidth.toFixed(2)}`}
-                        title={`Inspect “${w.text}” (${w.gloss || w.rom}) in ${sc.refLabel}`}
-                      >
-                        <span class="sw-status-slot" dir="ltr" aria-hidden="true">
-                          <span class="sw-dot-idle"></span>
-                          <span class="sw-focal-tag">Disputed</span>
-                        </span>
-                        <span class="sw-orig">{w.text}</span>
-                        <span class="sw-gloss" dir="ltr">{w.gloss || w.rom}</span>
-                      </a>
-                    ) : (
-                      <span
-                        class="showcase-word"
-                        data-word-idx={wIdx}
-                      >
-                        <span class="sw-status-slot" dir="ltr" aria-hidden="true">
-                          <span class="sw-dot-idle"></span>
-                          <span class="sw-check-mark">✓</span>
-                        </span>
-                        <span class="sw-orig">{w.text}</span>
-                        <span class="sw-gloss" dir="ltr">{w.gloss || w.rom}</span>
-                      </span>
-                    ),
-                  )}
-                  {sc.hasTrailingEllipsis && (
-                    <span class="sw-ellipsis" aria-hidden="true">…</span>
-                  )}
+              <!-- Compact mobile-only reminder shown when the verse strip folds away during Steps 1-3 -->
+              <button type="button" class="showcase-mini-bar showcase-verse-mini" data-expand-inspect>
+                <span class="mini-bar-dot mini-dot-disputed" aria-hidden="true"></span>
+                <span class="mini-bar-text">
+                  <strong>{sc.refLabel}</strong> · <span class={sc.isHebrew ? "script-hebrew" : "script-greek"} dir={sc.isHebrew ? "rtl" : "ltr"}>{sc.focalWordText}</span> (“{sc.focalWordGloss}”)
+                </span>
+                <span class="mini-bar-action">Show verse</span>
+              </button>
+
+              <!-- Single-Line Verse Strip (full focus in Step 0; subdued on desktop / folded on mobile in Steps 1-3) -->
+              <div class="showcase-verse-wrap">
+                <div class="showcase-verse-inner">
+                  <div class={`showcase-verse-box ${sc.isHebrew ? "verse-is-rtl" : "verse-is-ltr"}`}>
+                    <div
+                      class={`showcase-stage ${sc.isHebrew ? "script-hebrew" : "script-greek"}`}
+                      dir={sc.isHebrew ? "rtl" : "ltr"}
+                    >
+                      <span class="verse-scan-puck" aria-hidden="true"></span>
+                      <span class="sw-verse-num" dir="ltr" title={`Start of ${sc.refLabel}`}>{sc.verseNum}</span>
+                      {sc.words.map((w, wIdx) =>
+                        w.isFocal ? (
+                          <a
+                            href={w.href}
+                            class="showcase-word showcase-word-focal"
+                            data-word-idx={wIdx}
+                            data-focal="true"
+                            style={`--bar:${w.barWidth.toFixed(2)}`}
+                            title={`Inspect “${w.text}” (${w.gloss || w.rom}) in ${sc.refLabel}`}
+                          >
+                            <span class="sw-status-slot" dir="ltr" aria-hidden="true">
+                              <span class="sw-dot-idle"></span>
+                              <span class="sw-focal-tag">Disputed</span>
+                            </span>
+                            <span class="sw-orig">{w.text}</span>
+                            <span class="sw-gloss" dir="ltr">{w.gloss || w.rom}</span>
+                          </a>
+                        ) : (
+                          <span
+                            class="showcase-word"
+                            data-word-idx={wIdx}
+                          >
+                            <span class="sw-status-slot" dir="ltr" aria-hidden="true">
+                              <span class="sw-dot-idle"></span>
+                              <span class="sw-check-mark">✓</span>
+                            </span>
+                            <span class="sw-orig">{w.text}</span>
+                            <span class="sw-gloss" dir="ltr">{w.gloss || w.rom}</span>
+                          </span>
+                        ),
+                      )}
+                      {sc.hasTrailingEllipsis && (
+                        <span class="sw-ellipsis" aria-hidden="true">…</span>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -750,159 +1040,170 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
                   </button>
                 </div>
 
+                <!-- Guided Narration Box (typed out phrase by phrase; pauses typing whenever a chart cue animates) -->
                 <div class="story-caption-wrap" aria-live="polite">
-                  <p class="story-caption active" data-step-caption="0" data-scan-caption="scanning">
+                  <p class="story-caption" data-live-caption>
                     Checking <strong>{sc.refLabel}</strong> word by word across surviving manuscripts…
                   </p>
-                  <p class="story-caption" data-step-caption="0-hit" data-scan-caption="hit">
-                    Disagreement spotted at <strong>“{sc.readings[0]?.gloss}”</strong> in <strong>{sc.refLabel}</strong>: manuscripts split right here.
-                  </p>
-                  {sc.beatCaptions.map((cap, cIdx) => (
-                    <p
-                      class="story-caption"
-                      data-step-caption={cIdx + 1}
-                      set:html={cap}
-                    />
-                  ))}
+                  <noscript>
+                    <p class="story-caption">{sc.fallbackSummary}</p>
+                  </noscript>
                 </div>
 
-                <!-- Collapsible evidence drawer: collapsed while scanning words, smoothly expands when disagreement is uncovered -->
-                <div class="story-drawer">
-                  <div class="story-drawer-inner">
-                    <!-- Animated Manuscript Dot Canvas -->
+                <!-- Visual connector pointing from active summary phrase down to the chart below -->
+                <div class="story-cue-bridge" aria-hidden="true">
+                  <span class="cue-bridge-stem"></span>
+                  <svg class="cue-bridge-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                    <path d="M1.5 1.5L6 6.2L10.5 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+
+                <!-- Collapsible Chart Stage: unfolds in Step 1; subdues on desktop / folds on mobile when Step 3 readings expand -->
+                <div class="story-canvas-wrap">
+                  <div class="story-canvas-inner">
                     <div class={`story-canvas canvas-${sc.canvasSize}`}>
-                  <!-- Emerald focus band (fades in ONLY on Step 3 where early witnesses anchor the decision) -->
-                  {sc.showEarlyFocus && (
-                    <div
-                      class="story-early-zone"
-                      style={`width: ${sc.earlyZoneWidthPct}%`}
-                      aria-hidden="true"
-                    >
-                      <span class="story-early-label">{sc.earlyZoneLabel}</span>
-                    </div>
-                  )}
-
-                  <!-- Clean left-aligned reading lane headers (stay anchored on the left across all steps) -->
-                  <div class="story-lane-guide lane-guide-0" aria-hidden="true">
-                    <span class="lane-tag lane-tag-a">
-                      <span class="lane-swatch swatch-a"></span>
-                      <span>{sc.laneLabels[0]}</span>
-                    </span>
-                  </div>
-                  <div class="story-lane-guide lane-guide-1" aria-hidden="true">
-                    <span class="lane-tag lane-tag-b">
-                      <span class="lane-swatch swatch-b"></span>
-                      <span>{sc.laneLabels[1]}</span>
-                    </span>
-                  </div>
-
-                  <!-- Every real manuscript dot, cascading in Step 1 -> gliding to date & reliability in Step 2 -> weighted in Step 3 -->
-                  {sc.dots.map((dot) => (
-                    <span
-                      class={`story-dot dot-lane-${dot.lane}${dot.early ? " dot-early" : ""}${dot.discounted ? " dot-discounted" : ""}${dot.label ? " dot-has-label" : ""}`}
-                      style={`--x1:${dot.x1}%; --y1:${dot.y1}%; --x2:${dot.x2}%; --y2:${dot.y2}%; --fill-delay:${dot.fillDelayMs}ms; --q-scale:${dot.qScale}; --q-alpha:${dot.qAlpha};`}
-                      title={dot.title}
-                    >
-                      {dot.label && (
-                        <span class="dot-label">
-                          <span class="dot-label-s1">{dot.label}</span>
-                          <span class="dot-label-s2">{dot.labelTimeline ?? dot.label}</span>
-                        </span>
+                      <!-- Emerald focus band (fades in ONLY on Step 3 decision where early witnesses anchor the choice) -->
+                      {sc.showEarlyFocus && (
+                        <div
+                          class="story-early-zone"
+                          style={`width: ${sc.earlyZoneWidthPct}%`}
+                          aria-hidden="true"
+                        >
+                          <span class="story-early-label">{sc.earlyZoneLabel}</span>
+                        </div>
                       )}
-                    </span>
-                  ))}
 
-                  <!-- Historical timeline axis (fades in on Step 2 & 3) -->
-                  <div class="story-axis" aria-hidden="true">
-                    <div class="story-axis-line"></div>
-                    {sc.ticks.map((tk) => (
-                      <span class="story-tick" style={`left:${tk.pct}%`}>
-                        <span>{tk.label}</span>
-                      </span>
-                    ))}
+                      <!-- Clean left-aligned reading lane headers (stay anchored on the left across all steps) -->
+                      <div class="story-lane-guide lane-guide-0" aria-hidden="true">
+                        <span class="lane-tag lane-tag-a">
+                          <span class="lane-swatch swatch-a"></span>
+                          <span>{sc.laneLabels[0]}</span>
+                        </span>
+                      </div>
+                      <div class="story-lane-guide lane-guide-1" aria-hidden="true">
+                        <span class="lane-tag lane-tag-b">
+                          <span class="lane-swatch swatch-b"></span>
+                          <span>{sc.laneLabels[1]}</span>
+                        </span>
+                      </div>
+
+                      <!-- Every real manuscript dot, revealed lane-by-lane on Step 1 -> gliding to date in Step 2 -> weighted in Step 3 -->
+                      {sc.dots.map((dot) => (
+                        <span
+                          class={`story-dot dot-lane-${dot.lane}${dot.early ? " dot-early" : ""}${dot.discounted ? " dot-discounted" : ""}${dot.label ? " dot-has-label" : ""}`}
+                          style={`--x1:${dot.x1}%; --y1:${dot.y1}%; --x2:${dot.x2}%; --y2:${dot.y2}%; --fill-delay:${dot.fillDelayMs}ms; --q-scale:${dot.qScale}; --q-alpha:${dot.qAlpha};`}
+                          title={dot.title}
+                        >
+                          {dot.label && (
+                            <span class="dot-label">
+                              <span class="dot-label-s1">{dot.label}</span>
+                              <span class="dot-label-s2">{dot.labelTimeline ?? dot.label}</span>
+                            </span>
+                          )}
+                        </span>
+                      ))}
+
+                      <!-- Historical timeline axis (fades in on Step 2 & 3) -->
+                      <div class="story-axis" aria-hidden="true">
+                        <div class="story-axis-line"></div>
+                        {sc.ticks.map((tk) => (
+                          <span class="story-tick" style={`left:${tk.pct}%`}>
+                            <span>{tk.label}</span>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <!-- Structured Readings Breakdown: Neutral in Step 1-2, Chosen Reading Circled & Likelihoods Revealed in Step 3 -->
-                {sc.readings.length > 0 && (
-                  <div class="story-readings">
-                    <div class="story-rdg-header" aria-hidden="true">
-                      <span>Reading</span>
-                      <span>Surviving manuscripts</span>
-                      <span class="col-right">This model’s likelihood</span>
-                    </div>
+                <!-- Compact mobile-only toggle shown when the chart folds away during Step 3 readings spotlight -->
+                <button type="button" class="showcase-mini-bar showcase-chart-mini" data-expand-inspect>
+                  <span class="mini-bar-dot mini-dot-emerald" aria-hidden="true"></span>
+                  <span class="mini-bar-text">
+                    <strong>Witness timeline</strong> · {formatNum(sc.totalSurviving)} intact {sc.totalSurviving === 1 ? "manuscript" : "manuscripts"} weighed
+                  </span>
+                  <span class="mini-bar-action">Show chart</span>
+                </button>
 
-                    {sc.readings.map((r, rIdx) => (
-                      <div class={`story-rdg-row${r.chosen ? " is-chosen" : ""}`}>
-                        <div class="story-rdg-word-col">
-                          <span class={`lane-swatch ${rIdx === 0 ? "swatch-a" : "swatch-b"}`} aria-hidden="true"></span>
-                          <span class={`story-rdg-ring-wrap${r.chosen ? " has-chosen-ring" : ""}`}>
-                            <a href={sc.focalHref} class="story-rdg-word-link">
-                              <span class={`story-rdg-orig ${sc.isHebrew ? "script-hebrew" : "script-greek"}`} dir={sc.isHebrew ? "rtl" : "ltr"}>
-                                {r.text}
+                <!-- Collapsible Readings Breakdown: folded during Steps 0-2, expands into spotlight at Step 3 finale -->
+                <div class="story-readings-wrap">
+                  <div class="story-readings-inner">
+                    {sc.readings.length > 0 && (
+                      <div class="story-readings">
+                        <div class="story-rdg-header" aria-hidden="true">
+                          <span>Reading</span>
+                          <span>Surviving manuscripts</span>
+                          <span class="col-right">This model’s likelihood</span>
+                        </div>
+
+                        {sc.readings.map((r, rIdx) => (
+                          <div class={`story-rdg-row${r.chosen ? " is-chosen" : ""}`}>
+                            <div class="story-rdg-word-col">
+                              <span class={`lane-swatch ${rIdx === 0 ? "swatch-a" : "swatch-b"}`} aria-hidden="true"></span>
+                              <span class={`story-rdg-ring-wrap${r.chosen ? " has-chosen-ring" : ""}`}>
+                                <a href={sc.focalHref} class="story-rdg-word-link">
+                                  <span class={`story-rdg-orig ${sc.isHebrew ? "script-hebrew" : "script-greek"}`} dir={sc.isHebrew ? "rtl" : "ltr"}>
+                                    {r.text}
+                                  </span>
+                                  <span class="story-rdg-gloss">“{r.gloss}”</span>
+                                </a>
+                                {r.chosen && (
+                                  <svg class="chosen-circle-svg" viewBox="0 0 220 52" preserveAspectRatio="none" aria-hidden="true">
+                                    <path d="M 12,26 C 10,8 64,3 112,4 C 166,5 210,11 208,27 C 206,43 162,48 110,48 C 56,48 12,42 14,24" />
+                                  </svg>
+                                )}
                               </span>
-                              <span class="story-rdg-gloss">“{r.gloss}”</span>
-                            </a>
-                            {r.chosen && (
-                              <svg class="chosen-circle-svg" viewBox="0 0 220 52" preserveAspectRatio="none" aria-hidden="true">
-                                <path d="M 12,26 C 10,8 64,3 112,4 C 166,5 210,11 208,27 C 206,43 162,48 110,48 C 56,48 12,42 14,24" />
-                              </svg>
-                            )}
-                          </span>
-                          {r.chosen && <span class="story-chosen-pill">Chosen</span>}
-                        </div>
+                              {r.chosen && <span class="story-chosen-pill">Chosen</span>}
+                            </div>
 
-                        <div class="story-rdg-copies-col">
-                          <div class="copies-primary">
-                            <strong>{formatNum(r.witCount)}</strong> {r.witCount === 1 ? "manuscript" : "manuscripts"}
-                            {sc.totalSurviving > 2 && (
-                              <span class="copies-share">({r.copySharePct}% of intact copies)</span>
-                            )}
-                          </div>
-                          <div class="copies-detail">
-                            {r.eraSummary}
-                            {r.notableWits.length > 0 && (
-                              <span class="copies-links">
-                                {" · "}
-                                {r.notableWits.map((sig, wIdx) => (
-                                  <>
-                                    <a
-                                      href={`/archive/?id=${encodeURIComponent(sig)}`}
-                                      class="sc-wit-text"
-                                      title={witTooltip(sig)}
-                                    >
-                                      {sig}
-                                    </a>
-                                    {wIdx < r.notableWits.length - 1 ? ", " : ""}
-                                  </>
-                                ))}
-                              </span>
-                            )}
-                          </div>
-                        </div>
+                            <div class="story-rdg-copies-col">
+                              <div class="copies-primary">
+                                <strong>{formatNum(r.witCount)}</strong> {r.witCount === 1 ? "manuscript" : "manuscripts"}
+                                {sc.totalSurviving > 2 && (
+                                  <span class="copies-share">({r.copySharePct}% of intact copies)</span>
+                                )}
+                              </div>
+                              <div class="copies-detail">
+                                {r.eraSummary}
+                                {r.notableWits.length > 0 && (
+                                  <span class="copies-links">
+                                    {" · "}
+                                    {r.notableWits.map((sig, wIdx) => (
+                                      <>
+                                        <a
+                                          href={`/archive/?id=${encodeURIComponent(sig)}`}
+                                          class="sc-wit-text"
+                                          title={witTooltip(sig)}
+                                        >
+                                          {sig}
+                                        </a>
+                                        {wIdx < r.notableWits.length - 1 ? ", " : ""}
+                                      </>
+                                    ))}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
 
-                        <div class="story-rdg-prob-col">
-                          <button type="button" class="prob-pending-btn" data-jump-step3>
-                            Weighed in step 3 →
-                          </button>
-                          <div class="prob-revealed-wrap">
-                            <ConfidenceBadge
-                              value={r.degree}
-                              kind="reading"
-                              interval={r.uncertainty}
-                              context={r.contextForHover}
-                              showLabel={true}
-                            />
+                            <div class="story-rdg-prob-col">
+                              <div class="prob-revealed-wrap">
+                                <ConfidenceBadge
+                                  value={r.degree}
+                                  kind="reading"
+                                  interval={r.uncertainty}
+                                  context={r.contextForHover}
+                                  showLabel={true}
+                                />
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                        ))}
+
+                        {sc.extraNote && (
+                          <div class="story-extra-note">{sc.extraNote}</div>
+                        )}
                       </div>
-                    ))}
-
-                    {sc.extraNote && (
-                      <div class="story-extra-note">{sc.extraNote}</div>
                     )}
-                  </div>
-                )}
 
                     <div class="story-open-wrap">
                       <div class="story-open-inner">
@@ -930,6 +1231,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
               </div>
             </div>
           ))}
+          <script type="application/json" id="showcase-scripts-data" set:html={showcaseScriptsJson} />
         </div>
       )}
     </div>
@@ -1578,28 +1880,353 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
   <script>
     import { renderConfidenceBadgeHtml } from "../lib/confidence";
 
-    // Auto-playing 4-phase animated evidence carousel with read-first choreography:
-    // 0: steady word-by-word check scan -> disputed word highlighted & alert pulses for standard reading time
-    // 1: breakdown drawer pops open & wording lanes populate
-    // 2: Step 2 caption pulses so reader reads first -> dots glide onto historical timeline
-    // 3: Step 3 decision pulses in emerald so reader reads first -> chart turns green & circles the answer
+    // Guided video-style animated evidence showcase:
+    // - Never animates the chart while the viewer is reading text
+    // - Types narration phrase by phrase, pauses at each animation cue to run that exact chart action, then resumes typing
+    // - Subdues finished sections on desktop (and smoothly collapses them on mobile) so the viewer never loses their spot
+    interface ClientRun {
+      t: string;
+      b?: boolean;
+    }
+
+    type ClientAction =
+      | "reveal-lane-0"
+      | "reveal-lane-1"
+      | "reveal-lane-2"
+      | "timeline"
+      | "spot-early"
+      | "spot-late"
+      | "spot-early-a"
+      | "spot-early-b"
+      | "spot-lacuna"
+      | "decide"
+      | "readings-open"
+      | "readings-circle"
+      | "readings-note";
+
+    interface ClientCue {
+      runs?: ClientRun[];
+      cueTone?: "lane-0" | "lane-1" | "lane-2" | "accent" | "emerald";
+      action?: ClientAction;
+      actionMs?: number;
+      holdMs?: number;
+    }
+
+    interface ClientCaseScript {
+      id: string;
+      refLabel: string;
+      hitRuns: ClientRun[];
+      steps: [ClientCue[], ClientCue[], ClientCue[]];
+    }
+
+    interface StepPhase {
+      startMs: number;
+      endMs: number;
+      kind: "intro" | "type" | "action" | "hold";
+      cueIdx: number;
+      charStart: number;
+      charEnd: number;
+      action?: ClientAction;
+      focus: "caption" | "chart" | "readings";
+    }
+
+    interface CompiledStep {
+      cues: ClientCue[];
+      phases: StepPhase[];
+      actionWindows: Array<{ startMs: number; endMs: number; action: ClientAction }>;
+      totalChars: number;
+      totalMs: number;
+    }
+
+    interface WordSlot {
+      el: HTMLSpanElement;
+      text: string;
+      start: number;
+      end: number;
+      state: "hidden" | "partial" | "shown";
+      shownLen: number;
+    }
+
+    class CaptionTypewriter {
+      private host: HTMLElement;
+      private key = "";
+      private words: WordSlot[] = [];
+      private segEls = new Map<number, HTMLElement>();
+      private caret: HTMLSpanElement;
+      private lastRevealed = -1;
+      private lastShowCaret = false;
+      private lastActiveCue = -2;
+
+      constructor(host: HTMLElement) {
+        this.host = host;
+        this.caret = document.createElement("span");
+        this.caret.className = "type-caret";
+        this.caret.setAttribute("aria-hidden", "true");
+      }
+
+      mountStatic(key: string, refLabel: string) {
+        if (this.key === key) return;
+        this.key = key;
+        this.words = [];
+        this.segEls.clear();
+        this.lastRevealed = -1;
+        this.lastShowCaret = false;
+        this.lastActiveCue = -2;
+        this.host.innerHTML = "";
+        this.host.append("Checking ");
+        const strong = document.createElement("strong");
+        strong.textContent = refLabel;
+        this.host.append(strong, " word by word across surviving manuscripts…");
+      }
+
+      mountCues(key: string, cues: ClientCue[]) {
+        if (this.key === key) return;
+        this.key = key;
+        this.words = [];
+        this.segEls.clear();
+        this.lastRevealed = -1;
+        this.lastShowCaret = false;
+        this.lastActiveCue = -2;
+        this.host.innerHTML = "";
+
+        let offset = 0;
+        cues.forEach((cue, cueIdx) => {
+          const runs = cue.runs ?? [];
+          if (!runs.length) return;
+          const seg = document.createElement("span");
+          seg.className = `cue-seg${cue.cueTone ? ` cue-tone-${cue.cueTone}` : ""}`;
+          seg.dataset.cueIdx = String(cueIdx);
+          this.segEls.set(cueIdx, seg);
+
+          for (const run of runs) {
+            const container: HTMLElement = run.b ? document.createElement("strong") : seg;
+            const pieces = run.t.split(/(\s+)/);
+            for (const piece of pieces) {
+              if (!piece) continue;
+              if (/^\s+$/.test(piece)) {
+                container.append(document.createTextNode(piece));
+                offset += piece.length;
+              } else {
+                const span = document.createElement("span");
+                span.className = "tw tw-hidden";
+                span.textContent = piece;
+                container.append(span);
+                this.words.push({
+                  el: span,
+                  text: piece,
+                  start: offset,
+                  end: offset + piece.length,
+                  state: "hidden",
+                  shownLen: 0,
+                });
+                offset += piece.length;
+              }
+            }
+            if (run.b) seg.append(container);
+          }
+
+          this.host.append(seg);
+        });
+      }
+
+      render(revealedChars: number, showCaret: boolean, activeCueIdx: number) {
+        if (
+          revealedChars === this.lastRevealed &&
+          showCaret === this.lastShowCaret &&
+          activeCueIdx === this.lastActiveCue
+        ) {
+          return;
+        }
+        this.lastRevealed = revealedChars;
+        this.lastShowCaret = showCaret;
+
+        if (activeCueIdx !== this.lastActiveCue) {
+          this.lastActiveCue = activeCueIdx;
+          this.segEls.forEach((el, idx) => {
+            el.classList.toggle("cue-active", idx === activeCueIdx);
+          });
+        }
+
+        if (this.caret.parentNode) this.caret.remove();
+        let caretPlaced = false;
+        let lastShownWord: WordSlot | null = null;
+
+        for (const w of this.words) {
+          if (revealedChars >= w.end) {
+            if (w.state !== "shown") {
+              w.el.classList.remove("tw-hidden");
+              w.el.textContent = w.text;
+              w.state = "shown";
+              w.shownLen = w.text.length;
+            }
+            lastShownWord = w;
+          } else if (revealedChars <= w.start) {
+            if (w.state !== "hidden") {
+              w.el.classList.add("tw-hidden");
+              w.el.textContent = w.text;
+              w.state = "hidden";
+              w.shownLen = 0;
+            }
+          } else {
+            const shownLen = Math.max(0, Math.min(w.text.length, revealedChars - w.start));
+            w.el.classList.remove("tw-hidden");
+            w.el.textContent = "";
+            const shownText = w.text.slice(0, shownLen);
+            const restText = w.text.slice(shownLen);
+            if (shownText) w.el.append(document.createTextNode(shownText));
+            if (showCaret) {
+              w.el.append(this.caret);
+              caretPlaced = true;
+            }
+            if (restText) {
+              const hiddenSpan = document.createElement("span");
+              hiddenSpan.className = "tw-hidden";
+              hiddenSpan.textContent = restText;
+              w.el.append(hiddenSpan);
+            }
+            w.state = "partial";
+            w.shownLen = shownLen;
+          }
+        }
+
+        if (showCaret && !caretPlaced) {
+          if (lastShownWord && lastShownWord.el.parentNode) {
+            lastShownWord.el.after(this.caret);
+          } else if (this.words.length > 0 && this.words[0].el.parentNode) {
+            this.words[0].el.before(this.caret);
+          }
+        }
+      }
+    }
+
     const showcase = document.getElementById("hero-showcase");
     const tabs = [...document.querySelectorAll<HTMLButtonElement>("[data-case-tab]")];
     const panes = [...document.querySelectorAll<HTMLElement>("[data-case-pane]")];
     const playToggle = document.getElementById("showcase-play-toggle") as HTMLButtonElement | null;
+    const scriptsEl = document.getElementById("showcase-scripts-data");
+    const caseScripts: ClientCaseScript[] = scriptsEl?.textContent
+      ? JSON.parse(scriptsEl.textContent)
+      : [];
+    const scriptById = new Map(caseScripts.map((s) => [s.id, s]));
 
-    const WORD_SCAN_MS = 540;       // standard time moving focus from word to word
-    const DISPUTED_READ_MS = 2600;  // standard highlight + reading time before breakdown pops up
-    const STEP_VISUAL_DELAY: Record<number, number> = {
-      1: 0,     // drawer pops open as soon as Step 0's read time completes
-      2: 2600,  // pulse & read Step 2 caption first, then glide dots onto timeline
-      3: 2800,  // pulse & read Step 3 decision first, then activate emerald & circle answer
-    };
-    const STEP_BASE_DURATIONS: Record<number, number> = {
-      1: 8200,
-      2: 10400,
-      3: 11800,
-    };
+    const reducedMotion = Boolean(
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches,
+    );
+
+    const WORD_SCAN_MS = 680;
+    const DISPUTED_PULSE_MS = 950;
+    const CHAR_MS = reducedMotion ? 0 : 32;
+    const DISPUTED_READ_HOLD_MS = 2100;
+    const DRAWER_OPEN_MS = reducedMotion ? 120 : 580;
+    const STEP_INTRO_PAUSE_MS = reducedMotion ? 120 : 380;
+
+    function countRunsChars(runs: ClientRun[] | undefined): number {
+      if (!runs) return 0;
+      let total = 0;
+      for (const r of runs) total += r.t.length;
+      return total;
+    }
+
+    function compileStep(step: number, cues: ClientCue[]): CompiledStep {
+      const phases: StepPhase[] = [];
+      const actionWindows: Array<{ startMs: number; endMs: number; action: ClientAction }> = [];
+      let cursor = 0;
+      let charCursor = 0;
+      let lastTextCueIdx = -1;
+
+      const introMs = step === 1 ? DRAWER_OPEN_MS : STEP_INTRO_PAUSE_MS;
+      phases.push({
+        startMs: cursor,
+        endMs: cursor + introMs,
+        kind: "intro",
+        cueIdx: -1,
+        charStart: 0,
+        charEnd: 0,
+        focus: "caption",
+      });
+      cursor += introMs;
+
+      cues.forEach((cue, cueIdx) => {
+        const len = countRunsChars(cue.runs);
+        const cStart = charCursor;
+        const cEnd = charCursor + len;
+        if (len > 0) {
+          lastTextCueIdx = cueIdx;
+          const typeMs = reducedMotion ? 450 : Math.max(240, len * CHAR_MS);
+          phases.push({
+            startMs: cursor,
+            endMs: cursor + typeMs,
+            kind: "type",
+            cueIdx,
+            charStart: cStart,
+            charEnd: cEnd,
+            focus: "caption",
+          });
+          cursor += typeMs;
+          charCursor = cEnd;
+        }
+
+        if (cue.action) {
+          const actionMs = reducedMotion
+            ? Math.min(cue.actionMs ?? 1500, 1200)
+            : cue.actionMs ?? 1600;
+          const isReadings = cue.action.startsWith("readings");
+          phases.push({
+            startMs: cursor,
+            endMs: cursor + actionMs,
+            kind: "action",
+            cueIdx: cue.action === "readings-note" ? -1 : isReadings ? lastTextCueIdx : cueIdx,
+            charStart: charCursor,
+            charEnd: charCursor,
+            action: cue.action,
+            focus: isReadings ? "readings" : "chart",
+          });
+          actionWindows.push({
+            startMs: cursor,
+            endMs: cursor + actionMs,
+            action: cue.action,
+          });
+          cursor += actionMs;
+        }
+
+        if (cue.holdMs && cue.holdMs > 0) {
+          const isReadings = Boolean(cue.action?.startsWith("readings"));
+          phases.push({
+            startMs: cursor,
+            endMs: cursor + cue.holdMs,
+            kind: "hold",
+            cueIdx: -1,
+            charStart: charCursor,
+            charEnd: charCursor,
+            focus: isReadings ? "readings" : "caption",
+          });
+          cursor += cue.holdMs;
+        }
+      });
+
+      return {
+        cues,
+        phases,
+        actionWindows,
+        totalChars: charCursor,
+        totalMs: cursor,
+      };
+    }
+
+    const compiledByCase = new Map<string, [CompiledStep, CompiledStep, CompiledStep]>();
+    caseScripts.forEach((cs) => {
+      compiledByCase.set(cs.id, [
+        compileStep(1, cs.steps[0]),
+        compileStep(2, cs.steps[1]),
+        compileStep(3, cs.steps[2]),
+      ]);
+    });
+
+    const typewriters = new Map<HTMLElement, CaptionTypewriter>();
+    panes.forEach((pane) => {
+      const capEl = pane.querySelector<HTMLElement>("[data-live-caption]");
+      if (capEl) typewriters.set(pane, new CaptionTypewriter(capEl));
+    });
 
     function getFocalWordIndex(pane: HTMLElement | undefined): number {
       if (!pane) return 0;
@@ -1608,12 +2235,24 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
       return idx >= 0 ? idx : 0;
     }
 
+    function getStep0Timing(caseIdx: number) {
+      const pane = panes[caseIdx];
+      const caseId = pane?.dataset.casePane ?? "";
+      const cs = scriptById.get(caseId);
+      const focalIdx = getFocalWordIndex(pane);
+      const scanEndMs = focalIdx * WORD_SCAN_MS;
+      const hitPulseEndMs = scanEndMs + DISPUTED_PULSE_MS;
+      const hitChars = countRunsChars(cs?.hitRuns);
+      const hitTypeMs = reducedMotion ? 450 : Math.max(400, hitChars * CHAR_MS);
+      const hitTypeEndMs = hitPulseEndMs + hitTypeMs;
+      const totalMs = hitTypeEndMs + DISPUTED_READ_HOLD_MS;
+      return { focalIdx, scanEndMs, hitPulseEndMs, hitChars, hitTypeMs, hitTypeEndMs, totalMs };
+    }
+
     function getStepDuration(caseIdx: number, step: number): number {
-      if (step === 0) {
-        const focalIdx = getFocalWordIndex(panes[caseIdx]);
-        return focalIdx * WORD_SCAN_MS + DISPUTED_READ_MS;
-      }
-      return STEP_BASE_DURATIONS[step] ?? 8200;
+      if (step === 0) return getStep0Timing(caseIdx).totalMs;
+      const caseId = panes[caseIdx]?.dataset.casePane ?? "";
+      return compiledByCase.get(caseId)?.[step - 1]?.totalMs ?? 10000;
     }
 
     function getTotalCaseMs(caseIdx: number): number {
@@ -1627,30 +2266,15 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
 
     let currentCaseIdx = 0;
     let currentStep = 0;
-    let currentVisual = 0;
-    let hitPulseFired = false;
+    let inspectMode = false;
     let lastScanWordIdx = -1;
+    let lastPuckMode: "scan" | "disputed-pulse" | "settled" | "" = "";
     let userPaused = false;
     let holdUntil = 0;
-    let tabHoldOnStep1 = false;
     let readingTooltip = false;
     let showcaseInView = true;
     let stepElapsed = 0;
     let lastTick = performance.now();
-
-    function clearCaptionPulse(pane: HTMLElement | undefined) {
-      const wrap = pane?.querySelector<HTMLElement>(".story-caption-wrap");
-      if (!wrap) return;
-      wrap.classList.remove("pulse-disputed", "pulse-accent", "pulse-emerald");
-    }
-
-    function pulseCaption(pane: HTMLElement | undefined, tone: "disputed" | "accent" | "emerald") {
-      const wrap = pane?.querySelector<HTMLElement>(".story-caption-wrap");
-      if (!wrap) return;
-      wrap.classList.remove("pulse-disputed", "pulse-accent", "pulse-emerald");
-      void wrap.offsetWidth;
-      wrap.classList.add(`pulse-${tone}`);
-    }
 
     function syncChosenCircles() {
       panes.forEach((pane) => {
@@ -1701,7 +2325,6 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
       const stage = pane.querySelector<HTMLElement>(".showcase-stage");
       const puck = pane.querySelector<HTMLElement>(".verse-scan-puck");
       if (!stage || !puck || !wordEl) return;
-
       if (wordEl.offsetWidth === 0) return;
 
       if (instant) puck.classList.add("puck-instant");
@@ -1719,64 +2342,225 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
       }
     }
 
-    function syncScanVisual(instant = false) {
+    function setFlag(pane: HTMLElement, key: string, on: boolean, val = "on") {
+      if (on) {
+        if (pane.dataset[key] !== val) pane.dataset[key] = val;
+      } else if (pane.dataset[key] !== undefined) {
+        delete pane.dataset[key];
+      }
+    }
+
+    function renderCurrentFrame(instantPuck = false) {
       const pane = panes[currentCaseIdx];
       if (!pane || pane.hidden) return;
+      const caseId = pane.dataset.casePane ?? "";
+      const cs = scriptById.get(caseId);
+      const tw = typewriters.get(pane);
       const words = [...pane.querySelectorAll<HTMLElement>(".showcase-word")];
-      if (!words.length) return;
       const focalIdx = getFocalWordIndex(pane);
 
       if (currentStep === 0) {
+        const t0 = getStep0Timing(currentCaseIdx);
         const activeIdx = Math.min(focalIdx, Math.floor(stepElapsed / WORD_SCAN_MS));
         const hitDisputed = activeIdx >= focalIdx;
+        const typingHit = stepElapsed >= t0.hitPulseEndMs;
 
         words.forEach((w, i) => {
           w.classList.toggle("word-checked", i < focalIdx && i <= activeIdx);
           w.classList.toggle("word-disputed-hit", i === focalIdx && hitDisputed);
         });
 
-        pane.querySelectorAll<HTMLElement>("[data-step-caption]").forEach((c) => {
-          const cap = c.dataset.stepCaption;
-          c.classList.toggle("active", hitDisputed ? cap === "0-hit" : cap === "0");
-        });
+        setFlag(pane, "hit", hitDisputed, "true");
+        setFlag(pane, "chartOpen", false);
+        setFlag(pane, "lane0", false);
+        setFlag(pane, "lane1", false);
+        setFlag(pane, "lane2", false);
+        setFlag(pane, "timeline", false);
+        setFlag(pane, "decide", false);
+        setFlag(pane, "readings", false);
+        setFlag(pane, "circle", false);
+        setFlag(pane, "note", false);
+        setFlag(pane, "spot", false);
+        setFlag(pane, "activeLane", false);
 
-        if (hitDisputed && !hitPulseFired) {
-          hitPulseFired = true;
-          pane.dataset.hit = "true";
-          pulseCaption(pane, "disputed");
-        } else if (!hitDisputed && pane.dataset.hit) {
-          delete pane.dataset.hit;
-        }
+        const puckMode: "scan" | "disputed-pulse" | "settled" = !hitDisputed
+          ? "scan"
+          : typingHit
+            ? "settled"
+            : "disputed-pulse";
 
-        if (instant || activeIdx !== lastScanWordIdx) {
+        if (instantPuck || activeIdx !== lastScanWordIdx || puckMode !== lastPuckMode) {
           lastScanWordIdx = activeIdx;
-          positionPuckOnWord(
-            pane,
-            words[activeIdx],
-            hitDisputed ? "disputed-pulse" : "scan",
-            instant,
-          );
+          lastPuckMode = puckMode;
+          positionPuckOnWord(pane, words[activeIdx], puckMode, instantPuck);
         }
-      } else {
-        words.forEach((w, i) => {
-          w.classList.toggle("word-checked", i < focalIdx);
-          w.classList.toggle("word-disputed-hit", i === focalIdx);
-        });
+
+        if (inspectMode) {
+          pane.dataset.focus = "inspect";
+        } else {
+          pane.dataset.focus = typingHit ? "caption" : "verse";
+        }
+
+        if (tw && cs) {
+          if (!typingHit) {
+            tw.mountStatic(`${caseId}-0-scan`, cs.refLabel);
+          } else {
+            tw.mountCues(`${caseId}-0-hit`, [{ runs: cs.hitRuns }]);
+            const frac = Math.min(1, Math.max(0, (stepElapsed - t0.hitPulseEndMs) / Math.max(1, t0.hitTypeMs)));
+            const chars = reducedMotion || inspectMode ? t0.hitChars : Math.floor(frac * t0.hitChars);
+            const showCaret = !reducedMotion && !inspectMode && stepElapsed < t0.hitTypeEndMs;
+            tw.render(chars, showCaret, -1);
+          }
+        }
+        return;
+      }
+
+      // Steps 1, 2, 3
+      words.forEach((w, i) => {
+        w.classList.toggle("word-checked", i < focalIdx);
+        w.classList.toggle("word-disputed-hit", i === focalIdx);
+      });
+      if (instantPuck || lastScanWordIdx !== focalIdx || lastPuckMode !== "settled") {
         lastScanWordIdx = focalIdx;
-        positionPuckOnWord(pane, words[focalIdx], "settled", instant);
+        lastPuckMode = "settled";
+        positionPuckOnWord(pane, words[focalIdx], "settled", instantPuck);
+      }
+
+      const compiled = compiledByCase.get(caseId)?.[currentStep - 1];
+      if (!compiled) return;
+
+      const t = inspectMode ? compiled.totalMs : Math.min(stepElapsed, compiled.totalMs);
+      let activePhase = compiled.phases[compiled.phases.length - 1];
+      for (const p of compiled.phases) {
+        if (t >= p.startMs && t < p.endMs) {
+          activePhase = p;
+          break;
+        }
+      }
+
+      // Cumulative flags from prior steps + fired actions in current step
+      let lane0 = currentStep >= 2 || inspectMode;
+      let lane1 = currentStep >= 2 || inspectMode;
+      let lane2 = currentStep >= 2 || inspectMode;
+      let timeline = currentStep >= 3 || (inspectMode && currentStep >= 2);
+      let decide = inspectMode && currentStep >= 3;
+      let readings = inspectMode && currentStep >= 3;
+      let circle = inspectMode && currentStep >= 3;
+      let note = inspectMode && currentStep >= 3;
+      let spot = "";
+      let activeLane = "";
+
+      for (const aw of compiled.actionWindows) {
+        const started = t >= aw.startMs;
+        const activeNow = !inspectMode && t >= aw.startMs && t < aw.endMs;
+        if (!started) continue;
+        switch (aw.action) {
+          case "reveal-lane-0":
+            lane0 = true;
+            if (activeNow) activeLane = "0";
+            break;
+          case "reveal-lane-1":
+            lane1 = true;
+            if (activeNow) activeLane = "1";
+            break;
+          case "reveal-lane-2":
+            lane2 = true;
+            if (activeNow) activeLane = "2";
+            break;
+          case "timeline":
+            timeline = true;
+            break;
+          case "spot-early":
+            if (activeNow) spot = "early";
+            break;
+          case "spot-late":
+            if (activeNow) spot = "late";
+            break;
+          case "spot-early-a":
+            if (activeNow) spot = "early-a";
+            break;
+          case "spot-early-b":
+            if (activeNow) spot = "early-b";
+            break;
+          case "spot-lacuna":
+            if (activeNow) spot = "lacuna";
+            break;
+          case "decide":
+            decide = true;
+            break;
+          case "readings-open":
+            readings = true;
+            break;
+          case "readings-circle":
+            readings = true;
+            circle = true;
+            break;
+          case "readings-note":
+            readings = true;
+            circle = true;
+            note = true;
+            break;
+        }
+      }
+
+      const wasReadingsOn = pane.dataset.readings === "on";
+      const wasCircleOn = pane.dataset.circle === "on";
+
+      setFlag(pane, "hit", true, "true");
+      setFlag(pane, "chartOpen", true);
+      setFlag(pane, "lane0", lane0);
+      setFlag(pane, "lane1", lane1);
+      setFlag(pane, "lane2", lane2);
+      setFlag(pane, "timeline", timeline);
+      setFlag(pane, "decide", decide);
+      setFlag(pane, "readings", readings);
+      setFlag(pane, "note", note);
+      setFlag(pane, "spot", Boolean(spot), spot);
+      setFlag(pane, "activeLane", Boolean(activeLane), activeLane);
+
+      if ((readings && !wasReadingsOn) || (circle && !wasCircleOn)) {
+        syncChosenCircles();
+        if (circle && !wasCircleOn) void pane.offsetWidth;
+      }
+      setFlag(pane, "circle", circle);
+
+      pane.dataset.focus = inspectMode ? "inspect" : activePhase.focus;
+
+      if (tw) {
+        tw.mountCues(`${caseId}-s${currentStep}`, compiled.cues);
+        let revealedChars = compiled.totalChars;
+        let showCaret = false;
+        let activeCueIdx = -1;
+
+        if (!inspectMode) {
+          if (activePhase.kind === "type") {
+            const span = Math.max(1, activePhase.endMs - activePhase.startMs);
+            const frac = Math.min(1, Math.max(0, (t - activePhase.startMs) / span));
+            revealedChars = reducedMotion
+              ? activePhase.charEnd
+              : activePhase.charStart + Math.floor(frac * (activePhase.charEnd - activePhase.charStart));
+            showCaret = !reducedMotion;
+          } else {
+            revealedChars = activePhase.charEnd;
+            showCaret = false;
+            if (activePhase.kind === "action") {
+              activeCueIdx = activePhase.cueIdx;
+            }
+          }
+        }
+        tw.render(revealedChars, showCaret, activeCueIdx);
       }
     }
 
-    function applyCaseAndStep(caseIdx: number, step: number, immediateVisual = false) {
+    function applyCaseAndStep(caseIdx: number, step: number, openInspect = false) {
       const caseChanged = caseIdx !== currentCaseIdx;
       currentCaseIdx = ((caseIdx % panes.length) + panes.length) % panes.length;
       currentStep = step;
+      inspectMode = openInspect;
       lastScanWordIdx = -1;
-      hitPulseFired = false;
+      lastPuckMode = "";
 
-      const delay = STEP_VISUAL_DELAY[step] ?? 0;
-      currentVisual =
-        step === 0 ? 0 : immediateVisual || delay === 0 ? step : Math.max(1, step - 1);
+      stepElapsed = openInspect ? getStepDuration(currentCaseIdx, currentStep) : 0;
 
       tabs.forEach((t, i) => {
         const active = i === currentCaseIdx;
@@ -1790,32 +2574,20 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         const active = i === currentCaseIdx;
         p.hidden = !active;
         if (active) {
-          if (currentVisual === 3) syncChosenCircles();
           p.dataset.step = String(currentStep);
-          p.dataset.visual = String(currentVisual);
-          if (currentStep === 0) delete p.dataset.hit;
-          else p.dataset.hit = "true";
-
           p.querySelectorAll<HTMLButtonElement>("[data-step-btn]").forEach((b) => {
             const s = Number(b.dataset.stepBtn);
             b.classList.toggle("active", s === currentStep);
             b.classList.toggle("done", s < currentStep);
             const sf = b.querySelector<HTMLElement>(".step-fill");
-            if (sf) sf.style.width = s < currentStep ? "100%" : "0%";
+            if (sf) sf.style.width = s < currentStep || (openInspect && s === currentStep) ? "100%" : "0%";
           });
-          if (currentStep >= 1) {
-            p.querySelectorAll<HTMLElement>("[data-step-caption]").forEach((c) => {
-              c.classList.toggle("active", Number(c.dataset.stepCaption) === currentStep);
-            });
-            pulseCaption(p, currentStep === 3 ? "emerald" : "accent");
-          } else {
-            clearCaptionPulse(p);
-          }
         }
       });
 
+      renderCurrentFrame(caseChanged || currentStep === 0 || openInspect);
       requestAnimationFrame(() => {
-        syncScanVisual(caseChanged || currentStep === 0);
+        renderCurrentFrame(true);
         syncChosenCircles();
       });
     }
@@ -1856,35 +2628,31 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
       syncPlayButton();
     }
 
-    function holdBriefly(ms = 12000) {
+    function holdBriefly(ms = 10000) {
       if (userPaused) return;
       holdUntil = Math.max(holdUntil, performance.now() + ms);
     }
 
     if (panes.length > 0) {
-      applyCaseAndStep(0, 0);
+      applyCaseAndStep(0, 0, false);
       syncPlayButton();
 
       document.fonts?.ready.then(() => {
-        syncScanVisual(true);
+        renderCurrentFrame(true);
         syncChosenCircles();
       });
       window.addEventListener("resize", () => {
-        syncScanVisual(true);
+        renderCurrentFrame(true);
         syncChosenCircles();
       });
 
       tabs.forEach((tab, idx) => {
         tab.addEventListener("click", () => {
-          stepElapsed = 0;
           holdUntil = 0;
           lastTick = performance.now();
           if (userPaused) {
-            tabHoldOnStep1 = false;
             applyCaseAndStep(idx, 1, true);
           } else {
-            // Run the word-by-word check scan -> disputed pulse & read -> Step 1 breakdown, then hold calmly for 12s
-            tabHoldOnStep1 = true;
             applyCaseAndStep(idx, 0, false);
           }
           updateProgressBar();
@@ -1895,7 +2663,6 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         pane.querySelectorAll<HTMLButtonElement>("[data-step-btn]").forEach((btn) => {
           btn.addEventListener("click", () => {
             const s = Number(btn.dataset.stepBtn || 1);
-            stepElapsed = 0;
             lastTick = performance.now();
             applyCaseAndStep(pIdx, s, true);
             updateProgressBar();
@@ -1903,29 +2670,50 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           });
         });
 
-        pane.querySelectorAll<HTMLButtonElement>("[data-jump-step3]").forEach((btn) => {
+        // Mobile "Show verse" / "Show chart" chips expand all stages cleanly in inspect mode
+        pane.querySelectorAll<HTMLButtonElement>("[data-expand-inspect]").forEach((btn) => {
           btn.addEventListener("click", () => {
-            stepElapsed = 0;
-            lastTick = performance.now();
-            applyCaseAndStep(pIdx, 3, true);
-            updateProgressBar();
+            inspectMode = true;
+            pane.dataset.focus = "inspect";
             pauseByUser();
+            renderCurrentFrame(true);
+            setTimeout(() => {
+              renderCurrentFrame(true);
+              syncChosenCircles();
+            }, 340);
           });
         });
 
-        // Clicking inside the canvas or readings holds the animation for 12s so you can examine calmly
-        pane.querySelector(".story-canvas")?.addEventListener("click", () => holdBriefly(12000));
-        pane.querySelector(".story-readings")?.addEventListener("click", (e) => {
-          if (!(e.target as Element | null)?.closest("[data-jump-step3]")) {
-            holdBriefly(12000);
-          }
+        // Re-measure circles once the readings drawer completes its height transition
+        pane.querySelector(".story-readings-wrap")?.addEventListener("transitionend", () => {
+          syncChosenCircles();
         });
+        pane.querySelector(".showcase-verse-wrap")?.addEventListener("transitionend", () => {
+          renderCurrentFrame(true);
+        });
+
+        // Clicking inside the canvas or readings holds auto-advance calmly for inspection
+        pane.querySelector(".story-canvas")?.addEventListener("click", () => holdBriefly(10000));
+        pane.querySelector(".story-readings")?.addEventListener("click", () => holdBriefly(10000));
       });
 
       playToggle?.addEventListener("click", () => {
         userPaused = !userPaused;
         holdUntil = 0;
         lastTick = performance.now();
+        if (!userPaused && inspectMode) {
+          inspectMode = false;
+          const limit = getStepDuration(currentCaseIdx, currentStep);
+          if (stepElapsed >= limit - 50) {
+            if (currentStep < 3) {
+              applyCaseAndStep(currentCaseIdx, currentStep + 1, false);
+            } else {
+              applyCaseAndStep(currentCaseIdx + 1, 0, false);
+            }
+          } else {
+            renderCurrentFrame(false);
+          }
+        }
         syncPlayButton();
       });
 
@@ -1948,7 +2736,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         if (!document.hidden) lastTick = performance.now();
       });
 
-      // Pause silently if the reader scrolls down past the showcase so collapsing/expanding never jumps their scroll position
+      // Pause silently if the reader scrolls down past the showcase so collapsing/expanding never shifts scroll
       if (showcase && "IntersectionObserver" in window) {
         const io = new IntersectionObserver(
           (entries) => {
@@ -1968,30 +2756,15 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         const isHeld = holdUntil > 0 && now < holdUntil;
         if (!userPaused && !readingTooltip && !isHeld && showcaseInView && !document.hidden) {
           stepElapsed += dt;
-          if (currentStep === 0) {
-            syncScanVisual(false);
-          } else if (currentVisual < currentStep) {
-            const visualDelay = STEP_VISUAL_DELAY[currentStep] ?? 0;
-            if (stepElapsed >= visualDelay) {
-              if (currentStep === 3) syncChosenCircles();
-              currentVisual = currentStep;
-              const activePane = panes[currentCaseIdx];
-              if (activePane) activePane.dataset.visual = String(currentVisual);
-            }
-          }
           const limit = getStepDuration(currentCaseIdx, currentStep);
           if (stepElapsed >= limit) {
-            stepElapsed = 0;
             if (currentStep < 3) {
-              const nextStep = currentStep + 1;
-              applyCaseAndStep(currentCaseIdx, nextStep, false);
-              if (nextStep === 1 && tabHoldOnStep1) {
-                tabHoldOnStep1 = false;
-                holdBriefly(12000);
-              }
+              applyCaseAndStep(currentCaseIdx, currentStep + 1, false);
             } else {
               applyCaseAndStep(currentCaseIdx + 1, 0, false);
             }
+          } else {
+            renderCurrentFrame(false);
           }
           updateProgressBar();
         }
