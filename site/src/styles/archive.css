@@ -162,31 +162,33 @@
   max-height: none;
 }
 
-@media (min-width: 921px) {
-  .archive-body.page-layout > .page-sidebar {
-    height: calc(100vh - 86px);
-    box-sizing: border-box;
-  }
-  .archive-body.page-layout > .page-sidebar > .page-sidebar-panel,
-  .archive-body.page-layout > .page-sidebar .page-sidebar-body {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 0;
-    box-sizing: border-box;
-  }
-  .archive-body.page-layout > .page-sidebar .ar-nav {
-    flex: 1 1 auto;
-    min-height: 0;
-  }
-}
-
 .source-item {
   scroll-margin-top: 88px;
 }
 
 .source-list {
-  padding-bottom: calc(100vh - 86px);
+  padding-bottom: calc(100vh - 220px);
+}
+
+.ar-filters {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 16px;
+}
+.ar-filters .search-input,
+.ar-filters .select-input {
+  width: 100%;
+  min-width: 0;
+  flex: none;
+  box-sizing: border-box;
+  font-size: 0.82rem;
+}
+.ar-filters .pill-group {
+  align-items: flex-start;
+}
+.ar-filters .pill-label {
+  flex: 1 0 100%;
+  margin: 0 0 2px;
 }
 
 /* Archive records: facts from archives/manuscripts and archives/transcriptions, each with its sources */

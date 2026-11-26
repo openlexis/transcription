@@ -45,50 +45,44 @@ const meta = {
 
   <section class="section" style="padding-top: 24px;">
     <div class="container">
-      <div class="filter-bar">
-        <div class="filter-top">
-          <input
-            type="search"
-            id="src-search"
-            class="search-input"
-            placeholder="Search by ID, name, shelfmark, institution, or file (e.g., 01, Sinaiticus, P46, 4Q1, Leningrad)…"
-            aria-label="Search manuscripts"
-          />
-          <select id="src-target" class="select-input" aria-label="Filter by book">
-            <option value="">All books</option>
-            {spec.targets.map((t) => (
-              <option value={t.id}>{t.name}</option>
-            ))}
-          </select>
-          <select id="src-prov" class="select-input" aria-label="Filter by archival institution">
-            <option value="">All institutions</option>
-            {stats.provenances.map((p) => (
-              <option value={p.id}>{p.name}</option>
-            ))}
-          </select>
-        </div>
-
-        <div style="display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center;">
-          <div class="pill-group" role="group" aria-label="Filter by ancient language">
-            <span class="pill-label">Language</span>
-            <button type="button" class="filter-pill active" data-lang="">All</button>
-            <button type="button" class="filter-pill" data-lang="Greek">Koine Greek</button>
-            <button type="button" class="filter-pill" data-lang="Hebrew">Biblical Hebrew &amp; Aramaic</button>
-          </div>
-
-          <div class="pill-group" role="group" aria-label="Filter by manuscript type">
-            <span class="pill-label">Type</span>
-            <button type="button" class="filter-pill active" data-type="">All</button>
-            <button type="button" class="filter-pill" data-type="continuous">Continuous</button>
-            <button type="button" class="filter-pill" data-type="scroll">Scroll</button>
-            <button type="button" class="filter-pill" data-type="lectionary">Lectionary</button>
-            <button type="button" class="filter-pill" data-type="catena">Catena</button>
-          </div>
-        </div>
-      </div>
-
       <div class="archive-body" data-archive-body>
-        <ArchiveListSidebar />
+        <ArchiveListSidebar>
+          <div slot="filters" class="ar-filters">
+            <input
+              type="search"
+              id="src-search"
+              class="search-input"
+              placeholder="Search by ID, name, shelfmark, institution, or file (e.g., 01, Sinaiticus, P46, 4Q1, Leningrad)…"
+              aria-label="Search manuscripts"
+            />
+            <select id="src-target" class="select-input" aria-label="Filter by book">
+              <option value="">All books</option>
+              {spec.targets.map((t) => (
+                <option value={t.id}>{t.name}</option>
+              ))}
+            </select>
+            <select id="src-prov" class="select-input" aria-label="Filter by archival institution">
+              <option value="">All institutions</option>
+              {stats.provenances.map((p) => (
+                <option value={p.id}>{p.name}</option>
+              ))}
+            </select>
+            <div class="pill-group" role="group" aria-label="Filter by ancient language">
+              <span class="pill-label">Language</span>
+              <button type="button" class="filter-pill active" data-lang="">All</button>
+              <button type="button" class="filter-pill" data-lang="Greek">Koine Greek</button>
+              <button type="button" class="filter-pill" data-lang="Hebrew">Biblical Hebrew and Aramaic</button>
+            </div>
+            <div class="pill-group" role="group" aria-label="Filter by manuscript type">
+              <span class="pill-label">Type</span>
+              <button type="button" class="filter-pill active" data-type="">All</button>
+              <button type="button" class="filter-pill" data-type="continuous">Continuous</button>
+              <button type="button" class="filter-pill" data-type="scroll">Scroll</button>
+              <button type="button" class="filter-pill" data-type="lectionary">Lectionary</button>
+              <button type="button" class="filter-pill" data-type="catena">Catena</button>
+            </div>
+          </div>
+        </ArchiveListSidebar>
         <div class="archive-main">
           <div class="results-meta">
             <span id="src-count">Showing {formatNum(index.length)} manuscripts</span>
@@ -110,6 +104,7 @@ const meta = {
     import { adaptedNote, citeBoxHtml, parseLicense } from "../lib/cite";
     import { archiveIcon } from "../lib/archive-icons";
     import { msAnchor } from "../lib/archive-list-sidebar";
+    import { languageCodeBadgeHtml } from "../lib/languages";
     const META = JSON.parse(document.getElementById("src-meta")?.textContent || "{}");
     const REPO = META.repo;
     const BOOKS = JSON.parse(document.getElementById("src-books")?.textContent || "[]");
@@ -395,7 +390,7 @@ const meta = {
               <span style="color: var(--ink-muted); font-size: 0.82rem; margin-left: 8px;">${esc(s.ds)} · ${plural(fileCount, "transcription file", "transcription files")}</span>
             </div>
             <div class="ar-sum-right">
-              <span class="ar-lang">${esc(s.ld)}</span>
+              ${languageCodeBadgeHtml(s.lg || s.ld)}
               <span class="ar-type" role="img" title="${esc(typeTip)}" aria-label="${esc(typeTip)}">${archiveIcon(s.ty in TYPE_INFO ? s.ty : "continuous", 16)}</span>
             </div>
           </summary>

@@ -1,4 +1,4 @@
-export type LangCode = "grc" | "hbo" | "arc";
+export type LangCode = "grc" | "hbo" | "arc" | "syc" | "lat" | "cop";
 
 export interface LanguageMeta {
   code: LangCode;
@@ -30,7 +30,65 @@ export const LANGUAGE_META: Record<LangCode, LanguageMeta> = {
     badgeClass: "badge-violet",
     note: "Imperial Aramaic, written right to left in the same square script as Hebrew.",
   },
+  syc: {
+    code: "syc",
+    label: "Classical Syriac",
+    shortLabel: "Syriac",
+    badgeClass: "badge-rose",
+    note: "Classical Syriac, written right to left.",
+  },
+  lat: {
+    code: "lat",
+    label: "Latin",
+    shortLabel: "Latin",
+    badgeClass: "badge-slate",
+    note: "Latin.",
+  },
+  cop: {
+    code: "cop",
+    label: "Coptic",
+    shortLabel: "Coptic",
+    badgeClass: "badge-emerald",
+    note: "Coptic.",
+  },
 };
+
+const SOURCE_LANGUAGE_CODES: Record<string, LangCode> = {
+  greek: "grc",
+  "koine greek": "grc",
+  hebrew: "hbo",
+  "biblical hebrew": "hbo",
+  "hebrew and aramaic": "hbo",
+  "biblical hebrew and aramaic": "hbo",
+  "biblical hebrew & aramaic": "hbo",
+  aramaic: "arc",
+  "biblical aramaic": "arc",
+  syriac: "syc",
+  "classical syriac": "syc",
+  latin: "lat",
+  coptic: "cop",
+};
+
+/** Map a source or display language name, or a language code, to a compact language code. */
+export function languageCodeFor(language: string): LangCode | undefined {
+  const raw = language.trim();
+  if (raw in LANGUAGE_META) return raw as LangCode;
+  return SOURCE_LANGUAGE_CODES[raw.toLowerCase()];
+}
+
+function escAttr(value: string): string {
+  return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+}
+
+/** Compact language code badge (for example "grc") with the full name as the accessible label. */
+export function languageCodeBadgeHtml(language: string): string {
+  const code = languageCodeFor(language);
+  const label = code ? LANGUAGE_META[code].label : language.trim();
+  const shown = code ?? language.trim();
+  if (!shown) return "";
+  const attr = escAttr(label);
+  return `<span class="lang-code-badge" title="${attr}" aria-label="${attr}">${escAttr(shown)}</span>`;
+}
 
 /** Exact language icons shared between the homepage language breakdown and the transcription reader. */
 export function languageIconSvg(code: LangCode, size = 13): string {
