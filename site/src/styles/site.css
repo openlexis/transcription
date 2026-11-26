@@ -4399,8 +4399,8 @@ tr:last-child td {
 
 .tok-omit {
   font-family: var(--font-mono);
-  font-size: 0.78em;
-  color: transparent;
+  font-size: 0.9em;
+  color: var(--ink-muted);
   min-width: 1.1em;
   text-align: center;
   transition: color 0.14s ease, background 0.12s ease;
@@ -4409,7 +4409,7 @@ tr:last-child td {
 .tok-omit:hover,
 .tok-omit:focus-visible,
 .tok-omit.tok-active {
-  color: var(--ink-muted);
+  color: var(--ink);
 }
 
 .book-eyebrow-row {

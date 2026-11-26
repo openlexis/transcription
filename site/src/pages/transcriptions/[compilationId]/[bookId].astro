@@ -524,6 +524,36 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                           </span>
                         ) : null;
 
+                        const tokenEmpty = !(tok.text && String(tok.text).trim());
+                        if (tokenEmpty) {
+                          const prev = tokIdx > 0 ? v.tokens[tokIdx - 1] : undefined;
+                          const prevEmpty = Boolean(prev && !(prev.text && String(prev.text).trim()));
+                          if (prevEmpty) return switchChip ? [switchChip] : [];
+                          const runKeys = [tok.key];
+                          for (let i = tokIdx + 1; i < v.tokens.length; i++) {
+                            if (v.tokens[i].text && String(v.tokens[i].text).trim()) break;
+                            runKeys.push(v.tokens[i].key);
+                          }
+                          const btn = (
+                            <button
+                              type="button"
+                              data-tok={tok.key}
+                              data-toks={runKeys.length > 1 ? runKeys.join(",") : undefined}
+                              data-vtok={vtok}
+                              data-lang={tok.lang}
+                              data-sev={tok.sevBucket}
+                              data-max-sev={maxSevAttr}
+                              data-conf={confAttr}
+                              style={tokStyle}
+                              title={runKeys.length > 1 ? `${runKeys.length} consecutive omitted readings` : "Omitted reading"}
+                              class={`tok-btn tok-app tok-omit${arcCls}`}
+                            >
+                              ·
+                            </button>
+                          );
+                          return switchChip ? [switchChip, btn] : [btn];
+                        }
+
                         if (tok.kind === "app" && tok.text && tok.text.trim().includes(" ")) {
                           const words = tok.text.trim().split(/\s+/).filter(Boolean);
                           const btns = words.map((word) => {
@@ -576,7 +606,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                                 {g && <span class="il-gloss">{g}</span>}
                               </>
                             ) : (
-                              "∅"
+                              "·"
                             )}
                           </button>
                         );
@@ -1439,6 +1469,25 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           ${lacHtml}
           ${buildGlossary()}
         `;
+
+        const extraKeys = (btn.dataset.toks || "").split(",").filter((k: string) => k && k !== key);
+        if (extraKeys.length) {
+          panel.innerHTML += extraKeys
+            .map((ek: string) => {
+              const it = DATA.t[ek] as any;
+              if (!it || it.k !== "a") return "";
+              const rdgs = (it.rd ?? []) as [string, string, string, string, string, (number | string)[], number, string, string][];
+              const variants = rdgs
+                .filter((r) => r[0] === "variant" && r[1] && r[1] !== "(omission)")
+                .map((r) => {
+                  const words = String(r[1]);
+                  return `<div class="app-rdg app-rdg-variant" style="margin-top:8px;"><div class="app-rdg-body">${renderInterlinearWords(words)}</div><div class="ms-sub" style="margin-top:4px;">${esc(fmtPct(String(r[2] ?? "")))} · ${esc(humanizeDiff(String(r[4] ?? "addition")))}</div></div>`;
+                })
+                .join("");
+              return `<div class="inspector-group-follow" style="margin-top:16px; padding-top:12px; border-top:1px dashed var(--border);"><strong>Another omitted place</strong><span class="ms-sub"> · ${esc(String(it.ref ?? item.ref))}</span>${variants || '<div class="ms-sub" style="margin-top:6px;">No alternative wording in surviving manuscripts.</div>'}</div>`;
+            })
+            .join("");
+        }
       }
 
       verseBlock.appendChild(panel);
