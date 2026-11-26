@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 /**
  * Writes `specifications/<ULID>/sources.json` for a folder specification: every transcript the specification will consider,
- * each with an identifier, its repository path, and the git commit that holds it. Book, language, date, license and archive
+ * each with its repository path and the git commit that holds it. Book, language, date, license and archive
  * details are not copied here; the compiler and site read them from the transcript and its catalog at that same commit
  * (`git show <commit>:<path>`), so later changes to `archives/` do not change what the specification means.
  *
@@ -74,7 +74,6 @@ const transcripts = sources
   .flatMap((src) =>
     src.files.flatMap((f) =>
       f.paths.map((path) => ({
-        id: `${f.provenance.id}:${path.replace(`archives/${f.provenance.id}/`, "").replace(/\.xml$/, "")}`,
         path,
         commit: commitOf.get(path)!,
       }))

@@ -85,19 +85,20 @@ export interface ResolvedSource {
     lines?: number;
     words?: number;
     provenance: { id: string; name: string; url: string };
-    /** Folder specifications only: each transcript's identifier, repository path, and the git commit to read it from. */
+    /** Folder specifications only: each transcript's repository path and the git commit to read it from. */
     transcripts?: PinnedTranscript[];
   }[];
 }
 
 export interface PinnedTranscript {
-  id: string;
   path: string;
   commit: string;
+  /** Earlier folder form only. New lists store just path and commit; the path already names the archive and file. */
+  id?: string;
 }
 
 /** The shape of `specifications/<ULID>/sources.json`: only the specification id and the transcripts, each with its
- * identifier, repository path, and the git commit that holds it. Book, language, date, license and archive details are
+ * repository path and the git commit that holds it. Book, language, date, license and archive details are
  * read from the transcript and its catalog (`archives/<archive>/index.json`) at that same commit. */
 export interface FrozenSources {
   specification: string;

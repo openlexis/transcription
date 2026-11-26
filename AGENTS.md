@@ -45,7 +45,7 @@ bun run site
 Words used here:
 
 - **Specification folder:** `specifications/<ULID>/`, holding exactly two files: `specification.yaml` (the rules, with `sources: sources.json`) and `sources.json` (the transcript list).
-- **Transcript list (`sources.json`):** every transcript the specification considers. Each transcript has an identifier (`<archive>:<file name without .xml>`), its repository path, and the git commit that holds it. Nothing else is stored there. Book, language, date, license and archive details are read from the transcript and its catalog (`archives/<archive>/index.json`) at that same commit.
+- **Transcript list (`sources.json`):** every transcript the specification considers. Each transcript has its repository path and the git commit that holds it. Nothing else is stored there. The path already names the archive and the file, so a separate identifier is not recorded. Book, language, date, license and archive details are read from the transcript and its catalog (`archives/<archive>/index.json`) at that same commit.
 - **Pinned transcript:** a transcript (and its catalog) read as they are in the recorded commit (`git show <commit>:<path>`), so later edits, moves or deletions under `archives/` do not change what a specification uses.
 
 A specification folder needs nothing else in the repository except the transcripts and their catalogs, which are read at their commits. To make a new specification:
