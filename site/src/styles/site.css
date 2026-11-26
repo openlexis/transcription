@@ -4546,6 +4546,10 @@ tr:last-child td {
   width: 4px;
 }
 
+.legend-bar-sm {
+  width: 8px;
+}
+
 .legend-bar-mid {
   width: 14px;
 }
@@ -4555,7 +4559,7 @@ tr:last-child td {
 }
 
 .verse-block {
-  margin: 0 0 12px;
+  margin: 0 0 22px;
 }
 
 .verse-line {
@@ -5676,6 +5680,7 @@ tr:last-child td {
 
 .page-sidebar-title + .page-sidebar-title,
 .book-sidebar-chapters + .reader-hint,
+.book-sidebar-chapters + .reader-filter-bar,
 .book-sidebar-legend + .reader-filter-bar,
 .page-sidebar-toc + .page-sidebar-note {
   margin-top: 18px;
@@ -5720,9 +5725,16 @@ tr:last-child td {
 }
 
 .book-chapter-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 6px;
+}
+
+.book-chapter-list .chapter-pill {
+  width: 100%;
+  min-width: 0;
+  padding: 0 4px;
+  box-sizing: border-box;
 }
 
 .chapter-pill.is-active,
@@ -5765,9 +5777,9 @@ tr:last-child td {
   scroll-margin-top: 88px;
 }
 
-/* Line numbers in their own column, with a hanging indent on wrapped text.
-   Direction is inherited, so Hebrew (rtl) is mirrored: number on the right,
-   wrapped lines indent further inward (away from the number). */
+/* Line numbers in their own column. Wrapped rows of the same line start at
+   the same edge as the first row. Direction is inherited, so Hebrew (rtl)
+   is mirrored: number on the right, text at a fixed edge beside it. */
 .verse-line {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -5798,9 +5810,123 @@ tr:last-child td {
 
 .verse-text {
   min-width: 0;
-  padding-inline-start: 1.5em;
-  text-indent: -1.5em;
+  padding-inline-start: 0;
+  text-indent: 0;
   overflow-wrap: anywhere;
+}
+
+.filter-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.filter-visual-native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.filter-visual-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 28px 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.84rem;
+  text-align: start;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%2364748b' d='M1.2 1.4 6 6.2l4.8-4.8 1.1 1.1L6 8.4 0.1 2.5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px 7px;
+}
+
+.filter-visual-btn:hover,
+.filter-visual-btn[aria-expanded="true"] {
+  border-color: var(--accent);
+}
+
+.filter-visual-current {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-width: 0;
+}
+
+.filter-visual-menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  max-height: min(60vh, 320px);
+  overflow-y: auto;
+}
+
+.filter-visual-menu [role="option"],
+.filter-visual-note {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  font-size: 0.84rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.filter-visual-menu [role="option"]:hover,
+.filter-visual-menu [role="option"]:focus {
+  background: var(--accent-soft);
+}
+
+.filter-visual-menu [role="option"][aria-selected="true"] {
+  font-weight: 600;
+}
+
+.filter-visual-swatches {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.filter-visual-note {
+  cursor: default;
+  color: var(--ink-muted);
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+  border-radius: 0 0 6px 6px;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.filter-visual-btn:focus-visible,
+.filter-visual-menu [role="option"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 @media (max-width: 920px) {

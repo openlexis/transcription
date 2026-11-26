@@ -397,16 +397,10 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
               {renderedChapters.map((ch) => (
                 <a
                   href={`#ch-${ch.chapter}`}
-                  class={`chapter-pill${ch.hasArc ? " chapter-pill-arc" : ""}`}
+                  class="chapter-pill"
                   data-ch-pill={ch.chapter}
                   data-current-label={`Chapter ${ch.chapter}`}
-                  title={
-                    ch.hasArc
-                      ? ch.hasHbo
-                        ? `Chapter ${ch.chapter} (includes Biblical Aramaic)`
-                        : `Chapter ${ch.chapter} (Biblical Aramaic)`
-                      : `Chapter ${ch.chapter}`
-                  }
+                  title={`Chapter ${ch.chapter}`}
                 >
                   {ch.chapter}
                 </a>
@@ -415,30 +409,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           </nav>
         )}
 
-        <div class="reader-hint book-sidebar-legend">
-          <div class="reader-legend-row">
-            <span class="legend-group">
-              <span class="legend-label">Severity:</span>
-              <span class="legend-item"><span class="legend-dot" data-sev="0"></span>Unanimous</span>
-              <span class="legend-item"><span class="legend-dot" data-sev="1"></span>Minor</span>
-              <span class="legend-item"><span class="legend-dot" data-sev="2"></span>Small</span>
-              <span class="legend-item"><span class="legend-dot" data-sev="3"></span>Moderate</span>
-              <span class="legend-item"><span class="legend-dot" data-sev="4"></span>Substantial</span>
-              <span class="legend-item"><span class="legend-dot" data-sev="5"></span>Major</span>
-            </span>
-            <span class="legend-group">
-              <span class="legend-label">Uncertainty width:</span>
-              <span class="legend-item"><span class="legend-bar legend-bar-dot"></span>Low (≥99% likely)</span>
-              <span class="legend-item"><span class="legend-bar legend-bar-mid"></span>Moderate (~75%)</span>
-              <span class="legend-item"><span class="legend-bar legend-bar-full"></span>High (≤51%)</span>
-            </span>
-            <span class="legend-group">
-              <span class="legend-item"><span class="legend-bar legend-bar-full" style="background:linear-gradient(90deg,rgba(148,163,184,0.40) 0%,rgba(148,163,184,0.40) 74%,rgba(249,115,22,0.96) 82%,rgba(249,115,22,0.96) 100%);"></span>Mixed severities = weighted gradient</span>
-            </span>
-          </div>
-        </div>
-
-        <div class="reader-filter-bar" role="region" aria-label="Filter text by severity, confidence, and language">
+        <div class="reader-filter-bar" role="region" aria-label="Filter text by severity, uncertainty, and language">
         {hasAramaic && (
           <label class="reader-filter-field">
             <span class="pill-label">Language</span>
@@ -449,27 +420,111 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             </select>
           </label>
         )}
-        <label class="reader-filter-field">
-          <span class="pill-label">Min severity</span>
-          <select id="filter-min-sev" class="select-input select-sm">
-            <option value="0">All words</option>
-            <option value="1">1+ Minor &amp; up</option>
-            <option value="2">2+ Small &amp; up</option>
-            <option value="3">3+ Moderate &amp; up</option>
-            <option value="4">4+ Substantial &amp; up</option>
-            <option value="5">5 Major only</option>
+        <div class="filter-visual reader-filter-field" data-filter-visual="sev">
+          <span class="filter-visual-label pill-label" id="filter-sev-label">Severity</span>
+          <select id="filter-min-sev" class="filter-visual-native" aria-hidden="true" tabindex="-1">
+            <option value="0" selected>All words</option>
+            <option value="1">Minor and up</option>
+            <option value="2">Small and up</option>
+            <option value="3">Moderate and up</option>
+            <option value="4">Substantial and up</option>
+            <option value="5">Major only</option>
           </select>
-        </label>
-        <label class="reader-filter-field">
-          <span class="pill-label">Confidence</span>
-          <select id="filter-max-conf" class="select-input select-sm">
-            <option value="100">Any confidence</option>
-            <option value="99">&lt; 99% (any uncertainty)</option>
-            <option value="95">&lt; 95% (notable)</option>
-            <option value="80">&lt; 80% (high uncertainty)</option>
-            <option value="60">&lt; 60% (heavily contested)</option>
+          <button
+            type="button"
+            class="filter-visual-btn"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-labelledby="filter-sev-label"
+            data-filter-btn="sev"
+          >
+            <span class="filter-visual-current" data-filter-current="sev">
+              <span class="legend-dot" data-sev="0"></span>
+              <span class="legend-dot" data-sev="1"></span>
+              <span class="legend-dot" data-sev="2"></span>
+              <span class="legend-dot" data-sev="3"></span>
+              <span class="legend-dot" data-sev="4"></span>
+              <span class="legend-dot" data-sev="5"></span>
+              All words
+            </span>
+          </button>
+          <ul class="filter-visual-menu" role="listbox" aria-labelledby="filter-sev-label" hidden data-filter-menu="sev">
+            <li role="option" aria-selected="true" data-value="0" tabindex="-1">
+              <span class="filter-visual-swatches">
+                <span class="legend-dot" data-sev="0"></span>
+                <span class="legend-dot" data-sev="1"></span>
+                <span class="legend-dot" data-sev="2"></span>
+                <span class="legend-dot" data-sev="3"></span>
+                <span class="legend-dot" data-sev="4"></span>
+                <span class="legend-dot" data-sev="5"></span>
+              </span>
+              All words
+            </li>
+            <li role="option" aria-selected="false" data-value="1" tabindex="-1">
+              <span class="legend-dot" data-sev="1"></span>
+              Minor and up
+            </li>
+            <li role="option" aria-selected="false" data-value="2" tabindex="-1">
+              <span class="legend-dot" data-sev="2"></span>
+              Small and up
+            </li>
+            <li role="option" aria-selected="false" data-value="3" tabindex="-1">
+              <span class="legend-dot" data-sev="3"></span>
+              Moderate and up
+            </li>
+            <li role="option" aria-selected="false" data-value="4" tabindex="-1">
+              <span class="legend-dot" data-sev="4"></span>
+              Substantial and up
+            </li>
+            <li role="option" aria-selected="false" data-value="5" tabindex="-1">
+              <span class="legend-dot" data-sev="5"></span>
+              Major only
+            </li>
+          </ul>
+        </div>
+        <div class="filter-visual reader-filter-field" data-filter-visual="unc">
+          <span class="filter-visual-label pill-label" id="filter-unc-label">Uncertainty</span>
+          <select id="filter-max-conf" class="filter-visual-native" aria-hidden="true" tabindex="-1">
+            <option value="100" selected>All words</option>
+            <option value="99">1% and above</option>
+            <option value="95">5% and above</option>
+            <option value="80">20% and above</option>
+            <option value="60">40% and above</option>
           </select>
-        </label>
+          <button
+            type="button"
+            class="filter-visual-btn"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-labelledby="filter-unc-label"
+            data-filter-btn="unc"
+          >
+            <span class="filter-visual-current" data-filter-current="unc">All words</span>
+          </button>
+          <ul class="filter-visual-menu" role="listbox" aria-labelledby="filter-unc-label" hidden data-filter-menu="unc">
+            <li role="option" aria-selected="true" data-value="100" tabindex="-1">All words</li>
+            <li role="option" aria-selected="false" data-value="99" tabindex="-1">
+              <span class="legend-bar legend-bar-dot"></span>
+              1% and above
+            </li>
+            <li role="option" aria-selected="false" data-value="95" tabindex="-1">
+              <span class="legend-bar legend-bar-sm"></span>
+              5% and above
+            </li>
+            <li role="option" aria-selected="false" data-value="80" tabindex="-1">
+              <span class="legend-bar legend-bar-mid"></span>
+              20% and above
+            </li>
+            <li role="option" aria-selected="false" data-value="60" tabindex="-1">
+              <span class="legend-bar legend-bar-full"></span>
+              40% and above
+            </li>
+            <li class="filter-visual-note" role="note">
+              <span class="legend-bar legend-bar-full" style="background:linear-gradient(90deg,rgba(148,163,184,0.40) 0%,rgba(148,163,184,0.40) 74%,rgba(249,115,22,0.96) 82%,rgba(249,115,22,0.96) 100%);"></span>
+              Mixed severities are a weighted gradient
+            </li>
+          </ul>
+        </div>
         <button type="button" id="filter-only-lines" class="filter-pill" aria-pressed="false">
           Only matching lines
         </button>
@@ -759,7 +814,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       if (filterStatus) {
         if (!hasThreshold) {
           filterStatus.textContent = onlyMatchingLines
-            ? "Pick a language, severity, or confidence filter"
+            ? "Pick a language, severity, or uncertainty filter"
             : "";
         } else {
           const unitLabel =
@@ -789,6 +844,104 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       applyReaderFilters();
     });
 
+    const SEV_LABELS: Record<string, string> = {
+      "0": "All words",
+      "1": "Minor and up",
+      "2": "Small and up",
+      "3": "Moderate and up",
+      "4": "Substantial and up",
+      "5": "Major only",
+    };
+    const UNC_LABELS: Record<string, string> = {
+      "100": "All words",
+      "99": "1% and above",
+      "95": "5% and above",
+      "80": "20% and above",
+      "60": "40% and above",
+    };
+    const UNC_BAR: Record<string, string> = {
+      "99": "legend-bar-dot",
+      "95": "legend-bar-sm",
+      "80": "legend-bar-mid",
+      "60": "legend-bar-full",
+    };
+
+    function sevCurrentHtml(value: string): string {
+      if (value === "0") {
+        return [0, 1, 2, 3, 4, 5].map((n) => `<span class="legend-dot" data-sev="${n}"></span>`).join("") + " All words";
+      }
+      return `<span class="legend-dot" data-sev="${value}"></span> ${SEV_LABELS[value] ?? "All words"}`;
+    }
+
+    function uncCurrentHtml(value: string): string {
+      const label = UNC_LABELS[value] ?? "All words";
+      const bar = UNC_BAR[value];
+      if (!bar) return label;
+      return `<span class="legend-bar ${bar}"></span> ${label}`;
+    }
+
+    function closeFilterMenus(except?: Element | null) {
+      document.querySelectorAll(".filter-visual").forEach((wrap) => {
+        if (wrap === except) return;
+        const btn = wrap.querySelector(".filter-visual-btn");
+        const menu = wrap.querySelector<HTMLElement>(".filter-visual-menu");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+        if (menu) menu.hidden = true;
+      });
+    }
+
+    function syncFilterVisuals() {
+      const sevVal = minSevSel?.value ?? "0";
+      const uncVal = maxConfSel?.value ?? "100";
+      const sevCurrent = document.querySelector('[data-filter-current="sev"]');
+      const uncCurrent = document.querySelector('[data-filter-current="unc"]');
+      if (sevCurrent) sevCurrent.innerHTML = sevCurrentHtml(sevVal);
+      if (uncCurrent) uncCurrent.innerHTML = uncCurrentHtml(uncVal);
+      document.querySelectorAll('[data-filter-menu="sev"] [role="option"]').forEach((opt) => {
+        opt.setAttribute("aria-selected", opt.getAttribute("data-value") === sevVal ? "true" : "false");
+      });
+      document.querySelectorAll('[data-filter-menu="unc"] [role="option"]').forEach((opt) => {
+        opt.setAttribute("aria-selected", opt.getAttribute("data-value") === uncVal ? "true" : "false");
+      });
+    }
+
+    function bindFilterVisual(kind: string, select: HTMLSelectElement | null) {
+      const wrap = document.querySelector(`[data-filter-visual="${kind}"]`);
+      if (!wrap || !select) return;
+      const btn = wrap.querySelector<HTMLButtonElement>(".filter-visual-btn");
+      const menu = wrap.querySelector<HTMLElement>(".filter-visual-menu");
+      if (!btn || !menu) return;
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const open = btn.getAttribute("aria-expanded") === "true";
+        closeFilterMenus();
+        if (!open) {
+          btn.setAttribute("aria-expanded", "true");
+          menu.hidden = false;
+        }
+      });
+      menu.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const opt = e.target instanceof Element ? e.target.closest("[role='option']") : null;
+        if (!opt) return;
+        const value = opt.getAttribute("data-value");
+        if (value == null) return;
+        select.value = value;
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+        syncFilterVisuals();
+        closeFilterMenus();
+        btn.focus();
+      });
+    }
+
+    bindFilterVisual("sev", minSevSel);
+    bindFilterVisual("unc", maxConfSel);
+    syncFilterVisuals();
+    document.addEventListener("click", () => closeFilterMenus());
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeFilterMenus();
+    });
+
     const resetFilters = () => {
       if (langSel) langSel.value = "all";
       if (minSevSel) minSevSel.value = "0";
@@ -796,6 +949,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       onlyMatchingLines = false;
       onlyLinesBtn?.classList.remove("active");
       onlyLinesBtn?.setAttribute("aria-pressed", "false");
+      syncFilterVisuals();
       applyReaderFilters();
     };
     filterReset?.addEventListener("click", resetFilters);
