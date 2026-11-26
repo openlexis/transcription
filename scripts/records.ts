@@ -37,7 +37,14 @@ const src = (path: string, locator: string, quote: string): Source => ({ path, l
 const raw = (header: string, tag: string, i = 0) => norm((header.replace(/<!--[\s\S]*?-->/g, " ").match(new RegExp(`<${tag}\\b[\\s\\S]*?</${tag}>`, "g")) ?? [])[i] ?? "");
 /** A day.month.year date as the Birmingham headers write it (13.5.2024), as YYYY-MM-DD. */
 const dmy = (s?: string) => { const m = s?.trim().match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/); return m && +m[2] <= 12 && +m[1] <= 31 ? `${m[3]}-${m[2].padStart(2, "0")}-${m[1].padStart(2, "0")}` : undefined; };
-const yearish = (s?: string) => (s && /^-?\d{4}(-\d\d(-\d\d)?)?$/.test(s) ? (/^-?\d{4}$/.test(s) ? +s : s) : undefined);
+/** A year as an integer, or an ISO date YYYY-MM / YYYY-MM-DD as a string. Placeholder words and bare year strings are not kept. */
+const yearish = (s?: string) => {
+  const t = s?.trim() ?? "";
+  if (!t || PLACEHOLDER.test(t)) return undefined;
+  if (/^-?\d{4}$/.test(t)) return +t;
+  if (/^-?\d{4}-(0[1-9]|1[0-2])(-([0-2]\d|3[01]))?$/.test(t)) return t;
+  return undefined;
+};
 const keyOf = (x: Any) => JSON.stringify(Object.fromEntries(Object.entries(x).filter(([k]) => k !== "sources" && k !== "statement")));
 const nameKey = (n: string) => n.toLowerCase().replace(/^the /, "").replace(/[^\p{L}\p{N}]/gu, "");
 /** Adds a value to a list, or merges its sources into an equal value already there. */
@@ -460,7 +467,7 @@ function tidy(o: any): any {
   const out: Any = {};
   for (const k of Object.keys(o).filter((k) => !k.startsWith("_")).sort((a, b) => rank(a) - rank(b))) {
     const v = tidy(o[k]);
-    if (v === undefined || (Array.isArray(v) && !v.length) || (v && typeof v === "object" && !Array.isArray(v) && !Object.keys(v).length)) continue;
+    if (v === undefined || v === null || (Array.isArray(v) && !v.length) || (v && typeof v === "object" && !Array.isArray(v) && !Object.keys(v).length)) continue;
     if (k === "roles" && Array.isArray(v) && !v.length) continue;
     out[k] = v;
   }

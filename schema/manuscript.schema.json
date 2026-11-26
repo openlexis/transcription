@@ -220,10 +220,18 @@
                 "type": "string"
               },
               "ageBP": {
-                "type": "number"
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "A number as a source states it. Omit the field or use null if none is stated; never a placeholder word."
               },
               "error": {
-                "type": "number"
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "A number as a source states it. Omit the field or use null if none is stated; never a placeholder word."
               },
               "calibration": {
                 "type": "string"

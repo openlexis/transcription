@@ -30,7 +30,7 @@ example `intf/01`.
 
 ## The one rule: every fact has a source
 
-A field is filled only when a source states it. Otherwise it is left out. A record never says "unknown". Every value carries
+A field is filled only when a source states it. Otherwise it is left out, or set to null. A record never uses a placeholder word such as "unknown" or "not stated", including in dates and numbers: a year is an integer (negative for BC), and a more precise date is an ISO 8601 string (YYYY-MM or YYYY-MM-DD). The archive page may show "Not stated" when a field is absent; that label is display only and is not stored in the records. Every value carries
 `sources`, and every source gives the exact words (`quote`) and where they are:
 
 - a file of this repository: `path` and `locator` (an XML path into the file's header, the part before the text), or
