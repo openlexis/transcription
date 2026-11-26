@@ -919,7 +919,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
       </div>
 
       {showcaseCases.length > 0 && latest && (
-        <div class="showcase-card" id="hero-showcase" data-playing="true">
+        <div class="showcase-card" id="hero-showcase" data-playing="true" data-intro-loop="true">
           <div class="showcase-topbar">
             <div class="showcase-tabs" role="tablist" aria-label="Real manuscript disagreements">
               {showcaseCases.map((sc, idx) => (
@@ -996,6 +996,11 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
                             </span>
                             <span class="sw-orig">{w.text}</span>
                             <span class="sw-gloss" dir="ltr">{w.gloss || w.rom}</span>
+                            <span class="showcase-prompt-arrow" aria-hidden="true">
+                              <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" focusable="false">
+                                <path d="M7 11.25 1.75 4.75h10.5L7 11.25z" />
+                              </svg>
+                            </span>
                           </a>
                         ) : (
                           <span
@@ -2116,6 +2121,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
 
     const WORD_SCAN_MS = 680;
     const DISPUTED_PULSE_MS = 950;
+    const INTRO_ARROW_HOLD_MS = reducedMotion ? 900 : 2400;
     const CHAR_MS = reducedMotion ? 0 : 32;
     const DISPUTED_READ_HOLD_MS = 2100;
     const DRAWER_OPEN_MS = reducedMotion ? 120 : 580;
@@ -2274,6 +2280,10 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
     let holdUntil = 0;
     let readingTooltip = false;
     let showcaseInView = true;
+    let showcaseVisible = true;
+    let introLooping = true;
+    let cachedExpandedHeight = 0;
+    let cachedExpandedWidth = 0;
     let stepElapsed = 0;
     let lastTick = performance.now();
 
@@ -2364,7 +2374,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         const t0 = getStep0Timing(currentCaseIdx);
         const activeIdx = Math.min(focalIdx, Math.floor(stepElapsed / WORD_SCAN_MS));
         const hitDisputed = activeIdx >= focalIdx;
-        const typingHit = stepElapsed >= t0.hitPulseEndMs;
+        const typingHit = !introLooping && stepElapsed >= t0.hitPulseEndMs;
 
         words.forEach((w, i) => {
           w.classList.toggle("word-checked", i < focalIdx && i <= activeIdx);
@@ -2614,6 +2624,145 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
       }
     }
 
+    function getIntroLoopDuration(caseIdx: number): number {
+      const t0 = getStep0Timing(caseIdx);
+      return t0.hitPulseEndMs + INTRO_ARROW_HOLD_MS;
+    }
+
+    function syncIntroLoopAttr() {
+      if (!showcase) return;
+      if (introLooping) showcase.dataset.introLoop = "true";
+      else delete showcase.dataset.introLoop;
+    }
+
+    function getStickyHeaderOffset(): number {
+      const header = document.querySelector(".site-header") as HTMLElement | null;
+      return (header?.getBoundingClientRect().height ?? 64) + 12;
+    }
+
+    function measureExpandedShowcaseHeight(): number {
+      if (!showcase) return 0;
+      const width = showcase.offsetWidth;
+      if (cachedExpandedHeight > 0 && cachedExpandedWidth === width) {
+        return cachedExpandedHeight;
+      }
+      const pane = panes[currentCaseIdx] ?? panes[0];
+      if (!pane) return showcase.offsetHeight;
+
+      const flagKeys = [
+        "step",
+        "focus",
+        "hit",
+        "chartOpen",
+        "lane0",
+        "lane1",
+        "lane2",
+        "timeline",
+        "decide",
+        "readings",
+        "circle",
+        "note",
+        "spot",
+        "activeLane",
+      ] as const;
+      const prevHidden = pane.hidden;
+      const prev: Record<string, string | undefined> = {};
+      for (const key of flagKeys) prev[key] = pane.dataset[key];
+
+      showcase.classList.add("is-measuring");
+      let height = showcase.offsetHeight;
+      try {
+        pane.hidden = false;
+        pane.dataset.step = "3";
+        pane.dataset.focus = "inspect";
+        pane.dataset.hit = "true";
+        pane.dataset.chartOpen = "on";
+        pane.dataset.lane0 = "on";
+        pane.dataset.lane1 = "on";
+        pane.dataset.lane2 = "on";
+        pane.dataset.timeline = "on";
+        pane.dataset.decide = "on";
+        pane.dataset.readings = "on";
+        pane.dataset.circle = "on";
+        pane.dataset.note = "on";
+        height = showcase.offsetHeight;
+      } finally {
+        pane.hidden = prevHidden;
+        for (const key of flagKeys) {
+          const val = prev[key];
+          if (val === undefined) delete pane.dataset[key];
+          else pane.dataset[key] = val;
+        }
+        showcase.classList.remove("is-measuring");
+      }
+
+      cachedExpandedHeight = height;
+      cachedExpandedWidth = width;
+      return height;
+    }
+
+    function expandedAreaFitsInViewport(): boolean {
+      if (!showcase) return false;
+      const rect = showcase.getBoundingClientRect();
+      const headerOffset = getStickyHeaderOffset();
+      const expandedH = measureExpandedShowcaseHeight();
+      if (rect.bottom <= headerOffset || rect.top >= window.innerHeight) return false;
+      const topClear = rect.top >= headerOffset - 4;
+      const bottomFits = rect.top + expandedH <= window.innerHeight + 4;
+      return topClear && bottomFits;
+    }
+
+    function getScrollYToFitExpanded(): number | null {
+      if (!showcase) return null;
+      const expandedH = measureExpandedShowcaseHeight();
+      const headerOffset = getStickyHeaderOffset();
+      const viewportH = window.innerHeight;
+      const pageTop = showcase.getBoundingClientRect().top + window.scrollY;
+      const available = viewportH - headerOffset;
+      let targetY: number;
+      if (expandedH <= available) {
+        const maxScroll = pageTop - headerOffset;
+        const minScroll = pageTop + expandedH - viewportH;
+        if (window.scrollY <= maxScroll + 4 && window.scrollY >= minScroll - 4) {
+          return null;
+        }
+        if (window.scrollY < minScroll) targetY = minScroll;
+        else targetY = maxScroll;
+      } else {
+        targetY = pageTop - headerOffset;
+        if (Math.abs(window.scrollY - targetY) <= 4) return null;
+      }
+      return Math.max(0, targetY);
+    }
+
+    function considerUnlockingFullPlayback() {
+      if (!introLooping || userPaused) return;
+      if (!expandedAreaFitsInViewport()) return;
+      introLooping = false;
+      lastTick = performance.now();
+      applyCaseAndStep(currentCaseIdx, 0, false);
+      updateProgressBar();
+      syncIntroLoopAttr();
+    }
+
+    function startFullAnimationFromClick() {
+      const targetY = getScrollYToFitExpanded();
+      const wasIntro = introLooping;
+      introLooping = false;
+      userPaused = false;
+      holdUntil = 0;
+      lastTick = performance.now();
+      if (wasIntro) {
+        applyCaseAndStep(currentCaseIdx, 0, false);
+      }
+      syncIntroLoopAttr();
+      syncPlayButton();
+      updateProgressBar();
+      if (targetY != null) {
+        window.scrollTo({ top: targetY, behavior: reducedMotion ? "auto" : "smooth" });
+      }
+    }
+
     function syncPlayButton() {
       if (!showcase || !playToggle) return;
       const playing = !userPaused;
@@ -2637,21 +2786,38 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
     if (panes.length > 0) {
       applyCaseAndStep(0, 0, false);
       syncPlayButton();
+      syncIntroLoopAttr();
+      requestAnimationFrame(() => {
+        considerUnlockingFullPlayback();
+      });
 
       document.fonts?.ready.then(() => {
+        cachedExpandedHeight = 0;
         renderCurrentFrame(true);
         syncChosenCircles();
+        considerUnlockingFullPlayback();
       });
       window.addEventListener("resize", () => {
+        cachedExpandedHeight = 0;
         renderCurrentFrame(true);
         syncChosenCircles();
+        considerUnlockingFullPlayback();
       });
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (introLooping) considerUnlockingFullPlayback();
+        },
+        { passive: true },
+      );
 
       tabs.forEach((tab, idx) => {
         tab.addEventListener("click", () => {
           holdUntil = 0;
           lastTick = performance.now();
           if (userPaused) {
+            introLooping = false;
+            syncIntroLoopAttr();
             applyCaseAndStep(idx, 1, true);
           } else {
             applyCaseAndStep(idx, 0, false);
@@ -2665,6 +2831,8 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           btn.addEventListener("click", () => {
             const s = Number(btn.dataset.stepBtn || 1);
             lastTick = performance.now();
+            introLooping = false;
+            syncIntroLoopAttr();
             applyCaseAndStep(pIdx, s, true);
             updateProgressBar();
             pauseByUser();
@@ -2675,6 +2843,8 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         pane.querySelectorAll<HTMLButtonElement>("[data-expand-inspect]").forEach((btn) => {
           btn.addEventListener("click", () => {
             inspectMode = true;
+            introLooping = false;
+            syncIntroLoopAttr();
             pane.dataset.focus = "inspect";
             pauseByUser();
             renderCurrentFrame(true);
@@ -2696,6 +2866,15 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         // Clicking inside the canvas or readings holds auto-advance calmly for inspection
         pane.querySelector(".story-canvas")?.addEventListener("click", () => holdBriefly(10000));
         pane.querySelector(".story-readings")?.addEventListener("click", () => holdBriefly(10000));
+
+        pane.querySelectorAll<HTMLAnchorElement>(".showcase-word-focal").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            if (e.defaultPrevented) return;
+            if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            e.preventDefault();
+            startFullAnimationFromClick();
+          });
+        });
       });
 
       playToggle?.addEventListener("click", () => {
@@ -2737,15 +2916,23 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         if (!document.hidden) lastTick = performance.now();
       });
 
-      // Pause silently if the reader scrolls down past the showcase so collapsing/expanding never shifts scroll
+      // Pause full playback if the reader scrolls past the showcase, so collapsing never shifts the page.
+      // The opening loop may keep playing while only the top of the card is on screen.
       if (showcase && "IntersectionObserver" in window) {
         const io = new IntersectionObserver(
           (entries) => {
-            const visible = entries.some((e) => e.isIntersecting);
-            if (visible && !showcaseInView) lastTick = performance.now();
+            const entry = entries[0];
+            const ratio = entry?.intersectionRatio ?? 0;
+            const any = Boolean(entry?.isIntersecting) && ratio > 0;
+            const visible = Boolean(entry?.isIntersecting) && ratio >= 0.15;
+            const wasActive = introLooping ? showcaseVisible : showcaseInView;
+            const nowActive = introLooping ? any : visible;
+            if (nowActive && !wasActive) lastTick = performance.now();
+            showcaseVisible = any;
             showcaseInView = visible;
+            if (introLooping) considerUnlockingFullPlayback();
           },
-          { threshold: 0.15 },
+          { threshold: [0, 0.15, 0.6, 1] },
         );
         io.observe(showcase);
       }
@@ -2755,17 +2942,30 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         lastTick = now;
 
         const isHeld = holdUntil > 0 && now < holdUntil;
-        if (!userPaused && !readingTooltip && !isHeld && showcaseInView && !document.hidden) {
+        const allowedInView = introLooping ? showcaseVisible : showcaseInView;
+        if (!userPaused && !readingTooltip && !isHeld && allowedInView && !document.hidden) {
           stepElapsed += dt;
-          const limit = getStepDuration(currentCaseIdx, currentStep);
-          if (stepElapsed >= limit) {
-            if (currentStep < 3) {
-              applyCaseAndStep(currentCaseIdx, currentStep + 1, false);
+          if (introLooping && currentStep === 0) {
+            const limit = getIntroLoopDuration(currentCaseIdx);
+            if (stepElapsed >= limit) {
+              stepElapsed = 0;
+              lastScanWordIdx = -1;
+              lastPuckMode = "";
+              renderCurrentFrame(true);
             } else {
-              applyCaseAndStep(currentCaseIdx + 1, 0, false);
+              renderCurrentFrame(false);
             }
           } else {
-            renderCurrentFrame(false);
+            const limit = getStepDuration(currentCaseIdx, currentStep);
+            if (stepElapsed >= limit) {
+              if (currentStep < 3) {
+                applyCaseAndStep(currentCaseIdx, currentStep + 1, false);
+              } else {
+                applyCaseAndStep(currentCaseIdx + 1, 0, false);
+              }
+            } else {
+              renderCurrentFrame(false);
+            }
           }
           updateProgressBar();
         }

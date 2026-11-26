@@ -821,6 +821,50 @@ h3 {
   font-weight: 600;
 }
 
+.showcase-prompt-arrow {
+  position: absolute;
+  left: 50%;
+  top: -16px;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  color: var(--accent);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showcase-prompt-arrow svg {
+  display: block;
+}
+
+.showcase-card.is-measuring,
+.showcase-card.is-measuring * {
+  transition: none !important;
+  animation: none !important;
+}
+
+.showcase-card[data-intro-loop="true"] .showcase-stage {
+  padding-top: 20px;
+}
+
+.showcase-card[data-intro-loop="true"] .showcase-word-focal.word-disputed-hit .showcase-prompt-arrow {
+  opacity: 1;
+  animation: promptArrowNudge 1.1s ease-in-out infinite;
+}
+
+@keyframes promptArrowNudge {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
 /* 3-Beat Animated Evidence Storyboard: open editorial layout (no nested card chrome) */
 .story-board {
   margin-top: 18px;
@@ -5312,7 +5356,8 @@ tr:last-child td {
 @media (prefers-reduced-motion: reduce) {
   .verse-scan-puck.puck-disputed,
   .showcase-pane[data-focus="chart"] .cue-bridge-arrow,
-  .type-caret::after {
+  .type-caret::after,
+  .showcase-prompt-arrow {
     animation: none;
   }
   .story-dot,
