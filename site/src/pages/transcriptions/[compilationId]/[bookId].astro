@@ -423,7 +423,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         <div class="filter-visual reader-filter-field" data-filter-visual="sev">
           <span class="filter-visual-label pill-label" id="filter-sev-label">Severity</span>
           <select id="filter-min-sev" class="filter-visual-native" aria-hidden="true" tabindex="-1">
-            <option value="0" selected>All words</option>
+            <option value="0" selected>Any</option>
             <option value="1">Minor and up</option>
             <option value="2">Small and up</option>
             <option value="3">Moderate and up</option>
@@ -445,7 +445,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
               <span class="legend-dot" data-sev="3"></span>
               <span class="legend-dot" data-sev="4"></span>
               <span class="legend-dot" data-sev="5"></span>
-              All words
+              Any
             </span>
           </button>
           <ul class="filter-visual-menu" role="listbox" aria-labelledby="filter-sev-label" hidden data-filter-menu="sev">
@@ -458,7 +458,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                 <span class="legend-dot" data-sev="4"></span>
                 <span class="legend-dot" data-sev="5"></span>
               </span>
-              All words
+              Any
             </li>
             <li role="option" aria-selected="false" data-value="1" tabindex="-1">
               <span class="legend-dot" data-sev="1"></span>
@@ -485,7 +485,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         <div class="filter-visual reader-filter-field" data-filter-visual="unc">
           <span class="filter-visual-label pill-label" id="filter-unc-label">Uncertainty</span>
           <select id="filter-max-conf" class="filter-visual-native" aria-hidden="true" tabindex="-1">
-            <option value="100" selected>All words</option>
+            <option value="100" selected>Any</option>
             <option value="99">1% and above</option>
             <option value="95">5% and above</option>
             <option value="80">20% and above</option>
@@ -499,10 +499,10 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             aria-labelledby="filter-unc-label"
             data-filter-btn="unc"
           >
-            <span class="filter-visual-current" data-filter-current="unc">All words</span>
+            <span class="filter-visual-current" data-filter-current="unc">Any</span>
           </button>
           <ul class="filter-visual-menu" role="listbox" aria-labelledby="filter-unc-label" hidden data-filter-menu="unc">
-            <li role="option" aria-selected="true" data-value="100" tabindex="-1">All words</li>
+            <li role="option" aria-selected="true" data-value="100" tabindex="-1">Any</li>
             <li role="option" aria-selected="false" data-value="99" tabindex="-1">
               <span class="legend-bar legend-bar-dot"></span>
               1% and above
@@ -845,7 +845,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
     });
 
     const SEV_LABELS: Record<string, string> = {
-      "0": "All words",
+      "0": "Any",
       "1": "Minor and up",
       "2": "Small and up",
       "3": "Moderate and up",
@@ -853,7 +853,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       "5": "Major only",
     };
     const UNC_LABELS: Record<string, string> = {
-      "100": "All words",
+      "100": "Any",
       "99": "1% and above",
       "95": "5% and above",
       "80": "20% and above",
@@ -868,13 +868,13 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
 
     function sevCurrentHtml(value: string): string {
       if (value === "0") {
-        return [0, 1, 2, 3, 4, 5].map((n) => `<span class="legend-dot" data-sev="${n}"></span>`).join("") + " All words";
+        return [0, 1, 2, 3, 4, 5].map((n) => `<span class="legend-dot" data-sev="${n}"></span>`).join("") + " Any";
       }
-      return `<span class="legend-dot" data-sev="${value}"></span> ${SEV_LABELS[value] ?? "All words"}`;
+      return `<span class="legend-dot" data-sev="${value}"></span> ${SEV_LABELS[value] ?? "Any"}`;
     }
 
     function uncCurrentHtml(value: string): string {
-      const label = UNC_LABELS[value] ?? "All words";
+      const label = UNC_LABELS[value] ?? "Any";
       const bar = UNC_BAR[value];
       if (!bar) return label;
       return `<span class="legend-bar ${bar}"></span> ${label}`;
