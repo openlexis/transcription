@@ -4471,8 +4471,9 @@ tr:last-child td {
 
 .reader-legend-row {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   gap: 6px 14px;
   line-height: 1.5;
 }

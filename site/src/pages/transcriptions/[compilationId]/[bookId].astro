@@ -322,28 +322,20 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         {bookLangCodes.map((code) => (
           <Pill icon="language" title={LANGUAGE_META[code].note}>{LANGUAGE_META[code].label}</Pill>
         ))}
-        <nav class="book-title-nav" aria-label="Book navigation">
-          {showBookNav && (
-            <>
-              <a href={bookUrl(c.compilationId, prevBook.id)}>← {prevBook.name}</a>
-              <span class="book-title-nav-sep" aria-hidden="true"> · </span>
-            </>
-          )}
-          <a href={compUrl(c.compilationId)}>All books</a>
-          {showBookNav && (
-            <>
-              <span class="book-title-nav-sep" aria-hidden="true"> · </span>
-              <a href={bookUrl(c.compilationId, nextBook.id)}>{nextBook.name} →</a>
-            </>
-          )}
-        </nav>
+        {showBookNav && (
+          <nav class="book-title-nav" aria-label="Previous and next book">
+            <a href={bookUrl(c.compilationId, prevBook.id)}>← {prevBook.name}</a>
+            <span class="book-title-nav-sep" aria-hidden="true"> · </span>
+            <a href={bookUrl(c.compilationId, nextBook.id)}>{nextBook.name} →</a>
+          </nav>
+        )}
       </div>
       <h1>{b.name}</h1>
       <Byline
         items={[
-          compTitle && { icon: "transcriptions", text: compTitle, title: "Transcription", href: compUrl(c.compilationId) },
           compAuthor && { icon: "author", text: compAuthor, title: "Author" },
           compDate && { icon: "date", text: compDate, title: "Date compiled" },
+          compTitle && { icon: "transcriptions", text: compTitle, title: "Transcription", href: compUrl(c.compilationId) },
           license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
         ]}
       />
