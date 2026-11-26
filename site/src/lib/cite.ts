@@ -34,36 +34,22 @@ export function archiveOf(path: string): string {
   return parts[0] === "archives" || parts[0] === "src" ? (parts[1] ?? "") : (parts[0] ?? "");
 }
 
-/** What Open Lexis changed when it converted a source that publishes no XML. Keyed by archive folder. */
-const ADAPTED: Record<string, { changed: string; kept: string }> = {
-  cntr: {
-    changed: "The source publishes this transcription as plain text, not XML. Open Lexis™ placed that text in a TEI P5 file.",
-    kept: "The text itself, which is the archive's plain text as published.",
-  },
-  aleppo: {
-    changed:
-      "The source publishes Text-Fabric data (tf/1.0), not XML. Open Lexis™ made a TEI P5 file for each book from that data. Lines on lost pages, which the edition fills in from related manuscripts, are marked as supplied and name that source. Words are the written words (ketiv), split at spaces and maqaf.",
-    kept: "The words, as the data gives them.",
-  },
-  "dt-ucph-sp": {
-    changed:
-      "The source publishes Text-Fabric data (tf/7.5.0), not XML. Open Lexis™ made a TEI P5 file from the consonantal text of each word in that data, arranged by book, chapter and line.",
-    kept: "The letters of each word, as the data gives them.",
-  },
-  "etcbc-dss": {
-    changed:
-      "The source publishes Text-Fabric data (tf/2.0.5), not XML. Open Lexis™ made a TEI P5 file from the Hebrew letters of each word in that data, arranged by book, chapter and line. A word with a letter that a modern editor reconstructed is left out and marked as a gap.",
-    kept: "The letters of each word that is kept, as the data gives them.",
-  },
-  "tal-florentin-sp": {
-    changed:
-      "The source publishes JSON, not XML: the edition's Hebrew running text, which the CACCHT project extracted from the edition's PDF. Open Lexis™ made a TEI P5 file from it. Genesis 1:1 to 3:24, which the edition takes from other manuscripts, is marked as supplied and names the source. A few small gaps the edition filled without marking them cannot be marked.",
-    kept: "The text, as the JSON gives it.",
-  },
+/** What the conversion actually did, for a source that publishes no XML. Keyed by archive folder. */
+const ADAPTED: Record<string, string> = {
+  cntr:
+    "The source publishes this transcription as plain text. Open Lexis™ converted it to TEI XML (the standard text-encoding format used by the other transcriptions). The source text is kept as published, including the source's own marks. A TEI header was added, and the body of the file is that source text.",
+  aleppo:
+    "The source publishes this transcription as Text-Fabric data (tf/1.0), not XML. Open Lexis™ converted it to TEI XML (the standard text-encoding format used by the other transcriptions), one file per book, by adding tags that mark each book, chapter, line and word. The words are the written words (ketiv), split at spaces and maqaf (the hyphen that joins Hebrew words). Only lines on a surviving page of the codex are its own text; a page-break tag records the codex page. Lines the edition fills in for lost pages are marked as supplied, and that mark names the edition's stated source, or an old photograph when the text is known from one.",
+  "dt-ucph-sp":
+    "The source publishes this transcription as Text-Fabric data (tf/7.5.0), not XML. Open Lexis™ converted it to TEI XML (the standard text-encoding format used by the other transcriptions) by adding tags that mark each book, chapter, line and word. The words are the consonantal text from the data, split at spaces and maqaf (the hyphen that joins Hebrew words). The letters are unchanged.",
+  "etcbc-dss":
+    "The source publishes this transcription as Text-Fabric data (tf/2.0.5), not XML. Open Lexis™ converted it to TEI XML (the standard text-encoding format used by the other transcriptions) by adding tags that mark each book, chapter, line and word. The words are the Hebrew letters from the data. A word with a letter that a modern editor reconstructed is left out, and a gap is marked in its place. A prefix written as its own item in the data is joined to the next word. Where one line is held in separate pieces in the scroll, the pieces are joined and a gap is marked between them.",
+  "tal-florentin-sp":
+    "The source publishes this transcription as JSON, not XML: the edition's Hebrew running text, which the CACCHT project extracted from the edition's PDF. Open Lexis™ converted it to TEI XML (the standard text-encoding format used by the other transcriptions) by adding tags that mark each book, chapter, line and word. Genesis 1:1 to 3:24, which the edition takes from other manuscripts, is marked as supplied, and that mark names the source. The edition says it filled a few small gaps from Cambridge Add 714 and the Abisha scroll without marking them; those cannot be marked here. The words are as the JSON gives them.",
 };
 
-/** The "Adapted by Open Lexis" note for a converted source file, or null when the file is the source's own file, unchanged. */
-export function adaptedNote(path: string, format: string): { changed: string; kept: string } | null {
+/** The "Adapted by" note for a converted source file, or null when the file is the source's own file, unchanged. */
+export function adaptedNote(path: string, format: string): string | null {
   if (!/^TEI P5 \(the source archive publishes no XML/.test(format)) return null;
   return ADAPTED[archiveOf(path)] ?? null;
 }

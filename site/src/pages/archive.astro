@@ -141,9 +141,7 @@ const meta = {
 
     function adaptedValue(f) {
       const a = adaptedNote(f.ps[0] || "", f.fmt);
-      if (!a) return "";
-      const kept = /[.!?]$/.test(a.kept) ? a.kept : `${a.kept}.`;
-      return `This file was adapted by Open Lexis™. ${esc(a.changed)} ${esc(kept)}`;
+      return a ? esc(a) : "";
     }
 
     function citeHtml(s) {
