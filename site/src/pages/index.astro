@@ -444,9 +444,9 @@ function buildShowcaseCase(opts: {
         relPct: null,
         early: mid <= opts.earlyCutoff,
         discounted: false,
-        label: `${sig} (damaged here)`,
-        labelTimeline: `${sig} (damaged here)`,
-        title: `${sig}${meta?.name ? ` · ${meta.name}` : ""} (${meta?.date || formatEra(mid)}): physically damaged / missing this word`,
+        label: `${sig} · torn (damaged here)`,
+        labelTimeline: `${sig} · torn (damaged here)`,
+        title: `${sig}${meta?.name ? ` · ${meta.name}` : ""} (${meta?.date || formatEra(mid)}): torn / physically damaged at this word`,
       });
     }
   }
@@ -614,22 +614,22 @@ const showcaseCases: ShowcaseCase[] = [
     discountLateInBeat3: false,
     stepScripts: [
       [
-        { runs: [{ t: "Only " }, { t: "2 intact manuscripts", b: true }, { t: " preserve this word: " }] },
+        { runs: [{ t: "Three manuscripts cover this line: " }] },
         {
           runs: [{ t: "1", b: true }, { t: " writes “seventh”" }],
           cueTone: "lane-0",
           action: "reveal-lane-0",
           actionMs: 1500,
         },
-        { runs: [{ t: " and " }] },
+        { runs: [{ t: ", " }] },
         {
-          runs: [{ t: "1", b: true }, { t: " writes “sixth.”" }],
+          runs: [{ t: "1", b: true }, { t: " writes “sixth,”" }],
           cueTone: "lane-1",
           action: "reveal-lane-1",
           actionMs: 1500,
         },
         {
-          runs: [{ t: " The ancient Dead Sea Scroll (4Q10) is torn at this spot." }],
+          runs: [{ t: " and the ancient Dead Sea Scroll (4Q10) is torn (damaged) at that spot." }],
           cueTone: "lane-2",
           action: "reveal-lane-2",
           actionMs: 1800,
@@ -638,13 +638,13 @@ const showcaseCases: ShowcaseCase[] = [
       ],
       [
         {
-          runs: [{ t: "Sorted by date, both intact witnesses come from the Middle Ages (AD 1009 & AD 1225)," }],
+          runs: [{ t: "In context, both intact copies come from the Middle Ages (AD 1009 & AD 1225)," }],
           cueTone: "accent",
           action: "timeline",
           actionMs: 2400,
         },
         {
-          runs: [{ t: " leaving a millennium-wide gap where the timeline cannot break the tie." }],
+          runs: [{ t: " leaving a long gap after the torn early scroll that date alone cannot break." }],
           cueTone: "lane-2",
           action: "spot-lacuna",
           actionMs: 1750,
@@ -848,6 +848,17 @@ const showcaseCases: ShowcaseCase[] = [
   }),
 ].filter((x): x is ShowcaseCase => x !== null);
 
+for (const sc of showcaseCases) {
+  if (sc.id !== "gen-2-2") continue;
+  const readingByLane = ["“seventh”", "“sixth”"] as const;
+  for (const dot of sc.dots) {
+    const reading = readingByLane[dot.lane];
+    if (!reading) continue;
+    if (dot.label) dot.label = `${dot.label} · ${reading}`;
+    if (dot.labelTimeline) dot.labelTimeline = `${dot.labelTimeline} · ${reading}`;
+  }
+}
+
 const showcaseScriptsJson = JSON.stringify(
   showcaseCases.map<CaseStepScript>((sc) => ({
     id: sc.id,
@@ -1038,7 +1049,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
                   <button type="button" class="story-step-btn" data-step-btn="2">
                     <span class="step-fill" aria-hidden="true"></span>
                     <span class="step-num">2</span>
-                    <span>Across the timeline</span>
+                    <span>Context</span>
                   </button>
                   <span class="step-arrow" aria-hidden="true">→</span>
                   <button type="button" class="story-step-btn" data-step-btn="3">
