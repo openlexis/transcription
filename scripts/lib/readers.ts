@@ -7,7 +7,8 @@ import { HEB_BOOKS, numeral, sacred, skel } from "./text";
 export type ParsedUnit = {
   book: string;
   ref: string;
-  words: { w: string; gap: boolean }[];
+  /** supplied: the word is text an edition filled in where the manuscript is lost (TEI <supplied>), not the manuscript's own text. */
+  words: { w: string; gap: boolean; supplied?: boolean }[];
   gapEnd: boolean;
   absent?: boolean;
 };
@@ -172,17 +173,19 @@ function readSimpleTei(xml: string): ReadResult {
       continue;
     }
     if (!inner) continue;
-    const words: { w: string; gap: boolean }[] = [];
-    let gap = false;
-    const tokRe = /<gap\b[^>]*\/>|<w\b[^>]*>([\s\S]*?)<\/w>/g;
+    const words: { w: string; gap: boolean; supplied?: boolean }[] = [];
+    let gap = false, supplied = false;
+    const tokRe = /<gap\b[^>]*\/>|<supplied\b[^>]*>|<\/supplied>|<w\b[^>]*>([\s\S]*?)<\/w>/g;
     let tm: RegExpExecArray | null;
     while ((tm = tokRe.exec(inner))) {
-      if (tm[1] === undefined) {
+      if (tm[0].startsWith("<supplied")) supplied = true;
+      else if (tm[0] === "</supplied>") supplied = false;
+      else if (tm[1] === undefined) {
         gap = true;
         lacunae++;
       } else {
         const w = unent(tm[1]).trim();
-        if (w) { words.push({ w, gap }); gap = false; totalWords++; }
+        if (w) { words.push(supplied ? { w, gap, supplied } : { w, gap }); gap = false; if (!supplied) totalWords++; }
       }
     }
     if (words.length || gap) units.push({ book, ref, words, gapEnd: gap });
@@ -223,6 +226,8 @@ export function readTranscriptionFile(absPath: string, provenanceId: string): Re
       return readCatena(xml);
     case "dt-ucph-sp":
     case "etcbc-dss":
+    case "aleppo":
+    case "tal-florentin-sp":
       return readSimpleTei(xml);
     case "uxlc":
       return readUxlc(xml, absPath);

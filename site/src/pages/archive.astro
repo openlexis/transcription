@@ -5,12 +5,12 @@ import {
   buildClientSourceIndex,
   formatNum,
   getCorpusStats,
-  getPrimarySpec,
+  getLatestSpec,
   githubBlob,
   specUrl,
 } from "../lib/corpus";
 
-const spec = getPrimarySpec();
+const spec = getLatestSpec();
 const stats = getCorpusStats(spec);
 const index = buildClientSourceIndex(spec);
 ---

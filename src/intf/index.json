@@ -1902,6 +1902,36 @@
       "words": 156
     },
     {
+      "id": "0296",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 0296",
+      "shelfmark": "Sinai, Saint Catherine's Monastery, ΝF Sp MG 48, 53, 55",
+      "century": "VI",
+      "year": 550,
+      "yearFrom": 500,
+      "yearTo": 599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=20296)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20296"
+        }
+      ],
+      "targets": [
+        "1John"
+      ],
+      "paths": [
+        "src/intf/0296.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the file's header)",
+      "sourceUrl": "https://ntvmr.uni-muenster.de/community/vmr/api/transcript/get/?docID=20296&pageID=ALL&format=teiraw",
+      "lines": 5,
+      "words": 0
+    },
+    {
       "id": "03",
       "type": "continuous",
       "language": "Greek",
@@ -4420,6 +4450,36 @@
       "sourceUrl": "https://ntvmr.uni-muenster.de/community/api/transcript/get/?docID=31273&pageID=ALL&format=teiraw",
       "lines": 1744,
       "words": 30172
+    },
+    {
+      "id": "1278",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1278",
+      "shelfmark": "Manchester, John Rylands University Library of Manchester, Gr. Ms. 17",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=31278)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31278"
+        }
+      ],
+      "targets": [
+        "Mark"
+      ],
+      "paths": [
+        "src/intf/1278.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the file's header)",
+      "sourceUrl": "https://ntvmr.uni-muenster.de/community/vmr/api/transcript/get/?docID=31278&pageID=ALL&format=teiraw",
+      "lines": 236,
+      "words": 0
     },
     {
       "id": "1279",
@@ -9149,6 +9209,36 @@
       "sourceUrl": "https://ntvmr.uni-muenster.de/community/api/transcript/get/?docID=32374&pageID=ALL&format=teiraw",
       "lines": 1043,
       "words": 18813
+    },
+    {
+      "id": "238",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 238",
+      "shelfmark": "Moscow, Russian State Archive of Ancient Acts (RGADA), Ед. хр. 3 (A 100)",
+      "century": "XI/XII",
+      "year": 1100,
+      "yearFrom": 1000,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=30238)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30238"
+        }
+      ],
+      "targets": [
+        "Mark"
+      ],
+      "paths": [
+        "src/intf/238.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the file's header)",
+      "sourceUrl": "https://ntvmr.uni-muenster.de/community/vmr/api/transcript/get/?docID=30238&pageID=ALL&format=teiraw",
+      "lines": 1,
+      "words": 0
     },
     {
       "id": "2411",
@@ -15975,6 +16065,35 @@
       "words": 1546
     },
     {
+      "id": "L1178",
+      "type": "lectionary",
+      "language": "Greek",
+      "shelfmark": "Patmos, St. John the Theologian Monastery, 11",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=41178)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=41178"
+        }
+      ],
+      "targets": [
+        "Acts"
+      ],
+      "paths": [
+        "src/intf/L1178.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the file's header)",
+      "sourceUrl": "https://ntvmr.uni-muenster.de/community/vmr/api/transcript/get/?docID=41178&pageID=ALL&format=teiraw",
+      "lines": 356,
+      "words": 0
+    },
+    {
       "id": "L1188",
       "type": "lectionary",
       "language": "Greek",
@@ -16128,6 +16247,35 @@
       "words": 690
     },
     {
+      "id": "L1825",
+      "type": "lectionary",
+      "language": "Greek",
+      "shelfmark": "Athens, National Library, EBE 3041, fol. 72-188",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=41825)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=41825"
+        }
+      ],
+      "targets": [
+        "Acts"
+      ],
+      "paths": [
+        "src/intf/L1825.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the file's header)",
+      "sourceUrl": "https://ntvmr.uni-muenster.de/community/vmr/api/transcript/get/?docID=41825&pageID=ALL&format=teiraw",
+      "lines": 75,
+      "words": 0
+    },
+    {
       "id": "L2005",
       "type": "lectionary",
       "language": "Greek",
@@ -16154,6 +16302,35 @@
       "sourceUrl": "https://ntvmr.uni-muenster.de/community/api/transcript/get/?docID=42005&pageID=ALL&format=teiraw",
       "lines": 13,
       "words": 213
+    },
+    {
+      "id": "L2010",
+      "type": "lectionary",
+      "language": "Greek",
+      "shelfmark": "Athens, National Library, EBE 2010",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=42010)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=42010"
+        }
+      ],
+      "targets": [
+        "Acts"
+      ],
+      "paths": [
+        "src/intf/L2010.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the file's header)",
+      "sourceUrl": "https://ntvmr.uni-muenster.de/community/vmr/api/transcript/get/?docID=42010&pageID=ALL&format=teiraw",
+      "lines": 130,
+      "words": 0
     },
     {
       "id": "L211",
@@ -16271,6 +16448,35 @@
       "words": 13142
     },
     {
+      "id": "L23",
+      "type": "lectionary",
+      "language": "Greek",
+      "shelfmark": "London, British Library, Cotton Vesp. B XVIII",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=40023)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=40023"
+        }
+      ],
+      "targets": [
+        "Acts"
+      ],
+      "paths": [
+        "src/intf/L23.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the file's header)",
+      "sourceUrl": "https://ntvmr.uni-muenster.de/community/vmr/api/transcript/get/?docID=40023&pageID=ALL&format=teiraw",
+      "lines": 351,
+      "words": 0
+    },
+    {
       "id": "L387",
       "type": "lectionary",
       "language": "Greek",
@@ -16358,6 +16564,35 @@
       "sourceUrl": "https://ntvmr.uni-muenster.de/community/api/transcript/get/?docID=40563&pageID=ALL&format=teiraw",
       "lines": 943,
       "words": 16308
+    },
+    {
+      "id": "L587",
+      "type": "lectionary",
+      "language": "Greek",
+      "shelfmark": "Athens, National Library, EBE 205",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=40587)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=40587"
+        }
+      ],
+      "targets": [
+        "Acts"
+      ],
+      "paths": [
+        "src/intf/L587.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the file's header)",
+      "sourceUrl": "https://ntvmr.uni-muenster.de/community/vmr/api/transcript/get/?docID=40587&pageID=ALL&format=teiraw",
+      "lines": 153,
+      "words": 0
     },
     {
       "id": "L596",
@@ -16481,6 +16716,35 @@
       "sourceUrl": "https://ntvmr.uni-muenster.de/community/api/transcript/get/?docID=40773&pageID=ALL&format=teiraw",
       "lines": 1737,
       "words": 30684
+    },
+    {
+      "id": "L809",
+      "type": "lectionary",
+      "language": "Greek",
+      "shelfmark": "Sinai, Saint Catherine's Monastery, Gr. 286",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=40809)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=40809"
+        }
+      ],
+      "targets": [
+        "Acts"
+      ],
+      "paths": [
+        "src/intf/L809.xml"
+      ],
+      "format": "TEI XML (the holder's file, unchanged)",
+      "license": "CC BY 4.0 (the file's header)",
+      "sourceUrl": "https://ntvmr.uni-muenster.de/community/vmr/api/transcript/get/?docID=40809&pageID=ALL&format=teiraw",
+      "lines": 220,
+      "words": 0
     },
     {
       "id": "L844",

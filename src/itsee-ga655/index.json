@@ -1,0 +1,46 @@
+{
+  "institution": {
+    "id": "itsee-ga655",
+    "name": "ITSEE, University of Birmingham, Gregory-Aland 655 (Gabriël Oberholzer)",
+    "url": "https://edata.bham.ac.uk/1367/"
+  },
+  "items": [
+    {
+      "id": "655",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 655",
+      "shelfmark": "Berlin, Staatsbibliothek zu Berlin, Graec. 4° 39",
+      "century": "XI/XII",
+      "year": 1100,
+      "yearFrom": 1000,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=30655)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30655"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John"
+      ],
+      "paths": [
+        "src/itsee-ga655/655.Matt.xml",
+        "src/itsee-ga655/655.Mark.xml",
+        "src/itsee-ga655/655.Luke.xml",
+        "src/itsee-ga655/655.John.xml"
+      ],
+      "format": "TEI XML (the holder's files, unchanged), one file per book",
+      "license": "CC BY-NC-SA (each file's header: \"Available for noncommercial re-use provided attribution is made to the original creators and the subsequent derivative is licensed as ShareAlike (Creative Commons by-nc-sa)\")",
+      "sourceUrl": "https://doi.org/10.25500/edata.bham.00001367",
+      "member": "NT_GRC_655_<book>.xml",
+      "lines": 3778,
+      "words": 66086
+    }
+  ]
+}

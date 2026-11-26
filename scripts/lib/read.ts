@@ -10,7 +10,8 @@ import { readFileSync } from "node:fs";
 import { parseXml, teiUnitsWithStats } from "./tei";
 import { HEB_BOOKS, NT_BOOKS, numeral, sacred, skel } from "./text";
 
-export type Word = { w: string; gap: boolean };
+/** supplied: text an edition filled in where the manuscript is lost (TEI <supplied>), not the manuscript's own text. */
+export type Word = { w: string; gap: boolean; supplied?: boolean };
 /** One line of one transcription. absent: the transcription marks the line as not in the manuscript. gapEnd: lost at its end. */
 export type Line = { book: string; ref: string; words: Word[]; gapEnd: boolean; absent?: boolean };
 /** What a transcription documents about its manuscript's copying, counted while reading it (unknown where the format records none). */
@@ -110,17 +111,20 @@ function uxlc(xml: string, book: string): Line[] {
   }
   return out;
 }
-/** TEI P5 made from Text-Fabric data: <ab n="Book c:v"> holding <w> words and <gap/> lacunae; <ab type="absent"> a line not there. */
+/** TEI P5 made from Text-Fabric data: <ab n="Book c:v"> holding <w> words and <gap/> lacunae; <ab type="absent"> a line not there;
+ * words inside <supplied> are text an edition filled in where the manuscript is lost, flagged supplied. */
 function tfTei(xml: string): Line[] {
   const out: Line[] = [];
   for (const m of xml.matchAll(/<ab((?:\s+[\w:]+="[^"]*")*)\s*(\/>|>([\s\S]*?)<\/ab>)/g)) {
     const n = m[1].match(/\sn="([^"]*)"/)?.[1], absent = /\stype="absent"/.test(m[1]);
     const r = n && unent(n).match(/^(\S+) (\d+:\d+)$/); if (!r) continue;
     if (absent) { out.push({ book: r[1], ref: r[2], words: [], gapEnd: false, absent: true }); continue; }
-    const words: Word[] = []; let gap = false;
-    for (const t of (m[3] ?? "").matchAll(/<gap\b[^>]*\/>|<w>([^<]*)<\/w>/g)) {
+    const words: Word[] = []; let gap = false, supplied = false;
+    for (const t of (m[3] ?? "").matchAll(/<gap\b[^>]*\/>|<supplied\b[^>]*>|<\/supplied>|<w>([^<]*)<\/w>/g)) {
+      if (t[0].startsWith("<supplied")) { supplied = true; continue; }
+      if (t[0] === "</supplied>") { supplied = false; continue; }
       if (t[1] === undefined) { gap = true; continue; }
-      words.push({ w: unent(t[1]), gap }); gap = false;
+      words.push(supplied ? { w: unent(t[1]), gap, supplied } : { w: unent(t[1]), gap }); gap = false;
     }
     out.push({ book: r[1], ref: r[2], words, gapEnd: gap });
   }
@@ -137,7 +141,7 @@ export function readEntry(root: string, provenance: string, paths: string[]): { 
       const name = p.replace(/^.*\/[^/.]+\./, "").replace(/\.xml$/, ""), b = HEB_BOOKS.find((x) => x.uxlc === name);
       if (!b) throw new Error(`${p}: no book for ${name}`);
       all.push(...uxlc(xml, b.id));
-    } else if (provenance === "dt-ucph-sp" || provenance === "etcbc-dss") all.push(...tfTei(xml));
+    } else if (provenance === "dt-ucph-sp" || provenance === "etcbc-dss" || provenance === "aleppo" || provenance === "tal-florentin-sp") all.push(...tfTei(xml));
     else if (provenance === "cntr") {
       const m = xml.match(/<ab type="holder-text">([\s\S]*?)<\/ab>/); if (!m) throw new Error(`${p}: no holder text`);
       const r = cntrText(unent(m[1])); all.push(...r.lines); corrections = (corrections ?? 0) + r.corrections;

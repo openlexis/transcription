@@ -295,6 +295,13 @@ export function getPrimarySpec(): SpecFile {
   return specs[0];
 }
 
+/** The newest specification (by ULID); its sources are the current corpus. */
+export function getLatestSpec(): SpecFile {
+  const specs = getSpecifications();
+  if (!specs.length) throw new Error("No specification YAML files found in specifications/");
+  return [...specs].sort((a, b) => (a.id < b.id ? 1 : -1))[0];
+}
+
 export const formatNum = (n: number) => n.toLocaleString("en-US");
 export const formatEra = (y: number) => (y < 0 ? `${-y} BC` : `AD ${y}`);
 export const shortUlid = (id: string) => (id.length > 6 ? id.slice(-6) : id);
