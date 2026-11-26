@@ -164,6 +164,15 @@
 
 .source-item {
   scroll-margin-top: 88px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 56px;
+}
+.source-item[open] {
+  content-visibility: visible;
+  contain-intrinsic-size: auto none;
+}
+.source-item[hidden] {
+  display: none;
 }
 
 .source-list {

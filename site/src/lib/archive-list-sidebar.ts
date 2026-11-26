@@ -91,9 +91,13 @@ function placeThumb(track: HTMLElement, index: number, total: number): void {
   thumb.style.top = `${top}px`;
 }
 
+function rowNodes(): HTMLElement[] {
+  return [...document.querySelectorAll<HTMLElement>(".source-item[data-archive-id]")].filter((el) => !el.hidden);
+}
+
 function visibleIndex(items: ArchiveNavItem[]): number {
   if (!items.length) return -1;
-  const nodes = [...document.querySelectorAll<HTMLElement>(".source-item[data-archive-id]")];
+  const nodes = rowNodes();
   if (!nodes.length) return 0;
   let currentId = nodes[0].getAttribute("data-archive-id") || "";
   for (const el of nodes) {
@@ -128,13 +132,11 @@ export function initArchiveListSidebar(): void {
   let current = 0;
 
   const visibleItems = (): ArchiveNavItem[] => {
-    const nodes = [...document.querySelectorAll<HTMLElement>(".source-item[data-archive-id]")];
+    const nodes = rowNodes();
     if (!nodes.length) {
-      const src = document.getElementById("src-list");
-      if (src && src.querySelector(".source-item") == null && (src.textContent || "").includes("No manuscripts")) {
-        return [];
-      }
-      return allItems;
+      const allRows = [...document.querySelectorAll<HTMLElement>("#src-list .source-item")];
+      if (allRows.length) return []; // built, but every row is hidden
+      return allItems; // list not built yet
     }
     const byId = new Map(allItems.map((it) => [it.id, it]));
     const out: ArchiveNavItem[] = [];

@@ -261,7 +261,13 @@ const meta = {
         el.innerHTML = views.length ? fileRecordRows(views) : "";
       });
     }
-    listEl?.addEventListener("toggle", (e) => { const d = e.target; if (d instanceof HTMLDetailsElement && d.open && d.classList.contains("source-item")) fillRecords(d); }, true);
+    listEl?.addEventListener("toggle", (e) => {
+      const d = e.target;
+      if (d instanceof HTMLDetailsElement && d.open && d.classList.contains("source-item")) {
+        ensureDetail(d);
+        fillRecords(d);
+      }
+    }, true);
 
     function fieldsHtml(s) {
       const [typeName, typeHint] = typeInfo(s.ty);
@@ -392,20 +398,12 @@ const meta = {
       return `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)} ↗</a>${l.where ? ` <span class="ms-sub">· terms found in ${esc(l.where)}</span>` : ""}`;
     }
 
-    function renderItem(s, openByDefault = false) {
+    function summaryHtml(s) {
       const fileCount = s.fl.reduce((n, f) => n + f.ps.length, 0);
-      const union = [...new Set(s.fl.flatMap((f) => f.bk))].sort(byBook);
-      const files = [...s.fl].sort((a, b) => b.bk.length - a.bk.length || byBook(a.bk[0] || "", b.bk[0] || ""));
-      const shared = new Set();
-      let sameName = false;
-      for (const f of files) for (const p of f.ps) { const n = p.split("/").pop(); if (shared.has(n)) sameName = true; shared.add(n); }
       const [typeName, typeHint] = typeInfo(s.ty);
       const typeTip = `${typeName}${typeHint ? `: ${typeHint}` : ""}`;
-
-      const intro = `<div class="ar-section-intro"><p>Each block is a transcription (the manuscript's text typed out) published by one institution.${sameName ? ` Files are named by the manuscript ID (${esc(s.id)}), not by book, so the same file name repeats under different institutions.` : ""}</p>${overlapHtml(s, union)}</div>`;
-
       return `
-        <details class="source-item" id="${msAnchor(s.id)}" data-archive-id="${esc(s.id)}"${openByDefault ? " open" : ""}>
+        <details class="source-item" id="${msAnchor(s.id)}" data-archive-id="${esc(s.id)}">
           <summary>
             <span class="ms-siglum">${esc(s.id)}</span>
             <div>
@@ -417,6 +415,18 @@ const meta = {
               <span class="ar-type" role="img" title="${esc(typeTip)}" aria-label="${esc(typeTip)}">${archiveIcon(s.ty in TYPE_INFO ? s.ty : "continuous", 16)}</span>
             </div>
           </summary>
+        </details>
+      `;
+    }
+
+    function detailHtml(s) {
+      const union = [...new Set(s.fl.flatMap((f) => f.bk))].sort(byBook);
+      const files = [...s.fl].sort((a, b) => b.bk.length - a.bk.length || byBook(a.bk[0] || "", b.bk[0] || ""));
+      const shared = new Set();
+      let sameName = false;
+      for (const f of files) for (const p of f.ps) { const n = p.split("/").pop(); if (shared.has(n)) sameName = true; shared.add(n); }
+      const intro = `<div class="ar-section-intro"><p>Each block is a transcription (the manuscript's text typed out) published by one institution.${sameName ? ` Files are named by the manuscript ID (${esc(s.id)}), not by book, so the same file name repeats under different institutions.` : ""}</p>${overlapHtml(s, union)}</div>`;
+      return `
           <div class="source-detail">
             <div>
               <div class="ar-section-head">${archiveIcon("shelfmark")}Manuscript</div>
@@ -430,8 +440,27 @@ const meta = {
             </div>
             ${citeHtml(s)}
           </div>
-        </details>
       `;
+    }
+
+    const byId = new Map(ALL.map((s) => [s.id, s]));
+    let rowEls: HTMLElement[] = [];
+    let emptyEl: HTMLElement | null = null;
+
+    function ensureDetail(det) {
+      if (!det || det.querySelector(".source-detail")) return;
+      const s = byId.get(det.getAttribute("data-archive-id") || "");
+      if (!s) return;
+      det.insertAdjacentHTML("beforeend", detailHtml(s));
+    }
+
+    function ensureListBuilt() {
+      if (!listEl || rowEls.length) return;
+      const parts = ALL.map(summaryHtml);
+      parts.push(`<div id="src-empty" hidden style="padding: 36px; text-align: center; color: var(--ink-muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);">No manuscripts match the current filters.</div>`);
+      listEl.innerHTML = parts.join("");
+      rowEls = [...listEl.querySelectorAll<HTMLElement>(".source-item")];
+      emptyEl = document.getElementById("src-empty");
     }
 
     function applyFilters() {
@@ -453,11 +482,20 @@ const meta = {
     }
 
     function render() {
+      ensureListBuilt();
+      const matched = new Set(filtered.map((s) => s.id));
+      for (const el of rowEls) {
+        el.hidden = !matched.has(el.getAttribute("data-archive-id") || "");
+      }
+      if (emptyEl) emptyEl.hidden = filtered.length > 0;
       const autoOpen = filtered.length === 1;
-      if (listEl) {
-        listEl.innerHTML = filtered.length
-          ? filtered.map((s) => renderItem(s, autoOpen)).join("")
-          : `<div style="padding: 36px; text-align: center; color: var(--ink-muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);">No manuscripts match the current filters.</div>`;
+      if (autoOpen) {
+        const only = document.getElementById(msAnchor(filtered[0].id));
+        if (only instanceof HTMLDetailsElement) {
+          ensureDetail(only);
+          only.open = true;
+          fillRecords(only);
+        }
       }
       if (countEl) {
         countEl.textContent = filtered.length === ALL.length
@@ -467,7 +505,6 @@ const meta = {
       if (resetBtn) {
         resetBtn.hidden = !(state.q || state.exactId || state.lang.length || state.type.length || state.prov || state.target);
       }
-      listEl?.querySelectorAll("details.source-item[open]").forEach((d) => fillRecords(d));
       window.dispatchEvent(new CustomEvent("archive-list-updated"));
     }
 
@@ -547,30 +584,11 @@ const meta = {
       }
       const jump = () => {
         const el = document.getElementById(msAnchor(id));
-        if (!el) return false;
+        if (!el || el.hidden) return;
         const top = el.getBoundingClientRect().top + window.scrollY - 88;
-        window.scrollTo(0, Math.max(0, top));
-        return Math.abs(el.getBoundingClientRect().top - 88) < 6;
+        window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
       };
-      const list = document.getElementById("src-list");
-      let lastHeight = -1;
-      let stable = 0;
-      let tries = 0;
-      const tick = () => {
-        const h = list?.scrollHeight ?? 0;
-        if (h > 0 && h === lastHeight) stable += 1;
-        else {
-          stable = 0;
-          lastHeight = h;
-        }
-        tries += 1;
-        if (stable >= 2 || tries > 40) {
-          jump();
-          return;
-        }
-        requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
+      requestAnimationFrame(jump);
     });
 
     applyFilters();
