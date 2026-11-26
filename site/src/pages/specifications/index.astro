@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Icon from "../../components/Icon.astro";
 import {
   formatAuthor,
   formatNum,
@@ -23,7 +24,6 @@ const specs = [...getSpecifications()].sort(
 >
   <section class="page-header">
     <div class="container">
-      <div class="eyebrow">Specifications</div>
       <h1>Specifications</h1>
       <p class="lead">
         Immutable specifications defining permitted ancient manuscripts, statistical modeling principles, and packaging requirements. Select any specification to read it in full.
@@ -53,24 +53,28 @@ const specs = [...getSpecifications()].sort(
               <div class="spec-card-meta">
                 {authorStr && (
                   <span class="badge" title="Author">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <Icon name="author" />
                     {authorStr}
                   </span>
                 )}
                 {s.license && (
                   <span class="badge" title={`${withTrademark(s.license.copyright)}. ${s.license.name}`}>
+                    <Icon name="license" />
                     {s.license.name}
                   </span>
                 )}
                 {dateStr && (
                   <span class="badge" title="Date created">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                    <Icon name="date" />
                     {dateStr}
                   </span>
                 )}
-                <span class="badge">{formatNum(s.targets.length)} books</span>
-                <span class="badge badge-emerald">{formatNum(s.sources.length)} manuscripts</span>
+                <span class="badge">
+                  <Icon name="manuscripts" />
+                  {formatNum(s.sources.length)} manuscripts
+                </span>
                 <span class={comps.length > 0 ? "badge badge-sky" : "badge"}>
+                  <Icon name="transcriptions" />
                   {comps.length === 0
                     ? "No transcriptions yet"
                     : `${comps.length} ${comps.length === 1 ? "transcription" : "transcriptions"}`}

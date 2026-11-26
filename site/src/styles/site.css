@@ -263,6 +263,10 @@ h3 {
   transition: all 0.15s ease;
 }
 
+.btn svg {
+  flex: none;
+}
+
 .btn:hover {
   text-decoration: none;
 }
@@ -2994,6 +2998,11 @@ h3 {
   color: var(--ink-secondary);
   border: 1px solid var(--border);
   white-space: nowrap;
+  max-width: 100%;
+}
+
+.badge svg {
+  flex: none;
 }
 
 .badge-indigo { background: var(--accent-soft); color: var(--accent); border-color: rgba(55, 48, 163, 0.16); }
@@ -4774,7 +4783,23 @@ tr:last-child td {
 
 /* Data-driven book attribute cards */
 .book-tile-card {
+  position: relative;
   gap: 10px;
+  cursor: pointer;
+  transition: border-color 0.14s ease, box-shadow 0.14s ease, transform 0.14s ease;
+}
+
+.book-tile-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.book-tile-main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
 .book-tile-card[hidden] {
@@ -4799,6 +4824,8 @@ tr:last-child td {
 }
 
 .book-attr-row {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;

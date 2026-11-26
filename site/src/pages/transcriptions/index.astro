@@ -1,15 +1,12 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Icon from "../../components/Icon.astro";
 import {
   compUrl,
-  formatAuthor,
-  formatBytes,
   formatNum,
   getCompilations,
   getSpecifications,
   shortUlid,
-  specUrl,
-  withTrademark,
 } from "../../lib/corpus";
 
 const compilations = getCompilations();
@@ -22,7 +19,6 @@ const specsById = new Map(getSpecifications().map((s) => [s.id, s]));
 >
   <section class="page-header">
     <div class="container">
-      <div class="eyebrow">Transcriptions</div>
       <h1>Transcriptions</h1>
       <p class="lead">
         Complete original-language texts assembled directly from primary ancient manuscripts. Each transcription reflects one model's full statistical assessment under a published specification, with every witness and probability preserved beside the text.
@@ -43,7 +39,7 @@ const specsById = new Map(getSpecifications().map((s) => [s.id, s]));
           <a href="/specifications/" class="btn btn-secondary">Read specification →</a>
         </div>
       ) : (
-        <div class="item-list">
+        <div class="spec-cards">
           {compilations.map((c) => {
             const m = c.manifest;
             const dateStr = m.compilation.createdAt
@@ -54,44 +50,50 @@ const specsById = new Map(getSpecifications().map((s) => [s.id, s]));
                 })
               : "";
             const title = m.compilation.title || (dateStr ? `${m.modelAttribution.modelName} · ${dateStr}` : m.modelAttribution.modelName);
-            const subtitle = m.compilation.subtitle || `${m.modelAttribution.modelName} (${m.modelAttribution.provider})`;
             const summary = m.compilation.summary || m.method.summary;
-            const authorStr = formatAuthor(m.compilation.author);
             const license = specsById.get(c.specId)?.license;
+            const modelName = m.modelAttribution.modelName;
             return (
-              <div class="panel">
-                <div class="panel-head">
-                  <div>
-                    <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 4px;">
-                      <a href={compUrl(c.compilationId)} style="font-size: 1.15rem; font-weight: 700; color: var(--ink);">
-                        {title}
-                      </a>
-                      <code title={c.compilationId}>{shortUlid(c.compilationId)}</code>
-                      <span class="badge badge-indigo">{m.modelAttribution.modelName}</span>
-                      {m.modelAttribution.effortLevel && (
-                        <span class="badge">{m.modelAttribution.effortLevel} effort</span>
-                      )}
-                    </div>
-                    <p class="panel-sub" style="margin-top: 2px;">
-                      {subtitle}{authorStr ? ` · ${authorStr}` : ""}{dateStr ? ` · ${dateStr}` : ""} · <a href={specUrl(c.specId)}>Specification <code title={c.specId}>{shortUlid(c.specId)}</code></a>{license && (<> · <a href={license.url} target="_blank" rel="noopener">{withTrademark(license.copyright)}. {license.name}</a></>)}
-                    </p>
+              <a href={compUrl(c.compilationId)} class="spec-card">
+                <div class="spec-card-top">
+                  <div class="spec-card-title-row">
+                    <h2 class="spec-card-title">{title}</h2>
                   </div>
-                  <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <a href={compUrl(c.compilationId)} class="btn btn-primary">Read transcription →</a>
-                  </div>
+                  <span class="spec-card-cta">Read transcription →</span>
                 </div>
-
-                <p style="margin: 0 0 14px; color: var(--ink-secondary); font-size: 0.92rem;">
-                  {summary}
-                </p>
-
-                <div style="display: flex; flex-wrap: wrap; gap: 18px; font-size: 0.88rem; color: var(--ink-muted); padding-top: 12px; border-top: 1px solid var(--border);">
-                  <span><strong style="color: var(--ink);">{formatNum(m.totals.books)}</strong> books</span>
-                  <span><strong style="color: var(--ink);">{formatNum(m.totals.lines)}</strong> lines</span>
-                  <span><strong style="color: var(--ink);">{formatNum(m.totals.words)}</strong> words</span>
-                  <span><strong style="color: var(--ink);">{formatNum(m.totals.variantPlaces)}</strong> points of disagreement</span>
+                <p class="spec-card-summary">{summary}</p>
+                <div class="spec-card-meta">
+                  {dateStr && (
+                    <span class="badge" title="Date compiled">
+                      <Icon name="date" />
+                      {dateStr}
+                    </span>
+                  )}
+                  {license && (
+                    <span class="badge" title={`${license.copyright}. ${license.name}`}>
+                      <Icon name="license" />
+                      {license.name}
+                    </span>
+                  )}
+                  {modelName && (
+                    <span class="badge" title="Model">
+                      <Icon name="model" />
+                      {modelName}
+                    </span>
+                  )}
+                  <span class="badge">
+                    <Icon name="words" />
+                    {formatNum(m.totals.words)} words
+                  </span>
+                  <span class="badge">
+                    <Icon name="disagreements" />
+                    {formatNum(m.totals.variantPlaces)} disagreements
+                  </span>
+                  <span class="spec-card-id" title={`Transcription ID: ${c.compilationId}`}>
+                    <code>{shortUlid(c.compilationId)}</code>
+                  </span>
                 </div>
-              </div>
+              </a>
             );
           })}
         </div>

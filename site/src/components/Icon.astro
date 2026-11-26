@@ -1,0 +1,105 @@
+---
+interface Props {
+  name:
+    | "author"
+    | "date"
+    | "license"
+    | "manuscripts"
+    | "transcriptions"
+    | "model"
+    | "words"
+    | "disagreements"
+    | "arrow-up"
+    | "effort"
+    | "harness"
+    | "books";
+  size?: number;
+}
+
+const { name, size = 12 } = Astro.props;
+---
+<svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  {name === "author" && (
+    <>
+      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+      <circle cx="12" cy="7" r="4"></circle>
+    </>
+  )}
+  {name === "date" && (
+    <>
+      <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+      <line x1="16" x2="16" y1="2" y2="6"></line>
+      <line x1="8" x2="8" y1="2" y2="6"></line>
+      <line x1="3" x2="21" y1="10" y2="10"></line>
+    </>
+  )}
+  {name === "license" && (
+    <>
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M14.83 14.83a4 4 0 1 1 0-5.66"></path>
+    </>
+  )}
+  {name === "manuscripts" && (
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+  )}
+  {name === "books" && (
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+  )}
+  {name === "transcriptions" && (
+    <>
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+      <path d="M14 2v6h6"></path>
+      <path d="M16 13H8"></path>
+      <path d="M16 17H8"></path>
+      <path d="M10 9H8"></path>
+    </>
+  )}
+  {name === "model" && (
+    <>
+      <rect width="16" height="16" x="4" y="4" rx="2"></rect>
+      <rect width="6" height="6" x="9" y="9"></rect>
+      <path d="M9 2v2"></path>
+      <path d="M15 2v2"></path>
+      <path d="M9 20v2"></path>
+      <path d="M15 20v2"></path>
+      <path d="M2 9h2"></path>
+      <path d="M2 15h2"></path>
+      <path d="M20 9h2"></path>
+      <path d="M20 15h2"></path>
+    </>
+  )}
+  {name === "words" && (
+    <>
+      <polyline points="4 7 4 4 20 4 20 7"></polyline>
+      <line x1="9" x2="15" y1="20" y2="20"></line>
+      <line x1="12" x2="12" y1="4" y2="20"></line>
+    </>
+  )}
+  {name === "disagreements" && (
+    <>
+      <circle cx="18" cy="18" r="3"></circle>
+      <circle cx="6" cy="6" r="3"></circle>
+      <path d="M13 6h3a2 2 0 0 1 2 2v7"></path>
+      <path d="M11 18H8a2 2 0 0 1-2-2V9"></path>
+    </>
+  )}
+  {name === "arrow-up" && (
+    <>
+      <path d="m5 12 7-7 7 7"></path>
+      <path d="M12 19V5"></path>
+    </>
+  )}
+  {name === "effort" && (
+    <>
+      <path d="m12 14 4-4"></path>
+      <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+    </>
+  )}
+  {name === "harness" && (
+    <>
+      <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+      <path d="M3 9h18"></path>
+      <path d="M9 21V9"></path>
+    </>
+  )}
+</svg>

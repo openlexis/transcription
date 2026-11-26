@@ -1,6 +1,7 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
 import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
+import Icon from "../../../components/Icon.astro";
 import {
   bookUrl,
   formatAuthor,
@@ -104,34 +105,56 @@ const license = getSpecifications().find((s) => s.id === c.specId)?.license;
       <div class="meta-strip">
         {compAuthor && (
           <span class="meta-chip" title="Author">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span><strong>Author:</strong> {compAuthor}</span>
+            <Icon name="author" size={14} />
+            <span>{compAuthor}</span>
           </span>
         )}
         {createdDate && (
           <span class="meta-chip" title="Date compiled">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-            <span><strong>Date:</strong> {createdDate}</span>
+            <Icon name="date" size={14} />
+            <span>{createdDate}</span>
           </span>
         )}
         <span class="meta-chip" title={`Specification ID: ${c.specId}`}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-          <span><strong>Specification:</strong> <a href={specUrl(c.specId)}><code>{shortUlid(c.specId)}</code></a></span>
+          <Icon name="arrow-up" size={14} />
+          <a href={specUrl(c.specId)}>Specification</a>
         </span>
         {license && (
           <span class="meta-chip" title={withTrademark(license.copyright)}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-            <span><strong>License:</strong> {withTrademark(license.copyright)}. <a href={license.url} target="_blank" rel="noopener">{license.name}</a></span>
+            <Icon name="license" size={14} />
+            <a href={license.url} target="_blank" rel="noopener">{license.name}</a>
           </span>
         )}
       </div>
-      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;">
-        <span class="badge badge-indigo">{attr.modelName} · {attr.provider}</span>
-        {attr.effortLevel && <span class="badge">{attr.effortLevel} effort</span>}
-        {attr.harness && <span class="badge">{attr.harness}</span>}
-        <span class="badge badge-emerald">{formatNum(m.books.length)} books</span>
-        <span class="badge">{formatNum(m.totals.words)} words</span>
-        <span class="badge">{formatNum(m.totals.variantPlaces)} points of disagreement</span>
+      <div class="spec-card-meta" style="border-top: 0; padding-top: 0; margin-top: 14px;">
+        <span class="badge badge-indigo">
+          <Icon name="model" />
+          {attr.modelName} · {attr.provider}
+        </span>
+        {attr.effortLevel && (
+          <span class="badge">
+            <Icon name="effort" />
+            {attr.effortLevel} effort
+          </span>
+        )}
+        {attr.harness && (
+          <span class="badge">
+            <Icon name="harness" />
+            {attr.harness}
+          </span>
+        )}
+        <span class="badge badge-emerald">
+          <Icon name="books" />
+          {formatNum(m.books.length)} books
+        </span>
+        <span class="badge">
+          <Icon name="words" />
+          {formatNum(m.totals.words)} words
+        </span>
+        <span class="badge">
+          <Icon name="disagreements" />
+          {formatNum(m.totals.variantPlaces)} points of disagreement
+        </span>
       </div>
       <p class="lead" style="margin-top: 12px;">
         {compSummary}
@@ -139,7 +162,7 @@ const license = getSpecifications().find((s) => s.id === c.specId)?.license;
       <div class="ulid-bar">
         <a href="/transcriptions/" class="btn btn-secondary">← All transcriptions</a>
         <a href={specUrl(c.specId)} class="btn btn-secondary" title={`Specification ID: ${c.specId}`}>
-          Specification {shortUlid(c.specId)} →
+          Specification <Icon name="arrow-up" size={14} />
         </a>
       </div>
     </div>
