@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Pill from "../../components/Pill.astro";
 import Byline from "../../components/Byline.astro";
+import ItemTitle from "../../components/ItemTitle.astro";
 import {
   formatAuthor,
   formatNum,
@@ -43,7 +44,7 @@ const specs = [...getSpecifications()].sort(
             <a href={specUrl(s.id)} class="spec-card">
               <div class="spec-card-top">
                 <div class="spec-card-title-row">
-                  <h2 class="spec-card-title">{withTrademark(s.title)}</h2>
+                  <ItemTitle class="spec-card-title" short={s.shortTitle} full={withTrademark(s.title)} />
                   {idx === 0 && specs.length > 1 && (
                     <Pill tone="accent">Latest</Pill>
                   )}

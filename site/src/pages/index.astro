@@ -1,9 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ConfidenceBadge from "../components/ConfidenceBadge.astro";
+import ItemTitle from "../components/ItemTitle.astro";
 import {
   bookUrl,
   buildClientSourceIndex,
+  compShortTitle,
   compUrl,
   formatAuthor,
   formatEra,
@@ -1240,9 +1242,8 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
                 <span>
                   Computed by{" "}
                   <a href={compUrl(latest.compilationId)}>
-                    {latest.manifest.compilation.title || latest.manifest.modelAttribution.modelName}
-                  </a>{" "}
-                  ({shortUlid(latest.compilationId)})
+                    {compShortTitle(latest)}
+                  </a>
                 </span>
                 <a href={sc.focalHref} class="showcase-footer-action">
                   Open {sc.refLabel} in reader →
@@ -1645,11 +1646,11 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           <div class="featured-comp-head">
             <div>
               <div class="meta-line">
-                Latest transcription · {latest.manifest.totals.books} books · {latest.manifest.modelAttribution.modelName} · <a href={specUrl(latest.specId)}>Rulebook {shortUlid(latest.specId)}</a>
+                Latest transcription · {latest.manifest.totals.books} books · {latest.manifest.modelAttribution.modelName} · <a href={specUrl(latest.specId)}>{specs.find((s) => s.id === latest.specId)?.shortTitle ?? "Specification"}</a>
               </div>
               <h3>
                 <a href={compUrl(latest.compilationId)} style="color: var(--ink);">
-                  {latest.manifest.compilation.title || latest.manifest.modelAttribution.modelName}
+                  {compShortTitle(latest)}
                 </a>
               </h3>
               <p class="featured-comp-sub">
@@ -1683,7 +1684,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           {compilations.slice(1, 4).map((c) => (
             <a href={compUrl(c.compilationId)} class="other-comp-card">
               <div class="other-comp-top">
-                <strong>{c.manifest.compilation.title || c.manifest.modelAttribution.modelName}</strong>
+                <strong>{compShortTitle(c)}</strong>
                 <span class="other-comp-arrow">Read →</span>
               </div>
               <span class="other-comp-meta">
@@ -1720,7 +1721,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           return (
             <a href={specUrl(s.id)} class="spec-card">
               <div class="spec-card-top">
-                <h3 class="spec-card-title">{withTrademark(s.title)}</h3>
+                <ItemTitle as="h3" class="spec-card-title" short={s.shortTitle} full={withTrademark(s.title)} />
                 <span class="spec-card-cta">Read rulebook →</span>
               </div>
               <p class="spec-card-summary">{s.summary}</p>

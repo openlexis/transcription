@@ -6,12 +6,14 @@ import DownloadTei from "../../../components/DownloadTei.astro";
 import Byline from "../../../components/Byline.astro";
 import ModelCredit from "../../../components/ModelCredit.astro";
 import CiteBox from "../../../components/CiteBox.astro";
+import ItemTitle from "../../../components/ItemTitle.astro";
 import { compilationCredit, perManuscript, witnessFiles } from "../../../lib/credits";
 import { bookDownloads } from "../../../lib/downloads";
 import { groupCredits } from "../../../lib/cite";
 import { readFileSync } from "node:fs";
 import {
   bookUrl,
+  compShortTitle,
   formatAuthor,
   formatBytes,
   formatNum,
@@ -92,7 +94,7 @@ const createdDate = m.compilation.createdAt
       day: "numeric",
     })
   : "";
-const compTitle = m.compilation.title || (createdDate ? `${attr.modelName} · ${createdDate}` : attr.modelName);
+const compTitle = compShortTitle(c);
 const compSubtitle = m.compilation.subtitle || `${attr.modelName} (${attr.provider})`;
 const compSummary = m.compilation.summary || m.method.summary;
 const compAuthor = formatAuthor(m.compilation.author);
@@ -124,7 +126,7 @@ const citeData = {
   <section class="page-header">
     <div class="container">
       <div class="eyebrow">Transcription</div>
-      <h1>{compTitle}</h1>
+      <ItemTitle as="h1" short={compTitle} full={m.compilation.title} />
       <p style="margin: 6px 0 0; font-size: 1.02rem; font-weight: 500; color: var(--ink-secondary);">
         {compSubtitle}
       </p>
@@ -132,7 +134,7 @@ const citeData = {
         items={[
           compAuthor && { icon: "author", text: compAuthor, title: "Author" },
           createdDate && { icon: "date", text: createdDate, title: "Date compiled" },
-          spec && { icon: "specification", text: withTrademark(spec.title), title: "Specification", href: specUrl(c.specId) },
+          spec && { icon: "specification", text: spec.shortTitle, title: `Specification: ${withTrademark(spec.title)}`, href: specUrl(c.specId) },
           license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
         ]}
       >

@@ -1362,6 +1362,7 @@ if (import.meta.main) {
     compilation: {
       id: compilationId,
       title: "Granular Word-Level Critical Text",
+      shortTitle: "Granular Word-Level Critical Text",
       subtitle: `Decoupled severity & word-level Dawid–Skene compilation by ${MODEL_ATTRIBUTION.modelName}`,
       summary:
         "Full 66-book compilation with granular word-level alignment (preventing unrelated variants from collapsing into whole-verse blocks) and decoupled edit-category vs. substantive-severity scoring.",

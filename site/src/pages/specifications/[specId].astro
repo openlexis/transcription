@@ -2,11 +2,13 @@
 import Layout from "../../layouts/Layout.astro";
 import Byline from "../../components/Byline.astro";
 import CiteBox from "../../components/CiteBox.astro";
+import ItemTitle from "../../components/ItemTitle.astro";
 import { allSpecFiles, perManuscript, specCredit } from "../../lib/credits";
 import { groupCredits } from "../../lib/cite";
 import {
   REPO,
   buildClientSourceIndex,
+  compShortTitle,
   compUrl,
   displayLanguage,
   formatAuthor,
@@ -71,14 +73,14 @@ const toc = [
 ];
 ---
 <Layout
-  title={single.title}
+  title={single.shortTitle}
   active="specs"
   description={single.summary}
 >
   <section class="page-header">
     <div class="container">
       <div class="eyebrow">Specification</div>
-      <h1>{withTrademark(single.title)}</h1>
+      <ItemTitle as="h1" short={single.shortTitle} full={withTrademark(single.title)} />
       <Byline
         items={[
           specAuthor && { icon: "author", text: specAuthor, title: "Author" },
@@ -111,7 +113,7 @@ const toc = [
           </summary>
           <ul class="spec-transcriptions-list">
             {specCompilations.map((c) => {
-              const title = c.manifest.compilation.title || c.manifest.modelAttribution.modelName;
+              const title = compShortTitle(c);
               const date = c.manifest.compilation.createdAt
                 ? new Date(c.manifest.compilation.createdAt).toLocaleDateString("en-US", {
                     year: "numeric",

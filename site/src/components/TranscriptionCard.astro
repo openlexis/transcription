@@ -1,7 +1,8 @@
 ---
 import Pill from "./Pill.astro";
 import Byline from "./Byline.astro";
-import { compUrl, formatNum, shortUlid, type CompilationRecord, type SpecLicense } from "../lib/corpus";
+import ItemTitle from "./ItemTitle.astro";
+import { compShortTitle, compUrl, formatNum, shortUlid, type CompilationRecord, type SpecLicense } from "../lib/corpus";
 
 interface Props {
   compilation: CompilationRecord;
@@ -17,15 +18,13 @@ const dateStr = m.compilation.createdAt
       day: "numeric",
     })
   : "";
-const title =
-  m.compilation.title ||
-  (dateStr ? `${m.modelAttribution.modelName} · ${dateStr}` : m.modelAttribution.modelName);
+const title = compShortTitle(c);
 const summary = m.compilation.summary || m.method.summary;
 ---
 <a href={compUrl(c.compilationId)} class="spec-card">
   <div class="spec-card-top">
     <div class="spec-card-title-row">
-      <h2 class="spec-card-title">{title}</h2>
+      <ItemTitle class="spec-card-title" short={title} full={m.compilation.title} />
     </div>
     <span class="spec-card-cta">Read transcription →</span>
   </div>

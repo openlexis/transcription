@@ -52,6 +52,7 @@ Words used here:
 - **Transcript list:** the `sources` field at the end of that file. Each transcript is one line, `{path: ..., commit: ...}`. Book, language, date, license and archive details are read from the transcript and its catalog (`archives/<archive>/index.json`) at that same commit.
 - **Pinned transcript:** a transcript (and its catalog) read as they are in the recorded commit (`git show <commit>:<path>`), so later edits, moves or deletions under `archives/` do not change what a specification uses.
 - **License:** every specification file must include a required `license` field. `bun run check` fails if it is missing.
+- **Short title:** every new specification file must include a required `shortTitle` field of at most 40 characters, for example `shortTitle: Severity and alignment, pinned list`. The site uses it in links, navigation, cards, lists and page titles, so it must tell this specification apart from every other one and must not be ULID characters. `bun run check` fails if it is missing, too long, or the same as another specification's. The specifications published before this rule cannot be edited, so their short titles live in `site/src/data/specification-short-titles.json`; never add a new specification there. Likewise every compilation's `manifest.json` must have `compilation.shortTitle` (at most 40 characters). A longer `title` is still allowed and is cut off with an ellipsis past 80 characters where it is shown.
 
 ```yaml
 license:
