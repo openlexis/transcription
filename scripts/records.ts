@@ -180,6 +180,14 @@ function fromHeader(path: string, archive: string, header: string, rec: Any, msr
   }
 }
 
+/** True when the years of a sentence date the images, as in "transcribed from digital images taken by the project in 2006-2009". */
+function imageYear(s: string) {
+  const m = s.match(/\b(images?|photographs?|microfilm)\b[^.]*?\b(taken|made|produced|photographed|captured)\b/i);
+  if (!m) return false;
+  const y = s.search(/\b(1[5-9]\d\d|20\d\d)\b/);
+  return y > (m.index ?? 0);
+}
+
 function sentence(path: string, s: string, loc: string, rec: Any, msr: Any, surr: string[]) {
   const S = [src(path, loc, s)], archive = path.split("/")[1], stem = path.split("/")[2].replace(/\.xml$/, "");
   const practice = (kind: string) => add(list(list(rec, "method", {} as any) as any, "practices"), { kind, text: s, sources: S });
@@ -189,7 +197,7 @@ function sentence(path: string, s: string, loc: string, rec: Any, msr: Any, surr
   const published = /\b(published|made available|first edition)\b/i.test(s);
   if (years(s).length && !/transcription editor|guidelines|version \d/i.test(s) && !/convert/i.test(s)) {
     if (published) add(list(rec, "published"), { text: s, ...dateOf(s), sources: S });
-    else if (/\b(made|produced|created|transcribed|undertaken|begun|completed)\b/i.test(s)) add(list(rec, "made"), { text: s, ...dateOf(s), sources: S });
+    else if (/\b(made|produced|created|transcribed|undertaken|begun|completed)\b/i.test(s) && !imageYear(s)) add(list(rec, "made"), { text: s, ...dateOf(s), sources: S });
   }
   // what it was made from
   const from = (kind: string, reproduction?: string) => add(list(rec, "madeFrom"), { kind, ...(reproduction ? { reproduction } : {}), description: s, sources: S });
@@ -303,7 +311,7 @@ function msFromHeader(path: string, archive: string, header: string, msr: Any) {
     if (!/image|photograph|facsimile|microfilm|edition/i.test(s)) return;
     const kind = /multispectral/i.test(s) ? "multispectral" : /microfilm/i.test(s) ? "microfilm" : /facsimile/i.test(s) ? "facsimile" : /raking/i.test(s) ? "digital-raking-light" : /colou?r digital|digital colou?r|colou?r images/i.test(s) ? "digital-colour" : /black[- ]and[- ]white/i.test(s) ? "black-and-white-photograph" : undefined;
     const r: Any = { id: `${archive}-${i + 1}`, ...(kind ? { kind } : {}), description: s };
-    const d = dateOf(s); if (Object.keys(d).length) r.when = { text: s.match(/\b(in |between )?\d{4}([-–]\d{2,4}| and \d{4})?/)?.[0].trim() ?? String(years(s)[0]), ...d, sources: [src(path, `${L}/additional/surrogates`, s)] };
+    const d = dateOf(s); if (Object.keys(d).length) r.when = { text: s.match(/\b\d{4}([-–]\d{2,4}| and \d{4})?/)?.[0].trim() ?? String(years(s)[0]), ...d, sources: [src(path, `${L}/additional/surrogates`, s)] };
     r.sources = [src(path, `${L}/additional/surrogates`, s)];
     const old = (msr.reproductions ??= []).find((x: Any) => x.description === s);
     if (old) { if (!old.sources.some((o: Any) => o.path === path)) old.sources.push(r.sources[0]); } else msr.reproductions.push(r);

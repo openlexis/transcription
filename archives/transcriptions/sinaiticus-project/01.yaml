@@ -115,13 +115,6 @@ made:
       - path: archives/sinaiticus-project/01.xml
         locator: "teiHeader/encodingDesc/projectDesc/p[1]"
         quote: This transcription was made by the Codex Sinaiticus Project as part of an online presentation and edition of Codex Sinaiticus between 2002 and 2010.
-  - text: "Double-transcribed from digital images taken by the Codex Sinaiticus Project team in 2006-2009, supplied by the Codex Sinaiticus Project."
-    from: 2006
-    to: 2009
-    sources:
-      - path: archives/sinaiticus-project/01.xml
-        locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
-        quote: "Double-transcribed from digital images taken by the Codex Sinaiticus Project team in 2006-2009, supplied by the Codex Sinaiticus Project."
   - text: "The Codex Sinaiticus transcription project, funded by the AHRC between 2006 and 2009"
     from: 2006
     to: 2009

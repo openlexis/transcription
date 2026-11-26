@@ -29,7 +29,7 @@
 .ar-file-head { display: flex; align-items: center; gap: 8px; font-weight: 600; }
 .ar-file-head a { overflow-wrap: anywhere; }
 .ar-file-rows { display: grid; gap: 5px; margin-top: 8px; }
-.ar-file-row { display: grid; grid-template-columns: 18px 74px minmax(0, 1fr); gap: 0 8px; align-items: start; font-size: 0.82rem; color: var(--ink-secondary); }
+.ar-file-row { display: grid; grid-template-columns: 18px 86px minmax(0, 1fr); gap: 0 8px; align-items: start; font-size: 0.82rem; color: var(--ink-secondary); }
 .ar-file-row > .ar-ico { margin-top: 2px; }
 .ar-file-row .ar-k { font-weight: 600; color: var(--ink-muted); }
 .ar-file-row .ar-v { min-width: 0; overflow-wrap: anywhere; }
@@ -169,3 +169,13 @@
 .source-list {
   padding-bottom: calc(100vh - 220px);
 }
+
+/* Archive records: facts from archives/manuscripts and archives/transcriptions, each with its sources */
+.ar-rec-head { font-weight: 600; font-size: 0.84rem; color: var(--ink-secondary); margin: 10px 0 2px; }
+.ar-rec-none { margin: 8px 0 4px; }
+.ar-rec-item + .ar-rec-item { margin-top: 6px; }
+.ar-src { font-size: 0.74rem; white-space: nowrap; }
+.ar-src a { color: var(--ink-muted); text-decoration: underline dotted; }
+.ar-src a:hover { color: var(--ink); }
+.ar-rec-file { display: contents; }
+.ar-file-row .ar-rec-item + .ar-rec-item { margin-top: 4px; }

@@ -190,6 +190,65 @@ const meta = {
       return `<div class="ar-field">${archiveIcon(icon)}<div class="ar-label">${label}${hint ? `<span class="ar-hint">${hint}</span>` : ""}</div><div class="ar-value">${valueHtml}</div></div>`;
     }
 
+    // The archive records (docs/archive-records.md): facts about the manuscript and each transcription file, each with its
+    // sources, loaded from /archive/records/<id>.json when a manuscript is opened.
+    const REC_PREFIX = { "etcbc-dss": "dss", aleppo: "mt", uxlc: "mt", "dt-ucph-sp": "sp", "tal-florentin-sp": "sp" };
+    const recId = (s) => `${REC_PREFIX[s.fl[0]?.pid] || "ga"}-${String(s.id).toLowerCase().replace(/[^a-z0-9]/g, "")}`;
+    const recCache = new Map();
+    const loadRec = (id) => {
+      if (!recCache.has(id)) recCache.set(id, fetch(`/archive/records/${encodeURIComponent(id)}.json`).then((r) => (r.ok ? r.json() : { t: {} })).catch(() => ({ t: {} })));
+      return recCache.get(id);
+    };
+    function srcLinks(ss) {
+      const uniq = [];
+      for (const x of ss || []) if (!uniq.some((y) => y.u === x.u && y.q === x.q)) uniq.push(x);
+      if (!uniq.length) return "";
+      const shown = uniq.slice(0, 3).map((x, i) => `<a href="${esc(x.u)}" target="_blank" rel="noopener" title="${esc(`${x.l}: "${x.q}"`)}">source${uniq.length > 1 ? ` ${i + 1}` : ""}</a>`);
+      return ` <span class="ar-src">${shown.join(" ")}${uniq.length > 3 ? ` <span>and ${uniq.length - 3} more</span>` : ""}</span>`;
+    }
+    const subs = (it) => (it.sub || []).map((l) => `<div class="ms-sub">${esc(l)}</div>`).join("");
+    const itemHtml = (it) => `<div class="ar-rec-item">${esc(it.t)}${it.link ? ` <a href="${esc(it.link)}" target="_blank" rel="noopener">${esc(hostOf(it.link))} ↗</a>` : ""}${srcLinks(it.s)}${subs(it)}</div>`;
+    const NOT_STATED = `<span class="ms-sub">Not stated</span>`;
+    function recordFieldsHtml(m) {
+      if (!m) return "";
+      const rows = [];
+      const add = (icon, label, hint, items) => { if (items.length) rows.push(field(icon, label, hint, items.map(itemHtml).join(""))); };
+      add("id", "Names and numbers", "names and catalog numbers, as each source gives them", [...m.names, ...m.ids]);
+      add("format", "Form and material", "", m.physical);
+      add("shelfmark", "Held at", "where the manuscript or a part of it is now", m.holdings);
+      add("date", "Dates stated", "when it was written, as each source states it, with how it was dated where stated", m.dates);
+      add("place", "Origin", "where it was written", m.origin);
+      add("history", "History", "events such as discovery, sale or transfer", m.history);
+      add("camera", "Image sets", "photographs, scans or copies of the pages that a transcription can be made from", m.repro);
+      return rows.length
+        ? `<div class="ar-rec-head">From the manuscript record <span class="ms-sub">(each fact with its source; hover a source link to see the exact words)</span></div><div class="ar-fields">${rows.join("")}</div>`
+        : `<div class="ms-sub ar-rec-none">The manuscript record has no further facts stated by a source.</div>`;
+    }
+    function fileRecordRows(views) {
+      const row = (icon, k, v) => `<div class="ar-file-row">${archiveIcon(icon, 14)}<span class="ar-k">${k}</span><span class="ar-v">${v}</span></div>`;
+      const all = (k) => views.flatMap((v) => v[k]);
+      const who = [], whoSrc = [];
+      for (const it of all("who")) if (!who.some((x) => x.t.toLowerCase() === it.t.toLowerCase())) { who.push(it); whoSrc.push(...it.s); }
+      const others = all("others"), usual = all("usual");
+      let whoHtml = who.length ? `${who.map((it) => `<span title="${esc((it.sub || []).join("; "))}">${esc(it.t)}</span>`).join(", ")}${srcLinks(whoSrc)}` : NOT_STATED;
+      if (others.length) whoHtml += `<div class="ms-sub">Support: ${others.map((it) => `${esc(it.t)}${it.sub ? ` (${esc(it.sub.join(", "))})` : ""}`).join("; ")}</div>`;
+      if (usual.length) whoHtml += `<div class="ms-sub">The project's usual practice: ${usual.map((it) => esc(it.t)).join("; ")}${srcLinks(usual.flatMap((it) => it.s))}</div>`;
+      const list = (k) => { const items = all(k), seen = new Set(); const u = items.filter((it) => !seen.has(it.t) && seen.add(it.t)); return u.length ? u.map(itemHtml).join("") : NOT_STATED; };
+      return [row("who", "Who", whoHtml), row("clock", "When", list("when")), row("camera", "Made from", list("from")), row("check", "How checked", list("checked")), row("branch", "Based on", list("based"))].join("");
+    }
+    async function fillRecords(det) {
+      if (!det || det.dataset.recFilled) return;
+      det.dataset.recFilled = "1";
+      const box = det.querySelector(".ar-rec-ms");
+      const data = await loadRec(box?.getAttribute("data-ms") || "");
+      if (box) box.innerHTML = recordFieldsHtml(data.m);
+      det.querySelectorAll(".ar-rec-file").forEach((el) => {
+        const views = (el.getAttribute("data-paths") || "").split("|").map((p) => data.t[p]).filter(Boolean);
+        el.innerHTML = views.length ? fileRecordRows(views) : "";
+      });
+    }
+    listEl?.addEventListener("toggle", (e) => { const d = e.target; if (d instanceof HTMLDetailsElement && d.open && d.classList.contains("source-item")) fillRecords(d); }, true);
+
     function fieldsHtml(s) {
       const [typeName, typeHint] = typeInfo(s.ty);
       const greek = s.lg === "Greek";
@@ -303,6 +362,7 @@ const meta = {
         <div class="ar-file">
           <div class="ar-file-head">${archiveIcon("provider")}<a href="${esc(f.pu)}" target="_blank" rel="noopener">${esc(f.pn)} ↗</a></div>
           <div class="ar-file-rows">
+            <div class="ar-rec-file" data-paths="${esc(f.ps.join("|"))}"></div>
             ${pills ? row("books", "Contains", `<span class="ar-pills">${pills}</span>${covers ? `<div class="ms-sub">Books: ${esc(covers)}</div>` : ""}`) : ""}
             ${row("file", "File", links)}
             ${row("format", "Format", `${esc(f.fmt)}${/^TEI/.test(f.fmt) ? `<div class="ms-sub">TEI is the standard file format for scholarly texts.</div>` : ""}`)}
@@ -344,7 +404,11 @@ const meta = {
             </div>
           </summary>
           <div class="source-detail">
-            ${fieldsHtml(s)}
+            <div>
+              <div class="ar-section-head">${archiveIcon("shelfmark")}Manuscript</div>
+              ${fieldsHtml(s)}
+              <div class="ar-rec-ms" data-ms="${esc(recId(s))}"><span class="ms-sub">Loading the manuscript record…</span></div>
+            </div>
             <div>
               <div class="ar-section-head">${archiveIcon("file")}Transcriptions</div>
               ${intro}
@@ -392,6 +456,7 @@ const meta = {
       if (resetBtn) {
         resetBtn.hidden = !(state.q || state.exactId || state.lang || state.type || state.prov || state.target);
       }
+      listEl?.querySelectorAll("details.source-item[open]").forEach((d) => fillRecords(d));
       window.dispatchEvent(new CustomEvent("archive-list-updated"));
     }
 
