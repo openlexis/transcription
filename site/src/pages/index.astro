@@ -18,6 +18,7 @@ import {
   shortUlid,
   specUrl,
   ulidTimestamp,
+  withTrademark,
   type ParsedVerseToken,
 } from "../lib/corpus";
 import { lookupWordGloss } from "../lib/gloss";
@@ -1701,7 +1702,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           return (
             <a href={specUrl(s.id)} class="spec-card">
               <div class="spec-card-top">
-                <h3 class="spec-card-title">{s.title}</h3>
+                <h3 class="spec-card-title">{withTrademark(s.title)}</h3>
                 <span class="spec-card-cta">Read rulebook →</span>
               </div>
               <p class="spec-card-summary">{s.summary}</p>
