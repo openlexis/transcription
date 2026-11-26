@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ArchiveListSidebar from "../components/ArchiveListSidebar.astro";
 import "../styles/cite.css";
 import "../styles/archive.css";
 import {
@@ -86,15 +87,20 @@ const meta = {
         </div>
       </div>
 
-      <div class="results-meta">
-        <span id="src-count">Showing {formatNum(Math.min(60, index.length))} of {formatNum(index.length)} manuscripts</span>
-        <button type="button" id="src-reset" class="copy-btn" hidden>Reset filters</button>
-      </div>
+      <div class="archive-body" data-archive-body>
+        <ArchiveListSidebar />
+        <div class="archive-main">
+          <div class="results-meta">
+            <span id="src-count">Showing {formatNum(Math.min(60, index.length))} of {formatNum(index.length)} manuscripts</span>
+            <button type="button" id="src-reset" class="copy-btn" hidden>Reset filters</button>
+          </div>
 
-      <div class="source-list" id="src-list"></div>
+          <div class="source-list" id="src-list"></div>
 
-      <div style="text-align: center; margin-top: 20px;">
-        <button type="button" id="src-more" class="btn btn-secondary" hidden>Load more manuscripts</button>
+          <div style="text-align: center; margin-top: 20px;">
+            <button type="button" id="src-more" class="btn btn-secondary" hidden>Load more manuscripts</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>

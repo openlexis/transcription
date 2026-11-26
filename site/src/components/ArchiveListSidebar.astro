@@ -1,0 +1,19 @@
+---
+import PageSidebar from "./PageSidebar.astro";
+---
+<PageSidebar label="In the archive" toggleLabel="In the archive" title="In the archive">
+  <p class="ar-nav-pos" data-archive-nav-pos></p>
+  <div class="ar-nav">
+    <nav aria-label="Manuscripts in the archive">
+      <ul class="page-sidebar-toc ar-nav-list" data-archive-nav-list></ul>
+    </nav>
+    <div class="ar-nav-track" data-archive-nav-track aria-hidden="true">
+      <div class="ar-nav-thumb"></div>
+    </div>
+  </div>
+</PageSidebar>
+
+<script>
+  import { initArchiveListSidebar } from "../lib/archive-list-sidebar";
+  initArchiveListSidebar();
+</script>
