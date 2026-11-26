@@ -340,13 +340,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         {bookLangCodes.map((code) => (
           <Pill icon="language" title={LANGUAGE_META[code].note}>{LANGUAGE_META[code].label}</Pill>
         ))}
-        {showBookNav && (
-          <nav class="book-title-nav" aria-label="Previous and next book">
-            <a href={bookUrl(c.compilationId, prevBook.id)}>← {prevBook.name}</a>
-            <span class="book-title-nav-sep" aria-hidden="true"> · </span>
-            <a href={bookUrl(c.compilationId, nextBook.id)}>{nextBook.name} →</a>
-          </nav>
-        )}
       </div>
       <h1>{b.name}</h1>
       <Byline
@@ -382,9 +375,20 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
   <section class="section">
     <div class="container page-layout">
       <PageSidebar
-        label="Chapters, key, and filters"
-        toggleLabel={renderedChapters.length > 1 ? "Chapters and filters" : "Key and filters"}
+        label="Books, chapters, key, and filters"
+        toggleLabel={renderedChapters.length > 1 ? "Books, chapters, and filters" : "Books and filters"}
       >
+        {(showBookNav || compTitle) && (
+          <nav class="book-sidebar-nav" aria-label="This transcription and nearby books">
+            <Byline
+              items={[
+                showBookNav && { icon: "arrow-left", text: prevBook.name, title: "Previous book", href: bookUrl(c.compilationId, prevBook.id) },
+                showBookNav && { icon: "arrow-right", text: nextBook.name, title: "Next book", href: bookUrl(c.compilationId, nextBook.id) },
+                compTitle && { icon: "transcriptions", text: compTitle, title: "Transcription", href: compUrl(c.compilationId) },
+              ]}
+            />
+          </nav>
+        )}
         {renderedChapters.length > 1 && (
           <nav class="book-sidebar-chapters" aria-label="Jump to chapter">
             <div class="page-sidebar-title">Chapters</div>

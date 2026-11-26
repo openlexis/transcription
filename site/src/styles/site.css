@@ -5677,11 +5677,26 @@ tr:last-child td {
 }
 
 .page-sidebar-title + .page-sidebar-title,
+.book-sidebar-nav + .book-sidebar-chapters,
+.book-sidebar-nav + .reader-filter-bar,
 .book-sidebar-chapters + .reader-hint,
 .book-sidebar-chapters + .reader-filter-bar,
 .book-sidebar-legend + .reader-filter-bar,
 .page-sidebar-toc + .page-sidebar-note {
   margin-top: 18px;
+}
+
+.book-sidebar-nav .byline {
+  margin-top: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.book-sidebar-nav .byline-item,
+.book-sidebar-nav .byline-item a {
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .page-sidebar-toc {
