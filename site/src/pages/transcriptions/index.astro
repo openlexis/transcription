@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Icon from "../../components/Icon.astro";
+import Pill from "../../components/Pill.astro";
 import {
   compUrl,
   formatNum,
@@ -64,31 +64,18 @@ const specsById = new Map(getSpecifications().map((s) => [s.id, s]));
                 <p class="spec-card-summary">{summary}</p>
                 <div class="spec-card-meta">
                   {dateStr && (
-                    <span class="badge" title="Date compiled">
-                      <Icon name="date" />
-                      {dateStr}
-                    </span>
+                    <Pill icon="date" title="Date compiled">{dateStr}</Pill>
                   )}
                   {license && (
-                    <span class="badge" title={`${license.copyright}. ${license.name}`}>
-                      <Icon name="license" />
+                    <Pill icon="license" title={`${license.copyright}. ${license.name}`}>
                       {license.name}
-                    </span>
+                    </Pill>
                   )}
                   {modelName && (
-                    <span class="badge" title="Model">
-                      <Icon name="model" />
-                      {modelName}
-                    </span>
+                    <Pill icon="model" title="Model">{modelName}</Pill>
                   )}
-                  <span class="badge">
-                    <Icon name="words" />
-                    {formatNum(m.totals.words)} words
-                  </span>
-                  <span class="badge">
-                    <Icon name="disagreements" />
-                    {formatNum(m.totals.variantPlaces)} disagreements
-                  </span>
+                  <Pill icon="words">{formatNum(m.totals.words)} words</Pill>
+                  <Pill icon="disagreements">{formatNum(m.totals.variantPlaces)} disagreements</Pill>
                   <span class="spec-card-id" title={`Transcription ID: ${c.compilationId}`}>
                     <code>{shortUlid(c.compilationId)}</code>
                   </span>

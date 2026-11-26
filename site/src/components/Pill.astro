@@ -1,0 +1,44 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  icon?:
+    | "author"
+    | "date"
+    | "license"
+    | "manuscripts"
+    | "transcriptions"
+    | "model"
+    | "provider"
+    | "words"
+    | "disagreements"
+    | "arrow-up"
+    | "arrow-left"
+    | "arrow-right"
+    | "effort"
+    | "harness"
+    | "books"
+    | "language"
+    | "section"
+    | "lines";
+  title?: string;
+  href?: string;
+  tone?: "default" | "accent" | "sky";
+  target?: string;
+  rel?: string;
+}
+
+const { icon, title, href, tone = "default", target, rel } = Astro.props;
+const classes = ["pill", tone !== "default" ? `pill-${tone}` : ""].filter(Boolean).join(" ");
+---
+{href ? (
+  <a class={classes} href={href} title={title} target={target} rel={rel}>
+    {icon && <Icon name={icon} />}
+    <slot />
+  </a>
+) : (
+  <span class={classes} title={title}>
+    {icon && <Icon name={icon} />}
+    <slot />
+  </span>
+)}

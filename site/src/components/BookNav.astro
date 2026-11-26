@@ -1,0 +1,23 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  prevHref: string;
+  prevName: string;
+  nextHref: string;
+  nextName: string;
+  class?: string;
+}
+
+const { prevHref, prevName, nextHref, nextName, class: className } = Astro.props;
+---
+<nav class:list={["book-nav", className]} aria-label="Previous and next book">
+  <a class="btn btn-secondary book-nav-btn" href={prevHref}>
+    <Icon name="arrow-left" size={16} />
+    <span class="book-nav-name">{prevName}</span>
+  </a>
+  <a class="btn btn-secondary book-nav-btn" href={nextHref}>
+    <span class="book-nav-name">{nextName}</span>
+    <Icon name="arrow-right" size={16} />
+  </a>
+</nav>

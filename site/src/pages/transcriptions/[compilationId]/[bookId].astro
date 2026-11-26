@@ -3,11 +3,12 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import Layout from "../../../layouts/Layout.astro";
 import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
+import Pill from "../../../components/Pill.astro";
+import BookNav from "../../../components/BookNav.astro";
 import {
+  bookUrl,
   compUrl,
-  displayLanguage,
   formatAuthor,
-  formatBytes,
   formatNum,
   getCompilations,
   getSpecifications,
@@ -22,7 +23,7 @@ import {
   type CompiledBookEntry,
 } from "../../../lib/corpus";
 import { buildBookGlossMap } from "../../../lib/gloss";
-import { languageIconSvg, renderLanguageBadgeHtml, type LangCode } from "../../../lib/languages";
+import { LANGUAGE_META, languageIconSvg, renderLanguageBadgeHtml, type LangCode } from "../../../lib/languages";
 import { transliterateText } from "../../../lib/transliterate";
 
 export function getStaticPaths() {
@@ -272,6 +273,12 @@ const bookLangCodes: LangCode[] = !isHebrew
     ? ["hbo", "arc"]
     : ["hbo"];
 
+const books = c.manifest.books;
+const bookIndex = books.findIndex((x) => x.id === b.id);
+const prevBook = books[(bookIndex - 1 + books.length) % books.length];
+const nextBook = books[(bookIndex + 1) % books.length];
+const showBookNav = books.length > 1;
+
 const glossMap = buildBookGlossMap(bookWords, isHebrew);
 const romanCache = new Map<string, string>();
 function romanOfWord(w: string): string {
@@ -316,44 +323,58 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
   <section class="page-header">
     <div class="container">
       <div class="book-eyebrow-row">
-        <span class="eyebrow" style="margin-bottom: 0;">{b.section}</span>
+        {b.section && (
+          <Pill icon="section">{b.section}</Pill>
+        )}
         {bookLangCodes.map((code) => (
-          <Fragment set:html={renderLanguageBadgeHtml(code, 12)} />
+          <Pill icon="language" title={LANGUAGE_META[code].note}>{LANGUAGE_META[code].label}</Pill>
         ))}
       </div>
       <h1>{b.name}</h1>
-      <div class="compilation-provenance" aria-label="Transcription and specification">
-        <span class="prov-item">
-          <span class="prov-label">Transcription</span>
-          <a href={compUrl(c.compilationId)} class="prov-value" title={`Transcription ID: ${c.compilationId}`}>
-            <strong>{compTitle}</strong>
-            <code>{shortUlid(c.compilationId)}</code>
-          </a>
-          <span class="prov-date">{modelLabel}{compAuthor ? ` · ${compAuthor}` : ""}{compDate ? ` · ${compDate}` : ""}</span>
-        </span>
-        <span class="prov-sep" aria-hidden="true">·</span>
-        <span class="prov-item">
-          <span class="prov-label">Specification</span>
-          <a href={specUrl(c.specId)} class="prov-value" title={`Specification ID: ${c.specId}`}><code>{shortUlid(c.specId)}</code></a>
-        </span>
+      <div class="pill-row" aria-label="Transcription and specification">
+        <Pill icon="transcriptions" href={compUrl(c.compilationId)} title={`Transcription ID: ${c.compilationId}`}>
+          {compTitle}
+        </Pill>
+        {modelLabel && (
+          <Pill icon="model" title="Model">{c.manifest.modelAttribution.modelName}</Pill>
+        )}
+        {c.manifest.modelAttribution.effortLevel && (
+          <Pill icon="effort" title="Effort">{c.manifest.modelAttribution.effortLevel} effort</Pill>
+        )}
+        {compAuthor && (
+          <Pill icon="author" title="Author">{compAuthor}</Pill>
+        )}
+        {compDate && (
+          <Pill icon="date" title="Date compiled">{compDate}</Pill>
+        )}
+        <Pill icon="arrow-up" href={specUrl(c.specId)} title={`Specification ID: ${c.specId}`}>Specification</Pill>
         {license && (
-          <>
-            <span class="prov-sep" aria-hidden="true">·</span>
-            <span class="prov-item">
-              <span class="prov-label">License</span>
-              <a href={license.url} class="prov-value" target="_blank" rel="noopener">{withTrademark(license.copyright)}. {license.name}</a>
-            </span>
-          </>
+          <Pill icon="license" href={license.url} title={withTrademark(license.copyright)} target="_blank" rel="noopener">
+            {license.name}
+          </Pill>
         )}
       </div>
-      <p class="lead book-stats-lead">
-        <span>{formatNum(b.stats.manuscripts)} manuscripts ({formatNum(b.stats.early)} early) · {formatNum(b.stats.lines)} lines · {formatNum(b.stats.words)} words · {formatNum(b.stats.places)} points of disagreement · mean word likelihood</span>
+      <div class="pill-row book-stats-lead" style="margin-top: 14px;">
+        <Pill icon="manuscripts">
+          {formatNum(b.stats.manuscripts)} manuscripts ({formatNum(b.stats.early)} early)
+        </Pill>
+        <Pill icon="lines">{formatNum(b.stats.lines)} lines</Pill>
+        <Pill icon="words">{formatNum(b.stats.words)} words</Pill>
+        <Pill icon="disagreements">{formatNum(b.stats.places)} points of disagreement</Pill>
         <ConfidenceBadge
           value={b.stats.meanWordConfidence}
           kind="book-mean"
           context={b.name}
         />
-      </p>
+      </div>
+      {showBookNav && (
+        <BookNav
+          prevHref={bookUrl(c.compilationId, prevBook.id)}
+          prevName={prevBook.name}
+          nextHref={bookUrl(c.compilationId, nextBook.id)}
+          nextName={nextBook.name}
+        />
+      )}
       <div class="ulid-bar">
         <a href={compUrl(c.compilationId)} class="btn btn-secondary">← All books</a>
         <a href={`${compUrl(c.compilationId)}#method`} class="btn btn-secondary">Method &amp; scenarios →</a>
@@ -635,6 +656,15 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           </section>
         ))}
       </div>
+      {showBookNav && (
+        <BookNav
+          class="book-nav-bottom"
+          prevHref={bookUrl(c.compilationId, prevBook.id)}
+          prevName={prevBook.name}
+          nextHref={bookUrl(c.compilationId, nextBook.id)}
+          nextName={nextBook.name}
+        />
+      )}
     </div>
   </section>
 

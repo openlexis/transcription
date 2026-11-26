@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Icon from "../../components/Icon.astro";
+import Pill from "../../components/Pill.astro";
 import {
   formatAuthor,
   formatNum,
@@ -44,7 +44,7 @@ const specs = [...getSpecifications()].sort(
                 <div class="spec-card-title-row">
                   <h2 class="spec-card-title">{withTrademark(s.title)}</h2>
                   {idx === 0 && specs.length > 1 && (
-                    <span class="badge badge-indigo">Latest</span>
+                    <Pill tone="accent">Latest</Pill>
                   )}
                 </div>
                 <span class="spec-card-cta">Read specification →</span>
@@ -52,33 +52,22 @@ const specs = [...getSpecifications()].sort(
               <p class="spec-card-summary">{s.summary}</p>
               <div class="spec-card-meta">
                 {authorStr && (
-                  <span class="badge" title="Author">
-                    <Icon name="author" />
-                    {authorStr}
-                  </span>
+                  <Pill icon="author" title="Author">{authorStr}</Pill>
                 )}
                 {s.license && (
-                  <span class="badge" title={`${withTrademark(s.license.copyright)}. ${s.license.name}`}>
-                    <Icon name="license" />
+                  <Pill icon="license" title={`${withTrademark(s.license.copyright)}. ${s.license.name}`}>
                     {s.license.name}
-                  </span>
+                  </Pill>
                 )}
                 {dateStr && (
-                  <span class="badge" title="Date created">
-                    <Icon name="date" />
-                    {dateStr}
-                  </span>
+                  <Pill icon="date" title="Date created">{dateStr}</Pill>
                 )}
-                <span class="badge">
-                  <Icon name="manuscripts" />
-                  {formatNum(s.sources.length)} manuscripts
-                </span>
-                <span class={comps.length > 0 ? "badge badge-sky" : "badge"}>
-                  <Icon name="transcriptions" />
+                <Pill icon="manuscripts">{formatNum(s.sources.length)} manuscripts</Pill>
+                <Pill icon="transcriptions" tone={comps.length > 0 ? "sky" : "default"}>
                   {comps.length === 0
                     ? "No transcriptions yet"
                     : `${comps.length} ${comps.length === 1 ? "transcription" : "transcriptions"}`}
-                </span>
+                </Pill>
                 <span class="spec-card-id" title={`Specification ID: ${s.id}`}>
                   <code>{shortUlid(s.id)}</code>
                 </span>
