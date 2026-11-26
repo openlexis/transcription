@@ -8,6 +8,7 @@ import DownloadTei from "../../../components/DownloadTei.astro";
 import Byline from "../../../components/Byline.astro";
 import CiteBox from "../../../components/CiteBox.astro";
 import PageSidebar from "../../../components/PageSidebar.astro";
+import Icon from "../../../components/Icon.astro";
 import { bookCredit, perManuscript, witnessFiles } from "../../../lib/credits";
 import { bookDownload } from "../../../lib/downloads";
 import { groupCredits } from "../../../lib/cite";
@@ -381,14 +382,30 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         toggleLabel={renderedChapters.length > 1 ? "Books, chapters, and filters" : "Books and filters"}
       >
         {(showBookNav || compTitle) && (
-          <nav class="book-sidebar-nav" aria-label="This transcription and nearby books">
-            <Byline
-              items={[
-                showBookNav && { icon: "arrow-left", text: prevBook.name, title: "Previous book", href: bookUrl(c.compilationId, prevBook.id) },
-                showBookNav && { icon: "arrow-right", text: nextBook.name, title: "Next book", href: bookUrl(c.compilationId, nextBook.id) },
-                compTitle && { icon: "transcriptions", text: compTitle, title: "Transcription", href: compUrl(c.compilationId) },
-              ]}
-            />
+          <nav class="book-sidebar-nav" aria-label="This transcription and nearby books" data-book-nav>
+            {showBookNav && (
+              <a class="book-sidebar-nav-link book-sidebar-nav-prev" href={bookUrl(c.compilationId, prevBook.id)} title="Previous book">
+                <Icon name="arrow-left" size={14} />
+                <span>{prevBook.name}</span>
+              </a>
+            )}
+            {compTitle && (
+              <a
+                class="book-sidebar-nav-link book-sidebar-nav-up"
+                href={compUrl(c.compilationId)}
+                title={compTitle}
+                aria-label={`Transcription: ${compTitle}`}
+              >
+                <span class="book-sidebar-nav-up-arrow" aria-hidden="true">↑</span>
+                <span class="book-sidebar-nav-up-word">Transcription</span>
+              </a>
+            )}
+            {showBookNav && (
+              <a class="book-sidebar-nav-link book-sidebar-nav-next" href={bookUrl(c.compilationId, nextBook.id)} title="Next book">
+                <Icon name="arrow-right" size={14} />
+                <span>{nextBook.name}</span>
+              </a>
+            )}
           </nav>
         )}
         {renderedChapters.length > 1 && (

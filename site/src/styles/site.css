@@ -5706,25 +5706,91 @@ tr:last-child td {
   margin-top: 18px;
 }
 
-/* Previous and next book share one line when they fit (previous left, next right) and wrap when they do not; the
-   transcription link takes its own line below them. */
-.book-sidebar-nav .byline {
-  margin-top: 0;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px 12px;
+/* Previous book, a link up to the transcription, and next book: one line (previous left, up arrow in the
+   middle, next right) when they fit; a stacked list, with the up link reading "↑ Transcription", when they do not. */
+.book-sidebar-nav {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  column-gap: 12px;
+  row-gap: 8px;
+  font-size: 0.86rem;
+  color: var(--ink-secondary);
 }
 
-.book-sidebar-nav .byline-item:last-child {
-  flex-basis: 100%;
-}
-
-.book-sidebar-nav .byline-item,
-.book-sidebar-nav .byline-item a {
+.book-sidebar-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
   max-width: 100%;
+  color: inherit;
   overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.book-sidebar-nav-link:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.book-sidebar-nav-link svg {
+  flex: none;
+  color: var(--ink-muted);
+}
+
+.book-sidebar-nav-prev { justify-self: start; }
+
+.book-sidebar-nav-up {
+  justify-self: center;
+  position: relative;
+}
+
+.book-sidebar-nav-next { justify-self: end; }
+
+/* Previous and next alone (no transcription link) share one line when they fit, without a middle column. */
+.book-sidebar-nav:not(.is-stacked):not(:has(.book-sidebar-nav-up)) {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.book-sidebar-nav:not(.is-stacked) .book-sidebar-nav-up-word {
+  display: none;
+}
+
+.book-sidebar-nav-up-arrow {
+  font-size: 1.05em;
+  line-height: 1;
+}
+
+.book-sidebar-nav.is-measuring {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.book-sidebar-nav.is-measuring .book-sidebar-nav-link {
+  flex: none;
+  min-width: max-content;
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+
+.book-sidebar-nav.is-measuring .book-sidebar-nav-up-word {
+  display: none;
+}
+
+.book-sidebar-nav.is-stacked {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.book-sidebar-nav.is-stacked .book-sidebar-nav-link {
+  justify-self: start;
 }
 
 .page-sidebar-toc {
