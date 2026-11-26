@@ -520,9 +520,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             </li>
           </ul>
         </div>
-        <button type="button" id="filter-only-lines" class="filter-pill" aria-pressed="false">
-          Only matching lines
-        </button>
         <span id="filter-status" class="reader-filter-status"></span>
         <button type="button" id="filter-reset" class="copy-btn" hidden>Reset</button>
       </div>
@@ -741,12 +738,10 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
     const langSel = document.getElementById("filter-lang") as HTMLSelectElement | null;
     const minSevSel = document.getElementById("filter-min-sev") as HTMLSelectElement | null;
     const maxConfSel = document.getElementById("filter-max-conf") as HTMLSelectElement | null;
-    const onlyLinesBtn = document.getElementById("filter-only-lines") as HTMLButtonElement | null;
     const filterStatus = document.getElementById("filter-status");
     const filterReset = document.getElementById("filter-reset") as HTMLButtonElement | null;
     const filterEmpty = document.getElementById("filter-empty");
     const filterEmptyReset = document.getElementById("filter-empty-reset") as HTMLButtonElement | null;
-    let onlyMatchingLines = false;
 
     function applyReaderFilters() {
       const langFilter = langSel?.value ?? "all";
@@ -754,8 +749,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       const minSev = Number(minSevSel?.value ?? 0);
       const maxConf = Number(maxConfSel?.value ?? 100);
       const hasThreshold = hasLangFilter || minSev > 0 || maxConf < 100;
-      // When filtering to a specific language (e.g., Biblical Aramaic only), show matching lines directly
-      const limitLines = hasLangFilter || (onlyMatchingLines && hasThreshold);
 
       let matchedLines = 0;
       let totalLines = 0;
@@ -791,26 +784,24 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           }
 
           if (verseMatches) matchedLines++;
-          const hideVerse = limitLines && !verseMatches;
+          const hideVerse = hasThreshold && !verseMatches;
           v.hidden = hideVerse;
           if (!hideVerse) chVisible++;
         }
 
-        const hideChap = limitLines && chVisible === 0;
+        const hideChap = hasThreshold && chVisible === 0;
         ch.hidden = hideChap;
         const pill = document.querySelector<HTMLElement>(`[data-ch-pill="${chId}"]`);
         if (pill) pill.classList.toggle("chapter-pill-empty", hideChap);
       }
 
       matchedTokens = matchedTokKeys.size;
-      if (filterReset) filterReset.hidden = !hasThreshold && !onlyMatchingLines;
-      if (filterEmpty) filterEmpty.hidden = !(limitLines && matchedLines === 0);
+      if (filterReset) filterReset.hidden = !hasThreshold;
+      if (filterEmpty) filterEmpty.hidden = !(hasThreshold && matchedLines === 0);
 
       if (filterStatus) {
         if (!hasThreshold) {
-          filterStatus.textContent = onlyMatchingLines
-            ? "Pick a language, severity, or uncertainty filter"
-            : "";
+          filterStatus.textContent = "";
         } else {
           const unitLabel =
             hasLangFilter && minSev === 0 && maxConf >= 100
@@ -832,13 +823,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
     langSel?.addEventListener("change", applyReaderFilters);
     minSevSel?.addEventListener("change", applyReaderFilters);
     maxConfSel?.addEventListener("change", applyReaderFilters);
-    onlyLinesBtn?.addEventListener("click", () => {
-      onlyMatchingLines = !onlyMatchingLines;
-      onlyLinesBtn.classList.toggle("active", onlyMatchingLines);
-      onlyLinesBtn.setAttribute("aria-pressed", String(onlyMatchingLines));
-      applyReaderFilters();
-    });
-
     const SEV_LABELS: Record<string, string> = {
       "0": "Any",
       "1": "Minor and up",
@@ -941,9 +925,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       if (langSel) langSel.value = "all";
       if (minSevSel) minSevSel.value = "0";
       if (maxConfSel) maxConfSel.value = "100";
-      onlyMatchingLines = false;
-      onlyLinesBtn?.classList.remove("active");
-      onlyLinesBtn?.setAttribute("aria-pressed", "false");
       syncFilterVisuals();
       applyReaderFilters();
     };
