@@ -1,4 +1,4 @@
-/** Nearby-manuscript window and place-in-list bar for archive record pages. */
+/** Nearby-manuscript window and place-in-list bar for the archive list. */
 
 export const ARCHIVE_NAV_RADIUS = 3;
 
@@ -67,17 +67,17 @@ function listHtml(items: ArchiveNavItem[], current: number): string {
       const item = items[entry.index];
       const title = esc(itemLabel(item));
       const inner = itemInner(item);
+      const href = `#${msAnchor(item.id)}`;
       if (entry.index === current) {
-        return `<li><span class="ar-nav-here" aria-current="page" title="${title}">${inner}</span></li>`;
+        return `<li><a href="${href}" class="ar-nav-here" aria-current="location" title="${title}" data-archive-jump="${esc(item.id)}">${inner}</a></li>`;
       }
-      const href = `/archive/?id=${encodeURIComponent(item.id)}`;
-      return `<li><a href="${href}" title="${title}">${inner}</a></li>`;
+      return `<li><a href="${href}" title="${title}" data-archive-jump="${esc(item.id)}">${inner}</a></li>`;
     })
     .join("");
 }
 
-
 const thumbObservers = new WeakMap<HTMLElement, ResizeObserver>();
+const HEADER_LINE = 90;
 
 function placeThumb(track: HTMLElement, index: number, total: number): void {
   const thumb = track.querySelector<HTMLElement>(".ar-nav-thumb");
@@ -91,12 +91,20 @@ function placeThumb(track: HTMLElement, index: number, total: number): void {
   thumb.style.top = `${top}px`;
 }
 
-function watchThumb(track: HTMLElement, index: number, total: number): void {
-  thumbObservers.get(track)?.disconnect();
-  const obs = new ResizeObserver(() => placeThumb(track, index, total));
-  thumbObservers.set(track, obs);
-  obs.observe(track);
-  placeThumb(track, index, total);
+function visibleIndex(items: ArchiveNavItem[]): number {
+  if (!items.length) return -1;
+  const nodes = [...document.querySelectorAll<HTMLElement>(".source-item[data-archive-id]")];
+  if (!nodes.length) return 0;
+  let currentId = nodes[0].getAttribute("data-archive-id") || "";
+  for (const el of nodes) {
+    if (el.getBoundingClientRect().top <= HEADER_LINE) {
+      currentId = el.getAttribute("data-archive-id") || currentId;
+    } else {
+      break;
+    }
+  }
+  const idx = items.findIndex((s) => s.id === currentId);
+  return idx >= 0 ? idx : 0;
 }
 
 export function initArchiveListSidebar(): void {
@@ -111,33 +119,77 @@ export function initArchiveListSidebar(): void {
   if (!sidebar) return;
 
   const items = JSON.parse(dataEl.textContent || "[]") as ArchiveNavItem[];
-  const raw = new URLSearchParams(location.search).get("id")?.trim() || "";
-  const current = raw ? items.findIndex((s) => s.id.toLowerCase() === raw.toLowerCase()) : -1;
-  const isRecord = current >= 0;
-
-  if (!isRecord) {
+  if (!items.length) {
     sidebar.hidden = true;
     body.classList.remove("page-layout");
     return;
   }
 
+  let current = 0;
   const total = items.length;
-  list.innerHTML = listHtml(items, current);
 
-  if (pos) {
-    pos.textContent = `${(current + 1).toLocaleString("en-US")} of ${total.toLocaleString("en-US")}`;
-  }
+  const paint = (index: number) => {
+    current = Math.max(0, Math.min(index, total - 1));
+    list.innerHTML = listHtml(items, current);
+    if (pos) {
+      pos.textContent = `${(current + 1).toLocaleString("en-US")} of ${total.toLocaleString("en-US")}`;
+    }
+    const currentLabel = sidebar.querySelector<HTMLElement>("[data-sidebar-current]");
+    if (currentLabel) {
+      currentLabel.textContent = items[current].id;
+      currentLabel.hidden = false;
+    }
+    if (track) placeThumb(track, current, total);
+  };
 
-  const currentLabel = sidebar.querySelector<HTMLElement>("[data-sidebar-current]");
-  if (currentLabel) {
-    currentLabel.textContent = items[current].id;
-    currentLabel.hidden = false;
-  }
+  const syncFromScroll = () => {
+    const index = visibleIndex(items);
+    if (index !== current) paint(index);
+    else if (track) placeThumb(track, current, total);
+  };
 
   sidebar.hidden = false;
   body.classList.add("page-layout");
+  paint(visibleIndex(items));
+  requestAnimationFrame(() => {
+    if (track) {
+      thumbObservers.get(track)?.disconnect();
+      const obs = new ResizeObserver(() => placeThumb(track, current, total));
+      thumbObservers.set(track, obs);
+      obs.observe(track);
+      placeThumb(track, current, total);
+    }
+    syncFromScroll();
+  });
 
-  if (track) {
-    requestAnimationFrame(() => watchThumb(track, current, total));
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      syncFromScroll();
+    });
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  const srcList = document.getElementById("src-list");
+  if (srcList) {
+    new MutationObserver(() => syncFromScroll()).observe(srcList, { childList: true });
   }
+
+  sidebar.addEventListener("click", (e) => {
+    const link = (e.target as HTMLElement).closest<HTMLAnchorElement>("[data-archive-jump]");
+    if (!link || !sidebar.contains(link)) return;
+    const id = link.getAttribute("data-archive-jump");
+    if (!id) return;
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent("archive-reveal", { detail: { id } }));
+    const panel = sidebar.querySelector(".page-sidebar-panel");
+    const toggle = sidebar.querySelector<HTMLButtonElement>(".page-sidebar-toggle");
+    if (panel && window.matchMedia("(max-width: 920px)").matches) {
+      panel.classList.remove("is-open");
+      toggle?.setAttribute("aria-expanded", "false");
+    }
+  });
 }

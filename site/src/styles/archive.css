@@ -156,3 +156,16 @@
   border-radius: 4px;
   background: var(--accent);
 }
+
+.archive-body.page-layout > .page-sidebar {
+  overflow: visible;
+  max-height: none;
+}
+
+.source-item {
+  scroll-margin-top: 88px;
+}
+
+.source-list {
+  padding-bottom: calc(100vh - 220px);
+}
