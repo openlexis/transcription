@@ -1,3 +1,7 @@
+html:has([data-archive-body]) {
+  scroll-behavior: auto;
+}
+
 /* Archive record pages: labeled fields, transcription files grouped by provider, images */
 .ar-ico { flex: none; color: var(--ink-muted); }
 .ar-type { display: inline-flex; align-items: center; color: var(--ink-muted); cursor: help; }
@@ -164,6 +168,15 @@
 
 .source-item {
   scroll-margin-top: 88px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto var(--src-row-h, 59px);
+}
+.source-list.is-measuring .source-item {
+  content-visibility: visible;
+}
+.source-item[open] {
+  content-visibility: visible;
+  contain-intrinsic-size: auto none;
 }
 .source-item[hidden] {
   display: none;

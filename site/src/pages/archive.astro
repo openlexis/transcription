@@ -454,6 +454,23 @@ const meta = {
       det.insertAdjacentHTML("beforeend", detailHtml(s));
     }
 
+    function measureRowSizes() {
+      if (!listEl || !rowEls.length) return;
+      listEl.classList.add("is-measuring");
+      void listEl.offsetHeight;
+      let typical = 0;
+      for (const el of rowEls) {
+        if (el.hidden) continue;
+        const h = el.getBoundingClientRect().height;
+        if (h > 0) {
+          el.style.containIntrinsicSize = `auto ${h}px`;
+          if (!typical) typical = h;
+        }
+      }
+      if (typical) listEl.style.setProperty("--src-row-h", `${typical}px`);
+      listEl.classList.remove("is-measuring");
+    }
+
     function ensureListBuilt() {
       if (!listEl || rowEls.length) return;
       const parts = ALL.map(summaryHtml);
@@ -461,6 +478,7 @@ const meta = {
       listEl.innerHTML = parts.join("");
       rowEls = [...listEl.querySelectorAll<HTMLElement>(".source-item")];
       emptyEl = document.getElementById("src-empty");
+      measureRowSizes();
     }
 
     function applyFilters() {
@@ -588,10 +606,23 @@ const meta = {
         const el = document.getElementById(msAnchor(id));
         if (!el || el.hidden) return;
         const top = el.getBoundingClientRect().top + window.scrollY - 88;
-        window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+        const root = document.documentElement;
+        const prev = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        window.scrollTo(0, Math.max(0, top));
+        root.style.scrollBehavior = prev;
       };
       if (relayout) requestAnimationFrame(jump);
       else jump();
+    });
+
+    let measureTick = 0;
+    window.addEventListener("resize", () => {
+      if (measureTick) return;
+      measureTick = requestAnimationFrame(() => {
+        measureTick = 0;
+        measureRowSizes();
+      });
     });
 
     applyFilters();
