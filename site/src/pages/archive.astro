@@ -238,17 +238,47 @@ const meta = {
             .join("")}</div>`
         : `<span class="ms-sub">No online images are linked yet.</span>`;
       rows.push(field("image", "Images", "photographs of the pages (a facsimile); separate from the transcriptions below", images));
+      const totals = [
+        s.tb ? `<span class="badge">${plural(s.tb, "book", "books")}</span>` : "",
+        s.tl ? `<span class="badge">${plural(s.tl, "line", "lines")}</span>` : "",
+        s.tw ? `<span class="badge">${plural(s.tw, "word", "words")}</span>` : "",
+      ].join("");
+      if (totals) {
+        rows.push(
+          field(
+            "counts",
+            "Contains",
+            "",
+            `<span class="ar-pills">${totals}</span><div class="ms-sub">Counts are the books, lines, and words attested in at least one transcription below: a book or line counts if any portion is present, a word is a whitespace-separated token of the transcribed text, and when transcriptions differ on the same line the highest word count is used.</div>`,
+          ),
+        );
+      }
       return `<div class="ar-fields">${rows.join("")}</div>`;
     }
 
-    function coversText(f, union) {
+    function coversText(f) {
       const bk = [...f.bk].sort(byBook);
       if (!bk.length) return "";
-      if (bk.length <= 6) return bk.map(bookName).join(", ");
-      if (bk.length === union.length) return `all ${num(union.length)}`;
-      const missing = union.filter((b) => !bk.includes(b));
-      if (missing.length && missing.length <= 3) return `all but ${missing.map(bookName).join(", ")}`;
-      return `${bookName(bk[0])} to ${bookName(bk[bk.length - 1])}`;
+      return bk.map(bookName).join(", ");
+    }
+
+    function pct(n, total) {
+      if (!total || n < 0) return "";
+      if (n === 0) return "0%";
+      if (n >= total) return "100%";
+      const p = (n / total) * 100;
+      if (p < 1) return p < 0.1 ? "<0.1%" : `${p.toFixed(1)}%`;
+      if (p > 99) {
+        const d = Math.min(99.9, Math.round(p * 10) / 10);
+        return `${d}%`.replace(/\.0%$/, "%");
+      }
+      return `${Math.round(p)}%`;
+    }
+
+    function countPill(n, one, many, total) {
+      if (!n && !total) return "";
+      const p = pct(n, total);
+      return `<span class="badge">${plural(n, one, many)}${p ? ` (${p})` : ""}</span>`;
     }
 
     function overlapHtml(s, union) {
@@ -267,16 +297,16 @@ const meta = {
           bs.sort(byBook);
           return bs.length <= 6 && groups.size > 1 ? `${bs.map(bookName).join(", ")} ${bs.length === 1 ? "is" : "are"} in ${n} files` : `${plural(bs.length, "book is", "books are")} in ${n} files`;
         });
-      return `<p>Together these files cover ${plural(union.length, "book", "books")}. ${esc(parts.join("; "))}.</p><p>Where files overlap, they are separate transcriptions of the same pages. They are not copies of each other and can differ in places.</p>`;
+      return `<p>${esc(parts.join("; "))}.</p><p>Where files overlap, they are separate transcriptions of the same pages. They are not copies of each other and can differ in places.</p>`;
     }
 
-    function fileHtml(f, union) {
+    function fileHtml(f, s) {
       const links = f.ps.map((p) => `<a href="${blob(p)}" target="_blank" rel="noopener"><code>${esc(p)}</code></a>`).join(" ");
-      const covers = coversText(f, union);
+      const covers = coversText(f);
       const pills = [
-        f.bk.length ? `<span class="badge">${plural(f.bk.length, "book", "books")}</span>` : "",
-        f.ln ? `<span class="badge">${plural(f.ln, "line", "lines")}</span>` : "",
-        f.wd ? `<span class="badge">${plural(f.wd, "word", "words")}</span>` : "",
+        f.bk.length || s.tb ? countPill(f.bk.length, "book", "books", s.tb) : "",
+        f.ln || s.tl ? countPill(f.ln, "line", "lines", s.tl) : "",
+        f.wd || s.tw ? countPill(f.wd, "word", "words", s.tw) : "",
       ].join("");
       const row = (icon, k, v) => `<div class="ar-file-row">${archiveIcon(icon, 14)}<span class="ar-k">${k}</span><span class="ar-v">${v}</span></div>`;
       const adapted = adaptedValue(f);
@@ -329,7 +359,7 @@ const meta = {
             <div>
               <div class="ar-section-head">${archiveIcon("file")}Transcriptions</div>
               ${intro}
-              ${files.map((f) => fileHtml(f, union)).join("")}
+              ${files.map((f) => fileHtml(f, s)).join("")}
             </div>
             ${citeHtml(s)}
           </div>

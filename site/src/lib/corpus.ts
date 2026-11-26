@@ -501,20 +501,30 @@ export function getCorpusStats(spec: SpecFile = getPrimarySpec()) {
   };
 }
 
-// Which books each archive XML file contains, written by `bun run archive:coverage`. Presentation only.
-let _coverage: Record<string, string[]> | undefined;
-function fileBooks(path: string): string[] {
+// Books, lines, and words in each archive XML file, plus manuscript totals.
+// Totals are the distinct books and lines attested in any of the manuscript's transcriptions;
+// a word is a token of the transcribed text, and a shared line uses the highest word count.
+// Written by `bun run archive:coverage`. Presentation only.
+type ArchiveCounts = { books: string[]; lines: number; words: number };
+type ArchiveCoverage = { files: Record<string, ArchiveCounts>; manuscripts: Record<string, ArchiveCounts> };
+const EMPTY_COUNTS: ArchiveCounts = { books: [], lines: 0, words: 0 };
+let _coverage: ArchiveCoverage | undefined;
+function archiveCoverage(): ArchiveCoverage {
   if (!_coverage) {
     const f = `${ROOT}site/src/data/archive-coverage.json`;
-    _coverage = existsSync(f) ? (JSON.parse(readFileSync(f, "utf8")) as Record<string, string[]>) : {};
+    _coverage = existsSync(f) ? (JSON.parse(readFileSync(f, "utf8")) as ArchiveCoverage) : { files: {}, manuscripts: {} };
   }
-  return _coverage[path] ?? [];
+  return _coverage;
+}
+function fileCoverage(path: string): ArchiveCounts {
+  return archiveCoverage().files[path] ?? EMPTY_COUNTS;
 }
 
 /** Compact client-side index for interactive expandable source explorers. */
 export function buildClientSourceIndex(spec: SpecFile) {
   return spec.sources.map((s) => {
     const d = formatDateRange(s);
+    const tot = archiveCoverage().manuscripts[s.id] ?? EMPTY_COUNTS;
     return {
       id: s.id,
       name: s.name ?? "",
@@ -529,18 +539,25 @@ export function buildClientSourceIndex(spec: SpecFile) {
       dsrc: s.dateSource ?? "",
       vw: s.viewers ?? [],
       tg: s.targets ?? [],
-      fl: s.files.map((f) => ({
-        ps: f.paths,
-        bk: [...new Set(f.paths.flatMap(fileBooks))],
-        fmt: f.format,
-        lic: f.license,
-        url: f.sourceUrl,
-        ln: f.lines ?? 0,
-        wd: f.words ?? 0,
-        pid: f.provenance.id,
-        pn: f.provenance.name,
-        pu: f.provenance.url,
-      })),
+      tb: tot.books.length,
+      tl: tot.lines,
+      tw: tot.words,
+      fl: s.files.map((f) => {
+        const parts = f.paths.map(fileCoverage);
+        const hasCov = f.paths.some((p) => archiveCoverage().files[p]);
+        return {
+          ps: f.paths,
+          bk: [...new Set(parts.flatMap((p) => p.books))],
+          fmt: f.format,
+          lic: f.license,
+          url: f.sourceUrl,
+          ln: hasCov ? parts.reduce((n, p) => n + p.lines, 0) : (f.lines ?? 0),
+          wd: hasCov ? parts.reduce((n, p) => n + p.words, 0) : (f.words ?? 0),
+          pid: f.provenance.id,
+          pn: f.provenance.name,
+          pu: f.provenance.url,
+        };
+      }),
     };
   });
 }

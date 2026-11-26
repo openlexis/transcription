@@ -68,11 +68,11 @@ function readCntr(xml: string): ReadResult {
       const last = Math.max(...[...tok].map((c, i) => (/[\p{L}¯]/u.test(c) ? i : -1)));
       const marks = [...tok].map((c, i) => (c === "*" || c === "&" ? i : -1)).filter((i) => i >= 0);
       if (!letters) {
-        if (marks.length || tok.includes("")) { gap = true; lacunae++; }
+        if (marks.length || tok.includes("\uFFFD")) { gap = true; lacunae++; }
         continue;
       }
       if (marks.some((i) => i < first)) { gap = true; lacunae++; }
-      const damaged = tok.includes("~") || tok.includes("^") || tok.includes("");
+      const damaged = tok.includes("~") || tok.includes("^") || tok.includes("\uFFFD");
       let ws = [skel(tok.replace(/[|\/%^~+*&\[\]_⋄$]/g, "").replace(/=/g, "").replace(/¯/g, "ν"))];
       if (tok.includes("$")) ws = numeral(ws[0]) ?? ws;
       else if (tok.includes("=")) ws = [sacred(ws[0])];
