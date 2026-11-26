@@ -3262,38 +3262,60 @@ a.pill:hover {
   align-items: center;
   gap: 10px 12px;
   margin-top: 20px;
+  max-width: 100%;
 }
 
-.book-nav {
+.ulid-bar .btn {
+  max-width: 100%;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.book-title-row {
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   justify-content: space-between;
-  align-items: stretch;
-  gap: 10px;
-  width: 100%;
+  gap: 6px 20px;
+  margin-bottom: 12px;
   max-width: 100%;
-  margin-top: 20px;
 }
 
-.book-nav-bottom {
-  margin-top: 28px;
-  margin-bottom: 8px;
-}
-
-.book-nav-btn {
-  flex: 1 1 12rem;
+.book-title-row h1 {
   min-width: 0;
-  max-width: 100%;
-  justify-content: center;
-  text-align: center;
-  padding: 12px 16px;
-  font-size: 0.95rem;
-  font-weight: 650;
 }
 
-.book-nav-name {
+.book-title-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 0;
+  min-width: 0;
+  margin-left: auto;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink-secondary);
+}
+
+.book-title-nav a {
+  color: var(--ink-secondary);
+  text-decoration: none;
   min-width: 0;
   overflow-wrap: anywhere;
+}
+
+.book-title-nav a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.book-title-nav-sep {
+  color: var(--ink-muted);
+  flex: none;
+  white-space: pre;
 }
 
 .ulid-pill {

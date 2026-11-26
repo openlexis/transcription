@@ -3,8 +3,8 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import Layout from "../../../layouts/Layout.astro";
 import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
+import Icon from "../../../components/Icon.astro";
 import Pill from "../../../components/Pill.astro";
-import BookNav from "../../../components/BookNav.astro";
 import {
   bookUrl,
   compUrl,
@@ -63,12 +63,6 @@ const compDate = c.manifest.compilation.createdAt
 const compTitle = c.manifest.compilation.title || c.manifest.modelAttribution.modelName;
 const compAuthor = formatAuthor(c.manifest.compilation.author);
 const license = getSpecifications().find((s) => s.id === c.specId)?.license;
-const modelLabel = [
-  c.manifest.modelAttribution.modelName,
-  c.manifest.modelAttribution.effortLevel,
-]
-  .filter(Boolean)
-  .join(" · ");
 const { witnesses, chapters } = parseCompiledBookTei(`${c.dir}/${b.file}`);
 const viewersMap = getWitnessViewersMap(c.specId);
 const reportScale = c.report?.frontmatter?.disagreement_scale;
@@ -330,24 +324,23 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           <Pill icon="language" title={LANGUAGE_META[code].note}>{LANGUAGE_META[code].label}</Pill>
         ))}
       </div>
-      <h1>{b.name}</h1>
-      <div class="pill-row" aria-label="Transcription and specification">
-        <Pill icon="transcriptions" href={compUrl(c.compilationId)} title={`Transcription ID: ${c.compilationId}`}>
-          {compTitle}
-        </Pill>
-        {modelLabel && (
-          <Pill icon="model" title="Model">{c.manifest.modelAttribution.modelName}</Pill>
+      <div class="book-title-row">
+        <h1>{b.name}</h1>
+        {showBookNav && (
+          <nav class="book-title-nav" aria-label="Previous and next book">
+            <a href={bookUrl(c.compilationId, prevBook.id)}>← {prevBook.name}</a>
+            <span class="book-title-nav-sep" aria-hidden="true"> · </span>
+            <a href={bookUrl(c.compilationId, nextBook.id)}>{nextBook.name} →</a>
+          </nav>
         )}
-        {c.manifest.modelAttribution.effortLevel && (
-          <Pill icon="effort" title="Effort">{c.manifest.modelAttribution.effortLevel} effort</Pill>
-        )}
+      </div>
+      <div class="pill-row">
         {compAuthor && (
           <Pill icon="author" title="Author">{compAuthor}</Pill>
         )}
         {compDate && (
           <Pill icon="date" title="Date compiled">{compDate}</Pill>
         )}
-        <Pill icon="arrow-up" href={specUrl(c.specId)} title={`Specification ID: ${c.specId}`}>Specification</Pill>
         {license && (
           <Pill icon="license" href={license.url} title={withTrademark(license.copyright)} target="_blank" rel="noopener">
             {license.name}
@@ -367,16 +360,12 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           context={b.name}
         />
       </div>
-      {showBookNav && (
-        <BookNav
-          prevHref={bookUrl(c.compilationId, prevBook.id)}
-          prevName={prevBook.name}
-          nextHref={bookUrl(c.compilationId, nextBook.id)}
-          nextName={nextBook.name}
-        />
-      )}
       <div class="ulid-bar">
         <a href={compUrl(c.compilationId)} class="btn btn-secondary">← All books</a>
+        <a href={compUrl(c.compilationId)} class="btn btn-secondary" title={`Transcription ID: ${c.compilationId}`}>{compTitle}</a>
+        <a href={specUrl(c.specId)} class="btn btn-secondary" title={`Specification ID: ${c.specId}`}>
+          Specification <Icon name="arrow-up" size={14} />
+        </a>
         <a href={`${compUrl(c.compilationId)}#method`} class="btn btn-secondary">Method &amp; scenarios →</a>
       </div>
     </div>
@@ -656,15 +645,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           </section>
         ))}
       </div>
-      {showBookNav && (
-        <BookNav
-          class="book-nav-bottom"
-          prevHref={bookUrl(c.compilationId, prevBook.id)}
-          prevName={prevBook.name}
-          nextHref={bookUrl(c.compilationId, nextBook.id)}
-          nextName={nextBook.name}
-        />
-      )}
     </div>
   </section>
 
