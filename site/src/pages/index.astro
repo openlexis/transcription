@@ -254,7 +254,7 @@ function buildShowcaseCase(opts: {
   // Compute Beat 1 (raw count) & Beat 2 (real catalog date timeline) dot coordinates
   const totalMainDots = topTwo.reduce((sum, r) => sum + r.witCount, 0);
   const canvasSize: "dense" | "medium" | "sparse" =
-    totalMainDots > 20 ? "dense" : totalMainDots > 6 ? "medium" : "sparse";
+    totalMainDots > 20 ? "dense" : totalMainDots >= 6 ? "medium" : "sparse";
   const denseDots = canvasSize === "dense";
   const isClustered = canvasSize !== "sparse";
   const yearToPct = (y: number) => {
@@ -539,45 +539,43 @@ const showcaseCases: ShowcaseCase[] = [
     readingGlossOverrides: ["light, and be satisfied", "be satisfied (omits “light”)"],
   }),
   buildShowcaseCase({
-    id: "1john-1-4",
-    bookId: "1John",
-    chIdx: 0,
-    ref: "1:4",
-    refLabel: "1 John 1:4",
-    tabHook: "“Your” or “our”?",
-    headline: "“Your joy” or “our joy”: a one-letter sound-alike where the oldest copies do not settle it.",
+    id: "heb-12-28",
+    bookId: "Heb",
+    chIdx: 11,
+    ref: "12:28",
+    refLabel: "Hebrews 12:28",
+    tabHook: "“Let us have” or “we have”?",
+    headline: "“Let us have” or “we have” gratitude: a one-letter sound-alike where the oldest copy does not win.",
     isHebrew: false,
-    focalMatch: "υμων",
-    wordRange: [0, 10],
-    minYear: 200,
-    maxYear: 1500,
+    focalMatch: "εχωμεν",
+    wordRange: [0, 6],
+    minYear: 150,
+    maxYear: 1400,
     earlyCutoff: 500,
-    earlyZoneLabel: "Early codices (AD 350–450)",
+    earlyZoneLabel: "Early witnesses (AD 200–450)",
     tickYears: [200, 500, 800, 1100, 1400],
     eraSummaries: [
-      "Earliest: 02, 04 (c. AD 450), plus 6 later copies",
-      "Earliest: 01, 03 (c. AD 350), plus 3 later copies",
+      "02, 04 (c. AD 450; 04 has 96.8% reliability), plus 81 (AD 1044)",
+      "P46 (c. AD 213; 91.9% reliability), 01 (c. AD 350), plus 6 (AD 1250)",
     ],
     discountLateInBeat3: false,
     beatCaptions: [
-      "In Koine Greek, “your” (υμων) and “our” (ημων) sounded identical and differ by a single letter. Here, <strong>8 manuscripts</strong> write “your joy” while <strong>5</strong> write “our joy.”",
-      "Sorted by date, the two oldest codices (01 &amp; 03, c. AD 350) actually read “our,” while “your” begins a century later (02 &amp; 04, c. AD 450). Date alone does not settle a sound-alike slip.",
-      "Weighing whole-book reliability, independent witness support, and scribal slip patterns beyond date alone, this model selects “your” at <strong>71.2%</strong> while keeping <strong>28.8%</strong> probability on “our.”",
+      "In Koine Greek, “let us have” (εχωμεν) and “we have” (εχομεν) sounded identical and differ by a single vowel (ω vs ο). Surviving witnesses split evenly: <strong>3</strong> write “let us have” and <strong>3</strong> write “we have.”",
+      "Sorted by date, the two oldest copies (P46, c. AD 213 &amp; 01, c. AD 350) actually read “we have,” while “let us have” starts later (02 &amp; 04, c. AD 450). Neither headcount nor date alone settles a sound-alike slip.",
+      "Weighing whole-book manuscript reliability (where 04 scores higher across Hebrews than P46) alongside witness independence, this model selects “let us have” at <strong>66.1%</strong> while preserving <strong>33.9%</strong> for “we have.”",
     ],
-    extraNote: "Manuscript 323 is damaged at this word. Specifications can also weight surrounding context (“we write...”) and phonetic confusion models directly.",
-    laneLabels: ["“your” (8)", "“our” (5)"],
+    extraNote: "All 6 surviving manuscripts at Hebrews 12:28 are intact here. Specifications can also model phonetic confusion and surrounding exhortation context directly.",
+    laneLabels: ["“let us have” (3)", "“we have” (3)"],
     wordGlossOverrides: {
-      "γραφομεν": "we write",
-      "ημεις": "we",
-      "ινα": "so that",
-      "υμων": "your",
-      "ημων": "our",
-      "πεπληρωμενη": "complete",
+      "διο": "therefore",
+      "βασιλειαν": "a kingdom",
+      "ασαλευτον": "unshakable",
+      "παραλαμβανοντες": "receiving",
+      "εχωμεν": "let us have",
+      "εχομεν": "we have",
+      "χαριν": "gratitude",
     },
-    wordGlossByIdx: {
-      8: "may be",
-    },
-    readingGlossOverrides: ["your", "our"],
+    readingGlossOverrides: ["let us have", "we have"],
   }),
 ].filter((x): x is ShowcaseCase => x !== null);
 
@@ -693,40 +691,39 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
                 >
                   <span class="verse-scan-puck" aria-hidden="true"></span>
                   <span class="sw-verse-num" dir="ltr" title={`Start of ${sc.refLabel}`}>{sc.verseNum}</span>
-                  {sc.words.map((w, wIdx) => (
-                    <a
-                      href={w.href}
-                      class={`showcase-word${w.isFocal ? " showcase-word-focal" : ""}`}
-                      data-word-idx={wIdx}
-                      data-focal={w.isFocal ? "true" : undefined}
-                      style={w.isFocal ? `--bar:${w.barWidth.toFixed(2)}` : undefined}
-                      title={`Inspect “${w.text}” (${w.gloss || w.rom}) in ${sc.refLabel}`}
-                    >
-                      <span class="sw-status-slot" dir="ltr" aria-hidden="true">
-                        {w.isFocal ? (
-                          <>
-                            <span class="sw-dot-idle"></span>
-                            <span class="sw-focal-tag">Disputed</span>
-                          </>
-                        ) : (
-                          <>
-                            <span class="sw-dot-idle"></span>
-                            <span class="sw-check-mark">✓</span>
-                          </>
-                        )}
+                  {sc.words.map((w, wIdx) =>
+                    w.isFocal ? (
+                      <a
+                        href={w.href}
+                        class="showcase-word showcase-word-focal"
+                        data-word-idx={wIdx}
+                        data-focal="true"
+                        style={`--bar:${w.barWidth.toFixed(2)}`}
+                        title={`Inspect “${w.text}” (${w.gloss || w.rom}) in ${sc.refLabel}`}
+                      >
+                        <span class="sw-status-slot" dir="ltr" aria-hidden="true">
+                          <span class="sw-dot-idle"></span>
+                          <span class="sw-focal-tag">Disputed</span>
+                        </span>
+                        <span class="sw-orig">{w.text}</span>
+                        <span class="sw-gloss" dir="ltr">{w.gloss || w.rom}</span>
+                      </a>
+                    ) : (
+                      <span
+                        class="showcase-word"
+                        data-word-idx={wIdx}
+                      >
+                        <span class="sw-status-slot" dir="ltr" aria-hidden="true">
+                          <span class="sw-dot-idle"></span>
+                          <span class="sw-check-mark">✓</span>
+                        </span>
+                        <span class="sw-orig">{w.text}</span>
+                        <span class="sw-gloss" dir="ltr">{w.gloss || w.rom}</span>
                       </span>
-                      <span class="sw-orig">{w.text}</span>
-                      <span class="sw-gloss" dir="ltr">{w.gloss || w.rom}</span>
-                    </a>
-                  ))}
+                    ),
+                  )}
                   {sc.hasTrailingEllipsis && (
-                    <a
-                      href={sc.verseHref}
-                      class="sw-ellipsis"
-                      title={`Read all of ${sc.refLabel} in full reader`}
-                    >
-                      …
-                    </a>
+                    <span class="sw-ellipsis" aria-hidden="true">…</span>
                   )}
                 </div>
               </div>

@@ -20,6 +20,7 @@ import {
   type CompiledBookEntry,
 } from "../../../lib/corpus";
 import { buildBookGlossMap } from "../../../lib/gloss";
+import { languageIconSvg, renderLanguageBadgeHtml, type LangCode } from "../../../lib/languages";
 import { transliterateText } from "../../../lib/transliterate";
 
 export function getStaticPaths() {
@@ -136,15 +137,39 @@ const collectWords = (s?: string) => {
   for (const w of s.trim().split(/\s+/)) if (w) bookWords.add(w);
 };
 let tokSeq = 0;
+let currentLang: LangCode = isHebrew ? "hbo" : "grc";
+let hasAramaic = false;
 
-const renderedChapters = chapters.map((ch) => ({
-  chapter: ch.chapter,
-  verses: ch.verses.map((v) => ({
+const renderedChapters = chapters.map((ch) => {
+  let chHasArc = false;
+  let chHasHbo = false;
+  const verses = ch.verses.map((v) => ({
     ref: v.ref,
     verseNum: v.verseNum,
     uncovered: v.uncovered,
     tokens: v.tokens.map((tok) => {
       const key = String(tokSeq++);
+      const tokHasText = Boolean(tok.text && tok.text.trim());
+      const tokLang: LangCode = !isHebrew
+        ? "grc"
+        : tok.aramaic
+          ? "arc"
+          : tokHasText
+            ? "hbo"
+            : currentLang;
+      let switchedTo: LangCode | undefined;
+      if (isHebrew && tokHasText && tokLang !== currentLang) {
+        switchedTo = tokLang;
+        currentLang = tokLang;
+      }
+      if (tokLang === "arc") {
+        hasAramaic = true;
+        chHasArc = true;
+      } else if (tokLang === "hbo" && tokHasText) {
+        chHasHbo = true;
+      }
+      const isAramaicTok = tokLang === "arc";
+
       if (tok.kind === "app") {
         let maxSev = 0;
         const bucketWeights = new Map<number, number>();
@@ -170,6 +195,7 @@ const renderedChapters = chapters.map((ch) => ({
           k: "a",
           ref: v.ref,
           t: tok.text,
+          ar: isAramaicTok ? 1 : 0,
           sv: maxSev,
           lc: toIdx(tok.lacunaWits),
           rd: readings.map((r) => [
@@ -188,7 +214,9 @@ const renderedChapters = chapters.map((ch) => ({
           key,
           kind: tok.kind,
           text: tok.text,
-          aramaic: tok.aramaic,
+          aramaic: isAramaicTok,
+          lang: tokLang,
+          switchedTo,
           sevBucket,
           maxSevBucket,
           confPct: Math.round(conf * 1000) / 10,
@@ -204,7 +232,7 @@ const renderedChapters = chapters.map((ch) => ({
           k: "w",
           ref: v.ref,
           t: tok.text,
-          ar: tok.aramaic ? 1 : 0,
+          ar: isAramaicTok ? 1 : 0,
           d: tok.degree ?? "",
           u: tok.uncertainty ?? "",
           at: toIdx(tok.attestedWits),
@@ -214,7 +242,9 @@ const renderedChapters = chapters.map((ch) => ({
           key,
           kind: tok.kind,
           text: tok.text,
-          aramaic: tok.aramaic,
+          aramaic: isAramaicTok,
+          lang: tokLang,
+          switchedTo,
           sevBucket: 0,
           maxSevBucket: 0,
           confPct: Math.round(conf * 1000) / 10,
@@ -223,8 +253,20 @@ const renderedChapters = chapters.map((ch) => ({
         };
       }
     }),
-  })),
-}));
+  }));
+  return {
+    chapter: ch.chapter,
+    hasArc: chHasArc,
+    hasHbo: chHasHbo,
+    verses,
+  };
+});
+
+const bookLangCodes: LangCode[] = !isHebrew
+  ? ["grc"]
+  : hasAramaic
+    ? ["hbo", "arc"]
+    : ["hbo"];
 
 const glossMap = buildBookGlossMap(bookWords, isHebrew);
 const romanCache = new Map<string, string>();
@@ -268,7 +310,12 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
 >
   <section class="page-header">
     <div class="container">
-      <div class="eyebrow">{b.section} · {displayLanguage(b.language)}</div>
+      <div class="book-eyebrow-row">
+        <span class="eyebrow" style="margin-bottom: 0;">{b.section}</span>
+        {bookLangCodes.map((code) => (
+          <Fragment set:html={renderLanguageBadgeHtml(code, 12)} />
+        ))}
+      </div>
       <h1>{b.name}</h1>
       <div class="compilation-provenance" aria-label="Transcription and specification">
         <span class="prov-item">
@@ -306,7 +353,20 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         <div class="chapter-pills" aria-label="Jump to chapter">
           <span class="chapter-pills-label">Chapters:</span>
           {renderedChapters.map((ch) => (
-            <a href={`#ch-${ch.chapter}`} class="chapter-pill" data-ch-pill={ch.chapter}>{ch.chapter}</a>
+            <a
+              href={`#ch-${ch.chapter}`}
+              class={`chapter-pill${ch.hasArc ? " chapter-pill-arc" : ""}`}
+              data-ch-pill={ch.chapter}
+              title={
+                ch.hasArc
+                  ? ch.hasHbo
+                    ? `Chapter ${ch.chapter} (includes Biblical Aramaic)`
+                    : `Chapter ${ch.chapter} (Biblical Aramaic)`
+                  : `Chapter ${ch.chapter}`
+              }
+            >
+              {ch.chapter}
+            </a>
           ))}
         </div>
       )}
@@ -333,11 +393,31 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             <span class="legend-group">
               <span class="legend-item"><span class="legend-bar legend-bar-full" style="background:linear-gradient(90deg,rgba(148,163,184,0.40) 0%,rgba(148,163,184,0.40) 74%,rgba(249,115,22,0.96) 82%,rgba(249,115,22,0.96) 100%);"></span>Mixed severities = weighted gradient</span>
             </span>
+            {hasAramaic && (
+              <span class="legend-group">
+                <span class="legend-label">Language:</span>
+                <span class="legend-item">
+                  <span class="legend-lang-swatch legend-lang-arc" aria-hidden="true"></span>
+                  <Fragment set:html={languageIconSvg("arc", 12)} />
+                  Biblical Aramaic (same square script as Hebrew)
+                </span>
+              </span>
+            )}
           </div>
         </div>
       </div>
 
-      <div class="reader-filter-bar" role="region" aria-label="Filter text by severity and confidence">
+      <div class="reader-filter-bar" role="region" aria-label="Filter text by severity, confidence, and language">
+        {hasAramaic && (
+          <label class="reader-filter-field">
+            <span class="pill-label">Language</span>
+            <select id="filter-lang" class="select-input select-sm">
+              <option value="all">Hebrew &amp; Aramaic</option>
+              <option value="arc">Biblical Aramaic only</option>
+              <option value="hbo">Biblical Hebrew only</option>
+            </select>
+          </label>
+        )}
         <label class="reader-filter-field">
           <span class="pill-label">Min severity</span>
           <select id="filter-min-sev" class="select-input select-sm">
@@ -367,7 +447,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       </div>
 
       <div id="filter-empty" class="reader-empty" hidden>
-        <p>No lines in {b.name} match the current severity and confidence filters.</p>
+        <p>No lines in {b.name} match the current filters.</p>
         <button type="button" id="filter-empty-reset" class="btn btn-secondary">Reset filters</button>
       </div>
 
@@ -381,9 +461,20 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         {renderedChapters.map((ch) => (
           <section class="chapter-block" id={`ch-${ch.chapter}`}>
             <div class="chapter-heading-row" dir="ltr">
-              <h2 class="chapter-heading">Chapter {ch.chapter}</h2>
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+                <h2 class="chapter-heading" style="margin-bottom: 0; padding-bottom: 0; border-bottom: 0;">Chapter {ch.chapter}</h2>
+                {hasAramaic && ch.hasArc && (
+                  <Fragment set:html={renderLanguageBadgeHtml("arc", 11)} />
+                )}
+              </div>
               {isHebrew && (
-                <span class="chapter-dir-cue" data-rtl-cue>← Hebrew reads right to left</span>
+                <span class="chapter-dir-cue" data-rtl-cue>
+                  {ch.hasArc && !ch.hasHbo
+                    ? "← Aramaic reads right to left"
+                    : ch.hasArc
+                      ? "← Hebrew & Aramaic read right to left"
+                      : "← Hebrew reads right to left"}
+                </span>
               )}
             </div>
             <div class="verses-list">
@@ -402,9 +493,26 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                         const tokStyle = styleParts.length ? styleParts.join(";") : undefined;
                         const maxSevAttr = tok.maxSevBucket > tok.sevBucket ? tok.maxSevBucket : undefined;
                         const confAttr = tok.confPct < 99.95 ? tok.confPct : undefined;
+                        const arcCls = tok.aramaic ? " tok-arc" : "";
+                        const switchChip = tok.switchedTo ? (
+                          <span
+                            class={`lang-switch-chip lang-switch-${tok.switchedTo}`}
+                            data-switch-lang={tok.switchedTo}
+                            dir="ltr"
+                            title={
+                              tok.switchedTo === "arc"
+                                ? "Text switches here to Biblical Aramaic (written in the same square script as Hebrew)"
+                                : "Text switches back here to Biblical Hebrew"
+                            }
+                          >
+                            <Fragment set:html={languageIconSvg(tok.switchedTo, 11)} />
+                            <span>{tok.switchedTo === "arc" ? "Biblical Aramaic" : "Biblical Hebrew"}</span>
+                          </span>
+                        ) : null;
+
                         if (tok.kind === "app" && tok.text && tok.text.trim().includes(" ")) {
                           const words = tok.text.trim().split(/\s+/).filter(Boolean);
-                          return words.map((word) => {
+                          const btns = words.map((word) => {
                             const g = glossMap[word];
                             return (
                               <button
@@ -412,11 +520,12 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                                 data-tok={tok.key}
                                 data-vtok={vtok}
                                 data-w={word}
+                                data-lang={tok.lang}
                                 data-sev={tok.sevBucket}
                                 data-max-sev={maxSevAttr}
                                 data-conf={confAttr}
                                 style={tokStyle}
-                                class="tok-btn tok-app"
+                                class={`tok-btn tok-app${arcCls}`}
                               >
                                 <span class="il-orig">{word}</span>
                                 <span class="il-rom">{romanOfWord(word)}</span>
@@ -424,14 +533,16 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                               </button>
                             );
                           });
+                          return switchChip ? [switchChip, ...btns] : btns;
                         }
                         const word = tok.text;
                         const g = word ? glossMap[word] : "";
-                        return (
+                        const btn = (
                           <button
                             type="button"
                             data-tok={tok.key}
                             data-vtok={vtok}
+                            data-lang={tok.lang}
                             data-sev={tok.sevBucket}
                             data-max-sev={maxSevAttr}
                             data-conf={confAttr}
@@ -439,11 +550,9 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                             class={
                               tok.kind === "app"
                                 ? word
-                                  ? "tok-btn tok-app"
-                                  : "tok-btn tok-app tok-omit"
-                                : tok.aramaic
-                                  ? "tok-btn tok-w tok-arc"
-                                  : "tok-btn tok-w"
+                                  ? `tok-btn tok-app${arcCls}`
+                                  : `tok-btn tok-app tok-omit${arcCls}`
+                                : `tok-btn tok-w${arcCls}`
                             }
                           >
                             {word ? (
@@ -457,6 +566,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                             )}
                           </button>
                         );
+                        return switchChip ? [switchChip, btn] : [btn];
                       })
                     )}
                   </div>
@@ -471,6 +581,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
 
   <script>
     import { transliterateText } from "../../../lib/transliterate";
+    import { renderLanguageBadgeHtml, type LangCode } from "../../../lib/languages";
     import {
       formatCredibleInterval,
       formatProbabilityPct,
@@ -502,7 +613,8 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       return DATA.g?.[word] || "";
     }
 
-    // Threshold & line-limiting filters for scholarly drill-down
+    // Threshold, language & line-limiting filters for drill-down
+    const langSel = document.getElementById("filter-lang") as HTMLSelectElement | null;
     const minSevSel = document.getElementById("filter-min-sev") as HTMLSelectElement | null;
     const maxConfSel = document.getElementById("filter-max-conf") as HTMLSelectElement | null;
     const onlyLinesBtn = document.getElementById("filter-only-lines") as HTMLButtonElement | null;
@@ -513,10 +625,13 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
     let onlyMatchingLines = false;
 
     function applyReaderFilters() {
+      const langFilter = langSel?.value ?? "all";
+      const hasLangFilter = langFilter !== "all";
       const minSev = Number(minSevSel?.value ?? 0);
       const maxConf = Number(maxConfSel?.value ?? 100);
-      const hasThreshold = minSev > 0 || maxConf < 100;
-      const limitLines = onlyMatchingLines && hasThreshold;
+      const hasThreshold = hasLangFilter || minSev > 0 || maxConf < 100;
+      // When filtering to a specific language (e.g., Biblical Aramaic only), show matching lines directly
+      const limitLines = hasLangFilter || (onlyMatchingLines && hasThreshold);
 
       let matchedLines = 0;
       let totalLines = 0;
@@ -541,7 +656,9 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             }
             const sev = Number(btn.dataset.maxSev ?? btn.dataset.sev ?? 0);
             const conf = btn.dataset.conf !== undefined ? Number(btn.dataset.conf) : 100;
-            const ok = sev >= minSev && (maxConf >= 100 || conf < maxConf);
+            const tokLang = btn.dataset.lang ?? "";
+            const langOk = !hasLangFilter || tokLang === langFilter;
+            const ok = langOk && sev >= minSev && (maxConf >= 100 || conf < maxConf);
             btn.classList.toggle("tok-dimmed", !ok);
             if (ok) {
               verseMatches = true;
@@ -568,14 +685,27 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       if (filterStatus) {
         if (!hasThreshold) {
           filterStatus.textContent = onlyMatchingLines
-            ? "Pick a severity or confidence threshold to filter lines"
+            ? "Pick a language, severity, or confidence filter"
             : "";
         } else {
-          filterStatus.textContent = `${matchedLines.toLocaleString()} of ${totalLines.toLocaleString()} lines · ${matchedTokens.toLocaleString()} ${matchedTokens === 1 ? "place" : "places"}`;
+          const unitLabel =
+            hasLangFilter && minSev === 0 && maxConf >= 100
+              ? langFilter === "arc"
+                ? matchedTokens === 1
+                  ? "Aramaic word"
+                  : "Aramaic words"
+                : matchedTokens === 1
+                  ? "Hebrew word"
+                  : "Hebrew words"
+              : matchedTokens === 1
+                ? "place"
+                : "places";
+          filterStatus.textContent = `${matchedLines.toLocaleString()} of ${totalLines.toLocaleString()} lines · ${matchedTokens.toLocaleString()} ${unitLabel}`;
         }
       }
     }
 
+    langSel?.addEventListener("change", applyReaderFilters);
     minSevSel?.addEventListener("change", applyReaderFilters);
     maxConfSel?.addEventListener("change", applyReaderFilters);
     onlyLinesBtn?.addEventListener("click", () => {
@@ -586,6 +716,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
     });
 
     const resetFilters = () => {
+      if (langSel) langSel.value = "all";
       if (minSevSel) minSevSel.value = "0";
       if (maxConfSel) maxConfSel.value = "100";
       onlyMatchingLines = false;
@@ -1098,6 +1229,17 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       panel.className = "inspector-panel";
       panel.setAttribute("dir", "ltr");
 
+      const wordLang: LangCode = !DATA.isHebrew
+        ? "grc"
+        : item.ar || btn.dataset.lang === "arc"
+          ? "arc"
+          : "hbo";
+      const langBadgeHtml = renderLanguageBadgeHtml(wordLang, 12);
+      const arcScriptNote =
+        wordLang === "arc"
+          ? `<div class="inspector-lang-note">Written in Imperial Aramaic, which shares the same square script as Hebrew.</div>`
+          : "";
+
       if (item.k === "w") {
         const heroHtml = renderInterlinearWords(item.t);
         const lacHtml = item.lc.length
@@ -1108,13 +1250,14 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
               <span class="badge badge-emerald">✓ Unanimous reading</span>
               <span class="ms-sub">${esc(item.ref)}</span>
-              ${item.ar ? `<span class="badge badge-violet">Biblical Aramaic</span>` : ""}
+              ${langBadgeHtml}
             </div>
             <div style="display:flex; align-items:center; gap:6px;">
               <button type="button" class="copy-btn" data-copy-word-link>Copy link</button>
               <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
             </div>
           </div>
+          ${arcScriptNote}
           <div class="inspector-reading-hero">
             ${heroHtml}
           </div>
@@ -1252,6 +1395,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
               <strong>Manuscript Differences</strong>
               <span class="ms-sub">${esc(item.ref)} · ${realRdgs.length} ${realRdgs.length === 1 ? "reading" : "readings"}</span>
+              ${langBadgeHtml}
               ${groupNote}
             </div>
             <div style="display:flex; align-items:center; gap:6px;">
@@ -1259,6 +1403,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
               <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
             </div>
           </div>
+          ${arcScriptNote}
           <ul class="app-rdg-list">${rdgsHtml}</ul>
           ${unseenHtml}
           ${lacHtml}
