@@ -15,6 +15,7 @@ Use this guide whenever asked to **implement a specification and produce a new c
 5. **Own your modeling decisions:** You are free to design your own statistical model, alignment strategy, and disagreement taxonomy; do not blindly copy an earlier model's parameters if you believe a better approach furthers recovery of the original text. You may reuse deterministic I/O helpers (`scripts/sources.ts`, `scripts/lib/readers.ts`, `scripts/lib/tei.ts`) to parse input files without rewriting boilerplate.
 6. **Honest attribution:** Record your exact provider, model family, model name, exact model ID, effort/reasoning tier, and harness in both `manifest.json` and `REPORT.md`.
 7. **No em dashes:** Em dashes (Unicode `U+2014` or HTML entities such as `&mdash;` / `&#8212;`) are disallowed everywhere in the project, including documentation, website UI copy, code comments, scripts, new specifications, and new compilation outputs (`manifest.json`, `REPORT.md`, and TEI XML titles/notes). Use commas, colons, semicolons, parentheses, periods, or middle dots (`·`) instead.
+8. **Specifications are frozen once used:** A specification can never be changed once a transcription (compilation) under it is published. Any change requires a new specification with a new ULID.
 
 ---
 
