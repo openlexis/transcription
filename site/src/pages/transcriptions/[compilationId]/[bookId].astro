@@ -147,6 +147,7 @@ const renderedChapters = chapters.map((ch) => {
     ref: v.ref,
     verseNum: v.verseNum,
     uncovered: v.uncovered,
+    filledIn: v.filledIn,
     tokens: v.tokens.map((tok) => {
       const key = String(tokSeq++);
       const tokHasText = Boolean(tok.text && tok.text.trim());
@@ -294,6 +295,7 @@ const clientData = {
     w.provenance,
     w.scientific,
     viewersMap.get(w.siglum)?.viewers ?? [],
+    w.filledIn,
   ]),
   g: glossMap,
   t: tokenPayloads,
@@ -570,6 +572,21 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                       })
                     )}
                   </div>
+                  {v.filledIn && v.filledIn.length > 0 && (
+                    <details class="verse-filled">
+                      <summary>
+                        Filled in, not the manuscript's own text: <strong>{v.filledIn.map((f) => f.siglum).join(", ")}</strong>
+                      </summary>
+                      {v.filledIn.map((f) => (
+                        <div class="verse-filled-item">
+                          <div class="verse-filled-text" dir={isHebrew ? "rtl" : "ltr"} lang={isHebrew ? "he" : "grc"}>{f.text}</div>
+                          <div class="verse-filled-source">
+                            <code>{f.siglum}</code> is lost here. Source: {f.source}. Not counted as a reading of {f.siglum}.
+                          </div>
+                        </div>
+                      ))}
+                    </details>
+                  )}
                 </div>
               ))}
             </div>
@@ -793,8 +810,8 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       const idx = Number(ref);
       const w = !Number.isNaN(idx) ? DATA.w[idx] : DATA.w.find((x: any[]) => x[0] === ref);
       if (!w) return `<div class="wit-detail-card">No witness record found for <code>${esc(ref)}</code>.</div>`;
-      const [sig, desc, dating, scribal, agreement, prov, sci, viewers] = w as [
-        string, string, string, string, string, string, string, { name: string; url: string }[],
+      const [sig, desc, dating, scribal, agreement, prov, sci, viewers, filledIn] = w as [
+        string, string, string, string, string, string, string, { name: string; url: string }[], string,
       ];
       const viewerLinks = Array.isArray(viewers) && viewers.length
         ? viewers
@@ -841,6 +858,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             <div><div class="source-meta-label">Reliability &amp; Agreement</div><div class="source-meta-val">${esc(agreement)}</div></div>
             <div><div class="source-meta-label">Physical &amp; Scribal</div><div class="source-meta-val">${esc(scribal)}</div></div>
             <div><div class="source-meta-label">Provenance / Scientific</div><div class="source-meta-val">${esc(prov)} · Scientific: ${esc(sci)}</div></div>
+            ${filledIn ? `<div><div class="source-meta-label">Filled-in text (not counted)</div><div class="source-meta-val">${esc(filledIn)}</div></div>` : ""}
           </div>
         </div>
       `;

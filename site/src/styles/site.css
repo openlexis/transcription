@@ -4269,6 +4269,45 @@ tr:last-child td {
   margin: 0;
 }
 
+.verse-filled {
+  margin: 2px 0 0;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+
+.verse-filled > summary {
+  cursor: pointer;
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 999px;
+  line-height: 1.4;
+}
+
+.verse-filled-item {
+  margin: 6px 0 0;
+  padding: 6px 10px;
+  border-inline-start: 2px dashed var(--border-strong);
+}
+
+.verse-filled-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  overflow-wrap: anywhere;
+}
+
+.verse-filled-source {
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .verse-filled > summary {
+    border-radius: 12px;
+  }
+}
+
 .verse-num {
   display: inline-block;
   font-family: var(--font-mono);

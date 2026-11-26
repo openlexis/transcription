@@ -7,6 +7,8 @@ This is the statistical method implemented in `scripts/compile.ts` for specifica
 - **Manuscript:** a surviving handwritten copy, whole or in pieces.
 - **Transcription:** the letters of one manuscript, typed. Only the first hand (the original copyist) is read.
 - **Line:** a numbered unit of a book, written chapter:line.
+- **Filled-in text:** words that an edition prints for a part of a manuscript that is lost, taken from some other source (another
+  manuscript, an old photograph, or the editor's own choice). It is not the manuscript's own text.
 - **Reading:** what one manuscript has at one point of a line: a word, several words, or nothing.
 - **Place:** a stretch of a line where the manuscripts do not all have the same reading.
 - **Reliability:** the chance that a manuscript has the original reading at a point where we can check it.
@@ -16,7 +18,7 @@ This is the statistical method implemented in `scripts/compile.ts` for specifica
 
 ## 1. Which transcriptions are read
 
-For each target book listed under `targets` in `specifications/<specification-id>.yaml`, only the primary XML files explicitly listed under `sources` in that specification are read (strict allowlist). Several transcriptions of one manuscript are consolidated into one witness; for each line the one with the most words is read (ties broken by specification listing order). Leaves of one manuscript that carry separate numbers are one witness (P64 with P67, P77 with P103). Only the first hand (original copyist) is read; damaged, supplied, or unread words are treated as lacunae. Translations into other languages are never read.
+For each target book listed under `targets` in `specifications/<specification-id>.yaml`, only the primary XML files explicitly listed under `sources` in that specification are read (strict allowlist). Several transcriptions of one manuscript are consolidated into one witness; for each line the one with the most words is read (ties broken by specification listing order). Leaves of one manuscript that carry separate numbers are one witness (P64 with P67, P77 with P103). Only the first hand (original copyist) is read; damaged, supplied, or unread words are treated as lacunae (for words an edition fills in for lost parts, see section 5). Translations into other languages are never read.
 
 ## 2. Lining up the words
 
@@ -103,7 +105,30 @@ the original is lost from every surviving manuscript is reported at each place t
 Unknown facts are never filled in. Where a fact would have raised or lowered a manuscript's expected reliability, its absence
 leaves the prior weak, so the estimate rests on measured agreement and its uncertainty range stays wide where that is thin.
 
-## 5. Why this is a sound method, and its limits
+## 5. Filled-in text for lost parts
+
+Some transcriptions are of editions that print a complete text and fill in the parts of the manuscript that are lost. Where the
+transcription marks such words (TEI `<supplied>`, as in the Aleppo Codex and Samaritan Pentateuch MS Nablus 6 files), the
+compiler treats them as follows, which is how this method gives them weight, as the specification asks ("marked as such and given
+weight accordingly"):
+
+- **Not the manuscript's own text.** A filled-in word is never counted as a reading of the manuscript. That manuscript is
+  lacunose (unreadable or lost) at that point, exactly as if the words were missing, and, as with any lacuna, this does not lower
+  its reliability.
+- **No vote of its own.** The filled-in words get a weight of zero. The reason is that they are a copy of something else:
+  usually of manuscripts the edition names or only describes ("closely related Tiberian manuscripts"), which are either already
+  in the specification as witnesses (so counting the copy would count them twice) or not in it at all (so the copy would bring in
+  a manuscript the specification excludes). The edition's stated source is also too vague, or lacks a date, for the model to give
+  it a reliability of its own.
+- **Always shown.** The compilation records, for every line that has filled-in text, which manuscript it is, the filled-in words
+  and the edition's stated source (a `<note type="filled-in">` in the line, with `corresp` naming the witness and `source` the
+  stated source), and, for each witness, how many lines and words of the book are filled in. A line that only filled-in text
+  covers is listed as uncovered. The reading page labels these lines.
+- **Where nothing marks them.** A transcription that fills in text without marking it cannot be treated this way. Such cases are
+  recorded in the holder's catalog entry (for example MS Nablus 6, where the edition says a few small gaps were filled from other
+  manuscripts and not marked).
+
+## 6. Why this is a sound method, and its limits
 
 The Dawid and Skene model is the standard way to combine several fallible sources when the truth is unknown and the reliability
 of each source must be learned from their agreement; it is used for medical diagnosis, survey coding and crowd labelling.

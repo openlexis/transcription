@@ -1,7 +1,7 @@
 // Transcription compiler for Open Lexis YAML specifications (TEI P5 XML output).
 // Usage:
 //   bun --smol scripts/compile.ts [spec-id] [all | <book-id>] [--compilation-id <ulid>]
-// Defaults: spec-id = 01M88AX3YW2HWVPGHTREFJS181, book = all.
+// Defaults: spec-id = 01M88AX3YW2HWVPGHTREFJS181, book = all. --out-dir <folder> writes a trial compilation outside outputs/.
 import { createHash, randomBytes } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
@@ -135,7 +135,7 @@ function gitInfo() {
 
 const METHOD_DESCRIPTION = `Statistical Method: Bayesian Dawid-Skene Latent-Class Model with Composite Likelihood and Scribal Evidence.
 
-1. Objective and Witness Consolidation. Each target book is reconstructed strictly from the allowlisted primary transcriptions in specification 01M88AX3YW2HWVPGHTREFJS181. Multiple transcriptions of the same physical manuscript (and known split leaves: P64/P67, P77/P103) are consolidated into a single witness so no manuscript votes twice; per verse, the transcription with the most readable words is used (ties broken by specification listing order). Only the first hand (original copyist) is read; damaged or editorially supplied words are treated as lacunae rather than votes.
+1. Objective and Witness Consolidation. Each target book is reconstructed strictly from the allowlisted primary transcriptions in the specification named in this compilation's header. Multiple transcriptions of the same physical manuscript (and known split leaves: P64/P67, P77/P103) are consolidated into a single witness so no manuscript votes twice; per line, the transcription with the most readable words is used (ties broken by specification listing order). Only the first hand (original copyist) is read; damaged or editorially supplied words are treated as lacunae rather than votes.
 
 2. Alignment and Orthographic Normalization. For each numbered line (chapter:line), witnesses are aligned oldest-first via Needleman-Wunsch global alignment. Orthographic spelling habits (Greek itacism ei/i, doubled letters, movable nu, final sigma of outos/achris/mechris, expanded nomina sacra and letter-numerals; Hebrew consonantal skeleton ignoring final forms and internal matres lectionis vav/yod) are folded for comparison so spelling conventions do not inflate substantive variation. The displayed surface spelling is taken from the oldest attesting witness. Non-continuous witnesses (scrolls, lectionaries, catenae) treat absent positions as lacunae rather than omissions. Every column where surviving non-lacunose witnesses disagree (including singular readings) is represented as a TEI <app> element. Adjacent variant columns are merged into a single <app> only when structurally coupled (an omission/insertion, a multi-word variant by the same witness, or a shared/transposed word within two columns), preventing unrelated single-word substitutions in large witness pools from collapsing into giant spans.
 
@@ -145,11 +145,16 @@ const METHOD_DESCRIPTION = `Statistical Method: Bayesian Dawid-Skene Latent-Clas
 
 5. Uncertainty Intervals and Reading Selection. One hundred deterministic Monte Carlo draws (seeded by book ID) are sampled from each witness's posterior Beta distribution. For every reading (selected, variant, and unseen-original) and every unanimous word, the posterior median is recorded in <certainty degree="..."/> and the 90% credible interval (5th to 95th percentile) in <note type="uncertainty">. At each <app>, the reading with highest point-estimate posterior probability is selected as <lem> (ties broken by earliest witness, then witness count, then lexicographical order).
 
-6. Unknowns and Limitations. Place of origin/writing (manuscript provenance) and scientific dating (e.g. radiocarbon) are undocumented for all manuscripts in the specification and are explicitly recorded as unknown in every <witness> entry without imputation. Limitations: uniform error distribution across alternatives does not model specific scribal error mechanisms (e.g., homoioteleuton), and geometric down-weighting of late witnesses is a statistical proxy for a full stemma codicum.`;
+6. Filled-in Text for Lost Parts. Where a transcription marks words that an edition fills in for a lost part of a manuscript (TEI <supplied>, as in the Aleppo Codex and Samaritan Pentateuch MS Nablus 6), those words are never counted as the manuscript's own text: the manuscript is lacunose at that point (which does not lower its reliability) and the filled-in words carry a weight of zero, because they are a copy of other manuscripts that are either already witnesses (so they would be counted twice) or not in the specification, and the stated source has no reliability of its own. Each line with filled-in text records the manuscript, the words and the edition's stated source in a <note type="filled-in">, each witness records how many lines and words are filled in, and a line covered only by filled-in text is uncovered.
+
+7. Unknowns and Limitations. Place of origin/writing (manuscript provenance) and scientific dating (e.g. radiocarbon) are undocumented for all manuscripts in the specification and are explicitly recorded as unknown in every <witness> entry without imputation. Limitations: uniform error distribution across alternatives does not model specific scribal error mechanisms (e.g., homoioteleuton), and geometric down-weighting of late witnesses is a statistical proxy for a full stemma codicum.`;
 
 // ---------- data structures ----------
 type Tok = { k: string; t: string; gap: boolean };
-type LineText = { absent: boolean; words: Tok[]; gapEnd: boolean; file: string; fileIdx: number };
+/** filled: text an edition filled in for a lost part of the manuscript (TEI <supplied>). It is not the manuscript's own text, so it is
+ * kept out of `words` (the manuscript is lacunose there) and carried only so the output can show it (scripts/METHOD.md, section 5). */
+type FilledIn = { text: string[]; source: string };
+type LineText = { absent: boolean; words: Tok[]; gapEnd: boolean; file: string; fileIdx: number; filled?: FilledIn };
 type WitnessEvidence = {
   siglum: string;
   xmlId: string;
@@ -161,6 +166,10 @@ type WitnessEvidence = {
   lacunae: number;
   transcribedWords: number;
   corrPenalty: number;
+  /** Lines and words of filled-in text (not the manuscript's own) in this book, and the stated sources; none of it is counted. */
+  filledInLines: number;
+  filledInWords: number;
+  filledInSources: string[];
   year: number;
   early: boolean;
   reliability?: {
@@ -200,7 +209,8 @@ type PlaceOut = {
   partlyLost?: number[];
   lostEverywhere?: { p: number; lo: number; hi: number };
 };
-type LineOut = { ref: string; uncovered?: boolean; witnesses: number[]; words?: WordOut[] };
+type FilledInOut = { w: number; source: string; text: string };
+type LineOut = { ref: string; uncovered?: boolean; witnesses: number[]; words?: WordOut[]; filledIn?: FilledInOut[] };
 
 function classifyDisagreement(p: PlaceOut): string {
   if (p.lost || !p.readings.length) return "unresolved_lacuna";
@@ -362,12 +372,29 @@ function compileBook(
     if (!ms.files.includes(entry.file)) ms.files.push(entry.file);
     for (const u of entry.units) {
       const arr = ms.lines.get(u.ref) ?? [];
+      // Filled-in words are not the manuscript's own text: they leave the witness lacunose where they stand (a lost-before mark on the
+      // next own word, or lost at the end of the line) and are kept apart so the output can show them.
+      const own: Tok[] = [];
+      const filledText: string[] = [];
+      const filledSources = new Set<string>();
+      let lostBefore = false;
+      for (const w of u.words) {
+        if (w.supplied) {
+          filledText.push(w.w);
+          filledSources.add(w.source ?? "not stated by the edition");
+          lostBefore = true;
+          continue;
+        }
+        own.push({ k: KEY(w.w), t: w.w, gap: w.gap || lostBefore });
+        lostBefore = false;
+      }
       arr.push({
         absent: !!u.absent,
-        words: u.words.map((w) => ({ k: KEY(w.w), t: w.w, gap: w.gap })),
-        gapEnd: u.gapEnd,
+        words: own,
+        gapEnd: u.gapEnd || (lostBefore && own.length > 0),
         file: entry.file,
         fileIdx: entry.fileIdx,
+        ...(filledText.length ? { filled: { text: filledText, source: [...filledSources].join("; ") } } : {}),
       });
       ms.lines.set(u.ref, arr);
     }
@@ -380,8 +407,21 @@ function compileBook(
   const sigla = [...byMs.keys()].sort((a, b) => yearOfSiglum(a) - yearOfSiglum(b) || (a < b ? -1 : a > b ? 1 : 0));
   const WIDX = new Map(sigla.map((s, i) => [s, i]));
 
+  // The line each manuscript contributes at a reference: the one with the most own words (as in the main loop below).
+  const chosenLine = (s: string, ref: string) =>
+    [...(byMs.get(s)!.lines.get(ref) ?? [])].sort((a, b) => b.words.length - a.words.length || a.fileIdx - b.fileIdx)[0];
+
   const witnesses: WitnessEvidence[] = sigla.map((s) => {
     const src = sourceMap.get(s)!;
+    let filledInLines = 0, filledInWords = 0;
+    const filledInSources = new Set<string>();
+    for (const ref of byMs.get(s)!.lines.keys()) {
+      const f = chosenLine(s, ref)?.filled;
+      if (!f) continue;
+      filledInLines++;
+      filledInWords += f.text.length;
+      for (const x of f.source.split("; ")) filledInSources.add(x);
+    }
     const sc = scribalStats.get(s) ?? { corrections: 0, lacunae: 0, words: 0, files: [], provenances: new Set<string>() };
     const leaves = Object.entries(SAME_MANUSCRIPT)
       .filter(([, v]) => v === s)
@@ -399,6 +439,9 @@ function compileBook(
       lacunae: sc.lacunae,
       transcribedWords: sc.words,
       corrPenalty: r4(corrPenalty),
+      filledInLines,
+      filledInWords,
+      filledInSources: [...filledInSources].sort(),
       year: yearOfSiglum(s),
       early: earlyOfSiglum(s),
     };
@@ -418,17 +461,19 @@ function compileBook(
 
     for (const ref of refs) {
       const present: { s: string; x: LineText }[] = [];
+      const filledIn: FilledInOut[] = [];
       for (const s of sigla) {
         const xs = byMs.get(s)!.lines.get(ref);
         if (!xs) continue;
         const x = [...xs].sort((a, b) => b.words.length - a.words.length || a.fileIdx - b.fileIdx)[0];
+        if (x.filled) filledIn.push({ w: WIDX.get(s)!, source: x.filled.source, text: x.filled.text.join(" ") });
         if (!x.absent && !x.words.length) continue;
         present.push({ s, x });
       }
       st.lines++;
       if (!present.some((p) => p.x.words.length)) {
         st.uncovered++;
-        lines.push({ ref, uncovered: true, witnesses: present.map((p) => WIDX.get(p.s)!) });
+        lines.push({ ref, uncovered: true, witnesses: present.map((p) => WIDX.get(p.s)!), ...(filledIn.length ? { filledIn } : {}) });
         continue;
       }
       st.witnessesPerLine += present.length;
@@ -663,7 +708,7 @@ function compileBook(
         const mask = aramaic(target.id, ref, words.map((w) => w.k));
         mask.forEach((a, i) => { if (a) words[i].a = 1; });
       }
-      lines.push({ ref, witnesses: present.map((p) => WIDX.get(p.s)!), words });
+      lines.push({ ref, witnesses: present.map((p) => WIDX.get(p.s)!), words, ...(filledIn.length ? { filledIn } : {}) });
     }
 
     // ---------- Bayesian Dawid-Skene EM + Composite Likelihood + Monte Carlo ----------
@@ -870,7 +915,8 @@ function compileBook(
         categoryCounts,
         severityCounts,
         stats: {
-          manuscripts: witnesses.length,
+          // a manuscript with nothing but filled-in text in this book has no text of its own here, so it is not counted
+          manuscripts: witnesses.filter((w) => !(w.filledInLines > 0 && (w.reliability?.linesCompared ?? 0) === 0)).length,
           early: witnesses.filter((w) => w.early).length,
           lines: st.lines,
           uncoveredLines: st.uncovered,
@@ -905,6 +951,11 @@ function renderTeiXml(
   const langCode = target.language.startsWith("Hebrew") ? "hbo" : "grc";
   const witRef = (idx: number) => `#${witnesses[idx].xmlId}`;
   const witRefs = (idxs: number[]) => idxs.map(witRef).join(" ");
+  /** Filled-in text at a line (not counted; METHOD.md section 5): one note per manuscript, naming it and the edition's stated source. */
+  const filledInNotes = (l: LineOut) =>
+    (l.filledIn ?? [])
+      .map((f) => `<note type="filled-in" corresp="${witRef(f.w)}" source="${escXml(f.source)}">${escXml(f.text)}</note>`)
+      .join("");
 
   const out: string[] = [];
   out.push('<?xml version="1.0" encoding="UTF-8"?>');
@@ -947,6 +998,9 @@ function renderTeiXml(
     out.push(`            <note type="provenance">${escXml(`Place of origin/writing: unknown (not documented in specification). Transcription holder(s): ${w.provenances.join(", ") || "unknown"}.`)}</note>`);
     out.push('            <note type="scientific-analysis">unknown (not documented in specification)</note>');
     out.push(`            <note type="physical-scribal">${escXml(`Manuscript type: ${s.type}; transcribed words observed: ${w.transcribedWords}; scribal corrections observed: ${w.corrections}; lacunae/damaged tokens observed: ${w.lacunae} (not penalized); scribal prior penalty: ${w.corrPenalty}.`)}</note>`);
+    if (w.filledInLines) {
+      out.push(`            <note type="filled-in">${escXml(`Filled-in text: ${w.filledInLines} lines (${w.filledInWords} words) of this book are text the edition fills in for lost portions of this manuscript, not the manuscript's own text. That text is not counted as this manuscript's reading and carries no vote. Stated source: ${w.filledInSources.join("; ")}.`)}</note>`);
+    }
     out.push(`            <note type="textual-agreement">${escXml(`Posterior reliability: ${rel.estimate} (90% interval: [${rel.low}, ${rel.high}]); lines compared: ${rel.linesCompared}; agreement share: ${rel.agreementShare ?? "n/a"}; prior mean: ${rel.priorMean}; prior strength: ${rel.priorStrength}; date range known: ${rel.dateRangeKnown}.`)}</note>`);
     out.push(`            <note type="source-files">${escXml(w.files.join(", "))}</note>`);
     out.push("          </witness>");
@@ -991,7 +1045,7 @@ function renderTeiXml(
     }
 
     if (l.uncovered) {
-      out.push(`          <ab n="${escXml(l.ref)}" type="uncovered"><gap reason="lost"/><note type="coverage">Uncovered line; witnesses present without readable words: ${escXml(witRefs(l.witnesses))}</note></ab>`);
+      out.push(`          <ab n="${escXml(l.ref)}" type="uncovered"><gap reason="lost"/><note type="coverage">Uncovered line; witnesses present without readable words: ${escXml(witRefs(l.witnesses))}</note>${filledInNotes(l)}</ab>`);
       continue;
     }
 
@@ -1116,7 +1170,8 @@ function renderTeiXml(
       bodyParts.push(`<spanGrp type="word-coverage">${spansXml.join("")}</spanGrp>`);
     }
 
-    out.push(`          <ab n="${escXml(l.ref)}">${bodyParts.join(" ")}</ab>`);
+    const filledXml = filledInNotes(l);
+    out.push(`          <ab n="${escXml(l.ref)}">${bodyParts.join(" ")}${filledXml ? " " + filledXml : ""}</ab>`);
   }
 
   if (curChapter) out.push("        </div>");
@@ -1135,10 +1190,14 @@ if (import.meta.main) {
   let bookArg = "all";
   let compilationId = "";
   let skipSite = false;
+  let outDirArg = ""; // --out-dir <folder>: write somewhere other than outputs/ (for a trial run)
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--compilation-id" && args[i + 1]) {
       compilationId = args[++i];
+    } else if (args[i] === "--out-dir" && args[i + 1]) {
+      outDirArg = args[++i];
+      skipSite = true;
     } else if (args[i] === "--no-site") {
       skipSite = true;
     } else if (/^[0-9A-HJKMNP-TV-Z]{26}$/.test(args[i])) {
@@ -1163,12 +1222,12 @@ if (import.meta.main) {
     bookArg === "all" ? spec.targets : spec.targets.filter((t) => t.id === bookArg || t.name === bookArg);
   if (!selectedTargets.length) throw new Error(`No target book matching "${bookArg}" in specification ${specId}`);
 
-  const outDir = `${ROOT}outputs/${specId}/${compilationId}`;
+  const outDir = outDirArg || `${ROOT}outputs/${specId}/${compilationId}`;
   mkdirSync(outDir, { recursive: true });
   const timestampIso = new Date().toISOString();
   const git = gitInfo();
 
-  console.log(`Compiling under specification ${specId} -> outputs/${specId}/${compilationId}/ (${selectedTargets.length} target books)`);
+  console.log(`Compiling under specification ${specId} -> ${outDirArg || `outputs/${specId}/${compilationId}/`} (${selectedTargets.length} target books)`);
 
   // Build consolidated source map (handling SAME_MANUSCRIPT merges)
   const sourceMap = new Map<string, SourceItem>();
@@ -1289,7 +1348,7 @@ if (import.meta.main) {
         "Full 66-book compilation with granular word-level alignment (preventing unrelated variants from collapsing into whole-verse blocks) and decoupled edit-category vs. substantive-severity scoring.",
       author: "Open Lexis",
       createdAt: timestampIso,
-      outputDirectory: `outputs/${specId}/${compilationId}/`,
+      outputDirectory: outDirArg || `outputs/${specId}/${compilationId}/`,
       outputFormat: "TEI P5 XML",
       reportFile: "REPORT.md",
     },
@@ -1322,7 +1381,7 @@ if (import.meta.main) {
       severityCounts: totalSeverityCounts,
     }),
   );
-  console.log(`Done: ${booksList.length} books written to outputs/${specId}/${compilationId}/ in ${((performance.now() - tStart) / 1000).toFixed(1)} s`);
+  console.log(`Done: ${booksList.length} books written to ${outDirArg || `outputs/${specId}/${compilationId}/`} in ${((performance.now() - tStart) / 1000).toFixed(1)} s`);
 
   if (!skipSite) {
     console.log("Rebuilding Astro site (site/www) to include the new compilation...");

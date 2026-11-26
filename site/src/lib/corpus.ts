@@ -758,6 +758,8 @@ export interface ParsedWitness {
   scribal: string;
   agreement: string;
   files: string;
+  /** Lines and words of this book that are filled in by the edition, not the manuscript's own text (empty when none). */
+  filledIn: string;
 }
 
 export interface ParsedAppReading {
@@ -792,6 +794,8 @@ export interface ParsedVerse {
   ref: string;
   verseNum: string;
   uncovered?: boolean;
+  /** Text an edition filled in for a lost part of a manuscript at this line; not counted as that manuscript's reading. */
+  filledIn?: { siglum: string; source: string; text: string }[];
   tokens: ParsedVerseToken[];
 }
 
@@ -834,6 +838,7 @@ export function parseCompiledBookTei(xmlPath: string): { witnesses: ParsedWitnes
         scribal: tag(/<note type="physical-scribal">([\s\S]*?)<\/note>/),
         agreement: tag(/<note type="textual-agreement">([\s\S]*?)<\/note>/),
         files: tag(/<note type="source-files">([\s\S]*?)<\/note>/),
+        filledIn: tag(/<note type="filled-in">([\s\S]*?)<\/note>/),
       });
     }
   }
@@ -857,8 +862,14 @@ export function parseCompiledBookTei(xmlPath: string): { witnesses: ParsedWitnes
       chapMap.set(ch, chap);
       chapters.push(chap);
     }
+    const filledIn: { siglum: string; source: string; text: string }[] = [];
+    const filledRe = /<note type="filled-in" corresp="#wit-([^"]*)" source="([^"]*)">([\s\S]*?)<\/note>/g;
+    let fm: RegExpExecArray | null;
+    while ((fm = filledRe.exec(rawInner))) {
+      filledIn.push({ siglum: unentXml(fm[1]), source: unentXml(fm[2]), text: unentXml(fm[3]) });
+    }
     if (attrs.includes('type="uncovered"')) {
-      chap.verses.push({ ref, verseNum: vs ?? ref, uncovered: true, tokens: [] });
+      chap.verses.push({ ref, verseNum: vs ?? ref, uncovered: true, ...(filledIn.length ? { filledIn } : {}), tokens: [] });
       continue;
     }
 
@@ -976,7 +987,7 @@ export function parseCompiledBookTei(xmlPath: string): { witnesses: ParsedWitnes
         });
       }
     }
-    chap.verses.push({ ref, verseNum: vs ?? ref, tokens });
+    chap.verses.push({ ref, verseNum: vs ?? ref, ...(filledIn.length ? { filledIn } : {}), tokens });
   }
 
   return { witnesses, chapters };

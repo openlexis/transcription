@@ -7,8 +7,9 @@ import { HEB_BOOKS, numeral, sacred, skel } from "./text";
 export type ParsedUnit = {
   book: string;
   ref: string;
-  /** supplied: the word is text an edition filled in where the manuscript is lost (TEI <supplied>), not the manuscript's own text. */
-  words: { w: string; gap: boolean; supplied?: boolean }[];
+  /** supplied: the word is text an edition filled in where the manuscript is lost (TEI <supplied>), not the manuscript's own text.
+   * source: the edition's stated source for that filled-in text (the source attribute of <supplied>), when it states one. */
+  words: { w: string; gap: boolean; supplied?: boolean; source?: string }[];
   gapEnd: boolean;
   absent?: boolean;
 };
@@ -173,19 +174,19 @@ function readSimpleTei(xml: string): ReadResult {
       continue;
     }
     if (!inner) continue;
-    const words: { w: string; gap: boolean; supplied?: boolean }[] = [];
-    let gap = false, supplied = false;
+    const words: { w: string; gap: boolean; supplied?: boolean; source?: string }[] = [];
+    let gap = false, supplied = false, source: string | undefined;
     const tokRe = /<gap\b[^>]*\/>|<supplied\b[^>]*>|<\/supplied>|<w\b[^>]*>([\s\S]*?)<\/w>/g;
     let tm: RegExpExecArray | null;
     while ((tm = tokRe.exec(inner))) {
-      if (tm[0].startsWith("<supplied")) supplied = true;
-      else if (tm[0] === "</supplied>") supplied = false;
+      if (tm[0].startsWith("<supplied")) { supplied = true; const sm = tm[0].match(/\bsource="([^"]*)"/); source = sm ? unent(sm[1]) : undefined; }
+      else if (tm[0] === "</supplied>") { supplied = false; source = undefined; }
       else if (tm[1] === undefined) {
         gap = true;
         lacunae++;
       } else {
         const w = unent(tm[1]).trim();
-        if (w) { words.push(supplied ? { w, gap, supplied } : { w, gap }); gap = false; if (!supplied) totalWords++; }
+        if (w) { words.push(supplied ? { w, gap, supplied, ...(source ? { source } : {}) } : { w, gap }); gap = false; if (!supplied) totalWords++; }
       }
     }
     if (words.length || gap) units.push({ book, ref, words, gapEnd: gap });
