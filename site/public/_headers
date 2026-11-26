@@ -1,0 +1,5 @@
+# Download copies are stored gzip-compressed (several books exceed the 25 MiB file limit).
+# Content-Encoding tells the browser to decode them into ordinary XML.
+/downloads/*
+  Content-Type: application/xml; charset=utf-8
+  Content-Encoding: gzip

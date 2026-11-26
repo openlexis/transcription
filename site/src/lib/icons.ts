@@ -16,4 +16,5 @@ export type IconName =
   | "books"
   | "language"
   | "section"
-  | "lines";
+  | "lines"
+  | "download";

@@ -7,7 +7,7 @@ import Byline from "../../../components/Byline.astro";
 import ModelCredit from "../../../components/ModelCredit.astro";
 import CiteBox from "../../../components/CiteBox.astro";
 import { compilationCredit, perManuscript, witnessFiles } from "../../../lib/credits";
-import { compilationDownload } from "../../../lib/downloads";
+import { bookDownloads } from "../../../lib/downloads";
 import { groupCredits } from "../../../lib/cite";
 import { readFileSync } from "node:fs";
 import {
@@ -98,7 +98,7 @@ const compSummary = m.compilation.summary || m.method.summary;
 const compAuthor = formatAuthor(m.compilation.author);
 const spec = getSpecifications().find((s) => s.id === c.specId);
 const license = spec?.license;
-const download = compilationDownload(c);
+const downloads = bookDownloads(c);
 // Sources used by any book: each witness names its source files in the book's header.
 const usedFiles = spec
   ? m.books.flatMap((b) => {
@@ -128,13 +128,16 @@ const citeData = {
       <p style="margin: 6px 0 0; font-size: 1.02rem; font-weight: 500; color: var(--ink-secondary);">
         {compSubtitle}
       </p>
-      <Byline
-        items={[
-          compAuthor && { icon: "author", text: compAuthor, title: "Author" },
-          createdDate && { icon: "date", text: createdDate, title: "Date compiled" },
-          license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
-        ]}
-      />
+      <div class="byline-with-cite">
+        <Byline
+          items={[
+            compAuthor && { icon: "author", text: compAuthor, title: "Author" },
+            createdDate && { icon: "date", text: createdDate, title: "Date compiled" },
+            license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
+          ]}
+        />
+        <CiteBox data={citeData} placement="byline" />
+      </div>
       <ModelCredit
         modelName={attr.modelName}
         effort={attr.effortLevel}
@@ -145,6 +148,22 @@ const citeData = {
         <Pill icon="books">{formatNum(m.books.length)} books</Pill>
         <Pill icon="words">{formatNum(m.totals.words)} words</Pill>
         <Pill icon="disagreements">{formatNum(m.totals.variantPlaces)} disagreements</Pill>
+        {downloads.length > 0 && (
+          <details class="download-menu">
+            <summary class="pill">
+              <Icon name="download" />
+              Download TEI
+            </summary>
+            <div class="download-list">
+              {downloads.map((d, i) => (
+                <>
+                  {i > 0 && " · "}
+                  <a href={d.href} download={d.name}>{d.label} ({formatBytes(d.bytes)})</a>
+                </>
+              ))}
+            </div>
+          </details>
+        )}
       </div>
       <p class="lead" style="margin-top: 12px;">
         {compSummary}
@@ -155,13 +174,6 @@ const citeData = {
           Specification <Icon name="arrow-up" size={14} />
         </a>
       </div>
-      {download && (
-        <div class="download-row">
-          <a href={download.href} class="btn btn-secondary" download>Download TEI, all books (zip, {formatBytes(download.bytes)})</a>
-          <span>Each book's TEI file, unchanged, with a sources file listing each source's credit, license and link.</span>
-        </div>
-      )}
-      <CiteBox data={citeData} />
     </div>
   </section>
 

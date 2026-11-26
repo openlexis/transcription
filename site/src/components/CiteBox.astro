@@ -1,17 +1,31 @@
 ---
 // A cite box: how to credit Open Lexis, and each source's own credit, license and link, as plain text or BibTeX.
+// placement="byline" is a link beside the license that opens the citation below the byline.
 import "../styles/cite.css";
 import { SITE_ORIGIN, citeBodyHtml, type CiteBoxData } from "../lib/cite";
 
 interface Props {
   data: CiteBoxData;
+  placement?: "box" | "byline";
 }
-const { data } = Astro.props;
+const { data, placement = "box" } = Astro.props;
+const body = citeBodyHtml(data, SITE_ORIGIN);
 ---
-<details class="cite-box" data-cite={JSON.stringify(data)}>
-  <summary>{data.heading}</summary>
-  <div class="cite-body" set:html={citeBodyHtml(data, SITE_ORIGIN)} />
-</details>
+{placement === "byline" ? (
+  <span class="cite-byline-slot">
+    <button type="button" class="cite-toggle" aria-expanded="false" aria-controls="cite-panel" data-cite-toggle>
+      {data.heading}
+    </button>
+    <div id="cite-panel" class="cite-box cite-panel" hidden data-cite={JSON.stringify(data)}>
+      <div class="cite-body" set:html={body} />
+    </div>
+  </span>
+) : (
+  <details class="cite-box" data-cite={JSON.stringify(data)}>
+    <summary>{data.heading}</summary>
+    <div class="cite-body" set:html={body} />
+  </details>
+)}
 <script>
   import "../lib/cite-ui";
 </script>

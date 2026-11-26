@@ -18,6 +18,17 @@ if (!(window as unknown as { __citeUi?: boolean }).__citeUi) {
   (window as unknown as { __citeUi?: boolean }).__citeUi = true;
   document.addEventListener("click", async (e) => {
     const t = e.target as HTMLElement | null;
+    const toggle = t?.closest<HTMLButtonElement>("[data-cite-toggle]");
+    if (toggle) {
+      const panel = toggle.closest(".cite-byline-slot, .byline-with-cite")?.querySelector<HTMLElement>(".cite-panel")
+        ?? document.getElementById(toggle.getAttribute("aria-controls") || "");
+      if (panel) {
+        const open = panel.hidden;
+        panel.hidden = !open;
+        toggle.setAttribute("aria-expanded", String(open));
+      }
+      return;
+    }
     const fmtBtn = t?.closest<HTMLButtonElement>("[data-cite-fmt]");
     if (fmtBtn) {
       const box = fmtBtn.closest(".cite-box");

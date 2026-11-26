@@ -349,14 +349,17 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         )}
       </div>
       <h1>{b.name}</h1>
-      <Byline
-        items={[
-          compAuthor && { icon: "author", text: compAuthor, title: "Author" },
-          compDate && { icon: "date", text: compDate, title: "Date compiled" },
-          compTitle && { icon: "transcriptions", text: compTitle, title: "Transcription", href: compUrl(c.compilationId) },
-          license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
-        ]}
-      />
+      <div class="byline-with-cite">
+        <Byline
+          items={[
+            compAuthor && { icon: "author", text: compAuthor, title: "Author" },
+            compDate && { icon: "date", text: compDate, title: "Date compiled" },
+            compTitle && { icon: "transcriptions", text: compTitle, title: "Transcription", href: compUrl(c.compilationId) },
+            license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
+          ]}
+        />
+        <CiteBox data={citeData} placement="byline" />
+      </div>
       <div class="pill-row book-stats-lead" style="margin-top: 14px;">
         <Pill icon="manuscripts">{formatNum(b.stats.manuscripts)} manuscripts</Pill>
         <Pill icon="lines">{formatNum(b.stats.lines)} lines</Pill>
@@ -367,14 +370,17 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           kind="book-mean"
           context={b.name}
         />
+        {download && (
+          <Pill
+            icon="download"
+            href={download.href}
+            download={download.name}
+            title={`TEI of ${b.name}, with this page's address, our license, and each source project's credit, license and link.`}
+          >
+            Download TEI ({formatBytes(download.bytes)})
+          </Pill>
+        )}
       </div>
-      {download && (
-        <div class="download-row">
-          <a href={download.href} class="btn btn-secondary" download>Download TEI (zip, {formatBytes(download.bytes)})</a>
-          <span>{b.file}, unchanged, with {b.file.replace(/\.xml$/, ".sources.xml")}, which lists each source's credit, license and link.</span>
-        </div>
-      )}
-      <CiteBox data={citeData} />
     </div>
   </section>
 
