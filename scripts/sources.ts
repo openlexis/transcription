@@ -19,6 +19,7 @@
  *   bun run sources list [--target Gen] [--institution intf] [--type scroll] [--language Greek] [--json]
  *   bun run sources get <id|institution:id> [--spec <id>] [--json]
  */
+import { spawnSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { CANONICAL_BOOKS, type SourceSet } from "./sets";
 
@@ -95,12 +96,24 @@ export interface PinnedTranscript {
   commit: string;
 }
 
-/** The shape of `specifications/<ULID>/sources.json`. */
+/** The shape of `specifications/<ULID>/sources.json`: only the specification id and the transcripts, each with its
+ * identifier, repository path, and the git commit that holds it. Book, language, date, license and archive details are
+ * read from the transcript and its catalog (`archives/<archive>/index.json`) at that same commit. */
 export interface FrozenSources {
   specification: string;
-  description: string;
-  createdAt: string;
-  selection: string[];
+  transcripts: PinnedTranscript[];
+  /** Earlier folder form only: a copied catalog. Still read when present; new lists do not include it. */
+  manuscripts?: FrozenSourcesLegacy["manuscripts"];
+  archives?: FrozenSourcesLegacy["archives"];
+  books?: TargetBook[];
+  selection?: string[];
+}
+
+export interface FrozenSourcesLegacy {
+  specification: string;
+  description?: string;
+  createdAt?: string;
+  selection?: string[];
   books: TargetBook[];
   archives: Record<string, { id: string; name: string; url: string }>;
   manuscripts: (Omit<ResolvedSource, "files"> & {
@@ -115,6 +128,92 @@ export interface FrozenSources {
       transcripts: PinnedTranscript[];
     }[];
   })[];
+}
+
+/** A file's text as it is in a given git commit (`git show <commit>:<path>`). */
+export function gitShow(commit: string, relPath: string): string {
+  const r = spawnSync("git", ["show", `${commit}:${relPath}`], { cwd: ROOT, encoding: "utf8", maxBuffer: 1 << 30 });
+  if (r.status !== 0) throw new Error(`Cannot read ${relPath} at commit ${commit}: ${(r.stderr || "").trim()}`);
+  return r.stdout;
+}
+
+const catalogCache = new Map<string, InstitutionIndex>();
+function catalogAt(archive: string, commit: string): InstitutionIndex {
+  const key = `${commit}:${archive}`;
+  const hit = catalogCache.get(key);
+  if (hit) return hit;
+  const idx = JSON.parse(gitShow(commit, `archives/${archive}/index.json`)) as InstitutionIndex;
+  catalogCache.set(key, idx);
+  return idx;
+}
+
+export function archiveOfPath(path: string): string {
+  const m = path.match(/^archives\/([^/]+)\//);
+  if (!m) throw new Error(`Transcript path is not under archives/: ${path}`);
+  return m[1];
+}
+
+/** Look up each pinned transcript in its archive catalog at the same commit, and build the compiler/site source list. */
+export function sourcesFromPinned(transcripts: PinnedTranscript[]): { targets: TargetBook[]; sources: ResolvedSource[] } {
+  const merged = new Map<string, ResolvedSource>();
+  const discoveredBooks = new Set<string>();
+  for (const t of transcripts) {
+    const archive = archiveOfPath(t.path);
+    const idx = catalogAt(archive, t.commit);
+    const item = idx.items.find((i) => i.paths.includes(t.path));
+    if (!item) throw new Error(`${t.path} is not listed in archives/${archive}/index.json at commit ${t.commit}`);
+    for (const b of item.targets ?? []) discoveredBooks.add(b);
+    const fileEntry = {
+      paths: [t.path],
+      format: item.format,
+      license: item.license,
+      sourceUrl: item.sourceUrl,
+      ...(item.member ? { member: item.member } : {}),
+      ...(item.lines !== undefined ? { lines: item.lines } : {}),
+      ...(item.words !== undefined ? { words: item.words } : {}),
+      provenance: idx.institution,
+      transcripts: [t],
+    };
+    const existing = merged.get(item.id);
+    if (existing) {
+      existing.files.push(fileEntry);
+      const set = new Set([...existing.targets, ...(item.targets ?? [])]);
+      existing.targets = [...set].sort(
+        (a, b) => (BOOK_META.get(a)?.order ?? 999) - (BOOK_META.get(b)?.order ?? 999)
+      );
+    } else {
+      merged.set(item.id, {
+        id: item.id,
+        type: item.type,
+        language: item.language,
+        ...(item.name ? { name: item.name } : {}),
+        ...(item.shelfmark ? { shelfmark: item.shelfmark } : {}),
+        ...(item.century ? { century: item.century } : {}),
+        ...(item.year !== undefined ? { year: item.year } : {}),
+        ...(item.yearFrom !== undefined ? { yearFrom: item.yearFrom } : {}),
+        ...(item.yearTo !== undefined ? { yearTo: item.yearTo } : {}),
+        ...(item.dateBasis ? { dateBasis: item.dateBasis } : {}),
+        ...(item.dateSource ? { dateSource: item.dateSource } : {}),
+        ...(item.viewers?.length ? { viewers: item.viewers } : {}),
+        targets: [...(item.targets ?? [])],
+        files: [fileEntry],
+      });
+    }
+  }
+  const targets: TargetBook[] = [...discoveredBooks]
+    .map((k) => {
+      const meta = BOOK_META.get(k);
+      return {
+        id: k,
+        name: meta?.name ?? k,
+        section: meta?.section ?? "Other",
+        number: meta?.number ?? 0,
+        language: meta?.language ?? "Unknown",
+      };
+    })
+    .sort((a, b) => (BOOK_META.get(a.id)?.order ?? 999) - (BOOK_META.get(b.id)?.order ?? 999));
+  const sources = [...merged.values()].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  return { targets, sources };
 }
 
 /** A folder specification's YAML path, `specifications/<ULID>/specification.yaml`. */
@@ -147,16 +246,22 @@ export function loadFrozenSources(specPath: string): { frozen: FrozenSources; ta
   const jsonPath = specPath.replace(/specification\.yaml$/, "sources.json");
   if (!existsSync(jsonPath)) throw new Error(`Missing ${jsonPath.slice(ROOT.length)} (run bun run spec:freeze)`);
   const frozen = JSON.parse(readFileSync(jsonPath, "utf8")) as FrozenSources;
-  const sources: ResolvedSource[] = frozen.manuscripts.map(({ files, ...m }) => ({
+  if (frozen.transcripts?.length && !frozen.manuscripts) {
+    const { targets, sources } = sourcesFromPinned(frozen.transcripts);
+    return { frozen, targets, sources };
+  }
+  // Earlier folder form: the list already copied catalog details.
+  const legacy = frozen as FrozenSources & FrozenSourcesLegacy;
+  const sources: ResolvedSource[] = (legacy.manuscripts ?? []).map(({ files, ...m }) => ({
     ...m,
     files: files.map(({ archive, transcripts, ...f }) => ({
       ...f,
       paths: transcripts.map((t) => t.path),
-      provenance: frozen.archives[archive],
+      provenance: legacy.archives[archive],
       transcripts,
     })),
   }));
-  return { frozen, targets: frozen.books, sources };
+  return { frozen, targets: legacy.books ?? [], sources };
 }
 
 export function loadSpecWithSources(specId?: string) {

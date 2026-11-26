@@ -32,10 +32,10 @@ for (const { id, path } of listSpecs()) {
   if (spec.sources !== "sources.json") fails.push(`${at}/specification.yaml: sources must be "sources.json"`);
   const frozen = JSON.parse(readFileSync(`${ROOT}${at}/sources.json`, "utf8")) as FrozenSources;
   if (frozen.specification !== id) fails.push(`${at}/sources.json: specification ${frozen.specification} does not match its folder`);
-  const pins = frozen.manuscripts.flatMap((m) => m.files.flatMap((f) => {
-    if (!frozen.archives[f.archive]) fails.push(`${at}/sources.json: archive ${f.archive} not described`);
-    return f.transcripts;
-  }));
+  const pins = frozen.transcripts?.length
+    ? frozen.transcripts
+    : (frozen.manuscripts ?? []).flatMap((m) => m.files.flatMap((f) => f.transcripts));
+  if (!pins.length) fails.push(`${at}/sources.json: no transcripts listed`);
   const r = spawnSync("git", ["cat-file", "--batch-check"], { cwd: ROOT, input: pins.map((t) => `${t.commit}:${t.path}`).join("\n") + "\n", encoding: "utf8", maxBuffer: 1 << 28 });
   const lines = r.stdout.trim().split("\n");
   pins.forEach((t, i) => { if (!lines[i] || lines[i].endsWith("missing")) fails.push(`${at}/sources.json: ${t.path} not found at commit ${t.commit}`); });

@@ -1,5 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { parse } from "yaml";
+import { loadFrozenSources } from "../../../scripts/sources.ts";
 
 export const ROOT = new URL("../../../", import.meta.url).pathname;
 export const REPO = "https://github.com/openlexis/transcription";
@@ -266,28 +267,6 @@ function resolveSpecSources(
   };
 }
 
-/** A folder specification's sources.json (written by `bun run spec:freeze`), in the shape the site uses. */
-function readFrozenSources(jsonPath: string): { targets: TargetBook[]; sources: SourceItem[] } {
-  const frozen = JSON.parse(readFileSync(jsonPath, "utf8")) as {
-    books: TargetBook[];
-    archives: Record<string, { id: string; name: string; url: string }>;
-    manuscripts: (Omit<SourceItem, "files"> & {
-      files: (Omit<SourceFileEntry, "paths" | "provenance"> & { archive: string; transcripts: { path: string; commit: string }[] })[];
-    })[];
-  };
-  return {
-    targets: frozen.books,
-    sources: frozen.manuscripts.map(({ files, ...m }) => ({
-      ...m,
-      files: files.map(({ archive, transcripts, ...f }) => ({
-        ...f,
-        paths: transcripts.map((t) => t.path),
-        provenance: frozen.archives[archive],
-      })),
-    })),
-  };
-}
-
 let _specs: SpecFile[] | undefined;
 export function getSpecifications(): SpecFile[] {
   if (_specs) return _specs;
@@ -314,7 +293,7 @@ export function getSpecifications(): SpecFile[] {
       "file" | "sources" | "sourceRefs" | "targets"
     > & { targets?: TargetBook[]; sources: string | string[] | Record<string, string[]> };
     if (file.endsWith("/specification.yaml")) {
-      const { targets, sources } = readFrozenSources(`${ROOT}${file.replace(/specification\.yaml$/, "sources.json")}`);
+      const { targets, sources } = loadFrozenSources(`${ROOT}${file}`);
       return { ...raw, file, targets, sourceRefs: [file.replace(/specification\.yaml$/, "sources.json")], sources };
     }
     const refs = raw.sources as string[] | Record<string, string[]>;

@@ -1,7 +1,7 @@
 // Transcription compiler for Open Lexis YAML specifications (TEI P5 XML output).
 // Usage:
 //   bun --smol scripts/compile.ts [spec-id] [all | <book-id>] [--compilation-id <ulid>]
-// Defaults: spec-id = 01M8B15AA3PRA5XYS94RDTVTBV, book = all. --out-dir <folder> writes a trial compilation outside transcripts/.
+// Defaults: spec-id = 01M8B2957VNH06FH7RNMQFDC5M, book = all. --out-dir <folder> writes a trial compilation outside transcripts/.
 import { createHash, randomBytes } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
@@ -9,14 +9,7 @@ import { align } from "./lib/align";
 import { betaDraw, loglik, posterior, prior, quantile, rng, type Unit, weights } from "./lib/model";
 import { readTranscriptionFile, readTranscriptionText, type ParsedUnit } from "./lib/readers";
 import { classifyReadingSeverity, formatSeverityNote, SEVERITY_SCALE, SEVERITY_TAXONOMY, type SeverityDef } from "./lib/severity";
-import { loadSpecWithSources } from "./sources";
-
-/** A file's text as it is in a given git commit (`git show <commit>:<path>`). */
-function gitShow(commit: string, relPath: string): string {
-  const r = spawnSync("git", ["show", `${commit}:${relPath}`], { cwd: ROOT, encoding: "utf8", maxBuffer: 1 << 30 });
-  if (r.status !== 0) throw new Error(`Cannot read ${relPath} at commit ${commit}: ${r.stderr.trim()}`);
-  return r.stdout;
-}
+import { gitShow, loadSpecWithSources } from "./sources";
 import { aramaic, greekKey, hebrewSpell, showGreek } from "./lib/text";
 
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -1193,7 +1186,7 @@ function renderTeiXml(
 // ---------- main CLI ----------
 if (import.meta.main) {
   const args = process.argv.slice(2);
-  let specId = "01M8B15AA3PRA5XYS94RDTVTBV";
+  let specId = "01M8B2957VNH06FH7RNMQFDC5M";
   let bookArg = "all";
   let compilationId = "";
   let skipSite = false;

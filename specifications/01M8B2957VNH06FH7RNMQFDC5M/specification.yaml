@@ -1,4 +1,4 @@
-id: 01M8B15AA3PRA5XYS94RDTVTBV
+id: 01M8B2957VNH06FH7RNMQFDC5M
 title: "Open Lexis Transcription Specification: Decoupled Severity & Granular Alignment"
 author: Open Lexis
 summary: Recover the original text of all 66 target books from the pinned primary manuscript
@@ -155,7 +155,7 @@ output_requirements:
       parse, or format data are not required to identify themselves.
   - name: Specification reference
     description: An explicit statement that the compilation was produced under this specification,
-      citing its ID (`01M8B15AA3PRA5XYS94RDTVTBV`).
+      citing its ID (`01M8B2957VNH06FH7RNMQFDC5M`).
 output_format:
   standard: TEI P5 XML
   references:
@@ -177,7 +177,7 @@ output_format:
     - One TEI P5 XML file per compiled book.
     - A single manifest (record) file (`manifest.json`) conforming to the schema in `AGENTS.md`,
       listing all book files, full model attribution, the compilation ID, and a statement citing
-      this specification's ID (`01M8B15AA3PRA5XYS94RDTVTBV`).
+      this specification's ID (`01M8B2957VNH06FH7RNMQFDC5M`).
     - A structured Markdown compilation report (`REPORT.md`) with YAML frontmatter conforming to
       `AGENTS.md`, followed by a plain-language Markdown narrative of what was performed.
 sources: sources.json

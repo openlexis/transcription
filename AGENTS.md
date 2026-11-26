@@ -8,9 +8,9 @@ Use this guide whenever asked to **implement a specification and produce a new c
 
 ## 1. Non-Negotiable Rules
 
-1. **Strict allowlist:** Read **only** the specification you were assigned and the transcripts it lists. For a specification folder, that is `specifications/<SPEC_ID>/specification.yaml`, `specifications/<SPEC_ID>/sources.json`, and each transcript in `sources.json` read at its recorded commit (`git show <commit>:<path>`). For an older single-file specification (`specifications/<SPEC_ID>.yaml`), it is the ULID set files (`archives/sets/<ULID>.json`) and catalogs (`archives/<archive>/index.json`) it references and the XML files those catalog entries name. Never roam `archives/` or ingest unreferenced files.
+1. **Strict allowlist:** Read **only** the specification you were assigned and the transcripts it lists. For a specification folder, that is `specifications/<SPEC_ID>/specification.yaml`, `specifications/<SPEC_ID>/sources.json`, and each transcript in `sources.json` read at its recorded commit (`git show <commit>:<path>`), with book, language, date, license and archive details read from that transcript and its catalog at the same commit. For an older single-file specification (`specifications/<SPEC_ID>.yaml`), it is the ULID set files (`archives/sets/<ULID>.json`) and catalogs (`archives/<archive>/index.json`) it references and the XML files those catalog entries name. Never roam `archives/` or ingest unreferenced files.
 2. **Total exclusion of outside material:** Never consult or import printed/critical editions, translations, modern reconstructions, facsimiles, external scholarly commentary, or anything under `site/` (including UI-only word glosses in `site/src/data/`).
-3. **Never fabricate metadata:** If a metadata field (e.g., provenance, scientific dating) is absent from the specification's `sources.json` (or, for an older specification, from `archives/<archive>/index.json`), record it explicitly as unknown and let it widen uncertainty rather than imputing it.
+3. **Never fabricate metadata:** If a metadata field (e.g., provenance, scientific dating) is absent from the transcript's catalog (`archives/<archive>/index.json`) at its pinned commit (or, for an older single-file specification, from the working-tree catalog), record it explicitly as unknown and let it widen uncertainty rather than imputing it.
 4. **Never modify existing specs, source sets, or previous compilations:** Always write your compilation to a **brand-new** directory `transcripts/<SPEC_ID>/<NEW_COMPILATION_ULID>/` using a freshly generated 26-character Crockford Base32 ULID.
 5. **Own your modeling decisions:** You are free to design your own statistical model, alignment strategy, and disagreement taxonomy; do not blindly copy an earlier model's parameters if you believe a better approach furthers recovery of the original text. You may reuse deterministic I/O helpers (`scripts/sources.ts`, `scripts/lib/readers.ts`, `scripts/lib/tei.ts`) to parse input files without rewriting boilerplate.
 6. **Honest attribution:** Record your exact provider, model family, model name, exact model ID, effort/reasoning tier, and harness in both `manifest.json` and `REPORT.md`.
@@ -45,10 +45,10 @@ bun run site
 Words used here:
 
 - **Specification folder:** `specifications/<ULID>/`, holding exactly two files: `specification.yaml` (the rules, with `sources: sources.json`) and `sources.json` (the transcript list).
-- **Transcript list (`sources.json`):** every transcript the specification considers. Each transcript has an identifier (`<archive>:<file name without .xml>`), its repository path, and the git commit that holds it. The list also copies the details the compiler and site use: the books (name, section, number, language) and, for each manuscript, its dates, date basis and source, language, type, format, license and source link.
-- **Pinned transcript:** a transcript read as it is in its recorded commit (`git show <commit>:<path>`), so later edits, moves or deletions under `archives/` do not change what a specification uses.
+- **Transcript list (`sources.json`):** every transcript the specification considers. Each transcript has an identifier (`<archive>:<file name without .xml>`), its repository path, and the git commit that holds it. Nothing else is stored there. Book, language, date, license and archive details are read from the transcript and its catalog (`archives/<archive>/index.json`) at that same commit.
+- **Pinned transcript:** a transcript (and its catalog) read as they are in the recorded commit (`git show <commit>:<path>`), so later edits, moves or deletions under `archives/` do not change what a specification uses.
 
-A specification folder needs nothing else in the repository except the transcripts, which are read at their commits. To make a new specification:
+A specification folder needs nothing else in the repository except the transcripts and their catalogs, which are read at their commits. To make a new specification:
 
 ```bash
 # 1. Mint a ULID and write specifications/<ULID>/specification.yaml with `sources: sources.json`

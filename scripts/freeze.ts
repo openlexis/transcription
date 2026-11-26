@@ -1,10 +1,9 @@
 #!/usr/bin/env bun
 /**
  * Writes `specifications/<ULID>/sources.json` for a folder specification: every transcript the specification will consider,
- * each with an identifier, its repository path, and the git commit that holds it, plus the catalog details the compiler and
- * site use (books, dates, languages, licenses, source links). After this, the specification needs nothing outside its folder
- * except the transcripts, which are read at their recorded commits (`git show <commit>:<path>`), so later changes to
- * `archives/` do not change what the specification means.
+ * each with an identifier, its repository path, and the git commit that holds it. Book, language, date, license and archive
+ * details are not copied here; the compiler and site read them from the transcript and its catalog at that same commit
+ * (`git show <commit>:<path>`), so later changes to `archives/` do not change what the specification means.
  *
  * Usage:
  *   bun run spec:freeze <SPEC_ULID> --from <older-spec-id>     (use the selection an older specification states)
@@ -15,7 +14,7 @@
  */
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { findSpecPath, folderSpecFile, type FrozenSources, isFolderSpec, resolveSelection } from "./sources";
+import { findSpecPath, folderSpecFile, isFolderSpec, resolveSelection } from "./sources";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const git = (...args: string[]) => {
@@ -43,7 +42,9 @@ const fromIdx = args.indexOf("--from");
 if (fromIdx >= 0) {
   const fromPath = findSpecPath(args[fromIdx + 1]);
   if (isFolderSpec(fromPath)) {
-    selection = (JSON.parse(readFileSync(fromPath.replace(/specification\.yaml$/, "sources.json"), "utf8")) as FrozenSources).selection;
+    const prev = JSON.parse(readFileSync(fromPath.replace(/specification\.yaml$/, "sources.json"), "utf8")) as { selection?: string[] };
+    if (!prev.selection?.length) throw new Error("--from a folder specification needs one whose sources.json still records a selection; use a single-file specification or pass set ULIDs");
+    selection = prev.selection;
   } else {
     const s = (Bun.YAML.parse(readFileSync(fromPath, "utf8")) as { sources: string[] }).sources;
     if (!Array.isArray(s)) throw new Error("--from needs a specification whose sources are a list");
@@ -52,7 +53,7 @@ if (fromIdx >= 0) {
 } else selection = args.slice(1);
 if (!selection.length) throw new Error("No selection given");
 
-const { targets, sources } = resolveSelection(selection);
+const { sources } = resolveSelection(selection);
 
 // The commit that holds each transcript: the last commit that changed it.
 const paths = new Set(sources.flatMap((s) => s.files.flatMap((f) => f.paths)));
@@ -69,32 +70,16 @@ for (const line of git("log", "--format=%x00%H", "--name-only", "HEAD", "--", "a
 const missing = [...paths].filter((p) => !commitOf.has(p));
 if (missing.length) throw new Error(`Not committed: ${missing.slice(0, 5).join(", ")}`);
 
-const archives: FrozenSources["archives"] = {};
-const frozen: FrozenSources = {
-  specification: specId,
-  description:
-    "Every transcript this specification considers. Read each one at its commit (git show <commit>:<path>); the details here are copied from the archive catalogs when the specification was made.",
-  createdAt: new Date().toISOString(),
-  selection,
-  books: targets.map(({ setId: _setId, ...b }) => b),
-  archives,
-  manuscripts: sources.map(({ files, ...m }) => ({
-    ...m,
-    files: files.map(({ paths: ps, provenance, transcripts: _t, ...f }) => {
-      archives[provenance.id] = provenance;
-      return {
-        archive: provenance.id,
-        ...f,
-        transcripts: ps.map((p) => ({
-          id: `${provenance.id}:${p.replace(`archives/${provenance.id}/`, "").replace(/\.xml$/, "")}`,
-          path: p,
-          commit: commitOf.get(p)!,
-        })),
-      };
-    }),
-  })),
-};
-frozen.archives = Object.fromEntries(Object.entries(archives).sort());
-writeFileSync(`${ROOT}${outRel}`, JSON.stringify(frozen, null, 2) + "\n");
-const n = frozen.manuscripts.reduce((a, m) => a + m.files.reduce((b, f) => b + f.transcripts.length, 0), 0);
-console.log(`Wrote ${outRel}: ${frozen.books.length} books, ${frozen.manuscripts.length} manuscripts, ${n} transcripts.`);
+const transcripts = sources
+  .flatMap((src) =>
+    src.files.flatMap((f) =>
+      f.paths.map((path) => ({
+        id: `${f.provenance.id}:${path.replace(`archives/${f.provenance.id}/`, "").replace(/\.xml$/, "")}`,
+        path,
+        commit: commitOf.get(path)!,
+      }))
+    )
+  )
+  .sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0));
+writeFileSync(`${ROOT}${outRel}`, JSON.stringify({ specification: specId, transcripts }, null, 2) + "\n");
+console.log(`Wrote ${outRel}: ${transcripts.length} transcripts.`);
