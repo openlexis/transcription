@@ -91,15 +91,12 @@ const meta = {
         <ArchiveListSidebar />
         <div class="archive-main">
           <div class="results-meta">
-            <span id="src-count">Showing {formatNum(Math.min(60, index.length))} of {formatNum(index.length)} manuscripts</span>
+            <span id="src-count">Showing {formatNum(index.length)} manuscripts</span>
             <button type="button" id="src-reset" class="copy-btn" hidden>Reset filters</button>
           </div>
 
           <div class="source-list" id="src-list"></div>
 
-          <div style="text-align: center; margin-top: 20px;">
-            <button type="button" id="src-more" class="btn btn-secondary" hidden>Load more manuscripts</button>
-          </div>
         </div>
       </div>
     </div>
@@ -120,7 +117,6 @@ const meta = {
     const ALL = dataEl ? JSON.parse(dataEl.textContent || "[]") : [];
     const listEl = document.getElementById("src-list");
     const countEl = document.getElementById("src-count");
-    const moreBtn = document.getElementById("src-more");
     const resetBtn = document.getElementById("src-reset");
     const searchInput = document.getElementById("src-search");
     const targetSelect = document.getElementById("src-target");
@@ -128,7 +124,7 @@ const meta = {
     const langBtns = [...document.querySelectorAll("[data-lang]")];
     const typeBtns = [...document.querySelectorAll("[data-type]")];
 
-    let state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "", limit: 60 };
+    let state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "" };
     let filtered = ALL;
 
     const esc = (s: unknown) =>
@@ -439,19 +435,16 @@ const meta = {
     }
 
     function render() {
-      const slice = filtered.slice(0, state.limit);
       const autoOpen = filtered.length === 1;
       if (listEl) {
-        listEl.innerHTML = slice.length
-          ? slice.map((s) => renderItem(s, autoOpen)).join("")
+        listEl.innerHTML = filtered.length
+          ? filtered.map((s) => renderItem(s, autoOpen)).join("")
           : `<div style="padding: 36px; text-align: center; color: var(--ink-muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);">No manuscripts match the current filters.</div>`;
       }
       if (countEl) {
-        countEl.textContent = `Showing ${num(slice.length)} of ${num(filtered.length)} matching manuscripts (${num(ALL.length)} total)`;
-      }
-      if (moreBtn) {
-        moreBtn.hidden = slice.length >= filtered.length;
-        moreBtn.textContent = `Load more (${num(filtered.length - slice.length)} remaining)`;
+        countEl.textContent = filtered.length === ALL.length
+          ? `Showing ${num(ALL.length)} manuscripts`
+          : `Showing ${num(filtered.length)} matching manuscripts (${num(ALL.length)} total)`;
       }
       if (resetBtn) {
         resetBtn.hidden = !(state.q || state.exactId || state.lang || state.type || state.prov || state.target);
@@ -489,19 +482,16 @@ const meta = {
     searchInput?.addEventListener("input", () => {
       state.exactId = "";
       state.q = searchInput.value;
-      state.limit = 60;
       applyFilters();
     });
     targetSelect?.addEventListener("change", () => {
       state.exactId = "";
       state.target = targetSelect.value;
-      state.limit = 60;
       applyFilters();
     });
     provSelect?.addEventListener("change", () => {
       state.exactId = "";
       state.prov = provSelect.value;
-      state.limit = 60;
       applyFilters();
     });
     langBtns.forEach((b) =>
@@ -510,7 +500,6 @@ const meta = {
         langBtns.forEach((x) => x.classList.remove("active"));
         b.classList.add("active");
         state.lang = b.getAttribute("data-lang") || "";
-        state.limit = 60;
         applyFilters();
       })
     );
@@ -520,16 +509,11 @@ const meta = {
         typeBtns.forEach((x) => x.classList.remove("active"));
         b.classList.add("active");
         state.type = b.getAttribute("data-type") || "";
-        state.limit = 60;
         applyFilters();
       })
     );
-    moreBtn?.addEventListener("click", () => {
-      state.limit += 80;
-      render();
-    });
     resetBtn?.addEventListener("click", () => {
-      state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "", limit: 60 };
+      state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "" };
       if (searchInput) searchInput.value = "";
       if (targetSelect) targetSelect.value = "";
       if (provSelect) provSelect.value = "";
@@ -550,7 +534,7 @@ const meta = {
       if (idx < 0) {
         idx = ALL.findIndex((s) => s.id === id);
         if (idx < 0) return;
-        state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "", limit: Math.max(60, idx + 1) };
+        state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "" };
         if (searchInput) searchInput.value = "";
         if (targetSelect) targetSelect.value = "";
         if (provSelect) provSelect.value = "";
@@ -558,9 +542,6 @@ const meta = {
         typeBtns.forEach((x, i) => x.classList.toggle("active", i === 0));
         applyFilters();
         idx = filtered.findIndex((s) => s.id === id);
-      } else if (idx >= state.limit) {
-        state.limit = idx + 1;
-        render();
       }
       const jump = () => {
         const el = document.getElementById(msAnchor(id));
