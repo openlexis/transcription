@@ -5,6 +5,10 @@ export const ARCHIVE_NAV_RADIUS = 3;
 export type ArchiveNavItem = { id: string; name?: string };
 export type ArchiveNavEntry = { kind: "item"; index: number } | { kind: "gap" };
 
+export function msAnchor(id: string): string {
+  return `ar-ms-${String(id).replace(/[^A-Za-z0-9_-]+/g, "_")}`;
+}
+
 /** Visible indices around `current`, plus the first and last items. A one-item hole is filled instead of shown as a gap. */
 export function archiveNavEntries(
   current: number,
