@@ -2,7 +2,7 @@
 /**
  * Programmatic resolver and CLI for specification source references.
  * Resolves a specification YAML's `sources` entries, supporting:
- *   - Immutable set ULIDs (`src/sets/<ULID>.json`, e.g., pinned book or institution snapshots)
+ *   - Immutable set ULIDs (`archives/sets/<ULID>.json`, e.g., pinned book or institution snapshots)
  *   - Direct item identifiers (`<institution>:<id>`, e.g., `uxlc:L`, `intf:01`)
  *
  * Derives target books directly from the resolved sources (single source of truth).
@@ -118,8 +118,8 @@ export function loadSpecWithSources(specId?: string) {
   if (Array.isArray(spec.sources)) {
     for (const ref of spec.sources) {
       if (ULID_RE.test(ref)) {
-        const setPath = `${ROOT}src/sets/${ref}.json`;
-        if (!existsSync(setPath)) throw new Error(`Missing source set: src/sets/${ref}.json`);
+        const setPath = `${ROOT}archives/sets/${ref}.json`;
+        if (!existsSync(setPath)) throw new Error(`Missing source set: archives/sets/${ref}.json`);
         const setObj = JSON.parse(readFileSync(setPath, "utf8")) as SourceSet;
         resolvedSets.push(setObj);
         if (setObj.kind === "book") bookSetIds.set(setObj.key, setObj.id);
@@ -143,14 +143,14 @@ export function loadSpecWithSources(specId?: string) {
   const discoveredBooks = new Set<string>(bookSetIds.keys());
 
   for (const [instId, idSet] of [...allowedByInst.entries()].sort()) {
-    const idxPath = `${ROOT}src/${instId}/index.json`;
-    if (!existsSync(idxPath)) throw new Error(`Missing catalog: src/${instId}/index.json`);
+    const idxPath = `${ROOT}archives/${instId}/index.json`;
+    if (!existsSync(idxPath)) throw new Error(`Missing catalog: archives/${instId}/index.json`);
     const idx = JSON.parse(readFileSync(idxPath, "utf8")) as InstitutionIndex;
     const byId = new Map(idx.items.map((item) => [item.id, item]));
 
     for (const id of [...idSet].sort()) {
       const item = byId.get(id);
-      if (!item) throw new Error(`Source "${id}" not found in src/${instId}/index.json`);
+      if (!item) throw new Error(`Source "${id}" not found in archives/${instId}/index.json`);
       for (const b of item.targets ?? []) discoveredBooks.add(b);
 
       const fileEntry = {

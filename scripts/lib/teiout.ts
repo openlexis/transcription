@@ -117,7 +117,7 @@ export function bookTei(B: BookResult, C: Common): string {
 <idno type="specification">${esc(C.specId)}</idno>
 <idno type="compilation">${esc(C.compilationId)}</idno>
 <date when="${esc(C.created)}">${esc(C.created)}</date>
-<availability><p>The ancient text is in the public domain. Each transcription read for this book keeps the license its holder states; the license of each is given with its witness below.</p></availability>
+<availability><p>The ancient text is in the public domain. Each transcription read for this book keeps the license its source archive states; the license of each is given with its witness below.</p></availability>
 </publicationStmt>
 <notesStmt><note type="specification">${esc(C.statement)}</note></notesStmt>
 <sourceDesc>

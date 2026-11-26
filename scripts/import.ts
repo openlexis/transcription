@@ -1,9 +1,9 @@
-// Brings the holders' manuscript transcriptions into src/<holder>/, one file per transcription, and lists every
-// manuscript with its date, holder and links in src/manuscripts.json.
-//   bun scripts/import.ts <folder holding the holders' downloaded files>
-// Naming: src/{holder}/{manuscript}.xml, or src/{holder}/{manuscript}.{part}.xml when one manuscript and holder
-// give more than one file. Where the holder publishes TEI XML (or other XML), that file is stored unchanged. Where the
-// holder publishes no XML, a TEI P5 document is written, and the inventory says so.
+// Brings the source archives' manuscript transcriptions into archives/<archive>/, one file per transcription, and lists every
+// manuscript with its date, source archive and links in archives/manuscripts.json.
+//   bun scripts/import.ts <folder with the archives' downloaded files>
+// Naming: archives/{archive}/{manuscript}.xml, or archives/{archive}/{manuscript}.{part}.xml when one manuscript and archive
+// give more than one file. Where the source archive publishes TEI XML (or other XML), that file is stored unchanged. Where the
+// source archive publishes no XML, a TEI P5 document is written, and the inventory says so.
 // Line and word counts in the inventory are taken from the first hand of each transcription. Nothing from a printed
 // edition, translation or image is read.
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -12,11 +12,11 @@ import { parseXml, teiUnits, type TeiUnit } from "./lib/tei";
 import { HEB_BOOKS, NT_BOOKS, numeral, sacred, skel } from "./lib/text";
 
 const SRC = process.argv[2];
-if (!SRC || !existsSync(SRC)) throw new Error("usage: bun scripts/import.ts <folder with the holders' files>");
+if (!SRC || !existsSync(SRC)) throw new Error("usage: bun scripts/import.ts <folder with the source archives' files>");
 const ROOT = new URL("..", import.meta.url).pathname;
 rmSync(`${ROOT}transcriptions`, { recursive: true, force: true });
-mkdirSync(`${ROOT}src`, { recursive: true });
-for (const f of readdirSync(`${ROOT}src`)) if (f !== "manuscripts.json" && f !== "books.json") rmSync(`${ROOT}src/${f}`, { recursive: true, force: true });
+mkdirSync(`${ROOT}archives`, { recursive: true });
+for (const f of readdirSync(`${ROOT}archives`)) if (f !== "manuscripts.json" && f !== "books.json" && f !== "sets") rmSync(`${ROOT}archives/${f}`, { recursive: true, force: true });
 
 const snap = (p: string) => { const d = readdirSync(`${SRC}/${p}`).filter((x) => /^\d{4}-\d\d-\d\d$/.test(x)).sort().pop()!; return `${SRC}/${p}/${d}`; };
 const zipList = (zip: string) => spawnSync("unzip", ["-Z1", zip], { maxBuffer: 1 << 26 }).stdout.toString().split("\n").filter(Boolean).sort();
@@ -35,9 +35,9 @@ export function gaSiglum(s: string): string | undefined {
 }
 const docOf = (s: string) => (s.startsWith("P") ? 10000 + +s.slice(1) : s.startsWith("L") ? 40000 + +s.slice(1) : s.startsWith("0") ? 20000 + +s : 30000 + +s);
 
-const xmlName = (siglum: string, holder: string, part?: string) => { mkdirSync(`${ROOT}src/${holder}`, { recursive: true }); return `src/${holder}/${siglum}${part ? `.${part}` : ""}.xml`; };
+const xmlName = (siglum: string, archive: string, part?: string) => { mkdirSync(`${ROOT}archives/${archive}`, { recursive: true }); return `archives/${archive}/${siglum}${part ? `.${part}` : ""}.xml`; };
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-/** A TEI P5 document for a transcription whose holder publishes no XML. */
+/** A TEI P5 document for a transcription whose source archive publishes no XML. */
 function teiDoc(o: { title: string; source: string; license: string; why: string; lang?: string; body: string }) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0">
@@ -56,12 +56,12 @@ ${o.body}
 </TEI>
 `;
 }
-const WHY_PLAIN = "The holder publishes this transcription as plain text, not XML. This file places that text, unchanged, in a TEI P5 document, which is the closest scholarly standard for a transcription of a single manuscript.";
-const WHY_TF = "The holder publishes this transcription as Text-Fabric data, not XML. This file is a TEI P5 transcription made from that data, which is the closest scholarly standard for a transcription of a single manuscript.";
+const WHY_PLAIN = "The source archive publishes this transcription as plain text, not XML. This file places that text, unchanged, in a TEI P5 document, which is the closest scholarly standard for a transcription of a single manuscript.";
+const WHY_TF = "The source archive publishes this transcription as Text-Fabric data, not XML. This file is a TEI P5 transcription made from that data, which is the closest scholarly standard for a transcription of a single manuscript.";
 
-// ---------- the holders ----------
-type Holder = { id: string; name: string; web: string; license: string };
-const HOLDERS: Record<string, Holder> = {
+// ---------- the source archives ----------
+type Archive = { id: string; name: string; web: string; license: string };
+const ARCHIVES: Record<string, Archive> = {
   "sinaiticus-project": { id: "sinaiticus-project", name: "Codex Sinaiticus Project", web: "https://epapers.bham.ac.uk/id/eprint/3306/", license: "CC BY-NC-SA 3.0 (the ePapers record)" },
   zacynthius: { id: "zacynthius", name: "ITSEE, University of Birmingham (Codex Zacynthius project)", web: "https://edata.bham.ac.uk/496/", license: "CC BY 4.0 (the eData record)" },
   "igntp-john": { id: "igntp-john", name: "International Greek New Testament Project (IGNTP), John", web: "https://itseeweb.cal.bham.ac.uk/iohannes/", license: "CC BY 4.0 (each file's header)" },
@@ -78,10 +78,10 @@ const HOLDERS: Record<string, Holder> = {
   cntr: { id: "cntr", name: "Center for New Testament Restoration (CNTR)", web: "https://github.com/Center-for-New-Testament-Restoration/transcriptions/tree/4e743a41a4b2ca010ece53229cd272aa59b1efe6", license: "CC BY-SA 4.0 (the repository's LICENSE.md)" },
 };
 /** The order in which transcriptions of one manuscript are listed (and break a tie, scripts/METHOD.md). */
-export const HOLDER_ORDER = Object.keys(HOLDERS);
+export const ARCHIVE_ORDER = Object.keys(ARCHIVES);
 
 // ---------- manuscripts ----------
-type Transcription = { holder: string; file?: string; files?: string[]; source: string; member?: string; format: string; license: string; lines: number; words: number };
+type Transcription = { archive: string; file?: string; files?: string[]; source: string; member?: string; format: string; license: string; lines: number; words: number };
 /** kind: a continuous-text manuscript; a lectionary (readings in the order of the church year); a catena (commentary with the
  * biblical text in pieces); a scroll (a fragmentary scroll from the Judaean desert). Only a continuous-text manuscript can show
  * that a word is absent (scripts/METHOD.md). */
@@ -100,7 +100,7 @@ const OSIS = NT_ORDER;
 /** Writes one transcription: units in book, chapter, line order. */
 type Unit = { book: string; ref: string; words: { w: string; gap: boolean }[]; gapEnd: boolean; absent?: boolean };
 type Opts = { member?: string; format?: string; part?: string; xml?: string | Buffer; files?: { part: string; xml: string | Buffer }[]; why?: string; title?: string; dir?: string; order?: string[]; kind?: Kind; language?: string; date?: { century: string; year?: number; from?: number; to?: number; basis?: string; source: string }; name?: string; shelfmark?: string; viewer?: { name: string; url: string }[] };
-function save(siglum: string, holder: string, source: string, license: string, units: Unit[], faxKey?: string, o: Opts = {}) {
+function save(siglum: string, archive: string, source: string, license: string, units: Unit[], faxKey?: string, o: Opts = {}) {
   siglum = gaSiglum(siglum) ?? siglum;
   const OSIS = o.order ?? NT_ORDER;
   const by = new Map<string, typeof units[number]>();
@@ -117,9 +117,9 @@ function save(siglum: string, holder: string, source: string, license: string, u
   if (!words) return;
   let file: string | undefined, files: string[] | undefined;
   if (o.files?.length) {
-    files = o.files.map((f) => { const q = xmlName(siglum, holder, f.part); writeFileSync(`${ROOT}${q}`, f.xml); return q; });
+    files = o.files.map((f) => { const q = xmlName(siglum, archive, f.part); writeFileSync(`${ROOT}${q}`, f.xml); return q; });
   } else {
-    file = xmlName(siglum, holder, o.part);
+    file = xmlName(siglum, archive, o.part);
     const xml = o.xml ?? teiDoc({
       title: o.title ?? `Manuscript ${siglum}`,
       source, license, why: o.why ?? WHY_TF,
@@ -143,11 +143,11 @@ function save(siglum: string, holder: string, source: string, license: string, u
     for (const x of f?.facsimiles ?? []) if (!viewer.some((v) => v.url === x.url)) viewer.push({ name: x.provider, url: x.url });
     for (const v of o.viewer ?? []) if (!viewer.some((x) => x.url === v.url)) viewer.push(v);
     const name = o.name ?? f?.name, shelfmark = o.shelfmark ?? f?.shelfmark;
-    const date = o.date ?? (c?.origEarly ? { century: String(c.orig), year: Math.round((c.origEarly + c.origLate) / 2), from: c.origEarly, to: c.origLate, basis: "catalogue date range (the catalogue does not state its method)", source: "INTF catalogue (catalogue.json in the holder's metadata)" } : f?.century ? { century: f.century, source: "not stated in the held records" } : undefined);
+    const date = o.date ?? (c?.origEarly ? { century: String(c.orig), year: Math.round((c.origEarly + c.origLate) / 2), from: c.origEarly, to: c.origLate, basis: "catalogue date range (the catalogue does not state its method)", source: "INTF catalogue (catalogue.json in the archive's metadata)" } : f?.century ? { century: f.century, source: "not stated in the archive records" } : undefined);
     m = { siglum, kind: o.kind ?? "continuous", language: o.language ?? "Greek", ...(name ? { name } : {}), ...(shelfmark ? { shelfmark } : {}), ...(date ? { century: date.century, ...(date.year !== undefined ? { year: date.year } : {}), ...(date.from !== undefined ? { yearFrom: date.from, yearTo: date.to } : {}), ...(date.basis ? { dateBasis: date.basis } : {}), dateSource: date.source } : {}), viewer, transcriptions: [] };
     MSS.set(siglum, m);
   }
-  m.transcriptions.push({ holder, ...(file ? { file } : {}), ...(files ? { files } : {}), source, ...(o.member ? { member: o.member } : {}), format: o.format ?? "TEI XML", license, lines: text.length, words });
+  m.transcriptions.push({ archive, ...(file ? { file } : {}), ...(files ? { files } : {}), source, ...(o.member ? { member: o.member } : {}), format: o.format ?? "TEI XML", license, lines: text.length, words });
 }
 const fromTei = (us: TeiUnit[]) => us.filter((u) => u.book >= 1).map((u) => ({ book: OSIS[u.book - 1], ref: u.ref, words: u.words, gapEnd: u.gapEnd }));
 const SP = { sacred, numeral };
@@ -164,9 +164,9 @@ function cntrLine(text: string) {
     const letters = [...tok].filter((c) => /\p{L}/u.test(c) || c === "¯").length;
     const first = tok.search(/[\p{L}¯]/u), last = Math.max(...[...tok].map((c, i) => (/[\p{L}¯]/u.test(c) ? i : -1)));
     const marks = [...tok].map((c, i) => (c === "*" || c === "&" ? i : -1)).filter((i) => i >= 0);
-    if (!letters) { if (marks.length || tok.includes("�")) gap = true; continue; }
+    if (!letters) { if (marks.length || tok.includes("\uFFFD")) gap = true; continue; }
     if (marks.some((i) => i < first)) gap = true;
-    const damaged = tok.includes("~") || tok.includes("^") || tok.includes("�");
+    const damaged = tok.includes("~") || tok.includes("^") || tok.includes("\uFFFD");
     let ws = [skel(tok.replace(/[|\/%^~+*&\[\]_⋄$]/g, "").replace(/=/g, "").replace(/¯/g, "ν"))];
     if (tok.includes("$")) ws = numeral(ws[0]) ?? ws;
     else if (tok.includes("=")) ws = [sacred(ws[0])];
@@ -186,8 +186,8 @@ function cntr(path: string, siglum: string, faxKey: string, src: string) {
     if (m[4].trim() === "-") { units.push({ book, ref, words: [], gapEnd: false, absent: true }); continue; }
     units.push({ book, ref, ...cntrLine(m[4]) });
   }
-  const xml = teiDoc({ title: `Manuscript ${siglum}, from the Center for New Testament Restoration`, source: src.replace("/tree/", "/blob/"), license: HOLDERS.cntr.license, why: WHY_PLAIN, lang: "grc", body: `<ab type="holder-text">${esc(raw)}</ab>` });
-  save(siglum, "cntr", src.replace("/tree/", "/blob/"), HOLDERS.cntr.license, units, faxKey, { format: "TEI P5 (the holder publishes no XML; the body is the holder's plain text, unchanged)", xml });
+  const xml = teiDoc({ title: `Manuscript ${siglum}, from the Center for New Testament Restoration`, source: src.replace("/tree/", "/blob/"), license: ARCHIVES.cntr.license, why: WHY_PLAIN, lang: "grc", body: `<ab type="source-text">${esc(raw)}</ab>` });
+  save(siglum, "cntr", src.replace("/tree/", "/blob/"), ARCHIVES.cntr.license, units, faxKey, { format: "TEI P5 (the source archive publishes no XML; the body is the archive's plain text, unchanged)", xml });
 }
 
 // ---------- run ----------
@@ -195,26 +195,26 @@ const CNTR_LEFT_OUT = new Set(["O23"]); // not a Gregory-Aland number the INTF c
 const cm = `${snap("cntr-mss")}/class 1`;
 for (const f of readdirSync(cm).filter((f) => f.endsWith(".txt")).sort()) {
   const n = f.slice(0, -4); if (CNTR_LEFT_OUT.has(n)) continue;
-  cntr(`${cm}/${f}`, n, `cntr-mss/${n}`, `${HOLDERS.cntr.web}/class%201/${n}.txt`);
+  cntr(`${cm}/${f}`, n, `cntr-mss/${n}`, `${ARCHIVES.cntr.web}/class%201/${n}.txt`);
 }
-for (const n of ["01", "02", "03", "04"]) cntr(`${snap(`cntr-${n}`)}/class 1/${n}.txt`, n, `cntr-${n}`, `${HOLDERS.cntr.web}/class%201/${n}.txt`);
+for (const n of ["01", "02", "03", "04"]) cntr(`${snap(`cntr-${n}`)}/class 1/${n}.txt`, n, `cntr-${n}`, `${ARCHIVES.cntr.web}/class%201/${n}.txt`);
 console.log(`cntr: ${MSS.size} manuscripts`);
 
 { // Codex Sinaiticus Project (its New Testament books)
-  const H = HOLDERS["sinaiticus-project"], zip = `${snap("sinaiticus-project")}/FINAL_TRANSCRIPTION_version105.xml.zip`;
+  const A = ARCHIVES["sinaiticus-project"], zip = `${snap("sinaiticus-project")}/FINAL_TRANSCRIPTION_version105.xml.zip`;
   const sina = memberBuf(zip, "FINAL_TRANSCRIPTION_version105.xml");
-  save("01", H.id, "https://epapers.bham.ac.uk/id/eprint/3306/1/FINAL_TRANSCRIPTION_version105.xml.zip", H.license, fromTei(teiUnits(sina.toString("utf8"), SP)), "sinaiticus-project", { member: "FINAL_TRANSCRIPTION_version105.xml", format: "TEI XML (the holder's file, unchanged)", xml: sina });
+  save("01", A.id, "https://epapers.bham.ac.uk/id/eprint/3306/1/FINAL_TRANSCRIPTION_version105.xml.zip", A.license, fromTei(teiUnits(sina.toString("utf8"), SP)), "sinaiticus-project", { member: "FINAL_TRANSCRIPTION_version105.xml", format: "TEI XML (the source archive's file, unchanged)", xml: sina });
 }
-{ const H = HOLDERS.zacynthius; const zac = readFileSync(`${snap("zacynthius")}/Zacynthius-gospel_2-0.xml`); save("040", H.id, "https://edata.bham.ac.uk/496/", H.license, fromTei(teiUnits(zac.toString("utf8"), SP)), "zacynthius", { member: "Zacynthius-gospel_2-0.xml", format: "TEI XML (the holder's file, unchanged)", xml: zac }); }
+{ const A = ARCHIVES.zacynthius; const zac = readFileSync(`${snap("zacynthius")}/Zacynthius-gospel_2-0.xml`); save("040", A.id, "https://edata.bham.ac.uk/496/", A.license, fromTei(teiUnits(zac.toString("utf8"), SP)), "zacynthius", { member: "Zacynthius-gospel_2-0.xml", format: "TEI XML (the source archive's file, unchanged)", xml: zac }); }
 
 const DONE = new Set<string>();
 const teiZip = (F: string, zip: string, pick: (m: string) => string | undefined, url: string) => {
-  const H = HOLDERS[F], seen = new Set<string>();
+  const A = ARCHIVES[F], seen = new Set<string>();
   let n = 0;
   for (const m of zipList(`${snap(F)}/${zip}`)) {
     const s = pick(m); if (!s || seen.has(s) || DONE.has(`${F}/${s}`)) continue; seen.add(s); DONE.add(`${F}/${s}`); n++;
     const xml = memberBuf(`${snap(F)}/${zip}`, m);
-    save(s, H.id, url, H.license, fromTei(teiUnits(xml.toString("utf8"), SP)), undefined, { member: m, format: "TEI XML (the holder's file, unchanged)", xml, ...(s.startsWith("L") ? { kind: "lectionary" as Kind } : {}) });
+    save(s, A.id, url, A.license, fromTei(teiUnits(xml.toString("utf8"), SP)), undefined, { member: m, format: "TEI XML (the source archive's file, unchanged)", xml, ...(s.startsWith("L") ? { kind: "lectionary" as Kind } : {}) });
   }
   console.log(`${F}: ${n} files`);
 };
@@ -237,7 +237,7 @@ teiZip("family-pi-mark", "transcriptions.zip", nn, "https://edata.bham.ac.uk/983
     const xml = readFileSync(`${intf}/transcriptions/${f}`);
     const head = xml.toString("utf8").slice(0, 20000);
     const license = /creativecommons\.org\/licenses\/by\/4\.0/.test(head) ? "CC BY 4.0 (the file's header)" : /All rights reserved/i.test(head) ? "the file's header states \"All rights reserved by the INTF\"" : "the file's header states no license";
-    save(s, "intf", `https://ntvmr.uni-muenster.de/community/api/transcript/get/?docID=${d}&pageID=ALL&format=teiraw`, license, fromTei(teiUnits(xml.toString("utf8"), SP)), undefined, { format: "TEI XML (the holder's file, unchanged)", xml, ...(lect ? { kind: "lectionary" as Kind } : {}) });
+    save(s, "intf", `https://ntvmr.uni-muenster.de/community/api/transcript/get/?docID=${d}&pageID=ALL&format=teiraw`, license, fromTei(teiUnits(xml.toString("utf8"), SP)), undefined, { format: "TEI XML (the source archive's file, unchanged)", xml, ...(lect ? { kind: "lectionary" as Kind } : {}) });
     if (++n % 100 === 0) console.log(`intf: ${n}`);
   }
   console.log(`intf: ${n} files`);
@@ -284,7 +284,7 @@ teiZip("family-pi-mark", "transcriptions.zip", nn, "https://edata.bham.ac.uk/983
     // a lemma can be split over several pieces of commentary: the pieces of one line are joined in order
     const joined = new Map<string, Unit>();
     for (const u of units) { const k = `${u.book} ${u.ref}`, o = joined.get(k); if (!o) joined.set(k, { ...u, words: [...u.words] }); else { if (u.words[0]) u.words[0] = { ...u.words[0], gap: true }; o.words.push(...u.words); o.gapEnd = u.gapEnd; } }
-    save(siglum, "igntp-catena", `https://doi.org/10.25500/edata.bham.00001097`, "CC BY 4.0 (each file's header)", [...joined.values()], undefined, { kind: "catena", member: `${bk}/${f}`, format: "TEI XML (the holder's file, unchanged)", xml: catXml, part: bk });
+    save(siglum, "igntp-catena", `https://doi.org/10.25500/edata.bham.00001097`, "CC BY 4.0 (each file's header)", [...joined.values()], undefined, { kind: "catena", member: `${bk}/${f}`, format: "TEI XML (the source archive's file, unchanged)", xml: catXml, part: bk });
     n++;
   }
   console.log(`catena: ${n} files`);
@@ -316,7 +316,7 @@ const hebWords = (raw: string) => raw.normalize("NFD").replace(/[\u0591-\u05AF\u
     }
   }
   save("L", "uxlc", "https://github.com/nerd-bible/tanach.us/tree/a89d77f15771e885038015c20d425c04ee2", "Tanach.us: \"All biblical Hebrew text, in any format, may be viewed or copied without restriction\"", units, "uxlc",
-    { member: "downloads/Books/<book>.xml", format: "XML (UXLC), one file per book (the holder's original files, unchanged)", dir: "hebrew", order: HEB, language: "Hebrew",
+    { member: "downloads/Books/<book>.xml", format: "XML (UXLC), one file per book (the source archive's original files, unchanged)", dir: "hebrew", order: HEB, language: "Hebrew",
       files: HEB_BOOKS.map((b) => ({ part: b.uxlc, xml: readFileSync(`${dir}/${b.uxlc}.xml`) })),
       date: { century: "11th (1008 or 1009)", year: 1008, from: 1008, to: 1009, basis: "colophon (a date written in the manuscript by its copyist)", source: "the colophon date as recorded with the Internet Archive images (forensics/facsimiles.json in the evidence repository)" } });
 }
@@ -340,8 +340,8 @@ const hebWords = (raw: string) => raw.normalize("NFD").replace(/[\u0591-\u05AF\u
     }
   }
   const lic = "CC BY-NC 4.0 (the dataset's README and LICENSE)", src = "https://github.com/DT-UCPH/sp/tree/e8a120f2e92b6558fd39bbe72f830ded871a0a47";
-  save("CBL751", "dt-ucph-sp", src, lic, D1, undefined, { format: "TEI P5 (the holder publishes no XML; made from Text-Fabric data, tf/7.5.0)", why: WHY_TF, title: "Samaritan Pentateuch, Chester Beatty Library MS 751", dir: "hebrew", order: HEB, language: "Hebrew", name: "Samaritan Pentateuch, Chester Beatty Library MS 751", shelfmark: "Dublin, Chester Beatty Library, MS 751", date: { century: "13th (1225)", year: 1225, from: 1225, to: 1225, basis: "date stated by the project that made the transcription (its method is not stated there)", source: "http://schorch.at/html/samaritanus_english.html (the Samaritanus project, which made the transcription)" } });
-  save("Garizim1", "dt-ucph-sp", src, lic, G1, undefined, { format: "TEI P5 (the holder publishes no XML; made from Text-Fabric data, tf/7.5.0)", why: WHY_TF, title: "Samaritan Pentateuch, MS Garizim 1 (Deuteronomy 32:36b to the end)", dir: "hebrew", order: HEB, language: "Hebrew", name: "Samaritan Pentateuch, MS Garizim 1 (Deuteronomy 32:36b to the end)", shelfmark: "Mount Gerizim, MS Garizim 1" });
+  save("CBL751", "dt-ucph-sp", src, lic, D1, undefined, { format: "TEI P5 (the source archive publishes no XML; made from Text-Fabric data, tf/7.5.0)", why: WHY_TF, title: "Samaritan Pentateuch, Chester Beatty Library MS 751", dir: "hebrew", order: HEB, language: "Hebrew", name: "Samaritan Pentateuch, Chester Beatty Library MS 751", shelfmark: "Dublin, Chester Beatty Library, MS 751", date: { century: "13th (1225)", year: 1225, from: 1225, to: 1225, basis: "date stated by the project that made the transcription (its method is not stated there)", source: "http://schorch.at/html/samaritanus_english.html (the Samaritanus project, which made the transcription)" } });
+  save("Garizim1", "dt-ucph-sp", src, lic, G1, undefined, { format: "TEI P5 (the source archive publishes no XML; made from Text-Fabric data, tf/7.5.0)", why: WHY_TF, title: "Samaritan Pentateuch, MS Garizim 1 (Deuteronomy 32:36b to the end)", dir: "hebrew", order: HEB, language: "Hebrew", name: "Samaritan Pentateuch, MS Garizim 1 (Deuteronomy 32:36b to the end)", shelfmark: "Mount Gerizim, MS Garizim 1" });
 }
 { // the biblical scrolls from the Judaean desert (ETCBC dss): a word with a letter a modern editor reconstructed is lost
   const d = `${snap("dss")}/tf/2.0.5`;
@@ -375,7 +375,7 @@ const hebWords = (raw: string) => raw.normalize("NFD").replace(/[\u0591-\u05AF\u
     const by = new Map<string, Unit>();
     for (const u of units) { const k = `${u.book} ${u.ref}`, o = by.get(k); if (!o) by.set(k, { ...u, words: [...u.words] }); else { if (u.words[0]) u.words[0] = { ...u.words[0], gap: true }; o.words.push(...u.words); } }
     save(scroll, "etcbc-dss", "https://github.com/ETCBC/dss/tree/0b7774a72b6d0e91712aa2156d2a1d354f1f5e6d", "CC BY-NC 4.0 (the dataset's README and LICENSE)", [...by.values()], undefined,
-      { format: "TEI P5 (the holder publishes no XML; made from Text-Fabric data, tf/2.0.5)", why: WHY_TF, title: `Dead Sea Scroll ${scroll.replace(/-/g, "/")}`, dir: "hebrew", order: HEB, language: "Hebrew", kind: "scroll", name: `Dead Sea Scroll ${scroll.replace(/-/g, "/")}`, viewer: [{ name: "Leon Levy Dead Sea Scrolls Digital Library", url: "https://www.deadseascrolls.org.il/" }],
+      { format: "TEI P5 (the source archive publishes no XML; made from Text-Fabric data, tf/2.0.5)", why: WHY_TF, title: `Dead Sea Scroll ${scroll.replace(/-/g, "/")}`, dir: "hebrew", order: HEB, language: "Hebrew", kind: "scroll", name: `Dead Sea Scroll ${scroll.replace(/-/g, "/")}`, viewer: [{ name: "Leon Levy Dead Sea Scrolls Digital Library", url: "https://www.deadseascrolls.org.il/" }],
         date: { century: "3rd century BC to 1st century AD (the span stated for the scrolls; this data gives no date for each scroll)", year: -100, from: -250, to: 70, basis: "the span stated for the scrolls as a group, not a date for this scroll", source: "http://dss.collections.imj.org.il/significance (Israel Museum): the scrolls are ascribed to the third century BCE to the first century CE; the middle, 100 BC, is used for every scroll" } });
   }
   console.log(`dss: ${out.size} scrolls`);
@@ -383,10 +383,10 @@ const hebWords = (raw: string) => raw.normalize("NFD").replace(/[\u0591-\u05AF\u
 
 
 const list = [...MSS.values()].sort((a, b) => (a.siglum < b.siglum ? -1 : a.siglum > b.siglum ? 1 : 0));
-for (const m of list) m.transcriptions.sort((a, b) => HOLDER_ORDER.indexOf(a.holder) - HOLDER_ORDER.indexOf(b.holder));
-writeFileSync(`${ROOT}src/manuscripts.json`, JSON.stringify({
-  note: "The list of manuscripts this specification uses. Each transcription is a file in src/{holder}/, named {manuscript}.xml (or {manuscript}.{part}.xml when one manuscript and holder give more than one file). Where the format says the holder's file is stored unchanged, the file is as the holder published it. Where the holder publishes no XML, the file is a TEI P5 document and the format says so.",
-  holders: HOLDERS,
+for (const m of list) m.transcriptions.sort((a, b) => ARCHIVE_ORDER.indexOf(a.archive) - ARCHIVE_ORDER.indexOf(b.archive));
+writeFileSync(`${ROOT}archives/manuscripts.json`, JSON.stringify({
+  note: "The list of manuscripts this specification uses. Each transcription is a file in archives/{archive}/, named {manuscript}.xml (or {manuscript}.{part}.xml when one manuscript and archive give more than one file). Where the format says the source archive's file is stored unchanged, the file is as the archive published it. Where the source archive publishes no XML, the file is a TEI P5 document and the format says so.",
+  archives: ARCHIVES,
   manuscripts: list,
 }, null, 1) + "\n");
 console.log(`${list.length} manuscripts, ${list.reduce((a, m) => a + m.transcriptions.length, 0)} transcriptions`);

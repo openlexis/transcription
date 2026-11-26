@@ -205,7 +205,7 @@ const toc = [
 
       <h2 id="embedded-data">7. Pinned Books &amp; Sources</h2>
       <p>
-        <code>{single.file}</code> defines its entire scope in a single <code>sources</code> list of immutable ULID snapshots (<code>src/sets/&lt;ULID&gt;.json</code>), eliminating any split between books and sources. If new manuscripts are added to <code>src/</code> later, <code>bun run sets</code> mints a new ULID while older specifications remain pinned to their exact historical set. Use <code>bun run sources</code> to resolve metadata and XML paths programmatically.
+        <code>{single.file}</code> defines its entire scope in a single <code>sources</code> list of immutable ULID snapshots (<code>archives/sets/&lt;ULID&gt;.json</code>), eliminating any split between books and sources. If new manuscripts are added to <code>archives/</code> later, <code>bun run sets</code> mints a new ULID while older specifications remain pinned to their exact historical set. Use <code>bun run sources</code> to resolve metadata and XML paths programmatically.
       </p>
 
       <details class="embed-accordion" id="embedded-targets">

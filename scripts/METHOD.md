@@ -68,10 +68,10 @@ Firth, 2011).
 **Dates and the prior.** Before any agreement is measured, an older copy is expected to be more reliable. The expected
 reliability of a copy made t years after the original is 0.5 + 0.45 × 2^(−t / 100): 0.95 at the time of the original,
 falling halfway toward 0.5 every 100 years. The original is taken as written in 400 BC for the Old Testament and AD 100 for
-the New Testament. A manuscript's date is the range its holder gives (`yearFrom` to `yearTo` in the inventory); the expected
+the New Testament. A manuscript's date is the range its source archive gives (`yearFrom` to `yearTo` in the inventory); the expected
 reliability is averaged over the whole range, so a wide range gives a vaguer expectation. This expectation is a Beta
 distribution whose weight equals 4 observations when the range is 100 years or less, and less for wider ranges (4 × 100 /
-width). Where the holder gives no range, the date is unknown: the expectation is set for the year 1500 with a weight of
+width). Where the archive gives no range, the date is unknown: the expectation is set for the year 1500 with a weight of
 only 1, so that the evidence of agreement decides.
 
 **Learning each manuscript's reliability from agreement.** Reliability is then learned from how often each manuscript agrees
@@ -95,10 +95,10 @@ the original is lost from every surviving manuscript is reported at each place t
 
 | Kind of evidence | Used | Where it comes from |
 |---|---|---|
-| Date range and margin of error | yes, in the prior | the holder's range in the inventory; unknown where none is given |
-| Method of dating | shown | the holder's statement; the INTF catalogue does not state its method for each manuscript |
-| Scientific dating (such as carbon dating) | unknown for every manuscript held | no holder record gives one |
-| Place of writing | unknown for every manuscript held | no holder record gives one |
+| Date range and margin of error | yes, in the prior | the source archive's range in the inventory; unknown where none is given |
+| Method of dating | shown | the source archive's statement; the INTF catalogue does not state its method for each manuscript |
+| Scientific dating (such as carbon dating) | unknown for every manuscript held | no archive record gives one |
+| Place of writing | unknown for every manuscript held | no archive record gives one |
 | Condition, corrections and errors | through agreement only | corrections are not read (first hand only); errors lower the measured agreement |
 | Agreement with the other manuscripts | yes, the main evidence | measured as above |
 
@@ -125,7 +125,7 @@ weight accordingly"):
   stated source), and, for each witness, how many lines and words of the book are filled in. A line that only filled-in text
   covers is listed as uncovered. The reading page labels these lines.
 - **Where nothing marks them.** A transcription that fills in text without marking it cannot be treated this way. Such cases are
-  recorded in the holder's catalog entry (for example MS Nablus 6, where the edition says a few small gaps were filled from other
+  recorded in the source archive's catalog entry (for example MS Nablus 6, where the edition says a few small gaps were filled from other
   manuscripts and not marked).
 
 ## 6. Why this is a sound method, and its limits
@@ -137,7 +137,7 @@ likelihood is an accepted way to keep dependent observations from being counted 
 
 Its limits: errors are taken as equally likely to land on any alternative, which ignores that some changes (such as a
 skipped repeat) are commoner than others; the weighting of late copies is a simple stand-in for their family tree; and the
-probabilities are only as good as the transcriptions and the holders' dates.
+probabilities are only as good as the transcriptions and the archives' dates.
 
 ## The Aramaic parts
 

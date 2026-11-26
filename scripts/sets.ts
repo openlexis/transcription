@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 /**
- * Compiles immutable, ULID-identified source set snapshots in `src/sets/<ULID>.json`
- * from the per-institution catalogs in `src/<institution>/index.json`.
+ * Compiles immutable, ULID-identified source set snapshots in `archives/sets/<ULID>.json`
+ * from the per-institution catalogs in `archives/<institution>/index.json`.
  *
  * Each book (Gen..Rev) and each institution (intf, uxlc, etc.) gets an immutable
  * snapshot file keyed by a 26-character ULID and content hash (sha256).
@@ -18,7 +18,7 @@ import { createHash, randomBytes } from "node:crypto";
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
-const SETS_DIR = `${ROOT}src/sets`;
+const SETS_DIR = `${ROOT}archives/sets`;
 
 // Crockford Base32 ULID generator (monotonic within the same millisecond)
 const CROCKFORD = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
@@ -164,9 +164,9 @@ if (import.meta.main) {
     existingByHash.set(`${s.kind}:${s.key}:${s.sha256}`, s);
   }
 
-  // Scan all institution catalogs in src/<institution>/index.json
-  const instDirs = readdirSync(`${ROOT}src`, { withFileTypes: true })
-    .filter((d) => d.isDirectory() && d.name !== "sets" && existsSync(`${ROOT}src/${d.name}/index.json`))
+  // Scan all institution catalogs in archives/<institution>/index.json
+  const instDirs = readdirSync(`${ROOT}archives`, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && d.name !== "sets" && existsSync(`${ROOT}archives/${d.name}/index.json`))
     .map((d) => d.name)
     .sort();
 
@@ -176,7 +176,7 @@ if (import.meta.main) {
   const instSets: { id: string; name: string; sources: Record<string, string[]> }[] = [];
 
   for (const instId of instDirs) {
-    const idx = JSON.parse(readFileSync(`${ROOT}src/${instId}/index.json`, "utf8")) as {
+    const idx = JSON.parse(readFileSync(`${ROOT}archives/${instId}/index.json`, "utf8")) as {
       institution: { id: string; name: string };
       items: { id: string; targets?: string[] }[];
     };

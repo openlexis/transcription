@@ -1,18 +1,18 @@
 # Source research, book by book
 
-This file records, for every book, the original-language transcriptions found, which were already in `src/`, which were added, and what could not be obtained. Counts are the number of source items in the book's newest set (`src/sets/latest.json`), before and after this round (an item held by two institutions counts twice, as in the sets).
+This file records, for every book, the original-language transcriptions found, which were already in `archives/`, which were added, and what could not be obtained. Counts are the number of source items in the book's newest set (`archives/sets/latest.json`), before and after this round (an item held by two institutions counts twice, as in the sets).
 
 Research date: 2026-11-25.
 
 ## Added in this round
 
-| Holder folder | Manuscript | Files | Books | License | Source |
+| Archive folder | Manuscript | Files | Books | License | Source |
 |---|---|---|---|---|---|
-| `src/aleppo/` | Aleppo Codex (A), about 930 | 39 TEI files, `A.<Book>.xml` (converted from Text-Fabric) | all 39 OT books; surviving pages in 27 | CC BY-SA 4.0 | https://github.com/MartijnNaaijer/aleppo (commit db38ddc) |
-| `src/tal-florentin-sp/` | Samaritan Pentateuch MS Nablus 6, 1204 | `Nablus6.xml` (converted from JSON) | Gen to Deut | CC BY-NC 4.0 | https://github.com/DT-UCPH/sp, `scripts/tal_florentin/results/tf_verses.json` (commit e8a120f), from Florentin and Tal 2024, https://doi.org/10.11647/OBP.0415 |
-| `src/itsee-ga655/` | Minuscule 655, 11th/12th century | 4 TEI files, unchanged | Matt, Mark, Luke, John | CC BY-NC-SA | https://doi.org/10.25500/edata.bham.00001367 |
-| `src/zacynthius/` (added to the existing catalog) | Lectionary 299 (upper text of Codex Zacynthius), about 1180 | `L299.xml`, unchanged | Matt, Mark, Luke, John | CC BY 4.0 | https://doi.org/10.25500/edata.bham.00000430 |
-| `src/intf/` (added to the existing catalog) | 0296, 238, 1278, L23, L587, L809, L1178, L1825, L2010 | 9 TEI files, unchanged | 1 John, Mark, Acts | CC BY 4.0 | NTVMR `transcript/get` (published transcriptions) |
+| `archives/aleppo/` | Aleppo Codex (A), about 930 | 39 TEI files, `A.<Book>.xml` (converted from Text-Fabric) | all 39 OT books; surviving pages in 27 | CC BY-SA 4.0 | https://github.com/MartijnNaaijer/aleppo (commit db38ddc) |
+| `archives/tal-florentin-sp/` | Samaritan Pentateuch MS Nablus 6, 1204 | `Nablus6.xml` (converted from JSON) | Gen to Deut | CC BY-NC 4.0 | https://github.com/DT-UCPH/sp, `scripts/tal_florentin/results/tf_verses.json` (commit e8a120f), from Florentin and Tal 2024, https://doi.org/10.11647/OBP.0415 |
+| `archives/itsee-ga655/` | Minuscule 655, 11th/12th century | 4 TEI files, unchanged | Matt, Mark, Luke, John | CC BY-NC-SA | https://doi.org/10.25500/edata.bham.00001367 |
+| `archives/zacynthius/` (added to the existing catalog) | Lectionary 299 (upper text of Codex Zacynthius), about 1180 | `L299.xml`, unchanged | Matt, Mark, Luke, John | CC BY 4.0 | https://doi.org/10.25500/edata.bham.00000430 |
+| `archives/intf/` (added to the existing catalog) | 0296, 238, 1278, L23, L587, L809, L1178, L1825, L2010 | 9 TEI files, unchanged | 1 John, Mark, Acts | CC BY 4.0 | NTVMR `transcript/get` (published transcriptions) |
 
 ## Per book
 
@@ -91,9 +91,9 @@ Research date: 2026-11-25.
 - **Babylonian (St Petersburg) Codex of the Prophets, Evr. I B 3**. No digital transcription found. IHBMR (https://ihbmr.com/manuscripts/P) gives only folio ranges and images; Strack's 1876 edition is a facsimile (images).
 - **Cairo Genizah** (Friedberg Genizah Project, Cambridge Taylor-Schechter). The Friedberg portal needs an account; Cambridge Digital Library gives images and catalog descriptions, not transcriptions of the biblical fragments. Nothing added.
 - **Nash Papyrus** (Cambridge, MS Or. 233). Cambridge Digital Library has images and a catalog record but no transcription. Nothing added.
-- **Masada, Naḥal Ḥever, Murabba'at, Wadi Sdeir**. Already present in `src/etcbc-dss/` (Mas1 to Mas1f, Mur1 to Mur4, Mur88 (the Minor Prophets scroll), Murx, XHev/Se 2, 3, 5, Sdeir1). 8HevXIIgr is Greek and is skipped.
+- **Masada, Naḥal Ḥever, Murabba'at, Wadi Sdeir**. Already present in `archives/etcbc-dss/` (Mas1 to Mas1f, Mur1 to Mur4, Mur88 (the Minor Prophets scroll), Murx, XHev/Se 2, 3, 5, Sdeir1). 8HevXIIgr is Greek and is skipped.
 - **Other Dead Sea Scroll sources**. No openly downloadable transcription beyond the ETCBC/CACCHT data was found.
-- **near-Aleppo (bdenckla, MAM)**. This is the same edition (מקרא על פי המסורה) that the Aleppo dataset is made from, so it is covered by `src/aleppo/`.
+- **near-Aleppo (bdenckla, MAM)**. This is the same edition (מקרא על פי המסורה) that the Aleppo dataset is made from, so it is covered by `archives/aleppo/`.
 - **Other Hebrew codices** (Damascus Crown, Sassoon Codex, Washington Pentateuch and others in IHBMR). Images and folio ranges only.
 - **INTF NTVMR**. The catalog lists 686 Greek documents with transcriptions; 660 were already present and 9 were added. 14 have no published transcription, only working copies by individual users or projects (P129, P130, 07, 045, 0171, 180, 236, 1210, 1349, 2372, 2713, 2793, 2860, and the published file for 1777 has only a heading). 110, 309 and 606 are published but name their book only as `XXX`, so their lines cannot be placed without guessing.
 - **CNTR**. The repository has no commits since the pinned one (4e743a4).

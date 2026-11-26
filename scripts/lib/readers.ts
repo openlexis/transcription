@@ -36,7 +36,7 @@ const unent = (s: string) =>
   );
 
 function readCntr(xml: string): ReadResult {
-  const m = xml.match(/<ab[^>]*type="holder-text"[^>]*>([\s\S]*?)<\/ab>/);
+  const m = xml.match(/<ab[^>]*type="source-text"[^>]*>([\s\S]*?)<\/ab>/);
   if (!m) return { units: [], stats: { corrections: 0, lacunae: 0, words: 0 } };
   const raw = unent(m[1]);
   const units: ParsedUnit[] = [];

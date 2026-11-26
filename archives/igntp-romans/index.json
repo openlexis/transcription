@@ -1,0 +1,5502 @@
+{
+  "institution": {
+    "id": "igntp-romans",
+    "name": "INTF and ITSEE, Romans",
+    "url": "https://edata.bham.ac.uk/1111/"
+  },
+  "items": [
+    {
+      "id": "01",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Codex Sinaiticus",
+      "shelfmark": "London, British Library, Add MS 43725 (with Leipzig, St Catherine's Monastery, Saint Petersburg)",
+      "century": "IV",
+      "year": 350,
+      "yearFrom": 300,
+      "yearTo": 399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20001"
+        },
+        {
+          "name": "Codex Sinaiticus Project",
+          "url": "https://codexsinaiticus.org/en/manuscript.aspx"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "2Tim",
+        "Titus",
+        "Phlm",
+        "Heb",
+        "Jas",
+        "1Pet",
+        "2Pet",
+        "1John",
+        "2John",
+        "3John",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "archives/igntp-romans/01.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_01_Rom.xml",
+      "lines": 431,
+      "words": 7070
+    },
+    {
+      "id": "010",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20010"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/010.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_010_Rom.xml",
+      "lines": 352,
+      "words": 5740
+    },
+    {
+      "id": "012",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20012"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/012.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_012_Rom.xml",
+      "lines": 420,
+      "words": 6842
+    },
+    {
+      "id": "0150",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20150"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/0150.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_0150_Rom.xml",
+      "lines": 95,
+      "words": 1580
+    },
+    {
+      "id": "0172",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "V",
+      "year": 450,
+      "yearFrom": 400,
+      "yearTo": 499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20172"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/0172.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_0172_Rom.xml",
+      "lines": 7,
+      "words": 24
+    },
+    {
+      "id": "02",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Codex Alexandrinus",
+      "shelfmark": "London, British Library, Royal MS 1 D VIII (the New Testament volume)",
+      "century": "V",
+      "year": 450,
+      "yearFrom": 400,
+      "yearTo": 499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20002"
+        },
+        {
+          "name": "British Library, Digitised Manuscripts",
+          "url": "https://www.bl.uk/manuscripts/FullDisplay.aspx?ref=Royal_MS_1_D_VIII"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "2Tim",
+        "Titus",
+        "Phlm",
+        "Heb",
+        "Jas",
+        "1Pet",
+        "2Pet",
+        "1John",
+        "2John",
+        "3John",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "archives/igntp-romans/02.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_02_Rom.xml",
+      "lines": 434,
+      "words": 6951
+    },
+    {
+      "id": "020",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 020",
+      "shelfmark": "Rome, Biblioteca Angelica, Ang. gr. 39",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20020"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/020.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_020_Rom.xml",
+      "lines": 433,
+      "words": 7197
+    },
+    {
+      "id": "0209",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 0209",
+      "shelfmark": "Ann Arbor, MI, University of Michigan Library, Ms. 8, fol. 96.106-112",
+      "century": "VII",
+      "year": 650,
+      "yearFrom": 600,
+      "yearTo": 699,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20209"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "2Cor",
+        "2Pet"
+      ],
+      "paths": [
+        "archives/igntp-romans/0209.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_0209_Rom.xml",
+      "lines": 20,
+      "words": 167
+    },
+    {
+      "id": "0219",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 0219",
+      "shelfmark": "Wien, Österreichische Nationalbibliothek, Pap. G. 36113 u. 26083",
+      "century": "IV/V",
+      "year": 400,
+      "yearFrom": 300,
+      "yearTo": 499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20219"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/0219.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_0219_Rom.xml",
+      "lines": 12,
+      "words": 16
+    },
+    {
+      "id": "0220",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 0220",
+      "shelfmark": "Washington D.C., Museum of the Bible, MOTB.MS.000566",
+      "century": "III",
+      "year": 250,
+      "yearFrom": 200,
+      "yearTo": 299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20220"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/0220.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_0220_Rom.xml",
+      "lines": 12,
+      "words": 82
+    },
+    {
+      "id": "0221",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 0221",
+      "shelfmark": "Wien, Österreichische Nationalbibliothek, Pap. G. 19890",
+      "century": "IV",
+      "year": 350,
+      "yearFrom": 300,
+      "yearTo": 399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20221"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/0221.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_0221_Rom.xml",
+      "lines": 7,
+      "words": 16
+    },
+    {
+      "id": "025",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "1John",
+        "2John",
+        "3John",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "archives/igntp-romans/025.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_025_Rom.xml",
+      "lines": 387,
+      "words": 6367
+    },
+    {
+      "id": "0278",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20278"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/0278.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_0278_Rom.xml",
+      "lines": 16,
+      "words": 208
+    },
+    {
+      "id": "0285",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "VI",
+      "year": 550,
+      "yearFrom": 500,
+      "yearTo": 599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20285"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/0285.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_0285_Rom.xml",
+      "lines": 21,
+      "words": 111
+    },
+    {
+      "id": "0289",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "V",
+      "year": 450,
+      "yearFrom": 425,
+      "yearTo": 475,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20289"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/0289.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_0289_Rom.xml",
+      "lines": 14,
+      "words": 46
+    },
+    {
+      "id": "03",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Codex Vaticanus",
+      "shelfmark": "Vatican City, Biblioteca Apostolica Vaticana, Vat. gr. 1209",
+      "century": "IV",
+      "year": 350,
+      "yearFrom": 300,
+      "yearTo": 399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20003"
+        },
+        {
+          "name": "DigiVatLib, Biblioteca Apostolica Vaticana",
+          "url": "https://digi.vatlib.it/view/MSS_Vat.gr.1209"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "Heb",
+        "Jas",
+        "1Pet",
+        "2Pet",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/03.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_03_Rom.xml",
+      "lines": 432,
+      "words": 7094
+    },
+    {
+      "id": "0311",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "VIII-IX",
+      "year": 800,
+      "yearFrom": 700,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20311"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/0311.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_0311_Rom.xml",
+      "lines": 12,
+      "words": 72
+    },
+    {
+      "id": "0319",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20319"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/0319.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_0319_Rom.xml",
+      "lines": 413,
+      "words": 6740
+    },
+    {
+      "id": "04",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Codex Ephraemi Rescriptus",
+      "shelfmark": "Paris, Bibliothèque nationale de France, Grec 9",
+      "century": "V",
+      "year": 450,
+      "yearFrom": 400,
+      "yearTo": 499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20004"
+        },
+        {
+          "name": "Gallica, Bibliothèque nationale de France",
+          "url": "https://gallica.bnf.fr/ark:/12148/btv1b8470433r"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "1Tim",
+        "2Tim",
+        "Titus",
+        "Phlm",
+        "Heb",
+        "Jas",
+        "1Pet",
+        "2Pet",
+        "1John",
+        "3John",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "archives/igntp-romans/04.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_04_Rom.xml",
+      "lines": 309,
+      "words": 4876
+    },
+    {
+      "id": "044",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 044",
+      "shelfmark": "Athos, Great Lavra Monastery, B' 52",
+      "century": "IX/X",
+      "year": 900,
+      "yearFrom": 800,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20044"
+        }
+      ],
+      "targets": [
+        "Mark",
+        "John",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/044.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_044_Rom.xml",
+      "lines": 433,
+      "words": 7183
+    },
+    {
+      "id": "048",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 048",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Vat. gr. 2061, fol. 198. 199. 221. 222. 229. 230. 293-303. 305-308",
+      "century": "V",
+      "year": 450,
+      "yearFrom": 400,
+      "yearTo": 499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20048"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Eph",
+        "1John",
+        "2John",
+        "3John"
+      ],
+      "paths": [
+        "archives/igntp-romans/048.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_048_Rom.xml",
+      "lines": 43,
+      "words": 423
+    },
+    {
+      "id": "049",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Majuscule 049",
+      "shelfmark": "Athos, Great Lavra Monastery, A' 88",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20049"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/049.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_049_Rom.xml",
+      "lines": 433,
+      "words": 7163
+    },
+    {
+      "id": "06",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "VI",
+      "year": 550,
+      "yearFrom": 500,
+      "yearTo": 599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20006"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/06.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_06_Rom.xml",
+      "lines": 427,
+      "words": 7033
+    },
+    {
+      "id": "1",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1",
+      "shelfmark": "Basel, Universitätsbibliothek, AN IV 2",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30001"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1_Rom.xml",
+      "lines": 433,
+      "words": 7200
+    },
+    {
+      "id": "103",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 103",
+      "shelfmark": "Moscow, State Historical Museum, Sinod. gr. 347 (Vlad. 096)",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30103"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/103.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_103_Rom.xml",
+      "lines": 432,
+      "words": 7161
+    },
+    {
+      "id": "104",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 104",
+      "shelfmark": "London, British Library, Harley 5537",
+      "century": "1087",
+      "year": 1087,
+      "yearFrom": 1087,
+      "yearTo": 1087,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30104"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/104.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_104_Rom.xml",
+      "lines": 436,
+      "words": 7233
+    },
+    {
+      "id": "1069",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1262",
+      "year": 1262,
+      "yearFrom": 1262,
+      "yearTo": 1262,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31069"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1069.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1069_Rom.xml",
+      "lines": 433,
+      "words": 7191
+    },
+    {
+      "id": "1108",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31108"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1108.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1108_Rom.xml",
+      "lines": 326,
+      "words": 5506
+    },
+    {
+      "id": "1115",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31115"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1115.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1115_Rom.xml",
+      "lines": 403,
+      "words": 6634
+    },
+    {
+      "id": "1175",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1175",
+      "shelfmark": "Patmos, St. John the Theologian Monastery, 16",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31175"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1175.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1175_Rom.xml",
+      "lines": 433,
+      "words": 7169
+    },
+    {
+      "id": "1241",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1241",
+      "shelfmark": "Sinai, Saint Catherine's Monastery, Gr. 260",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31241"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "John",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1241.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1241_Rom.xml",
+      "lines": 432,
+      "words": 7194
+    },
+    {
+      "id": "1243",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1243",
+      "shelfmark": "Sinai, Saint Catherine's Monastery, Gr. 262",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31243"
+        }
+      ],
+      "targets": [
+        "Mark",
+        "John",
+        "Acts",
+        "Rom",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1243.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1243_Rom.xml",
+      "lines": 433,
+      "words": 7184
+    },
+    {
+      "id": "1297",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1297",
+      "shelfmark": "Paris, Bibliothèque Nationale, Suppl. Gr. 1259, fol. 155-319",
+      "century": "1290",
+      "year": 1290,
+      "yearFrom": 1290,
+      "yearTo": 1290,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31297"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1297.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1297_Rom.xml",
+      "lines": 433,
+      "words": 7180
+    },
+    {
+      "id": "1319",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31319"
+        }
+      ],
+      "targets": [
+        "John",
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1319.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1319_Rom.xml",
+      "lines": 433,
+      "words": 7116
+    },
+    {
+      "id": "1359",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1359",
+      "shelfmark": "Paris, Bibliothèque Nationale, Suppl. Gr. 1335",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31359"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1359.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1359_Rom.xml",
+      "lines": 433,
+      "words": 7157
+    },
+    {
+      "id": "1505",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1505",
+      "shelfmark": "Athos, Great Lavra Monastery, B' 26",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31505"
+        }
+      ],
+      "targets": [
+        "John",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1505.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1505_Rom.xml",
+      "lines": 433,
+      "words": 7182
+    },
+    {
+      "id": "1506",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1506",
+      "shelfmark": "Athos, Great Lavra Monastery, B' 89",
+      "century": "1320",
+      "year": 1320,
+      "yearFrom": 1320,
+      "yearTo": 1320,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31506"
+        }
+      ],
+      "targets": [
+        "Mark",
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/1506.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1506_Rom.xml",
+      "lines": 412,
+      "words": 6733
+    },
+    {
+      "id": "1524",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1524",
+      "shelfmark": "Wien, Österreichische Nationalbibliothek, Theol. gr. 150",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31524"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1524.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1524_Rom.xml",
+      "lines": 433,
+      "words": 6800
+    },
+    {
+      "id": "1573",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1573",
+      "shelfmark": "Athos, Vatopedi Monastery, 939",
+      "century": "XII/XIII",
+      "year": 1200,
+      "yearFrom": 1100,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31573"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "Col",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1573.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1573_Rom.xml",
+      "lines": 433,
+      "words": 7187
+    },
+    {
+      "id": "1611",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1611",
+      "shelfmark": "Athens, National Library, EBE 94",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31611"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1611.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1611_Rom.xml",
+      "lines": 433,
+      "words": 7202
+    },
+    {
+      "id": "1617",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31617"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1617.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1617_Rom.xml",
+      "lines": 433,
+      "words": 7203
+    },
+    {
+      "id": "1718",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1718",
+      "shelfmark": "Athos, Vatopedi Monastery, 851",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31718"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Eph",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1718.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1718_Rom.xml",
+      "lines": 433,
+      "words": 7162
+    },
+    {
+      "id": "1729",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1729",
+      "shelfmark": "Athos, Vatopedi Monastery, 968",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31729"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1729.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1729_Rom.xml",
+      "lines": 410,
+      "words": 6773
+    },
+    {
+      "id": "1739",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1739",
+      "shelfmark": "Athos, Great Lavra Monastery, B' 64",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31739"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "1Cor",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1739.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1739_Rom.xml",
+      "lines": 432,
+      "words": 7054
+    },
+    {
+      "id": "1751",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1751",
+      "shelfmark": "Athos, Great Lavra Monastery, K' 190, fol. 1-168",
+      "century": "1479",
+      "year": 1479,
+      "yearFrom": 1479,
+      "yearTo": 1479,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31751"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1751.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1751_Rom.xml",
+      "lines": 434,
+      "words": 7054
+    },
+    {
+      "id": "1798",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31798"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1798.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1798_Rom.xml",
+      "lines": 409,
+      "words": 6671
+    },
+    {
+      "id": "18",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 18",
+      "shelfmark": "Paris, Bibliothèque Nationale, Gr. 47, fol 1-346",
+      "century": "1363/4",
+      "year": 1364,
+      "yearFrom": 1363,
+      "yearTo": 1364,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30018"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "2Tim",
+        "Titus",
+        "Phlm",
+        "Heb",
+        "Jas",
+        "2Pet",
+        "1John",
+        "2John",
+        "3John",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "archives/igntp-romans/18.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_18_Rom.xml",
+      "lines": 433,
+      "words": 7196
+    },
+    {
+      "id": "1834",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1301",
+      "year": 1301,
+      "yearFrom": 1301,
+      "yearTo": 1301,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31834"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1834.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1834_Rom.xml",
+      "lines": 432,
+      "words": 7042
+    },
+    {
+      "id": "1837",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1837",
+      "shelfmark": "Grottaferrata, Biblioteca Statale del Monumento Nazionale, A. β. 3",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31837"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1837.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1837_Rom.xml",
+      "lines": 432,
+      "words": 7074
+    },
+    {
+      "id": "1838",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1838",
+      "shelfmark": "Grottaferrata, Biblioteca Statale del Monumento Nazionale, A. β. 6",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31838"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1838.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1838_Rom.xml",
+      "lines": 419,
+      "words": 6822
+    },
+    {
+      "id": "1846",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1846",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Vat. gr. 2099",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31846"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1846.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1846_Rom.xml",
+      "lines": 249,
+      "words": 4159
+    },
+    {
+      "id": "1852",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1852",
+      "shelfmark": "Uppsala, Uppsala University Library, Ms. Gr. 11",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31852"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1852.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1852_Rom.xml",
+      "lines": 433,
+      "words": 7173
+    },
+    {
+      "id": "1875",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1875",
+      "shelfmark": "Athens, National Library, EBE 149",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31875"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1875.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1875_Rom.xml",
+      "lines": 433,
+      "words": 7151
+    },
+    {
+      "id": "1877",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31877"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1877.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1877_Rom.xml",
+      "lines": 433,
+      "words": 7168
+    },
+    {
+      "id": "1881",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 1881",
+      "shelfmark": "Sinai, Saint Catherine's Monastery, Gr. 300",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31881"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/1881.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1881_Rom.xml",
+      "lines": 432,
+      "words": 7086
+    },
+    {
+      "id": "1886",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31886"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1886.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1886_Rom.xml",
+      "lines": 433,
+      "words": 7102
+    },
+    {
+      "id": "1893",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31893"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1893.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1893_Rom.xml",
+      "lines": 433,
+      "words": 7110
+    },
+    {
+      "id": "1908",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31908"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1908.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1908_Rom.xml",
+      "lines": 434,
+      "words": 7129
+    },
+    {
+      "id": "1909",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31909"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/1909.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1909_Rom.xml",
+      "lines": 268,
+      "words": 4521
+    },
+    {
+      "id": "1912",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31912"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1912.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1912_Rom.xml",
+      "lines": 395,
+      "words": 6475
+    },
+    {
+      "id": "1935",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31935"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1935.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1935_Rom.xml",
+      "lines": 433,
+      "words": 7103
+    },
+    {
+      "id": "1942",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31942"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1942.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1942_Rom.xml",
+      "lines": 340,
+      "words": 5597
+    },
+    {
+      "id": "1947",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31947"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1947.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1947_Rom.xml",
+      "lines": 20,
+      "words": 305
+    },
+    {
+      "id": "1950",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1394",
+      "year": 1394,
+      "yearFrom": 1394,
+      "yearTo": 1394,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31950"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1950.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1950_Rom.xml",
+      "lines": 433,
+      "words": 7010
+    },
+    {
+      "id": "1959",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31959"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1959.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1959_Rom.xml",
+      "lines": 433,
+      "words": 7146
+    },
+    {
+      "id": "1961",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31961"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1961.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1961_Rom.xml",
+      "lines": 433,
+      "words": 7117
+    },
+    {
+      "id": "1962",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XI/XII",
+      "year": 1100,
+      "yearFrom": 1000,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31962"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1962.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1962_Rom.xml",
+      "lines": 427,
+      "words": 7084
+    },
+    {
+      "id": "1963",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31963"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1963.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1963_Rom.xml",
+      "lines": 434,
+      "words": 7221
+    },
+    {
+      "id": "1969",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31969"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1969.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1969_Rom.xml",
+      "lines": 428,
+      "words": 6749
+    },
+    {
+      "id": "1973",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31973"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1973.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1973_Rom.xml",
+      "lines": 432,
+      "words": 7111
+    },
+    {
+      "id": "1985",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1561",
+      "year": 1561,
+      "yearFrom": 1561,
+      "yearTo": 1561,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31985"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1985.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1985_Rom.xml",
+      "lines": 432,
+      "words": 7180
+    },
+    {
+      "id": "1987",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31987"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1987.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1987_Rom.xml",
+      "lines": 252,
+      "words": 4151
+    },
+    {
+      "id": "1991",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31991"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1991.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1991_Rom.xml",
+      "lines": 388,
+      "words": 6066
+    },
+    {
+      "id": "1995",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31995"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/1995.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1995_Rom.xml",
+      "lines": 432,
+      "words": 7139
+    },
+    {
+      "id": "1996",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31996"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1996.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1996_Rom.xml",
+      "lines": 433,
+      "words": 7208
+    },
+    {
+      "id": "1999",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=31999"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/1999.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_1999_Rom.xml",
+      "lines": 434,
+      "words": 7196
+    },
+    {
+      "id": "2000",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32000"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/2000.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2000_Rom.xml",
+      "lines": 424,
+      "words": 6950
+    },
+    {
+      "id": "2006",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32006"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/2006.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2006_Rom.xml",
+      "lines": 327,
+      "words": 5088
+    },
+    {
+      "id": "2012",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32012"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/2012.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2012_Rom.xml",
+      "lines": 433,
+      "words": 7258
+    },
+    {
+      "id": "206",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 206",
+      "shelfmark": "London, Lambeth Palace, MS. 1182",
+      "century": "XIII + XIV/XV",
+      "year": 1350,
+      "yearFrom": 1200,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30206"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/206.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_206_Rom.xml",
+      "lines": 433,
+      "words": 7129
+    },
+    {
+      "id": "2102",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1451",
+      "year": 1451,
+      "yearFrom": 1451,
+      "yearTo": 1451,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32102"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/2102.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2102_Rom.xml",
+      "lines": 430,
+      "words": 6799
+    },
+    {
+      "id": "2105",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32105"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/2105.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2105_Rom.xml",
+      "lines": 433,
+      "words": 7091
+    },
+    {
+      "id": "2110",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32110"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal"
+      ],
+      "paths": [
+        "archives/igntp-romans/2110.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2110_Rom.xml",
+      "lines": 435,
+      "words": 7186
+    },
+    {
+      "id": "2127",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32127"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/2127.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2127_Rom.xml",
+      "lines": 432,
+      "words": 7117
+    },
+    {
+      "id": "218",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 218",
+      "shelfmark": "Wien, Österreichische Nationalbibliothek, Theol. gr. 23, fol. 486-623",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30218"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "Heb",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/218.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_218_Rom.xml",
+      "lines": 433,
+      "words": 7143
+    },
+    {
+      "id": "2197",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32197"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/2197.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2197_Rom.xml",
+      "lines": 432,
+      "words": 7123
+    },
+    {
+      "id": "2200",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 2200",
+      "shelfmark": "Elassona, Panagia Olympiotissa Monastery, 79",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32200"
+        }
+      ],
+      "targets": [
+        "Mark",
+        "Acts",
+        "Rom",
+        "Gal",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/2200.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2200_Rom.xml",
+      "lines": 433,
+      "words": 7116
+    },
+    {
+      "id": "2344",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 2344",
+      "shelfmark": "Paris, Bibliothèque Nationale, Coislin Grec 18, fol. 170-230",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32344"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/2344.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2344_Rom.xml",
+      "lines": 430,
+      "words": 7054
+    },
+    {
+      "id": "2352",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32352"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/2352.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2352_Rom.xml",
+      "lines": 434,
+      "words": 7205
+    },
+    {
+      "id": "2400",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32400"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/2400.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2400_Rom.xml",
+      "lines": 408,
+      "words": 6746
+    },
+    {
+      "id": "2464",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 2464",
+      "shelfmark": "Patmos, St. John the Theologian Monastery, 742",
+      "century": "IX",
+      "year": 850,
+      "yearFrom": 800,
+      "yearTo": 899,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32464"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/2464.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2464_Rom.xml",
+      "lines": 323,
+      "words": 5379
+    },
+    {
+      "id": "2495",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 2495",
+      "shelfmark": "Sinai, Saint Catherine's Monastery, Gr. 1992",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32495"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/2495.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2495_Rom.xml",
+      "lines": 433,
+      "words": 7166
+    },
+    {
+      "id": "2516",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32516"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/2516.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2516_Rom.xml",
+      "lines": 433,
+      "words": 7138
+    },
+    {
+      "id": "2523",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1453",
+      "year": 1453,
+      "yearFrom": 1453,
+      "yearTo": 1453,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32523"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/2523.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2523_Rom.xml",
+      "lines": 433,
+      "words": 7152
+    },
+    {
+      "id": "2544",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 2544",
+      "shelfmark": "St. Petersburg, National Library of Russia, Ф. № 351 /120.125",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32544"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/2544.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2544_Rom.xml",
+      "lines": 433,
+      "words": 7224
+    },
+    {
+      "id": "256",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XI/XII",
+      "year": 1100,
+      "yearFrom": 1000,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30256"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/256.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_256_Rom.xml",
+      "lines": 433,
+      "words": 7150
+    },
+    {
+      "id": "2576",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1286",
+      "year": 1286,
+      "yearFrom": 1286,
+      "yearTo": 1286,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32576"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/2576.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2576_Rom.xml",
+      "lines": 434,
+      "words": 7177
+    },
+    {
+      "id": "263",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30263"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/263.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_263_Rom.xml",
+      "lines": 433,
+      "words": 7117
+    },
+    {
+      "id": "2659",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32659"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal"
+      ],
+      "paths": [
+        "archives/igntp-romans/2659.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2659_Rom.xml",
+      "lines": 345,
+      "words": 5475
+    },
+    {
+      "id": "2685",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32685"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/2685.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2685_Rom.xml",
+      "lines": 433,
+      "words": 7114
+    },
+    {
+      "id": "2853",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "X/XI",
+      "year": 1000,
+      "yearFrom": 900,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/2853.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2853_Rom.xml",
+      "lines": 433,
+      "words": 7132
+    },
+    {
+      "id": "2936",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "1227/28",
+      "year": 1228,
+      "yearFrom": 1227,
+      "yearTo": 1228,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=32936"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal"
+      ],
+      "paths": [
+        "archives/igntp-romans/2936.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_2936_Rom.xml",
+      "lines": 257,
+      "words": 4232
+    },
+    {
+      "id": "3",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 3",
+      "shelfmark": "Wien, Österreichische Nationalbibliothek, Suppl. gr. 52",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30003"
+        }
+      ],
+      "targets": [
+        "Mark",
+        "Rom",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/3.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_3_Rom.xml",
+      "lines": 433,
+      "words": 7192
+    },
+    {
+      "id": "326",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 326",
+      "shelfmark": "Oxford, Lincoln College, Ms. Gr. 82",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30326"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/326.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_326_Rom.xml",
+      "lines": 413,
+      "words": 6821
+    },
+    {
+      "id": "33",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 33",
+      "shelfmark": "Paris, Bibliothèque Nationale, Gr. 14, fol. 51r-143v",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30033"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Titus",
+        "Phlm",
+        "Heb",
+        "Jas",
+        "1Pet",
+        "2Pet",
+        "1John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/33.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_33_Rom.xml",
+      "lines": 436,
+      "words": 6726
+    },
+    {
+      "id": "330",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 330",
+      "shelfmark": "St. Petersburg, National Library of Russia, Ф. № 906 /Gr. 101",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30330"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/330.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_330_Rom.xml",
+      "lines": 433,
+      "words": 7218
+    },
+    {
+      "id": "35",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 35",
+      "shelfmark": "Paris, Bibliothèque Nationale, Coislin Grec 199",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30035"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "John",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "archives/igntp-romans/35.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_35_Rom.xml",
+      "lines": 433,
+      "words": 7201
+    },
+    {
+      "id": "363",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30363"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/363.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_363_Rom.xml",
+      "lines": 433,
+      "words": 7203
+    },
+    {
+      "id": "365",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 365",
+      "shelfmark": "Florence, Biblioteca Medicea Laurenziana, Pluteo VI. 36",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30365"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/365.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_365_Rom.xml",
+      "lines": 386,
+      "words": 6363
+    },
+    {
+      "id": "38",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 38",
+      "shelfmark": "Paris, Bibliothèque Nationale, Coislin Grec 200",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30038"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Rom",
+        "Gal",
+        "Eph",
+        "Col",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/38.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_38_Rom.xml",
+      "lines": 433,
+      "words": 7169
+    },
+    {
+      "id": "398",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 398",
+      "shelfmark": "Cambridge, Cambridge University Library, Ms. Kk. 6.4",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30398"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/398.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_398_Rom.xml",
+      "lines": 433,
+      "words": 7207
+    },
+    {
+      "id": "400",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 400",
+      "shelfmark": "Berlin, Staatsbibliothek zu Berlin, Diez. A Duod. 10",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30400"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/400.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_400_Rom.xml",
+      "lines": 407,
+      "words": 6040
+    },
+    {
+      "id": "421",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII/XIV",
+      "year": 1300,
+      "yearFrom": 1200,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30421"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal"
+      ],
+      "paths": [
+        "archives/igntp-romans/421.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_421_Rom.xml",
+      "lines": 433,
+      "words": 7072
+    },
+    {
+      "id": "424",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 424",
+      "shelfmark": "Wien, Österreichische Nationalbibliothek, Theol. gr. 302, fol. 1-353",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30424"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/424.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_424_Rom.xml",
+      "lines": 433,
+      "words": 7222
+    },
+    {
+      "id": "43",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 43",
+      "shelfmark": "Paris, Bibliothèque de l'Arsenal, 8409; Paris, Bibliothèque de l'Arsenal, 8410",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30043"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "1Thess",
+        "2Thess",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/43.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_43_Rom.xml",
+      "lines": 434,
+      "words": 7201
+    },
+    {
+      "id": "436",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 436",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Vat. gr. 367",
+      "century": "XI/XII",
+      "year": 1100,
+      "yearFrom": 1000,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30436"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/436.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_436_Rom.xml",
+      "lines": 415,
+      "words": 6897
+    },
+    {
+      "id": "441",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 441",
+      "shelfmark": "Uppsala, Uppsala University Library, Gr. 1, p. 3-182",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30441"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/441.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_441_Rom.xml",
+      "lines": 435,
+      "words": 7242
+    },
+    {
+      "id": "451",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 451",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Urb. gr. 3",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30451"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/451.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_451_Rom.xml",
+      "lines": 433,
+      "words": 7224
+    },
+    {
+      "id": "455",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIII/XIV",
+      "year": 1300,
+      "yearFrom": 1200,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30455"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/455.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_455_Rom.xml",
+      "lines": 434,
+      "words": 7117
+    },
+    {
+      "id": "459",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 459",
+      "shelfmark": "Florence, Biblioteca Medicea Laurenziana, Pluteo IV. 32",
+      "century": "1092",
+      "year": 1092,
+      "yearFrom": 1092,
+      "yearTo": 1092,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30459"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/459.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_459_Rom.xml",
+      "lines": 436,
+      "words": 7262
+    },
+    {
+      "id": "467",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 467",
+      "shelfmark": "Paris, Bibliothèque Nationale, Gr. 59",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30467"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/467.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_467_Rom.xml",
+      "lines": 433,
+      "words": 7160
+    },
+    {
+      "id": "5",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 5",
+      "shelfmark": "Paris, Bibliothèque Nationale, Gr. 106",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30005"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/5.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_5_Rom.xml",
+      "lines": 435,
+      "words": 7245
+    },
+    {
+      "id": "6",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 6",
+      "shelfmark": "Paris, Bibliothèque Nationale, Gr. 112",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30006"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "2Tim",
+        "Titus",
+        "Phlm",
+        "Heb",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/6.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_6_Rom.xml",
+      "lines": 433,
+      "words": 7123
+    },
+    {
+      "id": "606",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 606",
+      "shelfmark": "Paris, Bibliothèque Nationale, Gr. 217",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30606"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/606.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_606_Rom.xml",
+      "lines": 432,
+      "words": 7184
+    },
+    {
+      "id": "608",
+      "type": "continuous",
+      "language": "Greek",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30608"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/608.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_608_Rom.xml",
+      "lines": 434,
+      "words": 7171
+    },
+    {
+      "id": "61",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 61",
+      "shelfmark": "Dublin, Trinity College, MS 30",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30061"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/61.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_61_Rom.xml",
+      "lines": 432,
+      "words": 7173
+    },
+    {
+      "id": "621",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 621",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Vat. gr. 1270",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30621"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/621.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_621_Rom.xml",
+      "lines": 435,
+      "words": 7186
+    },
+    {
+      "id": "623",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 623",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Vat. gr. 1650",
+      "century": "1037",
+      "year": 1037,
+      "yearFrom": 1037,
+      "yearTo": 1037,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30623"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/623.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_623_Rom.xml",
+      "lines": 432,
+      "words": 7174
+    },
+    {
+      "id": "629",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 629",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Ottob. gr. 298",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30629"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/629.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_629_Rom.xml",
+      "lines": 430,
+      "words": 7097
+    },
+    {
+      "id": "630",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 630",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Ottob. gr. 325",
+      "century": "XII/XIII",
+      "year": 1200,
+      "yearFrom": 1100,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30630"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "2Thess",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/630.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_630_Rom.xml",
+      "lines": 432,
+      "words": 7030
+    },
+    {
+      "id": "69",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 69",
+      "shelfmark": "Leicester, Leicestershire Record Office, 6 D 32.1",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30069"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/69.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_69_Rom.xml",
+      "lines": 432,
+      "words": 7141
+    },
+    {
+      "id": "81",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 81",
+      "shelfmark": "Alexandria, Greek Orthodox Patriarchate of Alexandria, 477; London, British Library, Add. 20003",
+      "century": "1044",
+      "year": 1044,
+      "yearFrom": 1044,
+      "yearTo": 1044,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30081"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Heb",
+        "1John",
+        "2John",
+        "3John",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/81.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_81_Rom.xml",
+      "lines": 432,
+      "words": 7125
+    },
+    {
+      "id": "88",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 88",
+      "shelfmark": "Naples, Biblioteca Nazionale, Ms. II. A. 7",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30088"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/88.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_88_Rom.xml",
+      "lines": 434,
+      "words": 7086
+    },
+    {
+      "id": "886",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 886",
+      "shelfmark": "Città del Vaticano, Biblioteca Apostolica Vaticana, Reg. gr. 6",
+      "century": "XIV",
+      "year": 1350,
+      "yearFrom": 1300,
+      "yearTo": 1399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30886"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/886.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_886_Rom.xml",
+      "lines": 433,
+      "words": 7139
+    },
+    {
+      "id": "90",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 90",
+      "shelfmark": "Amsterdam, University Library, Remonstr. 186",
+      "century": "XVI",
+      "year": 1550,
+      "yearFrom": 1500,
+      "yearTo": 1599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30090"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "1Thess",
+        "2Thess"
+      ],
+      "paths": [
+        "archives/igntp-romans/90.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_90_Rom.xml",
+      "lines": 433,
+      "words": 7151
+    },
+    {
+      "id": "915",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Minuscule 915",
+      "shelfmark": "El Escorial, Real Biblioteca del Monasterio de El Escorial, T-III-12",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=30915"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Thess",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/915.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_915_Rom.xml",
+      "lines": 433,
+      "words": 7106
+    },
+    {
+      "id": "L1126",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=41126"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L1126.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L1126_Rom.xml",
+      "lines": 53,
+      "words": 893
+    },
+    {
+      "id": "L1159",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "1331",
+      "year": 1331,
+      "yearFrom": 1331,
+      "yearTo": 1331,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=41159"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L1159.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L1159_Rom.xml",
+      "lines": 431,
+      "words": 7149
+    },
+    {
+      "id": "L1178",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=41178"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L1178.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L1178_Rom.xml",
+      "lines": 419,
+      "words": 6922
+    },
+    {
+      "id": "L1188",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=41188"
+        }
+      ],
+      "targets": [
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L1188.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L1188_Rom.xml",
+      "lines": 428,
+      "words": 7055
+    },
+    {
+      "id": "L1298",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=41298"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L1298.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L1298_Rom.xml",
+      "lines": 150,
+      "words": 2493
+    },
+    {
+      "id": "L1440",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "1251",
+      "year": 1251,
+      "yearFrom": 1251,
+      "yearTo": 1251,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=41440"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L1440.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L1440_Rom.xml",
+      "lines": 430,
+      "words": 7082
+    },
+    {
+      "id": "L156",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "X",
+      "year": 950,
+      "yearFrom": 900,
+      "yearTo": 999,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=40156"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "Jude"
+      ],
+      "paths": [
+        "archives/igntp-romans/L156.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L156_Rom.xml",
+      "lines": 401,
+      "words": 6679
+    },
+    {
+      "id": "L169",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "XIII",
+      "year": 1250,
+      "yearFrom": 1200,
+      "yearTo": 1299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=40169"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph",
+        "2Tim",
+        "Titus"
+      ],
+      "paths": [
+        "archives/igntp-romans/L169.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L169_Rom.xml",
+      "lines": 430,
+      "words": 7104
+    },
+    {
+      "id": "L2010",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "XV",
+      "year": 1450,
+      "yearFrom": 1400,
+      "yearTo": 1499,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=42010"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L2010.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L2010_Rom.xml",
+      "lines": 431,
+      "words": 6945
+    },
+    {
+      "id": "L2058",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "1619",
+      "year": 1619,
+      "yearFrom": 1619,
+      "yearTo": 1619,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=42058"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L2058.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L2058_Rom.xml",
+      "lines": 431,
+      "words": 7159
+    },
+    {
+      "id": "L23",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "XI",
+      "year": 1050,
+      "yearFrom": 1000,
+      "yearTo": 1099,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=40023"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L23.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L23_Rom.xml",
+      "lines": 147,
+      "words": 2425
+    },
+    {
+      "id": "L587",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=40587"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L587.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L587_Rom.xml",
+      "lines": 431,
+      "words": 7132
+    },
+    {
+      "id": "L60",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "1021/2",
+      "year": 1022,
+      "yearFrom": 1021,
+      "yearTo": 1022,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=40060"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L60.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L60_Rom.xml",
+      "lines": 114,
+      "words": 1836
+    },
+    {
+      "id": "L809",
+      "type": "lectionary",
+      "language": "Greek",
+      "century": "XII",
+      "year": 1150,
+      "yearFrom": 1100,
+      "yearTo": 1199,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=40809"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "Gal",
+        "Eph"
+      ],
+      "paths": [
+        "archives/igntp-romans/L809.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_L809_Rom.xml",
+      "lines": 431,
+      "words": 7150
+    },
+    {
+      "id": "P10",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 10",
+      "shelfmark": "Cambridge, MA, Houghton Library, Harvard University, MS Gr SM2218",
+      "century": "IV",
+      "year": 350,
+      "yearFrom": 300,
+      "yearTo": 399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10010"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/P10.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_P10_Rom.xml",
+      "lines": 7,
+      "words": 75
+    },
+    {
+      "id": "P113",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 113",
+      "shelfmark": "Oxford, Bodleian Art, Archaeology and Ancient World Library, P. Oxy. 4497",
+      "century": "III",
+      "year": 250,
+      "yearFrom": 200,
+      "yearTo": 299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10113"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/P113.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_P113_Rom.xml",
+      "lines": 3,
+      "words": 3
+    },
+    {
+      "id": "P118",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 118",
+      "shelfmark": "Köln, Institut für Afrikanistik und Ägyptologie, Inv. Nr. 10311",
+      "century": "III",
+      "year": 250,
+      "yearFrom": 200,
+      "yearTo": 299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10118"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/P118.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_P118_Rom.xml",
+      "lines": 11,
+      "words": 22
+    },
+    {
+      "id": "P131",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 131",
+      "shelfmark": "Oxford, Bodleian Art, Archaeology and Ancient World Library, P.Oxy. 5573",
+      "century": "III",
+      "year": 250,
+      "yearFrom": 200,
+      "yearTo": 300,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10131"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/P131.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_P131_Rom.xml",
+      "lines": 16,
+      "words": 39
+    },
+    {
+      "id": "P26",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 26",
+      "shelfmark": "Dallas, TX, Southern Methodist University Bridwell Library, Pap. 1",
+      "century": "VII (A)",
+      "year": 613,
+      "yearFrom": 600,
+      "yearTo": 625,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10026"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/P26.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_P26_Rom.xml",
+      "lines": 16,
+      "words": 69
+    },
+    {
+      "id": "P27",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 27",
+      "shelfmark": "Cambridge, Cambridge University Library, Ms. Add. 7211",
+      "century": "III",
+      "year": 250,
+      "yearFrom": 200,
+      "yearTo": 299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10027"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/P27.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_P27_Rom.xml",
+      "lines": 30,
+      "words": 61
+    },
+    {
+      "id": "P31",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 31",
+      "shelfmark": "Manchester, John Rylands University Library of Manchester, Gr. P. 4",
+      "century": "VII",
+      "year": 650,
+      "yearFrom": 600,
+      "yearTo": 699,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10031"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/P31.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_P31_Rom.xml",
+      "lines": 6,
+      "words": 51
+    },
+    {
+      "id": "P40",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 40",
+      "shelfmark": "Heidelberg, Institut für Papyrologie, P. Heid. Inv. G. 645",
+      "century": "III",
+      "year": 250,
+      "yearFrom": 200,
+      "yearTo": 299,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10040"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/P40.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_P40_Rom.xml",
+      "lines": 34,
+      "words": 122
+    },
+    {
+      "id": "P46",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 46",
+      "shelfmark": "Dublin, Chester Beatty Library, CBL BP II; Ann Arbor, MI, University of Michigan Library, Inv. Nr. 6238",
+      "century": "III (A)",
+      "year": 213,
+      "yearFrom": 200,
+      "yearTo": 225,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10046"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "Heb"
+      ],
+      "paths": [
+        "archives/igntp-romans/P46.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_P46_Rom.xml",
+      "lines": 247,
+      "words": 2696
+    },
+    {
+      "id": "P61",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 61",
+      "shelfmark": "New York, NY, Morgan Library &amp; Museum, Colt Pap. 5.1-4",
+      "century": "VIII (A)",
+      "year": 713,
+      "yearFrom": 700,
+      "yearTo": 725,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10061"
+        }
+      ],
+      "targets": [
+        "Rom",
+        "1Cor",
+        "Phil",
+        "Col",
+        "1Thess",
+        "Titus",
+        "Phlm"
+      ],
+      "paths": [
+        "archives/igntp-romans/P61.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_P61_Rom.xml",
+      "lines": 4,
+      "words": 6
+    },
+    {
+      "id": "P94",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Papyrus 94",
+      "shelfmark": "Cairo, The Egyptian Museum, P. Cair. 10730",
+      "century": "V/VI",
+      "year": 500,
+      "yearFrom": 400,
+      "yearTo": 599,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10094"
+        }
+      ],
+      "targets": [
+        "Rom"
+      ],
+      "paths": [
+        "archives/igntp-romans/P94.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY 4.0 (the eData record and each file's header)",
+      "sourceUrl": "https://edata.bham.ac.uk/1111/5/Romans-transcriptions.zip",
+      "member": "ecm_romans/NT_GRC_P94_Rom.xml",
+      "lines": 9,
+      "words": 46
+    }
+  ]
+}

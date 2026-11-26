@@ -1,0 +1,70 @@
+{
+  "institution": {
+    "id": "sinaiticus-project",
+    "name": "Codex Sinaiticus Project",
+    "url": "https://epapers.bham.ac.uk/id/eprint/3306/"
+  },
+  "items": [
+    {
+      "id": "01",
+      "type": "continuous",
+      "language": "Greek",
+      "name": "Codex Sinaiticus",
+      "shelfmark": "London, British Library, Add MS 43725 (with Leipzig, St Catherine's Monastery, Saint Petersburg)",
+      "century": "IV",
+      "year": 350,
+      "yearFrom": 300,
+      "yearTo": 399,
+      "dateBasis": "catalogue date range (the catalogue does not state its method)",
+      "dateSource": "INTF catalogue (catalogue.json in the archive's metadata)",
+      "viewers": [
+        {
+          "name": "INTF New Testament Virtual Manuscript Room",
+          "url": "https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20001"
+        },
+        {
+          "name": "Codex Sinaiticus Project",
+          "url": "https://codexsinaiticus.org/en/manuscript.aspx"
+        }
+      ],
+      "targets": [
+        "Matt",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts",
+        "Rom",
+        "1Cor",
+        "2Cor",
+        "Gal",
+        "Eph",
+        "Phil",
+        "Col",
+        "1Thess",
+        "2Thess",
+        "1Tim",
+        "2Tim",
+        "Titus",
+        "Phlm",
+        "Heb",
+        "Jas",
+        "1Pet",
+        "2Pet",
+        "1John",
+        "2John",
+        "3John",
+        "Jude",
+        "Rev"
+      ],
+      "paths": [
+        "archives/sinaiticus-project/01.xml"
+      ],
+      "format": "TEI XML (the source archive's file, unchanged)",
+      "license": "CC BY-NC-SA 3.0 (the ePapers record)",
+      "sourceUrl": "https://epapers.bham.ac.uk/id/eprint/3306/1/FINAL_TRANSCRIPTION_version105.xml.zip",
+      "member": "FINAL_TRANSCRIPTION_version105.xml",
+      "lines": 7902,
+      "words": 136148
+    }
+  ]
+}

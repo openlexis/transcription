@@ -175,8 +175,8 @@ function resolveSpecSources(
   if (Array.isArray(sourceRefs)) {
     for (const ref of sourceRefs) {
       if (ULID_RE.test(ref)) {
-        const setPath = `${ROOT}src/sets/${ref}.json`;
-        if (!existsSync(setPath)) throw new Error(`Missing source set: src/sets/${ref}.json`);
+        const setPath = `${ROOT}archives/sets/${ref}.json`;
+        if (!existsSync(setPath)) throw new Error(`Missing source set: archives/sets/${ref}.json`);
         const setObj = JSON.parse(readFileSync(setPath, "utf8")) as SourceSetJson;
         if (setObj.kind === "book") {
           bookSets.push(setObj);
@@ -211,16 +211,16 @@ function resolveSpecSources(
   const merged = new Map<string, SourceItem>();
 
   for (const [instId, idSet] of [...allowedByInst.entries()].sort()) {
-    const idxPath = `${ROOT}src/${instId}/index.json`;
+    const idxPath = `${ROOT}archives/${instId}/index.json`;
     if (!existsSync(idxPath)) {
-      throw new Error(`Missing institutional catalog: src/${instId}/index.json`);
+      throw new Error(`Missing institutional catalog: archives/${instId}/index.json`);
     }
     const idx = JSON.parse(readFileSync(idxPath, "utf8")) as InstitutionIndexJson;
     const byId = new Map(idx.items.map((item) => [item.id, item]));
 
     for (const id of [...idSet].sort()) {
       const item = byId.get(id);
-      if (!item) throw new Error(`Source "${id}" not found in src/${instId}/index.json`);
+      if (!item) throw new Error(`Source "${id}" not found in archives/${instId}/index.json`);
       const fileEntry: SourceFileEntry = {
         paths: item.paths,
         format: item.format,
@@ -501,7 +501,7 @@ export function buildClientSourceIndex(spec: SpecFile) {
   });
 }
 
-// ---------- Compiled Outputs (outputs/<spec-id>/<compilation-id>/) ----------
+// ---------- Compiled Transcripts (transcripts/<spec-id>/<compilation-id>/) ----------
 
 export interface CompiledBookEntry {
   id: string;
@@ -688,7 +688,7 @@ export function getWitnessViewersMap(specId: string): Map<string, { viewers: { n
 let _compilations: CompilationRecord[] | undefined;
 export function getCompilations(): CompilationRecord[] {
   if (_compilations) return _compilations;
-  const outRoot = `${ROOT}outputs`;
+  const outRoot = `${ROOT}transcripts`;
   if (!existsSync(outRoot)) {
     _compilations = [];
     return _compilations;
@@ -713,7 +713,7 @@ export function getCompilations(): CompilationRecord[] {
           specId,
           compilationId,
           dir,
-          relDir: `outputs/${specId}/${compilationId}`,
+          relDir: `transcripts/${specId}/${compilationId}`,
           manifest,
           report,
         });

@@ -2,7 +2,7 @@
 // words in the first hand, with the places where the text is lost. Every format in the corpus has a reader here:
 //  - TEI XML as published by the IGNTP, ITSEE, INTF, the Codex Sinaiticus Project and the Codex Zacynthius project (lib/tei.ts);
 //  - TEI XML of the IGNTP/ITSEE catenae: only the biblical text (lemmata, <ab type="biblical">) is read, not the commentary;
-//  - TEI P5 holding the plain text of the Center for New Testament Restoration (CNTR), unchanged, in <ab type="holder-text">;
+//  - TEI P5 holding the plain text of the Center for New Testament Restoration (CNTR), unchanged, in <ab type="source-text">;
 //  - UXLC XML (the Leningrad Codex, one file per book): the words as written in the line (Ketiv), not the marginal Qere;
 //  - TEI P5 made from Text-Fabric data (the Samaritan Pentateuch and the Dead Sea Scrolls): <ab n="Book c:v"> with <w> and <gap>.
 // Nothing else is read: no file that the specification does not list.
@@ -143,7 +143,7 @@ export function readEntry(root: string, provenance: string, paths: string[]): { 
       all.push(...uxlc(xml, b.id));
     } else if (provenance === "dt-ucph-sp" || provenance === "etcbc-dss" || provenance === "aleppo" || provenance === "tal-florentin-sp") all.push(...tfTei(xml));
     else if (provenance === "cntr") {
-      const m = xml.match(/<ab type="holder-text">([\s\S]*?)<\/ab>/); if (!m) throw new Error(`${p}: no holder text`);
+      const m = xml.match(/<ab type="source-text">([\s\S]*?)<\/ab>/); if (!m) throw new Error(`${p}: no source text`);
       const r = cntrText(unent(m[1])); all.push(...r.lines); corrections = (corrections ?? 0) + r.corrections;
     } else if (provenance === "igntp-catena") all.push(...catenaLines(xml));
     else {

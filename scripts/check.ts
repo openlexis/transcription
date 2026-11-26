@@ -1,4 +1,4 @@
-// Validator for TEI P5 XML compilation artifacts in outputs/<specification-id>/<compilation-id>/.
+// Validator for TEI P5 XML compilation artifacts in transcripts/<specification-id>/<compilation-id>/.
 //   bun run check
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
@@ -10,22 +10,22 @@ const ROOT = new URL("..", import.meta.url).pathname;
 const sha = (x: string | Buffer) => createHash("sha256").update(x).digest("hex");
 const fails: string[] = [];
 
-if (!existsSync(`${ROOT}outputs`)) {
-  console.error("FAILED: no outputs/ directory found");
+if (!existsSync(`${ROOT}transcripts`)) {
+  console.error("FAILED: no transcripts/ directory found");
   process.exit(1);
 }
 
 let compilations = 0, booksChecked = 0, appsChecked = 0, certChecked = 0, witsChecked = 0;
 
-for (const specId of readdirSync(`${ROOT}outputs`).sort()) {
+for (const specId of readdirSync(`${ROOT}transcripts`).sort()) {
   const specPath = `${ROOT}specifications/${specId}.yaml`;
   if (!existsSync(specPath)) {
-    fails.push(`outputs/${specId}: no matching specifications/${specId}.yaml`);
+    fails.push(`transcripts/${specId}: no matching specifications/${specId}.yaml`);
     continue;
   }
   const { targets: specTargets } = loadSpecWithSources(specId);
-  for (const compId of readdirSync(`${ROOT}outputs/${specId}`).sort()) {
-    const dir = `${ROOT}outputs/${specId}/${compId}`, at = `outputs/${specId}/${compId}`;
+  for (const compId of readdirSync(`${ROOT}transcripts/${specId}`).sort()) {
+    const dir = `${ROOT}transcripts/${specId}/${compId}`, at = `transcripts/${specId}/${compId}`;
     const mfPath = `${dir}/manifest.json`;
     if (!existsSync(mfPath)) {
       fails.push(`${at}: missing manifest.json`);

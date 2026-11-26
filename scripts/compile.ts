@@ -1,7 +1,7 @@
 // Transcription compiler for Open Lexis YAML specifications (TEI P5 XML output).
 // Usage:
 //   bun --smol scripts/compile.ts [spec-id] [all | <book-id>] [--compilation-id <ulid>]
-// Defaults: spec-id = 01M88AX3YW2HWVPGHTREFJS181, book = all. --out-dir <folder> writes a trial compilation outside outputs/.
+// Defaults: spec-id = 01M88AX3YW2HWVPGHTREFJS181, book = all. --out-dir <folder> writes a trial compilation outside transcripts/.
 import { createHash, randomBytes } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
@@ -995,7 +995,7 @@ function renderTeiXml(
     out.push(`            <abbr type="siglum">${escXml(w.siglum)}</abbr>`);
     out.push(`            <desc>${escXml(label)}${s.shelfmark ? `; shelfmark: ${escXml(s.shelfmark)}` : ""}</desc>`);
     out.push(`            <note type="dating">${escXml(dateDesc)}</note>`);
-    out.push(`            <note type="provenance">${escXml(`Place of origin/writing: unknown (not documented in specification). Transcription holder(s): ${w.provenances.join(", ") || "unknown"}.`)}</note>`);
+    out.push(`            <note type="provenance">${escXml(`Place of origin/writing: unknown (not documented in specification). Source archive(s): ${w.provenances.join(", ") || "unknown"}.`)}</note>`);
     out.push('            <note type="scientific-analysis">unknown (not documented in specification)</note>');
     out.push(`            <note type="physical-scribal">${escXml(`Manuscript type: ${s.type}; transcribed words observed: ${w.transcribedWords}; scribal corrections observed: ${w.corrections}; lacunae/damaged tokens observed: ${w.lacunae} (not penalized); scribal prior penalty: ${w.corrPenalty}.`)}</note>`);
     if (w.filledInLines) {
@@ -1190,7 +1190,7 @@ if (import.meta.main) {
   let bookArg = "all";
   let compilationId = "";
   let skipSite = false;
-  let outDirArg = ""; // --out-dir <folder>: write somewhere other than outputs/ (for a trial run)
+  let outDirArg = ""; // --out-dir <folder>: write somewhere other than transcripts/ (for a trial run)
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--compilation-id" && args[i + 1]) {
@@ -1211,8 +1211,8 @@ if (import.meta.main) {
   const specPath = `${ROOT}specifications/${specId}.yaml`;
   if (!existsSync(specPath)) throw new Error(`Specification not found: ${specPath}`);
   const specRaw = readFileSync(specPath, "utf8");
-  // the specification's `sources` (immutable ULID sets and/or institution:id items), resolved through src/sets/<ULID>.json
-  // and src/<institution>/index.json only; the target books are those the resolved sources hold (scripts/sources.ts)
+  // the specification's `sources` (immutable ULID sets and/or institution:id items), resolved through archives/sets/<ULID>.json
+  // and archives/<institution>/index.json only; the target books are those the resolved sources hold (scripts/sources.ts)
   const resolved = loadSpecWithSources(specId);
   const raw = resolved.spec as unknown as { id: string; title: string; summary?: string };
   const spec: Spec = { id: raw.id, title: raw.title, summary: raw.summary ?? "", targets: resolved.targets, sources: resolved.sources };
@@ -1222,12 +1222,12 @@ if (import.meta.main) {
     bookArg === "all" ? spec.targets : spec.targets.filter((t) => t.id === bookArg || t.name === bookArg);
   if (!selectedTargets.length) throw new Error(`No target book matching "${bookArg}" in specification ${specId}`);
 
-  const outDir = outDirArg || `${ROOT}outputs/${specId}/${compilationId}`;
+  const outDir = outDirArg || `${ROOT}transcripts/${specId}/${compilationId}`;
   mkdirSync(outDir, { recursive: true });
   const timestampIso = new Date().toISOString();
   const git = gitInfo();
 
-  console.log(`Compiling under specification ${specId} -> ${outDirArg || `outputs/${specId}/${compilationId}/`} (${selectedTargets.length} target books)`);
+  console.log(`Compiling under specification ${specId} -> ${outDirArg || `transcripts/${specId}/${compilationId}/`} (${selectedTargets.length} target books)`);
 
   // Build consolidated source map (handling SAME_MANUSCRIPT merges)
   const sourceMap = new Map<string, SourceItem>();
@@ -1348,7 +1348,7 @@ if (import.meta.main) {
         "Full 66-book compilation with granular word-level alignment (preventing unrelated variants from collapsing into whole-verse blocks) and decoupled edit-category vs. substantive-severity scoring.",
       author: "Open Lexis",
       createdAt: timestampIso,
-      outputDirectory: outDirArg || `outputs/${specId}/${compilationId}/`,
+      outputDirectory: outDirArg || `transcripts/${specId}/${compilationId}/`,
       outputFormat: "TEI P5 XML",
       reportFile: "REPORT.md",
     },
@@ -1381,7 +1381,7 @@ if (import.meta.main) {
       severityCounts: totalSeverityCounts,
     }),
   );
-  console.log(`Done: ${booksList.length} books written to ${outDirArg || `outputs/${specId}/${compilationId}/`} in ${((performance.now() - tStart) / 1000).toFixed(1)} s`);
+  console.log(`Done: ${booksList.length} books written to ${outDirArg || `transcripts/${specId}/${compilationId}/`} in ${((performance.now() - tStart) / 1000).toFixed(1)} s`);
 
   if (!skipSite) {
     console.log("Rebuilding Astro site (site/www) to include the new compilation...");
