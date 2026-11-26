@@ -193,6 +193,7 @@ const renderedChapters = chapters.map((ch) => {
         const selRdg = readings.find((r) => r.type === "selected");
         const selP = Number(selRdg?.degree ?? 1);
         collectWords(tok.text);
+        const places: { sev: number; mass: number }[] = [];
         for (const r of readings) {
           if (r.type !== "unseen") collectWords(r.text);
           if (r.type !== "variant") continue;
@@ -202,11 +203,14 @@ const renderedChapters = chapters.map((ch) => {
           const rp = Number(r.degree ?? 0);
           const weight = Number.isNaN(rp) ? 0 : Math.max(0, rp);
           bucketWeights.set(bucket, (bucketWeights.get(bucket) ?? 0) + weight);
+          const mass = Number.isNaN(rp) ? 0 : Math.round(Math.max(0, rp) * 1000) / 10;
+          places.push({ sev: bucket, mass });
         }
         const conf = Number.isNaN(selP) ? 1 : selP;
         const barWidth = Math.max(0, Math.min(1, (0.99 - conf) / (0.99 - 0.51)));
         const { sevBucket, grad } = buildSeverityGradient(bucketWeights);
         const maxSevBucket = maxSev > 0 ? normalizeSeverityBucket(maxSev, reportScale) : sevBucket;
+        const placesAttr = places.length ? places.map((pl) => `${pl.sev}:${pl.mass}`).join(",") : undefined;
         tokenPayloads[key] = {
           k: "a",
           ref: v.ref,
@@ -235,6 +239,7 @@ const renderedChapters = chapters.map((ch) => {
           switchedTo,
           sevBucket,
           maxSevBucket,
+          placesAttr,
           confPct: Math.round(conf * 1000) / 10,
           grad,
           barWidth,
@@ -263,6 +268,7 @@ const renderedChapters = chapters.map((ch) => {
           switchedTo,
           sevBucket: 0,
           maxSevBucket: 0,
+          placesAttr: undefined,
           confPct: Math.round(conf * 1000) / 10,
           grad: undefined,
           barWidth,
@@ -575,6 +581,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                         const tokStyle = styleParts.length ? styleParts.join(";") : undefined;
                         const maxSevAttr = tok.maxSevBucket > tok.sevBucket ? tok.maxSevBucket : undefined;
                         const confAttr = tok.confPct < 99.95 ? tok.confPct : undefined;
+                        const placesAttr = tok.placesAttr;
 
                         const tokenEmpty = !(tok.text && String(tok.text).trim());
                         if (tokenEmpty) {
@@ -596,6 +603,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                               data-sev={tok.sevBucket}
                               data-max-sev={maxSevAttr}
                               data-conf={confAttr}
+                              data-places={placesAttr}
                               style={tokStyle}
                               title={runKeys.length > 1 ? `${runKeys.length} consecutive omitted readings` : "Omitted reading"}
                               class={`tok-btn tok-app tok-omit`}
@@ -620,6 +628,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                                 data-sev={tok.sevBucket}
                                 data-max-sev={maxSevAttr}
                                 data-conf={confAttr}
+                                data-places={placesAttr}
                                 style={tokStyle}
                                 class={`tok-btn tok-app`}
                               >
@@ -642,6 +651,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                             data-sev={tok.sevBucket}
                             data-max-sev={maxSevAttr}
                             data-conf={confAttr}
+                            data-places={placesAttr}
                             style={tokStyle}
                             class={
                               tok.kind === "app"
@@ -736,6 +746,25 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
     const filterEmpty = document.getElementById("filter-empty");
     const filterEmptyReset = document.getElementById("filter-empty-reset") as HTMLButtonElement | null;
 
+    function tokenMatchesFilters(btn: HTMLButtonElement, minSev: number, maxConf: number): boolean {
+      const raw = btn.dataset.places;
+      if (raw && minSev > 0) {
+        const needMass = 100 - maxConf;
+        for (const part of raw.split(",")) {
+          const colon = part.indexOf(":");
+          if (colon < 0) continue;
+          const sev = Number(part.slice(0, colon));
+          const mass = Number(part.slice(colon + 1));
+          if (!Number.isFinite(sev) || !Number.isFinite(mass)) continue;
+          if (sev >= minSev && (maxConf >= 100 || mass >= needMass)) return true;
+        }
+        return false;
+      }
+      const sev = Number(btn.dataset.sev ?? 0);
+      const conf = btn.dataset.conf !== undefined ? Number(btn.dataset.conf) : 100;
+      return sev >= minSev && (maxConf >= 100 || conf < maxConf);
+    }
+
     function applyReaderFilters() {
       const minSev = Number(minSevSel?.value ?? 0);
       const maxConf = Number(maxConfSel?.value ?? 100);
@@ -762,9 +791,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
               btn.classList.remove("tok-dimmed");
               continue;
             }
-            const sev = Number(btn.dataset.maxSev ?? btn.dataset.sev ?? 0);
-            const conf = btn.dataset.conf !== undefined ? Number(btn.dataset.conf) : 100;
-            const ok = sev >= minSev && (maxConf >= 100 || conf < maxConf);
+            const ok = tokenMatchesFilters(btn, minSev, maxConf);
             btn.classList.toggle("tok-dimmed", !ok);
             if (ok) {
               verseMatches = true;
