@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { parse } from "yaml";
 import { isPinnedList, loadFrozenSources, sourcesFromPinned } from "../../../scripts/sources.ts";
-import { clampTitle, FULL_TITLE_MAX, readSpecTitleRegistry, SHORT_TITLE_MAX, specShortTitle } from "../../../scripts/lib/titles.ts";
+import { clampTitle, FULL_TITLE_MAX, SHORT_TITLE_MAX, specShortTitle } from "../../../scripts/lib/titles.ts";
 export { clampTitle, FULL_TITLE_MAX, SHORT_TITLE_MAX };
 
 export const ROOT = new URL("../../../", import.meta.url).pathname;
@@ -82,7 +82,7 @@ export interface SpecFile {
   file: string;
   id: string;
   title: string;
-  /** Required short title (at most 40 characters): the specification's own `shortTitle`, or for a specification published before that rule, its entry in data/specification-short-titles.json. */
+  /** Required short title of at most 40 characters, from the specification's own `shortTitle` field. */
   shortTitle: string;
   author?: AuthorInfo;
   license: SpecLicense;
@@ -303,13 +303,12 @@ export function getSpecifications(): SpecFile[] {
     )
     .sort();
 
-  const titleRegistry = readSpecTitleRegistry(ROOT);
   _specs = files.map((file) => {
     const parsed = parse(readFileSync(`${ROOT}${file}`, "utf8")) as Omit<
       SpecFile,
       "file" | "sources" | "sourceRefs" | "targets" | "shortTitle"
     > & { shortTitle?: string; targets?: TargetBook[]; sources: string | string[] | Record<string, string[]> };
-    const raw = { ...parsed, shortTitle: specShortTitle(parsed, titleRegistry) ?? clampTitle(parsed.title, SHORT_TITLE_MAX) };
+    const raw = { ...parsed, shortTitle: specShortTitle(parsed) ?? "" };
     if (isPinnedList(raw.sources)) {
       const { targets, sources } = sourcesFromPinned(raw.sources);
       return { ...raw, file, targets, sourceRefs: [file], sources };

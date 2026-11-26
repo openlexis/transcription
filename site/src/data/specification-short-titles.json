@@ -1,9 +1,0 @@
-{
-  "description": "Short titles for the specifications published before shortTitle was required. Published specifications are never edited, so their short titles live here, keyed by ULID. Only those specifications may be listed (scripts/lib/titles.ts LEGACY_SPEC_IDS); every newer specification states shortTitle in its own YAML. Each title is at most 40 characters.",
-  "specifications": {
-    "01M88AX3YW2HWVPGHTREFJS181": "First specification",
-    "01M89WMZPKWMDPCWWDTAA9VN7D": "Severity and alignment",
-    "01M8AW2EZ2NVKBF813GZE3MN7M": "Severity and alignment, source sets",
-    "01M8B40TZ4W7PX1RHJWY11ZNW0": "Severity and alignment, pinned list"
-  }
-}

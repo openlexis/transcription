@@ -262,7 +262,7 @@ if (!onlyDir) {
       try { return [{ at, shortTitle: JSON.parse(readFileSync(mf, "utf8")).compilation?.shortTitle }]; } catch { return []; }
     }),
   );
-  fails.push(...checkShortTitles(ROOT, specs, comps));
+  fails.push(...checkShortTitles(specs, comps));
 }
 
 // The archive records: one YAML file per manuscript and per transcription file (docs/archive-records.md).
