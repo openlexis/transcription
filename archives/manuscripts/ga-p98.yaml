@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p98
+holdings:
+  - repository: French Institute for Eastern Archaeology
+    settlement: Cairo
+    country: Egypt
+    idno:
+      - P. IFAO inv. 237b
+    sources:
+      - path: archives/intf/P98.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Egypt Cairo French Institute for Eastern Archaeology P. IFAO inv. 237b
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: II (?)
+    notBefore: 150
+    notAfter: 250
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":250,\"gaNum\":\"P98\",\"orig\":\"II (?)\",\"docID\":10098,\"groupID\":\"\",\"primaryName\":\"P98\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":150}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":250,\"gaNum\":\"P98\",\"orig\":\"II (?)\",\"docID\":10098,\"groupID\":\"\",\"primaryName\":\"P98\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":150}"

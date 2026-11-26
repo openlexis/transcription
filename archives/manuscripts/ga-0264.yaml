@@ -1,0 +1,45 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0264
+names:
+  - text: "0264"
+    language: la
+    sources:
+      - path: archives/igntp-john/0264.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">0264</msName>"
+identifiers:
+  - scheme: GA
+    value: "0264"
+    sources:
+      - path: archives/igntp-john/0264.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0264</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20264"
+    sources:
+      - path: archives/igntp-john/0264.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20264</idno></altIdentifier>"
+  - scheme: TM
+    value: "61648"
+    sources:
+      - path: archives/igntp-john/0264.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61648</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2798"
+    sources:
+      - path: archives/igntp-john/0264.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2798</idno></altIdentifier>"
+holdings:
+  - repository: Staatliche Museen
+    settlement: Berlin
+    country: Germany
+    idno:
+      - P. 14049
+    sources:
+      - path: archives/igntp-john/0264.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Berlin Staatliche Museen P. 14049

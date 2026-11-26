@@ -1,0 +1,405 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-01
+names:
+  - text: Codex Sinaiticus
+    language: la
+    sources:
+      - path: archives/igntp-john/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Sinaiticus</msName>"
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Sinaiticus</msName>"
+identifiers:
+  - scheme: GA
+    value: "01"
+    sources:
+      - path: archives/igntp-2thessalonians/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>01</idno> </altIdentifier>"
+      - path: archives/igntp-john/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>01</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20001"
+    sources:
+      - path: archives/igntp-2thessalonians/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>20001</idno> </altIdentifier>"
+      - path: archives/igntp-john/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20001</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: א
+    sources:
+      - path: archives/igntp-john/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>א</idno></altIdentifier>"
+  - scheme: TM
+    value: "62315"
+    sources:
+      - path: archives/igntp-john/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>62315</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "3478"
+    sources:
+      - path: archives/igntp-john/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>3478</idno></altIdentifier>"
+  - scheme: Fraenkel_2004
+    value: S
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Fraenkel_2004\"><idno>S</idno></altIdentifier>"
+  - scheme: Gregory-Aland
+    value: "01"
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Gregory-Aland\"><idno>01</idno></altIdentifier>"
+  - scheme: Gregory
+    value: א
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Gregory\"><idno>א</idno></altIdentifier>"
+form:
+  text: codex
+  sources:
+    - path: archives/sinaiticus-project/01.xml
+      locator: teiHeader/fileDesc/sourceDesc/msDesc/physDesc/objectDesc
+      quote: "<objectDesc form=\"codex\">"
+material:
+  text: Parchment
+  sources:
+    - path: archives/sinaiticus-project/01.xml
+      locator: teiHeader/fileDesc/sourceDesc/msDesc/physDesc/objectDesc/supportDesc/support
+      quote: Parchment
+languages:
+  - text: Greek
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msContents/textLang
+        quote: Greek
+holdings:
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Add. 43725
+    leaves: "148"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=20001&format=json
+        accessed: 2026-11-26
+        quote: Add. 43725
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Add. 43725
+    sources:
+      - path: archives/igntp-ephesians/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Add. 43725
+      - path: archives/igntp-galatians/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Add. 43725
+      - path: archives/intf/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Add. 43725
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Add. MS
+    sources:
+      - path: archives/igntp-john/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Add. MS
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - MS Add. 43725
+    sources:
+      - path: archives/igntp-romans/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library MS Add. 43725
+  - repository: Library
+    settlement: "Monastery of St Catherine, Sinai"
+    country: Egypt
+    idno:
+      - MS ΜΓ 1
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Egypt Monastery of St Catherine, Sinai Library MS ΜΓ 1"
+  - repository: Universitätsbibliothek
+    settlement: Leipzig
+    country: Germany
+    idno:
+      - Codex graecus 1
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Leipzig Universitätsbibliothek Codex graecus 1
+  - repository: National Library of Russia
+    settlement: St Petersburg
+    country: Russia
+    idno:
+      - Codex graecus 259
+      - Codex graecus 843
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Russia St Petersburg National Library of Russia Codex graecus 259 Codex graecus 843
+  - repository: The British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Additional Manuscript 43725
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London The British Library Additional Manuscript 43725
+  - repository: British Library
+    settlement: London
+    leaves: "347"
+    sources:
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: There are 347 leaves in the British Library in London; 43 leaves in Leipzig University Library; fragments of four leaves in the National Library of Russia in St Petersburg and 18 complete or fragmentary leaves in St Catherine’s Monastery in Egypt.
+  - repository: Leipzig University Library
+    settlement: Leipzig
+    leaves: "43"
+    sources:
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: There are 347 leaves in the British Library in London; 43 leaves in Leipzig University Library; fragments of four leaves in the National Library of Russia in St Petersburg and 18 complete or fragmentary leaves in St Catherine’s Monastery in Egypt.
+  - repository: National Library of Russia
+    settlement: St Petersburg
+    leaves: fragments of four leaves
+    sources:
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: There are 347 leaves in the British Library in London; 43 leaves in Leipzig University Library; fragments of four leaves in the National Library of Russia in St Petersburg and 18 complete or fragmentary leaves in St Catherine’s Monastery in Egypt.
+  - repository: National Library of Russia
+    settlement: St. Petersburg
+    leaves: parts of five leaves
+    sources:
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: There are 43 leaves held at the University Library in Leipzig and parts of five leaves are held at the National Library of Russia in St. Petersburg.
+  - repository: St Catherine’s Monastery
+    country: Egypt
+    leaves: 18 complete or fragmentary leaves
+    sources:
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: There are 347 leaves in the British Library in London; 43 leaves in Leipzig University Library; fragments of four leaves in the National Library of Russia in St Petersburg and 18 complete or fragmentary leaves in St Catherine’s Monastery in Egypt.
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IV
+    notBefore: 300
+    notAfter: 399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":399,\"gaNum\":1,\"orig\":\"IV\",\"docID\":20001,\"groupID\":\"\",\"primaryName\":1,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":399,\"gaNum\":1,\"orig\":\"IV\",\"docID\":20001,\"groupID\":\"\",\"primaryName\":1,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"
+  - text: Middle of fourth century
+    of: writing
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origDate
+        quote: "<origDate notBefore=\"320\" notAfter=\"370\">Middle of fourth century</origDate>"
+  - text: could have been produced at any point from the early fourth century to the early fifth century
+    of: writing
+    statedBy:
+      - name: Brent Nongbri
+        sources:
+          - title: The Date of Codex Sinaiticus
+            url: https://doi.org/10.1093/jts/flac083
+            citation: "Brent Nongbri, Journal of Theological Studies 73 (2022), 516-534 (abstract, as given by Crossref)"
+            accessed: 2026-11-26
+            quote: This essay surveys the evidence for the date of production of the codex and concludes that it could have been produced at any point from the early fourth century to the early fifth century.
+    publication: "Brent Nongbri, Journal of Theological Studies 73 (2022), 516-534 (abstract, as given by Crossref)"
+    sources:
+      - title: The Date of Codex Sinaiticus
+        url: https://doi.org/10.1093/jts/flac083
+        citation: "Brent Nongbri, Journal of Theological Studies 73 (2022), 516-534 (abstract, as given by Crossref)"
+        accessed: 2026-11-26
+        quote: concludes that it could have been produced at any point from the early fourth century to the early fifth century
+provenance:
+  - when:
+      text: "1844, 1853 and 1859"
+      from: 1844
+      to: 1859
+      sources:
+        - title: "Virtual reunification, virtual preservation and enhanced conservation"
+          url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+          citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+          accessed: 2026-11-26
+          quote: "Leaves and fragments of the manuscript were taken by Constantine Tischendorf so that they might be published in 1844, in 1853 and in 1859."
+    description: "Leaves and fragments of the manuscript were taken by Constantine Tischendorf so that they might be published in 1844, in 1853 and in 1859."
+    type: acquisition
+    agents:
+      - name: Constantine Tischendorf
+        sources:
+          - title: "Virtual reunification, virtual preservation and enhanced conservation"
+            url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+            citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+            accessed: 2026-11-26
+            quote: "Leaves and fragments of the manuscript were taken by Constantine Tischendorf so that they might be published in 1844, in 1853 and in 1859."
+    sources:
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: "Leaves and fragments of the manuscript were taken by Constantine Tischendorf so that they might be published in 1844, in 1853 and in 1859."
+  - when:
+      when: 1933
+      sources:
+        - title: "Virtual reunification, virtual preservation and enhanced conservation"
+          url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+          citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+          accessed: 2026-11-26
+          quote: "In 1933, the main surviving portion of the Codex was sold by the Soviet government."
+    description: "In 1933, the main surviving portion of the Codex was sold by the Soviet government. These are the 347 leaves now held by the British Library."
+    type: sale
+    agents:
+      - name: the Soviet government
+        kind: organisation
+        sources:
+          - title: "Virtual reunification, virtual preservation and enhanced conservation"
+            url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+            citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+            accessed: 2026-11-26
+            quote: "In 1933, the main surviving portion of the Codex was sold by the Soviet government."
+    sources:
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: "In 1933, the main surviving portion of the Codex was sold by the Soviet government. These are the 347 leaves now held by the British Library."
+  - when:
+      text: June 1975
+      when: "1975-06"
+      sources:
+        - title: "Virtual reunification, virtual preservation and enhanced conservation"
+          url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+          citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+          accessed: 2026-11-26
+          quote: recovered by the monks from the northern wall of the monastery in June 1975.
+    description: The 18 complete or fragmentary leaves remaining at Saint Catherine’s Monastery were recovered by the monks from the northern wall of the monastery in June 1975.
+    type: discovery
+    place: "the northern wall of Saint Catherine's Monastery"
+    sources:
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: The 18 complete or fragmentary leaves remaining at Saint Catherine’s Monastery were recovered by the monks from the northern wall of the monastery in June 1975.
+reproductions:
+  - id: ntvmr-10
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 296 page images listed
+    owner: "Images © The British Library Board. All Rights Reserved. British Library, London"
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=20001
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=20001&format=json
+        accessed: 2026-11-26
+        quote: "Images © The British Library Board. All Rights Reserved. British Library, London"
+  - id: sinaiticus-project-1
+    kind: facsimile
+    when:
+      text: 1911 and 1922
+      from: 1911
+      to: 1922
+      sources:
+        - path: archives/sinaiticus-project/01.xml
+          locator: teiHeader/fileDesc/sourceDesc/msDesc/additional/surrogates
+          quote: "Black and white facsimile by H. and K. Lake, 1911 and 1922."
+    description: "Black and white facsimile by H. and K. Lake, 1911 and 1922."
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/additional/surrogates
+        quote: "Black and white facsimile by H. and K. Lake, 1911 and 1922."
+  - id: sinaiticus-project-2
+    kind: digital-colour
+    when:
+      text: in 2006-2009
+      from: 2006
+      to: 2009
+      sources:
+        - path: archives/sinaiticus-project/01.xml
+          locator: teiHeader/fileDesc/sourceDesc/msDesc/additional/surrogates
+          quote: Colour digital images taken by the Codex Sinaiticus Project team in 2006-2009.
+    description: Colour digital images taken by the Codex Sinaiticus Project team in 2006-2009.
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/additional/surrogates
+        quote: Colour digital images taken by the Codex Sinaiticus Project team in 2006-2009.
+  - id: sinaiticus-project-3
+    description: Images online at http://www.codexsinaiticus.org/en/manuscript.aspx
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/additional/surrogates
+        quote: Images online at http://www.codexsinaiticus.org/en/manuscript.aspx
+  - id: csp-digitisation
+    kind: digital-colour
+    description: "Each leaf was digitised using standard lighting and raking lighting, the latter to reveal physical characteristics of the manuscript."
+    madeBy:
+      - name: Codex Sinaiticus Project
+        kind: organisation
+        sources:
+          - title: "Virtual reunification, virtual preservation and enhanced conservation"
+            url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+            citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+            accessed: 2026-11-26
+            quote: "The Codex Sinaiticus Project has, over the past seven years, worked towards the July 2009 web launch of images of all the leaves."
+    lighting: standard lighting and raking lighting
+    coverage: all the leaves
+    where: in situ in the four locations
+    sources:
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: "Each leaf was digitised using standard lighting and raking lighting, the latter to reveal physical characteristics of the manuscript."
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: It was agreed to digitise the manuscript in situ in the four locations.
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: "The Codex Sinaiticus Project has, over the past seven years, worked towards the July 2009 web launch of images of all the leaves."

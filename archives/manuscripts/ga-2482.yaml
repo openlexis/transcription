@@ -1,0 +1,32 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2482
+identifiers:
+  - scheme: GA
+    value: "2482"
+    sources:
+      - path: archives/igntp-2thessalonians/2482.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>2482</idno> </altIdentifier>"
+      - path: archives/igntp-galatians/2482.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>2482</idno></altIdentifier>"
+  - scheme: Liste
+    value: "32482"
+    sources:
+      - path: archives/igntp-2thessalonians/2482.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>32482</idno> </altIdentifier>"
+      - path: archives/igntp-galatians/2482.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>32482</idno></altIdentifier>"
+holdings:
+  - repository: "Biblioteca Comunale dell'Archiginnasio"
+    settlement: Bologna
+    country: Italy
+    idno:
+      - A. 3
+    sources:
+      - path: archives/igntp-galatians/2482.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Italy Bologna Biblioteca Comunale dell'Archiginnasio A. 3"

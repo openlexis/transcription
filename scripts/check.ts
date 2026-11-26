@@ -7,6 +7,7 @@ import { spawnSync } from "node:child_process";
 import { isPinnedList, listSpecs, loadSpecWithSources, type FrozenSources, type PinnedTranscript } from "./sources";
 import { readSpecLicense, type SpecLicense } from "./lib/spec";
 import { contractPins, loadPinnedContract, validateCompilation, type Contract } from "./lib/contract";
+import { checkRecords } from "./lib/records-check";
 
 // bun run check                              every specification and every compilation in transcripts/
 // bun run check --spec <ULID> --dir <folder> [--books Obad,Jonah]
@@ -57,6 +58,11 @@ for (const { id, path } of listSpecs()) {
     } catch (e) {
       fails.push(String(e instanceof Error ? e.message : e));
     }
+  }
+  const recordPins = (spec as unknown as { records?: unknown }).records;
+  if (recordPins !== undefined) {
+    if (isPinnedList(recordPins)) checkPins(`${at} records`, recordPins);
+    else fails.push(`${at}: records must be a list of {path, commit}`);
   }
   if (isPinnedList(spec.sources)) {
     pinnedSpecs++;
@@ -243,6 +249,10 @@ for (const specId of onlyDir ? [] : readdirSync(`${ROOT}transcripts`).sort()) {
   }
 }
 
+// The archive records: one YAML file per manuscript and per transcription file (docs/archive-records.md).
+const rec = onlyDir ? undefined : checkRecords(ROOT);
+if (rec) fails.push(...rec.fails);
+
 const s = ((performance.now() - t0) / 1000).toFixed(2);
 if (fails.length) {
   console.log(fails.slice(0, 50).join("\n"));
@@ -250,5 +260,5 @@ if (fails.length) {
   process.exit(1);
 }
 console.log(
-  `OK: ${pinnedSpecs} specification(s) with an embedded transcript list, ${specFolders} specification folder(s), ${pinnedChecked} pinned transcripts, ${compilations} compilation(s) (${contractChecked} against a pinned contract), ${booksChecked} books, ${witsChecked} witness records, ${appsChecked} <app> elements, ${certChecked} <certainty> elements verified in ${s} s`,
+  `OK: ${pinnedSpecs} specification(s) with an embedded transcript list, ${specFolders} specification folder(s), ${pinnedChecked} pinned transcripts, ${compilations} compilation(s) (${contractChecked} against a pinned contract), ${booksChecked} books, ${witsChecked} witness records, ${appsChecked} <app> elements, ${certChecked} <certainty> elements${rec ? `, ${rec.manuscripts} manuscript and ${rec.transcriptions} transcription records (${rec.quotes} quotes found in their files)` : ""} verified in ${s} s`,
 );

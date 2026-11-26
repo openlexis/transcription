@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p93
+names:
+  - text: Papyrus 93
+    language: en
+    sources:
+      - path: archives/igntp-john/P93.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 93</msName>"
+identifiers:
+  - scheme: GA
+    value: P93
+    sources:
+      - path: archives/igntp-john/P93.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P93</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10093"
+    sources:
+      - path: archives/igntp-john/P93.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10093</idno></altIdentifier>"
+  - scheme: TM
+    value: "61650"
+    sources:
+      - path: archives/igntp-john/P93.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61650</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2800"
+    sources:
+      - path: archives/igntp-john/P93.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2800</idno></altIdentifier>"
+holdings:
+  - repository: "Istituto Papirologico 'G Vitelli'"
+    settlement: Florence
+    country: Italy
+    idno:
+      - PSI Inv. 108
+    sources:
+      - path: archives/igntp-john/P93.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Italy Florence Istituto Papirologico 'G Vitelli' PSI Inv. 108"
+  - repository: Istituto Papirologico
+    settlement: Florence
+    country: Italy
+    idno:
+      - PSI inv. 108
+    sources:
+      - path: archives/intf/P93.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Florence Istituto Papirologico PSI inv. 108
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: V
+    notBefore: 400
+    notAfter: 499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":499,\"gaNum\":\"P93\",\"orig\":\"V\",\"docID\":10093,\"groupID\":\"\",\"primaryName\":\"P93\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":499,\"gaNum\":\"P93\",\"orig\":\"V\",\"docID\":10093,\"groupID\":\"\",\"primaryName\":\"P93\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"

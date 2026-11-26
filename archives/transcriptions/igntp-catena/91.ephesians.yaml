@@ -1,0 +1,91 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: igntp-catena/91.ephesians
+manuscript: ga-91
+file: archives/igntp-catena/91.ephesians.xml
+title:
+  text: A transcription of the Pseudo-Oecumenian Catena on Ephesians in GA 91
+  sources:
+    - path: archives/igntp-catena/91.ephesians.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A transcription of the Pseudo-Oecumenian Catena on Ephesians in GA 91
+people:
+  - name: "The Institute for Textual Scholarship and Electronic Editing (ITSEE), University of Birmingham UK"
+    kind: organisation
+    roles:
+      - cre
+      - pbl
+    statement: Created by
+    sources:
+      - path: archives/igntp-catena/91.ephesians.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: "Created by The Institute for Textual Scholarship and Electronic Editing (ITSEE), University of Birmingham UK"
+      - path: archives/igntp-catena/91.ephesians.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: "The Institute for Textual Scholarship and Electronic Editing (ITSEE), University of Birmingham UK"
+  - name: Clark R. Bates
+    roles:
+      - trc
+    statement: Transcribed by
+    sources:
+      - path: archives/igntp-catena/91.ephesians.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[2]"
+        quote: Transcribed by Clark R. Bates
+  - name: "Arts and Humanities Research Council, Midlands4Cities Doctoral Training Scheme"
+    roles:
+      - fnd
+    sources:
+      - path: archives/igntp-catena/91.ephesians.xml
+        locator: "teiHeader/fileDesc/titleStmt/funder[1]"
+        quote: "Arts and Humanities Research Council, Midlands4Cities Doctoral Training Scheme."
+made:
+  - text: "Collection period: October 2020 to February 2023"
+    from: "2020-10"
+    to: "2023-02"
+    sources:
+      - title: University of Birmingham eData Repository
+        url: https://edata.bham.ac.uk/1100/
+        accessed: 2026-11-26
+        quote: From To October 2020 February 2023
+madeFrom:
+  - kind: images
+    description: Data transcribed into Excel spreadsheets from digital images of manuscripts.
+    sources:
+      - title: University of Birmingham eData Repository
+        url: https://edata.bham.ac.uk/1100/
+        accessed: 2026-11-26
+        quote: Data transcribed into Excel spreadsheets from digital images of manuscripts.
+version:
+  text: "Version 1.0, published on 21.03.2024"
+  label: "1.0"
+  when: 2024-03-21
+  sources:
+    - path: archives/igntp-catena/91.ephesians.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: "Version 1.0, published on 21.03.2024"
+method:
+  guidelines:
+    - text: The encoding is based on version 1.6 of the IGNTP Guidelines available at.
+      sources:
+        - path: archives/igntp-catena/91.ephesians.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: The encoding is based on version 1.6 of the IGNTP Guidelines available at.
+  tools:
+    - text: Data transcribed into Excel spreadsheets from digital images of manuscripts. Data converted by scripts into XML and HTML for online publication
+      sources:
+        - title: University of Birmingham eData Repository
+          url: https://edata.bham.ac.uk/1100/
+          accessed: 2026-11-26
+          quote: "Data transcribed into Excel spreadsheets from digital images of manuscripts. Data processing and preparation activities: Data converted by scripts into XML and HTML for online publication"
+  encoding:
+    - text: It is an extended version of the TEI P5 schema.
+      sources:
+        - path: archives/igntp-catena/91.ephesians.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: It is an extended version of the TEI P5 schema.
+rights:
+  statement: Attribution 4.0 International (CC BY 4.0) Available for re-use under a Creative Commons license provided attribution is made to the original creators.
+  sources:
+    - path: archives/igntp-catena/91.ephesians.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: Attribution 4.0 International (CC BY 4.0) Available for re-use under a Creative Commons license provided attribution is made to the original creators.

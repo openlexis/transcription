@@ -1,0 +1,47 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2766
+identifiers:
+  - scheme: GA
+    value: "2766"
+    sources:
+      - path: archives/igntp-john/2766.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>2766</idno> </altIdentifier>"
+  - scheme: Liste
+    value: "32766"
+    sources:
+      - path: archives/igntp-john/2766.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>32766</idno> </altIdentifier>"
+holdings:
+  - repository: "Duke University, David M. Rubenstein Library"
+    settlement: "Durham, NC"
+    country: USA
+    idno:
+      - Greek MS 031
+    sources:
+      - path: archives/intf/2766.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Durham, NC Duke University, David M. Rubenstein Library Greek MS 031"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XIII
+    notBefore: 1200
+    notAfter: 1299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1299,\"gaNum\":2766,\"orig\":\"XIII\",\"docID\":32766,\"groupID\":\"\",\"primaryName\":2766,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1299,\"gaNum\":2766,\"orig\":\"XIII\",\"docID\":32766,\"groupID\":\"\",\"primaryName\":2766,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1200}"

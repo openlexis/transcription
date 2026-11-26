@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-252
+holdings:
+  - repository: Russian State Archive of Ancient Acts (RGADA)
+    settlement: Moscow
+    country: Russia
+    idno:
+      - Ед. хр. 5 (A 145)
+    sources:
+      - path: archives/intf/252.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Russia Moscow Russian State Archive of Ancient Acts (RGADA) Ед. хр. 5 (A 145)
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XIII/XIV
+    notBefore: 1200
+    notAfter: 1399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1399,\"gaNum\":252,\"orig\":\"XIII/XIV\",\"docID\":30252,\"groupID\":\"\",\"primaryName\":252,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1399,\"gaNum\":252,\"orig\":\"XIII/XIV\",\"docID\":30252,\"groupID\":\"\",\"primaryName\":252,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1200}"

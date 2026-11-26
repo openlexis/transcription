@@ -1,0 +1,16 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1905
+holdings:
+  - repository: Bibliothèque nationale de France
+    settlement: Paris
+    country: France
+    idno:
+      - Coislin 27
+    sources:
+      - path: archives/igntp-catena/1905.romans.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque nationale de France Coislin 27
+      - path: archives/igntp-catena/1905.ephesians.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque nationale de France Coislin 27

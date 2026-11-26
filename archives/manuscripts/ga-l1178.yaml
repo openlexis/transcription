@@ -1,0 +1,68 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-l1178
+identifiers:
+  - scheme: GA
+    value: L1178
+    sources:
+      - path: archives/igntp-ephesians/L1178.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>L1178</idno></altIdentifier>"
+      - path: archives/igntp-galatians/L1178.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>L1178</idno></altIdentifier>"
+      - path: archives/igntp-romans/L1178.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>L1178</idno></altIdentifier>"
+  - scheme: Liste
+    value: "41178"
+    sources:
+      - path: archives/igntp-ephesians/L1178.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>41178</idno></altIdentifier>"
+      - path: archives/igntp-galatians/L1178.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>41178</idno></altIdentifier>"
+      - path: archives/igntp-romans/L1178.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>41178</idno></altIdentifier>"
+holdings:
+  - repository: St. John the Theologian Monastery
+    settlement: Patmos
+    country: Greece
+    idno:
+      - "11"
+    sources:
+      - path: archives/igntp-ephesians/L1178.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Patmos St. John the Theologian Monastery 11
+      - path: archives/igntp-galatians/L1178.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Patmos St. John the Theologian Monastery 11
+      - path: archives/igntp-romans/L1178.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Patmos St. John the Theologian Monastery 11
+      - path: archives/intf/L1178.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Patmos St. John the Theologian Monastery 11
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XI
+    notBefore: 1000
+    notAfter: 1099
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1099,\"gaNum\":\"L1178\",\"orig\":\"XI\",\"docID\":41178,\"groupID\":\"\",\"primaryName\":\"L1178\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1099,\"gaNum\":\"L1178\",\"orig\":\"XI\",\"docID\":41178,\"groupID\":\"\",\"primaryName\":\"L1178\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"

@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p66
+names:
+  - text: Papyrus 66
+    language: en
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 66</msName>"
+identifiers:
+  - scheme: GA
+    value: P66
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P66</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10066"
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10066</idno></altIdentifier>"
+  - scheme: TM
+    value: "61627"
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61627</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2777"
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2777</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Bodmeriana
+    settlement: Cologny
+    country: Switzerland
+    idno:
+      - P. Bodmer II
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Switzerland Cologny Biblioteca Bodmeriana P. Bodmer II
+  - repository: Institut für Altertumskunde
+    settlement: Köln
+    country: Germany
+    idno:
+      - Inv. Nr. 4274/4298
+    sources:
+      - path: archives/intf/P66.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Köln Institut für Altertumskunde Inv. Nr. 4274/4298
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III (A)
+    notBefore: 200
+    notAfter: 225
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":225,\"gaNum\":\"P66\",\"orig\":\"III (A)\",\"docID\":10066,\"groupID\":\"\",\"primaryName\":\"P66\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":225,\"gaNum\":\"P66\",\"orig\":\"III (A)\",\"docID\":10066,\"groupID\":\"\",\"primaryName\":\"P66\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"

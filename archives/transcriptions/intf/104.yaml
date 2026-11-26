@@ -1,0 +1,63 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: intf/104
+manuscript: ga-104
+file: archives/intf/104.xml
+title:
+  text: "104"
+  sources:
+    - path: archives/intf/104.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: "104"
+people:
+  - name: The Institut für neutestamentliche Textforschung
+    roles:
+      - pbl
+    sources:
+      - path: archives/intf/104.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institut für neutestamentliche Textforschung
+  - name: Trained undergraduate students in Münster
+    kind: group
+    roles:
+      - trc
+    statement: The initial transcriptions are made by trained undergraduate students in Münster
+    generalPractice: true
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: The initial transcriptions are made by trained undergraduate students in Münster
+method:
+  practices:
+    - kind: independent-double-transcription
+      generalPractice: true
+      text: Two independent initial transcriptions are made of each manuscript.
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: Both organizations observe the same practice of producing two independent initial transcriptions
+    - kind: reconciliation
+      generalPractice: true
+      text: "A third person, usually the transcription coordinator, reconciles the two with reference to the images of the manuscript and makes the final file."
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: "these are reconciled by a third person (usually the transcription coordinator) with reference to the images of the manuscript, who creates a final file"
+rights:
+  statement: (C) 2026 Institut für Neutestamentliche Textforschung. This work is licensed under a Creative Commons Attribution 4.0 Unported License
+  sources:
+    - path: archives/intf/104.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: (C) 2026 Institut für Neutestamentliche Textforschung. This work is licensed under a Creative Commons Attribution 4.0 Unported License
+generatedBy:
+  text: "edition metadata assembled by VMRCRE (Virtual Manuscript Room Collaborative Research Environment), transcript/get"
+  sources:
+    - path: archives/intf/104.xml
+      locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+      quote: "edition metadata assembled by VMRCRE (Virtual Manuscript Room Collaborative Research Environment), transcript/get"

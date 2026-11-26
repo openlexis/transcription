@@ -1,0 +1,45 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-078
+names:
+  - text: "078"
+    language: la
+    sources:
+      - path: archives/igntp-john/078.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">078</msName>"
+identifiers:
+  - scheme: GA
+    value: "078"
+    sources:
+      - path: archives/igntp-john/078.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>078</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20078"
+    sources:
+      - path: archives/igntp-john/078.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20078</idno></altIdentifier>"
+  - scheme: TM
+    value: "61830"
+    sources:
+      - path: archives/igntp-john/078.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61830</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2984"
+    sources:
+      - path: archives/igntp-john/078.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2984</idno></altIdentifier>"
+holdings:
+  - repository: National Library of Russia
+    settlement: St Petersburg
+    country: Russia
+    idno:
+      - "Gr. 13, fols. 1-7 (lower script)"
+    sources:
+      - path: archives/igntp-john/078.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Russia St Petersburg National Library of Russia Gr. 13, fols. 1-7 (lower script)"

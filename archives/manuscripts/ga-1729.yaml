@@ -1,0 +1,71 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1729
+identifiers:
+  - scheme: GA
+    value: "1729"
+    sources:
+      - path: archives/igntp-2thessalonians/1729.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>1729</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/1729.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1729</idno></altIdentifier>"
+      - path: archives/igntp-romans/1729.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1729</idno></altIdentifier>"
+  - scheme: Liste
+    value: "31729"
+    sources:
+      - path: archives/igntp-2thessalonians/1729.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>31729</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/1729.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31729</idno></altIdentifier>"
+      - path: archives/igntp-romans/1729.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31729</idno></altIdentifier>"
+holdings:
+  - repository: Vatopedi
+    settlement: Athos
+    country: Greece
+    idno:
+      - "968"
+    sources:
+      - path: archives/igntp-ephesians/1729.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athos Vatopedi 968
+      - path: archives/igntp-romans/1729.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athos Vatopedi 968
+  - repository: Vatopedi Monastery
+    settlement: Athos
+    country: Greece
+    idno:
+      - "968"
+    sources:
+      - path: archives/intf/1729.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athos Vatopedi Monastery 968
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XVI
+    notBefore: 1500
+    notAfter: 1599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1599,\"gaNum\":1729,\"orig\":\"XVI\",\"docID\":31729,\"groupID\":\"\",\"primaryName\":1729,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1599,\"gaNum\":1729,\"orig\":\"XVI\",\"docID\":31729,\"groupID\":\"\",\"primaryName\":1729,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1500}"

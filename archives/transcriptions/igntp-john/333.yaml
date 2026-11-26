@@ -1,0 +1,218 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: igntp-john/333
+manuscript: ga-333
+file: archives/igntp-john/333.xml
+title:
+  text: A Transcription of John in 333
+  sources:
+    - path: archives/igntp-john/333.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A Transcription of John in 333
+people:
+  - name: the International Greek New Testament Project
+    kind: organisation
+    roles:
+      - cre
+    statement: Created by
+    sources:
+      - path: archives/igntp-john/333.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by the International Greek New Testament Project
+      - path: archives/igntp-john/333.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2010 and 2013.
+  - name: The Arts and Humanities Research Council
+    roles:
+      - fnd
+    sources:
+      - path: archives/igntp-john/333.xml
+        locator: "teiHeader/fileDesc/titleStmt/funder[1]"
+        quote: The Arts and Humanities Research Council
+  - name: The Institute for Textual Scholarship and Electronic Editing
+    roles:
+      - spn
+      - pbl
+    sources:
+      - path: archives/igntp-john/333.xml
+        locator: "teiHeader/fileDesc/titleStmt/sponsor[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing
+      - path: archives/igntp-john/333.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: University of Birmingham
+    roles:
+      - pbl
+    sources:
+      - path: archives/igntp-john/333.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: Catherine Smith
+    roles:
+      - mrk
+    statement: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+    sources:
+      - path: archives/igntp-john/333.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+        quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+  - name: "IGNTP contributors, including volunteers and postdoctoral scholars"
+    kind: group
+    roles:
+      - trc
+    statement: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+    generalPractice: true
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+made:
+  - text: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2010 and 2013.
+    from: 2010
+    to: 2013
+    sources:
+      - path: archives/igntp-john/333.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2010 and 2013.
+published:
+  - text: 8.8.2013
+    when: 2013-08-08
+    sources:
+      - path: archives/igntp-john/333.xml
+        locator: teiHeader/fileDesc/publicationStmt/date
+        quote: "<date>8.8.2013</date>"
+version:
+  text: "Version 1.0, created on 8.8.2013"
+  label: "1.0"
+  when: 2013-08-08
+  sources:
+    - path: archives/igntp-john/333.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: "Version 1.0, created on 8.8.2013"
+revisions:
+  entries:
+    - when: 2016-03-23
+      description: Transcription changed at 18.28 by David Parker.
+      "n": "18"
+    - when: 2015-12-06
+      description: Nicetas atttribution of commentary removed from title by David Parker.
+      "n": "17"
+    - when: 2015-03-13
+      description: 20.30 and 20.31 tags (omitted verses at end of witness) deleted by Rachel Kevern.
+      "n": "16"
+    - when: 2014-10-29
+      description: "Unclear and supplied tags altered at 2.5,6,7 and 8 by Rachel Kevern."
+      "n": "15"
+    - when: 2014-09-02
+      description: το deleted from 5.27 by Rachel Kevern.
+      "n": "14"
+    - when: 2014-07-25
+      description: "The following folios have been reordered to correct the order of the biblical text: 367, 368, 369, 370, 371 and 372 by Rachel Kevern."
+      "n": "13"
+    - when: 2014-07-25
+      description: "αγουσι changed to αγουσιν at 18.28; ος λεγεται deleted at 19.17; α[υτο]υ changed to απ [αυτ]ου at 19.36; whole of 20.17 added; second half of 20.20 added; first half of 20.21 added; θωμα deleted at 20.29 by Rachel Kevern."
+      "n": "12"
+    - when: 2014-07-24
+      description: "ζησεται changed to ζησει at 6.58, τουτων removed at 7.31; ο ιησους deleted from 8.20; second τω changed to του at 8.38; εμαυτω changed to επ αυτω at 11.38; ο changed to ο[λος] at 12.19; by Rachel Kevern."
+      "n": "11"
+    - when: 2014-07-23
+      description: "[αυτον] added at 1.19; 1.31 moved and completed; [ο] ις- added at 1.43; του removed at 1.45; ιουδαιων changed to ιουδαιου at 3.25; παλιν deleted at 4.3; [σου] changed to σου at 4.16; ημελλε changed to εμελλε at 4.47; [απ]εκρινετο changed to [απ]εκρινατο at 5.7; το added at beginning of 5.27; second εγω deleted, [ποιειν] added, ουδεν moved and at οτι ου ζητω το θελημα το εμον αλλα το θελημα του πεμψαντος με πατρος added at 5.30; by Rachel Kevern."
+      "n": "10"
+    - when: 2014-07-22
+      description: "App and ill tags removed at 20.26, 20.27 (x2), 20.28, 20.29, 20.24, 20.25 (x3), 20.21, 20.23 by Rachel Kevern."
+      "n": "9"
+    - when: 2014-07-21
+      description: "App and ill tags removed at 18.24, 20.7, 20.8, 20.18 (x2), 20.19 (x3), 20.20, 20.14, 20.15, 20.16 (x2) by Rachel Kevern."
+      "n": "8"
+    - when: 2014-05-07
+      description: "ακουσι changed to ακουουσι at 10.27, επεσεν changed to επεσε at 11.32, πυρ το βαλλουσι changed to το πυρ βαλλουσι at 15.6, μεινη deleted from 15.11, ουν changed to ον and editorial note added at 18.9, supplied [κειμενα] deleted at 20.5, ης changed to εις at 20.24, ερχεται removed from * and C at 20.26 by Rachel Kevern."
+      "n": "7"
+    - when: 2014-04-18
+      description: "Word break at 1.15 and 20.25 corrected, καλει removed at 10.3, μαριαν changed to μαρθα at 11.28, αλλα changed to αλλ at 11.54 by Rachel Kevern."
+      "n": "6"
+    - when: 2013-12-05
+      description: "App and ill tags removed, at 3.29, 6.47, 7.50, 7.51, 8.43, 8.51, 8.56, 8.59 (x2), 9.29, 10.1, 10.2, 10.3, 10.4, 10.5, 10.24, 10.25, 10.29, 10.30, 10.31, 10.34, 10.35, 10.40 (x2), 11.4, 11.6 (x3), 11.7 (x3), 11.21, 11.22, 11.32, 11.36, 11.37, 11.38 (x2), 11.39 (x2), 11.40, 11.44 (x2), 11.49, 11.51, 11.52, 11.54 (x2), 11.55, 11.56, 12.4, 12.6, 12.19, 12.27, 21.31, 12.33 (x2), 12.35, 12.36, 12.37, 12.38, 12.40, 12.47 (x2), 13.3, 13.5, 13.6, 13.11, 13.15, 13.16, 13.18, 13.19, 13.20, 13.26, 13.27 (x2), 13.28, 13.30 (x2), 13.31, 13.32, 13.33, 13.35, 13.37, 13.38, 14.5, 14.6, 14.8, 14.9 (x2), 14.16, 14.18, 14.19, 14.21, 14.27, 14.28 (x2), 14.31 (x2), 15.3, 15.6 (x2), 15.8, 15.16, 15.19 (x2), 15.22, 16.2 (x2), 16.12 (x2), 16.19 (x2), 16.21 (x4), 16.22, 16.25 (x3), 16.28, 16.29, 16.30, 16.33, 17.7, 17.8, 17.10, 17.14, 17.15, 17.19, 17.22, 17.23, 17.24, 17.25, 17.26, 18.1, 18.3, 18.4, 18.5, 18.6, 18.10 (x2), 18.11 (x2), 18.12, 18.13, 18.14, 18.15, 18.16, 18.17, 18.18, 18.20 (x2), 18.23, 18.25 (x2), 18.26, 18.28 (x2), 18.29, 18.30, 18.35, 18.40, 19.27, 20.8, 20.9, 20.10, 20.18 (x2), 20.14, 20.15; 8.39 and 8.40 edited; overlines removed from proper names by Rachel Kevern and David Parker."
+      "n": "5"
+    - when: 2013-11-22
+      description: "Transcription of κλαυσετε at 16.20 changed, correction at 17.22 deleted by David Parker."
+      "n": "4"
+    - when: 2013-11-18
+      description: Word break at 17.22 corrected by David Parker.
+      "n": "3"
+    - when: 2013-11-15
+      description: Correction in 13.5 removed and ed note added by David Parker.
+      "n": "2"
+    - when: 2013-11-21
+      description: NomSac tag added at 1.47 by David Parker.
+      "n": "2"
+    - when: 2013-11-13
+      description: Iota adscript removed by David Parker.
+      "n": "1"
+    - when: 2013-08-08
+      description: Converted from plain text by Catherine Smith using Python conversion scripts 1.0.
+      "n": "0"
+  sources:
+    - path: archives/igntp-john/333.xml
+      locator: teiHeader/revisionDesc
+      quote: Transcription changed at 18.28 by David Parker.
+method:
+  practices:
+    - kind: conversion-to-xml
+      text: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+      sources:
+        - path: archives/igntp-john/333.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+    - kind: conversion-to-xml
+      text: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+      sources:
+        - path: archives/igntp-john/333.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+    - kind: independent-double-transcription
+      generalPractice: true
+      text: Two independent initial transcriptions are made of each manuscript.
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: Both organizations observe the same practice of producing two independent initial transcriptions
+    - kind: reconciliation
+      generalPractice: true
+      text: "A third person, usually the transcription coordinator, reconciles the two with reference to the images of the manuscript and makes the final file."
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: "these are reconciled by a third person (usually the transcription coordinator) with reference to the images of the manuscript, who creates a final file"
+  guidelines:
+    - text: The original transcription guidelines can be found at
+      sources:
+        - path: archives/igntp-john/333.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: The original transcription guidelines can be found at
+    - text: The XML specifications used are version 1.4 of the IGNTP Guidelines available at
+      sources:
+        - path: archives/igntp-john/333.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[3]"
+          quote: The XML specifications used are version 1.4 of the IGNTP Guidelines available at
+  tools:
+    - text: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+      sources:
+        - path: archives/igntp-john/333.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+    - text: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+      sources:
+        - path: archives/igntp-john/333.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+rights:
+  statement: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."
+  sources:
+    - path: archives/igntp-john/333.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."

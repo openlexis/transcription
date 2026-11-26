@@ -1,0 +1,22 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1919
+holdings:
+  - repository: Biblioteca Medicea Laurenziana
+    settlement: Firenze
+    country: Italy
+    idno:
+      - Plut. 10.04
+    sources:
+      - path: archives/igntp-catena/1919.romans.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Firenze Biblioteca Medicea Laurenziana Plut. 10.04
+  - repository: Biblioteca Medicea Laurenziana
+    settlement: Florence
+    country: Italy
+    idno:
+      - Plut. 10.04
+    sources:
+      - path: archives/igntp-catena/1919.ephesians.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Florence Biblioteca Medicea Laurenziana Plut. 10.04

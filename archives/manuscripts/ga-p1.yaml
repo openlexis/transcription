@@ -1,0 +1,67 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p1
+holdings:
+  - repository: Penn Museum
+    settlement: "Philadelphia, PA"
+    country: USA
+    idno:
+      - E 2746
+    leaves: 2 Frg (1 Dbl.)
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10001&format=json
+        accessed: 2026-11-26
+        quote: E 2746
+  - repository: Penn Museum
+    settlement: "Philadelphia, PA"
+    country: USA
+    idno:
+      - E 2746
+    sources:
+      - path: archives/intf/P1.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Philadelphia, PA Penn Museum E 2746"
+  - repository: Penn Museum
+    settlement: "Philadelphia, PA"
+    country: USA
+    idno:
+      - E 2746
+    leaves: 2 Frg (1 Dbl.)
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/liste/search/?docID=10001&detail=page&format=json
+        accessed: 2026-11-26
+        quote: "\"shelfNumber\": \"E 2746\""
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III
+    notBefore: 200
+    notAfter: 299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":299,\"gaNum\":\"P1\",\"orig\":\"III\",\"docID\":10001,\"groupID\":\"\",\"primaryName\":\"P1\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":299,\"gaNum\":\"P1\",\"orig\":\"III\",\"docID\":10001,\"groupID\":\"\",\"primaryName\":\"P1\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+reproductions:
+  - id: ntvmr-10
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 2 page images listed
+    owner: Images© PennMuseum
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10001
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10001&format=json
+        accessed: 2026-11-26
+        quote: Images© PennMuseum

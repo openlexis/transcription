@@ -1,0 +1,13 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: tal-florentin-sp/Nablus6
+manuscript: sp-nablus6
+file: archives/tal-florentin-sp/Nablus6.xml
+basedOn:
+  - name: "Moshe Florentin and Abraham Tal, The Samaritan Pentateuch (Open Book Publishers, 2024)"
+    url: https://doi.org/10.11647/OBP.0415
+    relation: derived-from
+    sources:
+      - url: https://github.com/DT-UCPH/sp/blob/e8a120f2e92b6558fd39bbe72f830ded871a0a47/README.md
+        accessed: 2026-11-13
+        quote: "From version 7.5.0, the dataset contains the readings of Moshe Florentin and Abraham Tal, The Samaritan Pentateuch"

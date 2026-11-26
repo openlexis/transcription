@@ -1,0 +1,33 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0306
+names:
+  - text: "0306"
+    language: la
+    sources:
+      - path: archives/igntp-john/0306.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">0306</msName>"
+identifiers:
+  - scheme: GA
+    value: "0306"
+    sources:
+      - path: archives/igntp-john/0306.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0306</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20306"
+    sources:
+      - path: archives/igntp-john/0306.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20306</idno></altIdentifier>"
+holdings:
+  - repository: Bodleian Library
+    settlement: Oxford
+    country: United Kingdom
+    idno:
+      - "Selden Supra 9, fols. 114-20 (lower script)"
+    sources:
+      - path: archives/igntp-john/0306.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "United Kingdom Oxford Bodleian Library Selden Supra 9, fols. 114-20 (lower script)"

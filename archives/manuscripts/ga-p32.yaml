@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p32
+holdings:
+  - repository: John Rylands University Library of Manchester
+    settlement: Manchester
+    country: United Kingdom
+    idno:
+      - Gr. P. 5
+    sources:
+      - path: archives/intf/P32.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom Manchester John Rylands University Library of Manchester Gr. P. 5
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III (A)
+    notBefore: 200
+    notAfter: 225
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":225,\"gaNum\":\"P32\",\"orig\":\"III (A)\",\"docID\":10032,\"groupID\":\"\",\"primaryName\":\"P32\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":225,\"gaNum\":\"P32\",\"orig\":\"III (A)\",\"docID\":10032,\"groupID\":\"\",\"primaryName\":\"P32\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"

@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2206
+holdings:
+  - repository: Greek Orthodox Patriarchate of Alexandria
+    settlement: Alexandria
+    country: Egypt
+    idno:
+      - "37"
+    sources:
+      - path: archives/intf/2206.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Egypt Alexandria Greek Orthodox Patriarchate of Alexandria 37
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XV
+    notBefore: 1400
+    notAfter: 1499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1499,\"gaNum\":2206,\"orig\":\"XV\",\"docID\":32206,\"groupID\":\"\",\"primaryName\":2206,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1499,\"gaNum\":2206,\"orig\":\"XV\",\"docID\":32206,\"groupID\":\"\",\"primaryName\":2206,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1400}"

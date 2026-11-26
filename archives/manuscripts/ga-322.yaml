@@ -1,0 +1,26 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-322
+identifiers:
+  - scheme: GA
+    value: "322"
+    sources:
+      - path: archives/igntp-ephesians/322.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>322</idno></altIdentifier>"
+  - scheme: Liste
+    value: "30322"
+    sources:
+      - path: archives/igntp-ephesians/322.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>30322</idno></altIdentifier>"
+holdings:
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Harley 5620
+    sources:
+      - path: archives/igntp-ephesians/322.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Harley 5620

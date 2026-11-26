@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p63
+names:
+  - text: Papyrus 63
+    language: en
+    sources:
+      - path: archives/igntp-john/P63.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 63</msName>"
+identifiers:
+  - scheme: GA
+    value: P63
+    sources:
+      - path: archives/igntp-john/P63.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P63</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10063"
+    sources:
+      - path: archives/igntp-john/P63.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10063</idno></altIdentifier>"
+  - scheme: TM
+    value: "61661"
+    sources:
+      - path: archives/igntp-john/P63.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61661</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2811"
+    sources:
+      - path: archives/igntp-john/P63.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2811</idno></altIdentifier>"
+holdings:
+  - repository: "Staatliche Museen, Ägyptische Abteilung"
+    settlement: Berlin
+    country: Germany
+    idno:
+      - P. 11914
+    sources:
+      - path: archives/igntp-john/P63.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Germany Berlin Staatliche Museen, Ägyptische Abteilung P. 11914"
+  - repository: Staatliche Museen zu Berlin
+    settlement: Berlin
+    country: Germany
+    idno:
+      - P. 11914
+    sources:
+      - path: archives/intf/P63.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Berlin Staatliche Museen zu Berlin P. 11914
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VI (A)
+    notBefore: 500
+    notAfter: 525
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":525,\"gaNum\":\"P63\",\"orig\":\"VI (A)\",\"docID\":10063,\"groupID\":\"\",\"primaryName\":\"P63\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":525,\"gaNum\":\"P63\",\"orig\":\"VI (A)\",\"docID\":10063,\"groupID\":\"\",\"primaryName\":\"P63\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"

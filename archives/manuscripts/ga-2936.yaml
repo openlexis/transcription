@@ -1,0 +1,31 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2936
+identifiers:
+  - scheme: GA
+    value: "2936"
+    sources:
+      - path: archives/igntp-galatians/2936.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>2936</idno></altIdentifier>"
+      - path: archives/igntp-romans/2936.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>2936</idno></altIdentifier>"
+  - scheme: Liste
+    value: "32936"
+    sources:
+      - path: archives/igntp-galatians/2936.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>32936</idno></altIdentifier>"
+      - path: archives/igntp-romans/2936.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>32936</idno></altIdentifier>"
+holdings:
+  - repository: EBE
+    settlement: Athens
+    idno:
+      - "122"
+    sources:
+      - path: archives/igntp-romans/2936.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Athens EBE 122

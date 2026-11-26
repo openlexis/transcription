@@ -1,0 +1,78 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-022
+names:
+  - text: Codex Purpureus Petropolitanus
+    language: la
+    sources:
+      - path: archives/igntp-john/022.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Purpureus Petropolitanus</msName>"
+identifiers:
+  - scheme: GA
+    value: "022"
+    sources:
+      - path: archives/igntp-john/022.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>022</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20022"
+    sources:
+      - path: archives/igntp-john/022.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20022</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: "N"
+    sources:
+      - path: archives/igntp-john/022.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>N</idno></altIdentifier>"
+  - scheme: TM
+    value: "61753"
+    sources:
+      - path: archives/igntp-john/022.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61753</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2905"
+    sources:
+      - path: archives/igntp-john/022.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2905</idno></altIdentifier>"
+holdings:
+  - repository: "Unknown, formerly A. Spinola"
+    settlement: "Unknown, formerly Lerma"
+    sources:
+      - path: archives/igntp-john/022.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Unknown Unknown, formerly Lerma Unknown, formerly A. Spinola"
+  - repository: Byzantine and Christian Museum
+    settlement: Athens
+    country: Greece
+    idno:
+      - ΒΧΜ 862 (σπ. 21)
+    sources:
+      - path: archives/intf/022.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athens Byzantine and Christian Museum ΒΧΜ 862 (σπ. 21)
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VI
+    notBefore: 500
+    notAfter: 599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":599,\"gaNum\":22,\"orig\":\"VI\",\"docID\":20022,\"groupID\":\"\",\"primaryName\":22,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":599,\"gaNum\":22,\"orig\":\"VI\",\"docID\":20022,\"groupID\":\"\",\"primaryName\":22,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"

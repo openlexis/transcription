@@ -1,0 +1,26 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0176
+identifiers:
+  - scheme: GA
+    value: "0176"
+    sources:
+      - path: archives/igntp-galatians/0176.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0176</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20176"
+    sources:
+      - path: archives/igntp-galatians/0176.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20176</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Medicea Laurenziana
+    settlement: Florence
+    country: Italy
+    idno:
+      - PSI III 251
+    sources:
+      - path: archives/igntp-galatians/0176.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Florence Biblioteca Medicea Laurenziana PSI III 251

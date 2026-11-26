@@ -1,0 +1,123 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: uxlc/L.Chronicles_1
+manuscript: mt-l
+file: archives/uxlc/L.Chronicles_1.xml
+title:
+  text: 1 Chronicles
+  sources:
+    - path: archives/uxlc/L.Chronicles_1.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: 1 Chronicles
+people:
+  - name: Christopher V. Kimball
+    roles:
+      - pbl
+    statement: "Publisher:"
+    sources:
+      - path: archives/uxlc/L.Chronicles_1.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: "Publisher: Christopher V. Kimball mail@cvkimball.com"
+  - name: Daniel Holman
+    roles:
+      - ctb
+    statement: author of corrections
+    sources:
+      - path: archives/uxlc/L.Chronicles_1.xml
+        locator: teiHeader/fileDesc/notesStmt/correction/author
+        quote: "<author>Daniel Holman</author>"
+  - name: Stephen Salisbury
+    roles:
+      - ctb
+    statement: author of corrections
+    sources:
+      - path: archives/uxlc/L.Chronicles_1.xml
+        locator: teiHeader/fileDesc/notesStmt/correction/author
+        quote: Stephen Salisbury
+  - name: "Dotan BHLA: CVK"
+    roles:
+      - ctb
+    statement: author of corrections
+    sources:
+      - path: archives/uxlc/L.Chronicles_1.xml
+        locator: teiHeader/fileDesc/notesStmt/correction/author
+        quote: "Dotan BHLA: CVK"
+  - name: CVK
+    roles:
+      - ctb
+    statement: author of corrections
+    sources:
+      - path: archives/uxlc/L.Chronicles_1.xml
+        locator: teiHeader/fileDesc/notesStmt/correction/author
+        quote: CVK
+  - name: Ben Denckla
+    roles:
+      - ctb
+    statement: author of corrections
+    sources:
+      - path: archives/uxlc/L.Chronicles_1.xml
+        locator: teiHeader/fileDesc/notesStmt/correction/author
+        quote: Ben Denckla
+  - name: Moshe Greenberg
+    roles:
+      - ctb
+    statement: author of corrections
+    sources:
+      - path: archives/uxlc/L.Chronicles_1.xml
+        locator: teiHeader/fileDesc/notesStmt/correction/author
+        quote: Moshe Greenberg
+  - name: Shmuel Schreiber
+    roles:
+      - ctb
+    statement: author of corrections
+    sources:
+      - path: archives/uxlc/L.Chronicles_1.xml
+        locator: teiHeader/fileDesc/notesStmt/correction/author
+        quote: Shmuel Schreiber
+version:
+  text: Unicode/XML Leningrad Codex (UXLC) UXLC 2.6 19 Oct 2026 27.7 18 Oct 2026 06:43
+  label: UXLC 2.6
+  sources:
+    - path: archives/uxlc/L.Chronicles_1.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: Unicode/XML Leningrad Codex (UXLC) UXLC 2.6 19 Oct 2026 27.7 18 Oct 2026 06:43
+revisions:
+  entries:
+    - description: "WLC2XML[8 Jul 2024] - Transcription from Michigan-Claremont encoding to Unicode with XML markings. See details in notes."
+    - description: "ScanReplace/EditWLC[30 Dec 2020] - Edits/removes transcription notes; removes MDs."
+    - description: "ScanReplace/InsertCGJs[29 Dec 2020] - Places CGJ in Jerusalem VUV words and leading metegs."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2020.02.19."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2020.10.19."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2021.04.01."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2021.10.19."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2022.04.01."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2022.07.04."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2022.10.19."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2022.12.07."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2023.04.01."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2023.07.04."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2023.10.19."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2024.04.01."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2024.10.19."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2025.04.01."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2025.10.19."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2026.04.01."
+    - description: "Updater[2 May 2024] - Changes.xml file dated 2026.10.19."
+    - description: "ScanReplace/RemoveNewlines[29 Aug 2026] - Removes newlines (\\n) from w, q, k tags."
+  sources:
+    - path: archives/uxlc/L.Chronicles_1.xml
+      locator: teiHeader/fileDesc/editionStmt/respStmt
+      quote: "WLC2XML[8 Jul 2024] - Transcription from Michigan-Claremont encoding to Unicode with XML markings. See details in notes."
+basedOn:
+  - name: "wlc420_ps.txt, provided by the Groves Center"
+    relation: derived-from
+    sources:
+      - path: archives/uxlc/L.Chronicles_1.xml
+        locator: teiHeader/fileDesc/notesStmt/note
+        quote: The original text file wlc420_ps.txt was provided by the Groves Center.
+rights:
+  statement: Freely available
+  sources:
+    - path: archives/uxlc/L.Chronicles_1.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: Freely available

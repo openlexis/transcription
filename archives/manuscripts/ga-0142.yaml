@@ -1,0 +1,65 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0142
+identifiers:
+  - scheme: GA
+    value: "0142"
+    sources:
+      - path: archives/igntp-2thessalonians/0142.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>0142</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/0142.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0142</idno></altIdentifier>"
+      - path: archives/igntp-galatians/0142.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0142</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20142"
+    sources:
+      - path: archives/igntp-2thessalonians/0142.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>20142</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/0142.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20142</idno></altIdentifier>"
+      - path: archives/igntp-galatians/0142.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20142</idno></altIdentifier>"
+holdings:
+  - repository: Bayerische Staatsbibliothek (BSB)
+    settlement: München
+    country: Germany
+    idno:
+      - Cod. graec. 375
+    sources:
+      - path: archives/igntp-ephesians/0142.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany München Bayerische Staatsbibliothek (BSB) Cod. graec. 375
+      - path: archives/igntp-galatians/0142.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany München Bayerische Staatsbibliothek (BSB) Cod. graec. 375
+      - path: archives/intf/0142.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany München Bayerische Staatsbibliothek (BSB) Cod. graec. 375
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: X
+    notBefore: 900
+    notAfter: 999
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":999,\"gaNum\":142,\"orig\":\"X\",\"docID\":20142,\"groupID\":\"\",\"primaryName\":142,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":999,\"gaNum\":142,\"orig\":\"X\",\"docID\":20142,\"groupID\":\"\",\"primaryName\":142,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"

@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-803
+holdings:
+  - repository: National Library
+    settlement: Athens
+    country: Greece
+    idno:
+      - EBE 88
+    sources:
+      - path: archives/intf/803.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athens National Library EBE 88
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XVI
+    notBefore: 1500
+    notAfter: 1599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1599,\"gaNum\":803,\"orig\":\"XVI\",\"docID\":30803,\"groupID\":\"\",\"primaryName\":803,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1599,\"gaNum\":803,\"orig\":\"XVI\",\"docID\":30803,\"groupID\":\"\",\"primaryName\":803,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1500}"

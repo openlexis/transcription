@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-072
+holdings:
+  - repository: "Last known: Damascus"
+    settlement: Location unknown
+    country: Location unknown
+    idno:
+      - "(früher: Damascus, Qubbat al-Khazna)"
+    sources:
+      - path: archives/intf/072.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Location unknown Location unknown Last known: Damascus (früher: Damascus, Qubbat al-Khazna)"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: V/VI
+    notBefore: 400
+    notAfter: 599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":599,\"gaNum\":72,\"orig\":\"V/VI\",\"docID\":20072,\"groupID\":\"\",\"primaryName\":72,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":599,\"gaNum\":72,\"orig\":\"V/VI\",\"docID\":20072,\"groupID\":\"\",\"primaryName\":72,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"

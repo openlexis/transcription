@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2050
+holdings:
+  - repository: Real Biblioteca del Monasterio de El Escorial
+    settlement: El Escorial
+    country: Spain
+    idno:
+      - "X-III-6, fol. 235-241"
+    sources:
+      - path: archives/intf/2050.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Spain El Escorial Real Biblioteca del Monasterio de El Escorial X-III-6, fol. 235-241"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1107"
+    notBefore: 1107
+    notAfter: 1107
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1107,\"gaNum\":2050,\"orig\":1107,\"docID\":32050,\"groupID\":\"\",\"primaryName\":2050,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1107}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1107,\"gaNum\":2050,\"orig\":1107,\"docID\":32050,\"groupID\":\"\",\"primaryName\":2050,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1107}"

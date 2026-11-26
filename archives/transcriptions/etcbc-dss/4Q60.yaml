@@ -1,0 +1,66 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: etcbc-dss/4Q60
+manuscript: dss-4q60
+file: archives/etcbc-dss/4Q60.xml
+people:
+  - name: "Martin G. Abegg, Jr"
+    roles:
+      - cre
+    sources:
+      - url: https://github.com/ETCBC/dss/blob/0b7774a72b6d0e91712aa2156d2a1d354f1f5e6d/tf/2.0.5/otype.tf
+        accessed: 2026-11-22
+        quote: "@createdBy=Martin G. Abegg, Jr., James E. Bowley, and Edward M. Cook"
+  - name: James E. Bowley
+    roles:
+      - cre
+    sources:
+      - url: https://github.com/ETCBC/dss/blob/0b7774a72b6d0e91712aa2156d2a1d354f1f5e6d/tf/2.0.5/otype.tf
+        accessed: 2026-11-22
+        quote: "@createdBy=Martin G. Abegg, Jr., James E. Bowley, and Edward M. Cook"
+  - name: Edward M. Cook
+    roles:
+      - cre
+    sources:
+      - url: https://github.com/ETCBC/dss/blob/0b7774a72b6d0e91712aa2156d2a1d354f1f5e6d/tf/2.0.5/otype.tf
+        accessed: 2026-11-22
+        quote: "@createdBy=Martin G. Abegg, Jr., James E. Bowley, and Edward M. Cook"
+  - name: Jarod Jacobs
+    roles:
+      - mrk
+    statement: converted by
+    sources:
+      - url: https://github.com/ETCBC/dss/blob/0b7774a72b6d0e91712aa2156d2a1d354f1f5e6d/tf/2.0.5/otype.tf
+        accessed: 2026-11-22
+        quote: "@convertedBy=Jarod Jacobs, Martijn Naaijer and Dirk Roorda"
+  - name: Martijn Naaijer
+    roles:
+      - mrk
+    statement: converted by
+    sources:
+      - url: https://github.com/ETCBC/dss/blob/0b7774a72b6d0e91712aa2156d2a1d354f1f5e6d/tf/2.0.5/otype.tf
+        accessed: 2026-11-22
+        quote: "@convertedBy=Jarod Jacobs, Martijn Naaijer and Dirk Roorda"
+  - name: Dirk Roorda
+    roles:
+      - mrk
+    statement: converted by
+    sources:
+      - url: https://github.com/ETCBC/dss/blob/0b7774a72b6d0e91712aa2156d2a1d354f1f5e6d/tf/2.0.5/otype.tf
+        accessed: 2026-11-22
+        quote: "@convertedBy=Jarod Jacobs, Martijn Naaijer and Dirk Roorda"
+made:
+  - text: "2015"
+    when: 2015
+    sources:
+      - url: https://github.com/ETCBC/dss/blob/0b7774a72b6d0e91712aa2156d2a1d354f1f5e6d/tf/2.0.5/otype.tf
+        accessed: 2026-11-22
+        quote: "@createdDate=2015"
+basedOn:
+  - name: "Martin Abegg's data files"
+    description: "Martin Abegg's data files, personal communication"
+    relation: derived-from
+    sources:
+      - url: https://github.com/ETCBC/dss/blob/0b7774a72b6d0e91712aa2156d2a1d354f1f5e6d/tf/2.0.5/otype.tf
+        accessed: 2026-11-22
+        quote: "@source=Martin Abegg's data files, personal communication"

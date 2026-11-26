@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2186
+holdings:
+  - repository: Vatopedi Monastery
+    settlement: Athos
+    country: Greece
+    idno:
+      - "333, fol. 83-176"
+    sources:
+      - path: archives/intf/2186.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Greece Athos Vatopedi Monastery 333, fol. 83-176"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XII
+    notBefore: 1100
+    notAfter: 1199
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1199,\"gaNum\":2186,\"orig\":\"XII\",\"docID\":32186,\"groupID\":\"\",\"primaryName\":2186,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1199,\"gaNum\":2186,\"orig\":\"XII\",\"docID\":32186,\"groupID\":\"\",\"primaryName\":2186,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"

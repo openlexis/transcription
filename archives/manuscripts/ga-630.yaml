@@ -1,0 +1,65 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-630
+identifiers:
+  - scheme: GA
+    value: "630"
+    sources:
+      - path: archives/igntp-2thessalonians/630.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>630</idno> </altIdentifier>"
+      - path: archives/igntp-galatians/630.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>630</idno> </altIdentifier>"
+      - path: archives/igntp-romans/630.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>630</idno></altIdentifier>"
+  - scheme: Liste
+    value: "30630"
+    sources:
+      - path: archives/igntp-2thessalonians/630.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>30630</idno> </altIdentifier>"
+      - path: archives/igntp-galatians/630.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>30630</idno> </altIdentifier>"
+      - path: archives/igntp-romans/630.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>30630</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Apostolica Vaticana
+    settlement: Città del Vaticano
+    country: Vatican City
+    idno:
+      - Ottob. gr. 325
+    sources:
+      - path: archives/igntp-galatians/630.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Ottob. gr. 325
+      - path: archives/igntp-romans/630.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Ottob. gr. 325
+      - path: archives/intf/630.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Ottob. gr. 325
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XII/XIII
+    notBefore: 1100
+    notAfter: 1299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1299,\"gaNum\":630,\"orig\":\"XII/XIII\",\"docID\":30630,\"groupID\":\"\",\"primaryName\":630,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1299,\"gaNum\":630,\"orig\":\"XII/XIII\",\"docID\":30630,\"groupID\":\"\",\"primaryName\":630,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"

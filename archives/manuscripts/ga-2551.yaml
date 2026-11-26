@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2551
+holdings:
+  - repository: Matenadaran
+    settlement: Yerevan
+    country: Armenia
+    idno:
+      - "M807, M919, M1197, M1249, M1251, M2105 (Vorsatzbll.)"
+    sources:
+      - path: archives/intf/2551.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Armenia Yerevan Matenadaran M807, M919, M1197, M1249, M1251, M2105 (Vorsatzbll.)"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XIII
+    notBefore: 1200
+    notAfter: 1299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1299,\"gaNum\":2551,\"orig\":\"XIII\",\"docID\":32551,\"groupID\":\"\",\"primaryName\":2551,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1299,\"gaNum\":2551,\"orig\":\"XIII\",\"docID\":32551,\"groupID\":\"\",\"primaryName\":2551,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1200}"

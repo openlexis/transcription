@@ -1,0 +1,69 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-033
+names:
+  - text: "033"
+    language: la
+    sources:
+      - path: archives/igntp-john/033.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">033</msName>"
+identifiers:
+  - scheme: GA
+    value: "033"
+    sources:
+      - path: archives/igntp-john/033.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>033</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20033"
+    sources:
+      - path: archives/igntp-john/033.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20033</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: X
+    sources:
+      - path: archives/igntp-john/033.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>X</idno></altIdentifier>"
+holdings:
+  - repository: Universitätsbibliothek
+    settlement: Munich
+    country: Germany
+    idno:
+      - 2o Cod. ms. 30
+    sources:
+      - path: archives/igntp-john/033.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Munich Universitätsbibliothek 2o Cod. ms. 30
+  - repository: Universitätsbibliothek
+    settlement: München
+    country: Germany
+    idno:
+      - Cim. 16 (2° Cod. Ms. 30)
+    sources:
+      - path: archives/intf/033.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany München Universitätsbibliothek Cim. 16 (2° Cod. Ms. 30)
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: X
+    notBefore: 900
+    notAfter: 999
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":999,\"gaNum\":33,\"orig\":\"X\",\"docID\":20033,\"groupID\":\"\",\"primaryName\":33,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":999,\"gaNum\":33,\"orig\":\"X\",\"docID\":20033,\"groupID\":\"\",\"primaryName\":33,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"

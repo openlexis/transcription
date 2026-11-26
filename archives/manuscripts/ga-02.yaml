@@ -1,0 +1,90 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-02
+names:
+  - text: Codex Alexandrinus
+    language: la
+    sources:
+      - path: archives/igntp-john/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Alexandrinus</msName>"
+identifiers:
+  - scheme: GA
+    value: "02"
+    sources:
+      - path: archives/igntp-2thessalonians/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>02</idno> </altIdentifier>"
+      - path: archives/igntp-john/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>02</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20002"
+    sources:
+      - path: archives/igntp-2thessalonians/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>20002</idno> </altIdentifier>"
+      - path: archives/igntp-john/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20002</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: A
+    sources:
+      - path: archives/igntp-john/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>A</idno></altIdentifier>"
+  - scheme: TM
+    value: "62318"
+    sources:
+      - path: archives/igntp-john/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>62318</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "3481"
+    sources:
+      - path: archives/igntp-john/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>3481</idno></altIdentifier>"
+holdings:
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Royal 1 D.VIII
+    sources:
+      - path: archives/igntp-ephesians/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Royal 1 D.VIII
+      - path: archives/igntp-galatians/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Royal 1 D.VIII
+      - path: archives/igntp-john/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Royal 1 D.VIII
+      - path: archives/igntp-romans/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Royal 1 D.VIII
+      - path: archives/intf/02.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Royal 1 D.VIII
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: V
+    notBefore: 400
+    notAfter: 499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":499,\"gaNum\":2,\"orig\":\"V\",\"docID\":20002,\"groupID\":\"\",\"primaryName\":2,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":499,\"gaNum\":2,\"orig\":\"V\",\"docID\":20002,\"groupID\":\"\",\"primaryName\":2,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"

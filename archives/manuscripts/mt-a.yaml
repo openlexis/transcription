@@ -1,0 +1,27 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: mt-a
+names:
+  - text: Aleppo Codex
+    sources:
+      - title: The Aleppo Codex (Ben Zvi Institute for the Study of Jewish Communities in the East)
+        url: https://www.aleppocodex.org/
+        accessed: 2026-11-26
+        quote: The Aleppo Codex
+dates:
+  - text: the 10th century (about 930 CE)
+    of: writing
+    sources:
+      - title: The Aleppo Codex (Ben Zvi Institute for the Study of Jewish Communities in the East)
+        url: https://www.aleppocodex.org/
+        accessed: 2026-11-26
+        quote: A manuscript of the Bible from the 10th century (about 930 CE)
+reproductions:
+  - id: aleppocodex-org
+    description: "Here it is in full colour, leaf by leaf and verse by verse."
+    where: https://www.aleppocodex.org/
+    sources:
+      - title: The Aleppo Codex (Ben Zvi Institute for the Study of Jewish Communities in the East)
+        url: https://www.aleppocodex.org/
+        accessed: 2026-11-26
+        quote: "Here it is in full colour, leaf by leaf and verse by verse."

@@ -1,0 +1,56 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-254
+identifiers:
+  - scheme: GA
+    value: "254"
+    sources:
+      - path: archives/igntp-2thessalonians/254.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>254</idno> </altIdentifier>"
+      - path: archives/igntp-galatians/254.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>254</idno></altIdentifier>"
+  - scheme: Liste
+    value: "30254"
+    sources:
+      - path: archives/igntp-2thessalonians/254.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>30254</idno> </altIdentifier>"
+      - path: archives/igntp-galatians/254.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>30254</idno></altIdentifier>"
+holdings:
+  - repository: National Library
+    settlement: Athens
+    country: Greece
+    idno:
+      - EBE 490
+    sources:
+      - path: archives/igntp-galatians/254.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athens National Library EBE 490
+      - path: archives/intf/254.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athens National Library EBE 490
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XIV
+    notBefore: 1300
+    notAfter: 1399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1399,\"gaNum\":254,\"orig\":\"XIV\",\"docID\":30254,\"groupID\":\"\",\"primaryName\":254,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1399,\"gaNum\":254,\"orig\":\"XIV\",\"docID\":30254,\"groupID\":\"\",\"primaryName\":254,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1300}"

@@ -1,0 +1,26 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1367
+identifiers:
+  - scheme: GA
+    value: "1367"
+    sources:
+      - path: archives/igntp-galatians/1367.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1367</idno></altIdentifier>"
+  - scheme: Liste
+    value: "31367"
+    sources:
+      - path: archives/igntp-galatians/1367.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31367</idno></altIdentifier>"
+holdings:
+  - repository: National Library
+    settlement: Athens
+    country: Greece
+    idno:
+      - EBE 1882
+    sources:
+      - path: archives/igntp-galatians/1367.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athens National Library EBE 1882

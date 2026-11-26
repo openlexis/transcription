@@ -1,0 +1,50 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2400
+identifiers:
+  - scheme: GA
+    value: "2400"
+    sources:
+      - path: archives/igntp-2thessalonians/2400.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>2400</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/2400.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>2400</idno></altIdentifier>"
+      - path: archives/igntp-galatians/2400.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>2400</idno> </altIdentifier>"
+      - path: archives/igntp-romans/2400.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>2400</idno></altIdentifier>"
+  - scheme: Liste
+    value: "32400"
+    sources:
+      - path: archives/igntp-2thessalonians/2400.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>32400</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/2400.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>32400</idno></altIdentifier>"
+      - path: archives/igntp-galatians/2400.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>32400</idno> </altIdentifier>"
+      - path: archives/igntp-romans/2400.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>32400</idno></altIdentifier>"
+holdings:
+  - repository: University of Chicago Library
+    settlement: "Chicago, IL"
+    country: USA
+    idno:
+      - Ms. 965 (Goodspeed)
+    sources:
+      - path: archives/igntp-ephesians/2400.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Chicago, IL University of Chicago Library Ms. 965 (Goodspeed)"
+      - path: archives/igntp-galatians/2400.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Chicago, IL University of Chicago Library Ms. 965 (Goodspeed)"
+      - path: archives/igntp-romans/2400.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Chicago, IL University of Chicago Library Ms. 965 (Goodspeed)"

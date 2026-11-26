@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1704
+holdings:
+  - repository: Koutloumousiou Monastery
+    settlement: Athos
+    country: Greece
+    idno:
+      - "356"
+    sources:
+      - path: archives/intf/1704.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athos Koutloumousiou Monastery 356
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1541"
+    notBefore: 1541
+    notAfter: 1541
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1541,\"gaNum\":1704,\"orig\":1541,\"docID\":31704,\"groupID\":\"\",\"primaryName\":1704,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1541}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1541,\"gaNum\":1704,\"orig\":1541,\"docID\":31704,\"groupID\":\"\",\"primaryName\":1704,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1541}"

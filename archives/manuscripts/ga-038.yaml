@@ -1,0 +1,69 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-038
+names:
+  - text: Codex Koridethianus
+    language: la
+    sources:
+      - path: archives/igntp-john/038.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Koridethianus</msName>"
+identifiers:
+  - scheme: GA
+    value: "038"
+    sources:
+      - path: archives/igntp-john/038.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>038</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20038"
+    sources:
+      - path: archives/igntp-john/038.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20038</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: Θ
+    sources:
+      - path: archives/igntp-john/038.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>Θ</idno></altIdentifier>"
+holdings:
+  - repository: Institute of Manuscripts
+    settlement: Tbilisi
+    country: Georgia
+    idno:
+      - Gr. 28
+    sources:
+      - path: archives/igntp-john/038.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Georgia Tbilisi Institute of Manuscripts Gr. 28
+  - repository: National Center of Manuscripts
+    settlement: Tbilisi
+    country: Georgia
+    idno:
+      - Gr. 28
+    sources:
+      - path: archives/intf/038.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Georgia Tbilisi National Center of Manuscripts Gr. 28
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IX
+    notBefore: 800
+    notAfter: 899
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":899,\"gaNum\":38,\"orig\":\"IX\",\"docID\":20038,\"groupID\":\"\",\"primaryName\":38,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":899,\"gaNum\":38,\"orig\":\"IX\",\"docID\":20038,\"groupID\":\"\",\"primaryName\":38,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"

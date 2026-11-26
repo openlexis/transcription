@@ -1,0 +1,16 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-l704
+identifiers:
+  - scheme: GA
+    value: L704
+    sources:
+      - path: archives/igntp-john/L704.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>L704</idno> </altIdentifier>"
+  - scheme: Liste
+    value: "40704"
+    sources:
+      - path: archives/igntp-john/L704.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>40704</idno> </altIdentifier>"

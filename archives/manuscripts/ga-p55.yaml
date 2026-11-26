@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p55
+names:
+  - text: Papyrus 55
+    language: en
+    sources:
+      - path: archives/igntp-john/P55.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 55</msName>"
+identifiers:
+  - scheme: GA
+    value: P55
+    sources:
+      - path: archives/igntp-john/P55.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P55</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10055"
+    sources:
+      - path: archives/igntp-john/P55.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10055</idno></altIdentifier>"
+  - scheme: TM
+    value: "61671"
+    sources:
+      - path: archives/igntp-john/P55.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61671</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2822"
+    sources:
+      - path: archives/igntp-john/P55.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2822</idno></altIdentifier>"
+holdings:
+  - repository: Österreichische Nationalbibliothek
+    settlement: Vienna
+    country: Austria
+    idno:
+      - Pap. G. 26214
+    sources:
+      - path: archives/igntp-john/P55.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Austria Vienna Österreichische Nationalbibliothek Pap. G. 26214
+  - repository: Österreichische Nationalbibliothek
+    settlement: Wien
+    country: Austria
+    idno:
+      - Pap. G. 26214
+    sources:
+      - path: archives/intf/P55.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Austria Wien Österreichische Nationalbibliothek Pap. G. 26214
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VI/VII
+    notBefore: 500
+    notAfter: 699
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":699,\"gaNum\":\"P55\",\"orig\":\"VI/VII\",\"docID\":10055,\"groupID\":\"\",\"primaryName\":\"P55\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":699,\"gaNum\":\"P55\",\"orig\":\"VI/VII\",\"docID\":10055,\"groupID\":\"\",\"primaryName\":\"P55\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"

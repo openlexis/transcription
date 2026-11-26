@@ -1,0 +1,22 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1980
+holdings:
+  - repository: Biblioteca Ambrosiana
+    settlement: Milano
+    country: Italy
+    idno:
+      - A.62.Inf
+    sources:
+      - path: archives/igntp-catena/1980.romans.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Milano Biblioteca Ambrosiana A.62.Inf
+  - repository: Biblioteca Ambrosiana
+    settlement: Milan
+    country: Italy
+    idno:
+      - A.62.inf
+    sources:
+      - path: archives/igntp-catena/1980.ephesians.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Milan Biblioteca Ambrosiana A.62.inf

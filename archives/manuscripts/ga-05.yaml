@@ -1,0 +1,81 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-05
+names:
+  - text: Codex Bezae
+    language: la
+    sources:
+      - path: archives/igntp-john/05.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Bezae</msName>"
+identifiers:
+  - scheme: GA
+    value: "05"
+    sources:
+      - path: archives/igntp-john/05.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>05</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20005"
+    sources:
+      - path: archives/igntp-john/05.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20005</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: D
+    sources:
+      - path: archives/igntp-john/05.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>D</idno></altIdentifier>"
+  - scheme: TM
+    value: "61777"
+    sources:
+      - path: archives/igntp-john/05.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61777</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2929"
+    sources:
+      - path: archives/igntp-john/05.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2929</idno></altIdentifier>"
+holdings:
+  - repository: University Library
+    settlement: Cambridge
+    country: United Kingdom
+    idno:
+      - Nn.2.41
+    sources:
+      - path: archives/igntp-john/05.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom Cambridge University Library Nn.2.41
+  - repository: Cambridge University Library
+    settlement: Cambridge
+    country: United Kingdom
+    idno:
+      - Ms. Nn. 2.41
+    sources:
+      - path: archives/intf/05.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom Cambridge Cambridge University Library Ms. Nn. 2.41
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: V
+    notBefore: 400
+    notAfter: 499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":499,\"gaNum\":5,\"orig\":\"V\",\"docID\":20005,\"groupID\":\"\",\"primaryName\":5,\"lang\":\"g-l\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":499,\"gaNum\":5,\"orig\":\"V\",\"docID\":20005,\"groupID\":\"\",\"primaryName\":5,\"lang\":\"g-l\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"

@@ -1,0 +1,102 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-03
+names:
+  - text: Codex Vaticanus
+    language: la
+    sources:
+      - path: archives/igntp-john/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Vaticanus</msName>"
+identifiers:
+  - scheme: GA
+    value: "03"
+    sources:
+      - path: archives/igntp-2thessalonians/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>03</idno> </altIdentifier>"
+      - path: archives/igntp-john/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>03</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20003"
+    sources:
+      - path: archives/igntp-2thessalonians/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>20003</idno> </altIdentifier>"
+      - path: archives/igntp-john/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20003</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: B
+    sources:
+      - path: archives/igntp-john/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>B</idno></altIdentifier>"
+  - scheme: TM
+    value: "62316"
+    sources:
+      - path: archives/igntp-john/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>62316</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "3479"
+    sources:
+      - path: archives/igntp-john/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>3479</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Apostolica Vaticana
+    settlement: Città del Vaticano
+    country: Vatican City
+    idno:
+      - "Vat. gr. 1209, p. 1235-1518"
+    sources:
+      - path: archives/igntp-ephesians/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Vat. gr. 1209, p. 1235-1518"
+      - path: archives/intf/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Vat. gr. 1209, p. 1235-1518"
+  - repository: Biblioteca Apostolica Vaticana
+    settlement: Città del Vaticano
+    country: Vatican City
+    idno:
+      - "Vat. gr. 1209, p. 1235-1518 (p. 1519-1536: GA1957)"
+    sources:
+      - path: archives/igntp-galatians/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Vat. gr. 1209, p. 1235-1518 (p. 1519-1536: GA1957)"
+      - path: archives/igntp-romans/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Vat. gr. 1209, p. 1235-1518 (p. 1519-1536: GA1957)"
+  - repository: Bibliotheca Apostolica Vaticana
+    settlement: Vatican City
+    country: Vatican
+    idno:
+      - Greek 1209
+    sources:
+      - path: archives/igntp-john/03.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Vatican Vatican City Bibliotheca Apostolica Vaticana Greek 1209
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IV
+    notBefore: 300
+    notAfter: 399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":399,\"gaNum\":3,\"orig\":\"IV\",\"docID\":20003,\"groupID\":\"\",\"primaryName\":3,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":399,\"gaNum\":3,\"orig\":\"IV\",\"docID\":20003,\"groupID\":\"\",\"primaryName\":3,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"

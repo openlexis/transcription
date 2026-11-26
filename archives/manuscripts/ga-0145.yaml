@@ -1,0 +1,45 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0145
+names:
+  - text: "0145"
+    language: la
+    sources:
+      - path: archives/igntp-john/0145.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">0145</msName>"
+identifiers:
+  - scheme: GA
+    value: "0145"
+    sources:
+      - path: archives/igntp-john/0145.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0145</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20145"
+    sources:
+      - path: archives/igntp-john/0145.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20145</idno></altIdentifier>"
+  - scheme: TM
+    value: "61694"
+    sources:
+      - path: archives/igntp-john/0145.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61694</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2845"
+    sources:
+      - path: archives/igntp-john/0145.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2845</idno></altIdentifier>"
+holdings:
+  - repository: "Unknown, formerly Kubbet el Chazne"
+    settlement: "Unknown, formerly Damascus"
+    country: "Unknown, formerly Syria"
+    idno:
+      - s.n.
+    sources:
+      - path: archives/igntp-john/0145.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Unknown, formerly Syria Unknown, formerly Damascus Unknown, formerly Kubbet el Chazne s.n."

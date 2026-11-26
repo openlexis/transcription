@@ -1,0 +1,39 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-013
+names:
+  - text: "013"
+    language: la
+    sources:
+      - path: archives/igntp-john/013.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">013</msName>"
+identifiers:
+  - scheme: GA
+    value: "013"
+    sources:
+      - path: archives/igntp-john/013.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>013</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20013"
+    sources:
+      - path: archives/igntp-john/013.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20013</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: H
+    sources:
+      - path: archives/igntp-john/013.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>H</idno></altIdentifier>"
+holdings:
+  - repository: Universitätsbibliothek
+    settlement: Hamburg
+    country: Germany
+    idno:
+      - Cod. 91 in scrin.
+    sources:
+      - path: archives/igntp-john/013.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Hamburg Universitätsbibliothek Cod. 91 in scrin.

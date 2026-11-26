@@ -1,0 +1,56 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p92
+identifiers:
+  - scheme: GA
+    value: P92
+    sources:
+      - path: archives/igntp-2thessalonians/P92.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>P92</idno> </altIdentifier>"
+  - scheme: Liste
+    value: "10092"
+    sources:
+      - path: archives/igntp-2thessalonians/P92.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>10092</idno> </altIdentifier>"
+holdings:
+  - repository: Museum of Egyptian Antiquities
+    settlement: Cairo
+    country: Egypt
+    idno:
+      - P. Narmuthis inv. 69.39a+69.229a
+    sources:
+      - path: archives/igntp-ephesians/P92.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Egypt Cairo Museum of Egyptian Antiquities P. Narmuthis inv. 69.39a+69.229a
+  - repository: The Egyptian Museum
+    settlement: Cairo
+    country: Egypt
+    idno:
+      - P. Narmuthis inv. 69.39a+69.229a
+    sources:
+      - path: archives/intf/P92.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Egypt Cairo The Egyptian Museum P. Narmuthis inv. 69.39a+69.229a
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III/IV
+    notBefore: 200
+    notAfter: 399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":399,\"gaNum\":\"P92\",\"orig\":\"III/IV\",\"docID\":10092,\"groupID\":\"\",\"primaryName\":\"P92\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":399,\"gaNum\":\"P92\",\"orig\":\"III/IV\",\"docID\":10092,\"groupID\":\"\",\"primaryName\":\"P92\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"

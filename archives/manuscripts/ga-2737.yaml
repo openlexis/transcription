@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2737
+holdings:
+  - repository: Biblioteca Apostolica Vaticana
+    settlement: Città del Vaticano
+    country: Vatican City
+    idno:
+      - Arch. Cap. S. Pietro D. 157
+    sources:
+      - path: archives/intf/2737.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Arch. Cap. S. Pietro D. 157
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: 1558/59
+    notBefore: 1558
+    notAfter: 1559
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1559,\"gaNum\":2737,\"orig\":\"1558/59\",\"docID\":32737,\"groupID\":\"\",\"primaryName\":2737,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1558}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1559,\"gaNum\":2737,\"orig\":\"1558/59\",\"docID\":32737,\"groupID\":\"\",\"primaryName\":2737,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1558}"

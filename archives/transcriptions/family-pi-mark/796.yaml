@@ -1,0 +1,92 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: family-pi-mark/796
+manuscript: ga-796
+file: archives/family-pi-mark/796.xml
+title:
+  text: A Transcription of Mark
+  sources:
+    - path: archives/family-pi-mark/796.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A Transcription of Mark
+people:
+  - name: Timothy N. Mitchell
+    roles:
+      - cre
+      - pbl
+    statement: Created by
+    sources:
+      - path: archives/family-pi-mark/796.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by Timothy N. Mitchell
+      - path: archives/family-pi-mark/796.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: Timothy N. Mitchell
+  - name: "the Institute for Textual Scholarship and Electronic Editing, Birmingham"
+    kind: organisation
+    roles:
+      - mrk
+    statement: XML conversion by
+    sources:
+      - path: archives/family-pi-mark/796.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[2]"
+        quote: "XML conversion by the Institute for Textual Scholarship and Electronic Editing, Birmingham"
+  - name: "IGNTP contributors, including volunteers and postdoctoral scholars"
+    kind: group
+    roles:
+      - trc
+    statement: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+    generalPractice: true
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+published:
+  - text: 22.11.2020
+    when: 2020-11-22
+    sources:
+      - path: archives/family-pi-mark/796.xml
+        locator: teiHeader/fileDesc/publicationStmt/date
+        quote: "<date>22.11.2020</date>"
+version:
+  text: "Version 1.0, created on 22.11.2020"
+  label: "1.0"
+  when: 2020-11-22
+  sources:
+    - path: archives/family-pi-mark/796.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: "Version 1.0, created on 22.11.2020"
+method:
+  practices:
+    - kind: independent-double-transcription
+      generalPractice: true
+      text: Two independent initial transcriptions are made of each manuscript.
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: Both organizations observe the same practice of producing two independent initial transcriptions
+    - kind: reconciliation
+      generalPractice: true
+      text: "A third person, usually the transcription coordinator, reconciles the two with reference to the images of the manuscript and makes the final file."
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: "these are reconciled by a third person (usually the transcription coordinator) with reference to the images of the manuscript, who creates a final file"
+  guidelines:
+    - text: The XML specifications used are version 1.4 of the IGNTP Guidelines available at
+      sources:
+        - path: archives/family-pi-mark/796.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: The XML specifications used are version 1.4 of the IGNTP Guidelines available at
+  tools:
+    - text: This transcription was produced using the online transcription editor developed by the Center for Digital Humanities at the University of Trier as part of the Workspace for Collaborative Editing Project between 2010 and 2013 and made available for use by the Institute for Textual Scholarship and Electronic Editing and the University of Birmingham.
+      sources:
+        - path: archives/family-pi-mark/796.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: This transcription was produced using the online transcription editor developed by the Center for Digital Humanities at the University of Trier as part of the Workspace for Collaborative Editing Project between 2010 and 2013 and made available for use by the Institute for Textual Scholarship and Electronic Editing and the University of Birmingham.

@@ -1,0 +1,108 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p6
+names:
+  - text: Papyrus 6
+    language: en
+    sources:
+      - path: archives/igntp-john/P6.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 6</msName>"
+identifiers:
+  - scheme: GA
+    value: P6
+    sources:
+      - path: archives/igntp-john/P6.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P6</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10006"
+    sources:
+      - path: archives/igntp-john/P6.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10006</idno></altIdentifier>"
+  - scheme: TM
+    value: "61656"
+    sources:
+      - path: archives/igntp-john/P6.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61656</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2806"
+    sources:
+      - path: archives/igntp-john/P6.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2806</idno></altIdentifier>"
+holdings:
+  - repository: Bibliothèque nationale universitaire
+    settlement: Strasbourg
+    country: France
+    idno:
+      - "P. Copt. 379, 381, 382, 384"
+    leaves: 15 Frg (4 Blatt)
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10006&format=json
+        accessed: 2026-11-26
+        quote: "P. Copt. 379, 381, 382, 384"
+  - repository: Bibliothèque Nationale et Universitaire
+    settlement: Strasbourg
+    country: France
+    idno:
+      - "Pap. Copt. 379, 381, 382, 384"
+    sources:
+      - path: archives/igntp-john/P6.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "France Strasbourg Bibliothèque Nationale et Universitaire Pap. Copt. 379, 381, 382, 384"
+  - repository: Bibliothèque nationale universitaire
+    settlement: Strasbourg
+    country: France
+    idno:
+      - "P. Copt. 379, 381, 382, 384"
+    sources:
+      - path: archives/intf/P6.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "France Strasbourg Bibliothèque nationale universitaire P. Copt. 379, 381, 382, 384"
+  - repository: Bibliothèque nationale universitaire
+    settlement: Strasbourg
+    country: France
+    idno:
+      - "P. Copt. 379, 381, 382, 384"
+    leaves: 15 Frg (4 Blatt)
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/liste/search/?docID=10006&detail=page&format=json
+        accessed: 2026-11-26
+        quote: "\"shelfNumber\": \"P. Copt. 379, 381, 382, 384\""
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IV
+    notBefore: 300
+    notAfter: 399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":399,\"gaNum\":\"P6\",\"orig\":\"IV\",\"docID\":10006,\"groupID\":\"\",\"primaryName\":\"P6\",\"lang\":\"g-k\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":399,\"gaNum\":\"P6\",\"orig\":\"IV\",\"docID\":10006,\"groupID\":\"\",\"primaryName\":\"P6\",\"lang\":\"g-k\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"
+reproductions:
+  - id: ntvmr-10
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 8 page images listed
+    owner: "Images © BNU, Straßburg"
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10006
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10006&format=json
+        accessed: 2026-11-26
+        quote: "Images © BNU, Straßburg"

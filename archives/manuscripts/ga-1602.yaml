@@ -1,0 +1,16 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1602
+identifiers:
+  - scheme: GA
+    value: "1602"
+    sources:
+      - path: archives/family-pi-mark/1602.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>1602</idno> </altIdentifier>"
+  - scheme: Liste
+    value: "31602"
+    sources:
+      - path: archives/family-pi-mark/1602.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>31602</idno> </altIdentifier>"

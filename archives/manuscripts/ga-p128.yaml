@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p128
+names:
+  - text: Papyrus 128
+    language: en
+    sources:
+      - path: archives/igntp-john/P128.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 128</msName>"
+identifiers:
+  - scheme: GA
+    value: P128
+    sources:
+      - path: archives/igntp-john/P128.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P128</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10128"
+    sources:
+      - path: archives/igntp-john/P128.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10128</idno></altIdentifier>"
+  - scheme: TM
+    value: "61825"
+    sources:
+      - path: archives/igntp-john/P128.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61825</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2979"
+    sources:
+      - path: archives/igntp-john/P128.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2979</idno></altIdentifier>"
+holdings:
+  - repository: Metropolitan Museum of Art
+    settlement: New York
+    country: United States
+    idno:
+      - Inv. 14.1.527
+    sources:
+      - path: archives/igntp-john/P128.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United States New York Metropolitan Museum of Art Inv. 14.1.527
+  - repository: The Metropolitan Museum of Art
+    settlement: "New York, NY"
+    country: USA
+    idno:
+      - Inv. 14.1.527
+    sources:
+      - path: archives/intf/P128.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA New York, NY The Metropolitan Museum of Art Inv. 14.1.527"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VI/ VII
+    notBefore: 500
+    notAfter: 699
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":699,\"gaNum\":\"P128\",\"orig\":\"VI/ VII\",\"docID\":10128,\"groupID\":\"\",\"primaryName\":\"P128\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":699,\"gaNum\":\"P128\",\"orig\":\"VI/ VII\",\"docID\":10128,\"groupID\":\"\",\"primaryName\":\"P128\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"

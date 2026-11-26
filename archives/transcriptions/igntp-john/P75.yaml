@@ -1,0 +1,216 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: igntp-john/P75
+manuscript: ga-p75
+file: archives/igntp-john/P75.xml
+title:
+  text: A Transcription of John in P75
+  sources:
+    - path: archives/igntp-john/P75.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A Transcription of John in P75
+people:
+  - name: the International Greek New Testament Project
+    kind: organisation
+    roles:
+      - cre
+    statement: Created by
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by the International Greek New Testament Project
+      - path: archives/igntp-john/P75.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2000 and 2010.
+  - name: The Arts and Humanities Research Council
+    roles:
+      - fnd
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: "teiHeader/fileDesc/titleStmt/funder[1]"
+        quote: The Arts and Humanities Research Council
+  - name: The Institute for Textual Scholarship and Electronic Editing
+    roles:
+      - spn
+      - pbl
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: "teiHeader/fileDesc/titleStmt/sponsor[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing
+      - path: archives/igntp-john/P75.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: University of Birmingham
+    roles:
+      - pbl
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: Catherine Smith
+    roles:
+      - mrk
+    statement: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+        quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+  - name: "IGNTP contributors, including volunteers and postdoctoral scholars"
+    kind: group
+    roles:
+      - trc
+    statement: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+    generalPractice: true
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+made:
+  - text: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2000 and 2010.
+    from: 2000
+    to: 2010
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2000 and 2010.
+published:
+  - text: 12.8.2013
+    when: 2013-08-12
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: teiHeader/fileDesc/publicationStmt/date
+        quote: "<date>12.8.2013</date>"
+version:
+  text: "Version 2.1, created 12.8.2013"
+  label: "2.1"
+  when: 2013-08-12
+  sources:
+    - path: archives/igntp-john/P75.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: "Version 2.1, created 12.8.2013"
+revisions:
+  entries:
+    - when: 2016-12-05
+      description: Gap rest verse added at 11.45 by David Parker.
+      "n": "20"
+    - when: 2015-03-13
+      description: Ab tag moved to after witness end tag at 15.10 by Rachel Kevern.
+      "n": "19"
+    - when: 2015-02-10
+      description: Word break at 9.33 corrected by Rachel Kevern.
+      "n": "18"
+    - when: 2014-11-11
+      description: "11.48 deleted, and gaps and uncertain spaces in 11.57 changed by Rachel Kevern."
+      "n": "17"
+    - when: 2014-09-30
+      description: "[ειτε] changed to [ειπε] at 10.24 by Rachel Kevern."
+      "n": "16"
+    - when: 2014-09-01
+      description: Word break at 4.51 corrected by Rachel Kevern.
+      "n": "15"
+    - when: 2014-08-26
+      description: "κα[] changed to κα[ι πυρι] at 1.33 by Rachel Kevern."
+      "n": "14"
+    - when: 2014-07-01
+      description: "ηκου[3] changed back to ηκου[σαν] at 12.18 by Rachel Kevern."
+      "n": "13"
+    - when: 2014-06-24
+      description: "[7] changed back to [εδυνατο] at 11.37, [3] changed back to [εις] at 11.38, [4] changed back to [υμιν] at 11.50, [5] changed back to [επροφ] at 11.51, [7] changed to [ημελλεν] at 11.51, ελεγ[2] changed back to ελεγ[ον] at 11.56, [6]νου changed back to [γινομε]νου at 13.2 and ισκαρι[4] changed back to ισκαρι[ωτης] at 13.2 by Rachel Kevern."
+      "n": "12"
+    - when: 2014-05-13
+      description: "[οχλας] changed to [οχλος] at 7.20 and word breaks at 7.22, 7.26, 7.28 and 8.14 corrected by Rachel Kevern."
+      "n": "11"
+    - when: 2014-04-08
+      description: "[γινομε]νου changed to [6]νου and ισκαρι[ωτου] changed to ισκαρι[4]at 13.2 by Rachel Kevern."
+      "n": "10"
+    - when: 2014-03-31
+      description: "ηκου[σαν] changed to ηκου[3] at 12.18 by Rachel Kevern."
+      "n": "9"
+    - when: 2014-03-31
+      description: "Two words over page break turned into one word at 11.33, [εδυνατο] changed to [7] at 11.37, [εις] changed to [3] at 11.38, μαρ[ιαμ] changed to μαρ[3] at 11.45, [ημιν] changed to [4] at 11.50, [επροφ] changed to [5] at 11.51, [εμελλεν] changed to [7] at 11.51 and ελεγ[ον] changed to ελεγ[2] at 11.56 by Rachel Kevern."
+      "n": "8"
+    - when: 2013-12-11
+      description: "μαρ[θαν] changed to μαρ[3] at 11.5 by David Parker."
+      "n": "7"
+    - when: 2013-11-24
+      description: Word break in 1.4 changed by David Parker.
+      "n": "6"
+    - when: 2013-11-01
+      description: Typo in 14.31 corrected by David Parker.
+      "n": "5"
+    - when: 2013-10-15
+      description: "Word breaks in 7.45, 8.43, corrected by David Parker."
+      "n": "4"
+    - when: 2013-10-11
+      description: Word break in 12.3 corrected by David Parker.
+      "n": "3"
+    - when: 2013-10-11
+      description: "Word break at 6.68, tagging at 6.19 and 14.28 corrected by David Parker."
+      "n": "2"
+    - when: 2013-07-03
+      description: Adjusted to XML specifications 1.4 by Hugh Houghton.
+      "n": "1"
+    - when: 2013-04-03
+      description: Converted from plain text by Catherine Smith using Python conversion scripts 1.0 with manual adjustments.
+      "n": "0"
+  sources:
+    - path: archives/igntp-john/P75.xml
+      locator: teiHeader/revisionDesc
+      quote: Gap rest verse added at 11.45 by David Parker.
+method:
+  practices:
+    - kind: conversion-to-xml
+      text: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+      sources:
+        - path: archives/igntp-john/P75.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+    - kind: conversion-to-xml
+      text: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+      sources:
+        - path: archives/igntp-john/P75.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+    - kind: independent-double-transcription
+      generalPractice: true
+      text: Two independent initial transcriptions are made of each manuscript.
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: Both organizations observe the same practice of producing two independent initial transcriptions
+    - kind: reconciliation
+      generalPractice: true
+      text: "A third person, usually the transcription coordinator, reconciles the two with reference to the images of the manuscript and makes the final file."
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: "these are reconciled by a third person (usually the transcription coordinator) with reference to the images of the manuscript, who creates a final file"
+  guidelines:
+    - text: The XML specifications used are version 1.4 of the IGNTP Guidelines available at
+      sources:
+        - path: archives/igntp-john/P75.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[3]"
+          quote: The XML specifications used are version 1.4 of the IGNTP Guidelines available at
+  tools:
+    - text: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+      sources:
+        - path: archives/igntp-john/P75.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+    - text: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+      sources:
+        - path: archives/igntp-john/P75.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+rights:
+  statement: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."
+  sources:
+    - path: archives/igntp-john/P75.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."

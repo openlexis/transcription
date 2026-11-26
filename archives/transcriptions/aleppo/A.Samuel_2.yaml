@@ -1,0 +1,14 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: aleppo/A.Samuel_2
+manuscript: mt-a
+file: archives/aleppo/A.Samuel_2.xml
+basedOn:
+  - name: "מקרא על פי המסורה (Miqra according to the Masorah), on Hebrew Wikisource"
+    description: "A Text-Fabric dataset of the Hebrew Bible according to the Aleppo Codex, in the edition מקרא על פי המסורה on Hebrew Wikisource"
+    url: https://he.wikisource.org/
+    relation: derived-from
+    sources:
+      - url: https://github.com/MartijnNaaijer/aleppo/blob/db38ddc918fd5d6e47a118f24545bd925975a597/README.md
+        accessed: 2026-11-26
+        quote: "A Text-Fabric dataset of the Hebrew Bible according to the Aleppo Codex, in the edition מקרא על פי המסורה on Hebrew Wikisource"

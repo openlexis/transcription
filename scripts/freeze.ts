@@ -16,11 +16,16 @@
  * that list.
  *
  * Every selected transcript must be committed with no uncommitted changes.
+ *
+ * It also writes a `records:` list after it: the archive record of each transcript (archives/transcriptions/...yaml) and of
+ * its manuscript (archives/manuscripts/<id>.yaml), each with the commit that holds it, so what the specification knows about
+ * a manuscript and its transcriptions (docs/archive-records.md) is fixed as well. These records must be committed too.
  */
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { findSpecPath, folderSpecFile, isFolderSpec, isPinnedList, resolveSelection } from "./sources";
 import { setTopLevelBlock } from "./lib/spec";
+import { manuscriptPath, transcriptionPath } from "./lib/records";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const git = (...args: string[]) => {
@@ -75,22 +80,34 @@ if (!selection.length) throw new Error("No selection given");
 const { sources } = resolveSelection(selection);
 
 const paths = new Set(sources.flatMap((s) => s.files.flatMap((f) => f.paths)));
-const dirty = git("status", "--porcelain", "--", ...new Set([...paths].map((p) => p.split("/").slice(0, 2).join("/"))))
+// the archive records of the selected transcripts and of their manuscripts
+const recordPaths = new Set<string>();
+for (const p of paths) {
+  const t = transcriptionPath(p);
+  if (!existsSync(`${ROOT}${t}`)) throw new Error(`No archive record ${t}: run bun scripts/records.ts and commit it`);
+  recordPaths.add(t);
+  const m = manuscriptPath((Bun.YAML.parse(readFileSync(`${ROOT}${t}`, "utf8")) as { manuscript: string }).manuscript);
+  if (existsSync(`${ROOT}${m}`)) recordPaths.add(m);
+}
+const all = new Set([...paths, ...recordPaths]);
+const dirty = git("status", "--porcelain", "--", "archives")
   .split("\n").filter(Boolean).map((l) => l.slice(3).replace(/^.* -> /, ""));
-const dirtyHit = dirty.filter((p) => paths.has(p));
-if (dirtyHit.length) throw new Error(`Commit these transcripts first: ${dirtyHit.slice(0, 5).join(", ")}${dirtyHit.length > 5 ? " ..." : ""}`);
+const dirtyHit = dirty.filter((p) => all.has(p) || [...all].some((a) => a.startsWith(p.endsWith("/") ? p : `${p}/`)));
+if (dirtyHit.length) throw new Error(`Commit these transcripts and records first: ${dirtyHit.slice(0, 5).join(", ")}${dirtyHit.length > 5 ? " ..." : ""}`);
 const commitOf = new Map<string, string>();
 let cur = "";
 for (const line of git("log", "--format=%x00%H", "--name-only", "HEAD", "--", "archives").split("\n")) {
   if (line.startsWith("\0")) cur = line.slice(1);
-  else if (line && paths.has(line) && !commitOf.has(line)) commitOf.set(line, cur);
+  else if (line && all.has(line) && !commitOf.has(line)) commitOf.set(line, cur);
 }
-const missing = [...paths].filter((p) => !commitOf.has(p));
+const missing = [...all].filter((p) => !commitOf.has(p));
 if (missing.length) throw new Error(`Not committed: ${missing.slice(0, 5).join(", ")}`);
 
 const transcripts = [...paths].sort().map((path) => ({ path, commit: commitOf.get(path)! }));
+const records = [...recordPaths].sort().map((path) => ({ path, commit: commitOf.get(path)! }));
 const list =
   "sources:\n" +
   transcripts.map((t) => `  - {path: ${t.path}, commit: ${t.commit}}\n`).join("");
-writeFileSync(yamlPath, setTopLevelBlock(yamlText, "sources", list));
-console.log(`Wrote ${transcripts.length} transcripts into ${yamlPath.slice(ROOT.length)}.`);
+const recordList = "records:\n" + records.map((t) => `  - {path: ${t.path}, commit: ${t.commit}}\n`).join("");
+writeFileSync(yamlPath, setTopLevelBlock(setTopLevelBlock(yamlText, "records", ""), "sources", list) + recordList);
+console.log(`Wrote ${transcripts.length} transcripts and ${records.length} archive records into ${yamlPath.slice(ROOT.length)}.`);

@@ -1,0 +1,99 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p11
+holdings:
+  - repository: "Saint Catherine's Monastery"
+    settlement: Sinai
+    country: Egypt
+    idno:
+      - Harris 14
+    leaves: 7 Frg (4 Bl.)
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10011&format=json
+        accessed: 2026-11-26
+        quote: Harris 14
+  - repository: National Library of Russia
+    settlement: St. Petersburg
+    country: Russia
+    idno:
+      - "Ф. № 906 /Gr. 258 "
+    leaves: 17 Frg
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10011&format=json
+        accessed: 2026-11-26
+        quote: Ф. № 906 /Gr. 258
+  - repository: "Saint Catherine's Monastery"
+    settlement: Sinai
+    country: Egypt
+    idno:
+      - Harris 14
+    sources:
+      - path: archives/intf/P11.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Egypt Sinai Saint Catherine's Monastery Harris 14"
+  - repository: "Saint Catherine's Monastery"
+    settlement: Sinai
+    country: Egypt
+    idno:
+      - Harris 14
+    leaves: 7 Frg (4 Bl.)
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/liste/search/?docID=10011&detail=page&format=json
+        accessed: 2026-11-26
+        quote: "\"shelfNumber\": \"Harris 14\""
+  - repository: National Library of Russia
+    settlement: St. Petersburg
+    country: Russia
+    idno:
+      - "Ф. № 906 /Gr. 258 "
+    leaves: 17 Frg
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/liste/search/?docID=10011&detail=page&format=json
+        accessed: 2026-11-26
+        quote: "\"shelfNumber\": \"Ф. № 906 /Gr. 258 \""
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VI
+    notBefore: 500
+    notAfter: 599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":599,\"gaNum\":\"P11\",\"orig\":\"VI\",\"docID\":10011,\"groupID\":\"\",\"primaryName\":\"P11\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":599,\"gaNum\":\"P11\",\"orig\":\"VI\",\"docID\":10011,\"groupID\":\"\",\"primaryName\":\"P11\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+reproductions:
+  - id: ntvmr-10
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 26 page images listed
+    owner: "Images © The Holding Institution &#x2028;&#x2028;&nbsp;&#x2028;&#x2028; Photos Digitized by INTF for Research Purposes"
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10011
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10011&format=json
+        accessed: 2026-11-26
+        quote: "Images © The Holding Institution &#x2028;&#x2028;&nbsp;&#x2028;&#x2028; Photos Digitized by INTF for Research Purposes"
+  - id: ntvmr-20
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 9 page images listed
+    owner: "Images © The Holding Institution &#x2028;&#x2028;&nbsp;&#x2028;&#x2028; Photos Digitized by INTF for Research Purposes"
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10011
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10011&format=json
+        accessed: 2026-11-26
+        quote: "Images © The Holding Institution &#x2028;&#x2028;&nbsp;&#x2028;&#x2028; Photos Digitized by INTF for Research Purposes"

@@ -1,0 +1,43 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p94
+holdings:
+  - repository: Museum of Egyptian Antiquities
+    settlement: Cairo
+    country: Egypt
+    idno:
+      - P. Cair. 10730
+    sources:
+      - path: archives/igntp-romans/P94.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Egypt Cairo Museum of Egyptian Antiquities P. Cair. 10730
+  - repository: The Egyptian Museum
+    settlement: Cairo
+    country: Egypt
+    idno:
+      - P. Cair. 10730
+    sources:
+      - path: archives/intf/P94.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Egypt Cairo The Egyptian Museum P. Cair. 10730
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: V/VI
+    notBefore: 400
+    notAfter: 599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":599,\"gaNum\":\"P94\",\"orig\":\"V/VI\",\"docID\":10094,\"groupID\":\"\",\"primaryName\":\"P94\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":599,\"gaNum\":\"P94\",\"orig\":\"V/VI\",\"docID\":10094,\"groupID\":\"\",\"primaryName\":\"P94\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"

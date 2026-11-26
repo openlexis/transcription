@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0188
+holdings:
+  - repository: Staatliche Museen zu Berlin
+    settlement: Berlin
+    country: Germany
+    idno:
+      - P. 13416
+    sources:
+      - path: archives/intf/0188.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Berlin Staatliche Museen zu Berlin P. 13416
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IV
+    notBefore: 300
+    notAfter: 399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":399,\"gaNum\":188,\"orig\":\"IV\",\"docID\":20188,\"groupID\":\"\",\"primaryName\":188,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":399,\"gaNum\":188,\"orig\":\"IV\",\"docID\":20188,\"groupID\":\"\",\"primaryName\":188,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"

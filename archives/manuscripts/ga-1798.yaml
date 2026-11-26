@@ -1,0 +1,41 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1798
+identifiers:
+  - scheme: GA
+    value: "1798"
+    sources:
+      - path: archives/igntp-2thessalonians/1798.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>1798</idno> </altIdentifier>"
+      - path: archives/igntp-galatians/1798.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1798</idno></altIdentifier>"
+      - path: archives/igntp-romans/1798.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1798</idno></altIdentifier>"
+  - scheme: Liste
+    value: "31798"
+    sources:
+      - path: archives/igntp-2thessalonians/1798.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>31798</idno> </altIdentifier>"
+      - path: archives/igntp-galatians/1798.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31798</idno></altIdentifier>"
+      - path: archives/igntp-romans/1798.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31798</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Franzoniana
+    settlement: Genova
+    country: Italy
+    idno:
+      - Urbani 24
+    sources:
+      - path: archives/igntp-galatians/1798.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Genova Biblioteca Franzoniana Urbani 24
+      - path: archives/igntp-romans/1798.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Genova Biblioteca Franzoniana Urbani 24

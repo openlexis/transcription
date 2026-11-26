@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p28
+names:
+  - text: Papyrus 28
+    language: en
+    sources:
+      - path: archives/igntp-john/P28.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 28</msName>"
+identifiers:
+  - scheme: GA
+    value: P28
+    sources:
+      - path: archives/igntp-john/P28.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P28</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10028"
+    sources:
+      - path: archives/igntp-john/P28.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10028</idno></altIdentifier>"
+  - scheme: TM
+    value: "61635"
+    sources:
+      - path: archives/igntp-john/P28.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61635</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2785"
+    sources:
+      - path: archives/igntp-john/P28.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2785</idno></altIdentifier>"
+holdings:
+  - repository: "Pacific School of Religion, Palestine Institute"
+    settlement: Berkeley
+    country: United States
+    idno:
+      - Pap. 2
+    sources:
+      - path: archives/igntp-john/P28.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "United States Berkeley Pacific School of Religion, Palestine Institute Pap. 2"
+  - repository: Collection of Gifford Combs
+    settlement: "Los Angeles, CA"
+    country: USA
+    idno:
+      - Pap.2
+    sources:
+      - path: archives/intf/P28.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Los Angeles, CA Collection of Gifford Combs Pap.2"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III
+    notBefore: 200
+    notAfter: 299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":299,\"gaNum\":\"P28\",\"orig\":\"III\",\"docID\":10028,\"groupID\":\"\",\"primaryName\":\"P28\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":299,\"gaNum\":\"P28\",\"orig\":\"III\",\"docID\":10028,\"groupID\":\"\",\"primaryName\":\"P28\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"

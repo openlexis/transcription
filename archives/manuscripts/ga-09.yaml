@@ -1,0 +1,39 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-09
+names:
+  - text: Codex Boreelianus
+    language: la
+    sources:
+      - path: archives/igntp-john/09.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Boreelianus</msName>"
+identifiers:
+  - scheme: GA
+    value: "09"
+    sources:
+      - path: archives/igntp-john/09.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>09</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20009"
+    sources:
+      - path: archives/igntp-john/09.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20009</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: F
+    sources:
+      - path: archives/igntp-john/09.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>F</idno></altIdentifier>"
+holdings:
+  - repository: Universiteitsbibliotheek
+    settlement: Utrecht
+    country: The Netherlands
+    idno:
+      - "1"
+    sources:
+      - path: archives/igntp-john/09.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: The Netherlands Utrecht Universiteitsbibliotheek 1

@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlexis-transcription.pages.dev/schema/transcription.schema.json",
+  "title": "Transcription record (archives/transcriptions/<provider>/<file stem>.yaml): facts about one transcription file",
+  "type": "object",
+  "required": [
+    "id",
+    "manuscript",
+    "file"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+/[^/]+$"
+    },
+    "manuscript": {
+      "type": "string",
+      "pattern": "^(ga|dss|mt|sp)-[a-z0-9]+$"
+    },
+    "file": {
+      "type": "string",
+      "pattern": "^archives/[a-z0-9-]+/[^/]+\\.xml$"
+    },
+    "title": {
+      "$ref": "common.schema.json#/$defs/text"
+    },
+    "people": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/person"
+      }
+    },
+    "made": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/dateStatement"
+      }
+    },
+    "published": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/dateStatement"
+      }
+    },
+    "version": {
+      "type": "object",
+      "required": [
+        "sources"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "when": {
+          "$ref": "common.schema.json#/$defs/year"
+        },
+        "sources": {
+          "$ref": "common.schema.json#/$defs/sources"
+        }
+      }
+    },
+    "revisions": {
+      "type": "object",
+      "required": [
+        "entries",
+        "sources"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "description"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "n": {
+                "type": "string"
+              },
+              "when": {
+                "$ref": "common.schema.json#/$defs/year"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "sources": {
+          "$ref": "common.schema.json#/$defs/sources"
+        }
+      }
+    },
+    "madeFrom": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "sources"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "enum": [
+              "images",
+              "original",
+              "edition",
+              "microfilm",
+              "typescript",
+              "facsimile",
+              "no-images",
+              "other"
+            ]
+          },
+          "reproduction": {
+            "type": "string",
+            "description": "The id of a reproduction in the manuscript record."
+          },
+          "description": {
+            "type": "string"
+          },
+          "when": {
+            "$ref": "common.schema.json#/$defs/dateStatement"
+          },
+          "generalPractice": {
+            "type": "boolean"
+          },
+          "sources": {
+            "$ref": "common.schema.json#/$defs/sources"
+          }
+        }
+      }
+    },
+    "baseText": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/text"
+      }
+    },
+    "basedOn": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "relation",
+          "sources"
+        ],
+        "additionalProperties": false,
+        "anyOf": [
+          {
+            "required": [
+              "transcription"
+            ]
+          },
+          {
+            "required": [
+              "name"
+            ]
+          }
+        ],
+        "properties": {
+          "transcription": {
+            "type": "string",
+            "description": "The id of another transcription record."
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "relation": {
+            "enum": [
+              "derived-from",
+              "reviewed-against",
+              "extended-from"
+            ]
+          },
+          "covers": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "sources": {
+            "$ref": "common.schema.json#/$defs/sources"
+          }
+        }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "practices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "kind",
+              "text",
+              "sources"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "enum": [
+                  "independent-double-transcription",
+                  "automatic-comparison",
+                  "reconciliation",
+                  "proofreading",
+                  "verification-against-original",
+                  "checked-against-images",
+                  "compared-with-edition",
+                  "compared-with-other-transcriptions",
+                  "base-text-adaptation",
+                  "conversion-to-xml"
+                ]
+              },
+              "text": {
+                "type": "string"
+              },
+              "generalPractice": {
+                "type": "boolean"
+              },
+              "sources": {
+                "$ref": "common.schema.json#/$defs/sources"
+              }
+            }
+          }
+        },
+        "guidelines": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/text"
+          }
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/text"
+          }
+        },
+        "encoding": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/text"
+          }
+        },
+        "conventions": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/text"
+          }
+        }
+      }
+    },
+    "scope": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/text"
+      }
+    },
+    "rights": {
+      "type": "object",
+      "required": [
+        "statement",
+        "sources"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "statement": {
+          "type": "string"
+        },
+        "sources": {
+          "$ref": "common.schema.json#/$defs/sources"
+        }
+      }
+    },
+    "generatedBy": {
+      "$ref": "common.schema.json#/$defs/text"
+    }
+  }
+}

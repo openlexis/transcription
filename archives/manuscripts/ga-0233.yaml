@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0233
+names:
+  - text: "0233"
+    language: la
+    sources:
+      - path: archives/igntp-john/0233.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">0233</msName>"
+identifiers:
+  - scheme: GA
+    value: "0233"
+    sources:
+      - path: archives/igntp-john/0233.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0233</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20233"
+    sources:
+      - path: archives/igntp-john/0233.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20233</idno></altIdentifier>"
+  - scheme: TM
+    value: "68788"
+    sources:
+      - path: archives/igntp-john/0233.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>68788</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "10062"
+    sources:
+      - path: archives/igntp-john/0233.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>10062</idno></altIdentifier>"
+holdings:
+  - repository: Bibelmuseum
+    settlement: Münster
+    country: Germany
+    idno:
+      - Ms 1 (lower script)
+    sources:
+      - path: archives/igntp-john/0233.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Münster Bibelmuseum Ms 1 (lower script)
+  - repository: Bibelmuseum
+    settlement: Münster
+    country: Germany
+    idno:
+      - Ms. 1 (untere Schrift)
+    sources:
+      - path: archives/intf/0233.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Münster Bibelmuseum Ms. 1 (untere Schrift)
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VIII
+    notBefore: 700
+    notAfter: 799
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":799,\"gaNum\":233,\"orig\":\"VIII\",\"docID\":20233,\"groupID\":\"\",\"primaryName\":233,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":700}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":799,\"gaNum\":233,\"orig\":\"VIII\",\"docID\":20233,\"groupID\":\"\",\"primaryName\":233,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":700}"

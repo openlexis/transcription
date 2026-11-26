@@ -1,0 +1,47 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-425
+identifiers:
+  - scheme: GA
+    value: "425"
+    sources:
+      - path: archives/igntp-2thessalonians/425.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>425</idno> </altIdentifier>"
+  - scheme: Liste
+    value: "30425"
+    sources:
+      - path: archives/igntp-2thessalonians/425.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>30425</idno> </altIdentifier>"
+holdings:
+  - repository: Österreichische Nationalbibliothek
+    settlement: Wien
+    country: Austria
+    idno:
+      - "Theol. gr. 221, fol. 1-159"
+    sources:
+      - path: archives/intf/425.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Austria Wien Österreichische Nationalbibliothek Theol. gr. 221, fol. 1-159"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1330"
+    notBefore: 1330
+    notAfter: 1330
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1330,\"gaNum\":425,\"orig\":1330,\"docID\":30425,\"groupID\":\"\",\"primaryName\":425,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1330}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1330,\"gaNum\":425,\"orig\":1330,\"docID\":30425,\"groupID\":\"\",\"primaryName\":425,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1330}"

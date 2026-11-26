@@ -1,0 +1,48 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: cntr/P6
+manuscript: ga-p6
+file: archives/cntr/P6.xml
+people:
+  - name: Alan Bunning
+    roles:
+      - cre
+    statement: Copyright © 2020-2026 by Alan Bunning.
+    sources:
+      - url: https://github.com/Center-for-New-Testament-Restoration/transcriptions/blob/4e743a41a4b2ca010ece53229cd272aa59b1efe6/README.md
+        accessed: 2026-11-02
+        quote: Copyright © 2020-2026 by Alan Bunning.
+made:
+  - text: These electronic transcriptions have taken over a decade to create
+    sources:
+      - title: CNTR Technical Reference
+        url: https://greekcntr.org/resources/technical.pdf
+        citation: "Alan Bunning, CNTR Technical Reference, August 24, 2026"
+        accessed: 2026-11-26
+        quote: These electronic transcriptions have taken over a decade to create
+method:
+  practices:
+    - kind: compared-with-other-transcriptions
+      generalPractice: true
+      text: The transcriptions were compared with other transcriptions when possible.
+      sources:
+        - title: CNTR Technical Reference
+          url: https://greekcntr.org/resources/technical.pdf
+          citation: "Alan Bunning, CNTR Technical Reference, August 24, 2026"
+          accessed: 2026-11-26
+          quote: have been compared with other transcriptions when possible for improved accuracy.
+    - kind: checked-against-images
+      generalPractice: true
+      text: Differences from other sources were resolved by examining images or publications of the manuscripts.
+      sources:
+        - title: CNTR Technical Reference
+          url: https://greekcntr.org/resources/technical.pdf
+          citation: "Alan Bunning, CNTR Technical Reference, August 24, 2026"
+          accessed: 2026-11-26
+          quote: Any differences between the CNTR transcriptions and these other sources were resolved by examining images or publications of the original extant manuscripts.
+  tools:
+    - text: Generated directly from the CNTR database
+      sources:
+        - url: https://github.com/Center-for-New-Testament-Restoration/transcriptions/blob/4e743a41a4b2ca010ece53229cd272aa59b1efe6/README.md
+          accessed: 2026-11-02
+          quote: These transcriptions are generated directly from the CNTR database

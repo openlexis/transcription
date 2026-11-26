@@ -1,0 +1,26 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0230
+identifiers:
+  - scheme: GA
+    value: "0230"
+    sources:
+      - path: archives/igntp-ephesians/0230.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0230</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20230"
+    sources:
+      - path: archives/igntp-ephesians/0230.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20230</idno></altIdentifier>"
+holdings:
+  - repository: The Egyptian Museum
+    settlement: Cairo
+    country: Egypt
+    idno:
+      - SR 3796 25/1/55/2 (21)
+    sources:
+      - path: archives/igntp-ephesians/0230.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Egypt Cairo The Egyptian Museum SR 3796 25/1/55/2 (21)

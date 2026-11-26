@@ -1,0 +1,56 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1424
+identifiers:
+  - scheme: GA
+    value: "1424"
+    sources:
+      - path: archives/igntp-galatians/1424.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>1424</idno> </altIdentifier>"
+      - path: archives/igntp-john/1424.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>1424</idno> </altIdentifier>"
+  - scheme: Liste
+    value: "31424"
+    sources:
+      - path: archives/igntp-galatians/1424.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>31424</idno> </altIdentifier>"
+      - path: archives/igntp-john/1424.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>31424</idno> </altIdentifier>"
+holdings:
+  - repository: Kosinitza Monastery
+    settlement: Drama
+    country: Greece
+    idno:
+      - 3 (3P)
+    sources:
+      - path: archives/igntp-galatians/1424.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Drama Kosinitza Monastery 3 (3P)
+      - path: archives/intf/1424.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Drama Kosinitza Monastery 3 (3P)
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IX/X
+    notBefore: 800
+    notAfter: 999
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":999,\"gaNum\":1424,\"orig\":\"IX/X\",\"docID\":31424,\"groupID\":\"\",\"primaryName\":1424,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":999,\"gaNum\":1424,\"orig\":\"IX/X\",\"docID\":31424,\"groupID\":\"\",\"primaryName\":1424,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"

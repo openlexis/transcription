@@ -1,0 +1,288 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: igntp-john/P66
+manuscript: ga-p66
+file: archives/igntp-john/P66.xml
+title:
+  text: A Transcription of John in P66
+  sources:
+    - path: archives/igntp-john/P66.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A Transcription of John in P66
+people:
+  - name: the International Greek New Testament Project
+    kind: organisation
+    roles:
+      - cre
+    statement: Created by
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by the International Greek New Testament Project
+      - path: archives/igntp-john/P66.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2000 and 2010.
+  - name: The Arts and Humanities Research Council
+    roles:
+      - fnd
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: "teiHeader/fileDesc/titleStmt/funder[1]"
+        quote: The Arts and Humanities Research Council
+  - name: The Institute for Textual Scholarship and Electronic Editing
+    roles:
+      - spn
+      - pbl
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: "teiHeader/fileDesc/titleStmt/sponsor[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing
+      - path: archives/igntp-john/P66.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: University of Birmingham
+    roles:
+      - pbl
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: Catherine Smith
+    roles:
+      - mrk
+    statement: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+        quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+  - name: "IGNTP contributors, including volunteers and postdoctoral scholars"
+    kind: group
+    roles:
+      - trc
+    statement: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+    generalPractice: true
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+made:
+  - text: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2000 and 2010.
+    from: 2000
+    to: 2010
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2000 and 2010.
+published:
+  - text: 12.8.2013
+    when: 2013-08-12
+    sources:
+      - path: archives/igntp-john/P66.xml
+        locator: teiHeader/fileDesc/publicationStmt/date
+        quote: "<date>12.8.2013</date>"
+version:
+  text: "Version 2.1, created 12.8.2013"
+  label: "2.1"
+  when: 2013-08-12
+  sources:
+    - path: archives/igntp-john/P66.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: "Version 2.1, created 12.8.2013"
+revisions:
+  entries:
+    - when: 2017-01-09
+      description: lac rest verse at 16.6 added by David Parker.
+      "n": "44"
+    - when: 2016-07-11
+      description: lac rest line at 16.2 removed by David Parker.
+      "n": "43"
+    - when: 2016-01-15
+      description: C* at 17.14 changed by David Parker.
+      "n": "42"
+    - when: 2016-01-15
+      description: Supplied text at 16.11 changed by David Parker.
+      "n": "41"
+    - when: 2015-10-14
+      description: Supplied text at 19.29 changed by David Parker.
+      "n": "40"
+    - when: 2015-04-14
+      description: "[να]ζ[ω]ρ[19-23] changed to [να]ζ[ω]ρ[αιον] rest of line lac at 18.5 by Rachel Kevern."
+      "n": "39"
+    - when: 2015-03-26
+      description: End of 16.7 verse marker moved by Rachel Kevern.
+      "n": "38"
+    - when: 2015-03-25
+      description: του τουτου changed to τουτου του at 15.19 by Rachel Kevern.
+      "n": "37"
+    - when: 2015-03-18
+      description: "βα θυ changed to βαθυ in * 4.11 and [18-21]τω changed to [16-19] [αυ]τω at 18.31 by Rachel Kevern."
+      "n": "36"
+    - when: 2015-03-04
+      description: "[ουν] changed to [συν] at 21.3 by Rachel Kevern."
+      "n": "35"
+    - when: 2015-01-21
+      description: "C* ην added to δ[ε μαθητης εκε]ινο[ς ην γνωσ]τος at 18.15 by Rachel Kevern (was missing in previous edit)."
+      "n": "34"
+    - when: 2015-01-14
+      description: "C* δ[11]ινο[7]τος changed to δ[ε μαθητης εκε]ινο[ς ην γνωσ]τος at 18.15 by Rachel Kevern."
+      "n": "33"
+    - when: 2014-12-04
+      description: 2-3 line gap changed to 2-3 char gap at 4.6 by Rachel Kevern.
+      "n": "32"
+    - when: 2014-11-12
+      description: "Word break at 4.42 corrected and empty word tag at 18.1 deleted and apostrophe added to same verse, apostrophe put in pc tags at 8.29, apostrophe moved into preceding word tags at 8.54, 8.56 and 9.28 by Rachel Kevern."
+      "n": "31"
+    - when: 2014-11-11
+      description: "Gap tags and uncertain spaces at the beginning of 16.29 and uncertain spaces on P154 changed, apostrophe moved to preceding word at 4.5 and 15.19 by Rachel Kevern."
+      "n": "30"
+    - when: 2014-11-04
+      description: Word break at 3.31 corrected by Rachel Kevern.
+      "n": "29"
+    - when: 2014-10-15
+      description: Empty word tag at 13.23 removed by Rachel Kevern.
+      "n": "28"
+    - when: 2014-09-04
+      description: "' moved inside each word of correction in 9:7 by Catherine Smith"
+      "n": "27"
+    - when: 2014-09-03
+      description: Rest of verse lac tags deleted from 16.11 by Rachel Kevern.
+      "n": "26"
+    - when: 2014-09-01
+      description: "[4-5] changed back to [ειδως] at 18.4 and rest of verse lac tags added to 16.10, 16.11 and 16.12 by Rachel Kevern."
+      "n": "25"
+    - when: 2014-07-14
+      description: "Rest of verse lac tags and rest of line lac tags added to 20.20, 22, 23, 25 and 26 by by Rachel Kevern."
+      "n": "24"
+    - when: 2014-07-02
+      description: "Rest of verse lac tag replaced by [ου] at 17.20 by Rachel Kevern."
+      "n": "23"
+    - when: 2014-07-01
+      description: Lac tags improved at 16.23 and 16.24 by Rachel Kevern.
+      "n": "22"
+    - when: 2014-06-24
+      description: "υ[μων] changed back to υ[μιν] at 16.6, [6] changed back to [λαλεις] and λ[5] changed back to λ[εγεις] at 16.29, [7] changed back to [εγνωκαν] at 17.7, word element added to gap element at 18.4 by Rachel Kevern."
+      "n": "21"
+    - when: 2014-06-23
+      description: "Some supplied text replaced by gap tag at 16.19, gap tag added at 17.20, [5-6] replaced by [ην ο το] at 19.20, ειπ[ε] changed to ειπ[εν] at 19.21, κ[4]ει[νος] changed to κ[αι εκ]ει[νος] at 19.35 and [ανεβ]ησ[αν] changed to [ενεβ]ησ[αν] at 21.3 by Rachel Kevern."
+      "n": "20"
+    - when: 2014-06-17
+      description: "κα[...] [1-2]ν changed to κα[ι] [εα]ν at 15.4 and lac elements added 16.11 and 16.12 by Rachel Kevern."
+      "n": "19"
+    - when: 2014-06-12
+      description: Line breaks removed from segs by Catherine Smith.
+      "n": "18"
+    - when: 2014-05-20
+      description: "[11-13]σαται changed to [11-13] [part word lacuna]σαται at 16.24, [6]λλα changed to [εχητε α]λλα at 16.33 and [6]παρας changed to [6] [part word lacuna]παρας at 17.1 by Rachel Kevern."
+      "n": "17"
+    - when: 2014-05-14
+      description: "ει[3] changed to εις το and [2-3]τα changed to [αυ]τα at 15.6; υμ[1]ς changed to υμ[α]ς at 15.21 and 'rest of verse' gap tag added at 15.2 by Rachel Kevern."
+      "n": "16"
+    - when: 2014-04-28
+      description: Apostrophe after app tags removed at 7.31 by Rachel Kevern.
+      "n": "15"
+    - when: 2014-04-08
+      description: Random apostrophes after app tags removed at 13.23 and 18.1 by Rachel Kevern.
+      "n": "14"
+    - when: 2014-03-25
+      description: Correction at 13.7 corrected and two new correctors added to listWit by Rachel Kevern.
+      "n": "13"
+    - when: 2014-03-19
+      description: "Word breaks at 18.5, 18.8 and 18.18 corrected. [επεσα] changed to [επεσαν] at 18.6. [ειδως] changed to [4-5] at 18.4. εμισει *σε C om changed to *εμισεισε C εμισει at 15.18. All by Rachel Kevern."
+      "n": "12"
+    - when: 2014-03-18
+      description: "[εδωκας] changed to [6-7] and [δεδ]ωκας changed to [2-3]ωκας at 17.8.[δεδω]κας changed to [3-4]κας at 17.9. [πιστευο]ντων changed to [7-8]ντων at 17.20. [δεδωκας] changed to [6-7] at 17.24. All by Rachel Kevern."
+      "n": "11"
+    - when: 2014-03-13
+      description: "[λαλεις] changed to [6], [λεγεις] changed to [6] at 16.29 and [εγνωκαν] changed to [7] at 17.7 by Rachel Kevern."
+      "n": "10"
+    - when: 2014-03-12
+      description: "υ[μιν] changed to υ[μων] at 16.6, ημ[5]της changed to ημ[ερα] [αυ]της at 16.21 and word break corrected at 16.19 by Rachel Kevern."
+      "n": "9"
+    - when: 2014-02-26
+      description: ου κυ changed to ουκυ at 12.39 by Rachel Kevern.
+      "n": "8"
+    - when: 2013-10-30
+      description: Correction to tagging of end of 21.9 by David Parker.
+      "n": "7"
+    - when: 2013-10-15
+      description: "Word breaks in 7.45, 8.43, 46, 11.54, 13.37, 14.19 corrected by David Parker."
+      "n": "6"
+    - when: 2013-10-11
+      description: "Word breaks corrected in 2.11, 3.15, 9.25, 12,5, 18.25, 19.20, 21.2, 21.5 by David Parker."
+      "n": "5"
+    - when: 2013-07-22
+      description: Ghost page removed by Catherine Smith.
+      "n": "4"
+    - when: 2013-07-03
+      description: "Adjusted to XML specifications 1.4 (apart from handling of ghost pages), including witnessEnd marking, by Hugh Houghton."
+      "n": "3"
+    - when: 2013-06-13
+      description: line lacs adding at beginning and end of 6 lines P115C1L11-P115C1L16
+      "n": "2"
+    - when: 2013-04-18
+      description: Koppa character fixed by Hugh Houghton.
+      "n": "1"
+    - when: 2013-04-03
+      description: Converted from plain text by Catherine Smith using Python conversion scripts 1.0 with manual adjustments.
+      "n": "0"
+  sources:
+    - path: archives/igntp-john/P66.xml
+      locator: teiHeader/revisionDesc
+      quote: lac rest verse at 16.6 added by David Parker.
+method:
+  practices:
+    - kind: conversion-to-xml
+      text: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+      sources:
+        - path: archives/igntp-john/P66.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+    - kind: conversion-to-xml
+      text: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+      sources:
+        - path: archives/igntp-john/P66.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+    - kind: independent-double-transcription
+      generalPractice: true
+      text: Two independent initial transcriptions are made of each manuscript.
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: Both organizations observe the same practice of producing two independent initial transcriptions
+    - kind: reconciliation
+      generalPractice: true
+      text: "A third person, usually the transcription coordinator, reconciles the two with reference to the images of the manuscript and makes the final file."
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: "these are reconciled by a third person (usually the transcription coordinator) with reference to the images of the manuscript, who creates a final file"
+  guidelines:
+    - text: The XML specifications used are version 1.4 of the IGNTP Guidelines available at
+      sources:
+        - path: archives/igntp-john/P66.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[3]"
+          quote: The XML specifications used are version 1.4 of the IGNTP Guidelines available at
+  tools:
+    - text: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+      sources:
+        - path: archives/igntp-john/P66.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+    - text: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+      sources:
+        - path: archives/igntp-john/P66.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+rights:
+  statement: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."
+  sources:
+    - path: archives/igntp-john/P66.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."

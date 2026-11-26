@@ -1,0 +1,13 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1982
+holdings:
+  - repository: Biblioteca Ambrosiana
+    settlement: Milan
+    country: Italy
+    idno:
+      - D.541 inf
+    sources:
+      - path: archives/igntp-catena/1982.ephesians.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Milan Biblioteca Ambrosiana D.541 inf

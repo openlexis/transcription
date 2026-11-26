@@ -1,0 +1,33 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0286
+names:
+  - text: "0286"
+    language: la
+    sources:
+      - path: archives/igntp-john/0286.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">0286</msName>"
+identifiers:
+  - scheme: GA
+    value: "0286"
+    sources:
+      - path: archives/igntp-john/0286.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0286</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20286"
+    sources:
+      - path: archives/igntp-john/0286.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20286</idno></altIdentifier>"
+holdings:
+  - repository: Monastery of St. Catherine
+    settlement: Sinai
+    country: Egypt
+    idno:
+      - N.E. MG 72
+    sources:
+      - path: archives/igntp-john/0286.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Egypt Sinai Monastery of St. Catherine N.E. MG 72

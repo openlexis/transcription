@@ -1,0 +1,81 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p39
+names:
+  - text: Papyrus 39
+    language: en
+    sources:
+      - path: archives/igntp-john/P39.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 39</msName>"
+identifiers:
+  - scheme: GA
+    value: P39
+    sources:
+      - path: archives/igntp-john/P39.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P39</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10039"
+    sources:
+      - path: archives/igntp-john/P39.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10039</idno></altIdentifier>"
+  - scheme: P.Oxy
+    value: "1780"
+    sources:
+      - path: archives/igntp-john/P39.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"P.Oxy\"><idno>1780</idno></altIdentifier>"
+  - scheme: TM
+    value: "61638"
+    sources:
+      - path: archives/igntp-john/P39.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61638</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2788"
+    sources:
+      - path: archives/igntp-john/P39.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2788</idno></altIdentifier>"
+holdings:
+  - repository: Ambrose Swabey Library
+    settlement: Rochester NY
+    country: United States
+    idno:
+      - Inv. 8864
+    sources:
+      - path: archives/igntp-john/P39.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United States Rochester NY Ambrose Swabey Library Inv. 8864
+  - repository: Museum of the Bible
+    settlement: Washington D.C.
+    country: USA
+    idno:
+      - MOTB.PAP.000116
+    sources:
+      - path: archives/intf/P39.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: USA Washington D.C. Museum of the Bible MOTB.PAP.000116
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III
+    notBefore: 200
+    notAfter: 299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":299,\"gaNum\":\"P39\",\"orig\":\"III\",\"docID\":10039,\"groupID\":\"\",\"primaryName\":\"P39\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":299,\"gaNum\":\"P39\",\"orig\":\"III\",\"docID\":10039,\"groupID\":\"\",\"primaryName\":\"P39\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"

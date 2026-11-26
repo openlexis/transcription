@@ -1,0 +1,71 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1127
+identifiers:
+  - scheme: GA
+    value: "1127"
+    sources:
+      - path: archives/igntp-2thessalonians/1127.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>1127</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/1127.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1127</idno></altIdentifier>"
+      - path: archives/igntp-galatians/1127.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1127</idno></altIdentifier>"
+  - scheme: Liste
+    value: "31127"
+    sources:
+      - path: archives/igntp-2thessalonians/1127.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>31127</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/1127.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31127</idno></altIdentifier>"
+      - path: archives/igntp-galatians/1127.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31127</idno></altIdentifier>"
+holdings:
+  - repository: Philotheou
+    settlement: Athos
+    country: Greece
+    idno:
+      - "48"
+    sources:
+      - path: archives/igntp-ephesians/1127.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athos Philotheou 48
+      - path: archives/igntp-galatians/1127.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athos Philotheou 48
+  - repository: Philotheou Monastery
+    settlement: Athos
+    country: Greece
+    idno:
+      - "48"
+    sources:
+      - path: archives/intf/1127.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athos Philotheou Monastery 48
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XII
+    notBefore: 1100
+    notAfter: 1199
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1199,\"gaNum\":1127,\"orig\":\"XII\",\"docID\":31127,\"groupID\":\"\",\"primaryName\":1127,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1199,\"gaNum\":1127,\"orig\":\"XII\",\"docID\":31127,\"groupID\":\"\",\"primaryName\":1127,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"

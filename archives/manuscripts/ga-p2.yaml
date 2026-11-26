@@ -1,0 +1,108 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p2
+names:
+  - text: Papyrus 2
+    language: en
+    sources:
+      - path: archives/igntp-john/P2.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 2</msName>"
+identifiers:
+  - scheme: GA
+    value: P2
+    sources:
+      - path: archives/igntp-john/P2.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P2</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10002"
+    sources:
+      - path: archives/igntp-john/P2.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10002</idno></altIdentifier>"
+  - scheme: TM
+    value: "61744"
+    sources:
+      - path: archives/igntp-john/P2.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61744</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2896"
+    sources:
+      - path: archives/igntp-john/P2.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2896</idno></altIdentifier>"
+holdings:
+  - repository: Museo Egizio
+    settlement: Florence
+    country: Italy
+    idno:
+      - Inv. Nr. 7134
+    leaves: 1 Frg
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10002&format=json
+        accessed: 2026-11-26
+        quote: Inv. Nr. 7134
+  - repository: Museo Archeologico
+    settlement: Florence
+    country: Italy
+    idno:
+      - Inv. 7134
+    sources:
+      - path: archives/igntp-john/P2.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Florence Museo Archeologico Inv. 7134
+  - repository: Museo Egizio
+    settlement: Florence
+    country: Italy
+    idno:
+      - Inv. Nr. 7134
+    sources:
+      - path: archives/intf/P2.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Florence Museo Egizio Inv. Nr. 7134
+  - repository: Museo Egizio
+    settlement: Florence
+    country: Italy
+    idno:
+      - Inv. Nr. 7134
+    leaves: 1 Frg
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/liste/search/?docID=10002&detail=page&format=json
+        accessed: 2026-11-26
+        quote: "\"shelfNumber\": \"Inv. Nr. 7134\""
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VI
+    notBefore: 500
+    notAfter: 599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":599,\"gaNum\":\"P2\",\"orig\":\"VI\",\"docID\":10002,\"groupID\":\"\",\"primaryName\":\"P2\",\"lang\":\"g-k\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":599,\"gaNum\":\"P2\",\"orig\":\"VI\",\"docID\":10002,\"groupID\":\"\",\"primaryName\":\"P2\",\"lang\":\"g-k\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+reproductions:
+  - id: ntvmr-10
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 2 page images listed
+    owner: "Images © The Holding Institution &#x2028;&#x2028;&nbsp;&#x2028;&#x2028; Photo Digitized by INTF for Research Purposes External Images by CSNTM"
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10002
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10002&format=json
+        accessed: 2026-11-26
+        quote: "Images © The Holding Institution &#x2028;&#x2028;&nbsp;&#x2028;&#x2028; Photo Digitized by INTF for Research Purposes External Images by CSNTM"

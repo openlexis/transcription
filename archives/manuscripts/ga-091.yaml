@@ -1,0 +1,44 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-091
+identifiers:
+  - scheme: partial
+    value: "Russia, St. Petersburg, Russian Academy of Sciences, Foreign Language Manuscripts F. 410"
+    sources:
+      - path: archives/igntp-john/091.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"partial\"><idno>Russia, St. Petersburg, Russian Academy of Sciences, Foreign Language Manuscripts F. 410 </idno></altIdentifier>"
+  - scheme: GA
+    value: "091"
+    sources:
+      - path: archives/igntp-john/091.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>091</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20091"
+    sources:
+      - path: archives/igntp-john/091.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20091</idno></altIdentifier>"
+  - scheme: TM
+    value: "61668"
+    sources:
+      - path: archives/igntp-john/091.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61668</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2819"
+    sources:
+      - path: archives/igntp-john/091.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2819</idno></altIdentifier>"
+holdings:
+  - repository: National Library of Russia
+    settlement: St Petersburg
+    country: Russia
+    idno:
+      - Gr. 279
+    sources:
+      - path: archives/igntp-john/091.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Russia St Petersburg National Library of Russia Gr. 279

@@ -1,0 +1,284 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: sinaiticus-project/01
+manuscript: ga-01
+file: archives/sinaiticus-project/01.xml
+title:
+  text: A Transcription of the Codex Sinaiticus
+  sources:
+    - path: archives/sinaiticus-project/01.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A Transcription of the Codex Sinaiticus
+people:
+  - name: the Codex Sinaiticus Project
+    roles:
+      - cre
+    statement: Created by
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by the Codex Sinaiticus Project
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the Codex Sinaiticus Project as part of an online presentation and edition of Codex Sinaiticus between 2002 and 2010.
+  - name: The Institute for Textual Scholarship and Electronic Editing
+    kind: organisation
+    roles:
+      - spn
+    statement: Sponsor
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[2]"
+        quote: Sponsor The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: University of Birmingham
+    kind: organisation
+    roles:
+      - spn
+    statement: Sponsor
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[2]"
+        quote: Sponsor The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: the Arts and Humanities Research Council
+    kind: organisation
+    roles:
+      - fnd
+    statement: Funded by
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[3]"
+        quote: Funded by the Arts and Humanities Research Council
+  - name: D.C. Parker
+    roles:
+      - trc
+    statement: Transcription
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[4]"
+        quote: "Transcription D.C. Parker Amy Myshrall T.A.E. Brown with Members of the Institüt für neutestamentliche Textforschung, Münster"
+  - name: Amy Myshrall
+    roles:
+      - trc
+    statement: Transcription
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[4]"
+        quote: "Transcription D.C. Parker Amy Myshrall T.A.E. Brown with Members of the Institüt für neutestamentliche Textforschung, Münster"
+  - name: T.A.E. Brown
+    roles:
+      - trc
+    statement: Transcription
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[4]"
+        quote: "Transcription D.C. Parker Amy Myshrall T.A.E. Brown with Members of the Institüt für neutestamentliche Textforschung, Münster"
+  - name: "Members of the Institüt für neutestamentliche Textforschung, Münster"
+    kind: group
+    roles:
+      - trc
+    statement: Transcription
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[4]"
+        quote: "Transcription D.C. Parker Amy Myshrall T.A.E. Brown with Members of the Institüt für neutestamentliche Textforschung, Münster"
+  - name: Rachel Kevern
+    roles:
+      - trc
+      - rev
+      - pfr
+    statement: "Transcription, reconciliation and proofreading"
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[5]"
+        quote: "Transcription, reconciliation and proofreading Rachel Kevern"
+  - name: H.A.G. Houghton
+    roles:
+      - pfr
+      - mrk
+    statement: Conversion to XML and proofreading
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[6]"
+        quote: Conversion to XML and proofreading H.A.G. Houghton
+  - name: The Codex Sinaiticus Project Board
+    roles:
+      - pbl
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Codex Sinaiticus Project Board
+made:
+  - text: This transcription was made by the Codex Sinaiticus Project as part of an online presentation and edition of Codex Sinaiticus between 2002 and 2010.
+    from: 2002
+    to: 2010
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the Codex Sinaiticus Project as part of an online presentation and edition of Codex Sinaiticus between 2002 and 2010.
+  - text: "Double-transcribed from digital images taken by the Codex Sinaiticus Project team in 2006-2009, supplied by the Codex Sinaiticus Project."
+    from: 2006
+    to: 2009
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+        quote: "Double-transcribed from digital images taken by the Codex Sinaiticus Project team in 2006-2009, supplied by the Codex Sinaiticus Project."
+  - text: "The Codex Sinaiticus transcription project, funded by the AHRC between 2006 and 2009"
+    from: 2006
+    to: 2009
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: "Chief among these was the Codex Sinaiticus transcription project, funded by the AHRC between 2006 and 2009"
+madeFrom:
+  - kind: images
+    reproduction: sinaiticus-project-2
+    description: "Double-transcribed from digital images taken by the Codex Sinaiticus Project team in 2006-2009, supplied by the Codex Sinaiticus Project."
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+        quote: "Double-transcribed from digital images taken by the Codex Sinaiticus Project team in 2006-2009, supplied by the Codex Sinaiticus Project."
+  - kind: original
+    description: "Verified against the manuscript portions in Leipzig, St Petersburg and Moscow in 2008-2009."
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+        quote: "Verified against the manuscript portions in Leipzig, St Petersburg and Moscow in 2008-2009."
+  - kind: images
+    reproduction: csp-digitisation
+    description: "Working from the digital images, two initial transcriptions were made by researchers which were then automatically compared by software to identify differences, before a final definitive transcription was agreed."
+    sources:
+      - title: "Virtual reunification, virtual preservation and enhanced conservation"
+        url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+        citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+        accessed: 2026-11-26
+        quote: "Working from the digital images, two initial transcriptions were made by researchers which were then automatically compared by software to identify differences, before a final definitive transcription was agreed."
+published:
+  - text: 3.11.2010
+    when: 2010-11-03
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: teiHeader/fileDesc/publicationStmt/date
+        quote: "<date>3.11.2010</date>"
+version:
+  text: "Version 1.05, last updated 7.9.2020"
+  label: "1.05"
+  when: 2020-09-07
+  sources:
+    - path: archives/sinaiticus-project/01.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: "Version 1.05, last updated 7.9.2020"
+revisions:
+  entries:
+    - when: 2020-09-07
+      description: "Correction of υψιστω to υψιστου on Q70-8r-1-7, with thanks to Michael Dormandy. (version 1.05)."
+      "n": "8"
+    - when: 2014-03-25
+      description: "Correction of erroneous encodings at Q74-2r-1-46 (rough breathing), Q69-1r-1-23 (lunate sigma), Q72-2r-2-3 (punctuation), Q17-1v-3-4 (diairesis), Q34-8r-2-28 (punctuation), Q82-4r-3-31 (punctuation). Thanks to Pietro Campagna for pointing out these and change 6 below (version 1.04)."
+      "n": "7"
+    - when: 2014-03-12
+      description: XML adjusted for correction and missing word added on Q45-1r-3-11. (version 1.03).
+      "n": "6"
+    - when: 2012-05-04
+      description: First chapter title on Q88-4v corrected. (version 1.03).
+      "n": "5"
+    - when: 2012-01-27
+      description: scribeid for Q77-6r corrected to A - this should have happened at the last change but was not correct in this file. (version 1.02b).
+      "n": "4"
+    - when: 2010-12-15
+      description: scribeid for Q77-6 to 8 corrected to A (version 1.02).
+      "n": "3"
+    - when: 2010-11-03
+      description: Minor changes to transcription incorporated (version 1.01).
+      "n": "2"
+    - when: 2010-07-06
+      description: Website launched at www.codexsinaiticus.org with full transcription (version 1.0)
+      "n": "1"
+  sources:
+    - path: archives/sinaiticus-project/01.xml
+      locator: teiHeader/revisionDesc
+      quote: "Correction of υψιστω to υψιστου on Q70-8r-1-7, with thanks to Michael Dormandy. (version 1.05)."
+method:
+  practices:
+    - kind: independent-double-transcription
+      text: "Double-transcribed from digital images taken by the Codex Sinaiticus Project team in 2006-2009, supplied by the Codex Sinaiticus Project."
+      sources:
+        - path: archives/sinaiticus-project/01.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: "Double-transcribed from digital images taken by the Codex Sinaiticus Project team in 2006-2009, supplied by the Codex Sinaiticus Project."
+    - kind: verification-against-original
+      text: "Verified against the manuscript portions in Leipzig, St Petersburg and Moscow in 2008-2009."
+      sources:
+        - path: archives/sinaiticus-project/01.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: "Verified against the manuscript portions in Leipzig, St Petersburg and Moscow in 2008-2009."
+    - kind: conversion-to-xml
+      text: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+      sources:
+        - path: archives/sinaiticus-project/01.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[3]"
+          quote: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+    - kind: independent-double-transcription
+      text: Two initial transcriptions were made by researchers from the digital images.
+      sources:
+        - title: "Virtual reunification, virtual preservation and enhanced conservation"
+          url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+          citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+          accessed: 2026-11-26
+          quote: "Working from the digital images, two initial transcriptions were made by researchers which were then automatically compared by software to identify differences, before a final definitive transcription was agreed."
+    - kind: automatic-comparison
+      text: "The two transcriptions were compared automatically by software to find differences, before a final transcription was agreed."
+      sources:
+        - title: "Virtual reunification, virtual preservation and enhanced conservation"
+          url: https://www.ifla.org/past-wlic/2009/163-shenton-en.pdf
+          citation: "Helen Shenton (Head of Collection Care, British Library), IFLA World Library and Information Congress, Milan, 2009"
+          accessed: 2026-11-26
+          quote: "Working from the digital images, two initial transcriptions were made by researchers which were then automatically compared by software to identify differences, before a final definitive transcription was agreed."
+  guidelines:
+    - text: "The XML is based on the TEI P5 guidelines, although there are some innovations in order to represent the physical layout of each page."
+      sources:
+        - path: archives/sinaiticus-project/01.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[3]"
+          quote: "The XML is based on the TEI P5 guidelines, although there are some innovations in order to represent the physical layout of each page."
+  tools:
+    - text: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+      sources:
+        - path: archives/sinaiticus-project/01.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[3]"
+          quote: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+  conventions:
+    - text: "The transcription includes foliation, lineation, all punctuation and abbreviations."
+      sources:
+        - path: archives/sinaiticus-project/01.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: "The transcription includes foliation, lineation, all punctuation and abbreviations."
+basedOn:
+  - name: the INTF transcriptions made for the digital Nestle-Aland edition
+    description: The transcription files for the New Testament were enhanced versions of those created by INTF for the digital NA.
+    relation: extended-from
+    covers: New Testament
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: the transcription files for the New Testament were enhanced versions of those created by INTF for the digital NA
+baseText:
+  - text: "Base texts used: Nestle-Aland, Novum Testamentum graece, 27th edition."
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+        quote: "Base texts used: Nestle-Aland, Novum Testamentum graece, 27th edition."
+scope:
+  - text: This transcription covers the whole manuscript.
+    sources:
+      - path: archives/sinaiticus-project/01.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+        quote: This transcription covers the whole manuscript.
+rights:
+  statement: Available for noncommercial re-use provided attribution is made to the original creators and the subsequent derivative is licensed as ShareAlike (Creative Commons by-nc-sa)
+  sources:
+    - path: archives/sinaiticus-project/01.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: Available for noncommercial re-use provided attribution is made to the original creators and the subsequent derivative is licensed as ShareAlike (Creative Commons by-nc-sa)

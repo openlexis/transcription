@@ -1,0 +1,69 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-011
+names:
+  - text: "011"
+    language: la
+    sources:
+      - path: archives/igntp-john/011.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">011</msName>"
+identifiers:
+  - scheme: GA
+    value: "011"
+    sources:
+      - path: archives/igntp-john/011.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>011</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20011"
+    sources:
+      - path: archives/igntp-john/011.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20011</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: G
+    sources:
+      - path: archives/igntp-john/011.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>G</idno></altIdentifier>"
+holdings:
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Harley 5864
+    sources:
+      - path: archives/igntp-john/011.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Harley 5864
+  - repository: Trinity College
+    settlement: Cambridge
+    country: United Kingdom
+    idno:
+      - "B.17.20, fol. 172"
+    sources:
+      - path: archives/intf/011.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "United Kingdom Cambridge Trinity College B.17.20, fol. 172"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IX
+    notBefore: 800
+    notAfter: 899
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":899,\"gaNum\":11,\"orig\":\"IX\",\"docID\":20011,\"groupID\":\"\",\"primaryName\":11,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":899,\"gaNum\":11,\"orig\":\"IX\",\"docID\":20011,\"groupID\":\"\",\"primaryName\":11,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"

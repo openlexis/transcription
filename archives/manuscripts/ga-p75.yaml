@@ -1,0 +1,79 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p75
+names:
+  - text: Papyrus 75
+    language: en
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 75</msName>"
+identifiers:
+  - scheme: former
+    value: "olim Cologny, Biblioteca Bodmeriana XIV-XV"
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"former\"><idno>olim Cologny, Biblioteca Bodmeriana XIV-XV</idno></altIdentifier>"
+  - scheme: GA
+    value: P75
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P75</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10075"
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10075</idno></altIdentifier>"
+  - scheme: TM
+    value: "61743"
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61743</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2895"
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2895</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Apostolica Vaticana
+    settlement: Vatican City
+    country: Italy
+    sources:
+      - path: archives/igntp-john/P75.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Vatican City Biblioteca Apostolica Vaticana
+  - repository: Biblioteca Apostolica Vaticana
+    settlement: Città del Vaticano
+    country: Vatican City
+    idno:
+      - Pap. Hanna.1 (Mater.Verbi)
+    sources:
+      - path: archives/intf/P75.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Pap. Hanna.1 (Mater.Verbi)
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III (A)
+    notBefore: 200
+    notAfter: 225
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":225,\"gaNum\":\"P75\",\"orig\":\"III (A)\",\"docID\":10075,\"groupID\":\"\",\"primaryName\":\"P75\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":225,\"gaNum\":\"P75\",\"orig\":\"III (A)\",\"docID\":10075,\"groupID\":\"\",\"primaryName\":\"P75\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"

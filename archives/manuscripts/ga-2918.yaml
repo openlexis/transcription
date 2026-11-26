@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2918
+holdings:
+  - repository: Biblioteca Apostolica Vaticana
+    settlement: Città del Vaticano
+    country: Vatican City
+    idno:
+      - "Borg. gr. 18, fol. 239-444"
+    sources:
+      - path: archives/intf/2918.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Borg. gr. 18, fol. 239-444"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1273"
+    notBefore: 1273
+    notAfter: 1273
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1273,\"gaNum\":2918,\"orig\":1273,\"docID\":32918,\"groupID\":\"\",\"primaryName\":2918,\"lang\":\"grc\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1273}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1273,\"gaNum\":2918,\"orig\":1273,\"docID\":32918,\"groupID\":\"\",\"primaryName\":2918,\"lang\":\"grc\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1273}"

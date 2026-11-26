@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-909
+holdings:
+  - repository: The Van Kampen Foundation
+    settlement: Orlando
+    country: USA
+    idno:
+      - VK 902
+    sources:
+      - path: archives/intf/909.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: USA Orlando The Van Kampen Foundation VK 902
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1107"
+    notBefore: 1107
+    notAfter: 1107
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1107,\"gaNum\":909,\"orig\":1107,\"docID\":30909,\"groupID\":\"\",\"primaryName\":909,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1107}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1107,\"gaNum\":909,\"orig\":1107,\"docID\":30909,\"groupID\":\"\",\"primaryName\":909,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1107}"

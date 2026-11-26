@@ -1,0 +1,50 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-632
+identifiers:
+  - scheme: GA
+    value: "632"
+    sources:
+      - path: archives/igntp-galatians/632.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>632</idno></altIdentifier>"
+  - scheme: Liste
+    value: "30632"
+    sources:
+      - path: archives/igntp-galatians/632.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>30632</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Vallicelliana
+    settlement: Rome
+    country: Italy
+    idno:
+      - B. 86
+    sources:
+      - path: archives/igntp-galatians/632.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Rome Biblioteca Vallicelliana B. 86
+      - path: archives/intf/632.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Rome Biblioteca Vallicelliana B. 86
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XII-XIV
+    notBefore: 1100
+    notAfter: 1399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1399,\"gaNum\":632,\"orig\":\"XII-XIV\",\"docID\":30632,\"groupID\":\"\",\"primaryName\":632,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1399,\"gaNum\":632,\"orig\":\"XII-XIV\",\"docID\":30632,\"groupID\":\"\",\"primaryName\":632,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"

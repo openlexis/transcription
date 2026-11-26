@@ -1,0 +1,185 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: igntp-john/841
+manuscript: ga-841
+file: archives/igntp-john/841.xml
+title:
+  text: A Transcription of John in 841
+  sources:
+    - path: archives/igntp-john/841.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A Transcription of John in 841
+people:
+  - name: the International Greek New Testament Project
+    kind: organisation
+    roles:
+      - cre
+    statement: Created by
+    sources:
+      - path: archives/igntp-john/841.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by the International Greek New Testament Project
+      - path: archives/igntp-john/841.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2010 and 2013.
+  - name: The Arts and Humanities Research Council
+    roles:
+      - fnd
+    sources:
+      - path: archives/igntp-john/841.xml
+        locator: "teiHeader/fileDesc/titleStmt/funder[1]"
+        quote: The Arts and Humanities Research Council
+  - name: The Institute for Textual Scholarship and Electronic Editing
+    roles:
+      - spn
+      - pbl
+    sources:
+      - path: archives/igntp-john/841.xml
+        locator: "teiHeader/fileDesc/titleStmt/sponsor[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing
+      - path: archives/igntp-john/841.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: University of Birmingham
+    roles:
+      - pbl
+    sources:
+      - path: archives/igntp-john/841.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: Catherine Smith
+    roles:
+      - mrk
+    statement: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+    sources:
+      - path: archives/igntp-john/841.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+        quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+  - name: "IGNTP contributors, including volunteers and postdoctoral scholars"
+    kind: group
+    roles:
+      - trc
+    statement: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+    generalPractice: true
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+made:
+  - text: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2010 and 2013.
+    from: 2010
+    to: 2013
+    sources:
+      - path: archives/igntp-john/841.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior of John between 2010 and 2013.
+published:
+  - text: 8.8.2013
+    when: 2013-08-08
+    sources:
+      - path: archives/igntp-john/841.xml
+        locator: teiHeader/fileDesc/publicationStmt/date
+        quote: "<date>8.8.2013</date>"
+version:
+  text: "Version 1.0, created on 8.8.2013"
+  label: "1.0"
+  when: 2013-08-08
+  sources:
+    - path: archives/igntp-john/841.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: "Version 1.0, created on 8.8.2013"
+revisions:
+  entries:
+    - when: 2016-03-23
+      description: "Changes to transcription at 18.20, 24, 28 by David Parker."
+      "n": "8"
+    - when: 2016-03-18
+      description: τη deleted at 18.20 by David Parker.
+      "n": "7"
+    - when: 2016-03-17
+      description: supposed correction removed at 5.23 by David Parker.
+      "n": "6"
+    - when: 2016-02-03
+      description: ερχομενα changed to επερχομενα by David Parker.
+      "n": "5"
+    - when: 2015-04-14
+      description: "* κ C λεγει corrected to και λεγει at 18.38 by Rachel Kevern."
+      "n": "4"
+    - when: 2014-10-29
+      description: Word break at 2.15 corrected by Rachel Kevern.
+      "n": "3"
+    - when: 2013-11-18
+      description: "Word break added in 19.20, word break removed in 19.41 by David Parker."
+      "n": "2"
+    - when: 2013-11-13
+      description: Iota adscript removed by David Parker.
+      "n": "1"
+    - when: 2013-08-08
+      description: Converted from plain text by Catherine Smith using Python conversion scripts 1.0.
+      "n": "0"
+  sources:
+    - path: archives/igntp-john/841.xml
+      locator: teiHeader/revisionDesc
+      quote: "Changes to transcription at 18.20, 24, 28 by David Parker."
+method:
+  practices:
+    - kind: conversion-to-xml
+      text: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+      sources:
+        - path: archives/igntp-john/841.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+    - kind: conversion-to-xml
+      text: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+      sources:
+        - path: archives/igntp-john/841.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+    - kind: independent-double-transcription
+      generalPractice: true
+      text: Two independent initial transcriptions are made of each manuscript.
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: Both organizations observe the same practice of producing two independent initial transcriptions
+    - kind: reconciliation
+      generalPractice: true
+      text: "A third person, usually the transcription coordinator, reconciles the two with reference to the images of the manuscript and makes the final file."
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: "these are reconciled by a third person (usually the transcription coordinator) with reference to the images of the manuscript, who creates a final file"
+  guidelines:
+    - text: The original transcription guidelines can be found at
+      sources:
+        - path: archives/igntp-john/841.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: The original transcription guidelines can be found at
+    - text: The XML specifications used are version 1.4 of the IGNTP Guidelines available at
+      sources:
+        - path: archives/igntp-john/841.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[3]"
+          quote: The XML specifications used are version 1.4 of the IGNTP Guidelines available at
+  tools:
+    - text: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+      sources:
+        - path: archives/igntp-john/841.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: "The initial transcription file was a plain text file for use with COLLATE, later converted to XML."
+    - text: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+      sources:
+        - path: archives/igntp-john/841.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: "The plain text file was converted to XML by Catherine Smith using the project's Python conversion scripts 1.0."
+rights:
+  statement: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."
+  sources:
+    - path: archives/igntp-john/841.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."

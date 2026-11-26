@@ -16,7 +16,9 @@ if (!SRC || !existsSync(SRC)) throw new Error("usage: bun scripts/import.ts <fol
 const ROOT = new URL("..", import.meta.url).pathname;
 rmSync(`${ROOT}transcriptions`, { recursive: true, force: true });
 mkdirSync(`${ROOT}archives`, { recursive: true });
-for (const f of readdirSync(`${ROOT}archives`)) if (f !== "manuscripts.json" && f !== "books.json" && f !== "sets") rmSync(`${ROOT}archives/${f}`, { recursive: true, force: true });
+// sets/ and the archive records (manuscripts/, transcriptions/: docs/archive-records.md) are kept; run bun scripts/records.ts after an import
+const KEEP = new Set(["manuscripts.json", "books.json", "sets", "manuscripts", "transcriptions"]);
+for (const f of readdirSync(`${ROOT}archives`)) if (!KEEP.has(f)) rmSync(`${ROOT}archives/${f}`, { recursive: true, force: true });
 
 const snap = (p: string) => { const d = readdirSync(`${SRC}/${p}`).filter((x) => /^\d{4}-\d\d-\d\d$/.test(x)).sort().pop()!; return `${SRC}/${p}/${d}`; };
 const zipList = (zip: string) => spawnSync("unzip", ["-Z1", zip], { maxBuffer: 1 << 26 }).stdout.toString().split("\n").filter(Boolean).sort();

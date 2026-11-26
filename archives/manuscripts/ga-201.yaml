@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-201
+holdings:
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Add. 11837
+    sources:
+      - path: archives/intf/201.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Add. 11837
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1357"
+    notBefore: 1357
+    notAfter: 1357
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1357,\"gaNum\":201,\"orig\":1357,\"docID\":30201,\"groupID\":\"\",\"primaryName\":201,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1357}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1357,\"gaNum\":201,\"orig\":1357,\"docID\":30201,\"groupID\":\"\",\"primaryName\":201,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1357}"

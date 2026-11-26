@@ -1,0 +1,50 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1912
+identifiers:
+  - scheme: GA
+    value: "1912"
+    sources:
+      - path: archives/igntp-2thessalonians/1912.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>1912</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/1912.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1912</idno></altIdentifier>"
+      - path: archives/igntp-galatians/1912.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1912</idno></altIdentifier>"
+      - path: archives/igntp-romans/1912.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1912</idno></altIdentifier>"
+  - scheme: Liste
+    value: "31912"
+    sources:
+      - path: archives/igntp-2thessalonians/1912.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>31912</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/1912.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31912</idno></altIdentifier>"
+      - path: archives/igntp-galatians/1912.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31912</idno></altIdentifier>"
+      - path: archives/igntp-romans/1912.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31912</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Nazionale
+    settlement: Naples
+    country: Italy
+    idno:
+      - Cod. Neapol. ex Vind. 8
+    sources:
+      - path: archives/igntp-ephesians/1912.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Naples Biblioteca Nazionale Cod. Neapol. ex Vind. 8
+      - path: archives/igntp-galatians/1912.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Naples Biblioteca Nazionale Cod. Neapol. ex Vind. 8
+      - path: archives/igntp-romans/1912.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Naples Biblioteca Nazionale Cod. Neapol. ex Vind. 8

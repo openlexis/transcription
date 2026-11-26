@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p37
+holdings:
+  - repository: University of Michigan Library
+    settlement: "Ann Arbor, MI"
+    country: USA
+    idno:
+      - P.Mich.inv. 1570
+    sources:
+      - path: archives/intf/P37.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Ann Arbor, MI University of Michigan Library P.Mich.inv. 1570"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III
+    notBefore: 250
+    notAfter: 299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":299,\"gaNum\":\"P37\",\"orig\":\"III\",\"docID\":10037,\"groupID\":\"\",\"primaryName\":\"P37\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":250}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":299,\"gaNum\":\"P37\",\"orig\":\"III\",\"docID\":10037,\"groupID\":\"\",\"primaryName\":\"P37\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":250}"

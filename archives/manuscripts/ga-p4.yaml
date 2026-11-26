@@ -1,0 +1,77 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p4
+holdings:
+  - repository: Bibliothèque Nationale
+    settlement: Paris
+    country: France
+    idno:
+      - Suppl. Gr. 1120
+    leaves: 6 Frg (4 Blatt)
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10004&format=json
+        accessed: 2026-11-26
+        quote: Suppl. Gr. 1120
+  - repository: Bibliothèque Nationale
+    settlement: Paris
+    country: France
+    idno:
+      - Suppl. Gr. 1120
+    sources:
+      - path: archives/intf/P4.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Suppl. Gr. 1120
+  - repository: Bibliothèque Nationale
+    settlement: Paris
+    country: France
+    idno:
+      - Suppl. Gr. 1120
+    leaves: 6 Frg (4 Blatt)
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/liste/search/?docID=10004&detail=page&format=json
+        accessed: 2026-11-26
+        quote: "\"shelfNumber\": \"Suppl. Gr. 1120\""
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III
+    notBefore: 200
+    notAfter: 299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":299,\"gaNum\":\"P4\",\"orig\":\"III\",\"docID\":10004,\"groupID\":\"\",\"primaryName\":\"P4\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":299,\"gaNum\":\"P4\",\"orig\":\"III\",\"docID\":10004,\"groupID\":\"\",\"primaryName\":\"P4\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+reproductions:
+  - id: ntvmr-10
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 8 page images listed
+    owner: "Images © The Holding Institution &#x2028;&#x2028;&nbsp;&#x2028;&#x2028; Photo Digitized by INTF for Research Purposes External Images by CSNTM"
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10004
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10004&format=json
+        accessed: 2026-11-26
+        quote: "Images © The Holding Institution &#x2028;&#x2028;&nbsp;&#x2028;&#x2028; Photo Digitized by INTF for Research Purposes External Images by CSNTM"
+  - id: ntvmr-20
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 6 page images listed
+    owner: "Images © The Holding Institution &#x2028;&#x2028;&nbsp;&#x2028;&#x2028; Photo Digitized by INTF for Research Purposes External Images by CSNTM"
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10004
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10004&format=json
+        accessed: 2026-11-26
+        quote: "Images © The Holding Institution &#x2028;&#x2028;&nbsp;&#x2028;&#x2028; Photo Digitized by INTF for Research Purposes External Images by CSNTM"

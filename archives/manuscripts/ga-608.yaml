@@ -1,0 +1,41 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-608
+identifiers:
+  - scheme: GA
+    value: "608"
+    sources:
+      - path: archives/igntp-2thessalonians/608.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>608</idno> </altIdentifier>"
+      - path: archives/igntp-galatians/608.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>608</idno></altIdentifier>"
+      - path: archives/igntp-romans/608.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>608</idno></altIdentifier>"
+  - scheme: Liste
+    value: "30608"
+    sources:
+      - path: archives/igntp-2thessalonians/608.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>30608</idno> </altIdentifier>"
+      - path: archives/igntp-galatians/608.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>30608</idno></altIdentifier>"
+      - path: archives/igntp-romans/608.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>30608</idno></altIdentifier>"
+holdings:
+  - repository: Bibliothèque Nationale
+    settlement: Paris
+    country: France
+    idno:
+      - Gr. 220
+    sources:
+      - path: archives/igntp-galatians/608.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Gr. 220
+      - path: archives/igntp-romans/608.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Gr. 220

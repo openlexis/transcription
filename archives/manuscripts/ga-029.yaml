@@ -1,0 +1,51 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-029
+names:
+  - text: "029"
+    language: la
+    sources:
+      - path: archives/igntp-john/029.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">029</msName>"
+identifiers:
+  - scheme: partial
+    value: "Vatican, Bibliotheca Vaticana, Borg. Copt. 109"
+    sources:
+      - path: archives/igntp-john/029.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"partial\"><idno>Vatican, Bibliotheca Vaticana, Borg. Copt. 109</idno></altIdentifier>"
+  - scheme: GA
+    value: "029"
+    sources:
+      - path: archives/igntp-john/029.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>029</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20029"
+    sources:
+      - path: archives/igntp-john/029.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20029</idno></altIdentifier>"
+  - scheme: TM
+    value: "61746"
+    sources:
+      - path: archives/igntp-john/029.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61746</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2898"
+    sources:
+      - path: archives/igntp-john/029.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2898</idno></altIdentifier>"
+holdings:
+  - repository: Bibliothèque nationale
+    settlement: Paris
+    country: France
+    idno:
+      - "Copt. 129,9 fols. 59v, 65v, 76v"
+    sources:
+      - path: archives/igntp-john/029.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "France Paris Bibliothèque nationale Copt. 129,9 fols. 59v, 65v, 76v"

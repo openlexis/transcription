@@ -1,0 +1,90 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-040
+names:
+  - text: Codex Zacynthius
+    language: la
+    sources:
+      - path: archives/zacynthius/040.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Zacynthius</msName>"
+identifiers:
+  - scheme: GA
+    value: "040"
+    sources:
+      - path: archives/zacynthius/040.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>040</idno> </altIdentifier>"
+  - scheme: Tischendorf
+    value: Ξ
+    sources:
+      - path: archives/zacynthius/040.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"> <idno>Ξ</idno> </altIdentifier>"
+  - scheme: TM
+    value: "61781"
+    sources:
+      - path: archives/zacynthius/040.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"> <idno>61781</idno> </altIdentifier>"
+  - scheme: LDAB
+    value: "2934"
+    sources:
+      - path: archives/zacynthius/040.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"> <idno>2934</idno> </altIdentifier>"
+form:
+  text: codex
+  sources:
+    - path: archives/zacynthius/040.xml
+      locator: teiHeader/fileDesc/sourceDesc/msDesc/physDesc/objectDesc
+      quote: "<objectDesc form=\"codex\">"
+material:
+  text: Parchment
+  sources:
+    - path: archives/zacynthius/040.xml
+      locator: teiHeader/fileDesc/sourceDesc/msDesc/physDesc/objectDesc/supportDesc/support
+      quote: Parchment
+languages:
+  - text: Greek
+    sources:
+      - path: archives/zacynthius/040.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msContents/textLang
+        quote: Greek
+holdings:
+  - repository: University Library
+    settlement: Cambridge
+    country: United Kingdom
+    idno:
+      - Add. MS 10062
+    sources:
+      - path: archives/zacynthius/040.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom Cambridge University Library Add. MS 10062
+dates:
+  - text: Around 700CE?
+    of: writing
+    sources:
+      - path: archives/zacynthius/040.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origDate
+        quote: "<origDate>Around 700CE?</origDate>"
+reproductions:
+  - id: zacynthius-spectral-2018
+    kind: multispectral
+    when:
+      text: 7 July 2018 to 24 July 2018
+      from: 2018-07-07
+      to: 2018-07-24
+      sources:
+        - title: "University of Birmingham eData Repository: Raw capture spectral JPEG images of Codex Zacynthius"
+          url: https://edata.bham.ac.uk/428/
+          accessed: 2026-11-26
+          quote: From To 7 July 2018 24 July 2018
+    description: "Raw capture spectral JPEG images of Codex Zacynthius: imaging of the manuscript under differing wavelengths of light."
+    device: "MegaVision E7 camera, with an Apo-Digitar M26 lens"
+    where: https://edata.bham.ac.uk/428/
+    sources:
+      - title: "University of Birmingham eData Repository: Raw capture spectral JPEG images of Codex Zacynthius"
+        url: https://edata.bham.ac.uk/428/
+        accessed: 2026-11-26
+        quote: "Imaging of manuscript under differing wavelengths of light using a MegaVision E7 camera, with an Apo-Digitar M26 lens."

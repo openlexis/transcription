@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-348
+holdings:
+  - repository: Biblioteca Ambrosiana
+    settlement: Milan
+    country: Italy
+    idno:
+      - B. 56 sup.
+    sources:
+      - path: archives/intf/348.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Milan Biblioteca Ambrosiana B. 56 sup.
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1022"
+    notBefore: 1022
+    notAfter: 1022
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1022,\"gaNum\":348,\"orig\":1022,\"docID\":30348,\"groupID\":\"\",\"primaryName\":348,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1022}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1022,\"gaNum\":348,\"orig\":1022,\"docID\":30348,\"groupID\":\"\",\"primaryName\":348,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1022}"

@@ -1,0 +1,363 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlexis-transcription.pages.dev/schema/manuscript.schema.json",
+  "title": "Manuscript record (archives/manuscripts/<id>.yaml): facts about the physical object and its reproductions",
+  "type": "object",
+  "required": [
+    "id"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(ga|dss|mt|sp)-[a-z0-9]+$"
+    },
+    "names": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/text"
+      }
+    },
+    "identifiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "scheme",
+          "value",
+          "sources"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "scheme": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "sources": {
+            "$ref": "common.schema.json#/$defs/sources"
+          }
+        }
+      }
+    },
+    "form": {
+      "$ref": "common.schema.json#/$defs/text"
+    },
+    "material": {
+      "$ref": "common.schema.json#/$defs/text"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/text"
+      }
+    },
+    "holdings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sources"
+        ],
+        "additionalProperties": false,
+        "anyOf": [
+          {
+            "required": [
+              "repository"
+            ]
+          },
+          {
+            "required": [
+              "settlement"
+            ]
+          },
+          {
+            "required": [
+              "idno"
+            ]
+          }
+        ],
+        "properties": {
+          "repository": {
+            "type": "string"
+          },
+          "settlement": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "idno": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "part": {
+            "type": "string"
+          },
+          "leaves": {
+            "type": "string",
+            "description": "The number of leaves held there, as stated."
+          },
+          "sources": {
+            "$ref": "common.schema.json#/$defs/sources"
+          }
+        }
+      }
+    },
+    "dates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sources"
+        ],
+        "additionalProperties": false,
+        "anyOf": [
+          {
+            "required": [
+              "text"
+            ]
+          },
+          {
+            "required": [
+              "when"
+            ]
+          },
+          {
+            "required": [
+              "notBefore"
+            ]
+          },
+          {
+            "required": [
+              "notAfter"
+            ]
+          }
+        ],
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "when": {
+            "$ref": "common.schema.json#/$defs/year"
+          },
+          "notBefore": {
+            "$ref": "common.schema.json#/$defs/year"
+          },
+          "notAfter": {
+            "$ref": "common.schema.json#/$defs/year"
+          },
+          "calendar": {
+            "type": "string"
+          },
+          "of": {
+            "enum": [
+              "writing",
+              "material",
+              "binding",
+              "correction"
+            ]
+          },
+          "part": {
+            "type": "string"
+          },
+          "method": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "category",
+                "name"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "category": {
+                  "enum": [
+                    "scientific",
+                    "palaeographic",
+                    "internal-evidence",
+                    "external-evidence",
+                    "reported",
+                    "computational"
+                  ]
+                },
+                "name": {
+                  "enum": [
+                    "radiocarbon",
+                    "dendrochronology",
+                    "thermoluminescence",
+                    "materials-analysis",
+                    "other-scientific",
+                    "palaeography",
+                    "codicology",
+                    "decoration-style",
+                    "colophon",
+                    "dated-text",
+                    "internal-reference",
+                    "textual-content",
+                    "external-record",
+                    "archaeological-context",
+                    "provenance-record",
+                    "catalogue",
+                    "machine-learned-handwriting",
+                    "other-computational"
+                  ]
+                }
+              }
+            }
+          },
+          "measurement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "laboratory": {
+                "type": "string"
+              },
+              "sample": {
+                "type": "string"
+              },
+              "ageBP": {
+                "type": "number"
+              },
+              "error": {
+                "type": "number"
+              },
+              "calibration": {
+                "type": "string"
+              },
+              "confidenceLevel": {
+                "type": "string"
+              }
+            }
+          },
+          "statedBy": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/person"
+            }
+          },
+          "publication": {
+            "type": "string"
+          },
+          "sources": {
+            "$ref": "common.schema.json#/$defs/sources"
+          }
+        }
+      }
+    },
+    "originPlaces": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/text"
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "sources"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "enum": [
+              "discovery",
+              "sighting",
+              "acquisition",
+              "transfer",
+              "sale",
+              "donation",
+              "loan"
+            ]
+          },
+          "when": {
+            "$ref": "common.schema.json#/$defs/dateStatement"
+          },
+          "place": {
+            "type": "string"
+          },
+          "agents": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/person"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "sources": {
+            "$ref": "common.schema.json#/$defs/sources"
+          }
+        }
+      }
+    },
+    "reproductions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "sources"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "kind": {
+            "enum": [
+              "digital-colour",
+              "digital-raking-light",
+              "multispectral",
+              "infrared",
+              "ultraviolet",
+              "black-and-white-photograph",
+              "facsimile",
+              "microfilm",
+              "edition"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "madeBy": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/person"
+            }
+          },
+          "when": {
+            "$ref": "common.schema.json#/$defs/dateStatement"
+          },
+          "device": {
+            "type": "string"
+          },
+          "lighting": {
+            "type": "string"
+          },
+          "resolution": {
+            "type": "string"
+          },
+          "coverage": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "where": {
+            "type": "string"
+          },
+          "sources": {
+            "$ref": "common.schema.json#/$defs/sources"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-513
+holdings:
+  - repository: Christ Church
+    settlement: Oxford
+    country: United Kingdom
+    idno:
+      - Wake 29
+    sources:
+      - path: archives/intf/513.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom Oxford Christ Church Wake 29
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1130"
+    notBefore: 1130
+    notAfter: 1130
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1130,\"gaNum\":513,\"orig\":1130,\"docID\":30513,\"groupID\":\"\",\"primaryName\":513,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1130}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1130,\"gaNum\":513,\"orig\":1130,\"docID\":30513,\"groupID\":\"\",\"primaryName\":513,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1130}"

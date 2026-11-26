@@ -1,0 +1,87 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-032
+names:
+  - text: Codex Washingtonianus
+    language: la
+    sources:
+      - path: archives/igntp-john/032.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Washingtonianus</msName>"
+  - text: Freer Gospels
+    language: en
+    sources:
+      - path: archives/igntp-john/032.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Freer Gospels</msName>"
+identifiers:
+  - scheme: GA
+    value: "032"
+    sources:
+      - path: archives/igntp-john/032.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>032</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20032"
+    sources:
+      - path: archives/igntp-john/032.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20032</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: W
+    sources:
+      - path: archives/igntp-john/032.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>W</idno></altIdentifier>"
+  - scheme: TM
+    value: "61831"
+    sources:
+      - path: archives/igntp-john/032.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61831</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2985"
+    sources:
+      - path: archives/igntp-john/032.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2985</idno></altIdentifier>"
+holdings:
+  - repository: "Smithsonian Institution, Freer Gallery of Art"
+    settlement: Washington DC
+    country: United States of America
+    idno:
+      - "06.274"
+    sources:
+      - path: archives/igntp-john/032.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "United States of America Washington DC Smithsonian Institution, Freer Gallery of Art 06.274"
+  - repository: "Smithsonian Institution, Freer Gallery of Art"
+    settlement: Washington D.C.
+    country: USA
+    idno:
+      - F1906.274
+    sources:
+      - path: archives/intf/032.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Washington D.C. Smithsonian Institution, Freer Gallery of Art F1906.274"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: V
+    notBefore: 400
+    notAfter: 499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":499,\"gaNum\":32,\"orig\":\"V\",\"docID\":20032,\"groupID\":\"\",\"primaryName\":32,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":499,\"gaNum\":32,\"orig\":\"V\",\"docID\":20032,\"groupID\":\"\",\"primaryName\":32,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"

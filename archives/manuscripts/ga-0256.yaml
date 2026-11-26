@@ -1,0 +1,45 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0256
+names:
+  - text: "0256"
+    language: la
+    sources:
+      - path: archives/igntp-john/0256.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">0256</msName>"
+identifiers:
+  - scheme: GA
+    value: "0256"
+    sources:
+      - path: archives/igntp-john/0256.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0256</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20256"
+    sources:
+      - path: archives/igntp-john/0256.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20256</idno></altIdentifier>"
+  - scheme: TM
+    value: "61686"
+    sources:
+      - path: archives/igntp-john/0256.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61686</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2837"
+    sources:
+      - path: archives/igntp-john/0256.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2837</idno></altIdentifier>"
+holdings:
+  - repository: Österreichische Nationalbibliothek
+    settlement: Vienna
+    country: Austria
+    idno:
+      - Pap. G. 26084
+    sources:
+      - path: archives/igntp-john/0256.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Austria Vienna Österreichische Nationalbibliothek Pap. G. 26084

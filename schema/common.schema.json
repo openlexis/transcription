@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlexis-transcription.pages.dev/schema/common.schema.json",
+  "title": "Shared parts of the archive records",
+  "$defs": {
+    "year": {
+      "description": "A year as a number (negative for BC), or an ISO 8601 date written YYYY, YYYY-MM or YYYY-MM-DD.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string",
+          "pattern": "^-?[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$"
+        }
+      ]
+    },
+    "source": {
+      "description": "Where a stated value comes from: a place in a file of this repository, or a web page, always with the exact words.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "path",
+            "locator",
+            "quote"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "pattern": "^archives/",
+              "description": "The file in this repository."
+            },
+            "locator": {
+              "type": "string",
+              "description": "Where in the file, as an XML path such as teiHeader/fileDesc/titleStmt/respStmt[2]."
+            },
+            "quote": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The exact words at that place."
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "url",
+            "accessed",
+            "quote"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "url": {
+              "type": "string",
+              "pattern": "^https?://",
+              "description": "The web page or file."
+            },
+            "accessed": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+              "description": "The date it was read."
+            },
+            "quote": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The exact words on it."
+            },
+            "title": {
+              "type": "string"
+            },
+            "citation": {
+              "type": "string",
+              "description": "The full reference, for a paper or book."
+            }
+          }
+        }
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "dateStatement": {
+      "type": "object",
+      "required": [
+        "sources"
+      ],
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": [
+            "text"
+          ]
+        },
+        {
+          "required": [
+            "when"
+          ]
+        },
+        {
+          "required": [
+            "notBefore"
+          ]
+        },
+        {
+          "required": [
+            "notAfter"
+          ]
+        },
+        {
+          "required": [
+            "from"
+          ]
+        },
+        {
+          "required": [
+            "to"
+          ]
+        }
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The date as the source words it."
+        },
+        "when": {
+          "$ref": "#/$defs/year"
+        },
+        "notBefore": {
+          "$ref": "#/$defs/year"
+        },
+        "notAfter": {
+          "$ref": "#/$defs/year"
+        },
+        "from": {
+          "$ref": "#/$defs/year"
+        },
+        "to": {
+          "$ref": "#/$defs/year"
+        },
+        "calendar": {
+          "type": "string"
+        },
+        "sources": {
+          "$ref": "#/$defs/sources"
+        }
+      }
+    },
+    "person": {
+      "type": "object",
+      "required": [
+        "name",
+        "sources"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "person",
+            "organisation",
+            "group"
+          ]
+        },
+        "roles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "cre",
+              "trc",
+              "pfr",
+              "edt",
+              "rev",
+              "mrk",
+              "prg",
+              "pdr",
+              "fnd",
+              "spn",
+              "pbl",
+              "dtc",
+              "pht",
+              "ctb"
+            ]
+          },
+          "description": "Library of Congress relator codes (https://id.loc.gov/vocabulary/relators)."
+        },
+        "statement": {
+          "type": "string",
+          "description": "The credit as written."
+        },
+        "books": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Books a source says this person worked on, when the file covers more than these."
+        },
+        "generalPractice": {
+          "type": "boolean",
+          "description": "The source describes the project's usual practice, not this file in particular."
+        },
+        "sources": {
+          "$ref": "#/$defs/sources"
+        }
+      }
+    },
+    "text": {
+      "type": "object",
+      "required": [
+        "text",
+        "sources"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "generalPractice": {
+          "type": "boolean"
+        },
+        "sources": {
+          "$ref": "#/$defs/sources"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-l60
+identifiers:
+  - scheme: GA
+    value: L60
+    sources:
+      - path: archives/igntp-ephesians/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>L60</idno></altIdentifier>"
+      - path: archives/igntp-galatians/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>L60</idno></altIdentifier>"
+      - path: archives/igntp-john/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>L60</idno> </altIdentifier>"
+      - path: archives/igntp-romans/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>L60</idno></altIdentifier>"
+  - scheme: Liste
+    value: "40060"
+    sources:
+      - path: archives/igntp-ephesians/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>40060</idno></altIdentifier>"
+      - path: archives/igntp-galatians/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>40060</idno></altIdentifier>"
+      - path: archives/igntp-john/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>40060</idno> </altIdentifier>"
+      - path: archives/igntp-romans/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>40060</idno></altIdentifier>"
+holdings:
+  - repository: Bibliothèque Nationale
+    settlement: Paris
+    country: France
+    idno:
+      - Gr. 375
+    sources:
+      - path: archives/igntp-ephesians/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Gr. 375
+      - path: archives/igntp-galatians/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Gr. 375
+      - path: archives/igntp-romans/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Gr. 375
+      - path: archives/intf/L60.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Gr. 375
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: 1021/2
+    notBefore: 1021
+    notAfter: 1022
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1022,\"gaNum\":\"L60\",\"orig\":\"1021/2\",\"docID\":40060,\"groupID\":\"\",\"primaryName\":\"L60\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1021}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1022,\"gaNum\":\"L60\",\"orig\":\"1021/2\",\"docID\":40060,\"groupID\":\"\",\"primaryName\":\"L60\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1021}"

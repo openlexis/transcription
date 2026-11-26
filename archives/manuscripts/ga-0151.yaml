@@ -1,0 +1,41 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0151
+identifiers:
+  - scheme: GA
+    value: "0151"
+    sources:
+      - path: archives/igntp-2thessalonians/0151.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>0151</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/0151.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0151</idno></altIdentifier>"
+      - path: archives/igntp-galatians/0151.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0151</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20151"
+    sources:
+      - path: archives/igntp-2thessalonians/0151.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>20151</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/0151.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20151</idno></altIdentifier>"
+      - path: archives/igntp-galatians/0151.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20151</idno></altIdentifier>"
+holdings:
+  - repository: St. John the Theologian Monastery
+    settlement: Patmos
+    country: Greece
+    idno:
+      - "62"
+    sources:
+      - path: archives/igntp-ephesians/0151.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Patmos St. John the Theologian Monastery 62
+      - path: archives/igntp-galatians/0151.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Patmos St. John the Theologian Monastery 62

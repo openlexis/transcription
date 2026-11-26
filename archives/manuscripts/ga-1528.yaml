@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1528
+holdings:
+  - repository: Princeton University Libraries
+    settlement: "Princeton, NJ"
+    country: USA
+    idno:
+      - Garrett MS. 3
+    sources:
+      - path: archives/intf/1528.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Princeton, NJ Princeton University Libraries Garrett MS. 3"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: 1135/6
+    notBefore: 1135
+    notAfter: 1136
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1136,\"gaNum\":1528,\"orig\":\"1135/6\",\"docID\":31528,\"groupID\":\"\",\"primaryName\":1528,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1135}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1136,\"gaNum\":1528,\"orig\":\"1135/6\",\"docID\":31528,\"groupID\":\"\",\"primaryName\":1528,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1135}"

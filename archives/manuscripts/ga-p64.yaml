@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p64
+holdings:
+  - repository: Magdalen College
+    settlement: Oxford
+    country: United Kingdom
+    idno:
+      - Ms. Gr. 17
+    sources:
+      - path: archives/intf/P64.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom Oxford Magdalen College Ms. Gr. 17
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III (A)
+    notBefore: 200
+    notAfter: 225
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":225,\"gaNum\":\"P64\",\"orig\":\"III (A)\",\"docID\":10064,\"groupID\":\"\",\"primaryName\":\"P64\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":225,\"gaNum\":\"P64\",\"orig\":\"III (A)\",\"docID\":10064,\"groupID\":\"\",\"primaryName\":\"P64\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"

@@ -1,0 +1,206 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: igntp-galatians/336
+manuscript: ga-336
+file: archives/igntp-galatians/336.xml
+title:
+  text: A Transcription of Galatians in 336
+  sources:
+    - path: archives/igntp-galatians/336.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A Transcription of Galatians in 336
+people:
+  - name: the International Greek New Testament Project
+    kind: organisation
+    roles:
+      - cre
+    statement: Created by
+    sources:
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by the International Greek New Testament Project
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the International Greek New Testament Project (IGNTP) in 2018.
+  - name: Bill Elliott
+    roles:
+      - trc
+    statement: Transcribed by
+    sources:
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[2]"
+        quote: Transcribed by Bill Elliott
+  - name: Amy Myshrall
+    roles:
+      - trc
+      - rev
+    statement: Transcribed by
+    sources:
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[3]"
+        quote: Transcribed by Amy Myshrall
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[4]"
+        quote: Reconciled by Amy Myshrall
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+        quote: The initial transcriptions were reconciled by Amy Myshrall.
+  - name: The Institute for Textual Scholarship and Electronic Editing
+    roles:
+      - spn
+      - pbl
+    sources:
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/fileDesc/titleStmt/sponsor[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: University of Birmingham
+    roles:
+      - pbl
+    sources:
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: Hugh Houghton
+    roles:
+      - mrk
+    statement: "The plain text file was converted to XML by Hugh Houghton and Catherine Smith using the project's Python conversion scripts."
+    sources:
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+        quote: "The plain text file was converted to XML by Hugh Houghton and Catherine Smith using the project's Python conversion scripts."
+  - name: Catherine Smith
+    roles:
+      - mrk
+    statement: "The plain text file was converted to XML by Hugh Houghton and Catherine Smith using the project's Python conversion scripts."
+    sources:
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+        quote: "The plain text file was converted to XML by Hugh Houghton and Catherine Smith using the project's Python conversion scripts."
+  - name: "IGNTP contributors, including volunteers and postdoctoral scholars"
+    kind: group
+    roles:
+      - trc
+    statement: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+    generalPractice: true
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+made:
+  - text: This transcription was made by the International Greek New Testament Project (IGNTP) in 2018.
+    when: 2018
+    sources:
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the International Greek New Testament Project (IGNTP) in 2018.
+  - text: "Collection period: 1 September 2012 to 31 August 2020"
+    from: 2012-09-01
+    to: 2020-08-31
+    sources:
+      - title: University of Birmingham eData Repository
+        url: https://edata.bham.ac.uk/1107/
+        accessed: 2026-11-26
+        quote: From To 1 September 2012 31 August 2020
+madeFrom:
+  - kind: images
+    description: The original transcription guidelines can be found at Transcribed using colour digital images from NTVMR.
+    sources:
+      - path: archives/igntp-galatians/336.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+        quote: The original transcription guidelines can be found at Transcribed using colour digital images from NTVMR.
+published:
+  - text: 13.5.2024
+    when: 2024-05-13
+    sources:
+      - path: archives/igntp-galatians/336.xml
+        locator: teiHeader/fileDesc/publicationStmt/date
+        quote: "<date>13.5.2024</date>"
+version:
+  text: "Version 1.0, created on 17.9.2020, archived on the University of Birmingham eData repository on 13.5.2024."
+  label: "1.0"
+  when: 2020-09-17
+  sources:
+    - path: archives/igntp-galatians/336.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: "Version 1.0, created on 17.9.2020, archived on the University of Birmingham eData repository on 13.5.2024."
+revisions:
+  entries:
+    - when: 2020-09-17
+      description: Converted from plain text by Hugh Houghton and Catherine Smith using Python conversion scripts.
+      "n": "0"
+  sources:
+    - path: archives/igntp-galatians/336.xml
+      locator: teiHeader/revisionDesc
+      quote: Converted from plain text by Hugh Houghton and Catherine Smith using Python conversion scripts.
+method:
+  practices:
+    - kind: reconciliation
+      text: The initial transcriptions were reconciled by Amy Myshrall.
+      sources:
+        - path: archives/igntp-galatians/336.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: The initial transcriptions were reconciled by Amy Myshrall.
+    - kind: conversion-to-xml
+      text: "The plain text file was converted to XML by Hugh Houghton and Catherine Smith using the project's Python conversion scripts."
+      sources:
+        - path: archives/igntp-galatians/336.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: "The plain text file was converted to XML by Hugh Houghton and Catherine Smith using the project's Python conversion scripts."
+    - kind: independent-double-transcription
+      generalPractice: true
+      text: Two independent initial transcriptions are made of each manuscript.
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: Both organizations observe the same practice of producing two independent initial transcriptions
+    - kind: reconciliation
+      generalPractice: true
+      text: "A third person, usually the transcription coordinator, reconciles the two with reference to the images of the manuscript and makes the final file."
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: "these are reconciled by a third person (usually the transcription coordinator) with reference to the images of the manuscript, who creates a final file"
+  guidelines:
+    - text: The original transcription guidelines can be found at Transcribed using colour digital images from NTVMR.
+      sources:
+        - path: archives/igntp-galatians/336.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: The original transcription guidelines can be found at Transcribed using colour digital images from NTVMR.
+    - text: The XML specifications used are version 1.6 of the IGNTP Guidelines available at
+      sources:
+        - path: archives/igntp-galatians/336.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[3]"
+          quote: The XML specifications used are version 1.6 of the IGNTP Guidelines available at
+  tools:
+    - text: "The plain text file was converted to XML by Hugh Houghton and Catherine Smith using the project's Python conversion scripts."
+      sources:
+        - path: archives/igntp-galatians/336.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: "The plain text file was converted to XML by Hugh Houghton and Catherine Smith using the project's Python conversion scripts."
+    - text: Most transcriptions were made in the Online Transcription Editor developed as part of the Workspace for Collaborative Editing.
+      sources:
+        - title: University of Birmingham eData Repository
+          url: https://edata.bham.ac.uk/1107/
+          accessed: 2026-11-26
+          quote: Most transcriptions were made in the Online Transcription Editor developed as part of the Workspace for Collaborative Editing.
+  encoding:
+    - text: The initial transcription file was a plain text file in Unicode.
+      sources:
+        - path: archives/igntp-galatians/336.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: The initial transcription file was a plain text file in Unicode.
+rights:
+  statement: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."
+  sources:
+    - path: archives/igntp-galatians/336.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."

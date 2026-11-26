@@ -1,0 +1,26 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0221
+identifiers:
+  - scheme: GA
+    value: "0221"
+    sources:
+      - path: archives/igntp-romans/0221.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0221</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20221"
+    sources:
+      - path: archives/igntp-romans/0221.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20221</idno></altIdentifier>"
+holdings:
+  - repository: Österreichische Nationalbibliothek
+    settlement: Wien
+    country: Austria
+    idno:
+      - Pap. G. 19890
+    sources:
+      - path: archives/igntp-romans/0221.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Austria Wien Österreichische Nationalbibliothek Pap. G. 19890

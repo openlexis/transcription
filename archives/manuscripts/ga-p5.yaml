@@ -1,0 +1,136 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p5
+names:
+  - text: Papyrus 5
+    language: en
+    sources:
+      - path: archives/igntp-john/P5.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 5</msName>"
+identifiers:
+  - scheme: GA
+    value: P5
+    sources:
+      - path: archives/igntp-john/P5.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P5</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10005"
+    sources:
+      - path: archives/igntp-john/P5.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10005</idno></altIdentifier>"
+  - scheme: P.Oxy
+    value: 208 + 1781
+    sources:
+      - path: archives/igntp-john/P5.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"P.Oxy\"><idno>208 + 1781</idno></altIdentifier>"
+  - scheme: TM
+    value: "61630"
+    sources:
+      - path: archives/igntp-john/P5.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61630</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2780"
+    sources:
+      - path: archives/igntp-john/P5.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2780</idno></altIdentifier>"
+holdings:
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Inv. Nr. 782
+    leaves: 1 Frg (2 Folien)
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10005&format=json
+        accessed: 2026-11-26
+        quote: Inv. Nr. 782
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Inv. Nr. 2484
+    leaves: 1 Frg
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10005&format=json
+        accessed: 2026-11-26
+        quote: Inv. Nr. 2484
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Pap. 782 + Pap. 2484
+    sources:
+      - path: archives/igntp-john/P5.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Pap. 782 + Pap. 2484
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Inv. Nr. 782
+    sources:
+      - path: archives/intf/P5.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Inv. Nr. 782
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Inv. Nr. 782
+    leaves: 1 Frg (2 Folien)
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/liste/search/?docID=10005&detail=page&format=json
+        accessed: 2026-11-26
+        quote: "\"shelfNumber\": \"Inv. Nr. 782\""
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Inv. Nr. 2484
+    leaves: 1 Frg
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/liste/search/?docID=10005&detail=page&format=json
+        accessed: 2026-11-26
+        quote: "\"shelfNumber\": \"Inv. Nr. 2484\""
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III
+    notBefore: 200
+    notAfter: 299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":299,\"gaNum\":\"P5\",\"orig\":\"III\",\"docID\":10005,\"groupID\":\"\",\"primaryName\":\"P5\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":299,\"gaNum\":\"P5\",\"orig\":\"III\",\"docID\":10005,\"groupID\":\"\",\"primaryName\":\"P5\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+reproductions:
+  - id: ntvmr-10
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 6 page images listed
+    owner: Photos Digitized by INTF for Research Purposes External Images by BritishLibrary
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10005
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10005&format=json
+        accessed: 2026-11-26
+        quote: Photos Digitized by INTF for Research Purposes External Images by BritishLibrary

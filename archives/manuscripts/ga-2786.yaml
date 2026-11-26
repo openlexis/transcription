@@ -1,0 +1,47 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2786
+identifiers:
+  - scheme: GA
+    value: "2786"
+    sources:
+      - path: archives/igntp-john/2786.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>2786</idno> </altIdentifier>"
+  - scheme: Liste
+    value: "32786"
+    sources:
+      - path: archives/igntp-john/2786.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>32786</idno> </altIdentifier>"
+holdings:
+  - repository: "Last known: Greece"
+    settlement: Location Unknown
+    country: Location Unknown
+    idno:
+      - "(früher Prophet Iliu, Thira, s.n.)"
+    sources:
+      - path: archives/intf/2786.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Location Unknown Location Unknown Last known: Greece (früher Prophet Iliu, Thira, s.n.)"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XIV
+    notBefore: 1300
+    notAfter: 1399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1399,\"gaNum\":2786,\"orig\":\"XIV\",\"docID\":32786,\"groupID\":\"\",\"primaryName\":2786,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1399,\"gaNum\":2786,\"orig\":\"XIV\",\"docID\":32786,\"groupID\":\"\",\"primaryName\":2786,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1300}"

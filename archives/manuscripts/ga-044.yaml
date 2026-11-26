@@ -1,0 +1,108 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-044
+names:
+  - text: Codex Laurensis
+    language: la
+    sources:
+      - path: archives/igntp-john/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Laurensis</msName>"
+identifiers:
+  - scheme: GA
+    value: "044"
+    sources:
+      - path: archives/igntp-2thessalonians/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>044</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>044</idno></altIdentifier>"
+      - path: archives/igntp-galatians/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>044</idno></altIdentifier>"
+      - path: archives/igntp-john/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>044</idno></altIdentifier>"
+      - path: archives/igntp-romans/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>044</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20044"
+    sources:
+      - path: archives/igntp-2thessalonians/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>20044</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20044</idno></altIdentifier>"
+      - path: archives/igntp-galatians/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20044</idno></altIdentifier>"
+      - path: archives/igntp-john/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20044</idno></altIdentifier>"
+      - path: archives/igntp-romans/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20044</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: Ψ
+    sources:
+      - path: archives/igntp-john/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>Ψ</idno></altIdentifier>"
+holdings:
+  - repository: Great Lavra
+    settlement: Athos
+    country: Greece
+    idno:
+      - "B' 52"
+    sources:
+      - path: archives/igntp-ephesians/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Greece Athos Great Lavra B' 52"
+      - path: archives/igntp-galatians/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Greece Athos Great Lavra B' 52"
+      - path: archives/igntp-romans/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Greece Athos Great Lavra B' 52"
+  - repository: Lavra
+    settlement: Athos
+    country: Greece
+    idno:
+      - "B' 52"
+    sources:
+      - path: archives/igntp-john/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Greece Athos Lavra B' 52"
+  - repository: Great Lavra Monastery
+    settlement: Athos
+    country: Greece
+    idno:
+      - "B' 52"
+    sources:
+      - path: archives/intf/044.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Greece Athos Great Lavra Monastery B' 52"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IX/X
+    notBefore: 800
+    notAfter: 999
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":999,\"gaNum\":44,\"orig\":\"IX/X\",\"docID\":20044,\"groupID\":\"\",\"primaryName\":44,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":999,\"gaNum\":44,\"orig\":\"IX/X\",\"docID\":20044,\"groupID\":\"\",\"primaryName\":44,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"

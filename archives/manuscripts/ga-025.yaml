@@ -1,0 +1,74 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-025
+identifiers:
+  - scheme: GA
+    value: "025"
+    sources:
+      - path: archives/igntp-2thessalonians/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>025</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>025</idno></altIdentifier>"
+      - path: archives/igntp-galatians/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>025</idno></altIdentifier>"
+      - path: archives/igntp-romans/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>025</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20025"
+    sources:
+      - path: archives/igntp-2thessalonians/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>20025</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20025</idno></altIdentifier>"
+      - path: archives/igntp-galatians/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20025</idno></altIdentifier>"
+      - path: archives/igntp-romans/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20025</idno></altIdentifier>"
+holdings:
+  - repository: National Library of Russia
+    settlement: St. Petersburg
+    country: Russia
+    idno:
+      - Ф. № 906 / Gr. 225
+    sources:
+      - path: archives/igntp-ephesians/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Russia St. Petersburg National Library of Russia Ф. № 906 / Gr. 225
+      - path: archives/igntp-galatians/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Russia St. Petersburg National Library of Russia Ф. № 906 / Gr. 225
+      - path: archives/igntp-romans/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Russia St. Petersburg National Library of Russia Ф. № 906 / Gr. 225
+      - path: archives/intf/025.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Russia St. Petersburg National Library of Russia Ф. № 906 / Gr. 225
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IX
+    notBefore: 800
+    notAfter: 899
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":899,\"gaNum\":25,\"orig\":\"IX\",\"docID\":20025,\"groupID\":\"\",\"primaryName\":25,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":899,\"gaNum\":25,\"orig\":\"IX\",\"docID\":20025,\"groupID\":\"\",\"primaryName\":25,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"

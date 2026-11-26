@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p52
+names:
+  - text: Papyrus 52
+    language: en
+    sources:
+      - path: archives/igntp-john/P52.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 52</msName>"
+identifiers:
+  - scheme: GA
+    value: P52
+    sources:
+      - path: archives/igntp-john/P52.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P52</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10052"
+    sources:
+      - path: archives/igntp-john/P52.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10052</idno></altIdentifier>"
+  - scheme: TM
+    value: "61624"
+    sources:
+      - path: archives/igntp-john/P52.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61624</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2774"
+    sources:
+      - path: archives/igntp-john/P52.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2774</idno></altIdentifier>"
+holdings:
+  - repository: John Rylands University Library
+    settlement: Manchester
+    country: United Kingdom
+    idno:
+      - Gr. P. 457
+    sources:
+      - path: archives/igntp-john/P52.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom Manchester John Rylands University Library Gr. P. 457
+  - repository: John Rylands University Library of Manchester
+    settlement: Manchester
+    country: United Kingdom
+    idno:
+      - Gr. P. 457
+    sources:
+      - path: archives/intf/P52.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom Manchester John Rylands University Library of Manchester Gr. P. 457
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: II (M)
+    notBefore: 125
+    notAfter: 175
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":175,\"gaNum\":\"P52\",\"orig\":\"II (M)\",\"docID\":10052,\"groupID\":\"\",\"primaryName\":\"P52\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":125}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":175,\"gaNum\":\"P52\",\"orig\":\"II (M)\",\"docID\":10052,\"groupID\":\"\",\"primaryName\":\"P52\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":125}"

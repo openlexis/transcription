@@ -1,0 +1,46 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-91
+holdings:
+  - repository: Bibliothèque nationale de France
+    settlement: Paris
+    country: France
+    idno:
+      - grec 219
+    sources:
+      - path: archives/igntp-catena/91.romans.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque nationale de France grec 219
+      - path: archives/igntp-catena/91.ephesians.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque nationale de France grec 219
+  - repository: Bibliothèque Nationale
+    settlement: Paris
+    country: France
+    idno:
+      - Gr. 219
+    sources:
+      - path: archives/intf/91.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Gr. 219
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XI
+    notBefore: 1000
+    notAfter: 1099
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1099,\"gaNum\":91,\"orig\":\"XI\",\"docID\":30091,\"groupID\":\"\",\"primaryName\":91,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1099,\"gaNum\":91,\"orig\":\"XI\",\"docID\":30091,\"groupID\":\"\",\"primaryName\":91,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"

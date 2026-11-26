@@ -1,0 +1,81 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0162
+names:
+  - text: "0162"
+    language: la
+    sources:
+      - path: archives/igntp-john/0162.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">0162</msName>"
+identifiers:
+  - scheme: GA
+    value: "0162"
+    sources:
+      - path: archives/igntp-john/0162.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0162</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20162"
+    sources:
+      - path: archives/igntp-john/0162.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20162</idno></altIdentifier>"
+  - scheme: P.Oxy.
+    value: "847"
+    sources:
+      - path: archives/igntp-john/0162.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"P.Oxy.\"><idno>847</idno></altIdentifier>"
+  - scheme: TM
+    value: "61637"
+    sources:
+      - path: archives/igntp-john/0162.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61637</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2787"
+    sources:
+      - path: archives/igntp-john/0162.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2787</idno></altIdentifier>"
+holdings:
+  - repository: "Metropolitan Museum of Art, Department of Egyptian Art"
+    settlement: New York
+    country: United States of America
+    idno:
+      - Inv. 09.182.43
+    sources:
+      - path: archives/igntp-john/0162.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "United States of America New York Metropolitan Museum of Art, Department of Egyptian Art Inv. 09.182.43"
+  - repository: The Metropolitan Museum of Art
+    settlement: "New York, NY"
+    country: USA
+    idno:
+      - Inv. 09.182.43 (P. Oxy. 847)
+    sources:
+      - path: archives/intf/0162.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA New York, NY The Metropolitan Museum of Art Inv. 09.182.43 (P. Oxy. 847)"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III/IV
+    notBefore: 200
+    notAfter: 399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":399,\"gaNum\":162,\"orig\":\"III/IV\",\"docID\":20162,\"groupID\":\"\",\"primaryName\":162,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":399,\"gaNum\":162,\"orig\":\"III/IV\",\"docID\":20162,\"groupID\":\"\",\"primaryName\":162,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"

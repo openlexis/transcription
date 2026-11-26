@@ -1,0 +1,22 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1923
+holdings:
+  - repository: Biblioteca Nazionale Marciana
+    settlement: Venezia
+    country: Italy
+    idno:
+      - Gr. Z. 33 (423)
+    sources:
+      - path: archives/igntp-catena/1923.romans.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Venezia Biblioteca Nazionale Marciana Gr. Z. 33 (423)
+  - repository: Biblioteca Nazionale Marciana
+    settlement: Venice
+    country: Italy
+    idno:
+      - Z.33 (423)
+    sources:
+      - path: archives/igntp-catena/1923.ephesians.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Venice Biblioteca Nazionale Marciana Z.33 (423)

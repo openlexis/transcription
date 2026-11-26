@@ -1,0 +1,106 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: itsee-ga655/655.Mark
+manuscript: ga-655
+file: archives/itsee-ga655/655.Mark.xml
+title:
+  text: A transcription of Mark in GA 655
+  sources:
+    - path: archives/itsee-ga655/655.Mark.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A transcription of Mark in GA 655
+people:
+  - name: The Institute for Textual Scholarship and Electronic Editing
+    roles:
+      - pbl
+    sources:
+      - path: archives/itsee-ga655/655.Mark.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: University of Birmingham
+    roles:
+      - pbl
+    sources:
+      - path: archives/itsee-ga655/655.Mark.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: Gabriël Oberholzer
+    roles:
+      - cre
+    statement: This transcription was made by Gabriël Oberholzer for an MA by Research at the University of Birmingham.
+    sources:
+      - path: archives/itsee-ga655/655.Mark.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by Gabriël Oberholzer for an MA by Research at the University of Birmingham.
+  - name: "IGNTP contributors, including volunteers and postdoctoral scholars"
+    kind: group
+    roles:
+      - trc
+    statement: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+    generalPractice: true
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+made:
+  - text: "Collection period: October 2021 to February 2023"
+    from: "2021-10"
+    to: "2023-02"
+    sources:
+      - title: University of Birmingham eData Repository
+        url: https://edata.bham.ac.uk/1367/
+        accessed: 2026-11-26
+        quote: From To October 2021 February 2023
+published:
+  - text: 15.09.2025
+    when: 2025-09-15
+    sources:
+      - path: archives/itsee-ga655/655.Mark.xml
+        locator: teiHeader/fileDesc/publicationStmt/date
+        quote: "<date>15.09.2025</date>"
+method:
+  practices:
+    - kind: independent-double-transcription
+      generalPractice: true
+      text: Two independent initial transcriptions are made of each manuscript.
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: Both organizations observe the same practice of producing two independent initial transcriptions
+    - kind: reconciliation
+      generalPractice: true
+      text: "A third person, usually the transcription coordinator, reconciles the two with reference to the images of the manuscript and makes the final file."
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: "these are reconciled by a third person (usually the transcription coordinator) with reference to the images of the manuscript, who creates a final file"
+  guidelines:
+    - text: The XML specifications used are version 1.6 of the IGNTP Guidelines available at
+      sources:
+        - path: archives/itsee-ga655/655.Mark.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: The XML specifications used are version 1.6 of the IGNTP Guidelines available at
+  tools:
+    - text: It was created using the Online Transcription Editor of the Workspace for Collaborative Editing.
+      sources:
+        - path: archives/itsee-ga655/655.Mark.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: It was created using the Online Transcription Editor of the Workspace for Collaborative Editing.
+    - text: Data transcribed using the Online Transcription Editor
+      sources:
+        - title: University of Birmingham eData Repository
+          url: https://edata.bham.ac.uk/1367/
+          accessed: 2026-11-26
+          quote: Data transcribed using the Online Transcription Editor
+rights:
+  statement: Available for noncommercial re-use provided attribution is made to the original creators and the subsequent derivative is licensed as ShareAlike (Creative Commons by-nc-sa)
+  sources:
+    - path: archives/itsee-ga655/655.Mark.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: Available for noncommercial re-use provided attribution is made to the original creators and the subsequent derivative is licensed as ShareAlike (Creative Commons by-nc-sa)

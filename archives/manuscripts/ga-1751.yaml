@@ -1,0 +1,80 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1751
+identifiers:
+  - scheme: GA
+    value: "1751"
+    sources:
+      - path: archives/igntp-2thessalonians/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>1751</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1751</idno></altIdentifier>"
+      - path: archives/igntp-galatians/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1751</idno></altIdentifier>"
+      - path: archives/igntp-romans/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1751</idno></altIdentifier>"
+  - scheme: Liste
+    value: "31751"
+    sources:
+      - path: archives/igntp-2thessalonians/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>31751</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31751</idno></altIdentifier>"
+      - path: archives/igntp-galatians/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31751</idno></altIdentifier>"
+      - path: archives/igntp-romans/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31751</idno></altIdentifier>"
+holdings:
+  - repository: Great Lavra
+    settlement: Athos
+    country: Greece
+    idno:
+      - "K' 190, fol. 1-168"
+    sources:
+      - path: archives/igntp-ephesians/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Greece Athos Great Lavra K' 190, fol. 1-168"
+      - path: archives/igntp-galatians/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Greece Athos Great Lavra K' 190, fol. 1-168"
+      - path: archives/igntp-romans/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Greece Athos Great Lavra K' 190, fol. 1-168"
+  - repository: Great Lavra Monastery
+    settlement: Athos
+    country: Greece
+    idno:
+      - "K' 190, fol. 1-168"
+    sources:
+      - path: archives/intf/1751.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Greece Athos Great Lavra Monastery K' 190, fol. 1-168"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1479"
+    notBefore: 1479
+    notAfter: 1479
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1479,\"gaNum\":1751,\"orig\":1479,\"docID\":31751,\"groupID\":\"\",\"primaryName\":1751,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1479}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1479,\"gaNum\":1751,\"orig\":1479,\"docID\":31751,\"groupID\":\"\",\"primaryName\":1751,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1479}"

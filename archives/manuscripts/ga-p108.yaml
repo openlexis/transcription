@@ -1,0 +1,81 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p108
+names:
+  - text: Papyrus 108
+    language: en
+    sources:
+      - path: archives/igntp-john/P108.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 108</msName>"
+identifiers:
+  - scheme: GA
+    value: P108
+    sources:
+      - path: archives/igntp-john/P108.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P108</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10108"
+    sources:
+      - path: archives/igntp-john/P108.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10108</idno></altIdentifier>"
+  - scheme: P.Oxy
+    value: "4447"
+    sources:
+      - path: archives/igntp-john/P108.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"P.Oxy\"><idno>4447</idno></altIdentifier>"
+  - scheme: TM
+    value: "61633"
+    sources:
+      - path: archives/igntp-john/P108.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61633</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2783"
+    sources:
+      - path: archives/igntp-john/P108.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2783</idno></altIdentifier>"
+holdings:
+  - repository: Ashmolean Museum
+    settlement: Oxford
+    country: United Kingdom
+    idno:
+      - P. Oxy. 4447
+    sources:
+      - path: archives/igntp-john/P108.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom Oxford Ashmolean Museum P. Oxy. 4447
+  - repository: "Bodleian Art, Archaeology and Ancient World Library"
+    settlement: Oxford
+    country: United Kingdom
+    idno:
+      - P. Oxy. 4447
+    sources:
+      - path: archives/intf/P108.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "United Kingdom Oxford Bodleian Art, Archaeology and Ancient World Library P. Oxy. 4447"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III
+    notBefore: 200
+    notAfter: 299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":299,\"gaNum\":\"P108\",\"orig\":\"III\",\"docID\":10108,\"groupID\":\"\",\"primaryName\":\"P108\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":299,\"gaNum\":\"P108\",\"orig\":\"III\",\"docID\":10108,\"groupID\":\"\",\"primaryName\":\"P108\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"

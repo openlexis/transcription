@@ -1,0 +1,63 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0309
+names:
+  - text: "0309"
+    language: la
+    sources:
+      - path: archives/igntp-john/0309.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">0309</msName>"
+identifiers:
+  - scheme: GA
+    value: "0309"
+    sources:
+      - path: archives/igntp-john/0309.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0309</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20309"
+    sources:
+      - path: archives/igntp-john/0309.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20309</idno></altIdentifier>"
+holdings:
+  - repository: Institut für Altertumskunde
+    settlement: Cologne
+    country: Germany
+    idno:
+      - "P. Köln, Inv. 806"
+    sources:
+      - path: archives/igntp-john/0309.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Germany Cologne Institut für Altertumskunde P. Köln, Inv. 806"
+  - repository: Institut für Altertumskunde
+    settlement: Köln
+    country: Germany
+    idno:
+      - Inv. Nr. 806
+    sources:
+      - path: archives/intf/0309.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Köln Institut für Altertumskunde Inv. Nr. 806
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VI
+    notBefore: 500
+    notAfter: 599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":599,\"gaNum\":309,\"orig\":\"VI\",\"docID\":20309,\"groupID\":\"\",\"primaryName\":309,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":599,\"gaNum\":309,\"orig\":\"VI\",\"docID\":20309,\"groupID\":\"\",\"primaryName\":309,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"

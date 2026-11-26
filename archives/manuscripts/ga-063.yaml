@@ -1,0 +1,33 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-063
+names:
+  - text: "063"
+    language: la
+    sources:
+      - path: archives/igntp-john/063.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">063</msName>"
+identifiers:
+  - scheme: GA
+    value: "063"
+    sources:
+      - path: archives/igntp-john/063.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>063</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20063"
+    sources:
+      - path: archives/igntp-john/063.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20063</idno></altIdentifier>"
+holdings:
+  - repository: Vatopedi
+    settlement: Athos
+    country: Greece
+    idno:
+      - "1219 (fols 40-52, 63)"
+    sources:
+      - path: archives/igntp-john/063.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Greece Athos Vatopedi 1219 (fols 40-52, 63)"

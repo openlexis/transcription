@@ -1,0 +1,39 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-028
+names:
+  - text: "028"
+    language: la
+    sources:
+      - path: archives/igntp-john/028.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">028</msName>"
+identifiers:
+  - scheme: GA
+    value: "028"
+    sources:
+      - path: archives/igntp-john/028.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>028</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20028"
+    sources:
+      - path: archives/igntp-john/028.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20028</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: S
+    sources:
+      - path: archives/igntp-john/028.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>S</idno></altIdentifier>"
+holdings:
+  - repository: Bibliotheca Apostolica Vaticana
+    settlement: Vatican City
+    country: Vatican
+    idno:
+      - Vat. gr. 354
+    sources:
+      - path: archives/igntp-john/028.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Vatican Vatican City Bibliotheca Apostolica Vaticana Vat. gr. 354

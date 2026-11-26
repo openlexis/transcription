@@ -1,0 +1,13 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2183
+holdings:
+  - repository: Μονη Βατοπεδιου
+    settlement: Athos
+    country: Greece
+    idno:
+      - "239"
+    sources:
+      - path: archives/igntp-catena/2183.ephesians.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Greece Athos Μονη Βατοπεδιου 239

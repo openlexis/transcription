@@ -1,0 +1,260 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: zacynthius/L299
+manuscript: ga-l299
+file: archives/zacynthius/L299.xml
+title:
+  text: A Transcription of the Lectionary in Codex Zacynthius (L299)
+  sources:
+    - path: archives/zacynthius/L299.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A Transcription of the Lectionary in Codex Zacynthius (L299)
+people:
+  - name: The Codex Zacynthius Project
+    kind: organisation
+    roles:
+      - cre
+    statement: Created by
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by The Codex Zacynthius Project A.C. Myshrall Gavriil-Ioannis Boutziopoulos Thomas William Ruston
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the Codex Zacynthius Project in 2018-19 from digital images.
+  - name: A.C. Myshrall
+    roles:
+      - cre
+    statement: Created by
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by The Codex Zacynthius Project A.C. Myshrall Gavriil-Ioannis Boutziopoulos Thomas William Ruston
+  - name: Gavriil-Ioannis Boutziopoulos
+    roles:
+      - cre
+    statement: Created by
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by The Codex Zacynthius Project A.C. Myshrall Gavriil-Ioannis Boutziopoulos Thomas William Ruston
+  - name: Thomas William Ruston
+    roles:
+      - cre
+    statement: Created by
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by The Codex Zacynthius Project A.C. Myshrall Gavriil-Ioannis Boutziopoulos Thomas William Ruston
+  - name: The Arts and Humanities Research Council
+    roles:
+      - fnd
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/fileDesc/titleStmt/funder[1]"
+        quote: The Arts and Humanities Research Council
+  - name: The Institute for Textual Scholarship and Electronic Editing
+    roles:
+      - spn
+      - pbl
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/fileDesc/titleStmt/sponsor[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: University of Birmingham
+    roles:
+      - pbl
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: "IGNTP contributors, including volunteers and postdoctoral scholars"
+    kind: group
+    roles:
+      - trc
+    statement: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+    generalPractice: true
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+made:
+  - text: This transcription was made by the Codex Zacynthius Project in 2018-19 from digital images.
+    from: 2018
+    to: 2019
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the Codex Zacynthius Project in 2018-19 from digital images.
+madeFrom:
+  - kind: images
+    description: This transcription was made by the Codex Zacynthius Project in 2018-19 from digital images.
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the Codex Zacynthius Project in 2018-19 from digital images.
+  - kind: images
+    description: The transcription was made from fresh digital images produced for the Codex Zacynthius project.
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+        quote: The transcription was made from fresh digital images produced for the Codex Zacynthius project.
+published:
+  - text: 31.1.2020
+    when: 2020-01-31
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: teiHeader/fileDesc/publicationStmt/date
+        quote: "<date>31.1.2020</date>"
+version:
+  text: "Version 1.0, last updated 25.1.2020"
+  label: "1.0"
+  when: 2020-01-25
+  sources:
+    - path: archives/zacynthius/L299.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: "Version 1.0, last updated 25.1.2020"
+revisions:
+  entries:
+    - when: 2020-01-25
+      description: Further proof reading corrections made by Catherine Smith.
+      "n": "25"
+    - when: 2020-01-24
+      description: rend attribute removed from fw of right justified lectionary titles which are now displayed as displaced-under by Catherine Smith.
+      "n": "24"
+    - when: 2020-01-23
+      description: Proofreading corrections entered by Hugh Houghton. Transcriptions added of covers.
+      "n": "23"
+    - when: 2020-01-14
+      description: Identifiers for every reading added at beginning of note type=LectionRef by Hugh Houghton. A colon added to separate the identifier from the data in all existing notes of this type.
+      "n": "22"
+    - when: 2019-11-02
+      description: proofread for layout against html lots of changes made to position of header items and marginal items which moves them out of the logical structure also added a few missed rubrics and other small corrections by Catherine Smith
+      "n": "21"
+    - when: 2019-10-28
+      description: diples changed from fw to seg in left margin and diple character changed to match undertext files by Catherine Smith
+      "n": "20"
+    - when: 2019-10-28
+      description: all scribal that are from the bottom margin moved to bottom of page by Catherine Smith
+      "n": "19"
+    - when: 2019-10-28
+      description: all other fws that are from the bottom margin moved to bottom of page by Catherine Smith (this does mean that some lectTitles are in a different lection)
+      "n": "18"
+    - when: 2019-10-28
+      description: "quire sig content changed to num rather than w and abbr, those that are at the bottom of the page also moved to bottom of page by Catherine Smith"
+      "n": "17"
+    - when: 2019-10-28
+      description: "page numbers separated into pencil and ink using rend attribute ('right' which was in rend now added to place attribute) by Catherine Smith"
+      "n": "16"
+    - when: 2019-10-28
+      description: local notes providing biblical reference for lection changed to type=lectionRef by Catherine Smith
+      "n": "15"
+    - when: 2019-10-27
+      description: free text at the end of page 110r made into fw lectTitle by Catherine Smith
+      "n": "14"
+    - when: 2019-10-27
+      description: ⩫ treated in same way as + as scribal note with place attribute where necessary by Catherine Smith
+      "n": "13"
+    - when: 2019-10-27
+      description: remaining segs removed and turned to scribal notes by Catherine Smith
+      "n": "12"
+    - when: 2019-10-27
+      description: "height attribute removed from hi rend=cap as not allowed in tei, replaced with cap-2 etc. by Catherine Smith"
+      "n": "11"
+    - when: 2019-10-27
+      description: segs containing just fw or just note deleted and place attribute added to fw or note to describe placement by Catherine Smith
+      "n": "10"
+    - when: 2019-10-27
+      description: XML ids removed from all notes because they are not unique and therefore invalidate the file by Catherine Smith
+      "n": "9"
+    - when: 2019-10-27
+      description: correction over page break of P77v changed to comply with our guidlines by removing page structure from corrector text by Catherine Smith
+      "n": "8"
+    - when: 2019-10-21
+      description: w tag containing only - changed to pc tag by Catherine Smith
+      "n": "7"
+    - when: 2019-10-21
+      description: crosses in margins changed from w in seg to scribal note with a place attribute by Catherine Smith in consultation with Hugh Houghton
+      "n": "6"
+    - when: 2019-10-21
+      description: rubricated crosses in text changed from w to scribal notes by Catherine Smith in consultation with Hugh Houghton
+      "n": "5"
+    - when: 2019-10-21
+      description: και abbreviated with ϗ changed so all three letters are within ex tags (originally kappa was outside) by Catherine Smith
+      "n": "4"
+    - when: 2019-10-21
+      description: words with ου abbreviated combined with following words where necessary by Hugh Houghton and Catherine Smith
+      "n": "3"
+    - when: 2019-10-14
+      description: "Adjustments to abbreviation expansions made by Amy Myshrall, first part of lection heading for M1D2a added as zhtei to M1D1b, M3D6a text added to M3D5c and M3D6b changed to M3D6 plus cross-references, lection heading text moved from M4D23d to M4D23c."
+      "n": "2"
+    - when: 2019-09-09
+      description: Adjustments regarding marginalia on fol. 50v and 89v made by Hugh Houghton following discussion with project team.
+      "n": "1"
+    - when: 2019-09-05
+      description: "Initial transcription by Gavriil-Ioannis Boutziopoulos and Thomas William Ruston reconciled and proofread by Amy Myshrall, archived on project server and joined into two separate files (one for synaxarion, one for menologion)."
+      "n": "0"
+  sources:
+    - path: archives/zacynthius/L299.xml
+      locator: teiHeader/revisionDesc
+      quote: Further proof reading corrections made by Catherine Smith.
+method:
+  practices:
+    - kind: independent-double-transcription
+      generalPractice: true
+      text: Two independent initial transcriptions are made of each manuscript.
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: Both organizations observe the same practice of producing two independent initial transcriptions
+    - kind: reconciliation
+      generalPractice: true
+      text: "A third person, usually the transcription coordinator, reconciles the two with reference to the images of the manuscript and makes the final file."
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: "these are reconciled by a third person (usually the transcription coordinator) with reference to the images of the manuscript, who creates a final file"
+  guidelines:
+    - text: The XML specifications used are version 1.5 of the IGNTP Guidelines available at
+      sources:
+        - path: archives/zacynthius/L299.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: The XML specifications used are version 1.5 of the IGNTP Guidelines available at
+  tools:
+    - text: It was created using the Online Transcription Editor produced by the Workspace for Collaborative Editing.
+      sources:
+        - path: archives/zacynthius/L299.xml
+          locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+          quote: It was created using the Online Transcription Editor produced by the Workspace for Collaborative Editing.
+  conventions:
+    - text: "The transcription includes foliation, lineation, all punctuation and abbreviations and marginal comments."
+      sources:
+        - path: archives/zacynthius/L299.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: "The transcription includes foliation, lineation, all punctuation and abbreviations and marginal comments."
+    - text: Details of the ekphonetic notation are not recorded.
+      sources:
+        - path: archives/zacynthius/L299.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: Details of the ekphonetic notation are not recorded.
+scope:
+  - text: This transcription is of the entire lectionary comprising the synaxarion (fol.
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+        quote: This transcription is of the entire lectionary comprising the synaxarion (fol.
+rights:
+  statement: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the project and named participants) and an indication is given of any changes made. See further."
+  sources:
+    - path: archives/zacynthius/L299.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the project and named participants) and an indication is given of any changes made. See further."

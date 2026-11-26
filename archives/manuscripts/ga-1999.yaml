@@ -1,0 +1,35 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1999
+identifiers:
+  - scheme: GA
+    value: "1999"
+    sources:
+      - path: archives/igntp-ephesians/1999.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1999</idno></altIdentifier>"
+      - path: archives/igntp-romans/1999.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1999</idno></altIdentifier>"
+  - scheme: Liste
+    value: "31999"
+    sources:
+      - path: archives/igntp-ephesians/1999.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31999</idno></altIdentifier>"
+      - path: archives/igntp-romans/1999.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31999</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Nazionale Marciana
+    settlement: Venice
+    country: Italy
+    idno:
+      - Gr. Z. 36 (350)
+    sources:
+      - path: archives/igntp-ephesians/1999.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Venice Biblioteca Nazionale Marciana Gr. Z. 36 (350)
+      - path: archives/igntp-romans/1999.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Venice Biblioteca Nazionale Marciana Gr. Z. 36 (350)

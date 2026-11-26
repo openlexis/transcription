@@ -1,0 +1,44 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2853
+identifiers:
+  - scheme: GA
+    value: "2853"
+    sources:
+      - path: archives/igntp-ephesians/2853.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>2853</idno></altIdentifier>"
+      - path: archives/igntp-galatians/2853.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>2853</idno></altIdentifier>"
+      - path: archives/igntp-romans/2853.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>2853</idno></altIdentifier>"
+  - scheme: Liste
+    value: "32853"
+    sources:
+      - path: archives/igntp-ephesians/2853.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>32853</idno></altIdentifier>"
+      - path: archives/igntp-galatians/2853.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>32853</idno></altIdentifier>"
+      - path: archives/igntp-romans/2853.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>32853</idno></altIdentifier>"
+holdings:
+  - repository: The Van Kampen Foundation
+    settlement: Orlando
+    country: USA
+    idno:
+      - VK 908
+    sources:
+      - path: archives/igntp-ephesians/2853.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: USA Orlando The Van Kampen Foundation VK 908
+      - path: archives/igntp-galatians/2853.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: USA Orlando The Van Kampen Foundation VK 908
+      - path: archives/igntp-romans/2853.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: USA Orlando The Van Kampen Foundation VK 908

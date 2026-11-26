@@ -1,0 +1,65 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2492
+identifiers:
+  - scheme: GA
+    value: "2492"
+    sources:
+      - path: archives/igntp-2thessalonians/2492.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>2492</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/2492.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>2492</idno></altIdentifier>"
+      - path: archives/igntp-galatians/2492.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>2492</idno> </altIdentifier>"
+  - scheme: Liste
+    value: "32492"
+    sources:
+      - path: archives/igntp-2thessalonians/2492.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>32492</idno> </altIdentifier>"
+      - path: archives/igntp-ephesians/2492.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>32492</idno></altIdentifier>"
+      - path: archives/igntp-galatians/2492.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>32492</idno> </altIdentifier>"
+holdings:
+  - repository: "Saint Catherine's Monastery"
+    settlement: Sinai
+    country: Egypt
+    idno:
+      - "Gr. 1342, fol. 1-178"
+    sources:
+      - path: archives/igntp-ephesians/2492.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Egypt Sinai Saint Catherine's Monastery Gr. 1342, fol. 1-178"
+      - path: archives/igntp-galatians/2492.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Egypt Sinai Saint Catherine's Monastery Gr. 1342, fol. 1-178"
+      - path: archives/intf/2492.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Egypt Sinai Saint Catherine's Monastery Gr. 1342, fol. 1-178"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XIV
+    notBefore: 1300
+    notAfter: 1399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1399,\"gaNum\":2492,\"orig\":\"XIV\",\"docID\":32492,\"groupID\":\"\",\"primaryName\":2492,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1399,\"gaNum\":2492,\"orig\":\"XIV\",\"docID\":32492,\"groupID\":\"\",\"primaryName\":2492,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1300}"

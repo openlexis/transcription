@@ -1,0 +1,76 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: igntp-catena/1980.romans
+manuscript: ga-1980
+file: archives/igntp-catena/1980.romans.xml
+title:
+  text: A transcription of the Pseudo-Oecumenian Catena on Romans in GA 1980
+  sources:
+    - path: archives/igntp-catena/1980.romans.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A transcription of the Pseudo-Oecumenian Catena on Romans in GA 1980
+people:
+  - name: "The Institute for Textual Scholarship and Electronic Editing (ITSEE), University of Birmingham UK"
+    kind: organisation
+    roles:
+      - cre
+      - pbl
+    statement: Created by
+    sources:
+      - path: archives/igntp-catena/1980.romans.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: "Created by The Institute for Textual Scholarship and Electronic Editing (ITSEE), University of Birmingham UK"
+      - path: archives/igntp-catena/1980.romans.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: "The Institute for Textual Scholarship and Electronic Editing (ITSEE), University of Birmingham UK"
+  - name: Jacopo Marcon
+    roles:
+      - trc
+    statement: Transcribed by
+    sources:
+      - path: archives/igntp-catena/1980.romans.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[2]"
+        quote: Transcribed by Jacopo Marcon
+  - name: The European Union Horizon 2020 research and innovation programme (grant agreement no. 770816).
+    roles:
+      - fnd
+    sources:
+      - path: archives/igntp-catena/1980.romans.xml
+        locator: "teiHeader/fileDesc/titleStmt/funder[1]"
+        quote: The European Union Horizon 2020 research and innovation programme (grant agreement no. 770816).
+made:
+  - text: "Collection period: 2019 to 2023"
+    from: 2019
+    to: 2023
+    sources:
+      - title: University of Birmingham eData Repository
+        url: https://edata.bham.ac.uk/1097/
+        accessed: 2026-11-26
+        quote: From To 2019 2023
+version:
+  text: "Version 1.0, published on 23.02.2023"
+  label: "1.0"
+  when: 2023-02-23
+  sources:
+    - path: archives/igntp-catena/1980.romans.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: "Version 1.0, published on 23.02.2023"
+method:
+  guidelines:
+    - text: The encoding is based on version 1.6 of the IGNTP Guidelines available at.
+      sources:
+        - path: archives/igntp-catena/1980.romans.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: The encoding is based on version 1.6 of the IGNTP Guidelines available at.
+  encoding:
+    - text: It is an extended version of the TEI P5 schema.
+      sources:
+        - path: archives/igntp-catena/1980.romans.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: It is an extended version of the TEI P5 schema.
+rights:
+  statement: Attribution 4.0 International (CC BY 4.0) Available for re-use under a Creative Commons license provided attribution is made to the original creators.
+  sources:
+    - path: archives/igntp-catena/1980.romans.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: Attribution 4.0 International (CC BY 4.0) Available for re-use under a Creative Commons license provided attribution is made to the original creators.

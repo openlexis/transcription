@@ -1,0 +1,39 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-030
+names:
+  - text: "030"
+    language: la
+    sources:
+      - path: archives/igntp-john/030.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">030</msName>"
+identifiers:
+  - scheme: GA
+    value: "030"
+    sources:
+      - path: archives/igntp-john/030.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>030</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20030"
+    sources:
+      - path: archives/igntp-john/030.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20030</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: U
+    sources:
+      - path: archives/igntp-john/030.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>U</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Nazionale Marciana
+    settlement: Venice
+    country: Italy
+    idno:
+      - Gr. 1.8 (1397)
+    sources:
+      - path: archives/igntp-john/030.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Venice Biblioteca Nazionale Marciana Gr. 1.8 (1397)

@@ -1,0 +1,81 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p90
+names:
+  - text: Papyrus 90
+    language: en
+    sources:
+      - path: archives/igntp-john/P90.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 90</msName>"
+identifiers:
+  - scheme: GA
+    value: P90
+    sources:
+      - path: archives/igntp-john/P90.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P90</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10090"
+    sources:
+      - path: archives/igntp-john/P90.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10090</idno></altIdentifier>"
+  - scheme: P.Oxy
+    value: "3523"
+    sources:
+      - path: archives/igntp-john/P90.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"P.Oxy\"><idno>3523</idno></altIdentifier>"
+  - scheme: TM
+    value: "61625"
+    sources:
+      - path: archives/igntp-john/P90.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61625</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2775"
+    sources:
+      - path: archives/igntp-john/P90.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2775</idno></altIdentifier>"
+holdings:
+  - repository: Ashmolean Museum
+    settlement: Oxford
+    country: United Kingdom
+    idno:
+      - P. Oxy. 3523
+    sources:
+      - path: archives/igntp-john/P90.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom Oxford Ashmolean Museum P. Oxy. 3523
+  - repository: "Bodleian Art, Archaeology and Ancient World Library"
+    settlement: Oxford
+    country: United Kingdom
+    idno:
+      - P. Oxy. 3523
+    sources:
+      - path: archives/intf/P90.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "United Kingdom Oxford Bodleian Art, Archaeology and Ancient World Library P. Oxy. 3523"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: II
+    notBefore: 100
+    notAfter: 199
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":199,\"gaNum\":\"P90\",\"orig\":\"II\",\"docID\":10090,\"groupID\":\"\",\"primaryName\":\"P90\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":100}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":199,\"gaNum\":\"P90\",\"orig\":\"II\",\"docID\":10090,\"groupID\":\"\",\"primaryName\":\"P90\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":100}"

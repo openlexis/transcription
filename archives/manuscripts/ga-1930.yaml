@@ -1,0 +1,26 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1930
+identifiers:
+  - scheme: GA
+    value: "1930"
+    sources:
+      - path: archives/igntp-galatians/1930.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>1930</idno></altIdentifier>"
+  - scheme: Liste
+    value: "31930"
+    sources:
+      - path: archives/igntp-galatians/1930.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>31930</idno></altIdentifier>"
+holdings:
+  - repository: Bayerische Staatsbibliothek (BSB)
+    settlement: München
+    country: Germany
+    idno:
+      - Cod. graec. 35
+    sources:
+      - path: archives/igntp-galatians/1930.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany München Bayerische Staatsbibliothek (BSB) Cod. graec. 35

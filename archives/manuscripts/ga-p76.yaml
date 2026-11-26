@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p76
+names:
+  - text: Papyrus 76
+    language: en
+    sources:
+      - path: archives/igntp-john/P76.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 76</msName>"
+identifiers:
+  - scheme: GA
+    value: P76
+    sources:
+      - path: archives/igntp-john/P76.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P76</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10076"
+    sources:
+      - path: archives/igntp-john/P76.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10076</idno></altIdentifier>"
+  - scheme: TM
+    value: "61669"
+    sources:
+      - path: archives/igntp-john/P76.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61669</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2820"
+    sources:
+      - path: archives/igntp-john/P76.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2820</idno></altIdentifier>"
+holdings:
+  - repository: Österreichische Nationalbibliothek
+    settlement: Vienna
+    country: Austria
+    idno:
+      - Pap. G. 36102
+    sources:
+      - path: archives/igntp-john/P76.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Austria Vienna Österreichische Nationalbibliothek Pap. G. 36102
+  - repository: Österreichische Nationalbibliothek
+    settlement: Wien
+    country: Austria
+    idno:
+      - Pap. G. 36102
+    sources:
+      - path: archives/intf/P76.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Austria Wien Österreichische Nationalbibliothek Pap. G. 36102
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VI
+    notBefore: 500
+    notAfter: 599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":599,\"gaNum\":\"P76\",\"orig\":\"VI\",\"docID\":10076,\"groupID\":\"\",\"primaryName\":\"P76\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":599,\"gaNum\":\"P76\",\"orig\":\"VI\",\"docID\":10076,\"groupID\":\"\",\"primaryName\":\"P76\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"

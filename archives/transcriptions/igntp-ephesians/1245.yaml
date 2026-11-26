@@ -1,0 +1,146 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: igntp-ephesians/1245
+manuscript: ga-1245
+file: archives/igntp-ephesians/1245.xml
+title:
+  text: A transcription of Ephesians in 1245
+  sources:
+    - path: archives/igntp-ephesians/1245.xml
+      locator: teiHeader/fileDesc/titleStmt/title
+      quote: A transcription of Ephesians in 1245
+people:
+  - name: The International Greek New Testament Project
+    kind: organisation
+    roles:
+      - cre
+    statement: Created by
+    sources:
+      - path: archives/igntp-ephesians/1245.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[1]"
+        quote: Created by The International Greek New Testament Project
+      - path: archives/igntp-ephesians/1245.xml
+        locator: "teiHeader/encodingDesc/projectDesc/p[1]"
+        quote: This transcription was made by the International Greek New Testament Project in its work towards the Editio Critica Maior.
+  - name: John Gram
+    roles:
+      - trc
+    statement: Transcribed by
+    sources:
+      - path: archives/igntp-ephesians/1245.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[2]"
+        quote: Transcribed by John Gram
+  - name: Joey McCollum
+    roles:
+      - trc
+    statement: Transcribed by
+    sources:
+      - path: archives/igntp-ephesians/1245.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[3]"
+        quote: Transcribed by Joey McCollum
+  - name: Amy Myshrall
+    roles:
+      - rev
+    statement: Reconciled by
+    sources:
+      - path: archives/igntp-ephesians/1245.xml
+        locator: "teiHeader/fileDesc/titleStmt/respStmt[4]"
+        quote: Reconciled by Amy Myshrall
+  - name: The Institute for Textual Scholarship and Electronic Editing
+    roles:
+      - spn
+      - pbl
+    sources:
+      - path: archives/igntp-ephesians/1245.xml
+        locator: "teiHeader/fileDesc/titleStmt/sponsor[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing
+      - path: archives/igntp-ephesians/1245.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: University of Birmingham
+    roles:
+      - pbl
+    sources:
+      - path: archives/igntp-ephesians/1245.xml
+        locator: "teiHeader/fileDesc/publicationStmt/publisher[1]"
+        quote: The Institute for Textual Scholarship and Electronic Editing University of Birmingham
+  - name: "IGNTP contributors, including volunteers and postdoctoral scholars"
+    kind: group
+    roles:
+      - trc
+    statement: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+    generalPractice: true
+    sources:
+      - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+        url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+        citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+        accessed: 2026-11-26
+        quote: "the IGNTP draws on a broader range of contributors, also including volunteers and postdoctoral scholars"
+made:
+  - text: "Collection period: 1 September 2017 to 31 August 2022"
+    from: 2017-09-01
+    to: 2022-08-31
+    sources:
+      - title: University of Birmingham eData Repository
+        url: https://edata.bham.ac.uk/1109/
+        accessed: 2026-11-26
+        quote: From To 1 September 2017 31 August 2022
+published:
+  - text: 13.5.2024
+    when: 2024-05-13
+    sources:
+      - path: archives/igntp-ephesians/1245.xml
+        locator: teiHeader/fileDesc/publicationStmt/date
+        quote: "<date>13.5.2024</date>"
+version:
+  text: "Version 1.1, created on 25.6.2018, archived on the University of Birmingham eData repository on 13.5.2024."
+  label: "1.1"
+  when: 2018-06-25
+  sources:
+    - path: archives/igntp-ephesians/1245.xml
+      locator: teiHeader/fileDesc/editionStmt/edition
+      quote: "Version 1.1, created on 25.6.2018, archived on the University of Birmingham eData repository on 13.5.2024."
+method:
+  practices:
+    - kind: independent-double-transcription
+      generalPractice: true
+      text: Two independent initial transcriptions are made of each manuscript.
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: Both organizations observe the same practice of producing two independent initial transcriptions
+    - kind: reconciliation
+      generalPractice: true
+      text: "A third person, usually the transcription coordinator, reconciles the two with reference to the images of the manuscript and makes the final file."
+      sources:
+        - title: "The Editio Critica Maior of the Greek New Testament: twenty years of digital collaboration"
+          url: https://pure-oai.bham.ac.uk/ws/files/120791797/2020_EarlyChristianity_EditioCriticaMaior.pdf
+          citation: "H.A.G. Houghton, D.C. Parker, P. Robinson and K. Wachtel, Early Christianity 11 (2020), 97-117, https://doi.org/10.1628/ec-2020-0009"
+          accessed: 2026-11-26
+          quote: "these are reconciled by a third person (usually the transcription coordinator) with reference to the images of the manuscript, who creates a final file"
+  guidelines:
+    - text: The XML specifications used are version 1.6 of the IGNTP Guidelines available at
+      sources:
+        - path: archives/igntp-ephesians/1245.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[2]"
+          quote: The XML specifications used are version 1.6 of the IGNTP Guidelines available at
+  tools:
+    - text: This transcription was produced using the online transcription editor developed by the Center for Digital Humanities at the University of Trier as part of the Workspace for Collaborative Editing Project between 2010 and 2013 and made available for use by the Institute for Textual Scholarship and Electronic Editing and the University of Birmingham.
+      sources:
+        - path: archives/igntp-ephesians/1245.xml
+          locator: "teiHeader/encodingDesc/editorialDecl/p[1]"
+          quote: This transcription was produced using the online transcription editor developed by the Center for Digital Humanities at the University of Trier as part of the Workspace for Collaborative Editing Project between 2010 and 2013 and made available for use by the Institute for Textual Scholarship and Electronic Editing and the University of Birmingham.
+    - text: These transcriptions were all made in the Online Transcription Editor developed as part of the Workspace for Collaborative Editing.
+      sources:
+        - title: University of Birmingham eData Repository
+          url: https://edata.bham.ac.uk/1109/
+          accessed: 2026-11-26
+          quote: These transcriptions were all made in the Online Transcription Editor developed as part of the Workspace for Collaborative Editing.
+rights:
+  statement: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."
+  sources:
+    - path: archives/igntp-ephesians/1245.xml
+      locator: teiHeader/fileDesc/publicationStmt/availability
+      quote: "Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0): available for re-use provided attribution is made to the original creators (the IGNTP and any named participants) and an indication is given of any changes made. See further."

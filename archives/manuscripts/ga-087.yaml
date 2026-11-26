@@ -1,0 +1,51 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-087
+names:
+  - text: "087"
+    language: la
+    sources:
+      - path: archives/igntp-john/087.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">087</msName>"
+identifiers:
+  - scheme: partial
+    value: "Egypt, Sinai, Monastery of St. Catherine, Syr. 1018"
+    sources:
+      - path: archives/igntp-john/087.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"partial\"><idno>Egypt, Sinai, Monastery of St. Catherine, Syr. 1018</idno></altIdentifier>"
+  - scheme: GA
+    value: "087"
+    sources:
+      - path: archives/igntp-john/087.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>087</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20087"
+    sources:
+      - path: archives/igntp-john/087.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20087</idno></altIdentifier>"
+  - scheme: TM
+    value: "61835"
+    sources:
+      - path: archives/igntp-john/087.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61835</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2989"
+    sources:
+      - path: archives/igntp-john/087.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2989</idno></altIdentifier>"
+holdings:
+  - repository: National Library of Russia
+    settlement: St Petersburg
+    country: Russia
+    idno:
+      - Gr. 12.278
+    sources:
+      - path: archives/igntp-john/087.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Russia St Petersburg National Library of Russia Gr. 12.278

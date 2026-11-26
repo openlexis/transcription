@@ -1,0 +1,37 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p26
+holdings:
+  - repository: Southern Methodist University Bridwell Library
+    settlement: "Dallas, TX"
+    country: USA
+    idno:
+      - Pap. 1
+    sources:
+      - path: archives/igntp-romans/P26.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Dallas, TX Southern Methodist University Bridwell Library Pap. 1"
+      - path: archives/intf/P26.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Dallas, TX Southern Methodist University Bridwell Library Pap. 1"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VII (A)
+    notBefore: 600
+    notAfter: 625
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":625,\"gaNum\":\"P26\",\"orig\":\"VII (A)\",\"docID\":10026,\"groupID\":\"\",\"primaryName\":\"P26\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":600}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":625,\"gaNum\":\"P26\",\"orig\":\"VII (A)\",\"docID\":10026,\"groupID\":\"\",\"primaryName\":\"P26\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":600}"

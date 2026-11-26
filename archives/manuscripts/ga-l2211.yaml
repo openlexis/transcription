@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-l2211
+holdings:
+  - repository: "Saint Catherine's Monastery"
+    settlement: Sinai
+    country: Egypt
+    idno:
+      - Arab. 116
+    sources:
+      - path: archives/intf/L2211.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Egypt Sinai Saint Catherine's Monastery Arab. 116"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "985"
+    notBefore: 985
+    notAfter: 985
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":985,\"gaNum\":\"L2211\",\"orig\":985,\"docID\":42211,\"groupID\":\"\",\"primaryName\":\"L2211\",\"lang\":\"g-arb\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":985}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":985,\"gaNum\":\"L2211\",\"orig\":985,\"docID\":42211,\"groupID\":\"\",\"primaryName\":\"L2211\",\"lang\":\"g-arb\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":985}"

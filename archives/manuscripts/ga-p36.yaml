@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p36
+names:
+  - text: Papyrus 36
+    language: en
+    sources:
+      - path: archives/igntp-john/P36.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 36</msName>"
+identifiers:
+  - scheme: GA
+    value: P36
+    sources:
+      - path: archives/igntp-john/P36.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P36</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10036"
+    sources:
+      - path: archives/igntp-john/P36.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10036</idno></altIdentifier>"
+  - scheme: TM
+    value: "61662"
+    sources:
+      - path: archives/igntp-john/P36.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61662</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2812"
+    sources:
+      - path: archives/igntp-john/P36.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2812</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Laurenziana
+    settlement: Florence
+    country: Italy
+    idno:
+      - PSI 3
+    sources:
+      - path: archives/igntp-john/P36.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Florence Biblioteca Laurenziana PSI 3
+  - repository: Biblioteca Medicea Laurenziana
+    settlement: Florence
+    country: Italy
+    idno:
+      - PSI I 3
+    sources:
+      - path: archives/intf/P36.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Italy Florence Biblioteca Medicea Laurenziana PSI I 3
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VI
+    notBefore: 500
+    notAfter: 599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":599,\"gaNum\":\"P36\",\"orig\":\"VI\",\"docID\":10036,\"groupID\":\"\",\"primaryName\":\"P36\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":599,\"gaNum\":\"P36\",\"orig\":\"VI\",\"docID\":10036,\"groupID\":\"\",\"primaryName\":\"P36\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"

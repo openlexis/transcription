@@ -1,0 +1,106 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p46
+holdings:
+  - repository: Chester Beatty Library
+    settlement: Dublin
+    country: Ireland
+    idno:
+      - CBL BP II
+    leaves: "56, f 1-10"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10046&format=json
+        accessed: 2026-11-26
+        quote: CBL BP II
+  - repository: University of Michigan Library
+    settlement: "Ann Arbor, MI"
+    country: USA
+    idno:
+      - Inv. Nr. 6238
+    leaves: "30"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10046&format=json
+        accessed: 2026-11-26
+        quote: Inv. Nr. 6238
+  - repository: Chester Beatty Library
+    settlement: Dublin
+    country: Ireland
+    idno:
+      - CBL BP II
+    sources:
+      - path: archives/igntp-ephesians/P46.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Ireland Dublin Chester Beatty Library CBL BP II
+      - path: archives/igntp-galatians/P46.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Ireland Dublin Chester Beatty Library CBL BP II
+      - path: archives/igntp-romans/P46.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Ireland Dublin Chester Beatty Library CBL BP II
+      - path: archives/intf/P46.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Ireland Dublin Chester Beatty Library CBL BP II
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III (A)
+    notBefore: 200
+    notAfter: 225
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":225,\"gaNum\":\"P46\",\"orig\":\"III (A)\",\"docID\":10046,\"groupID\":\"\",\"primaryName\":\"P46\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":225,\"gaNum\":\"P46\",\"orig\":\"III (A)\",\"docID\":10046,\"groupID\":\"\",\"primaryName\":\"P46\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+reproductions:
+  - id: ntvmr-10
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 60 page images listed
+    owner: "Images © University of Michigan, Library"
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10046
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10046&format=json
+        accessed: 2026-11-26
+        quote: "Images © University of Michigan, Library"
+  - id: ntvmr-30
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 104 page images listed
+    owner: "Images © The Trustees of the Chester Beatty Library, Dublin"
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10046
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10046&format=json
+        accessed: 2026-11-26
+        quote: "Images © The Trustees of the Chester Beatty Library, Dublin"
+  - id: ntvmr-40
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 97 page images listed
+    owner: "Images © The Trustees of the Chester Beatty Library, Dublin"
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10046
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10046&format=json
+        accessed: 2026-11-26
+        quote: "Images © The Trustees of the Chester Beatty Library, Dublin"
+  - id: ntvmr-50
+    description: Page images shown in the INTF New Testament Virtual Manuscript Room
+    coverage: 6 page images listed
+    owner: "Images © The Trustees of the Chester Beatty Library, Dublin"
+    where: https://ntvmr.uni-muenster.de/manuscript-workspace?docID=10046
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript metadata"
+        url: https://ntvmr.uni-muenster.de/community/vmr/api/metadata/manuscript/get/?docID=10046&format=json
+        accessed: 2026-11-26
+        quote: "Images © The Trustees of the Chester Beatty Library, Dublin"

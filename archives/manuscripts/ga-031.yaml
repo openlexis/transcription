@@ -1,0 +1,39 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-031
+names:
+  - text: "031"
+    language: la
+    sources:
+      - path: archives/igntp-john/031.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">031</msName>"
+identifiers:
+  - scheme: GA
+    value: "031"
+    sources:
+      - path: archives/igntp-john/031.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>031</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20031"
+    sources:
+      - path: archives/igntp-john/031.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20031</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: V
+    sources:
+      - path: archives/igntp-john/031.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>V</idno></altIdentifier>"
+holdings:
+  - repository: Historical Museum
+    settlement: Moscow
+    country: Russia
+    idno:
+      - V.9 S.399
+    sources:
+      - path: archives/igntp-john/031.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Russia Moscow Historical Museum V.9 S.399

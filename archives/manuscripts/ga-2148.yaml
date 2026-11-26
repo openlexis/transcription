@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2148
+holdings:
+  - repository: National Library of Russia
+    settlement: St. Petersburg
+    country: Russia
+    idno:
+      - Ф. № 906 / Gr. 235
+    sources:
+      - path: archives/intf/2148.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Russia St. Petersburg National Library of Russia Ф. № 906 / Gr. 235
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1337"
+    notBefore: 1337
+    notAfter: 1337
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1337,\"gaNum\":2148,\"orig\":1337,\"docID\":32148,\"groupID\":\"\",\"primaryName\":2148,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1337}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1337,\"gaNum\":2148,\"orig\":1337,\"docID\":32148,\"groupID\":\"\",\"primaryName\":2148,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1337}"

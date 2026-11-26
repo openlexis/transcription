@@ -1,0 +1,54 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p120
+names:
+  - text: Papyrus 120
+    language: en
+    sources:
+      - path: archives/igntp-john/P120.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 120</msName>"
+identifiers:
+  - scheme: GA
+    value: P120
+    sources:
+      - path: archives/igntp-john/P120.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P120</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10120"
+    sources:
+      - path: archives/igntp-john/P120.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10120</idno></altIdentifier>"
+holdings:
+  - repository: "Bodleian Art, Archaeology and Ancient World Library"
+    settlement: Oxford
+    country: United Kingdom
+    idno:
+      - P. Oxy. 4804
+    sources:
+      - path: archives/intf/P120.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "United Kingdom Oxford Bodleian Art, Archaeology and Ancient World Library P. Oxy. 4804"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IV
+    notBefore: 300
+    notAfter: 399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":399,\"gaNum\":\"P120\",\"orig\":\"IV\",\"docID\":10120,\"groupID\":\"\",\"primaryName\":\"P120\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":399,\"gaNum\":\"P120\",\"orig\":\"IV\",\"docID\":10120,\"groupID\":\"\",\"primaryName\":\"P120\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"

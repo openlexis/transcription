@@ -1,0 +1,25 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2006
+identifiers:
+  - scheme: GA
+    value: "2006"
+    sources:
+      - path: archives/igntp-romans/2006.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>2006</idno></altIdentifier>"
+  - scheme: Liste
+    value: "32006"
+    sources:
+      - path: archives/igntp-romans/2006.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>32006</idno></altIdentifier>"
+holdings:
+  - repository: Biblioteca Apostolica Vaticana
+    settlement: Città del Vaticano
+    idno:
+      - Reg. gr. 4
+    sources:
+      - path: archives/igntp-romans/2006.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Città del Vaticano Biblioteca Apostolica Vaticana Reg. gr. 4

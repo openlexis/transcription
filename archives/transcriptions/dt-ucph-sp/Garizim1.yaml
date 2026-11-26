@@ -1,0 +1,22 @@
+# Transcription record: one transcription file. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/transcription.schema.json
+id: dt-ucph-sp/Garizim1
+manuscript: sp-garizim1
+file: archives/dt-ucph-sp/Garizim1.xml
+people:
+  - name: "Samaritanus project, Martin-Luther-Universität Halle-Wittenberg"
+    kind: organisation
+    roles:
+      - cre
+    statement: directed by Stefan Schorch
+    sources:
+      - url: https://github.com/DT-UCPH/sp/blob/e8a120f2e92b6558fd39bbe72f830ded871a0a47/README.md
+        accessed: 2026-11-13
+        quote: "The text was provided by the Samaritanus-project based at Martin-Luther-Universität Halle-Wittenberg, directed by Stefan Schorch"
+madeFrom:
+  - kind: other
+    description: based on a transcription MS Dublin Chester Beatty Library 751 (Gen 1-Deut 32:36) + MS Garizim 1 (Deut 32:36b-34)
+    sources:
+      - url: https://github.com/DT-UCPH/sp/blob/e8a120f2e92b6558fd39bbe72f830ded871a0a47/README.md
+        accessed: 2026-11-13
+        quote: is based on a transcription MS Dublin Chester Beatty Library 751 (Gen 1-Deut 32:36) + MS Garizim 1 (Deut 32:36b-34)

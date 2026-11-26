@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-117
+holdings:
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - "Harley 5731, fol. 1-182"
+    sources:
+      - path: archives/intf/117.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "United Kingdom London British Library Harley 5731, fol. 1-182"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XV
+    notBefore: 1400
+    notAfter: 1499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1499,\"gaNum\":117,\"orig\":\"XV\",\"docID\":30117,\"groupID\":\"\",\"primaryName\":117,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1499,\"gaNum\":117,\"orig\":\"XV\",\"docID\":30117,\"groupID\":\"\",\"primaryName\":117,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1400}"

@@ -1,0 +1,47 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-346
+identifiers:
+  - scheme: GA
+    value: "346"
+    sources:
+      - path: archives/igntp-john/346.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>346</idno> </altIdentifier>"
+  - scheme: Liste
+    value: "30346"
+    sources:
+      - path: archives/igntp-john/346.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>30346</idno> </altIdentifier>"
+holdings:
+  - repository: Biblioteca Ambrosiana
+    settlement: Milan
+    country: Italy
+    idno:
+      - "S. 23 sup., fol. 5-145"
+    sources:
+      - path: archives/intf/346.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "Italy Milan Biblioteca Ambrosiana S. 23 sup., fol. 5-145"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XII
+    notBefore: 1100
+    notAfter: 1199
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1199,\"gaNum\":346,\"orig\":\"XII\",\"docID\":30346,\"groupID\":\"\",\"primaryName\":346,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1199,\"gaNum\":346,\"orig\":\"XII\",\"docID\":30346,\"groupID\":\"\",\"primaryName\":346,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"

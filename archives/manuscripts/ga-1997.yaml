@@ -1,0 +1,22 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-1997
+holdings:
+  - repository: Biblioteca Apostolica Vaticana
+    settlement: Vatican City
+    country: Vatican City
+    idno:
+      - Palatinus graecus 10
+    sources:
+      - path: archives/igntp-catena/1997.romans.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Vatican City Vatican City Biblioteca Apostolica Vaticana Palatinus graecus 10
+  - repository: Bibliotheca Apostolica Vaticana
+    settlement: Vatican City
+    country: Vatican City
+    idno:
+      - Palatinus graecus 10
+    sources:
+      - path: archives/igntp-catena/1997.ephesians.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Vatican City Vatican City Bibliotheca Apostolica Vaticana Palatinus graecus 10

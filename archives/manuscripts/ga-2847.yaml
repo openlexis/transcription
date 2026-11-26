@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-2847
+holdings:
+  - repository: Bibliothèque Nationale
+    settlement: Paris
+    country: France
+    idno:
+      - "Gr. 1060, fol. 127-176"
+    sources:
+      - path: archives/intf/2847.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "France Paris Bibliothèque Nationale Gr. 1060, fol. 127-176"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1518"
+    notBefore: 1518
+    notAfter: 1518
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1518,\"gaNum\":2847,\"orig\":1518,\"docID\":32847,\"groupID\":\"\",\"primaryName\":2847,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1518}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1518,\"gaNum\":2847,\"orig\":1518,\"docID\":32847,\"groupID\":\"\",\"primaryName\":2847,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1518}"

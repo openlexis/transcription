@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p24
+holdings:
+  - repository: Yale Divinity Library
+    settlement: "New Haven, CT"
+    country: USA
+    idno:
+      - "RG 305, Box 1, Folder 13 (P. Oxy. 1230)"
+    sources:
+      - path: archives/intf/P24.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA New Haven, CT Yale Divinity Library RG 305, Box 1, Folder 13 (P. Oxy. 1230)"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IV
+    notBefore: 300
+    notAfter: 399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":399,\"gaNum\":\"P24\",\"orig\":\"IV\",\"docID\":10024,\"groupID\":\"\",\"primaryName\":\"P24\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":399,\"gaNum\":\"P24\",\"orig\":\"IV\",\"docID\":10024,\"groupID\":\"\",\"primaryName\":\"P24\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"

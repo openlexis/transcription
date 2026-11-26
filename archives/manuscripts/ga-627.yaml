@@ -1,0 +1,22 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-627
+holdings:
+  - repository: Biblioteca Apostolica Vaticana
+    settlement: Vatican City
+    country: Vatican City
+    idno:
+      - Vaticanus graecus 206
+    sources:
+      - path: archives/igntp-catena/627.romans.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Vatican City Vatican City Biblioteca Apostolica Vaticana Vaticanus graecus 206
+  - repository: Biblioteca Apostolica Vaticana
+    settlement: Vatican City
+    country: Vatican City
+    idno:
+      - Vaticanus graecus 2062
+    sources:
+      - path: archives/igntp-catena/627.ephesians.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Vatican City Vatican City Biblioteca Apostolica Vaticana Vaticanus graecus 2062

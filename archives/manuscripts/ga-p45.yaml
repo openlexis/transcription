@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p45
+names:
+  - text: Papyrus 45
+    language: en
+    sources:
+      - path: archives/igntp-john/P45.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 45</msName>"
+identifiers:
+  - scheme: GA
+    value: P45
+    sources:
+      - path: archives/igntp-john/P45.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P45</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10045"
+    sources:
+      - path: archives/igntp-john/P45.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10045</idno></altIdentifier>"
+  - scheme: TM
+    value: "61826"
+    sources:
+      - path: archives/igntp-john/P45.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61826</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2980"
+    sources:
+      - path: archives/igntp-john/P45.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2980</idno></altIdentifier>"
+holdings:
+  - repository: Chester Beatty Library
+    settlement: Dublin
+    country: Ireland
+    idno:
+      - P. Chester Beatty 1
+    sources:
+      - path: archives/igntp-john/P45.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Ireland Dublin Chester Beatty Library P. Chester Beatty 1
+  - repository: Chester Beatty Library
+    settlement: Dublin
+    country: Ireland
+    idno:
+      - CBL BP I
+    sources:
+      - path: archives/intf/P45.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Ireland Dublin Chester Beatty Library CBL BP I
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III
+    notBefore: 200
+    notAfter: 299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":299,\"gaNum\":\"P45\",\"orig\":\"III\",\"docID\":10045,\"groupID\":\"\",\"primaryName\":\"P45\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":299,\"gaNum\":\"P45\",\"orig\":\"III\",\"docID\":10045,\"groupID\":\"\",\"primaryName\":\"P45\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":200}"

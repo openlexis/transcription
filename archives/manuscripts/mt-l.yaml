@@ -1,0 +1,55 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: mt-l
+names:
+  - text: Leningrad Codex
+    sources:
+      - title: Internet Archive item Leningrad_Codex_Color_Images (metadata)
+        url: https://archive.org/metadata/Leningrad_Codex_Color_Images
+        accessed: 2026-11-26
+        quote: "The Leningrad Codex, full-color photographs of the entire biblical text taken by Bruce E. Zuckerman for the West Semitic Research Project. National Library of Russia, St. Petersburg, MS Evr. I B19a."
+holdings:
+  - repository: National Library of Russia
+    settlement: St. Petersburg
+    idno:
+      - MS Evr. I B19a
+    sources:
+      - title: Internet Archive item Leningrad_Codex_Color_Images (metadata)
+        url: https://archive.org/metadata/Leningrad_Codex_Color_Images
+        accessed: 2026-11-26
+        quote: "The Leningrad Codex, full-color photographs of the entire biblical text taken by Bruce E. Zuckerman for the West Semitic Research Project. National Library of Russia, St. Petersburg, MS Evr. I B19a."
+dates:
+  - text: "1008"
+    when: 1008
+    of: writing
+    sources:
+      - title: Internet Archive item Leningrad_Codex_Color_Images (metadata)
+        url: https://archive.org/metadata/Leningrad_Codex_Color_Images
+        accessed: 2026-11-26
+        quote: "\"date\":\"1008\""
+reproductions:
+  - id: wsrp-colour-photographs
+    description: Full-color photographs of the entire biblical text taken by Bruce E. Zuckerman for the West Semitic Research Project.
+    madeBy:
+      - name: Bruce E. Zuckerman
+        roles:
+          - pht
+        sources:
+          - title: Internet Archive item Leningrad_Codex_Color_Images (metadata)
+            url: https://archive.org/metadata/Leningrad_Codex_Color_Images
+            accessed: 2026-11-26
+            quote: "The Leningrad Codex, full-color photographs of the entire biblical text taken by Bruce E. Zuckerman for the West Semitic Research Project. National Library of Russia, St. Petersburg, MS Evr. I B19a."
+      - name: West Semitic Research Project
+        kind: organisation
+        sources:
+          - title: Internet Archive item Leningrad_Codex_Color_Images (metadata)
+            url: https://archive.org/metadata/Leningrad_Codex_Color_Images
+            accessed: 2026-11-26
+            quote: "The Leningrad Codex, full-color photographs of the entire biblical text taken by Bruce E. Zuckerman for the West Semitic Research Project. National Library of Russia, St. Petersburg, MS Evr. I B19a."
+    coverage: the entire biblical text
+    where: https://archive.org/details/Leningrad_Codex_Color_Images
+    sources:
+      - title: Internet Archive item Leningrad_Codex_Color_Images (metadata)
+        url: https://archive.org/metadata/Leningrad_Codex_Color_Images
+        accessed: 2026-11-26
+        quote: "The Leningrad Codex, full-color photographs of the entire biblical text taken by Bruce E. Zuckerman for the West Semitic Research Project. National Library of Russia, St. Petersburg, MS Evr. I B19a."

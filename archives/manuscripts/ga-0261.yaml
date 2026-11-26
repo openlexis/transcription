@@ -1,0 +1,26 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-0261
+identifiers:
+  - scheme: GA
+    value: "0261"
+    sources:
+      - path: archives/igntp-galatians/0261.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>0261</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20261"
+    sources:
+      - path: archives/igntp-galatians/0261.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20261</idno></altIdentifier>"
+holdings:
+  - repository: Staatliche Museen zu Berlin Preußischer Kulturbesitz
+    settlement: Berlin
+    country: Germany
+    idno:
+      - P. 6791.6792.14043
+    sources:
+      - path: archives/igntp-galatians/0261.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Berlin Staatliche Museen zu Berlin Preußischer Kulturbesitz P. 6791.6792.14043

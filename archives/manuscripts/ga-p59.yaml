@@ -1,0 +1,75 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p59
+names:
+  - text: Papyrus 59
+    language: en
+    sources:
+      - path: archives/igntp-john/P59.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"en\">Papyrus 59</msName>"
+identifiers:
+  - scheme: GA
+    value: P59
+    sources:
+      - path: archives/igntp-john/P59.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>P59</idno></altIdentifier>"
+  - scheme: Liste
+    value: "10059"
+    sources:
+      - path: archives/igntp-john/P59.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>10059</idno></altIdentifier>"
+  - scheme: TM
+    value: "61676"
+    sources:
+      - path: archives/igntp-john/P59.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61676</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2827"
+    sources:
+      - path: archives/igntp-john/P59.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2827</idno></altIdentifier>"
+holdings:
+  - repository: Pierpont Morgan Library
+    settlement: New York
+    country: United States
+    idno:
+      - P. Colt 3
+    sources:
+      - path: archives/igntp-john/P59.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United States New York Pierpont Morgan Library P. Colt 3
+  - repository: Morgan Library & Museum
+    settlement: "New York, NY"
+    country: USA
+    idno:
+      - Colt Pap. 3.1-4
+    sources:
+      - path: archives/intf/P59.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA New York, NY Morgan Library & Museum Colt Pap. 3.1-4"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VII
+    notBefore: 600
+    notAfter: 699
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":699,\"gaNum\":\"P59\",\"orig\":\"VII\",\"docID\":10059,\"groupID\":\"\",\"primaryName\":\"P59\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":600}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":699,\"gaNum\":\"P59\",\"orig\":\"VII\",\"docID\":10059,\"groupID\":\"\",\"primaryName\":\"P59\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":600}"

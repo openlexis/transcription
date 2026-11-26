@@ -1,0 +1,72 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-l299
+names:
+  - text: Codex Zacynthius
+    language: la
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Zacynthius</msName>"
+identifiers:
+  - scheme: GA
+    value: L299
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>L299</idno></altIdentifier>"
+  - scheme: TM
+    value: "61781"
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61781</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2934"
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2934</idno></altIdentifier>"
+form:
+  text: codex
+  sources:
+    - path: archives/zacynthius/L299.xml
+      locator: teiHeader/fileDesc/sourceDesc/msDesc/physDesc/objectDesc
+      quote: "<objectDesc form=\"codex\">"
+material:
+  text: Parchment
+  sources:
+    - path: archives/zacynthius/L299.xml
+      locator: teiHeader/fileDesc/sourceDesc/msDesc/physDesc/objectDesc/supportDesc/support
+      quote: Parchment
+languages:
+  - text: Greek
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msContents/textLang
+        quote: Greek
+holdings:
+  - repository: University Library
+    settlement: Cambridge
+    country: United Kingdom
+    idno:
+      - Add. MS 10062
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom Cambridge University Library Add. MS 10062
+dates:
+  - text: Around the year 1180
+    notBefore: 1175
+    notAfter: 1200
+    of: writing
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origDate
+        quote: "<origDate notBefore=\"1175\" notAfter=\"1200\">Around the year 1180</origDate>"
+originPlaces:
+  - text: Rhodes?
+    sources:
+      - path: archives/zacynthius/L299.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origPlace
+        quote: Rhodes?

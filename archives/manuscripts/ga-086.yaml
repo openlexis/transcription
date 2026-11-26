@@ -1,0 +1,51 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-086
+names:
+  - text: "086"
+    language: la
+    sources:
+      - path: archives/igntp-john/086.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">086</msName>"
+identifiers:
+  - scheme: partial
+    value: "Egypt, Cairo, Egyptian Museum 9239, 1 fol. (numbered 1, containing John 1:23-26; lower script)"
+    sources:
+      - path: archives/igntp-john/086.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"partial\"><idno>Egypt, Cairo, Egyptian Museum 9239, 1 fol. (numbered 1, containing John 1:23-26; lower script)</idno></altIdentifier>"
+  - scheme: GA
+    value: "086"
+    sources:
+      - path: archives/igntp-john/086.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>086</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20086"
+    sources:
+      - path: archives/igntp-john/086.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20086</idno></altIdentifier>"
+  - scheme: TM
+    value: "61666"
+    sources:
+      - path: archives/igntp-john/086.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61666</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2816"
+    sources:
+      - path: archives/igntp-john/086.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2816</idno></altIdentifier>"
+holdings:
+  - repository: British Library
+    settlement: London
+    country: United Kingdom
+    idno:
+      - Or. 5707 (13 fols (numbered 1r-13v); lower script)
+    sources:
+      - path: archives/igntp-john/086.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: United Kingdom London British Library Or. 5707 (13 fols (numbered 1r-13v); lower script)

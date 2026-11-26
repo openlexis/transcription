@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p7
+holdings:
+  - repository: Vernadsky National Library
+    settlement: Kyiv
+    country: Ukraine
+    idno:
+      - Ф. 301 (КДА) 553п
+    sources:
+      - path: archives/intf/P7.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Ukraine Kyiv Vernadsky National Library Ф. 301 (КДА) 553п
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III/IV (?)
+    notBefore: 300
+    notAfter: 499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":499,\"gaNum\":\"P7\",\"orig\":\"III/IV (?)\",\"docID\":10007,\"groupID\":\"\",\"primaryName\":\"P7\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":499,\"gaNum\":\"P7\",\"orig\":\"III/IV (?)\",\"docID\":10007,\"groupID\":\"\",\"primaryName\":\"P7\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"

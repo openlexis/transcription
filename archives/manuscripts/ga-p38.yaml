@@ -1,0 +1,34 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p38
+holdings:
+  - repository: University of Michigan Library
+    settlement: "Ann Arbor, MI"
+    country: USA
+    idno:
+      - Inv. Nr. 1571
+    sources:
+      - path: archives/intf/P38.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA Ann Arbor, MI University of Michigan Library Inv. Nr. 1571"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IV (A)
+    notBefore: 300
+    notAfter: 325
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":325,\"gaNum\":\"P38\",\"orig\":\"IV (A)\",\"docID\":10038,\"groupID\":\"\",\"primaryName\":\"P38\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":325,\"gaNum\":\"P38\",\"orig\":\"IV (A)\",\"docID\":10038,\"groupID\":\"\",\"primaryName\":\"P38\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"

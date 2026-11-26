@@ -1,0 +1,45 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-026
+names:
+  - text: "026"
+    language: la
+    sources:
+      - path: archives/igntp-john/026.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">026</msName>"
+identifiers:
+  - scheme: GA
+    value: "026"
+    sources:
+      - path: archives/igntp-john/026.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>026</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20026"
+    sources:
+      - path: archives/igntp-john/026.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20026</idno></altIdentifier>"
+  - scheme: TM
+    value: "61780"
+    sources:
+      - path: archives/igntp-john/026.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61780</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2932"
+    sources:
+      - path: archives/igntp-john/026.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2932</idno></altIdentifier>"
+holdings:
+  - repository: Herzog August Bibliothek
+    settlement: Wolfenbüttel
+    country: Germany
+    idno:
+      - Codices Weissenburgenses 64 fols. 197-8 (lower script)
+    sources:
+      - path: archives/igntp-john/026.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: Germany Wolfenbüttel Herzog August Bibliothek Codices Weissenburgenses 64 fols. 197-8 (lower script)

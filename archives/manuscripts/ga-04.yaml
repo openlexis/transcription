@@ -1,0 +1,96 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-04
+names:
+  - text: Codex Ephraemi rescriptus
+    language: la
+    sources:
+      - path: archives/igntp-john/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/msName
+        quote: "<msName xml:lang=\"la\">Codex Ephraemi rescriptus</msName>"
+identifiers:
+  - scheme: GA
+    value: "04"
+    sources:
+      - path: archives/igntp-ephesians/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"> <idno>04</idno> </altIdentifier>"
+      - path: archives/igntp-john/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"GA\"><idno>04</idno></altIdentifier>"
+  - scheme: Liste
+    value: "20004"
+    sources:
+      - path: archives/igntp-ephesians/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"> <idno>20004</idno> </altIdentifier>"
+      - path: archives/igntp-john/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Liste\"><idno>20004</idno></altIdentifier>"
+  - scheme: Tischendorf
+    value: C
+    sources:
+      - path: archives/igntp-john/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"Tischendorf\"><idno>C</idno></altIdentifier>"
+  - scheme: TM
+    value: "61778"
+    sources:
+      - path: archives/igntp-john/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"TM\"><idno>61778</idno></altIdentifier>"
+  - scheme: LDAB
+    value: "2930"
+    sources:
+      - path: archives/igntp-john/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
+        quote: "<altIdentifier type=\"LDAB\"><idno>2930</idno></altIdentifier>"
+holdings:
+  - repository: Bibliothèque Nationale
+    settlement: Paris
+    country: France
+    idno:
+      - Gr. 9
+    sources:
+      - path: archives/igntp-ephesians/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Gr. 9
+      - path: archives/igntp-galatians/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Gr. 9
+      - path: archives/igntp-romans/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Gr. 9
+      - path: archives/intf/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque Nationale Gr. 9
+  - repository: Bibliothèque nationale
+    settlement: Paris
+    country: France
+    idno:
+      - Grec 9
+    sources:
+      - path: archives/igntp-john/04.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: France Paris Bibliothèque nationale Grec 9
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: V
+    notBefore: 400
+    notAfter: 499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":499,\"gaNum\":4,\"orig\":\"V\",\"docID\":20004,\"groupID\":\"\",\"primaryName\":4,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":499,\"gaNum\":4,\"orig\":\"V\",\"docID\":20004,\"groupID\":\"\",\"primaryName\":4,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"

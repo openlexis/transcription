@@ -1,0 +1,37 @@
+# Manuscript record: the physical manuscript and its reproductions. Written by scripts/records.ts; entries whose sources are all web pages it does not produce were written by hand and are kept.
+# Fields: docs/archive-records.md. Schema: schema/manuscript.schema.json
+id: ga-p49
+holdings:
+  - repository: Yale University Library
+    settlement: "New Haven, CT"
+    country: USA
+    idno:
+      - P.CtYBR inv. 415
+    sources:
+      - path: archives/igntp-ephesians/P49.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA New Haven, CT Yale University Library P.CtYBR inv. 415"
+      - path: archives/intf/P49.xml
+        locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
+        quote: "USA New Haven, CT Yale University Library P.CtYBR inv. 415"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: III (E)
+    notBefore: 275
+    notAfter: 299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":299,\"gaNum\":\"P49\",\"orig\":\"III (E)\",\"docID\":10049,\"groupID\":\"\",\"primaryName\":\"P49\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":275}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":299,\"gaNum\":\"P49\",\"orig\":\"III (E)\",\"docID\":10049,\"groupID\":\"\",\"primaryName\":\"P49\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":275}"
