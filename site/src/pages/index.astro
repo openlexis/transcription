@@ -1023,10 +1023,6 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
                     <path fill="#ffffff" d="M1 1.1 1 19.6 6.3 14.6 9.9 23.2 13.2 21.8 9.6 13.3 17.2 13.3Z"/>
                     <path fill="#171717" d="M2.2 2.6 2.2 16.9 6.6 12.7 10 21.1 11.8 20.3 8.4 11.9 14.8 11.9Z"/>
                   </svg>
-                  <svg class="prompt-cursor-icon prompt-cursor-hand" width="56" height="56" viewBox="0 0 24 24" focusable="false">
-                    <path fill="#ffffff" d="M9.2 1.1c1.15 0 2.08.93 2.08 2.08V8.2c.28-.18.62-.28.98-.28.9 0 1.66.54 1.95 1.31.32-.22.71-.35 1.13-.35 1.15 0 2.08.93 2.08 2.08 0 .2-.03.4-.08.58.4-.2.86-.32 1.35-.32 1.28 0 2.32 1.03 2.32 2.36 0 1.12-.22 2.32-.68 3.52C19.6 19.7 17.4 22.2 13.15 22.2H9.4c-4.2 0-7.15-3.15-7.15-7.2v-3.9c0-1.2.98-2.18 2.18-2.18.42 0 .82.12 1.15.33V7.35c0-1.15.93-2.08 2.08-2.08.28 0 .54.05.78.15V3.18c0-1.15.93-2.08 2.08-2.08Z"/>
-                    <path fill="#171717" d="M9.2 2.2c.54 0 .98.44.98.98v8.15h1.1V9.1c0-.54.44-.98.98-.98s.98.44.98.98v2.35h1.1v-1.15c0-.54.44-.98.98-.98s.98.44.98.98v1.7h1.15v-.4c0-.62.5-1.12 1.12-1.12.7 0 1.22.55 1.22 1.26 0 1.02-.2 2.12-.62 3.22C18.7 19.1 16.9 21.1 13.15 21.1H9.4c-3.55 0-6.05-2.6-6.05-6.1v-3.9c0-.6.48-1.08 1.08-1.08.22 0 .42.06.6.18v3.15h1.1V7.35c0-.54.44-.98.98-.98s.98.44.98.98v4.05h1.1V3.18c0-.54.44-.98.98-.98Z"/>
-                  </svg>
                 </span>
               </div>
 
@@ -2400,6 +2396,8 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         setFlag(pane, "note", false);
         setFlag(pane, "spot", false);
         setFlag(pane, "activeLane", false);
+        setFlag(pane, "wordPulse", false);
+        setFlag(pane, "chartPulse", false);
 
         const puckMode: "scan" | "disputed-pulse" | "settled" = !hitDisputed
           ? "scan"
@@ -2440,11 +2438,6 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         w.classList.toggle("word-checked", i < focalIdx);
         w.classList.toggle("word-disputed-hit", i === focalIdx);
       });
-      if (instantPuck || lastScanWordIdx !== focalIdx || lastPuckMode !== "settled") {
-        lastScanWordIdx = focalIdx;
-        lastPuckMode = "settled";
-        positionPuckOnWord(pane, words[focalIdx], "settled", instantPuck);
-      }
 
       const compiled = compiledByCase.get(caseId)?.[currentStep - 1];
       if (!compiled) return;
@@ -2456,6 +2449,18 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           activePhase = p;
           break;
         }
+      }
+
+      const chartAction = Boolean(
+        activePhase.kind === "action" && activePhase.action && !activePhase.action.startsWith("readings"),
+      );
+      const wordPulse = !inspectMode && !reducedMotion && t < DISPUTED_PULSE_MS;
+      const chartPulse = !inspectMode && !reducedMotion && !wordPulse && chartAction;
+      const puckMode: "scan" | "disputed-pulse" | "settled" = wordPulse ? "disputed-pulse" : "settled";
+      if (instantPuck || lastScanWordIdx !== focalIdx || lastPuckMode !== puckMode) {
+        lastScanWordIdx = focalIdx;
+        lastPuckMode = puckMode;
+        positionPuckOnWord(pane, words[focalIdx], puckMode, instantPuck);
       }
 
       // Cumulative flags from prior steps + fired actions in current step
@@ -2537,6 +2542,8 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
       setFlag(pane, "note", note);
       setFlag(pane, "spot", Boolean(spot), spot);
       setFlag(pane, "activeLane", Boolean(activeLane), activeLane);
+      setFlag(pane, "wordPulse", wordPulse);
+      setFlag(pane, "chartPulse", chartPulse);
 
       if ((readings && !wasReadingsOn) || (circle && !wasCircleOn)) {
         syncChosenCircles();
@@ -2563,7 +2570,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           } else {
             revealedChars = activePhase.charEnd;
             showCaret = false;
-            if (activePhase.kind === "action") {
+            if (activePhase.kind === "action" && !wordPulse) {
               activeCueIdx = activePhase.cueIdx;
             }
           }
@@ -2872,10 +2879,12 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
             const s = Number(btn.dataset.stepBtn || 1);
             lastTick = performance.now();
             introLooping = false;
+            userPaused = false;
+            holdUntil = 0;
             syncIntroLoopAttr();
-            applyCaseAndStep(pIdx, s, true);
+            applyCaseAndStep(pIdx, s, false);
             updateProgressBar();
-            pauseByUser();
+            syncPlayButton();
           });
         });
 

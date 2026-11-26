@@ -850,10 +850,6 @@ h3 {
   filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.45));
 }
 
-.prompt-cursor-hand {
-  opacity: 0;
-}
-
 .prompt-cursor-ripple {
   position: absolute;
   left: 0;
@@ -875,14 +871,6 @@ h3 {
 .verse-is-rtl .showcase-card[data-intro-loop="true"] .showcase-prompt-cursor.is-active,
 .showcase-card[data-intro-loop="true"] .verse-is-rtl .showcase-prompt-cursor.is-active {
   animation-name: promptCursorTravelRtl;
-}
-
-.showcase-card[data-intro-loop="true"] .showcase-prompt-cursor.is-active .prompt-cursor-arrow {
-  animation: promptCursorArrowSwap 2.8s ease-out forwards;
-}
-
-.showcase-card[data-intro-loop="true"] .showcase-prompt-cursor.is-active .prompt-cursor-hand {
-  animation: promptCursorHandSwap 2.8s ease-out forwards;
 }
 
 .showcase-card[data-intro-loop="true"] .showcase-prompt-cursor.is-active .prompt-cursor-ripple {
@@ -907,16 +895,6 @@ h3 {
   52% { transform: translate(0, 0) scale(0.84); }
   62% { transform: translate(0, 0) scale(1); }
   100% { opacity: 1; transform: translate(0, 0) scale(1); }
-}
-
-@keyframes promptCursorArrowSwap {
-  0%, 34% { opacity: 1; }
-  42%, 100% { opacity: 0; }
-}
-
-@keyframes promptCursorHandSwap {
-  0%, 34% { opacity: 0; }
-  42%, 100% { opacity: 1; }
 }
 
 @keyframes promptCursorRipple {
@@ -5512,12 +5490,74 @@ tr:last-child td {
   }
 }
 
+
+/* One attention pulse at a time: the disputed word first, then the chart area for that step. */
+.showcase-pane[data-word-pulse="on"][data-focus="chart"] .cue-bridge-arrow,
+.showcase-pane[data-chart-pulse="on"][data-focus="chart"] .cue-bridge-arrow {
+  animation: none;
+}
+
+.showcase-pane[data-word-pulse="on"] .mini-dot-disputed {
+  animation: puckDisputedPulse 0.95s ease-in-out infinite;
+}
+
+.showcase-pane[data-chart-pulse="on"]:not([data-timeline="on"])[data-active-lane="0"] .story-dot.dot-lane-0,
+.showcase-pane[data-chart-pulse="on"]:not([data-timeline="on"])[data-active-lane="1"] .story-dot.dot-lane-1,
+.showcase-pane[data-chart-pulse="on"]:not([data-timeline="on"])[data-active-lane="2"] .story-dot.dot-lane-2 {
+  animation: chartAreaPulse 0.95s ease-in-out infinite;
+}
+
+.showcase-pane[data-chart-pulse="on"][data-active-lane="0"] .lane-tag-a,
+.showcase-pane[data-chart-pulse="on"][data-active-lane="1"] .lane-tag-b {
+  animation: chartTagPulse 0.95s ease-in-out infinite;
+}
+
+.showcase-pane[data-chart-pulse="on"][data-timeline="on"]:not([data-spot]):not([data-decide="on"]) .story-canvas {
+  animation: chartCanvasPulse 0.95s ease-in-out infinite;
+}
+
+.showcase-pane[data-chart-pulse="on"][data-timeline="on"][data-spot="early"] .story-dot.dot-early,
+.showcase-pane[data-chart-pulse="on"][data-timeline="on"][data-spot="late"] .story-dot.dot-lane-1:not(.dot-early),
+.showcase-pane[data-chart-pulse="on"][data-timeline="on"][data-spot="early-a"] .story-dot.dot-lane-0.dot-early,
+.showcase-pane[data-chart-pulse="on"][data-timeline="on"][data-spot="early-b"] .story-dot.dot-lane-1.dot-early,
+.showcase-pane[data-chart-pulse="on"][data-timeline="on"][data-spot="lacuna"] .story-dot.dot-lane-2 {
+  animation: chartAreaPulse 0.95s ease-in-out infinite;
+}
+
+.showcase-pane[data-chart-pulse="on"][data-decide="on"] .story-dot.dot-lane-0.dot-early {
+  animation: chartAreaPulseEmerald 0.95s ease-in-out infinite;
+}
+
+@keyframes chartAreaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(55, 48, 163, 0.4); }
+  50% { box-shadow: 0 0 0 7px rgba(55, 48, 163, 0); }
+}
+
+@keyframes chartAreaPulseEmerald {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.42); }
+  50% { box-shadow: 0 0 0 7px rgba(5, 150, 105, 0); }
+}
+
+@keyframes chartTagPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(55, 48, 163, 0.11); }
+  50% { box-shadow: 0 0 0 7px rgba(55, 48, 163, 0.22); }
+}
+
+@keyframes chartCanvasPulse {
+  0%, 100% { box-shadow: 0 6px 20px -10px rgba(55, 48, 163, 0.2); border-color: rgba(55, 48, 163, 0.38); }
+  50% { box-shadow: 0 0 0 6px rgba(55, 48, 163, 0.16); border-color: rgba(55, 48, 163, 0.55); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .verse-scan-puck.puck-disputed,
   .showcase-pane[data-focus="chart"] .cue-bridge-arrow,
   .type-caret::after,
   .showcase-prompt-cursor,
-  .showcase-prompt-cursor * {
+  .showcase-prompt-cursor *,
+  .showcase-pane[data-word-pulse="on"] .mini-dot-disputed,
+  .showcase-pane[data-chart-pulse="on"] .story-dot,
+  .showcase-pane[data-chart-pulse="on"] .lane-tag,
+  .showcase-pane[data-chart-pulse="on"] .story-canvas {
     animation: none !important;
   }
   .showcase-card[data-intro-loop="true"] .showcase-prompt-cursor.is-active {
@@ -5525,9 +5565,6 @@ tr:last-child td {
     transform: none;
   }
   .showcase-card[data-intro-loop="true"] .showcase-prompt-cursor.is-active .prompt-cursor-arrow {
-    opacity: 0;
-  }
-  .showcase-card[data-intro-loop="true"] .showcase-prompt-cursor.is-active .prompt-cursor-hand {
     opacity: 1;
   }
   .showcase-card[data-intro-loop="true"] .showcase-prompt-cursor.is-active .prompt-cursor-ripple {
