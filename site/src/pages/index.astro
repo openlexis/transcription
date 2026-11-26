@@ -2650,16 +2650,18 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
       const cursor = pane.querySelector<HTMLElement>(".showcase-prompt-cursor");
       const wrap = pane.querySelector<HTMLElement>(".showcase-verse-wrap");
       const word = pane.querySelector<HTMLElement>(".showcase-word-focal");
-      const orig = word?.querySelector<HTMLElement>(".sw-orig") ?? word;
       if (!cursor) return;
-      if (!show || !wrap || !orig) {
+      if (!show || !wrap || !word) {
         cursor.classList.remove("is-active");
         return;
       }
       const wr = wrap.getBoundingClientRect();
-      const or = orig.getBoundingClientRect();
-      cursor.style.left = `${or.left - wr.left + or.width * 0.4}px`;
-      cursor.style.top = `${or.top - wr.top + or.height * 0.28}px`;
+      const br = word.getBoundingClientRect();
+      const pad = 4;
+      const cursorSize = 56;
+      const left = Math.min(br.right - wr.left + pad, Math.max(0, wr.width - cursorSize));
+      cursor.style.left = `${left}px`;
+      cursor.style.top = `${br.bottom - wr.top + pad}px`;
       if (!cursor.classList.contains("is-active")) {
         cursor.classList.add("is-active");
       }
