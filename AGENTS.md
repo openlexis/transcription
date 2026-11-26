@@ -8,7 +8,7 @@ Use this guide whenever asked to **implement a specification and produce a new c
 
 ## 1. Non-Negotiable Rules
 
-1. **Strict allowlist:** Read **only** the specification you were assigned and the transcripts it lists. For a specification folder, that is `specifications/<SPEC_ID>/specification.yaml`, `specifications/<SPEC_ID>/sources.json`, and each transcript in `sources.json` read at its recorded commit (`git show <commit>:<path>`), with book, language, date, license and archive details read from that transcript and its catalog at the same commit. For an older single-file specification (`specifications/<SPEC_ID>.yaml`), it is the ULID set files (`archives/sets/<ULID>.json`) and catalogs (`archives/<archive>/index.json`) it references and the XML files those catalog entries name. Never roam `archives/` or ingest unreferenced files.
+1. **Strict allowlist:** Read **only** the specification you were assigned and the transcripts it lists. For a specification whose `sources` is a transcript list in `specifications/<SPEC_ID>.yaml`, that is this file and each transcript in `sources`, read at its recorded commit (`git show <commit>:<path>`), with book, language, date, license and archive details read from that transcript and its catalog at the same commit. For a specification folder, that is `specifications/<SPEC_ID>/specification.yaml`, `specifications/<SPEC_ID>/sources.json`, and each transcript in `sources.json` read the same way. For an older single-file specification whose `sources` names set ULIDs, it is the ULID set files (`archives/sets/<ULID>.json`) and catalogs (`archives/<archive>/index.json`) it references and the XML files those catalog entries name. Never roam `archives/` or ingest unreferenced files.
 2. **Total exclusion of outside material:** Never consult or import printed/critical editions, translations, modern reconstructions, facsimiles, external scholarly commentary, or anything under `site/` (including UI-only word glosses in `site/src/data/`).
 3. **Never fabricate metadata:** If a metadata field (e.g., provenance, scientific dating) is absent from the transcript's catalog (`archives/<archive>/index.json`) at its pinned commit (or, for an older single-file specification, from the working-tree catalog), record it explicitly as unknown and let it widen uncertainty rather than imputing it.
 4. **Never modify existing specs, source sets, or previous compilations:** Always write your compilation to a **brand-new** directory `transcripts/<SPEC_ID>/<NEW_COMPILATION_ULID>/` using a freshly generated 26-character Crockford Base32 ULID.
@@ -40,30 +40,30 @@ bun run check
 bun run site
 ```
 
-### Specification folders
+### Pinned specifications
 
 Words used here:
 
-- **Specification folder:** `specifications/<ULID>/`, holding exactly two files: `specification.yaml` (the rules, with `sources: sources.json`) and `sources.json` (the transcript list).
-- **Transcript list (`sources.json`):** every transcript the specification considers. Each transcript has its repository path and the git commit that holds it. Nothing else is stored there. The path already names the archive and the file, so a separate identifier is not recorded. Book, language, date, license and archive details are read from the transcript and its catalog (`archives/<archive>/index.json`) at that same commit.
+- **Specification file:** `specifications/<ULID>.yaml`, a single file holding the rules and, at the end, the transcript list.
+- **Transcript list:** the `sources` field at the end of that file. Each transcript is one line, `{path: ..., commit: ...}`. Book, language, date, license and archive details are read from the transcript and its catalog (`archives/<archive>/index.json`) at that same commit.
 - **Pinned transcript:** a transcript (and its catalog) read as they are in the recorded commit (`git show <commit>:<path>`), so later edits, moves or deletions under `archives/` do not change what a specification uses.
 
-A specification folder needs nothing else in the repository except the transcripts and their catalogs, which are read at their commits. To make a new specification:
+A specification file needs nothing else in the repository except the transcripts and their catalogs, which are read at their commits. Older folder specifications (`specifications/<ULID>/specification.yaml` and `sources.json`) and older single-file specifications whose `sources` name set ULIDs stay as committed and are still read those ways. To make a new specification:
 
 ```bash
-# 1. Mint a ULID and write specifications/<ULID>/specification.yaml with `sources: sources.json`
+# 1. Mint a ULID and write specifications/<ULID>.yaml (rules only; `sources` may be empty or `sources: sources.json`)
 bun -e 'import { ulid } from "./scripts/sets.ts"; console.log(ulid());'
 
-# 2. Write its transcript list from a selection (an older specification's selection, or set ULIDs and <archive>:<id> items).
-#    Every selected transcript must be committed first.
+# 2. Write the transcript list at the end of that file from a selection (an older specification's set ULIDs, or set ULIDs and <archive>:<id> items).
+#    Every selected transcript must be committed first. If `sources` already lists transcripts, the command refuses unless you pass --replace, which replaces that list.
 bun run spec:freeze <ULID> --from <OLDER_SPEC_ID>
-bun run spec:freeze <ULID> <SET_ULID | archive:id> ...
+bun run spec:freeze <ULID> --replace --from <OLDER_SPEC_ID>
 
-# 3. Check it, then commit both files together
+# 3. Check it, then commit the file
 bun run check
 ```
 
-`bun run check` confirms each specification folder holds only those two files, that the IDs match the folder name, and that every transcript in `sources.json` exists at its recorded commit. Older single-file specifications stay exactly as committed and are still read the old way.
+`bun run check` confirms every listed transcript exists at its recorded commit. Folder specifications are still checked the earlier way (only those two files, IDs match).
 
 ---
 

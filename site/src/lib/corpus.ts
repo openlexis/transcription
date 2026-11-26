@@ -1,6 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { parse } from "yaml";
-import { loadFrozenSources } from "../../../scripts/sources.ts";
+import { isPinnedList, loadFrozenSources, sourcesFromPinned } from "../../../scripts/sources.ts";
 
 export const ROOT = new URL("../../../", import.meta.url).pathname;
 export const REPO = "https://github.com/openlexis/transcription";
@@ -275,8 +275,9 @@ export function getSpecifications(): SpecFile[] {
     _specs = [];
     return _specs;
   }
-  // Folder specifications (specifications/<ULID>/specification.yaml with sources.json beside it) are read only from their
-  // folder. Older single-file specifications (specifications/<ULID>.yaml) resolve through archives/sets and the catalogs.
+  // A specification whose `sources` is a transcript list is read from that file alone. Folder specifications
+  // (specifications/<ULID>/specification.yaml with sources.json) are read from their folder. Older single-file
+  // specifications resolve through archives/sets and the catalogs.
   const files = readdirSync(specDir, { withFileTypes: true })
     .flatMap((d) =>
       d.isDirectory() && existsSync(`${specDir}/${d.name}/specification.yaml`)
@@ -292,6 +293,10 @@ export function getSpecifications(): SpecFile[] {
       SpecFile,
       "file" | "sources" | "sourceRefs" | "targets"
     > & { targets?: TargetBook[]; sources: string | string[] | Record<string, string[]> };
+    if (isPinnedList(raw.sources)) {
+      const { targets, sources } = sourcesFromPinned(raw.sources);
+      return { ...raw, file, targets, sourceRefs: [file], sources };
+    }
     if (file.endsWith("/specification.yaml")) {
       const { targets, sources } = loadFrozenSources(`${ROOT}${file}`);
       return { ...raw, file, targets, sourceRefs: [file.replace(/specification\.yaml$/, "sources.json")], sources };

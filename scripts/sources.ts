@@ -97,6 +97,11 @@ export interface PinnedTranscript {
   id?: string;
 }
 
+/** True when `sources` is a transcript list (each item has path and commit), not a list of set ULIDs. */
+export function isPinnedList(sources: unknown): sources is PinnedTranscript[] {
+  return Array.isArray(sources) && sources.length > 0 && typeof sources[0] === "object" && sources[0] != null && "path" in (sources[0] as object) && "commit" in (sources[0] as object);
+}
+
 /** The shape of `specifications/<ULID>/sources.json`: only the specification id and the transcripts, each with its
  * repository path and the git commit that holds it. Book, language, date, license and archive details are
  * read from the transcript and its catalog (`archives/<archive>/index.json`) at that same commit. */
@@ -270,8 +275,12 @@ export function loadSpecWithSources(specId?: string) {
   const spec = Bun.YAML.parse(readFileSync(specPath, "utf8")) as {
     id: string;
     title: string;
-    sources: string | string[] | Record<string, string[]>;
+    sources: string | string[] | Record<string, string[]> | PinnedTranscript[];
   };
+  if (isPinnedList(spec.sources)) {
+    const { targets, sources } = sourcesFromPinned(spec.sources);
+    return { spec, specPath, targets, sources, resolvedSets: [] as SourceSet[] };
+  }
   if (isFolderSpec(specPath)) {
     if (spec.sources !== "sources.json") throw new Error(`${specPath.slice(ROOT.length)}: sources must be "sources.json"`);
     const { frozen, targets, sources } = loadFrozenSources(specPath);

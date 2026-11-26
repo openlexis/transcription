@@ -4,7 +4,7 @@ Primary ancient manuscript transcriptions for the Old Testament (Biblical Hebrew
 
 ## Repository Structure
 
-- **[`specifications/`](specifications/):** One folder per specification, `specifications/<ULID>/`, holding `specification.yaml` (the rules) and `sources.json` (the transcript list: every transcript the specification considers, with its repository path and the git commit that holds it), made by `bun run spec:freeze`. Book, language, date, license and archive details are read from the transcript and its catalog at that same commit, so later changes to `archives/` do not change a specification. Older specifications are single files (`specifications/<ULID>.yaml`) whose `sources` list names source sets in `archives/sets/`; they stay as committed and are still read that way.
+- **[`specifications/`](specifications/):** Each new specification is one file, `specifications/<ULID>.yaml`, holding the rules and, at the end, the transcript list (every transcript the specification considers, one line each, with its repository path and the git commit that holds it), written by `bun run spec:freeze`. Book, language, date, license and archive details are read from the transcript and its catalog at that same commit, so later changes to `archives/` do not change a specification. Older folder specifications (`specifications/<ULID>/` with `sources.json`) and older single-file specifications whose `sources` list names source sets in `archives/sets/` stay as committed and are still read those ways.
 - **[`archives/sets/`](archives/sets/):** Immutable, content-hashed ULID snapshots (`archives/sets/<ULID>.json`) for every book and institution. When new material is added to `archives/`, running `bun run sets` mints a new ULID while preserving all previous snapshots untouched.
 - **[`archives/<institution>/`](archives/):** The primary XML manuscript corpus across institutional directories, each with its own `index.json` catalog mapping source identifiers to metadata, licenses, and XML file paths.
 - **[`transcripts/`](transcripts/):** Compiled TEI P5 XML transcripts organized as `transcripts/<specification-id>/<compilation-id>/`, containing one TEI P5 XML file per target book (`<book-id>.xml`), `manifest.json`, and a structured Markdown compilation report (`REPORT.md`).
@@ -16,13 +16,13 @@ Primary ancient manuscript transcriptions for the Old Testament (Biblical Hebrew
 | Command | Description |
 |---|---|
 | `bun run sets` | Compile/update immutable ULID source sets in `archives/sets/` from `archives/<institution>/index.json` |
-| `bun run spec:freeze <ULID> (--from <spec-id> \| <set-ULID\|archive:id> ...)` | Write `specifications/<ULID>/sources.json`, the transcript list of a new specification folder, from a selection |
+| `bun run spec:freeze <ULID> [--replace] (--from <spec-id> \| <set-ULID\|archive:id> ...)` | Write the transcript list at the end of `specifications/<ULID>.yaml` from a selection; `--replace` replaces a list that is already there |
 | `bun run sources summary` | Show specification summary, pinned set count, and institution breakdown |
 | `bun run sources targets` | List resolved target books with primary source counts and pinned ULIDs |
 | `bun run sources list [--target Gen] [--institution intf] [--json]` | Filter permitted sources for a specification |
 | `bun run sources get <id\|institution:id>` | Resolve full metadata and XML paths for one permitted source |
-| `bun run compile [spec-id] [all \| <book>]` | Compile target books (default: the newest specification, 01M8B2PF9KBPWSTCJCJ6S5NJCE) into `transcripts/<spec-id>/<ulid>/` (with `REPORT.md` & `manifest.json`) and rebuild the Astro site |
-| `bun run check` | Validate specification folders (only `specification.yaml` and `sources.json`; every listed transcript exists at its commit) and all TEI P5 XML compilations, manifests, and `REPORT.md` frontmatter in `transcripts/` |
+| `bun run compile [spec-id] [all \| <book>]` | Compile target books (default: the newest specification, 01M8B40TZ4W7PX1RHJWY11ZNW0) into `transcripts/<spec-id>/<ulid>/` (with `REPORT.md` & `manifest.json`) and rebuild the Astro site |
+| `bun run check` | Validate pinned transcripts (each listed transcript exists at its commit), older specification folders, and all TEI P5 XML compilations, manifests, and `REPORT.md` frontmatter in `transcripts/` |
 | `bun run site` / `bun run site:build` | Build the static website into `site/www` |
 | `bun run site:dev` | Start the Astro development server with live reload |
 | `bun run site:preview` | Preview the built website (`site/www`) locally |

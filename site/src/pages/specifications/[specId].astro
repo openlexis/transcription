@@ -46,6 +46,7 @@ const clientSources = buildClientSourceIndex(single);
 // A folder specification keeps everything it uses in specifications/<ULID>/ (specification.yaml and sources.json).
 const isFolder = single.file.endsWith("/specification.yaml");
 const sourcesFile = single.file.replace(/specification\.yaml$/, "sources.json");
+const isEmbedded = !isFolder && Array.isArray(single.sourceRefs) && single.sourceRefs[0] === single.file;
 
 const toc = [
   { id: "objective", text: "1. Objective" },
@@ -214,9 +215,9 @@ const toc = [
       </ul>
 
       <h2 id="embedded-data">7. Pinned Books &amp; Sources</h2>
-      {isFolder ? (
+      {isFolder || isEmbedded ? (
       <p>
-        <code>{sourcesFile}</code> lists every transcript this specification considers, each with its repository path and the git commit that holds it, Book, language, date, license and archive details are read from the transcript and its catalog at that same commit, so later changes to <code>archives/</code> do not change this specification. It was made with <code>bun run spec:freeze</code>.
+        <code>{isEmbedded ? single.file : sourcesFile}</code> lists every transcript this specification considers, one line each, with its repository path and the git commit that holds it. Book, language, date, license and archive details are read from the transcript and its catalog at that same commit, so later changes to <code>archives/</code> do not change this specification. The list is written with <code>bun run spec:freeze</code>.
       </p>
       ) : (
       <p>
