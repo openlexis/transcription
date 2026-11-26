@@ -570,6 +570,7 @@ const meta = {
         if (location.search) history.replaceState(null, "", location.pathname);
       }
       let idx = filtered.findIndex((s) => s.id === id);
+      let relayout = false;
       if (idx < 0) {
         idx = ALL.findIndex((s) => s.id === id);
         if (idx < 0) return;
@@ -581,6 +582,7 @@ const meta = {
         syncPills(typeBtns, "data-type", state.type);
         applyFilters();
         idx = filtered.findIndex((s) => s.id === id);
+        relayout = true;
       }
       const jump = () => {
         const el = document.getElementById(msAnchor(id));
@@ -588,7 +590,8 @@ const meta = {
         const top = el.getBoundingClientRect().top + window.scrollY - 88;
         window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
       };
-      requestAnimationFrame(jump);
+      if (relayout) requestAnimationFrame(jump);
+      else jump();
     });
 
     applyFilters();
