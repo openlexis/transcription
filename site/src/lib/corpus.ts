@@ -298,6 +298,9 @@ export function getPrimarySpec(): SpecFile {
 export const formatNum = (n: number) => n.toLocaleString("en-US");
 export const formatEra = (y: number) => (y < 0 ? `${-y} BC` : `AD ${y}`);
 export const shortUlid = (id: string) => (id.length > 6 ? id.slice(-6) : id);
+export const specUrl = (specId: string) => `/specifications/${shortUlid(specId)}/`;
+export const compUrl = (compilationId: string) => `/transcriptions/${shortUlid(compilationId)}/`;
+export const bookUrl = (compilationId: string, bookId: string) => `/transcriptions/${shortUlid(compilationId)}/${bookId}/`;
 
 const CROCKFORD = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 
@@ -930,7 +933,7 @@ export function parseCompiledBookTei(xmlPath: string): { witnesses: ParsedWitnes
           const plain = unentXml(rBody.replace(/<[^>]+>[\s\S]*?<\/[^>]+>|<[^>]+>/g, "")).trim();
           readings.push({
             type: rType,
-            text: plain || (rType === "unseen" ? "(unattested original)" : "— (omission)"),
+            text: plain || (rType === "unseen" ? "(unattested original)" : "(omission)"),
             witCount: wits.length,
             wits,
             degree: degM ? degM[1] : "",

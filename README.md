@@ -4,12 +4,12 @@ Primary ancient manuscript transcriptions for the Old Testament (Biblical Hebrew
 
 ## Repository Structure
 
-- **[`specifications/`](specifications/)** — Compact specification YAML files (currently [`specifications/01M88AX3YW2HWVPGHTREFJS181.yaml`](specifications/01M88AX3YW2HWVPGHTREFJS181.yaml), ~11 KB). Each specification defines its rules and a single `sources` list of immutable ULID set snapshots (and/or direct `<institution>:<id>` items).
-- **[`src/sets/`](src/sets/)** — Immutable, content-hashed ULID snapshots (`src/sets/<ULID>.json`) for every book and institution. When new material is added to `src/`, running `bun run sets` mints a new ULID while preserving all previous snapshots untouched.
-- **[`src/<institution>/`](src/)** — The primary XML manuscript corpus across 14 institutional directories, each with its own `index.json` catalog mapping source identifiers to metadata, licenses, and XML file paths.
-- **[`outputs/`](outputs/)** — Compiled TEI P5 XML outputs organized as `outputs/<specification-id>/<compilation-id>/`, containing one TEI P5 XML file per target book (`<book-id>.xml`), `manifest.json`, and a structured Markdown compilation report (`REPORT.md`).
-- **[`scripts/`](scripts/)** — Source-set compiler (`scripts/sets.ts`), programmatic source resolver (`scripts/sources.ts`), import, compilation, and verification utilities.
-- **[`site/`](site/)** — Static Astro website resolving `specifications/*.yaml`, `src/sets/*.json`, `src/<institution>/index.json`, and every compilation under `outputs/<specification-id>/<compilation-id>/`.
+- **[`specifications/`](specifications/):** Compact specification YAML files (currently [`specifications/01M88AX3YW2HWVPGHTREFJS181.yaml`](specifications/01M88AX3YW2HWVPGHTREFJS181.yaml), ~11 KB). Each specification defines its rules and a single `sources` list of immutable ULID set snapshots (and/or direct `<institution>:<id>` items).
+- **[`src/sets/`](src/sets/):** Immutable, content-hashed ULID snapshots (`src/sets/<ULID>.json`) for every book and institution. When new material is added to `src/`, running `bun run sets` mints a new ULID while preserving all previous snapshots untouched.
+- **[`src/<institution>/`](src/):** The primary XML manuscript corpus across 14 institutional directories, each with its own `index.json` catalog mapping source identifiers to metadata, licenses, and XML file paths.
+- **[`outputs/`](outputs/):** Compiled TEI P5 XML outputs organized as `outputs/<specification-id>/<compilation-id>/`, containing one TEI P5 XML file per target book (`<book-id>.xml`), `manifest.json`, and a structured Markdown compilation report (`REPORT.md`).
+- **[`scripts/`](scripts/):** Source-set compiler (`scripts/sets.ts`), programmatic source resolver (`scripts/sources.ts`), import, compilation, and verification utilities.
+- **[`site/`](site/):** Static Astro website resolving `specifications/*.yaml`, `src/sets/*.json`, `src/<institution>/index.json`, and every compilation under `outputs/<specification-id>/<compilation-id>/`.
 
 ## Commands (Bun)
 
@@ -22,12 +22,14 @@ Primary ancient manuscript transcriptions for the Old Testament (Biblical Hebrew
 | `bun run sources get <id\|institution:id>` | Resolve full metadata and XML paths for one permitted source |
 | `bun run compile [spec-id] [all \| <book>]` | Compile target books into `outputs/<spec-id>/<ulid>/` (with `REPORT.md` & `manifest.json`) and rebuild the Astro site |
 | `bun run check` | Validate all TEI P5 XML compilations, manifests, and `REPORT.md` frontmatter in `outputs/` |
-| `bun run site` | Build the static website into `site/www` |
-| `cd site && bun run preview` | Preview the built website locally |
+| `bun run site` / `bun run site:build` | Build the static website into `site/www` |
+| `bun run site:dev` | Start the Astro development server with live reload |
+| `bun run site:preview` | Preview the built website (`site/www`) locally |
+| `bun run site:install` | Install Astro website dependencies in `site/` |
 
 ## Compilation Report (`REPORT.md`) Schema
 
-Every compilation directory `outputs/<specification-id>/<compilation-id>/` must include a `REPORT.md` with YAML frontmatter describing what was performed (disagreement categories are **not prescribed**—each model/compiler defines whatever categories best characterize the disagreements it observed), followed by a plain-language Markdown narrative:
+Every compilation directory `outputs/<specification-id>/<compilation-id>/` must include a `REPORT.md` with YAML frontmatter describing what was performed (disagreement categories are **not prescribed**; each model/compiler defines whatever categories best characterize the disagreements it observed), followed by a plain-language Markdown narrative:
 
 ```markdown
 ---

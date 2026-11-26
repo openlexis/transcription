@@ -1,0 +1,60 @@
+---
+import {
+  buildConfidenceModel,
+  confidenceIconSvg,
+  type ConfidenceBadgeOptions,
+} from "../lib/confidence";
+
+type Props = ConfidenceBadgeOptions;
+
+const props = Astro.props;
+const m = buildConfidenceModel(props);
+const focusable = props.focusable !== false;
+const fillWidth = Math.max(m.fillPct, m.prob > 0 ? 4 : 0).toFixed(1);
+const cardFillWidth = Math.max(m.fillPct, 2).toFixed(1);
+const wrapClass = [
+  "ol-conf-wrap",
+  props.compact ? "ol-conf-compact" : "",
+  props.className ?? "",
+]
+  .filter(Boolean)
+  .join(" ");
+---
+<span
+  class={wrapClass}
+  tabindex={focusable ? 0 : undefined}
+  aria-label={m.ariaLabel}
+>
+  <span class={`ol-conf-pill ol-conf-${m.tier}`}>
+    <Fragment set:html={m.iconSvg} />
+    {props.compact ? (
+      <span class="ol-conf-dot" aria-hidden="true"></span>
+    ) : (
+      <span class="ol-conf-meter" aria-hidden="true">
+        <span class="ol-conf-meter-fill" style={`width:${fillWidth}%`}></span>
+      </span>
+    )}
+    <span class="ol-conf-val">{m.displayPct}</span>
+    {props.showLabel && <span class="ol-conf-inline-label">{m.shortLabel}</span>}
+  </span>
+
+  <span class="ol-conf-card" role="tooltip">
+    <span class="ol-conf-card-head">
+      <span class="ol-conf-card-title">
+        <Fragment set:html={confidenceIconSvg(m.kind, 13)} />
+        <span>{m.title}</span>
+      </span>
+      <span class={`ol-conf-card-pct ol-conf-text-${m.tier}`}>{m.displayPct}</span>
+    </span>
+    <span class="ol-conf-card-track" aria-hidden="true">
+      <span class={`ol-conf-card-fill ol-conf-fill-${m.tier}`} style={`width:${cardFillWidth}%`}></span>
+    </span>
+    <span class="ol-conf-card-desc">{m.description}</span>
+    {(m.contextNote || m.intervalText) && (
+      <span class="ol-conf-card-meta">
+        {m.contextNote && <span>{m.contextNote}</span>}
+        {m.intervalText && <span>{m.intervalText}</span>}
+      </span>
+    )}
+  </span>
+</span>

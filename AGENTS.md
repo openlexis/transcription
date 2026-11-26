@@ -1,4 +1,4 @@
-# Open Lexis Transcription — Agent & Model Guide
+# Open Lexis Transcription: Agent & Model Guide
 
 This repository contains primary ancient biblical manuscript transcriptions (`src/`), immutable specification files (`specifications/*.yaml`), compiled critical-text outputs (`outputs/<spec-id>/<compilation-id>/`), and a static Astro viewer (`site/`).
 
@@ -12,8 +12,9 @@ Use this guide whenever asked to **implement a specification and produce a new c
 2. **Total exclusion of outside material:** Never consult or import printed/critical editions, translations, modern reconstructions, facsimiles, external scholarly commentary, or anything under `site/` (including UI-only word glosses in `site/src/data/`).
 3. **Never fabricate metadata:** If a metadata field (e.g., provenance, scientific dating) is absent from `src/<institution>/index.json`, record it explicitly as unknown and let it widen uncertainty rather than imputing it.
 4. **Never modify existing specs, source sets, or previous compilations:** Always write your compilation to a **brand-new** directory `outputs/<SPEC_ID>/<NEW_COMPILATION_ULID>/` using a freshly generated 26-character Crockford Base32 ULID.
-5. **Own your modeling decisions:** You are free to design your own statistical model, alignment strategy, and disagreement taxonomy—do not blindly copy an earlier model's parameters if you believe a better approach furthers recovery of the original text. You may reuse deterministic I/O helpers (`scripts/sources.ts`, `scripts/lib/readers.ts`, `scripts/lib/tei.ts`) to parse input files without rewriting boilerplate.
+5. **Own your modeling decisions:** You are free to design your own statistical model, alignment strategy, and disagreement taxonomy; do not blindly copy an earlier model's parameters if you believe a better approach furthers recovery of the original text. You may reuse deterministic I/O helpers (`scripts/sources.ts`, `scripts/lib/readers.ts`, `scripts/lib/tei.ts`) to parse input files without rewriting boilerplate.
 6. **Honest attribution:** Record your exact provider, model family, model name, exact model ID, effort/reasoning tier, and harness in both `manifest.json` and `REPORT.md`.
+7. **No em dashes:** Em dashes (Unicode `U+2014` or HTML entities such as `&mdash;` / `&#8212;`) are disallowed everywhere in the project, including documentation, website UI copy, code comments, scripts, new specifications, and new compilation outputs (`manifest.json`, `REPORT.md`, and TEI XML titles/notes). Use commas, colons, semicolons, parentheses, periods, or middle dots (`·`) instead.
 
 ---
 

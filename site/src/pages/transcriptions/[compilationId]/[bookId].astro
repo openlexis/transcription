@@ -1,33 +1,40 @@
 ---
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import Layout from "../../../../layouts/Layout.astro";
+import Layout from "../../../layouts/Layout.astro";
+import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
 import {
+  compUrl,
   displayLanguage,
   formatAuthor,
   formatBytes,
   formatNum,
-  formatPct,
   getCompilations,
   getWitnessViewersMap,
   githubBlob,
   normalizeSeverityBucket,
   parseCompiledBookTei,
   shortUlid,
+  specUrl,
   type CompilationRecord,
   type CompiledBookEntry,
-} from "../../../../lib/corpus";
-import { buildBookGlossMap } from "../../../../lib/gloss";
+} from "../../../lib/corpus";
+import { buildBookGlossMap } from "../../../lib/gloss";
+import { transliterateText } from "../../../lib/transliterate";
 
 export function getStaticPaths() {
+  const seenComps = new Set<string>();
   const paths: {
-    params: { specId: string; compilationId: string; bookId: string };
+    params: { compilationId: string; bookId: string };
     props: { compilation: CompilationRecord; book: CompiledBookEntry };
   }[] = [];
   for (const c of getCompilations()) {
+    const slug = shortUlid(c.compilationId);
+    if (seenComps.has(slug)) throw new Error(`Duplicate short compilation slug: ${slug}`);
+    seenComps.add(slug);
     for (const b of c.manifest.books) {
       paths.push({
-        params: { specId: c.specId, compilationId: c.compilationId, bookId: b.id },
+        params: { compilationId: slug, bookId: b.id },
         props: { compilation: c, book: b },
       });
     }
@@ -125,7 +132,7 @@ const toIdx = (list?: string[]) =>
 const tokenPayloads: Record<string, unknown> = {};
 const bookWords = new Set<string>();
 const collectWords = (s?: string) => {
-  if (!s || s.startsWith("—")) return;
+  if (!s || s === "(omission)") return;
   for (const w of s.trim().split(/\s+/)) if (w) bookWords.add(w);
 };
 let tokSeq = 0;
@@ -219,10 +226,21 @@ const renderedChapters = chapters.map((ch) => ({
   })),
 }));
 
+const glossMap = buildBookGlossMap(bookWords, isHebrew);
+const romanCache = new Map<string, string>();
+function romanOfWord(w: string): string {
+  let r = romanCache.get(w);
+  if (r === undefined) {
+    r = transliterateText(w, isHebrew, "romanized");
+    romanCache.set(w, r);
+  }
+  return r;
+}
+
 const clientData = {
   bookId: b.id,
   isHebrew,
-  compUrl: `/outputs/${c.specId}/${c.compilationId}/`,
+  compUrl: compUrl(c.compilationId),
   scale: reportScale ?? { min: 1, max: 5 },
   subcats: subcatById,
   w: witnesses.map((w) => [
@@ -235,26 +253,27 @@ const clientData = {
     w.scientific,
     viewersMap.get(w.siglum)?.viewers ?? [],
   ]),
-  g: buildBookGlossMap(bookWords, isHebrew),
+  g: glossMap,
   t: tokenPayloads,
 };
-const inspectorRel = `outputs/${c.specId}/${c.compilationId}/${b.id}/inspector.json`;
-mkdirSync(join(process.cwd(), "www", `outputs/${c.specId}/${c.compilationId}/${b.id}`), { recursive: true });
+const inspectorDir = `transcriptions/${shortUlid(c.compilationId)}/${b.id}`;
+const inspectorRel = `${inspectorDir}/inspector.json`;
+mkdirSync(join(process.cwd(), "www", inspectorDir), { recursive: true });
 writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientData));
 ---
 <Layout
   title={`${b.name} · ${c.manifest.modelAttribution.modelName}`}
-  active="outputs"
-  description={`Compiled original-language text of ${b.name} by ${c.manifest.modelAttribution.modelName}.`}
+  active="transcriptions"
+  description={`Original-language text of ${b.name} assembled from primary manuscripts (${c.manifest.modelAttribution.modelName}).`}
 >
   <section class="page-header">
     <div class="container">
       <div class="eyebrow">{b.section} · {displayLanguage(b.language)}</div>
       <h1>{b.name}</h1>
-      <div class="compilation-provenance" aria-label="Compilation source">
+      <div class="compilation-provenance" aria-label="Transcription and specification">
         <span class="prov-item">
-          <span class="prov-label">Compilation</span>
-          <a href={`/outputs/${c.specId}/${c.compilationId}/`} class="prov-value" title={`Compilation ID: ${c.compilationId}`}>
+          <span class="prov-label">Transcription</span>
+          <a href={compUrl(c.compilationId)} class="prov-value" title={`Transcription ID: ${c.compilationId}`}>
             <strong>{compTitle}</strong>
             <code>{shortUlid(c.compilationId)}</code>
           </a>
@@ -263,15 +282,20 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         <span class="prov-sep" aria-hidden="true">·</span>
         <span class="prov-item">
           <span class="prov-label">Specification</span>
-          <a href={`/specifications/${c.specId}/`} class="prov-value" title={`Specification ID: ${c.specId}`}><code>{shortUlid(c.specId)}</code></a>
+          <a href={specUrl(c.specId)} class="prov-value" title={`Specification ID: ${c.specId}`}><code>{shortUlid(c.specId)}</code></a>
         </span>
       </div>
-      <p class="lead">
-        {formatNum(b.stats.manuscripts)} manuscripts ({formatNum(b.stats.early)} early) · {formatNum(b.stats.lines)} lines · {formatNum(b.stats.words)} words · {formatNum(b.stats.places)} points of disagreement · mean word probability {formatPct(b.stats.meanWordConfidence)}
+      <p class="lead book-stats-lead">
+        <span>{formatNum(b.stats.manuscripts)} manuscripts ({formatNum(b.stats.early)} early) · {formatNum(b.stats.lines)} lines · {formatNum(b.stats.words)} words · {formatNum(b.stats.places)} points of disagreement · mean word likelihood</span>
+        <ConfidenceBadge
+          value={b.stats.meanWordConfidence}
+          kind="book-mean"
+          context={b.name}
+        />
       </p>
       <div class="ulid-bar">
-        <a href={`/outputs/${c.specId}/${c.compilationId}/`} class="btn btn-secondary">← Back to compilation summary</a>
-        <a href={`/outputs/${c.specId}/${c.compilationId}/#method`} class="btn btn-secondary">Method &amp; scenarios →</a>
+        <a href={compUrl(c.compilationId)} class="btn btn-secondary">← All books</a>
+        <a href={`${compUrl(c.compilationId)}#method`} class="btn btn-secondary">Method &amp; scenarios →</a>
       </div>
     </div>
   </section>
@@ -302,21 +326,14 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             </span>
             <span class="legend-group">
               <span class="legend-label">Width = uncertainty:</span>
-              <span class="legend-item"><span class="legend-bar legend-bar-dot"></span>≥99%</span>
-              <span class="legend-item"><span class="legend-bar legend-bar-mid"></span>~75%</span>
-              <span class="legend-item"><span class="legend-bar legend-bar-full"></span>≤51%</span>
+              <span class="legend-item"><span class="legend-bar legend-bar-dot"></span>Low (≥99% likely)</span>
+              <span class="legend-item"><span class="legend-bar legend-bar-mid"></span>Moderate (~75%)</span>
+              <span class="legend-item"><span class="legend-bar legend-bar-full"></span>High (≤51%)</span>
             </span>
             <span class="legend-group">
               <span class="legend-item"><span class="legend-bar legend-bar-full" style="background:linear-gradient(90deg,rgba(148,163,184,0.40) 0%,rgba(148,163,184,0.40) 74%,rgba(249,115,22,0.96) 82%,rgba(249,115,22,0.96) 100%);"></span>Mixed severities = weighted gradient</span>
             </span>
           </div>
-        </div>
-        <div class="script-switcher" role="group" aria-label="Display script">
-          <span class="script-switcher-label">Display:</span>
-          <button type="button" class="filter-pill active" data-script="original">Original</button>
-          <button type="button" class="filter-pill" data-script="romanized">Romanized</button>
-          <button type="button" class="filter-pill" data-script="gloss" title="Basic literal US English word-for-word glosses (UI display aid only — not read by the compilation model)">Gloss</button>
-          <button type="button" class="filter-pill" data-script="interlinear" title="Original script stacked with romanization and basic literal US English gloss">Interlinear</button>
         </div>
       </div>
 
@@ -353,33 +370,22 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         <p>No lines in {b.name} match the current severity and confidence filters.</p>
         <button type="button" id="filter-empty-reset" class="btn btn-secondary">Reset filters</button>
       </div>
-      <script is:inline>
-        (function () {
-          try {
-            var s = localStorage.getItem("openlexis-display-script");
-            if (s === "romanized" || s === "gloss" || s === "interlinear") {
-              document.documentElement.dataset.scriptPending = s;
-              document.querySelectorAll("[data-script]").forEach(function (b) {
-                b.classList.toggle("active", b.getAttribute("data-script") === s);
-              });
-              setTimeout(function () {
-                delete document.documentElement.dataset.scriptPending;
-              }, 2000);
-            }
-          } catch (e) {}
-        })();
-      </script>
 
       <div
         id="compiled-reader"
-        class={`compiled-text ${isHebrew ? "script-hebrew" : "script-greek"}`}
+        class={`compiled-text mode-interlinear ${isHebrew ? "script-hebrew" : "script-greek"}`}
         dir={isHebrew ? "rtl" : "ltr"}
         lang={isHebrew ? "hbo" : "grc"}
         data-inspector={`/${inspectorRel}`}
       >
         {renderedChapters.map((ch) => (
           <section class="chapter-block" id={`ch-${ch.chapter}`}>
-            <h2 class="chapter-heading" dir="ltr">Chapter {ch.chapter}</h2>
+            <div class="chapter-heading-row" dir="ltr">
+              <h2 class="chapter-heading">Chapter {ch.chapter}</h2>
+              {isHebrew && (
+                <span class="chapter-dir-cue" data-rtl-cue>← Hebrew reads right to left</span>
+              )}
+            </div>
             <div class="verses-list">
               {ch.verses.map((v) => (
                 <div class="verse-block" id={`v-${v.ref.replace(":", "-")}`}>
@@ -388,7 +394,8 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                     {v.uncovered ? (
                       <span class="verse-uncovered" dir="ltr">[uncovered in surviving witnesses]</span>
                     ) : (
-                      v.tokens.flatMap((tok) => {
+                      v.tokens.flatMap((tok, tokIdx) => {
+                        const vtok = tokIdx + 1;
                         const styleParts: string[] = [];
                         if (tok.barWidth > 0.005) styleParts.push(`--bar:${tok.barWidth.toFixed(2)}`);
                         if (tok.grad) styleParts.push(`--bar-bg:${tok.grad}`);
@@ -397,37 +404,58 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                         const confAttr = tok.confPct < 99.95 ? tok.confPct : undefined;
                         if (tok.kind === "app" && tok.text && tok.text.trim().includes(" ")) {
                           const words = tok.text.trim().split(/\s+/).filter(Boolean);
-                          return words.map((word) => (
-                            <button
-                              type="button"
-                              data-tok={tok.key}
-                              data-w={word}
-                              data-sev={tok.sevBucket}
-                              data-max-sev={maxSevAttr}
-                              data-conf={confAttr}
-                              style={tokStyle}
-                              class="tok-btn tok-app"
-                            >{word}</button>
-                          ));
+                          return words.map((word) => {
+                            const g = glossMap[word];
+                            return (
+                              <button
+                                type="button"
+                                data-tok={tok.key}
+                                data-vtok={vtok}
+                                data-w={word}
+                                data-sev={tok.sevBucket}
+                                data-max-sev={maxSevAttr}
+                                data-conf={confAttr}
+                                style={tokStyle}
+                                class="tok-btn tok-app"
+                              >
+                                <span class="il-orig">{word}</span>
+                                <span class="il-rom">{romanOfWord(word)}</span>
+                                {g && <span class="il-gloss">{g}</span>}
+                              </button>
+                            );
+                          });
                         }
+                        const word = tok.text;
+                        const g = word ? glossMap[word] : "";
                         return (
                           <button
                             type="button"
                             data-tok={tok.key}
+                            data-vtok={vtok}
                             data-sev={tok.sevBucket}
                             data-max-sev={maxSevAttr}
                             data-conf={confAttr}
                             style={tokStyle}
                             class={
                               tok.kind === "app"
-                                ? tok.text
+                                ? word
                                   ? "tok-btn tok-app"
                                   : "tok-btn tok-app tok-omit"
                                 : tok.aramaic
                                   ? "tok-btn tok-w tok-arc"
                                   : "tok-btn tok-w"
                             }
-                          >{tok.text || "∅"}</button>
+                          >
+                            {word ? (
+                              <>
+                                <span class="il-orig">{word}</span>
+                                <span class="il-rom">{romanOfWord(word)}</span>
+                                {g && <span class="il-gloss">{g}</span>}
+                              </>
+                            ) : (
+                              "∅"
+                            )}
+                          </button>
                         );
                       })
                     )}
@@ -442,16 +470,20 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
   </section>
 
   <script>
-    import { transliterateText, type DisplayScript } from "../../../../lib/transliterate";
+    import { transliterateText } from "../../../lib/transliterate";
+    import {
+      formatCredibleInterval,
+      formatProbabilityPct,
+      renderConfidenceBadgeHtml,
+    } from "../../../lib/confidence";
 
     const reader = document.getElementById("compiled-reader");
     const inspectorUrl =
       reader?.dataset.inspector || new URL("inspector.json", document.location.href).pathname;
-    const DATA = await fetch(inspectorUrl).then((r) => (r.ok ? r.json() : { w: [], t: {} }));
-    const scriptBtns = [...document.querySelectorAll<HTMLButtonElement>("[data-script]")];
+    const DATA = await fetch(inspectorUrl)
+      .then((r) => (r.ok ? r.json() : { w: [], t: {} }))
+      .catch(() => ({ w: [], t: {} }));
     const scriptCls = DATA.isHebrew ? "script-hebrew" : "script-greek";
-    const STORAGE_KEY = "openlexis-display-script";
-    let currentScript: DisplayScript = "original";
     let activeBtn: HTMLButtonElement | null = null;
     let activePanel: HTMLElement | null = null;
 
@@ -469,72 +501,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
     function glossWord(word: string): string {
       return DATA.g?.[word] || "";
     }
-
-    function glossPhrase(text: string): string {
-      const words = text.trim().split(/\s+/).filter(Boolean);
-      return words.map((w) => glossWord(w) || romanOf(w)).join(" ");
-    }
-
-    function applyDisplayScript(mode: DisplayScript) {
-      currentScript = mode;
-      try {
-        localStorage.setItem(STORAGE_KEY, mode);
-      } catch {}
-
-      scriptBtns.forEach((b) => b.classList.toggle("active", b.dataset.script === mode));
-
-      if (reader) {
-        reader.classList.toggle("mode-romanized", mode === "romanized");
-        reader.classList.toggle("mode-gloss", mode === "gloss");
-        reader.classList.toggle("mode-interlinear", mode === "interlinear");
-        // Pure romanized or English gloss reads naturally left-to-right even for Hebrew/Aramaic books
-        reader.setAttribute(
-          "dir",
-          mode === "romanized" || mode === "gloss" ? "ltr" : DATA.isHebrew ? "rtl" : "ltr",
-        );
-      }
-
-      const btns = reader?.querySelectorAll<HTMLButtonElement>("button.tok-btn") ?? [];
-      for (const btn of btns) {
-        const key = btn.dataset.tok;
-        if (!key) continue;
-        const item = DATA.t[key];
-        if (!item) continue;
-        const raw = btn.dataset.w || item.t || "";
-        const orig = raw || "∅";
-        if (mode === "original" || !raw) {
-          btn.textContent = orig;
-        } else if (mode === "romanized") {
-          btn.textContent = romanOf(raw);
-        } else if (mode === "gloss") {
-          const g = glossWord(raw);
-          if (g) {
-            btn.textContent = g;
-          } else {
-            btn.innerHTML = `<span class="gloss-fallback">${esc(romanOf(raw))}</span>`;
-          }
-        } else {
-          const g = glossWord(raw);
-          btn.innerHTML = `<span class="il-pair"><span class="il-orig">${esc(raw)}</span><span class="il-rom" dir="ltr">${esc(romanOf(raw))}</span>${g ? `<span class="il-gloss" dir="ltr">${esc(g)}</span>` : ""}</span>`;
-        }
-      }
-
-      // Refresh open inspector panel if one is visible
-      if (activeBtn) {
-        const btn = activeBtn;
-        activePanel?.remove();
-        activeBtn = null;
-        activePanel = null;
-        openInspector(btn);
-      }
-    }
-
-    scriptBtns.forEach((b) =>
-      b.addEventListener("click", () => {
-        const m = (b.dataset.script || "original") as DisplayScript;
-        applyDisplayScript(m);
-      })
-    );
 
     // Threshold & line-limiting filters for scholarly drill-down
     const minSevSel = document.getElementById("filter-min-sev") as HTMLSelectElement | null;
@@ -630,46 +596,23 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
     filterReset?.addEventListener("click", resetFilters);
     filterEmptyReset?.addEventListener("click", resetFilters);
 
-    // Restore user's saved display script preference across books before revealing reader
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY) as DisplayScript | null;
-      if (saved === "romanized" || saved === "gloss" || saved === "interlinear") {
-        applyDisplayScript(saved);
-      }
-    } catch {}
-    const hadPending = Boolean(document.documentElement.dataset.scriptPending);
-    delete document.documentElement.dataset.scriptPending;
-    if (hadPending && location.hash) {
-      const hashTarget = document.getElementById(location.hash.slice(1));
-      if (hashTarget) hashTarget.scrollIntoView();
-    }
-
     function fmtPct(deg: string): string {
-      const n = Number(deg);
-      if (Number.isNaN(n)) return deg;
-      if (n >= 0.9995) return ">99.9%";
-      if (n <= 0.0005) return "<0.1%";
-      return `${(n * 100).toFixed(1)}%`;
+      return formatProbabilityPct(deg);
     }
 
     function fmtInterval(raw: string): string {
-      const m = raw.match(/\[([0-9.]+),\s*([0-9.]+)\]/);
-      if (!m) return raw;
-      return `90% range: ${fmtPct(m[1])} – ${fmtPct(m[2])}`;
+      return formatCredibleInterval(raw);
     }
 
-    const CONF_ICON = `<svg class="conf-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`;
-    const CONF_ICON_SM = `<svg class="conf-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`;
-
-    function renderConfBadge(deg: string, unc: string, isUnseen = false): string {
-      const n = Number(deg);
-      const pct = fmtPct(deg);
+    function renderConfBadge(deg: string, unc: string, isUnseen = false, context = ""): string {
       const rangeStr = unc ? fmtInterval(unc) : "";
-      const tier = Number.isNaN(n) ? "low" : n >= 0.9 ? "high" : n >= 0.5 ? "mid" : "low";
-      const tooltip = isUnseen
-        ? `${pct} likely that the original text was not preserved in any surviving manuscript${rangeStr ? ` (${rangeStr})` : ""}`
-        : `${pct} likely to be the original text written by the original author${rangeStr ? ` (${rangeStr})` : ""}`;
-      return `<span class="conf-badge conf-${tier}" title="${esc(tooltip)}" aria-label="${esc(tooltip)}">${CONF_ICON}<span>${esc(pct)}</span></span>${rangeStr ? `<span class="ms-sub" title="${esc(tooltip)}">${esc(rangeStr)}</span>` : ""}`;
+      const badgeHtml = renderConfidenceBadgeHtml({
+        value: deg,
+        kind: isUnseen ? "unseen" : "reading",
+        interval: unc,
+        context,
+      });
+      return `${badgeHtml}${rangeStr ? `<span class="ms-sub">${esc(rangeStr)}</span>` : ""}`;
     }
 
     function siglumOf(ref: number | string): string {
@@ -680,10 +623,16 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       const info = witSummary(r);
       const relStr = info.rel !== null ? `${Math.round(info.rel * 100)}%` : "";
       const tipParts = [info.shortType, info.dateShort, relStr ? `${relStr} manuscript reliability` : "", "click for details"].filter(Boolean);
-      const relTip = `${relStr} manuscript reliability — estimated probability that ${info.sig} preserves the original reading at a given line`;
-      const relBadge = relStr
-        ? `<span class="wit-chip-rel" title="${esc(relTip)}">${CONF_ICON_SM}${esc(relStr)}</span>`
-        : "";
+      const relBadge =
+        info.rel !== null
+          ? renderConfidenceBadgeHtml({
+              value: info.rel,
+              kind: "reliability",
+              context: info.sig,
+              compact: true,
+              focusable: false,
+            })
+          : "";
       return `<button type="button" class="wit-chip" data-wit="${esc(r)}" title="${esc(tipParts.join(" · "))}"><span>${esc(info.sig)}</span>${relBadge}</button>`;
     }
 
@@ -693,7 +642,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       const rest = refs.slice(limit);
       const chips = visible.map(renderWitChipBtn).join("");
       const more = rest.length
-        ? `<button type="button" class="wit-chip wit-chip-more" data-more="${esc(JSON.stringify(rest))}">+${rest.length} more</button>`
+        ? `<button type="button" class="wit-chip wit-chip-more" data-more="${esc(JSON.stringify(rest))}">Show all ${refs.length}</button>`
         : "";
       return `<div class="wit-chips-wrap"><div class="wit-chips">${chips}${more}</div><div class="wit-detail-slot"></div></div>`;
     }
@@ -737,8 +686,8 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         weightParts.push(`started at ${Math.round(info.priorMean * 100)}% date-based prior`);
       }
       const weightTier = info.isEarly
-        ? "Early witness (within 400 yrs of composition) — receives full 1.0 model weight."
-        : "Later witness — subject to geometric cluster discounting when sharing a reading with other late copies.";
+        ? "Early witness (within 400 yrs of composition): receives full 1.0 model weight."
+        : "Later witness: subject to geometric cluster discounting when sharing a reading with other late copies.";
       const weightSummaryHtml = weightParts.length
         ? `<div class="wit-weight-note"><strong>Model weighting:</strong> ${esc(weightParts.join(" · "))}. ${esc(weightTier)}</div>`
         : "";
@@ -751,7 +700,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             </div>
             <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
               ${viewerLinks}
-              <a href="/sources/?q=${encodeURIComponent(sig)}" style="font-size:0.8rem;">Source record →</a>
+              <a href="/archive/?id=${encodeURIComponent(sig)}" style="font-size:0.8rem;">Archive record →</a>
               <button type="button" class="copy-btn" data-close-wit>Close</button>
             </div>
           </div>
@@ -774,8 +723,8 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             <p><strong>Probability (%):</strong> The model's posterior median estimate that this reading is what the original author wrote, given the attesting witnesses, their dating priors, scribal correction rates, and dependence discounting.</p>
             <p><strong>90% range:</strong> The 5th-to-95th percentile credible interval across 100 Monte Carlo draws from each witness's posterior reliability. Narrow ranges indicate strong independent agreement; wider ranges indicate thin, conflicting, or poorly dated evidence.</p>
             <p><strong>Witness chips (e.g., <code>01</code>, <code>03</code>, <code>P45</code>):</strong> Click any witness identifier to inspect its dating, posterior reliability, scribal notes, and provenance right here.</p>
-            <p><strong>Difference labels:</strong> Categorize how a variant differs from the selected reading (<a href="${esc(DATA.compUrl)}#difference-categories">see full definitions on the compilation page →</a>).</p>
-            <p><strong>Word-for-word glosses:</strong> Basic literal US English word glosses from <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible.org / Tyndale House</a> (CC BY 4.0) shown strictly as a UI reading aid—never read by or exposed to compilation models.</p>
+            <p><strong>Difference labels:</strong> Categorize how a variant differs from the selected reading (<a href="${esc(DATA.compUrl)}#difference-categories">see full definitions on the overview page →</a>).</p>
+            <p><strong>Word-for-word glosses:</strong> Basic literal US English word glosses from <a href="https://www.stepbible.org/" target="_blank" rel="noopener">STEPBible.org / Tyndale House</a> (CC BY 4.0) shown strictly as a UI reading aid, never read by or exposed to compilation models.</p>
           </div>
         </details>
       `;
@@ -1111,7 +1060,12 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       reader?.querySelectorAll("button.tok-active").forEach((b) => b.classList.remove("tok-active"));
     }
 
-    function openInspector(btn: HTMLButtonElement) {
+    function clearWordHash() {
+      const m = location.hash.match(/^#(v-[^-]+-[^-]+)-w\d+$/);
+      if (m) history.replaceState(null, "", `#${m[1]}`);
+    }
+
+    function openInspector(btn: HTMLButtonElement, syncHash = true) {
       const key = btn.dataset.tok;
       if (!key) return;
       const item = DATA.t[key];
@@ -1123,6 +1077,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         clearActiveTokens();
         activeBtn = null;
         activePanel = null;
+        if (syncHash) clearWordHash();
         return;
       }
 
@@ -1132,21 +1087,19 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       const verseBlock = btn.closest(".verse-block");
       if (!verseBlock) return;
 
+      if (syncHash && verseBlock.id && btn.dataset.vtok) {
+        const nextHash = `#${verseBlock.id}-w${btn.dataset.vtok}`;
+        if (location.hash !== nextHash) {
+          history.replaceState(null, "", nextHash);
+        }
+      }
+
       const panel = document.createElement("div");
       panel.className = "inspector-panel";
       panel.setAttribute("dir", "ltr");
 
       if (item.k === "w") {
-        const origDir = DATA.isHebrew ? "rtl" : "ltr";
-        const gText = glossPhrase(item.t);
-        const heroHtml =
-          currentScript === "original"
-            ? `<span class="inspector-word ${scriptCls}" dir="${origDir}">${esc(item.t)}</span>${gText ? `<span class="inspector-gloss-inline" title="Basic literal word gloss (UI display aid only)">${esc(gText)}</span>` : ""}`
-            : currentScript === "romanized"
-              ? `<span class="inspector-word-rom" dir="ltr">${esc(romanOf(item.t))}</span>${gText ? `<span class="inspector-gloss-inline" title="Basic literal word gloss (UI display aid only)">${esc(gText)}</span>` : ""}`
-              : currentScript === "gloss"
-                ? `<span class="inspector-word-rom" dir="ltr">${esc(gText)}</span><span class="inspector-rom" dir="${origDir}">${esc(item.t)}</span>`
-                : renderInterlinearWords(item.t);
+        const heroHtml = renderInterlinearWords(item.t);
         const lacHtml = item.lc.length
           ? `<div style="margin-top: 8px;"><span class="source-meta-label">Lacunose / damaged (${item.lc.length}):</span>${renderWitChips(item.lc, 12)}</div>`
           : "";
@@ -1157,13 +1110,16 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
               <span class="ms-sub">${esc(item.ref)}</span>
               ${item.ar ? `<span class="badge badge-violet">Biblical Aramaic</span>` : ""}
             </div>
-            <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <button type="button" class="copy-btn" data-copy-word-link>Copy link</button>
+              <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
+            </div>
           </div>
           <div class="inspector-reading-hero">
             ${heroHtml}
           </div>
           <div class="inspector-prob-row">
-            ${renderConfBadge(item.d, item.u, false)}
+            ${renderConfBadge(item.d, item.u, false, `Unanimous across ${item.at.length.toLocaleString()} surviving ${item.at.length === 1 ? "manuscript" : "manuscripts"}.`)}
           </div>
           <div style="margin-top: 8px;">
             <span class="source-meta-label">Attested by ${item.at.length} ${item.at.length === 1 ? "witness" : "witnesses"} (click any siglum for details):</span>
@@ -1174,8 +1130,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         `;
       } else {
         const chosenEntry = item.rd.find((x: any[]) => x[0] === "selected");
-        const chosenOrig = chosenEntry && !String(chosenEntry[1] || "").startsWith("—") ? String(chosenEntry[1]) : "";
-        const chosenRom = chosenOrig ? romanOf(chosenOrig) : "";
+        const chosenOrig = chosenEntry && String(chosenEntry[1] || "") !== "(omission)" ? String(chosenEntry[1]) : "";
         const chosenWits = (chosenEntry?.[5] ?? []) as (number | string)[];
         const chosenDeg = String(chosenEntry?.[2] ?? "");
 
@@ -1184,9 +1139,15 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         const realRdgs = allRdgs.filter((r) => r[0] !== "unseen");
         const unseenRdg = allRdgs.find((r) => r[0] === "unseen");
 
+        const totalIntactWits = realRdgs.reduce((sum, r) => sum + (r[5]?.length ?? 0), 0);
+
         const rdgsHtml = realRdgs
           .map((r: RdgTuple) => {
             const [rType, rText, deg, unc, diff, wits, sevLevel, sevSub, sevNote] = r;
+            const witContext =
+              totalIntactWits > 0
+                ? `Attested by ${wits.length.toLocaleString()} of ${totalIntactWits.toLocaleString()} intact manuscripts.`
+                : "";
             const pNum = Number(deg);
             const isOverruled = rType === "variant" && !Number.isNaN(pNum) && pNum < 0.01;
             const roleLabel =
@@ -1245,34 +1206,17 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             const witsHtml = wits.length
               ? `<div style="margin-top:6px;"><span class="source-meta-label">Manuscripts (${wits.length}):</span>${renderWitChips(wits, 14)}</div>`
               : "";
-            const isRealReading = rType !== "unseen" && !rText.startsWith("—");
+            const isRealReading = rType !== "unseen" && rText !== "(omission)";
             const isVariantDiff = rType === "variant" && isRealReading && Boolean(chosenOrig);
-            const origDir = DATA.isHebrew ? "rtl" : "ltr";
-            const gLine = isRealReading ? glossPhrase(rText) : "";
-            const chosenGloss = chosenOrig ? glossPhrase(chosenOrig) : "";
-            let bodyHtml = "";
-            if (!isRealReading) {
-              bodyHtml = `<div class="app-rdg-text app-rdg-unseen-text">${esc(displayText)}</div>`;
-            } else if (currentScript === "original") {
-              const origHtml = isVariantDiff ? renderDiffReading(chosenOrig, rText) : esc(rText);
-              bodyHtml = `<div class="app-rdg-text ${scriptCls}" dir="${origDir}">${origHtml}</div>${gLine ? `<div class="inspector-gloss-line" dir="ltr" title="Basic literal word-for-word gloss (UI display aid only)">${esc(gLine)}</div>` : ""}`;
-            } else if (currentScript === "romanized") {
-              const romHtml =
-                isVariantDiff && chosenRom ? renderDiffReading(chosenRom, romanOf(rText)) : esc(romanOf(rText));
-              bodyHtml = `<div class="app-rdg-text app-rdg-rom-only" dir="ltr">${romHtml}</div>${gLine ? `<div class="inspector-gloss-line" dir="ltr" title="Basic literal word-for-word gloss (UI display aid only)">${esc(gLine)}</div>` : ""}`;
-            } else if (currentScript === "gloss") {
-              const glossHtml =
-                isVariantDiff && chosenGloss ? renderDiffReading(chosenGloss, gLine) : esc(gLine);
-              bodyHtml = `<div class="app-rdg-text app-rdg-rom-only" dir="ltr">${glossHtml}</div>`;
-            } else {
-              bodyHtml = isVariantDiff
+            const bodyHtml = !isRealReading
+              ? `<div class="app-rdg-text app-rdg-unseen-text">${esc(displayText)}</div>`
+              : isVariantDiff
                 ? renderInterlinearDiff(chosenOrig, rText)
                 : renderInterlinearWords(rText);
-            }
             return `
               <li class="app-rdg app-rdg-${esc(rType)}${isOverruled ? " app-rdg-overruled" : ""}">
                 <div class="app-rdg-top">
-                  ${renderConfBadge(deg, unc, rType === "unseen")}
+                  ${renderConfBadge(deg, unc, rType === "unseen", witContext)}
                   ${roleLabel}
                   ${sevBadge}
                 </div>
@@ -1290,12 +1234,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         const unseenHtml = unseenRdg
           ? (() => {
               const [, , deg, unc] = unseenRdg;
-              const p = Number(deg);
-              const note =
-                !Number.isNaN(p) && p < 0.01
-                  ? `Chance that the original wording is not in any surviving manuscript: ${fmtPct(deg)}.`
-                  : `Chance that the original wording is not in any surviving manuscript: ${fmtPct(deg)} (${fmtInterval(unc)}).`;
-              return `<div class="app-unseen-note">${esc(note)}</div>`;
+              return `<div class="app-unseen-note"><span>Chance that the original wording is not in any surviving manuscript:</span> ${renderConfBadge(deg, unc, true)}</div>`;
             })()
           : "";
 
@@ -1315,7 +1254,10 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
               <span class="ms-sub">${esc(item.ref)} · ${realRdgs.length} ${realRdgs.length === 1 ? "reading" : "readings"}</span>
               ${groupNote}
             </div>
-            <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <button type="button" class="copy-btn" data-copy-word-link>Copy link</button>
+              <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
+            </div>
           </div>
           <ul class="app-rdg-list">${rdgsHtml}</ul>
           ${unseenHtml}
@@ -1339,11 +1281,21 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         return;
       }
 
+      const copyLinkBtn = target.closest<HTMLButtonElement>("[data-copy-word-link]");
+      if (copyLinkBtn) {
+        navigator.clipboard?.writeText(location.href).then(() => {
+          copyLinkBtn.textContent = "Copied ✓";
+          setTimeout(() => (copyLinkBtn.textContent = "Copy link"), 1500);
+        }).catch(() => {});
+        return;
+      }
+
       if (target.closest("[data-close-inspector]")) {
         activePanel?.remove();
         clearActiveTokens();
         activeBtn = null;
         activePanel = null;
+        clearWordHash();
         return;
       }
 
@@ -1381,5 +1333,35 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         }
       }
     });
+
+    // Deep-link support: #v-1-18-w4 (or legacy ?tok=3#v-1-18) scrolls to the verse and opens its live inspector
+    function openFromHash() {
+      const hash = location.hash.replace(/^#/, "");
+      const wordMatch = hash.match(/^(v-[^-]+-[^-]+)-w(\d+)$/);
+      if (wordMatch) {
+        const verseEl = document.getElementById(wordMatch[1]);
+        const targetBtn = verseEl?.querySelector<HTMLButtonElement>(`button.tok-btn[data-vtok="${wordMatch[2]}"]`);
+        if (verseEl && targetBtn) {
+          verseEl.scrollIntoView({ block: "center" });
+          if (!activeBtn || activeBtn.dataset.tok !== targetBtn.dataset.tok) {
+            openInspector(targetBtn, false);
+          }
+          return;
+        }
+      }
+      const initParams = new URLSearchParams(location.search);
+      const tokIdxParam = initParams.get("tok");
+      if (tokIdxParam !== null && hash) {
+        const verseEl = document.getElementById(hash);
+        const vtok = Number(tokIdxParam) + 1;
+        const targetBtn = verseEl?.querySelector<HTMLButtonElement>(`button.tok-btn[data-vtok="${vtok}"]`);
+        if (verseEl && targetBtn) {
+          verseEl.scrollIntoView({ block: "center" });
+          openInspector(targetBtn, true);
+        }
+      }
+    }
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
   </script>
 </Layout>

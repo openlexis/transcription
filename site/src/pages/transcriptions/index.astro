@@ -1,26 +1,28 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import {
+  compUrl,
   formatAuthor,
   formatBytes,
   formatNum,
   getCompilations,
   shortUlid,
+  specUrl,
 } from "../../lib/corpus";
 
 const compilations = getCompilations();
 ---
 <Layout
-  title="Compiled Outputs"
-  active="outputs"
-  description="Compiled TEI P5 XML biblical texts produced under Open Lexis specifications."
+  title="Transcriptions"
+  active="transcriptions"
+  description="Read original-language transcriptions assembled directly from primary ancient manuscripts."
 >
   <section class="page-header">
     <div class="container">
-      <div class="eyebrow">Compiled Outputs ({compilations.length})</div>
-      <h1>Compiled Outputs</h1>
+      <div class="eyebrow">Transcriptions</div>
+      <h1>Transcriptions</h1>
       <p class="lead">
-        Original-language compilations generated under the YAML specifications in <code>specifications/</code> and stored as TEI P5 XML under <code>outputs/&lt;specification-id&gt;/&lt;compilation-id&gt;/</code>.
+        Complete original-language texts assembled directly from primary ancient manuscripts. Each transcription reflects one model's full statistical assessment under a published specification, with every witness and probability preserved beside the text.
       </p>
     </div>
   </section>
@@ -30,9 +32,9 @@ const compilations = getCompilations();
       {compilations.length === 0 ? (
         <div class="callout">
           <div>
-            <h3>No Compiled Outputs Yet</h3>
+            <h3>No Transcriptions Yet</h3>
             <p>
-              Run <code>bun run compile</code> to compile all target books under the active specification and rebuild this site automatically.
+              Run <code>bun run compile</code> to assemble all target books under the active specification and rebuild this site automatically.
             </p>
           </div>
           <a href="/specifications/" class="btn btn-secondary">Read specification →</a>
@@ -47,8 +49,8 @@ const compilations = getCompilations();
                   month: "short",
                   day: "numeric",
                 })
-              : "—";
-            const title = m.compilation.title || `${m.modelAttribution.modelName} · ${dateStr}`;
+              : "";
+            const title = m.compilation.title || (dateStr ? `${m.modelAttribution.modelName} · ${dateStr}` : m.modelAttribution.modelName);
             const subtitle = m.compilation.subtitle || `${m.modelAttribution.modelName} (${m.modelAttribution.provider})`;
             const summary = m.compilation.summary || m.method.summary;
             const authorStr = formatAuthor(m.compilation.author);
@@ -57,22 +59,21 @@ const compilations = getCompilations();
                 <div class="panel-head">
                   <div>
                     <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 4px;">
-                      <a href={`/outputs/${c.specId}/${c.compilationId}/`} style="font-size: 1.15rem; font-weight: 700; color: var(--ink);">
+                      <a href={compUrl(c.compilationId)} style="font-size: 1.15rem; font-weight: 700; color: var(--ink);">
                         {title}
                       </a>
                       <code title={c.compilationId}>{shortUlid(c.compilationId)}</code>
-                      <span class="badge badge-emerald">{m.totals.books} books</span>
                       <span class="badge badge-indigo">{m.modelAttribution.modelName}</span>
                       {m.modelAttribution.effortLevel && (
                         <span class="badge">{m.modelAttribution.effortLevel} effort</span>
                       )}
                     </div>
                     <p class="panel-sub" style="margin-top: 2px;">
-                      {subtitle}{authorStr ? ` · ${authorStr}` : ""}{dateStr !== "—" ? ` · ${dateStr}` : ""} · <a href={`/specifications/${c.specId}/`}>Specification <code title={c.specId}>{shortUlid(c.specId)}</code></a>
+                      {subtitle}{authorStr ? ` · ${authorStr}` : ""}{dateStr ? ` · ${dateStr}` : ""} · <a href={specUrl(c.specId)}>Specification <code title={c.specId}>{shortUlid(c.specId)}</code></a>
                     </p>
                   </div>
                   <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <a href={`/outputs/${c.specId}/${c.compilationId}/`} class="btn btn-primary">Read books →</a>
+                    <a href={compUrl(c.compilationId)} class="btn btn-primary">Read transcription →</a>
                   </div>
                 </div>
 

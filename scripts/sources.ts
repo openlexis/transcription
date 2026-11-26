@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 /**
  * Programmatic resolver and CLI for specification source references.
- * Resolves a specification YAML's `sources` entries—supporting:
+ * Resolves a specification YAML's `sources` entries, supporting:
  *   - Immutable set ULIDs (`src/sets/<ULID>.json`, e.g., pinned book or institution snapshots)
  *   - Direct item identifiers (`<institution>:<id>`, e.g., `uxlc:L`, `intf:01`)
  *

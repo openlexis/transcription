@@ -7,6 +7,7 @@ import {
   getCompilationsForSpec,
   getSpecifications,
   shortUlid,
+  specUrl,
   ulidTimestamp,
 } from "../../lib/corpus";
 
@@ -17,14 +18,14 @@ const specs = [...getSpecifications()].sort(
 <Layout
   title="Specifications"
   active="specs"
-  description="Self-contained YAML specifications for compiling biblical texts from primary manuscript transcriptions."
+  description="Self-contained YAML specifications for assembling transcriptions from primary ancient manuscripts."
 >
   <section class="page-header">
     <div class="container">
-      <div class="eyebrow">Specifications ({specs.length})</div>
+      <div class="eyebrow">Specifications</div>
       <h1>Specifications</h1>
       <p class="lead">
-        Immutable compilation specifications defining permitted primary sources, modeling principles, and output requirements. Select any specification to read it in full.
+        Immutable specifications defining permitted ancient manuscripts, statistical modeling principles, and packaging requirements. Select any specification to read it in full.
       </p>
     </div>
   </section>
@@ -37,7 +38,7 @@ const specs = [...getSpecifications()].sort(
           const dateStr = formatUlidDate(s.id);
           const authorStr = formatAuthor(s.author);
           return (
-            <a href={`/specifications/${s.id}/`} class="spec-card">
+            <a href={specUrl(s.id)} class="spec-card">
               <div class="spec-card-top">
                 <div class="spec-card-title-row">
                   <h2 class="spec-card-title">{s.title}</h2>
@@ -62,11 +63,11 @@ const specs = [...getSpecifications()].sort(
                   </span>
                 )}
                 <span class="badge">{formatNum(s.targets.length)} books</span>
-                <span class="badge badge-emerald">{formatNum(s.sources.length)} primary sources</span>
+                <span class="badge badge-emerald">{formatNum(s.sources.length)} manuscripts</span>
                 <span class={comps.length > 0 ? "badge badge-sky" : "badge"}>
                   {comps.length === 0
-                    ? "No compilations yet"
-                    : `${comps.length} ${comps.length === 1 ? "compilation" : "compilations"}`}
+                    ? "No transcriptions yet"
+                    : `${comps.length} ${comps.length === 1 ? "transcription" : "transcriptions"}`}
                 </span>
                 <span class="spec-card-id" title={`Specification ID: ${s.id}`}>
                   <code>{shortUlid(s.id)}</code>

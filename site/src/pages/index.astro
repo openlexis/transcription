@@ -1,23 +1,598 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ConfidenceBadge from "../components/ConfidenceBadge.astro";
 import {
+  bookUrl,
+  buildClientSourceIndex,
+  compUrl,
   formatAuthor,
-  formatBytes,
+  formatEra,
   formatNum,
+  formatUlidDate,
   getCompilations,
+  getCompilationsForSpec,
   getCorpusStats,
   getPrimarySpec,
   getSpecifications,
-  githubBlob,
-  githubTree,
+  parseCompiledBookTei,
   shortUlid,
+  specUrl,
+  ulidTimestamp,
+  type ParsedVerseToken,
 } from "../lib/corpus";
+import { lookupWordGloss } from "../lib/gloss";
+import { transliterateText } from "../lib/transliterate";
 
-const specs = getSpecifications();
+const specs = [...getSpecifications()].sort(
+  (a, b) => (ulidTimestamp(b.id) ?? 0) - (ulidTimestamp(a.id) ?? 0) || (a.id < b.id ? 1 : -1),
+);
 const spec = getPrimarySpec();
 const stats = getCorpusStats(spec);
 const compilations = getCompilations();
 const latest = compilations[0];
+
+const sourceById = new Map(
+  spec.sources.map((s) => [s.id.toLowerCase(), s]),
+);
+const sourceMetaById = new Map(
+  buildClientSourceIndex(spec).map((s) => [
+    s.id.toLowerCase(),
+    {
+      id: s.id,
+      name: s.name || s.id,
+      date: s.ds || "",
+    },
+  ]),
+);
+
+function witTooltip(sig: string): string {
+  const m = sourceMetaById.get(sig.toLowerCase());
+  if (!m) return `Inspect manuscript ${sig}`;
+  const parts = [m.name !== m.id ? `${m.id} (${m.name})` : m.id, m.date].filter(Boolean);
+  return `${parts.join(" · ")}: click to inspect manuscript record`;
+}
+
+function witnessMidYear(sig: string, fallbackDating?: string): number | null {
+  const src = sourceById.get(sig.toLowerCase());
+  if (src?.yearFrom !== undefined && src?.yearTo !== undefined) {
+    return Math.round((src.yearFrom + src.yearTo) / 2);
+  }
+  if (src?.year !== undefined) return src.year;
+  if (fallbackDating) {
+    const m = fallbackDating.match(/Range:\s*(-?\d+)\s+to\s+(-?\d+)/i);
+    if (m) return Math.round((Number(m[1]) + Number(m[2])) / 2);
+  }
+  return null;
+}
+
+interface ShowcaseWord {
+  text: string;
+  gloss: string;
+  rom: string;
+  barWidth: number;
+  isFocal: boolean;
+  href: string;
+}
+
+interface StoryDot {
+  sig: string;
+  lane: 0 | 1 | 2; // 0 = chosen/reading A, 1 = variant/reading B, 2 = lacuna
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  fillDelayMs: number;
+  qScale: number;
+  qAlpha: number;
+  relPct: number | null;
+  early: boolean;
+  discounted: boolean;
+  label?: string;
+  labelTimeline?: string;
+  title: string;
+}
+
+interface TimelineTick {
+  label: string;
+  pct: number;
+}
+
+interface ShowcaseReading {
+  text: string;
+  gloss: string;
+  degree: string;
+  uncertainty: string;
+  pctNum: number;
+  witCount: number;
+  copySharePct: number;
+  notableWits: string[];
+  chosen: boolean;
+  eraSummary: string;
+  contextForHover: string;
+}
+
+interface ShowcaseCase {
+  id: string;
+  refLabel: string;
+  verseNum: string;
+  langLabel: string;
+  tabHook: string;
+  headline: string;
+  isHebrew: boolean;
+  canvasSize: "dense" | "medium" | "sparse";
+  totalSurviving: number;
+  extraNote: string;
+  laneLabels: [string, string];
+  verseHref: string;
+  focalHref: string;
+  hasTrailingEllipsis: boolean;
+  words: ShowcaseWord[];
+  readings: ShowcaseReading[];
+  dots: StoryDot[];
+  ticks: TimelineTick[];
+  earlyZoneWidthPct: number;
+  earlyZoneLabel: string;
+  showEarlyFocus: boolean;
+  beatCaptions: [string, string, string];
+}
+
+function buildShowcaseCase(opts: {
+  id: string;
+  bookId: string;
+  chIdx: number;
+  ref: string;
+  refLabel: string;
+  tabHook: string;
+  headline: string;
+  isHebrew: boolean;
+  focalMatch: string;
+  wordRange: [number, number];
+  minYear: number;
+  maxYear: number;
+  earlyCutoff: number;
+  earlyZoneLabel: string;
+  tickYears: number[];
+  eraSummaries: [string, string];
+  discountLateInBeat3: boolean;
+  beatCaptions: [string, string, string];
+  extraNote: string;
+  laneLabels: [string, string];
+  wordGlossOverrides?: Record<string, string>;
+  wordGlossByIdx?: Record<number, string>;
+  readingGlossOverrides?: [string, string];
+}): ShowcaseCase | null {
+  if (!latest) return null;
+  const bookEntry = latest.manifest.books.find((b) => b.id === opts.bookId);
+  if (!bookEntry) return null;
+  const parsed = parseCompiledBookTei(`${latest.dir}/${bookEntry.file}`);
+  const witMap = new Map(parsed.witnesses.map((w) => [w.siglum, w]));
+  const verse = parsed.chapters[opts.chIdx]?.verses.find((v) => v.ref === opts.ref);
+  if (!verse) return null;
+  const baseBookUrl = bookUrl(latest.compilationId, opts.bookId);
+  const verseId = `v-${opts.ref.replace(":", "-")}`;
+
+  const allWords: ShowcaseWord[] = [];
+  let focalTok: ParsedVerseToken | undefined;
+  let focalTokIdx = 0;
+
+  for (let tokIdx = 0; tokIdx < verse.tokens.length; tokIdx++) {
+    const tok = verse.tokens[tokIdx];
+    if (!tok.text) continue;
+    const isFocal = tok.kind === "app" && tok.text.includes(opts.focalMatch);
+    if (isFocal && !focalTok) {
+      focalTok = tok;
+      focalTokIdx = tokIdx;
+    }
+
+    let barWidth = 0;
+    if (isFocal && tok.kind === "app") {
+      const sel = (tok.readings ?? []).find((r) => r.type === "selected");
+      const selP = Number(sel?.degree ?? 1);
+      const conf = Number.isNaN(selP) ? 1 : selP;
+      barWidth = Math.max(0.28, Math.min(1, (0.99 - conf) / (0.99 - 0.51)));
+    }
+
+    const tokHref = `${baseBookUrl}#${verseId}-w${tokIdx + 1}`;
+    for (const w of tok.text.trim().split(/\s+/).filter(Boolean)) {
+      const isFocalWord = isFocal && w.includes(opts.focalMatch);
+      const wordIdx = allWords.length;
+      allWords.push({
+        text: w,
+        gloss:
+          opts.wordGlossByIdx?.[wordIdx] ??
+          opts.wordGlossOverrides?.[w] ??
+          lookupWordGloss(w, opts.isHebrew),
+        rom: transliterateText(w, opts.isHebrew, "romanized"),
+        barWidth: isFocalWord ? barWidth : 0,
+        isFocal: isFocalWord,
+        href: tokHref,
+      });
+    }
+  }
+
+  const words = allWords.slice(opts.wordRange[0], opts.wordRange[1]);
+  const hasTrailingEllipsis = opts.wordRange[1] < allWords.length;
+
+  const allRealReadings = (focalTok?.readings ?? []).filter(
+    (r) => r.type === "selected" || r.type === "variant",
+  );
+  const totalIntact = allRealReadings.reduce((sum, r) => sum + r.witCount, 0);
+  const topTwo = allRealReadings.slice(0, 2);
+
+  const readings: ShowcaseReading[] = topTwo.map((r, idx) => {
+    const gloss =
+      opts.readingGlossOverrides?.[idx] ??
+      (r.text === "(omission)"
+        ? "(omitted)"
+        : r.text
+            .trim()
+            .split(/\s+/)
+            .map(
+              (w) =>
+                opts.wordGlossOverrides?.[w] ??
+                lookupWordGloss(w, opts.isHebrew) ??
+                transliterateText(w, opts.isHebrew, "romanized"),
+            )
+            .join(" "));
+    const n = Number(r.degree ?? 0);
+    const copySharePct = totalIntact > 0 ? Math.round((r.witCount / totalIntact) * 100) : 0;
+    return {
+      text: r.text,
+      gloss,
+      degree: r.degree,
+      uncertainty: r.uncertainty,
+      pctNum: Number.isNaN(n) ? 0 : Math.round(n * 1000) / 10,
+      witCount: r.witCount,
+      copySharePct,
+      notableWits: r.wits.slice(0, 4),
+      chosen: r.type === "selected",
+      eraSummary: opts.eraSummaries[idx] ?? "",
+      contextForHover: `Attested by ${formatNum(r.witCount)} of ${formatNum(totalIntact)} intact manuscripts (${copySharePct}% of copies).`,
+    };
+  });
+
+  // Compute Beat 1 (raw count) & Beat 2 (real catalog date timeline) dot coordinates
+  const totalMainDots = topTwo.reduce((sum, r) => sum + r.witCount, 0);
+  const canvasSize: "dense" | "medium" | "sparse" =
+    totalMainDots > 20 ? "dense" : totalMainDots > 6 ? "medium" : "sparse";
+  const denseDots = canvasSize === "dense";
+  const isClustered = canvasSize !== "sparse";
+  const yearToPct = (y: number) => {
+    const clamped = Math.max(opts.minYear, Math.min(opts.maxYear, y));
+    return 4 + ((clamped - opts.minYear) / Math.max(1, opts.maxYear - opts.minYear)) * 90;
+  };
+
+  const dots: StoryDot[] = [];
+
+  topTwo.forEach((r, laneIdx) => {
+    const lane = laneIdx as 0 | 1;
+    const glossWord = readings[laneIdx]?.gloss || r.text;
+
+    // Sort witnesses chronologically for clean deterministic placement
+    const witEntries = r.wits.map((sig) => {
+      const pw = witMap.get(sig);
+      const meta = sourceMetaById.get(sig.toLowerCase());
+      const mid = witnessMidYear(sig, pw?.dating) ?? opts.maxYear;
+      const relMatch = pw?.agreement?.match(/Posterior reliability:\s*([0-9.]+)/i);
+      const rel = relMatch ? Number(relMatch[1]) : null;
+      return {
+        sig,
+        mid,
+        rel,
+        name: meta?.name && meta.name !== sig ? meta.name : "",
+        dateStr: meta?.date || formatEra(mid),
+      };
+    });
+    witEntries.sort((a, b) => a.mid - b.mid || a.sig.localeCompare(b.sig));
+
+    // Group by century for Beat 2 beeswarm
+    const byCentury = new Map<number, typeof witEntries>();
+    for (const entry of witEntries) {
+      const bucket = Math.floor(entry.mid / 100) * 100;
+      const arr = byCentury.get(bucket) ?? [];
+      arr.push(entry);
+      byCentury.set(bucket, arr);
+    }
+
+    const timelinePos = new Map<string, { x2: number; y2: number }>();
+    for (const [bucket, group] of byCentury) {
+      if (isClustered) {
+        const count = group.length;
+        const maxRows = lane === 0 ? 2 : denseDots ? 6 : 3;
+        const rows = Math.min(maxRows, Math.max(1, count <= 2 ? count : Math.ceil(count / (denseDots ? 6 : 2))));
+        const cols = Math.ceil(count / rows);
+        const yMin = lane === 0 ? 22 : count <= 2 ? 64 : 61;
+        const yMax = lane === 0 ? 34 : count <= 2 ? 73 : 81;
+
+        group.forEach((entry, idx) => {
+          const col = Math.floor(idx / rows);
+          const row = idx % rows;
+          let yearVal = entry.mid;
+          if (count > 2) {
+            const frac = cols > 1 ? col / (cols - 1) : 0.5;
+            yearVal = bucket + 12 + frac * 76;
+          }
+          const x2 = yearToPct(yearVal);
+          const y2 =
+            rows === 1
+              ? (yMin + yMax) / 2
+              : yMin + (row / (rows - 1)) * (yMax - yMin);
+          timelinePos.set(entry.sig, { x2, y2 });
+        });
+      } else {
+        const count = group.length;
+        const baseY = lane === 0 ? 30 : 69;
+        group.forEach((entry, idx) => {
+          const x2 = yearToPct(entry.mid);
+          const y2 =
+            count === 1
+              ? baseY
+              : 23 + (idx / Math.max(1, count - 1)) * 22;
+          timelinePos.set(entry.sig, { x2, y2 });
+        });
+      }
+    }
+
+    // Beat 1 raw count cluster placement + Step 1 cascade delay + Step 2 quality encoding
+    witEntries.forEach((entry, idx) => {
+      let x1: number;
+      let y1: number;
+      if (denseDots) {
+        const cols = 39;
+        const col = idx % cols;
+        const row = Math.floor(idx / cols);
+        x1 = 4 + col * 2.32;
+        y1 = lane === 0 ? 28 : 63 + row * 6.2;
+      } else if (canvasSize === "medium") {
+        x1 = 8 + idx * 5.6;
+        y1 = lane === 0 ? 28 : 68;
+      } else {
+        x1 = 10 + idx * 11;
+        y1 = lane === 0 ? (witEntries.length > 1 ? 22 + idx * 9 : 28) : 68;
+      }
+      const tp = timelinePos.get(entry.sig) ?? { x2: yearToPct(entry.mid), y2: y1 };
+      const early = entry.mid <= opts.earlyCutoff;
+      const discounted = opts.discountLateInBeat3 && !early && lane === 1;
+      const fillDelayMs = denseDots
+        ? Math.round((idx / Math.max(1, witEntries.length - 1)) * 680) + lane * 140
+        : canvasSize === "medium"
+          ? idx * 70 + lane * 150
+          : idx * 130 + lane * 180;
+      const relNorm = entry.rel !== null ? Math.max(0, Math.min(1, (entry.rel - 0.72) / 0.25)) : 0.75;
+      const qScale = Number((0.76 + relNorm * 0.42).toFixed(2));
+      const qAlpha = Number((0.42 + relNorm * 0.58).toFixed(2));
+      const relPct = entry.rel !== null ? Math.round(entry.rel * 100) : null;
+      const shortDate = entry.dateStr.replace(/\s*±\s*\d+/, "");
+      dots.push({
+        sig: entry.sig,
+        lane,
+        x1: Number(x1.toFixed(2)),
+        y1: Number(y1.toFixed(2)),
+        x2: Number(tp.x2.toFixed(2)),
+        y2: Number(tp.y2.toFixed(2)),
+        fillDelayMs,
+        qScale,
+        qAlpha,
+        relPct,
+        early,
+        discounted,
+        label: isClustered ? undefined : `${entry.sig} (${shortDate})`,
+        labelTimeline: isClustered
+          ? undefined
+          : `${entry.sig} · ${shortDate}${relPct !== null ? ` · ${relPct}% rel.` : ""}`,
+        title: `${entry.sig}${entry.name ? ` · ${entry.name}` : ""} (${entry.dateStr}${relPct !== null ? `, ${relPct}% reliability` : ""}): reads ${r.text} (“${glossWord}”)`,
+      });
+    });
+  });
+
+  // Include notable lacunose early scroll (e.g., 4Q10 in Gen 2:2) in sparse mode
+  if (!isClustered && (focalTok?.lacunaWits?.length ?? 0) > 0) {
+    for (const sig of focalTok?.lacunaWits ?? []) {
+      const pw = witMap.get(sig);
+      const meta = sourceMetaById.get(sig.toLowerCase());
+      const mid = witnessMidYear(sig, pw?.dating) ?? opts.minYear;
+      dots.push({
+        sig,
+        lane: 2,
+        x1: 58,
+        y1: 48,
+        x2: Number(yearToPct(mid).toFixed(2)),
+        y2: 48,
+        fillDelayMs: 360,
+        qScale: 1,
+        qAlpha: 1,
+        relPct: null,
+        early: mid <= opts.earlyCutoff,
+        discounted: false,
+        label: `${sig} (damaged here)`,
+        labelTimeline: `${sig} (damaged here)`,
+        title: `${sig}${meta?.name ? ` · ${meta.name}` : ""} (${meta?.date || formatEra(mid)}): physically damaged / missing this word`,
+      });
+    }
+  }
+
+  const ticks: TimelineTick[] = opts.tickYears.map((y) => ({
+    label: formatEra(y),
+    pct: Number(yearToPct(y).toFixed(2)),
+  }));
+
+  const earlyZoneWidthPct = Number(
+    Math.max(12, Math.min(45, yearToPct(opts.earlyCutoff) - 2)).toFixed(2),
+  );
+
+  return {
+    id: opts.id,
+    refLabel: opts.refLabel,
+    verseNum: opts.ref.split(":")[1] ?? "",
+    langLabel: opts.isHebrew ? "Biblical Hebrew" : "Koine Greek",
+    tabHook: opts.tabHook,
+    headline: opts.headline,
+    isHebrew: opts.isHebrew,
+    canvasSize,
+    totalSurviving: totalIntact,
+    extraNote: opts.extraNote,
+    laneLabels: opts.laneLabels,
+    verseHref: `${baseBookUrl}#${verseId}`,
+    focalHref: `${baseBookUrl}#${verseId}-w${focalTokIdx + 1}`,
+    hasTrailingEllipsis,
+    words,
+    readings,
+    dots,
+    ticks,
+    earlyZoneWidthPct,
+    earlyZoneLabel: opts.earlyZoneLabel,
+    showEarlyFocus: opts.discountLateInBeat3,
+    beatCaptions: opts.beatCaptions,
+  };
+}
+
+const showcaseCases: ShowcaseCase[] = [
+  buildShowcaseCase({
+    id: "john-1-18",
+    bookId: "John",
+    chIdx: 0,
+    ref: "1:18",
+    refLabel: "John 1:18",
+    tabHook: "“God” or “Son”?",
+    headline: "“The only God” or “the only Son”: 7 earliest copies against 153 later ones.",
+    isHebrew: false,
+    focalMatch: "θεος",
+    wordRange: [0, 8],
+    minYear: 100,
+    maxYear: 1600,
+    earlyCutoff: 500,
+    earlyZoneLabel: "Earliest witnesses (AD 200–450)",
+    tickYears: [100, 400, 800, 1200, 1600],
+    eraSummaries: [
+      "Earliest: P66, P75 (c. AD 213), 01, 03 (c. AD 350)",
+      "Mostly medieval (AD 750–1550); earliest: 02 (c. AD 450)",
+    ],
+    discountLateInBeat3: true,
+    beatCaptions: [
+      "Surviving Greek manuscripts disagree: <strong>153 copies</strong> write “Son,” while only <strong>7</strong> write “God.” By raw majority count, “Son” dominates.",
+      "Sorted by date, a sharp divide appears: the earliest surviving manuscripts (AD 200–450) write “God,” while the 153 “Son” copies arrive centuries later across medieval traditions.",
+      "Under the published specification, this model prioritizes early independent witnesses and discounts late dependent clusters, selecting “God” at <strong>&gt;99.9% original-text likelihood</strong>.",
+    ],
+    extraNote: "Plus 4 medieval copies with a minor plural spelling (υιοις) and 1 damaged witness (L252), for 165 manuscripts total at this word.",
+    laneLabels: ["“God” (7)", "“Son” (153)"],
+  }),
+  buildShowcaseCase({
+    id: "gen-2-2",
+    bookId: "Gen",
+    chIdx: 1,
+    ref: "2:2",
+    refLabel: "Genesis 2:2",
+    tabHook: "Seventh or sixth?",
+    headline: "Seventh day or sixth: two medieval traditions split where the earliest scroll is torn.",
+    isHebrew: true,
+    focalMatch: "שְּׁבִיעִי",
+    wordRange: [0, 7],
+    minYear: -300,
+    maxYear: 1400,
+    earlyCutoff: 100,
+    earlyZoneLabel: "Ancient scroll era (300 BC – AD 100)",
+    tickYears: [-300, 100, 500, 900, 1300],
+    eraSummaries: [
+      "Leningrad Codex (L · AD 1009)",
+      "Samaritan Pentateuch (CBL751 · AD 1225)",
+    ],
+    discountLateInBeat3: false,
+    beatCaptions: [
+      "Only <strong>2 intact manuscripts</strong> preserve this word: 1 writes “seventh” and 1 writes “sixth.” The ancient Dead Sea Scroll (4Q10) is torn right at this spot.",
+      "Sorted by date, both intact witnesses come from the Middle Ages (AD 1009 &amp; AD 1225), leaving a millennium-wide gap where timeline alone cannot break the tie.",
+      "Weighing whole-book consistency across all 1,533 verses of Genesis (97.1% vs 96.6% manuscript reliability) rather than forcing false certainty, this model leans toward “seventh” at <strong>54.3% vs 44.1%</strong> and keeps the uncertainty visible.",
+    ],
+    extraNote: "Dead Sea Scroll 4Q10 is physically damaged at this word; 1.4% estimated chance that the original wording is unattested.",
+    laneLabels: ["“seventh” (1)", "“sixth” (1)"],
+  }),
+  buildShowcaseCase({
+    id: "isa-53-11",
+    bookId: "Isa",
+    chIdx: 52,
+    ref: "53:11",
+    refLabel: "Isaiah 53:11",
+    tabHook: "Restoring “light”",
+    headline: "Restoring “light”: three 2,000-year-old Dead Sea Scrolls against one medieval copy.",
+    isHebrew: true,
+    focalMatch: "אור",
+    wordRange: [0, 6],
+    minYear: -300,
+    maxYear: 1200,
+    earlyCutoff: 100,
+    earlyZoneLabel: "Dead Sea Scrolls (2nd–1st c. BC)",
+    tickYears: [-300, 0, 300, 600, 900, 1200],
+    eraSummaries: [
+      "Dead Sea Scrolls: 1Qisaa, 1Q8, 4Q58 (c. 90 BC)",
+      "Leningrad Codex (L · AD 1009)",
+    ],
+    discountLateInBeat3: true,
+    beatCaptions: [
+      "<strong>3 manuscripts</strong> include the word “light” (“see light and be satisfied”), while <strong>1</strong> (the medieval Leningrad Codex behind older translations) omits it.",
+      "Sorted by date, those 3 manuscripts are <strong>Dead Sea Scrolls (c. 90 BC)</strong>, predating the Leningrad Codex (AD 1009) by more than a millennium.",
+      "Under the published specification, this model weights three ancient scrolls over a single copy written a millennium later, selecting “light” at <strong>&gt;99.9% original-text likelihood</strong>.",
+    ],
+    extraNote: "All 4 surviving witnesses at Isaiah 53:11 are intact at this phrase.",
+    laneLabels: ["Includes “light” (3)", "Omits “light” (1)"],
+    wordGlossOverrides: {
+      "וישבע": "and be satisfied",
+    },
+    readingGlossOverrides: ["light, and be satisfied", "be satisfied (omits “light”)"],
+  }),
+  buildShowcaseCase({
+    id: "1john-1-4",
+    bookId: "1John",
+    chIdx: 0,
+    ref: "1:4",
+    refLabel: "1 John 1:4",
+    tabHook: "“Your” or “our”?",
+    headline: "“Your joy” or “our joy”: a one-letter sound-alike where the oldest copies do not settle it.",
+    isHebrew: false,
+    focalMatch: "υμων",
+    wordRange: [0, 10],
+    minYear: 200,
+    maxYear: 1500,
+    earlyCutoff: 500,
+    earlyZoneLabel: "Early codices (AD 350–450)",
+    tickYears: [200, 500, 800, 1100, 1400],
+    eraSummaries: [
+      "Earliest: 02, 04 (c. AD 450), plus 6 later copies",
+      "Earliest: 01, 03 (c. AD 350), plus 3 later copies",
+    ],
+    discountLateInBeat3: false,
+    beatCaptions: [
+      "In Koine Greek, “your” (υμων) and “our” (ημων) sounded identical and differ by a single letter. Here, <strong>8 manuscripts</strong> write “your joy” while <strong>5</strong> write “our joy.”",
+      "Sorted by date, the two oldest codices (01 &amp; 03, c. AD 350) actually read “our,” while “your” begins a century later (02 &amp; 04, c. AD 450). Date alone does not settle a sound-alike slip.",
+      "Weighing whole-book reliability, independent witness support, and scribal slip patterns beyond date alone, this model selects “your” at <strong>71.2%</strong> while keeping <strong>28.8%</strong> probability on “our.”",
+    ],
+    extraNote: "Manuscript 323 is damaged at this word. Specifications can also weight surrounding context (“we write...”) and phonetic confusion models directly.",
+    laneLabels: ["“your” (8)", "“our” (5)"],
+    wordGlossOverrides: {
+      "γραφομεν": "we write",
+      "ημεις": "we",
+      "ινα": "so that",
+      "υμων": "your",
+      "ημων": "our",
+      "πεπληρωμενη": "complete",
+    },
+    wordGlossByIdx: {
+      8: "may be",
+    },
+    readingGlossOverrides: ["your", "our"],
+  }),
+].filter((x): x is ShowcaseCase => x !== null);
+
+const latestCompBase = latest ? compUrl(latest.compilationId).replace(/\/$/, "") : "/transcriptions";
+
+const featuredBooks = [
+  { id: "Gen", label: "Genesis" },
+  { id: "Ps", label: "Psalms" },
+  { id: "Isa", label: "Isaiah" },
+  { id: "Matt", label: "Matthew" },
+  { id: "Mark", label: "Mark" },
+  { id: "John", label: "John" },
+  { id: "Rom", label: "Romans" },
+  { id: "Rev", label: "Revelation" },
+];
 
 const witnessTypes = [
   {
@@ -54,67 +629,835 @@ const greekCount = stats.languages.Greek ?? 0;
 const hebrewCount = stats.languages.Hebrew ?? 0;
 ---
 <Layout title="Open Lexis" active="home">
-  <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">Open Biblical Manuscript Corpus</div>
-        <h1>Ancient manuscript transcriptions in their original languages.</h1>
-        <p class="lead">
-          An open archive of primary biblical manuscript transcriptions in Koine Greek, Biblical Hebrew, and Biblical Aramaic—paired with self-contained YAML specifications that bundle rules, target books, and permitted source metadata into a single file.
+  <!-- Clean Editorial Hero + Auto-Playing Animated Evidence Carousel -->
+  <section class="hero-editorial">
+    <div class="container">
+      <div class="hero-intro">
+        <div class="home-kicker">Open Manuscript Project</div>
+        <h1 class="hero-headline">
+          Ancient texts, assembled <span class="hero-accent">directly from primary manuscripts</span>, word by word.
+        </h1>
+        <p class="hero-sub">
+          The Bible survives across hundreds of ancient hand-copied manuscripts that do not always agree. Open Lexis applies statistical modeling directly to those primary manuscripts under published specifications, assembling the complete text word by word while keeping every witness, probability, and decision transparent.
         </p>
-        <div class="actions">
-          {latest ? (
-            <a href={`/outputs/${latest.specId}/${latest.compilationId}/`} class="btn btn-primary">
-              Read compiled output →
-            </a>
-          ) : (
-            <a href="/specifications/" class="btn btn-primary">
-              {specs.length === 1 ? "Read specification" : `View ${specs.length} specifications`}
-            </a>
-          )}
-          <a href="/specifications/" class="btn btn-secondary">
-            {specs.length === 1 ? "Specification" : `${specs.length} specifications`}
-          </a>
-          <a href="/sources/" class="btn btn-secondary">Explore {formatNum(stats.sourceCount)} sources</a>
-        </div>
       </div>
 
-      <div class="hero-metrics">
-        <div class="metric-card">
-          <div class="metric-value">{formatNum(stats.sourceCount)}</div>
-          <div class="metric-label">Primary sources <span style="display:block; font-size:0.76rem;">in spec <code title={spec.id}>{shortUlid(spec.id)}</code></span></div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">{formatNum(stats.totalXmlFiles)}</div>
-          <div class="metric-label">XML files in <code>src/</code> <span style="display:block; font-size:0.76rem;">across {stats.provenanceCount} institutions</span></div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">{stats.targetCount}</div>
-          <div class="metric-label">Target biblical books <span style="display:block; font-size:0.76rem;">to reconstruct</span></div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">{specs.length}</div>
-          <div class="metric-label">{specs.length === 1 ? "Specification" : "Specifications"} <span style="display:block; font-size:0.76rem;">immutable snapshots</span></div>
-        </div>
-        <div class="metric-card wide">
-          <div>
-            <div class="metric-value">{(stats.totalWords / 1_000_000).toFixed(1)}M</div>
-            <div class="metric-label">Transcribed words across {formatNum(stats.totalLines)} lines</div>
+      {showcaseCases.length > 0 && latest && (
+        <div class="showcase-card" id="hero-showcase" data-playing="true">
+          <div class="showcase-topbar">
+            <div class="showcase-tabs" role="tablist" aria-label="Real manuscript disagreements">
+              {showcaseCases.map((sc, idx) => (
+                <button
+                  type="button"
+                  role="tab"
+                  class={`showcase-tab${idx === 0 ? " active" : ""}`}
+                  aria-selected={idx === 0 ? "true" : "false"}
+                  data-case-tab={sc.id}
+                >
+                  <span class="showcase-tab-ref">{sc.refLabel}</span>
+                  <span class="showcase-tab-hook">{sc.tabHook}</span>
+                  <span class="showcase-tab-progress" aria-hidden="true"><span></span></span>
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              class="showcase-play-btn"
+              id="showcase-play-toggle"
+              aria-pressed="false"
+              title="Pause or resume automatic walkthrough"
+            >
+              <svg class="icon-pause" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+              <svg class="icon-play" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+              <span class="play-btn-label">Pause</span>
+            </button>
           </div>
-          <a href="/specifications/" class="badge badge-indigo">View specifications →</a>
+
+          {showcaseCases.map((sc, idx) => (
+            <div
+              class="showcase-pane"
+              data-case-pane={sc.id}
+              data-step="0"
+              data-visual="0"
+              hidden={idx !== 0}
+            >
+              <div class="showcase-pane-head">
+                <h2 class="showcase-title">{sc.headline}</h2>
+              </div>
+
+              <!-- Single-Line Verse Strip (puck scans word-by-word in authentic LTR/RTL reading direction) -->
+              <div class={`showcase-verse-box ${sc.isHebrew ? "verse-is-rtl" : "verse-is-ltr"}`}>
+                <div
+                  class={`showcase-stage ${sc.isHebrew ? "script-hebrew" : "script-greek"}`}
+                  dir={sc.isHebrew ? "rtl" : "ltr"}
+                >
+                  <span class="verse-scan-puck" aria-hidden="true"></span>
+                  <span class="sw-verse-num" dir="ltr" title={`Start of ${sc.refLabel}`}>{sc.verseNum}</span>
+                  {sc.words.map((w, wIdx) => (
+                    <a
+                      href={w.href}
+                      class={`showcase-word${w.isFocal ? " showcase-word-focal" : ""}`}
+                      data-word-idx={wIdx}
+                      data-focal={w.isFocal ? "true" : undefined}
+                      style={w.isFocal ? `--bar:${w.barWidth.toFixed(2)}` : undefined}
+                      title={`Inspect “${w.text}” (${w.gloss || w.rom}) in ${sc.refLabel}`}
+                    >
+                      <span class="sw-status-slot" dir="ltr" aria-hidden="true">
+                        {w.isFocal ? (
+                          <>
+                            <span class="sw-dot-idle"></span>
+                            <span class="sw-focal-tag">Disputed</span>
+                          </>
+                        ) : (
+                          <>
+                            <span class="sw-dot-idle"></span>
+                            <span class="sw-check-mark">✓</span>
+                          </>
+                        )}
+                      </span>
+                      <span class="sw-orig">{w.text}</span>
+                      <span class="sw-gloss" dir="ltr">{w.gloss || w.rom}</span>
+                    </a>
+                  ))}
+                  {sc.hasTrailingEllipsis && (
+                    <a
+                      href={sc.verseHref}
+                      class="sw-ellipsis"
+                      title={`Read all of ${sc.refLabel} in full reader`}
+                    >
+                      …
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <!-- 3-Beat Animated Evidence Storyboard -->
+              <div class="story-board">
+                <div class="story-steps-bar" role="group" aria-label="Walkthrough steps">
+                  <button type="button" class="story-step-btn" data-step-btn="1">
+                    <span class="step-fill" aria-hidden="true"></span>
+                    <span class="step-num">1</span>
+                    <span>The disagreement</span>
+                  </button>
+                  <span class="step-arrow" aria-hidden="true">→</span>
+                  <button type="button" class="story-step-btn" data-step-btn="2">
+                    <span class="step-fill" aria-hidden="true"></span>
+                    <span class="step-num">2</span>
+                    <span>Across the timeline</span>
+                  </button>
+                  <span class="step-arrow" aria-hidden="true">→</span>
+                  <button type="button" class="story-step-btn" data-step-btn="3">
+                    <span class="step-fill" aria-hidden="true"></span>
+                    <span class="step-num">3</span>
+                    <span>The model’s decision</span>
+                  </button>
+                </div>
+
+                <div class="story-caption-wrap" aria-live="polite">
+                  <p class="story-caption active" data-step-caption="0" data-scan-caption="scanning">
+                    Checking <strong>{sc.refLabel}</strong> word by word across surviving manuscripts…
+                  </p>
+                  <p class="story-caption" data-step-caption="0-hit" data-scan-caption="hit">
+                    Disagreement spotted at <strong>“{sc.readings[0]?.gloss}”</strong> in <strong>{sc.refLabel}</strong>: manuscripts split right here.
+                  </p>
+                  {sc.beatCaptions.map((cap, cIdx) => (
+                    <p
+                      class="story-caption"
+                      data-step-caption={cIdx + 1}
+                      set:html={cap}
+                    />
+                  ))}
+                </div>
+
+                <!-- Collapsible evidence drawer: collapsed while scanning words, smoothly expands when disagreement is uncovered -->
+                <div class="story-drawer">
+                  <div class="story-drawer-inner">
+                    <!-- Animated Manuscript Dot Canvas -->
+                    <div class={`story-canvas canvas-${sc.canvasSize}`}>
+                  <!-- Emerald focus band (fades in ONLY on Step 3 where early witnesses anchor the decision) -->
+                  {sc.showEarlyFocus && (
+                    <div
+                      class="story-early-zone"
+                      style={`width: ${sc.earlyZoneWidthPct}%`}
+                      aria-hidden="true"
+                    >
+                      <span class="story-early-label">{sc.earlyZoneLabel}</span>
+                    </div>
+                  )}
+
+                  <!-- Clean left-aligned reading lane headers (stay anchored on the left across all steps) -->
+                  <div class="story-lane-guide lane-guide-0" aria-hidden="true">
+                    <span class="lane-tag lane-tag-a">
+                      <span class="lane-swatch swatch-a"></span>
+                      <span>{sc.laneLabels[0]}</span>
+                    </span>
+                  </div>
+                  <div class="story-lane-guide lane-guide-1" aria-hidden="true">
+                    <span class="lane-tag lane-tag-b">
+                      <span class="lane-swatch swatch-b"></span>
+                      <span>{sc.laneLabels[1]}</span>
+                    </span>
+                  </div>
+
+                  <!-- Every real manuscript dot, cascading in Step 1 -> gliding to date & reliability in Step 2 -> weighted in Step 3 -->
+                  {sc.dots.map((dot) => (
+                    <span
+                      class={`story-dot dot-lane-${dot.lane}${dot.early ? " dot-early" : ""}${dot.discounted ? " dot-discounted" : ""}${dot.label ? " dot-has-label" : ""}`}
+                      style={`--x1:${dot.x1}%; --y1:${dot.y1}%; --x2:${dot.x2}%; --y2:${dot.y2}%; --fill-delay:${dot.fillDelayMs}ms; --q-scale:${dot.qScale}; --q-alpha:${dot.qAlpha};`}
+                      title={dot.title}
+                    >
+                      {dot.label && (
+                        <span class="dot-label">
+                          <span class="dot-label-s1">{dot.label}</span>
+                          <span class="dot-label-s2">{dot.labelTimeline ?? dot.label}</span>
+                        </span>
+                      )}
+                    </span>
+                  ))}
+
+                  <!-- Historical timeline axis (fades in on Step 2 & 3) -->
+                  <div class="story-axis" aria-hidden="true">
+                    <div class="story-axis-line"></div>
+                    {sc.ticks.map((tk) => (
+                      <span class="story-tick" style={`left:${tk.pct}%`}>
+                        <span>{tk.label}</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <!-- Structured Readings Breakdown: Neutral in Step 1-2, Chosen Reading Circled & Likelihoods Revealed in Step 3 -->
+                {sc.readings.length > 0 && (
+                  <div class="story-readings">
+                    <div class="story-rdg-header" aria-hidden="true">
+                      <span>Reading</span>
+                      <span>Surviving manuscripts</span>
+                      <span class="col-right">This model’s likelihood</span>
+                    </div>
+
+                    {sc.readings.map((r, rIdx) => (
+                      <div class={`story-rdg-row${r.chosen ? " is-chosen" : ""}`}>
+                        <div class="story-rdg-word-col">
+                          <span class={`lane-swatch ${rIdx === 0 ? "swatch-a" : "swatch-b"}`} aria-hidden="true"></span>
+                          <span class={`story-rdg-ring-wrap${r.chosen ? " has-chosen-ring" : ""}`}>
+                            <a href={sc.focalHref} class="story-rdg-word-link">
+                              <span class={`story-rdg-orig ${sc.isHebrew ? "script-hebrew" : "script-greek"}`} dir={sc.isHebrew ? "rtl" : "ltr"}>
+                                {r.text}
+                              </span>
+                              <span class="story-rdg-gloss">“{r.gloss}”</span>
+                            </a>
+                            {r.chosen && (
+                              <svg class="chosen-circle-svg" viewBox="0 0 220 52" preserveAspectRatio="none" aria-hidden="true">
+                                <path d="M 12,26 C 10,8 64,3 112,4 C 166,5 210,11 208,27 C 206,43 162,48 110,48 C 56,48 12,42 14,24" />
+                              </svg>
+                            )}
+                          </span>
+                          {r.chosen && <span class="story-chosen-pill">Chosen</span>}
+                        </div>
+
+                        <div class="story-rdg-copies-col">
+                          <div class="copies-primary">
+                            <strong>{formatNum(r.witCount)}</strong> {r.witCount === 1 ? "manuscript" : "manuscripts"}
+                            {sc.totalSurviving > 2 && (
+                              <span class="copies-share">({r.copySharePct}% of intact copies)</span>
+                            )}
+                          </div>
+                          <div class="copies-detail">
+                            {r.eraSummary}
+                            {r.notableWits.length > 0 && (
+                              <span class="copies-links">
+                                {" · "}
+                                {r.notableWits.map((sig, wIdx) => (
+                                  <>
+                                    <a
+                                      href={`/archive/?id=${encodeURIComponent(sig)}`}
+                                      class="sc-wit-text"
+                                      title={witTooltip(sig)}
+                                    >
+                                      {sig}
+                                    </a>
+                                    {wIdx < r.notableWits.length - 1 ? ", " : ""}
+                                  </>
+                                ))}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <div class="story-rdg-prob-col">
+                          <button type="button" class="prob-pending-btn" data-jump-step3>
+                            Weighed in step 3 →
+                          </button>
+                          <div class="prob-revealed-wrap">
+                            <ConfidenceBadge
+                              value={r.degree}
+                              kind="reading"
+                              interval={r.uncertainty}
+                              context={r.contextForHover}
+                              showLabel={true}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+
+                    {sc.extraNote && (
+                      <div class="story-extra-note">{sc.extraNote}</div>
+                    )}
+                  </div>
+                )}
+
+                    <div class="story-open-wrap">
+                      <div class="story-open-inner">
+                        <p class="story-open-question">
+                          <strong>More than a timeline.</strong> Under a published <a href="/specifications/">specification</a>, a model can weigh many signals together: manuscript age, whole-book reliability, lineage independence, spelling and sound-alike slips, and surrounding context. Each transcription reflects how its model applied those factors across all 66 books.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Subtle, low-profile source footer -->
+              <div class="showcase-footer">
+                <span>
+                  Computed by{" "}
+                  <a href={compUrl(latest.compilationId)}>
+                    {latest.manifest.compilation.title || latest.manifest.modelAttribution.modelName}
+                  </a>{" "}
+                  ({shortUlid(latest.compilationId)})
+                </span>
+                <a href={sc.focalHref} class="showcase-footer-action">
+                  Open {sc.refLabel} in reader →
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Editorial Thesis: The Gutenberg Parallel (with custom editorial SVG visuals) -->
+  <section class="section gutenberg-section">
+    <div class="container">
+      <div class="gutenberg-intro">
+        <div class="home-kicker">Why the Bible · Why Now</div>
+        <h2 class="gutenberg-headline">
+          What the Gutenberg press did for printing, Open Lexis does for recovering the text.
+        </h2>
+        <p class="gutenberg-lead">
+          When Gutenberg built the printing press, the first major book he printed was the Bible, making exact copies possible at massive scale. Open Lexis brings that same leap to the words themselves: weighing hundreds of thousands of words in seconds with total consistency, so newly discovered manuscripts can be included right away instead of waiting decades for a manual revision.
+        </p>
+      </div>
+
+      <div class="era-strip" aria-label="Three eras of preserving the Bible">
+        <div class="era-col">
+          <div class="era-visual" aria-hidden="true">
+            <svg viewBox="0 0 260 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Three cascading hand-copied manuscripts with tiny branching drift marks -->
+              <rect x="14" y="14" width="66" height="80" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+              <line x1="25" y1="30" x2="68" y2="30" stroke="#92400e" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+              <line x1="25" y1="42" x2="62" y2="42" stroke="#92400e" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+              <line x1="25" y1="54" x2="68" y2="54" stroke="#92400e" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+              <line x1="25" y1="66" x2="54" y2="66" stroke="#92400e" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+              <text x="47" y="84" text-anchor="middle" fill="#92400e" font-size="9" font-weight="700" font-family="Inter, sans-serif">Original</text>
+
+              <path d="M84 36 C96 36, 98 28, 110 28" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="3 2.5"/>
+              <path d="M84 62 C96 62, 98 72, 110 72" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="3 2.5"/>
+
+              <!-- Copy A (small drift) -->
+              <rect x="112" y="8" width="60" height="42" rx="5" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+              <line x1="121" y1="20" x2="162" y2="20" stroke="#64748b" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+              <line x1="121" y1="30" x2="143" y2="30" stroke="#64748b" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+              <rect x="147" y="26" width="15" height="8" rx="3" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+              <line x1="121" y1="40" x2="156" y2="40" stroke="#64748b" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+
+              <!-- Copy B (different drift) -->
+              <rect x="112" y="58" width="60" height="42" rx="5" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+              <line x1="121" y1="70" x2="138" y2="70" stroke="#64748b" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+              <rect x="142" y="66" width="18" height="8" rx="3" fill="#fffbeb" stroke="#d97706" stroke-width="1"/>
+              <line x1="121" y1="80" x2="162" y2="80" stroke="#64748b" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+              <line x1="121" y1="90" x2="150" y2="90" stroke="#64748b" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+
+              <!-- Branching out further -->
+              <path d="M175 28 L194 20 M175 34 L194 42 M175 78 L194 70 M175 84 L194 92" stroke="#cbd5e1" stroke-width="1.2"/>
+              <rect x="197" y="10" width="46" height="22" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+              <rect x="197" y="36" width="46" height="22" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+              <rect x="197" y="62" width="46" height="22" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+              <circle cx="220" cy="21" r="2.5" fill="#dc2626" opacity="0.65"/>
+              <circle cx="214" cy="47" r="2.5" fill="#d97706" opacity="0.7"/>
+              <circle cx="226" cy="47" r="2.5" fill="#dc2626" opacity="0.65"/>
+              <circle cx="218" cy="73" r="2.5" fill="#d97706" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="era-meta">
+            <span class="era-num">01</span>
+            <span class="era-date">Antiquity – 1450s</span>
+          </div>
+          <h3>Hand Copying</h3>
+          <p>
+            Generations of scribes copied the text by hand, preserving it across centuries while inevitably introducing spelling slips and wording differences.
+          </p>
+        </div>
+
+        <div class="era-col">
+          <div class="era-visual" aria-hidden="true">
+            <svg viewBox="0 0 260 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Movable type plate stamping identical printed Bibles -->
+              <rect x="18" y="16" width="70" height="76" rx="6" fill="#0f172a"/>
+              <rect x="26" y="25" width="54" height="58" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+              <line x1="33" y1="36" x2="73" y2="36" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round"/>
+              <line x1="33" y1="46" x2="73" y2="46" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round"/>
+              <line x1="33" y1="56" x2="68" y2="56" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round"/>
+              <line x1="33" y1="66" x2="73" y2="66" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round"/>
+              <text x="53" y="79" text-anchor="middle" fill="#94a3b8" font-size="8" font-weight="700" font-family="JetBrains Mono, monospace">1455 TYPE</text>
+
+              <!-- Arrow -->
+              <path d="M96 54 H124" stroke="#475569" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M119 49 L125 54 L119 59" stroke="#475569" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- Stack of exact printed copies -->
+              <rect x="166" y="26" width="66" height="68" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.3"/>
+              <rect x="152" y="20" width="66" height="68" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+              <rect x="138" y="14" width="66" height="68" rx="5" fill="#ffffff" stroke="#0f172a" stroke-width="1.5"/>
+              <line x1="148" y1="28" x2="194" y2="28" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+              <line x1="148" y1="38" x2="194" y2="38" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+              <line x1="148" y1="48" x2="188" y2="48" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+              <line x1="148" y1="58" x2="194" y2="58" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+              <rect x="148" y="67" width="46" height="9" rx="4.5" fill="#f1f5f9"/>
+              <text x="171" y="74" text-anchor="middle" fill="#475569" font-size="7" font-weight="700" font-family="Inter, sans-serif">EXACT COPIES</text>
+            </svg>
+          </div>
+          <div class="era-meta">
+            <span class="era-num">02</span>
+            <span class="era-date">1455</span>
+          </div>
+          <h3>The Gutenberg Press</h3>
+          <p>
+            Made exact printed copies possible at huge volume, starting with the Bible, while locking in whichever manuscripts were on hand at the time.
+          </p>
+        </div>
+
+        <div class="era-col era-col-now">
+          <div class="era-visual" aria-hidden="true">
+            <svg viewBox="0 0 260 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Many manuscripts + newly discovered scroll converging into consistent statistical lens -> verified text -->
+              <circle cx="24" cy="24" r="4" fill="#3730a3" opacity="0.85"/>
+              <circle cx="38" cy="18" r="3.5" fill="#3730a3" opacity="0.65"/>
+              <circle cx="20" cy="40" r="3.5" fill="#475569" opacity="0.6"/>
+              <circle cx="36" cy="36" r="4" fill="#3730a3" opacity="0.8"/>
+              <circle cx="24" cy="56" r="3.5" fill="#475569" opacity="0.55"/>
+              <circle cx="38" cy="60" r="3.5" fill="#475569" opacity="0.5"/>
+              <circle cx="26" cy="74" r="3.5" fill="#475569" opacity="0.5"/>
+
+              <!-- Newly discovered manuscript pill -->
+              <rect x="12" y="84" width="60" height="16" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.2"/>
+              <text x="42" y="95" text-anchor="middle" fill="#047857" font-size="7.5" font-weight="700" font-family="Inter, sans-serif">+ New Scroll</text>
+
+              <!-- Converging streams -->
+              <path d="M44 26 C72 26, 78 48, 102 52" stroke="#6366f1" stroke-width="1.4" opacity="0.55"/>
+              <path d="M44 52 C70 52, 80 54, 102 54" stroke="#64748b" stroke-width="1.4" opacity="0.45"/>
+              <path d="M72 91 C86 88, 90 62, 102 58" stroke="#059669" stroke-width="1.5" stroke-dasharray="3 2"/>
+
+              <!-- Statistical analysis prism -->
+              <rect x="104" y="30" width="44" height="48" rx="10" fill="#eef2ff" stroke="#3730a3" stroke-width="1.6"/>
+              <path d="M115 62 L122 52 L128 57 L137 44" stroke="#3730a3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="137" cy="44" r="2.5" fill="#059669"/>
+
+              <!-- Output stream -->
+              <path d="M150 54 H172" stroke="#3730a3" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M167 49 L173 54 L167 59" stroke="#3730a3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- Consistent verified text -->
+              <rect x="177" y="14" width="68" height="80" rx="6" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+              <line x1="187" y1="28" x2="225" y2="28" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="234" cy="28" r="3" fill="#059669"/>
+              <line x1="187" y1="40" x2="225" y2="40" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="234" cy="40" r="3" fill="#059669"/>
+              <line x1="187" y1="52" x2="225" y2="52" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="234" cy="52" r="3" fill="#d97706"/>
+              <line x1="187" y1="64" x2="225" y2="64" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="234" cy="64" r="3" fill="#059669"/>
+              <rect x="187" y="75" width="48" height="11" rx="5.5" fill="#ecfdf5"/>
+              <text x="211" y="83" text-anchor="middle" fill="#047857" font-size="7.2" font-weight="700" font-family="Inter, sans-serif">CONSISTENT</text>
+            </svg>
+          </div>
+          <div class="era-meta">
+            <span class="era-num">03</span>
+            <span class="era-date">Today</span>
+          </div>
+          <h3>Instant Analysis at Scale</h3>
+          <p>
+            Weighs {(stats.totalWords / 1_000_000).toFixed(1)}M words across {formatNum(stats.sourceCount)} manuscripts in seconds with complete consistency, ready to incorporate new evidence immediately.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Auditability Contrast: Manual Scale vs. Instant Open Audit -->
   <section class="section">
     <div class="container">
       <div class="section-head">
         <div>
-          <h2>Source Corpus Breakdown</h2>
+          <div class="home-kicker">Open Auditability</div>
+          <h2>Built so anyone can check the work.</h2>
           <p class="section-sub">
-            All {formatNum(stats.sourceCount)} primary sources and {stats.targetCount} target books for <a href={`/specifications/${spec.id}/`}>specification <code title={spec.id}>{shortUlid(spec.id)}</code></a>, indexed across {stats.provenanceCount} institutions totaling {formatNum(stats.totalXmlFiles)} XML files.
+            Whether you are an institution auditing your own editorial standards, a scholar testing a rival model, or a complete newcomer curious about a single verse, Open Lexis surfaces every judgment clearly and verifies consistency across all 66 books.
           </p>
+        </div>
+      </div>
+
+      <div class="audit-compare">
+        <div class="audit-col audit-old">
+          <div class="audit-visual" aria-hidden="true">
+            <svg viewBox="0 0 420 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Manuscripts -->
+              <rect x="14" y="28" width="84" height="58" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+              <line x1="28" y1="44" x2="82" y2="44" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+              <line x1="28" y1="56" x2="74" y2="56" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+              <line x1="28" y1="68" x2="80" y2="68" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+              <text x="56" y="102" text-anchor="middle" fill="#64748b" font-size="10" font-weight="600" font-family="Inter, sans-serif">Manuscripts</text>
+
+              <path d="M104 57 H144" stroke="#cbd5e1" stroke-width="1.6" stroke-dasharray="4 3"/>
+              <path d="M139 52 L145 57 L139 62" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- Manual Review Workflow -->
+              <rect x="150" y="20" width="120" height="74" rx="10" fill="#334155"/>
+              <circle cx="210" cy="44" r="11" fill="#475569"/>
+              <path d="M206 44 H214 M210 40 V48" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
+              <circle cx="210" cy="44" r="5" stroke="#e2e8f0" stroke-width="1.4"/>
+              <path d="M210 41.5 V44.5 L212 45.5" stroke="#e2e8f0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="210" y="72" text-anchor="middle" fill="#f8fafc" font-size="10" font-weight="700" font-family="Inter, sans-serif">Manual Review</text>
+              <text x="210" y="85" text-anchor="middle" fill="#cbd5e1" font-size="8.4" font-family="Inter, sans-serif">Hard to audit at scale</text>
+
+              <path d="M276 57 H316" stroke="#cbd5e1" stroke-width="1.6" stroke-dasharray="4 3"/>
+              <path d="M311 52 L317 57 L311 62" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- Final text with unverified consistency badge -->
+              <rect x="322" y="28" width="84" height="58" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+              <line x1="336" y1="45" x2="380" y2="45" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+              <line x1="336" y1="57" x2="390" y2="57" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+              <line x1="336" y1="69" x2="372" y2="69" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="394" cy="36" r="10" fill="#fffbeb" stroke="#d97706" stroke-width="1.4"/>
+              <text x="394" y="40" text-anchor="middle" fill="#b45309" font-size="11" font-weight="800" font-family="Inter, sans-serif">?</text>
+              <text x="364" y="102" text-anchor="middle" fill="#64748b" font-size="10" font-weight="600" font-family="Inter, sans-serif">Published Text</text>
+            </svg>
+          </div>
+          <div class="audit-label">Traditional Workflow · Hard to Audit at Scale</div>
+          <h3>Even careful teams struggle to verify every call</h3>
+          <ul class="audit-list">
+            <li>Institutions and committees lack a fast way to confirm that stated rules were applied consistently across hundreds of thousands of words.</li>
+            <li>Readers can see the final printed text, but tracing the exact weighing behind each individual decision takes deep specialized effort.</li>
+            <li>Incorporating newly discovered manuscripts cleanly across an entire corpus takes years of manual review.</li>
+          </ul>
+        </div>
+
+        <div class="audit-col audit-new">
+          <div class="audit-visual" aria-hidden="true">
+            <svg viewBox="0 0 420 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Raw Manuscripts -->
+              <rect x="14" y="22" width="84" height="56" rx="8" fill="#ffffff" stroke="#3730a3" stroke-width="1.5"/>
+              <line x1="28" y1="38" x2="82" y2="38" stroke="#3730a3" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+              <line x1="28" y1="50" x2="74" y2="50" stroke="#3730a3" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+              <line x1="28" y1="62" x2="80" y2="62" stroke="#3730a3" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+              <text x="56" y="93" text-anchor="middle" fill="#3730a3" font-size="9.5" font-weight="700" font-family="Inter, sans-serif">Raw Manuscripts</text>
+
+              <path d="M102 50 H142" stroke="#3730a3" stroke-width="1.6"/>
+              <path d="M137 45 L143 50 L137 55" stroke="#3730a3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- Transparent Rules & Weighting -->
+              <rect x="148" y="16" width="124" height="68" rx="10" fill="#eef2ff" stroke="#3730a3" stroke-width="1.6"/>
+              <rect x="162" y="30" width="96" height="8" rx="4" fill="#ffffff"/>
+              <rect x="162" y="30" width="74" height="8" rx="4" fill="#3730a3" opacity="0.8"/>
+              <rect x="162" y="45" width="96" height="8" rx="4" fill="#ffffff"/>
+              <rect x="162" y="45" width="52" height="8" rx="4" fill="#059669" opacity="0.85"/>
+              <text x="210" y="72" text-anchor="middle" fill="#312e81" font-size="9.5" font-weight="700" font-family="Inter, sans-serif">Stated Open Rules</text>
+
+              <path d="M276 50 H316" stroke="#059669" stroke-width="1.6"/>
+              <path d="M311 45 L317 50 L311 55" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- Verified Text -->
+              <rect x="322" y="22" width="84" height="56" rx="8" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+              <line x1="336" y1="38" x2="380" y2="38" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+              <line x1="336" y1="50" x2="388" y2="50" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+              <line x1="336" y1="62" x2="372" y2="62" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="394" cy="30" r="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+              <path d="M390 30 L393 33 L398 27" stroke="#047857" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="364" y="93" text-anchor="middle" fill="#047857" font-size="9.5" font-weight="700" font-family="Inter, sans-serif">Verified Text</text>
+
+              <!-- Instant audit feedback loop along bottom -->
+              <path d="M364 100 C364 112, 210 112, 210 92" stroke="#059669" stroke-width="1.4" stroke-dasharray="3 2.5"/>
+              <path d="M206 96 L210 90 L214 96" stroke="#059669" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="242" y="97" width="90" height="15" rx="7.5" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+              <text x="287" y="107" text-anchor="middle" fill="#047857" font-size="8" font-weight="700" font-family="Inter, sans-serif">INSTANT AUDIT ✓</text>
+            </svg>
+          </div>
+          <div class="audit-label audit-label-open">With Open Lexis · Open &amp; Verifiable for Everyone</div>
+          <h3>Straightforward decisions anyone can check</h3>
+          <ul class="audit-list">
+            <li><strong>Useful for authorities and newcomers alike:</strong> Institutions can audit editorial standards, scholars can compare modeling approaches, and curious readers can inspect any word at a glance.</li>
+            <li><strong>Verified consistency:</strong> Every verse and book follows the same published specification, verified programmatically across the entire corpus.</li>
+            <li><strong>Readily surfaced evidence:</strong> Assembled strictly from primary manuscripts (never printed editions or commentary), with every source and uncertainty range kept right beside the text.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Visual Language Explainer (Two-Slider Control) -->
+  <section class="section" style="padding-top: 8px; border-top: 0;">
+    <div class="container">
+      <div class="signal-card">
+        <div class="signal-copy">
+          <div class="signal-eyebrow">Reading the Marks</div>
+          <h2>Uncertainty at a glance.</h2>
+          <p>
+            Every word carries a tiny mark above it. <strong>Wider means more uncertainty</strong> (a dot when there is little uncertainty, stretching into a wide bar as uncertainty grows), and <strong>color</strong> shows how much surviving manuscripts differ. Even a unanimous green word can carry a wide bar when only a single late manuscript survives.
+          </p>
+
+          <div class="signal-sliders">
+            <div class="signal-slider-wrap">
+              <div class="signal-slider-head">
+                <label for="demo-conf-slider">Uncertainty (mark width)</label>
+                <span id="demo-conf-slot">
+                  <ConfidenceBadge
+                    value={0.54}
+                    kind="reading"
+                    integer={true}
+                    context="Simulated reading likelihood in the interactive preview"
+                  />
+                </span>
+              </div>
+              <input
+                type="range"
+                id="demo-conf-slider"
+                min="0"
+                max="49"
+                value="46"
+                aria-label="Slide from little uncertainty to high uncertainty"
+              />
+              <div class="signal-slider-scale">
+                <span>Little uncertainty (dot)</span>
+                <span>High uncertainty (wide bar)</span>
+              </div>
+            </div>
+
+            <div class="signal-slider-wrap">
+              <div class="signal-slider-head">
+                <label for="demo-sev-slider">Manuscript difference (color)</label>
+                <span class="signal-sev-pill" id="demo-sev-pill" data-sev="5">
+                  <span class="signal-sev-swatch" aria-hidden="true"></span>
+                  <span id="demo-sev-label">5/5 Major (meaning)</span>
+                </span>
+              </div>
+              <input
+                type="range"
+                id="demo-sev-slider"
+                min="0"
+                max="5"
+                step="1"
+                value="5"
+                aria-label="Slide from unanimous to severity level 5"
+              />
+              <div class="signal-sev-ticks" aria-hidden="true">
+                <span>Unanimous</span>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5 Major</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="signal-demo">
+          <div class="signal-live-stage" id="demo-live-stage" data-sev="5">
+            <span class="signal-live-kicker">Interactive preview</span>
+            <span class="demo-word demo-word-live script-hebrew" dir="rtl" id="demo-live-word" data-sev="5" style="--bar: 0.94;">הַשְּׁבִיעִי</span>
+            <span class="signal-live-status" id="demo-live-status">
+              <strong>54% likely original</strong> · Level 5 major meaning change
+            </span>
+          </div>
+
+          <div class="signal-demo-row">
+            <a href={`${latestCompBase}/John/#v-1-1-w6`} class="demo-chip">
+              <span class="demo-word" data-sev="0">λογος</span>
+              <span class="demo-caption"><strong>Unanimous</strong> · John 1:1</span>
+            </a>
+            <a href={`${latestCompBase}/John/#v-1-18-w3`} class="demo-chip">
+              <span class="demo-word" data-sev="1" style="--bar: 0.45;">μονογενης</span>
+              <span class="demo-caption"><strong>Spelling</strong> · John 1:18</span>
+            </a>
+            <a href={`${latestCompBase}/John/#v-1-20-w4`} class="demo-chip">
+              <span class="demo-word" data-sev="3" style="--bar: 0.65;">εγω</span>
+              <span class="demo-caption"><strong>Omission</strong> · John 1:20</span>
+            </a>
+            <a href={`${latestCompBase}/Gen/#v-2-2-w4`} class="demo-chip">
+              <span class="demo-word script-hebrew" dir="rtl" data-sev="5" style="--bar: 0.94;">הַשְּׁבִיעִי</span>
+              <span class="demo-caption"><strong>Meaning split</strong> · Gen 2:2</span>
+            </a>
+          </div>
+          <div class="signal-demo-foot">
+            <span>Drag the two sliders on the left, or click any real verse above to open it</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Published Transcriptions: Biblical Corpus -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="home-kicker">Transcriptions</div>
+          <h2>Read the assembled transcriptions.</h2>
+          <p class="section-sub">
+            Every book is already assembled and ready to read, with interlinear glosses, surviving witnesses, and model probabilities available on any word whenever you want a closer look.
+          </p>
+        </div>
+        <a href="/transcriptions/" class="btn btn-secondary">All transcriptions →</a>
+      </div>
+
+      {latest && (
+        <div class="featured-comp">
+          <div class="featured-comp-head">
+            <div>
+              <div class="meta-line">
+                Latest transcription · {latest.manifest.totals.books} books · {latest.manifest.modelAttribution.modelName} · <a href={specUrl(latest.specId)}>Rulebook {shortUlid(latest.specId)}</a>
+              </div>
+              <h3>
+                <a href={compUrl(latest.compilationId)} style="color: var(--ink);">
+                  {latest.manifest.compilation.title || latest.manifest.modelAttribution.modelName}
+                </a>
+              </h3>
+              <p class="featured-comp-sub">
+                {latest.manifest.compilation.summary || latest.manifest.method.summary}
+              </p>
+            </div>
+            <a href={compUrl(latest.compilationId)} class="btn btn-primary">
+              Browse books →
+            </a>
+          </div>
+
+          <div class="quick-books">
+            <span class="quick-books-label">Jump right in:</span>
+            {featuredBooks.map((fb, idx) => (
+              <>
+                <a
+                  href={bookUrl(latest.compilationId, fb.id)}
+                  class="quick-book-link"
+                >
+                  {fb.label}
+                </a>
+                {idx < featuredBooks.length - 1 && <span class="quick-book-sep" aria-hidden="true">·</span>}
+              </>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {compilations.length > 1 && (
+        <div class="other-comps">
+          {compilations.slice(1, 4).map((c) => (
+            <a href={compUrl(c.compilationId)} class="other-comp-card">
+              <div class="other-comp-top">
+                <strong>{c.manifest.compilation.title || c.manifest.modelAttribution.modelName}</strong>
+                <span class="other-comp-arrow">Read →</span>
+              </div>
+              <span class="other-comp-meta">
+                {c.manifest.modelAttribution.modelName}
+                {c.manifest.compilation.subtitle ? ` · ${c.manifest.compilation.subtitle}` : ""}
+                {formatAuthor(c.manifest.compilation.author) ? ` · ${formatAuthor(c.manifest.compilation.author)}` : ""}
+                {` · ${formatNum(c.manifest.totals.variantPlaces)} places manuscripts differ`}
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Specifications -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="home-kicker">Open Rulebooks</div>
+          <h2>Every decision follows a published specification.</h2>
+          <p class="section-sub">
+            Each specification pins the exact manuscripts included and the statistical standards a model must satisfy, keeping every transcription traceable and open to independent replication or new specifications.
+          </p>
+        </div>
+        <a href="/specifications/" class="btn btn-secondary">All specifications →</a>
+      </div>
+
+      <div class="home-spec-grid">
+        {specs.map((s) => {
+          const comps = getCompilationsForSpec(s.id);
+          const dateStr = formatUlidDate(s.id);
+          return (
+            <a href={specUrl(s.id)} class="spec-card">
+              <div class="spec-card-top">
+                <h3 class="spec-card-title">{s.title}</h3>
+                <span class="spec-card-cta">Read rulebook →</span>
+              </div>
+              <p class="spec-card-summary">{s.summary}</p>
+              <div class="spec-meta-line">
+                {[
+                  dateStr,
+                  `${formatNum(s.targets.length)} books`,
+                  `${formatNum(s.sources.length)} manuscripts`,
+                  `${comps.length} ${comps.length === 1 ? "transcription" : "transcriptions"}`,
+                  shortUlid(s.id),
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Primary Evidence Archive -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="home-kicker">Archive</div>
+          <h2>Grounded in {formatNum(stats.sourceCount)} ancient manuscripts.</h2>
+          <p class="section-sub">
+            From 3rd-century BC Dead Sea Scrolls through medieval codices across {stats.provenanceCount} archival institutions, with every manuscript preserved verbatim and open to inspect.
+          </p>
+        </div>
+        <a href="/archive/" class="btn btn-secondary">Search the archive →</a>
+      </div>
+
+      <div class="proof-strip">
+        <div class="proof-stat">
+          <div class="proof-val">{formatNum(stats.sourceCount)}</div>
+          <div class="proof-lbl">Ancient manuscripts</div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-val">{stats.targetCount}</div>
+          <div class="proof-lbl">Biblical books</div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-val">{(stats.totalWords / 1_000_000).toFixed(1)}M</div>
+          <div class="proof-lbl">Manuscript words</div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-val">{stats.provenanceCount}</div>
+          <div class="proof-lbl">Archival institutions</div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-val">{latest ? formatNum(latest.manifest.totals.variantPlaces) : formatNum(stats.totalXmlFiles)}</div>
+          <div class="proof-lbl">{latest ? "Places manuscripts differ" : "Source files"}</div>
         </div>
       </div>
 
@@ -122,8 +1465,8 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         <div class="panel">
           <div class="panel-head">
             <div>
-              <h3>By Witness Type</h3>
-              <p class="panel-sub">How the {formatNum(stats.sourceCount)} primary sources preserve the biblical text.</p>
+              <h3>Types of Manuscripts</h3>
+              <p class="panel-sub">How the {formatNum(stats.sourceCount)} ancient manuscripts preserve the text.</p>
             </div>
           </div>
 
@@ -134,33 +1477,22 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
                 <div class="breakdown-item">
                   <div class={`icon-box icon-${row.color}`} aria-hidden="true">
                     {row.key === "continuous" && (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
-                      </svg>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
                     )}
                     {row.key === "scroll" && (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4"/>
-                        <path d="M19 17V5a2 2 0 0 0-2-2H4"/>
-                      </svg>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/></svg>
                     )}
                     {row.key === "lectionary" && (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2"/>
-                        <path d="M16 2v4M8 2v4M3 10h18M8 14h8M8 18h5"/>
-                      </svg>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h8M8 18h5"/></svg>
                     )}
                     {row.key === "catena" && (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <path d="M14 2v6h6M8 13h8M8 17h5"/>
-                      </svg>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
                     )}
                   </div>
                   <div>
                     <div class="item-top">
-                      <a href={`/sources/?type=${row.key}`} class="item-title">{row.label}</a>
-                      <span class="item-count">{formatNum(row.count)} <span>({pct}%)</span></span>
+                      <a href={`/archive/?type=${row.key}`} class="item-title">{row.label}</a>
+                      <span class="item-count">{formatNum(row.count)} <span>({pct}% of archive)</span></span>
                     </div>
                     <p class="item-desc">{row.desc}</p>
                     <div class="bar-track">
@@ -177,24 +1509,22 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           <div class="panel-head">
             <div>
               <h3>By Ancient Language</h3>
-              <p class="panel-sub">Original languages of the {stats.targetCount} target books and {formatNum(stats.sourceCount)} sources.</p>
+              <p class="panel-sub">Original languages across the {stats.targetCount} currently indexed books.</p>
             </div>
           </div>
 
           <div class="item-list">
             <div class="breakdown-item">
               <div class="icon-box icon-sky" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 20h16M7 16V6a5 5 0 0 1 10 0v10"/>
-                </svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M7 16V6a5 5 0 0 1 10 0v10"/></svg>
               </div>
               <div>
                 <div class="item-top">
-                  <a href="/sources/?language=Greek" class="item-title">Koine Greek</a>
-                  <span class="item-count">{formatNum(greekCount)} sources <span>· {stats.ntCount} target books</span></span>
+                  <a href="/archive/?language=Greek" class="item-title">Koine Greek</a>
+                  <span class="item-count">{formatNum(greekCount)} manuscripts <span>· {stats.ntCount} NT books</span></span>
                 </div>
                 <p class="item-desc">
-                  The common ancient Greek of the Hellenistic and Roman Mediterranean (1st–4th centuries AD), in which the New Testament was written.
+                  Hellenistic and Roman Mediterranean Greek of the New Testament, from 2nd-century papyri (P52, P46, P66, P75) to Sinaiticus and Vaticanus.
                 </p>
                 <div class="bar-track">
                   <div class="bar-fill fill-sky" style={`width: ${Math.round((greekCount / stats.sourceCount) * 100)}%`}></div>
@@ -204,17 +1534,15 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
 
             <div class="breakdown-item">
               <div class="icon-box icon-amber" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 6h14M17 6v12M8 10v8"/>
-                </svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M17 6v12M8 10v8"/></svg>
               </div>
               <div>
                 <div class="item-top">
-                  <a href="/sources/?language=Hebrew" class="item-title">Biblical Hebrew</a>
-                  <span class="item-count">{formatNum(hebrewCount)} sources <span>· {stats.otCount} target books</span></span>
+                  <a href="/archive/?language=Hebrew" class="item-title">Biblical Hebrew</a>
+                  <span class="item-count">{formatNum(hebrewCount)} manuscripts <span>· {stats.otCount} OT books</span></span>
                 </div>
                 <p class="item-desc">
-                  Ancient Classical Hebrew of the Old Testament, preserved in the Leningrad Codex, Samaritan Pentateuch, and Dead Sea Scrolls.
+                  Ancient Classical Hebrew preserved across the Dead Sea Scrolls, Samaritan Pentateuch, and the Leningrad Codex.
                 </p>
                 <div class="bar-track">
                   <div class="bar-fill fill-amber" style={`width: ${Math.round((hebrewCount / stats.sourceCount) * 100)}%`}></div>
@@ -224,18 +1552,15 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
 
             <div class="breakdown-item">
               <div class="icon-box icon-violet" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="9"/>
-                  <path d="M3.6 9h16.8M3.6 15h16.8M12 3a14.5 14.5 0 0 0 0 18M12 3a14.5 14.5 0 0 1 0 18"/>
-                </svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a14.5 14.5 0 0 0 0 18M12 3a14.5 14.5 0 0 0 0 18"/></svg>
               </div>
               <div>
                 <div class="item-top">
-                  <a href="/specifications/#embedded-targets" class="item-title">Biblical Aramaic</a>
-                  <span class="item-count">{stats.aramaicTargetCount} target books <span>(OT sections)</span></span>
+                  <a href={`${specUrl(spec.id)}#embedded-targets`} class="item-title">Biblical Aramaic</a>
+                  <span class="item-count">{stats.aramaicTargetCount} books <span>(OT sections)</span></span>
                 </div>
                 <p class="item-desc">
-                  Ancient Imperial Aramaic closely related to Hebrew, used in passages of {stats.aramaicTargetNames.join(", ")} and preserved within the Old Testament sources.
+                  Imperial Aramaic sections of {stats.aramaicTargetNames.join(", ")}, tagged and preserved alongside the Hebrew witnesses.
                 </p>
                 <div class="bar-track">
                   <div class="bar-fill fill-violet" style="width: 6%"></div>
@@ -245,59 +1570,494 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           </div>
 
           <div class="panel-foot">
-            <a href="/specifications/#embedded-targets" class="btn btn-secondary">Inspect {stats.targetCount} target books</a>
-            <a href="/sources/" class="btn btn-secondary">Explore all {formatNum(stats.sourceCount)} sources</a>
+            <a href="/specifications/" class="btn btn-secondary">Read specifications</a>
+            <a href="/archive/" class="btn btn-secondary">Explore the archive →</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      {compilations.length > 0 ? (
-        <div class="panel">
-          <div class="panel-head">
-            <div>
-              <h3>Compiled Outputs ({compilations.length})</h3>
-              <p class="panel-sub">
-                TEI P5 XML compilations generated under the specifications in <code>specifications/</code> and published under <code>outputs/</code>.
-              </p>
-            </div>
-            <a href="/outputs/" class="btn btn-secondary">All outputs →</a>
-          </div>
-          <div class="item-list">
-            {compilations.slice(0, 5).map((c) => (
-              <div class="callout" style="margin: 0;">
-                <div>
-                  <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 6px;">
-                    <a href={`/outputs/${c.specId}/${c.compilationId}/`} style="font-weight: 700; font-size: 1.02rem; color: var(--ink);">
-                      {c.manifest.compilation.title || c.manifest.modelAttribution.modelName}
-                    </a>
-                    <code title={c.compilationId}>{shortUlid(c.compilationId)}</code>
-                    <span class="badge badge-emerald">{c.manifest.totals.books} books</span>
-                    <span class="badge badge-indigo">{c.manifest.modelAttribution.modelName}</span>
-                  </div>
-                  <p style="margin: 0; color: var(--ink-secondary); font-size: 0.9rem;">
-                    {c.manifest.compilation.subtitle ? `${c.manifest.compilation.subtitle} · ` : ""}{formatAuthor(c.manifest.compilation.author) ? `${formatAuthor(c.manifest.compilation.author)} · ` : ""}Spec <code title={c.specId}>{shortUlid(c.specId)}</code> · {formatNum(c.manifest.totals.words)} words
-                  </p>
-                </div>
-                <a href={`/outputs/${c.specId}/${c.compilationId}/`} class="btn btn-primary">Explore →</a>
-              </div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div class="callout">
-          <div>
-            <h3>Compiled Outputs: Not Yet Published</h3>
-            <p>
-              This site currently presents the primary XML corpus in <code>src/</code> and the self-contained specification YAML in <code>specifications/</code>. Compiled outputs under <code>outputs/</code> will appear here once published.
-            </p>
-          </div>
-          <a href="/specifications/" class="btn btn-secondary">View specification →</a>
-        </div>
-      )}
-    </div>
-  </section>
+  <script>
+    import { renderConfidenceBadgeHtml } from "../lib/confidence";
+
+    // Auto-playing 4-phase animated evidence carousel with read-first choreography:
+    // 0: steady word-by-word check scan -> disputed word highlighted & alert pulses for standard reading time
+    // 1: breakdown drawer pops open & wording lanes populate
+    // 2: Step 2 caption pulses so reader reads first -> dots glide onto historical timeline
+    // 3: Step 3 decision pulses in emerald so reader reads first -> chart turns green & circles the answer
+    const showcase = document.getElementById("hero-showcase");
+    const tabs = [...document.querySelectorAll<HTMLButtonElement>("[data-case-tab]")];
+    const panes = [...document.querySelectorAll<HTMLElement>("[data-case-pane]")];
+    const playToggle = document.getElementById("showcase-play-toggle") as HTMLButtonElement | null;
+
+    const WORD_SCAN_MS = 540;       // standard time moving focus from word to word
+    const DISPUTED_READ_MS = 2600;  // standard highlight + reading time before breakdown pops up
+    const STEP_VISUAL_DELAY: Record<number, number> = {
+      1: 0,     // drawer pops open as soon as Step 0's read time completes
+      2: 2600,  // pulse & read Step 2 caption first, then glide dots onto timeline
+      3: 2800,  // pulse & read Step 3 decision first, then activate emerald & circle answer
+    };
+    const STEP_BASE_DURATIONS: Record<number, number> = {
+      1: 8200,
+      2: 10400,
+      3: 11800,
+    };
+
+    function getFocalWordIndex(pane: HTMLElement | undefined): number {
+      if (!pane) return 0;
+      const words = [...pane.querySelectorAll<HTMLElement>(".showcase-word")];
+      const idx = words.findIndex((w) => w.dataset.focal === "true");
+      return idx >= 0 ? idx : 0;
+    }
+
+    function getStepDuration(caseIdx: number, step: number): number {
+      if (step === 0) {
+        const focalIdx = getFocalWordIndex(panes[caseIdx]);
+        return focalIdx * WORD_SCAN_MS + DISPUTED_READ_MS;
+      }
+      return STEP_BASE_DURATIONS[step] ?? 8200;
+    }
+
+    function getTotalCaseMs(caseIdx: number): number {
+      return (
+        getStepDuration(caseIdx, 0) +
+        getStepDuration(caseIdx, 1) +
+        getStepDuration(caseIdx, 2) +
+        getStepDuration(caseIdx, 3)
+      );
+    }
+
+    let currentCaseIdx = 0;
+    let currentStep = 0;
+    let currentVisual = 0;
+    let hitPulseFired = false;
+    let lastScanWordIdx = -1;
+    let userPaused = false;
+    let holdUntil = 0;
+    let tabHoldOnStep1 = false;
+    let readingTooltip = false;
+    let showcaseInView = true;
+    let stepElapsed = 0;
+    let lastTick = performance.now();
+
+    function clearCaptionPulse(pane: HTMLElement | undefined) {
+      const wrap = pane?.querySelector<HTMLElement>(".story-caption-wrap");
+      if (!wrap) return;
+      wrap.classList.remove("pulse-disputed", "pulse-accent", "pulse-emerald");
+    }
+
+    function pulseCaption(pane: HTMLElement | undefined, tone: "disputed" | "accent" | "emerald") {
+      const wrap = pane?.querySelector<HTMLElement>(".story-caption-wrap");
+      if (!wrap) return;
+      wrap.classList.remove("pulse-disputed", "pulse-accent", "pulse-emerald");
+      void wrap.offsetWidth;
+      wrap.classList.add(`pulse-${tone}`);
+    }
+
+    function syncChosenCircles() {
+      panes.forEach((pane) => {
+        if (pane.hidden) return;
+        pane.querySelectorAll<HTMLElement>(".story-rdg-ring-wrap.has-chosen-ring").forEach((wrap) => {
+          const svg = wrap.querySelector<SVGSVGElement>(".chosen-circle-svg");
+          const path = svg?.querySelector<SVGPathElement>("path");
+          if (!svg || !path) return;
+          const rw = wrap.offsetWidth;
+          const rh = wrap.offsetHeight;
+          if (!rw || !rh) return;
+
+          const padX = 10;
+          const padY = 6;
+          const w = rw + padX * 2;
+          const h = rh + padY * 2;
+
+          svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+          svg.removeAttribute("preserveAspectRatio");
+
+          const xL = 3;
+          const xR = w - 3;
+          const yT = 3;
+          const yB = h - 3;
+          const cx = w * 0.5;
+          const cy = h * 0.5;
+          const d = [
+            `M ${(xL + 2).toFixed(1)},${(cy + 1).toFixed(1)}`,
+            `C ${xL.toFixed(1)},${(yT + 2).toFixed(1)} ${(w * 0.24).toFixed(1)},${yT.toFixed(1)} ${cx.toFixed(1)},${(yT + 0.6).toFixed(1)}`,
+            `C ${(w * 0.78).toFixed(1)},${(yT + 1.2).toFixed(1)} ${xR.toFixed(1)},${(yT + 3.5).toFixed(1)} ${(xR - 0.5).toFixed(1)},${cy.toFixed(1)}`,
+            `C ${(xR - 1).toFixed(1)},${(yB - 2.5).toFixed(1)} ${(w * 0.76).toFixed(1)},${yB.toFixed(1)} ${cx.toFixed(1)},${(yB - 0.5).toFixed(1)}`,
+            `C ${(w * 0.22).toFixed(1)},${(yB - 1).toFixed(1)} ${(xL + 0.5).toFixed(1)},${(yB - 3).toFixed(1)} ${(xL + 2.6).toFixed(1)},${(cy - 1.8).toFixed(1)}`,
+          ].join(" ");
+          path.setAttribute("d", d);
+
+          const len = Math.ceil(path.getTotalLength()) + 6;
+          path.style.setProperty("--circ-len", String(len));
+        });
+      });
+    }
+
+    function positionPuckOnWord(
+      pane: HTMLElement,
+      wordEl: HTMLElement | undefined,
+      mode: "scan" | "disputed-pulse" | "settled",
+      instant = false,
+    ) {
+      const stage = pane.querySelector<HTMLElement>(".showcase-stage");
+      const puck = pane.querySelector<HTMLElement>(".verse-scan-puck");
+      if (!stage || !puck || !wordEl) return;
+
+      if (wordEl.offsetWidth === 0) return;
+
+      if (instant) puck.classList.add("puck-instant");
+      puck.style.left = `${wordEl.offsetLeft}px`;
+      puck.style.top = `${wordEl.offsetTop}px`;
+      puck.style.width = `${wordEl.offsetWidth}px`;
+      puck.style.height = `${wordEl.offsetHeight}px`;
+      puck.classList.add("puck-visible");
+      puck.classList.toggle("puck-scanning", mode === "scan");
+      puck.classList.toggle("puck-disputed", mode === "disputed-pulse");
+      puck.classList.toggle("puck-settled", mode === "settled");
+      if (instant) {
+        void puck.offsetWidth;
+        puck.classList.remove("puck-instant");
+      }
+    }
+
+    function syncScanVisual(instant = false) {
+      const pane = panes[currentCaseIdx];
+      if (!pane || pane.hidden) return;
+      const words = [...pane.querySelectorAll<HTMLElement>(".showcase-word")];
+      if (!words.length) return;
+      const focalIdx = getFocalWordIndex(pane);
+
+      if (currentStep === 0) {
+        const activeIdx = Math.min(focalIdx, Math.floor(stepElapsed / WORD_SCAN_MS));
+        const hitDisputed = activeIdx >= focalIdx;
+
+        words.forEach((w, i) => {
+          w.classList.toggle("word-checked", i < focalIdx && i <= activeIdx);
+          w.classList.toggle("word-disputed-hit", i === focalIdx && hitDisputed);
+        });
+
+        pane.querySelectorAll<HTMLElement>("[data-step-caption]").forEach((c) => {
+          const cap = c.dataset.stepCaption;
+          c.classList.toggle("active", hitDisputed ? cap === "0-hit" : cap === "0");
+        });
+
+        if (hitDisputed && !hitPulseFired) {
+          hitPulseFired = true;
+          pane.dataset.hit = "true";
+          pulseCaption(pane, "disputed");
+        } else if (!hitDisputed && pane.dataset.hit) {
+          delete pane.dataset.hit;
+        }
+
+        if (instant || activeIdx !== lastScanWordIdx) {
+          lastScanWordIdx = activeIdx;
+          positionPuckOnWord(
+            pane,
+            words[activeIdx],
+            hitDisputed ? "disputed-pulse" : "scan",
+            instant,
+          );
+        }
+      } else {
+        words.forEach((w, i) => {
+          w.classList.toggle("word-checked", i < focalIdx);
+          w.classList.toggle("word-disputed-hit", i === focalIdx);
+        });
+        lastScanWordIdx = focalIdx;
+        positionPuckOnWord(pane, words[focalIdx], "settled", instant);
+      }
+    }
+
+    function applyCaseAndStep(caseIdx: number, step: number, immediateVisual = false) {
+      const caseChanged = caseIdx !== currentCaseIdx;
+      currentCaseIdx = ((caseIdx % panes.length) + panes.length) % panes.length;
+      currentStep = step;
+      lastScanWordIdx = -1;
+      hitPulseFired = false;
+
+      const delay = STEP_VISUAL_DELAY[step] ?? 0;
+      currentVisual =
+        step === 0 ? 0 : immediateVisual || delay === 0 ? step : Math.max(1, step - 1);
+
+      tabs.forEach((t, i) => {
+        const active = i === currentCaseIdx;
+        t.classList.toggle("active", active);
+        t.setAttribute("aria-selected", String(active));
+        const fill = t.querySelector<HTMLElement>(".showcase-tab-progress > span");
+        if (fill && !active) fill.style.width = "0%";
+      });
+
+      panes.forEach((p, i) => {
+        const active = i === currentCaseIdx;
+        p.hidden = !active;
+        if (active) {
+          if (currentVisual === 3) syncChosenCircles();
+          p.dataset.step = String(currentStep);
+          p.dataset.visual = String(currentVisual);
+          if (currentStep === 0) delete p.dataset.hit;
+          else p.dataset.hit = "true";
+
+          p.querySelectorAll<HTMLButtonElement>("[data-step-btn]").forEach((b) => {
+            const s = Number(b.dataset.stepBtn);
+            b.classList.toggle("active", s === currentStep);
+            b.classList.toggle("done", s < currentStep);
+            const sf = b.querySelector<HTMLElement>(".step-fill");
+            if (sf) sf.style.width = s < currentStep ? "100%" : "0%";
+          });
+          if (currentStep >= 1) {
+            p.querySelectorAll<HTMLElement>("[data-step-caption]").forEach((c) => {
+              c.classList.toggle("active", Number(c.dataset.stepCaption) === currentStep);
+            });
+            pulseCaption(p, currentStep === 3 ? "emerald" : "accent");
+          } else {
+            clearCaptionPulse(p);
+          }
+        }
+      });
+
+      requestAnimationFrame(() => {
+        syncScanVisual(caseChanged || currentStep === 0);
+        syncChosenCircles();
+      });
+    }
+
+    function updateProgressBar() {
+      const tab = tabs[currentCaseIdx];
+      const fill = tab?.querySelector<HTMLElement>(".showcase-tab-progress > span");
+      if (fill) {
+        let priorMs = 0;
+        for (let s = 0; s < currentStep; s++) priorMs += getStepDuration(currentCaseIdx, s);
+        const total = getTotalCaseMs(currentCaseIdx);
+        const pct = Math.min(100, ((priorMs + stepElapsed) / Math.max(1, total)) * 100);
+        fill.style.width = `${pct.toFixed(1)}%`;
+      }
+      if (currentStep >= 1) {
+        const pane = panes[currentCaseIdx];
+        const stepBtn = pane?.querySelector<HTMLElement>(`[data-step-btn="${currentStep}"] .step-fill`);
+        if (stepBtn) {
+          const limit = getStepDuration(currentCaseIdx, currentStep);
+          const stepPct = Math.min(100, (stepElapsed / Math.max(1, limit)) * 100);
+          stepBtn.style.width = `${stepPct.toFixed(1)}%`;
+        }
+      }
+    }
+
+    function syncPlayButton() {
+      if (!showcase || !playToggle) return;
+      const playing = !userPaused;
+      showcase.dataset.playing = String(playing);
+      playToggle.setAttribute("aria-pressed", String(!playing));
+      const lbl = playToggle.querySelector(".play-btn-label");
+      if (lbl) lbl.textContent = playing ? "Pause" : "Resume";
+    }
+
+    function pauseByUser() {
+      userPaused = true;
+      holdUntil = 0;
+      syncPlayButton();
+    }
+
+    function holdBriefly(ms = 12000) {
+      if (userPaused) return;
+      holdUntil = Math.max(holdUntil, performance.now() + ms);
+    }
+
+    if (panes.length > 0) {
+      applyCaseAndStep(0, 0);
+      syncPlayButton();
+
+      document.fonts?.ready.then(() => {
+        syncScanVisual(true);
+        syncChosenCircles();
+      });
+      window.addEventListener("resize", () => {
+        syncScanVisual(true);
+        syncChosenCircles();
+      });
+
+      tabs.forEach((tab, idx) => {
+        tab.addEventListener("click", () => {
+          stepElapsed = 0;
+          holdUntil = 0;
+          lastTick = performance.now();
+          if (userPaused) {
+            tabHoldOnStep1 = false;
+            applyCaseAndStep(idx, 1, true);
+          } else {
+            // Run the word-by-word check scan -> disputed pulse & read -> Step 1 breakdown, then hold calmly for 12s
+            tabHoldOnStep1 = true;
+            applyCaseAndStep(idx, 0, false);
+          }
+          updateProgressBar();
+        });
+      });
+
+      panes.forEach((pane, pIdx) => {
+        pane.querySelectorAll<HTMLButtonElement>("[data-step-btn]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const s = Number(btn.dataset.stepBtn || 1);
+            stepElapsed = 0;
+            lastTick = performance.now();
+            applyCaseAndStep(pIdx, s, true);
+            updateProgressBar();
+            pauseByUser();
+          });
+        });
+
+        pane.querySelectorAll<HTMLButtonElement>("[data-jump-step3]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            stepElapsed = 0;
+            lastTick = performance.now();
+            applyCaseAndStep(pIdx, 3, true);
+            updateProgressBar();
+            pauseByUser();
+          });
+        });
+
+        // Clicking inside the canvas or readings holds the animation for 12s so you can examine calmly
+        pane.querySelector(".story-canvas")?.addEventListener("click", () => holdBriefly(12000));
+        pane.querySelector(".story-readings")?.addEventListener("click", (e) => {
+          if (!(e.target as Element | null)?.closest("[data-jump-step3]")) {
+            holdBriefly(12000);
+          }
+        });
+      });
+
+      playToggle?.addEventListener("click", () => {
+        userPaused = !userPaused;
+        holdUntil = 0;
+        lastTick = performance.now();
+        syncPlayButton();
+      });
+
+      // Hold auto-advance while reading a probability hover card
+      showcase?.addEventListener("pointerover", (e) => {
+        if ((e.target as Element | null)?.closest(".ol-conf-wrap")) {
+          readingTooltip = true;
+        }
+      });
+      showcase?.addEventListener("pointerout", (e) => {
+        const fromConf = (e.target as Element | null)?.closest(".ol-conf-wrap");
+        const toConf = (e.relatedTarget as Element | null)?.closest(".ol-conf-wrap");
+        if (fromConf && !toConf) {
+          readingTooltip = false;
+          lastTick = performance.now();
+        }
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) lastTick = performance.now();
+      });
+
+      // Pause silently if the reader scrolls down past the showcase so collapsing/expanding never jumps their scroll position
+      if (showcase && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            const visible = entries.some((e) => e.isIntersecting);
+            if (visible && !showcaseInView) lastTick = performance.now();
+            showcaseInView = visible;
+          },
+          { threshold: 0.15 },
+        );
+        io.observe(showcase);
+      }
+
+      function tick(now: number) {
+        const dt = Math.min(120, Math.max(0, now - lastTick));
+        lastTick = now;
+
+        const isHeld = holdUntil > 0 && now < holdUntil;
+        if (!userPaused && !readingTooltip && !isHeld && showcaseInView && !document.hidden) {
+          stepElapsed += dt;
+          if (currentStep === 0) {
+            syncScanVisual(false);
+          } else if (currentVisual < currentStep) {
+            const visualDelay = STEP_VISUAL_DELAY[currentStep] ?? 0;
+            if (stepElapsed >= visualDelay) {
+              if (currentStep === 3) syncChosenCircles();
+              currentVisual = currentStep;
+              const activePane = panes[currentCaseIdx];
+              if (activePane) activePane.dataset.visual = String(currentVisual);
+            }
+          }
+          const limit = getStepDuration(currentCaseIdx, currentStep);
+          if (stepElapsed >= limit) {
+            stepElapsed = 0;
+            if (currentStep < 3) {
+              const nextStep = currentStep + 1;
+              applyCaseAndStep(currentCaseIdx, nextStep, false);
+              if (nextStep === 1 && tabHoldOnStep1) {
+                tabHoldOnStep1 = false;
+                holdBriefly(12000);
+              }
+            } else {
+              applyCaseAndStep(currentCaseIdx + 1, 0, false);
+            }
+          }
+          updateProgressBar();
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    // Interactive two-slider simulator: Certainty -> Uncertainty AND Unanimous -> Severity 1-5
+    const confSlider = document.getElementById("demo-conf-slider") as HTMLInputElement | null;
+    const sevSlider = document.getElementById("demo-sev-slider") as HTMLInputElement | null;
+    const slotEl = document.getElementById("demo-conf-slot");
+    const liveWord = document.getElementById("demo-live-word");
+    const liveStage = document.getElementById("demo-live-stage");
+    const liveStatus = document.getElementById("demo-live-status");
+    const sevPill = document.getElementById("demo-sev-pill");
+    const sevLabel = document.getElementById("demo-sev-label");
+
+    const SEV_META: Record<number, { pill: string; detail: string }> = {
+      0: { pill: "Unanimous", detail: "All surviving manuscripts agree" },
+      1: { pill: "1/5 Minor (spelling)", detail: "Level 1 minor spelling variation" },
+      2: { pill: "2/5 Small (grammar)", detail: "Level 2 small grammatical nuance" },
+      3: { pill: "3/5 Moderate (omission)", detail: "Level 3 missing or added word" },
+      4: { pill: "4/5 Substantial (phrase)", detail: "Level 4 substantial phrase wording shift" },
+      5: { pill: "5/5 Major (meaning)", detail: "Level 5 major meaning change" },
+    };
+
+    const syncSimulators = () => {
+      if (!confSlider || !sevSlider || !slotEl || !liveWord) return;
+      const uncertaintyStep = Number(confSlider.value); // 0 (100% certain) -> 49 (51% uncertain)
+      const pct = Math.max(51, Math.min(100, 100 - uncertaintyStep));
+      const conf = pct / 100;
+      const bar = Math.max(0, Math.min(1, (0.99 - conf) / (0.99 - 0.51)));
+      const sev = Math.max(0, Math.min(5, Number(sevSlider.value)));
+      const meta = SEV_META[sev] ?? SEV_META[5];
+
+      slotEl.innerHTML = renderConfidenceBadgeHtml({
+        value: pct >= 100 ? 0.9999 : conf,
+        kind: "reading",
+        integer: pct < 100,
+        context: "Simulated reading likelihood in the interactive preview",
+      });
+      liveWord.style.setProperty("--bar", bar.toFixed(2));
+      liveWord.dataset.sev = String(sev);
+      if (liveStage) liveStage.dataset.sev = String(sev);
+      if (sevPill) sevPill.dataset.sev = String(sev);
+      if (sevLabel) sevLabel.textContent = meta.pill;
+      if (liveStatus) {
+        const pctLabel = pct >= 100 ? ">99.9%" : `${pct}%`;
+        const uncLabel =
+          pct >= 99 ? "Little uncertainty" : pct >= 85 ? "Moderate uncertainty" : "High uncertainty";
+        const detail =
+          sev === 0
+            ? pct >= 99
+              ? "Unanimous across manuscripts"
+              : "No manuscripts disagree, yet thin or late survival (such as a single medieval copy) leaves uncertainty"
+            : meta.detail;
+        liveStatus.innerHTML = `<strong>${uncLabel} (${pctLabel} likely original)</strong> · ${detail}`;
+      }
+    };
+
+    confSlider?.addEventListener("input", syncSimulators);
+    sevSlider?.addEventListener("input", syncSimulators);
+    syncSimulators();
+  </script>
 </Layout>

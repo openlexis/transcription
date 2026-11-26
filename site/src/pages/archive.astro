@@ -7,6 +7,7 @@ import {
   getCorpusStats,
   getPrimarySpec,
   githubBlob,
+  specUrl,
 } from "../lib/corpus";
 
 const spec = getPrimarySpec();
@@ -14,19 +15,20 @@ const stats = getCorpusStats(spec);
 const index = buildClientSourceIndex(spec);
 ---
 <Layout
-  title="Sources"
-  active="sources"
-  description="Searchable, expandable list of all primary sources embedded in the specification YAML."
+  title="Archive"
+  active="archive"
+  description="Historical archive of primary ancient manuscripts: Dead Sea Scrolls, early Greek papyri, and medieval codices."
 >
   <section class="page-header">
     <div class="container">
-      <div class="eyebrow">Referenced by {spec.file}</div>
-      <h1>Primary Sources</h1>
+      <div class="eyebrow">Historical Archive</div>
+      <h1>Archive</h1>
       <p class="lead">
-        All {formatNum(stats.sourceCount)} primary sources ({formatNum(stats.totalXmlFiles)} XML files across {stats.provenanceCount} source institutions) referenced under <code>sources:</code> in <a href={`/specifications/${spec.id}/`}>the specification</a> and indexed per institution in <code>src/&lt;institution&gt;/index.json</code>. Click any source to expand its full metadata, XML paths, provenance, license, and facsimile links.
+        Search and inspect all {formatNum(stats.sourceCount)} primary ancient manuscripts ({formatNum(stats.totalXmlFiles)} XML files across {stats.provenanceCount} archival institutions), spanning 3rd-century BC Dead Sea Scrolls, early Greek papyri, and medieval codices. Click any manuscript to view its dating, XML files, license, and facsimile links.
       </p>
       <div class="actions">
-        <a href="/specifications/" class="btn btn-secondary">← Back to specifications</a>
+        <a href="/transcriptions/" class="btn btn-secondary">Browse transcriptions →</a>
+        <a href={specUrl(spec.id)} class="btn btn-secondary">View specification</a>
       </div>
     </div>
   </section>
@@ -39,19 +41,19 @@ const index = buildClientSourceIndex(spec);
             type="search"
             id="src-search"
             class="search-input"
-            placeholder="Search by ID, name, shelfmark, provenance, or XML file (e.g., 01, Sinaiticus, P46, 4Q1, Leningrad)…"
-            aria-label="Search sources"
+            placeholder="Search by ID, name, shelfmark, institution, or file (e.g., 01, Sinaiticus, P46, 4Q1, Leningrad)…"
+            aria-label="Search manuscripts"
           />
-          <select id="src-target" class="select-input" aria-label="Filter by target book">
-            <option value="">All target books ({spec.targets.length})</option>
+          <select id="src-target" class="select-input" aria-label="Filter by book">
+            <option value="">All books</option>
             {spec.targets.map((t) => (
-              <option value={t.id}>{t.name} ({formatNum(stats.targetSourceCounts[t.id] ?? 0)})</option>
+              <option value={t.id}>{t.name}</option>
             ))}
           </select>
-          <select id="src-prov" class="select-input" aria-label="Filter by provenance">
-            <option value="">All provenance sources ({stats.provenances.length})</option>
+          <select id="src-prov" class="select-input" aria-label="Filter by archival institution">
+            <option value="">All institutions</option>
             {stats.provenances.map((p) => (
-              <option value={p.id}>{p.name} ({formatNum(p.sourceCount)})</option>
+              <option value={p.id}>{p.name}</option>
             ))}
           </select>
         </div>
@@ -64,7 +66,7 @@ const index = buildClientSourceIndex(spec);
             <button type="button" class="filter-pill" data-lang="Hebrew">Biblical Hebrew &amp; Aramaic</button>
           </div>
 
-          <div class="pill-group" role="group" aria-label="Filter by witness type">
+          <div class="pill-group" role="group" aria-label="Filter by manuscript type">
             <span class="pill-label">Type</span>
             <button type="button" class="filter-pill active" data-type="">All</button>
             <button type="button" class="filter-pill" data-type="continuous">Continuous</button>
@@ -76,14 +78,14 @@ const index = buildClientSourceIndex(spec);
       </div>
 
       <div class="results-meta">
-        <span id="src-count">Showing {formatNum(Math.min(60, index.length))} of {formatNum(index.length)} sources</span>
+        <span id="src-count">Showing {formatNum(Math.min(60, index.length))} of {formatNum(index.length)} manuscripts</span>
         <button type="button" id="src-reset" class="copy-btn" hidden>Reset filters</button>
       </div>
 
       <div class="source-list" id="src-list"></div>
 
       <div style="text-align: center; margin-top: 20px;">
-        <button type="button" id="src-more" class="btn btn-secondary" hidden>Load more sources</button>
+        <button type="button" id="src-more" class="btn btn-secondary" hidden>Load more manuscripts</button>
       </div>
     </div>
   </section>
@@ -102,7 +104,7 @@ const index = buildClientSourceIndex(spec);
     const langBtns = [...document.querySelectorAll("[data-lang]")];
     const typeBtns = [...document.querySelectorAll("[data-type]")];
 
-    let state = { q: "", lang: "", type: "", prov: "", target: "", limit: 60 };
+    let state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "", limit: 60 };
     let filtered = ALL;
 
     const esc = (s) =>
@@ -116,7 +118,7 @@ const index = buildClientSourceIndex(spec);
     const typeBadge = (t) =>
       t === "scroll" ? "badge badge-amber" : t === "catena" ? "badge badge-violet" : t === "lectionary" ? "badge badge-emerald" : "badge badge-indigo";
 
-    function renderItem(s) {
+    function renderItem(s, openByDefault = false) {
       const filesHtml = s.fl
         .map((f) => {
           const links = f.ps
@@ -140,7 +142,7 @@ const index = buildClientSourceIndex(spec);
       const fileCount = s.fl.reduce((n, f) => n + f.ps.length, 0);
 
       return `
-        <details class="source-item">
+        <details class="source-item"${openByDefault ? " open" : ""}>
           <summary>
             <span class="ms-siglum">${esc(s.id)}</span>
             <div>
@@ -166,7 +168,9 @@ const index = buildClientSourceIndex(spec);
 
     function applyFilters() {
       const q = state.q.trim().toLowerCase();
+      const exactId = state.exactId.trim().toLowerCase();
       filtered = ALL.filter((s) => {
+        if (exactId) return s.id.toLowerCase() === exactId;
         if (state.lang && s.lg !== state.lang) return false;
         if (state.type && s.ty !== state.type) return false;
         if (state.target && !(s.tg || []).includes(state.target)) return false;
@@ -182,26 +186,30 @@ const index = buildClientSourceIndex(spec);
 
     function render() {
       const slice = filtered.slice(0, state.limit);
+      const autoOpen = filtered.length === 1;
       if (listEl) {
         listEl.innerHTML = slice.length
-          ? slice.map(renderItem).join("")
-          : `<div style="padding: 36px; text-align: center; color: var(--ink-muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);">No sources match the current filters.</div>`;
+          ? slice.map((s) => renderItem(s, autoOpen)).join("")
+          : `<div style="padding: 36px; text-align: center; color: var(--ink-muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);">No manuscripts match the current filters.</div>`;
       }
       if (countEl) {
-        countEl.textContent = `Showing ${num(slice.length)} of ${num(filtered.length)} matching sources (${num(ALL.length)} total in this YAML)`;
+        countEl.textContent = `Showing ${num(slice.length)} of ${num(filtered.length)} matching manuscripts (${num(ALL.length)} total)`;
       }
       if (moreBtn) {
         moreBtn.hidden = slice.length >= filtered.length;
         moreBtn.textContent = `Load more (${num(filtered.length - slice.length)} remaining)`;
       }
       if (resetBtn) {
-        resetBtn.hidden = !(state.q || state.lang || state.type || state.prov || state.target);
+        resetBtn.hidden = !(state.q || state.exactId || state.lang || state.type || state.prov || state.target);
       }
     }
 
-    // Apply URL params (?q=, ?type=, ?language=, ?provenance=, ?target=)
+    // Apply URL params (?id=, ?q=, ?type=, ?language=, ?provenance=, ?target=)
     const params = new URLSearchParams(location.search);
-    if (params.get("q") && searchInput) {
+    if (params.get("id")) {
+      state.exactId = params.get("id");
+      if (searchInput) searchInput.value = state.exactId;
+    } else if (params.get("q") && searchInput) {
       state.q = params.get("q");
       searchInput.value = state.q;
     }
@@ -223,22 +231,26 @@ const index = buildClientSourceIndex(spec);
     }
 
     searchInput?.addEventListener("input", () => {
+      state.exactId = "";
       state.q = searchInput.value;
       state.limit = 60;
       applyFilters();
     });
     targetSelect?.addEventListener("change", () => {
+      state.exactId = "";
       state.target = targetSelect.value;
       state.limit = 60;
       applyFilters();
     });
     provSelect?.addEventListener("change", () => {
+      state.exactId = "";
       state.prov = provSelect.value;
       state.limit = 60;
       applyFilters();
     });
     langBtns.forEach((b) =>
       b.addEventListener("click", () => {
+        state.exactId = "";
         langBtns.forEach((x) => x.classList.remove("active"));
         b.classList.add("active");
         state.lang = b.getAttribute("data-lang") || "";
@@ -248,6 +260,7 @@ const index = buildClientSourceIndex(spec);
     );
     typeBtns.forEach((b) =>
       b.addEventListener("click", () => {
+        state.exactId = "";
         typeBtns.forEach((x) => x.classList.remove("active"));
         b.classList.add("active");
         state.type = b.getAttribute("data-type") || "";
@@ -260,7 +273,7 @@ const index = buildClientSourceIndex(spec);
       render();
     });
     resetBtn?.addEventListener("click", () => {
-      state = { q: "", lang: "", type: "", prov: "", target: "", limit: 60 };
+      state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "", limit: 60 };
       if (searchInput) searchInput.value = "";
       if (targetSelect) targetSelect.value = "";
       if (provSelect) provSelect.value = "";

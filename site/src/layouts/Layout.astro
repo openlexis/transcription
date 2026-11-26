@@ -5,27 +5,35 @@ import { REPO } from "../lib/corpus";
 interface Props {
   title: string;
   description?: string;
-  active?: "home" | "specs" | "sources" | "outputs";
+  active?: "home" | "transcriptions" | "archive" | "specs";
 }
 
 const {
   title,
-  description = "Primary ancient manuscript transcriptions for the Old and New Testaments in Koine Greek, Biblical Hebrew, and Biblical Aramaic.",
+  description = "Open-source transcriptions assembled directly from primary ancient manuscripts, word by word, with immutable specifications, statistical probabilities, and full auditability.",
   active,
 } = Astro.props;
+const pageTitle = title === "Open Lexis" ? "Open Lexis · Transcriptions Assembled from Ancient Manuscripts" : `${title} · Open Lexis`;
 ---
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{title === "Open Lexis" ? "Open Lexis · Biblical Manuscript Transcriptions" : `${title} · Open Lexis`}</title>
+  <title>{pageTitle}</title>
   <meta name="description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Open Lexis" />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={description} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={description} />
   <meta name="theme-color" content="#ffffff" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Gentium+Plus:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+Hebrew:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
   <header class="site-header">
@@ -41,9 +49,9 @@ const {
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="/" class={active === "home" ? "active" : ""}>Overview</a>
+        <a href="/transcriptions/" class={active === "transcriptions" ? "active" : ""}>Transcriptions</a>
+        <a href="/archive/" class={active === "archive" ? "active" : ""}>Archive</a>
         <a href="/specifications/" class={active === "specs" ? "active" : ""}>Specifications</a>
-        <a href="/sources/" class={active === "sources" ? "active" : ""}>Sources</a>
-        <a href="/outputs/" class={active === "outputs" ? "active" : ""}>Outputs</a>
       </nav>
     </div>
   </header>
@@ -55,18 +63,55 @@ const {
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <strong style="color: var(--ink);">Open Lexis</strong> · Ancient Biblical Manuscript Corpus
+        <strong style="color: var(--ink);">Open Lexis</strong> · Open-Source Manuscript Reconstruction
         <div style="margin-top: 4px;">
-          Primary manuscript transcriptions in Koine Greek, Biblical Hebrew, and Biblical Aramaic.
+          Assembling ancient texts word by word from immutable primary manuscripts.
         </div>
       </div>
       <div class="footer-links">
+        <a href="/transcriptions/">Transcriptions</a>
+        <a href="/archive/">Archive</a>
         <a href="/specifications/">Specifications</a>
-        <a href="/sources/">Sources</a>
-        <a href="/outputs/">Outputs</a>
         <a href={REPO} target="_blank" rel="noopener">Repository ↗</a>
       </div>
     </div>
   </footer>
+  <script is:inline>
+    (function () {
+      function positionConfCard(wrap) {
+        var card = wrap.querySelector(".ol-conf-card");
+        if (!card) return;
+        wrap.classList.remove("ol-conf-below");
+        card.style.setProperty("--conf-shift-x", "0px");
+        var rect = card.getBoundingClientRect();
+        var margin = 12;
+        if (rect.top < 72) {
+          wrap.classList.add("ol-conf-below");
+        }
+        rect = card.getBoundingClientRect();
+        var shift = 0;
+        if (rect.left < margin) {
+          shift = margin - rect.left;
+        } else if (rect.right > window.innerWidth - margin) {
+          shift = window.innerWidth - margin - rect.right;
+        }
+        if (shift !== 0) {
+          card.style.setProperty("--conf-shift-x", Math.round(shift) + "px");
+        }
+      }
+      document.addEventListener("pointerenter", function (e) {
+        var t = e.target;
+        if (!(t instanceof Element)) return;
+        var wrap = t.closest(".ol-conf-wrap");
+        if (wrap) positionConfCard(wrap);
+      }, true);
+      document.addEventListener("focusin", function (e) {
+        var t = e.target;
+        if (!(t instanceof Element)) return;
+        var wrap = t.closest(".ol-conf-wrap");
+        if (wrap) positionConfCard(wrap);
+      });
+    })();
+  </script>
 </body>
 </html>

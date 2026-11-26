@@ -1,23 +1,32 @@
 ---
-import Layout from "../../../../layouts/Layout.astro";
+import Layout from "../../../layouts/Layout.astro";
+import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
 import {
+  bookUrl,
   formatAuthor,
   formatBytes,
   formatNum,
-  formatPct,
   getBookAttributes,
   getCompilations,
   githubBlob,
   githubTree,
   normalizeSeverityBucket,
+  shortUlid,
+  specUrl,
   type CompilationRecord,
-} from "../../../../lib/corpus";
+} from "../../../lib/corpus";
 
 export function getStaticPaths() {
-  return getCompilations().map((c) => ({
-    params: { specId: c.specId, compilationId: c.compilationId },
-    props: { compilation: c },
-  }));
+  const seen = new Set<string>();
+  return getCompilations().map((c) => {
+    const slug = shortUlid(c.compilationId);
+    if (seen.has(slug)) throw new Error(`Duplicate short compilation slug: ${slug}`);
+    seen.add(slug);
+    return {
+      params: { compilationId: slug },
+      props: { compilation: c },
+    };
+  });
 }
 
 interface Props {
@@ -79,32 +88,34 @@ const compAuthor = formatAuthor(m.compilation.author);
 ---
 <Layout
   title={compTitle}
-  active="outputs"
+  active="transcriptions"
   description={compSummary}
 >
   <section class="page-header">
     <div class="container">
-      <div class="eyebrow">Compiled Edition</div>
+      <div class="eyebrow">Transcription</div>
       <h1>{compTitle}</h1>
       <p style="margin: 6px 0 0; font-size: 1.02rem; font-weight: 500; color: var(--ink-secondary);">
         {compSubtitle}
       </p>
-      {(compAuthor || createdDate) && (
-        <div class="meta-strip">
-          {compAuthor && (
-            <span class="meta-chip" title="Author">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <span><strong>Author:</strong> {compAuthor}</span>
-            </span>
-          )}
-          {createdDate && (
-            <span class="meta-chip" title="Date compiled">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-              <span><strong>Date:</strong> {createdDate}</span>
-            </span>
-          )}
-        </div>
-      )}
+      <div class="meta-strip">
+        {compAuthor && (
+          <span class="meta-chip" title="Author">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span><strong>Author:</strong> {compAuthor}</span>
+          </span>
+        )}
+        {createdDate && (
+          <span class="meta-chip" title="Date compiled">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            <span><strong>Date:</strong> {createdDate}</span>
+          </span>
+        )}
+        <span class="meta-chip" title={`Specification ID: ${c.specId}`}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          <span><strong>Specification:</strong> <a href={specUrl(c.specId)}><code>{shortUlid(c.specId)}</code></a></span>
+        </span>
+      </div>
       <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;">
         <span class="badge badge-indigo">{attr.modelName} · {attr.provider}</span>
         {attr.effortLevel && <span class="badge">{attr.effortLevel} effort</span>}
@@ -117,8 +128,10 @@ const compAuthor = formatAuthor(m.compilation.author);
         {compSummary}
       </p>
       <div class="ulid-bar">
-        <a href="/outputs/" class="btn btn-secondary">← All outputs</a>
-        <a href={`/specifications/${c.specId}/`} class="btn btn-secondary">Specification →</a>
+        <a href="/transcriptions/" class="btn btn-secondary">← All transcriptions</a>
+        <a href={specUrl(c.specId)} class="btn btn-secondary" title={`Specification ID: ${c.specId}`}>
+          Specification {shortUlid(c.specId)} →
+        </a>
       </div>
     </div>
   </section>
@@ -127,9 +140,9 @@ const compAuthor = formatAuthor(m.compilation.author);
     <div class="container">
       <div class="section-head">
         <div>
-          <h2>Compiled Books ({formatNum(m.books.length)})</h2>
+          <h2>Books</h2>
           <p class="section-sub">
-            Click any book to read its compiled text, word-level manuscript coverage, and differences.
+            Click any book to read its text word by word, inspect manuscript coverage, and examine disagreements.
           </p>
         </div>
       </div>
@@ -156,7 +169,7 @@ const compAuthor = formatAuthor(m.compilation.author);
                   </button>
                   {f.values.map((v) => (
                     <button type="button" class="filter-pill" data-attr-key={f.key} data-attr-val={v.value}>
-                      {v.value} <span style="opacity: 0.72; margin-left: 3px;">({formatNum(v.count)})</span>
+                      {v.value}
                     </button>
                   ))}
                 </div>
@@ -183,20 +196,19 @@ const compAuthor = formatAuthor(m.compilation.author);
               data-book-attrs={JSON.stringify(attrs)}
               data-book-search={searchHay}
             >
-              <a href={`/outputs/${c.specId}/${c.compilationId}/${b.id}/`} class="book-tile-main">
+              <a href={bookUrl(c.compilationId, b.id)} class="book-tile-main">
                 <div class="book-top">
                   <span class="book-name">{b.name}</span>
                   <span class="book-code">{b.id}</span>
                 </div>
                 <div class="book-meta">
                   <span class="book-sources">{formatNum(b.stats.words)} words</span>
-                  <span
-                    class="conf-badge conf-high"
-                    title={`${formatPct(b.stats.meanWordConfidence)} average likelihood across all words in ${b.name} that the compiled text matches the original author`}
-                  >
-                    <svg class="conf-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
-                    <span>{formatPct(b.stats.meanWordConfidence)}</span>
-                  </span>
+                  <ConfidenceBadge
+                    value={b.stats.meanWordConfidence}
+                    kind="book-mean"
+                    context={b.name}
+                    focusable={false}
+                  />
                 </div>
               </a>
               {flatAttrs.length > 0 && (
@@ -225,7 +237,7 @@ const compAuthor = formatAuthor(m.compilation.author);
     <div class="container">
       <div class="section-head">
         <div>
-          <h2>Methodology &amp; Compilation Details</h2>
+          <h2>Methodology &amp; Model Details</h2>
           <p class="section-sub">Expand any section below to inspect the model details, statistical method, scenarios, and disagreement categories.</p>
         </div>
       </div>
@@ -233,7 +245,7 @@ const compAuthor = formatAuthor(m.compilation.author);
       <details class="embed-accordion" id="summary">
         <summary>
           <div class="embed-summary-left">
-            <span class="embed-summary-title">Compilation Summary &amp; Model Provenance</span>
+            <span class="embed-summary-title">Transcription Summary &amp; Model Provenance</span>
             <span class="embed-summary-sub">{attr.provider} · {attr.modelName} · {formatNum(m.totals.lines)} lines · {formatNum(m.totals.words)} words · {formatBytes(m.totals.totalBytes)}</span>
           </div>
           <span class="embed-chevron" aria-hidden="true"></span>
@@ -367,7 +379,7 @@ const compAuthor = formatAuthor(m.compilation.author);
                   <thead>
                     <tr>
                       <th style="width: 24%;">Evidence Category</th>
-                      <th>How Used in This Compilation</th>
+                      <th>How Used in This Transcription</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -410,7 +422,7 @@ const compAuthor = formatAuthor(m.compilation.author);
               <div>
                 <h3 style="margin-bottom: 8px;">Disagreement Categories</h3>
                 <p class="section-sub" style="margin-bottom: 14px;">
-                  Categories classifying all {formatNum(totalCategorized)} points of disagreement across this compilation.
+                  Categories classifying all {formatNum(totalCategorized)} points of disagreement across this transcription.
                 </p>
                 <div class="table-wrap">
                   <table>

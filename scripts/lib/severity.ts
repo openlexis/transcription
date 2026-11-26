@@ -324,5 +324,5 @@ export function classifyReadingSeverity(selKeys: string[], rdgKeys: string[], is
 }
 
 export function formatSeverityNote(sev: SeverityDef): string {
-  return `${sev.shortLabel} — ${sev.label}: ${sev.confidenceEffect}`;
+  return `${sev.shortLabel} · ${sev.label}: ${sev.confidenceEffect}`;
 }

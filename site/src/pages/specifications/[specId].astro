@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import {
   REPO,
   buildClientSourceIndex,
+  compUrl,
   displayLanguage,
   formatAuthor,
   formatNum,
@@ -12,14 +13,21 @@ import {
   getCorpusStats,
   getSpecifications,
   githubBlob,
+  shortUlid,
   type SpecFile,
 } from "../../lib/corpus";
 
 export function getStaticPaths() {
-  return getSpecifications().map((spec) => ({
-    params: { specId: spec.id },
-    props: { spec },
-  }));
+  const seen = new Set<string>();
+  return getSpecifications().map((spec) => {
+    const slug = shortUlid(spec.id);
+    if (seen.has(slug)) throw new Error(`Duplicate short specification slug: ${slug}`);
+    seen.add(slug);
+    return {
+      params: { specId: slug },
+      props: { spec },
+    };
+  });
 }
 
 interface Props {
@@ -82,8 +90,8 @@ const toc = [
           <button type="button" class="copy-btn" id="copy-id">Copy</button>
         </div>
         {specCompilations.length > 0 && (
-          <a href={`/outputs/${single.id}/${specCompilations[0].compilationId}/`} class="btn btn-primary">
-            View {specCompilations.length === 1 ? "compiled output" : `${specCompilations.length} compiled outputs`} →
+          <a href={specCompilations.length === 1 ? compUrl(specCompilations[0].compilationId) : "/transcriptions/"} class="btn btn-primary">
+            {specCompilations.length === 1 ? "Read transcription" : "Read transcriptions"} →
           </a>
         )}
       </div>
@@ -99,7 +107,7 @@ const toc = [
         ))}
       </ul>
       <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--ink-muted);">
-        Everything on this page—rules, target books, and all {formatNum(stats.sourceCount)} sources—comes from the single file <code>{single.file}</code>.
+        Everything on this page (rules, target books, and all {formatNum(stats.sourceCount)} sources) comes from the single file <code>{single.file}</code>.
       </div>
     </aside>
 
@@ -217,13 +225,13 @@ const toc = [
             {otTargets.map((b) => {
               const n = stats.targetSourceCounts[b.id] ?? 0;
               return (
-                <a href={`/sources/?target=${encodeURIComponent(b.id)}`} class="book-tile book-tile-link">
+                <a href={`/archive/?target=${encodeURIComponent(b.id)}`} class="book-tile book-tile-link">
                   <div class="book-top">
                     <span class="book-name">{b.name}</span>
                     <span class="book-code">{b.id}</span>
                   </div>
                   <div class="book-meta">
-                    <span class="book-sources">{formatNum(n)} {n === 1 ? "source" : "sources"}</span>
+                    <span class="book-sources">{formatNum(n)} {n === 1 ? "manuscript" : "manuscripts"}</span>
                     <span class={b.language.includes("Aramaic") ? "badge badge-violet" : "badge badge-amber"}>
                       {displayLanguage(b.language)}
                     </span>
@@ -238,13 +246,13 @@ const toc = [
             {ntTargets.map((b) => {
               const n = stats.targetSourceCounts[b.id] ?? 0;
               return (
-                <a href={`/sources/?target=${encodeURIComponent(b.id)}`} class="book-tile book-tile-link">
+                <a href={`/archive/?target=${encodeURIComponent(b.id)}`} class="book-tile book-tile-link">
                   <div class="book-top">
                     <span class="book-name">{b.name}</span>
                     <span class="book-code">{b.id}</span>
                   </div>
                   <div class="book-meta">
-                    <span class="book-sources">{formatNum(n)} {n === 1 ? "source" : "sources"}</span>
+                    <span class="book-sources">{formatNum(n)} {n === 1 ? "manuscript" : "manuscripts"}</span>
                     <span class="badge badge-sky">{displayLanguage(b.language)}</span>
                   </div>
                 </a>
@@ -259,10 +267,10 @@ const toc = [
           <div class="embed-summary-left">
             <span class="embed-summary-title">
               <code>sources</code>
-              <span class="badge badge-emerald">{formatNum(stats.sourceCount)} primary sources</span>
+              <span class="badge badge-emerald">{formatNum(stats.sourceCount)} manuscripts</span>
               <span class="badge">{formatNum(stats.totalXmlFiles)} XML files</span>
             </span>
-            <span class="embed-summary-sub">Self-contained allowlist of every permitted witness and its inline metadata inside <code>{single.file}</code></span>
+            <span class="embed-summary-sub">Self-contained allowlist of every permitted manuscript and its inline metadata inside <code>{single.file}</code></span>
           </div>
           <span class="embed-chevron" aria-hidden="true"></span>
         </summary>
@@ -272,13 +280,13 @@ const toc = [
               type="search"
               id="inline-src-search"
               class="search-input"
-              placeholder="Search sources by ID, name, provenance, or XML path (e.g., 01, Sinaiticus, P46, 4Q1)…"
-              aria-label="Search embedded sources"
+              placeholder="Search manuscripts by ID, name, institution, or XML path (e.g., 01, Sinaiticus, P46, 4Q1)…"
+              aria-label="Search embedded manuscripts"
             />
-            <a href="/sources/" class="btn btn-secondary">Open full explorer →</a>
+            <a href="/archive/" class="btn btn-secondary">Open full archive →</a>
           </div>
           <div class="results-meta" style="margin-bottom: 10px;">
-            <span id="inline-src-count">Showing 25 of {formatNum(stats.sourceCount)} sources</span>
+            <span id="inline-src-count">Showing 25 of {formatNum(stats.sourceCount)} manuscripts</span>
           </div>
           <div class="source-list" id="inline-src-list"></div>
           <div style="text-align: center; margin-top: 14px;">
