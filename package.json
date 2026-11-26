@@ -5,6 +5,7 @@
   "scripts": {
     "sets": "bun scripts/sets.ts",
     "sources": "bun scripts/sources.ts",
+    "spec:freeze": "bun scripts/freeze.ts",
     "import": "bun scripts/import.ts",
     "compile": "bun --smol scripts/compile.ts",
     "check": "bun scripts/check.ts",

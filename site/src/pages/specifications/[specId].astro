@@ -43,6 +43,9 @@ const specCompilations = getCompilationsForSpec(single.id);
 const otTargets = single.targets.filter((t) => t.section === "Old Testament");
 const ntTargets = single.targets.filter((t) => t.section === "New Testament");
 const clientSources = buildClientSourceIndex(single);
+// A folder specification keeps everything it uses in specifications/<ULID>/ (specification.yaml and sources.json).
+const isFolder = single.file.endsWith("/specification.yaml");
+const sourcesFile = single.file.replace(/specification\.yaml$/, "sources.json");
 
 const toc = [
   { id: "objective", text: "1. Objective" },
@@ -107,7 +110,11 @@ const toc = [
         ))}
       </ul>
       <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--ink-muted);">
-        Everything on this page (rules, target books, and all {formatNum(stats.sourceCount)} sources) comes from the single file <code>{single.file}</code>.
+        {isFolder ? (
+          <>Everything on this page (rules, target books, and all {formatNum(stats.sourceCount)} sources) comes from this specification's folder: <code>{single.file}</code> and <code>{sourcesFile}</code>.</>
+        ) : (
+          <>Everything on this page (rules, target books, and all {formatNum(stats.sourceCount)} sources) comes from the single file <code>{single.file}</code>.</>
+        )}
       </div>
     </aside>
 
@@ -138,6 +145,9 @@ const toc = [
       <p set:html={formatSpecText(single.corpus_layout.structure, true)} />
       <h3>File Layout</h3>
       <ul>
+        {single.corpus_layout.naming.sources && (
+          <li><strong>Transcript list:</strong> <code>{single.corpus_layout.naming.sources}</code></li>
+        )}
         {single.corpus_layout.naming.sets && (
           <li><strong>Immutable source sets:</strong> <code>{single.corpus_layout.naming.sets}</code></li>
         )}
@@ -204,9 +214,15 @@ const toc = [
       </ul>
 
       <h2 id="embedded-data">7. Pinned Books &amp; Sources</h2>
+      {isFolder ? (
+      <p>
+        <code>{sourcesFile}</code> lists every transcript this specification considers, each with its repository path and the git commit that holds it, along with the books and the details of each manuscript. Each transcript is read as it is in that commit, so later changes to <code>archives/</code> do not change this specification. It was made with <code>bun run spec:freeze</code>.
+      </p>
+      ) : (
       <p>
         <code>{single.file}</code> defines its entire scope in a single <code>sources</code> list of immutable ULID snapshots (<code>archives/sets/&lt;ULID&gt;.json</code>), eliminating any split between books and sources. If new manuscripts are added to <code>archives/</code> later, <code>bun run sets</code> mints a new ULID while older specifications remain pinned to their exact historical set. Use <code>bun run sources</code> to resolve metadata and XML paths programmatically.
       </p>
+      )}
 
       <details class="embed-accordion" id="embedded-targets">
         <summary>
@@ -270,7 +286,7 @@ const toc = [
               <span class="badge badge-emerald">{formatNum(stats.sourceCount)} manuscripts</span>
               <span class="badge">{formatNum(stats.totalXmlFiles)} XML files</span>
             </span>
-            <span class="embed-summary-sub">Self-contained allowlist of every permitted manuscript and its inline metadata inside <code>{single.file}</code></span>
+            <span class="embed-summary-sub">Self-contained allowlist of every permitted manuscript and its inline metadata inside <code>{isFolder ? sourcesFile : single.file}</code></span>
           </div>
           <span class="embed-chevron" aria-hidden="true"></span>
         </summary>

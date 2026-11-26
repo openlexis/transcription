@@ -219,7 +219,11 @@ function readUxlc(xml: string, filePath: string): ReadResult {
 
 /** Read a single allowlisted XML file according to its provenance ID. */
 export function readTranscriptionFile(absPath: string, provenanceId: string): ReadResult {
-  const xml = readFileSync(absPath, "utf8");
+  return readTranscriptionText(readFileSync(absPath, "utf8"), absPath, provenanceId);
+}
+
+/** Same as readTranscriptionFile, for text already read (for example a file at a pinned git commit). `absPath` is only used for its file name. */
+export function readTranscriptionText(xml: string, absPath: string, provenanceId: string): ReadResult {
   switch (provenanceId) {
     case "cntr":
       return readCntr(xml);

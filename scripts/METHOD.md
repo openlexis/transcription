@@ -1,6 +1,6 @@
 # Method of this compiler
 
-This is the statistical method implemented in `scripts/compile.ts` for specifications under `specifications/<specification-id>.yaml` (such as `specifications/01M88AX3YW2HWVPGHTREFJS181.yaml`). The specification does not prescribe a single model; another compiler may choose differently. Each compilation records its full method description in `manifest.json` and every book's `<teiHeader>`.
+This is the statistical method implemented in `scripts/compile.ts` for specifications under `specifications/<specification-id>/` (such as `specifications/01M8B15AA3PRA5XYS94RDTVTBV/`; older ones are single files such as `specifications/01M88AX3YW2HWVPGHTREFJS181.yaml`). The specification does not prescribe a single model; another compiler may choose differently. Each compilation records its full method description in `manifest.json` and every book's `<teiHeader>`.
 
 ## Words used here
 
@@ -18,7 +18,7 @@ This is the statistical method implemented in `scripts/compile.ts` for specifica
 
 ## 1. Which transcriptions are read
 
-For each target book listed under `targets` in `specifications/<specification-id>.yaml`, only the primary XML files explicitly listed under `sources` in that specification are read (strict allowlist). Several transcriptions of one manuscript are consolidated into one witness; for each line the one with the most words is read (ties broken by specification listing order). Leaves of one manuscript that carry separate numbers are one witness (P64 with P67, P77 with P103). Only the first hand (original copyist) is read; damaged, supplied, or unread words are treated as lacunae (for words an edition fills in for lost parts, see section 5). Translations into other languages are never read.
+For each target book of the specification, only the primary XML files its `sources` list names are read (strict allowlist). For a specification folder that list is `sources.json`, and each file is read as it is in the git commit recorded for it. Several transcriptions of one manuscript are consolidated into one witness; for each line the one with the most words is read (ties broken by specification listing order). Leaves of one manuscript that carry separate numbers are one witness (P64 with P67, P77 with P103). Only the first hand (original copyist) is read; damaged, supplied, or unread words are treated as lacunae (for words an edition fills in for lost parts, see section 5). Translations into other languages are never read.
 
 ## 2. Lining up the words
 

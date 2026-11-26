@@ -85,6 +85,7 @@ export interface SpecFile {
     root: string;
     structure: string;
     naming: {
+      sources?: string;
       sets?: string;
       index?: string;
       single_file: string;
@@ -265,6 +266,28 @@ function resolveSpecSources(
   };
 }
 
+/** A folder specification's sources.json (written by `bun run spec:freeze`), in the shape the site uses. */
+function readFrozenSources(jsonPath: string): { targets: TargetBook[]; sources: SourceItem[] } {
+  const frozen = JSON.parse(readFileSync(jsonPath, "utf8")) as {
+    books: TargetBook[];
+    archives: Record<string, { id: string; name: string; url: string }>;
+    manuscripts: (Omit<SourceItem, "files"> & {
+      files: (Omit<SourceFileEntry, "paths" | "provenance"> & { archive: string; transcripts: { path: string; commit: string }[] })[];
+    })[];
+  };
+  return {
+    targets: frozen.books,
+    sources: frozen.manuscripts.map(({ files, ...m }) => ({
+      ...m,
+      files: files.map(({ archive, transcripts, ...f }) => ({
+        ...f,
+        paths: transcripts.map((t) => t.path),
+        provenance: frozen.archives[archive],
+      })),
+    })),
+  };
+}
+
 let _specs: SpecFile[] | undefined;
 export function getSpecifications(): SpecFile[] {
   if (_specs) return _specs;
@@ -273,18 +296,30 @@ export function getSpecifications(): SpecFile[] {
     _specs = [];
     return _specs;
   }
-  const files = readdirSync(specDir)
-    .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
+  // Folder specifications (specifications/<ULID>/specification.yaml with sources.json beside it) are read only from their
+  // folder. Older single-file specifications (specifications/<ULID>.yaml) resolve through archives/sets and the catalogs.
+  const files = readdirSync(specDir, { withFileTypes: true })
+    .flatMap((d) =>
+      d.isDirectory() && existsSync(`${specDir}/${d.name}/specification.yaml`)
+        ? [`specifications/${d.name}/specification.yaml`]
+        : d.isFile() && /\.ya?ml$/.test(d.name)
+          ? [`specifications/${d.name}`]
+          : []
+    )
     .sort();
 
-  _specs = files.map((name) => {
-    const file = `specifications/${name}`;
+  _specs = files.map((file) => {
     const raw = parse(readFileSync(`${ROOT}${file}`, "utf8")) as Omit<
       SpecFile,
       "file" | "sources" | "sourceRefs" | "targets"
-    > & { targets?: TargetBook[]; sources: string[] | Record<string, string[]> };
-    const { targets, sources } = resolveSpecSources(raw.sources, raw.targets);
-    return { ...raw, file, targets, sourceRefs: raw.sources, sources };
+    > & { targets?: TargetBook[]; sources: string | string[] | Record<string, string[]> };
+    if (file.endsWith("/specification.yaml")) {
+      const { targets, sources } = readFrozenSources(`${ROOT}${file.replace(/specification\.yaml$/, "sources.json")}`);
+      return { ...raw, file, targets, sourceRefs: [file.replace(/specification\.yaml$/, "sources.json")], sources };
+    }
+    const refs = raw.sources as string[] | Record<string, string[]>;
+    const { targets, sources } = resolveSpecSources(refs, raw.targets);
+    return { ...raw, file, targets, sourceRefs: refs, sources };
   });
   return _specs;
 }

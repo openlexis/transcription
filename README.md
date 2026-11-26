@@ -4,24 +4,25 @@ Primary ancient manuscript transcriptions for the Old Testament (Biblical Hebrew
 
 ## Repository Structure
 
-- **[`specifications/`](specifications/):** Compact specification YAML files (such as [`specifications/01M88AX3YW2HWVPGHTREFJS181.yaml`](specifications/01M88AX3YW2HWVPGHTREFJS181.yaml)). Each specification defines its rules and a single `sources` list of immutable ULID set snapshots (and/or direct `<institution>:<id>` items).
+- **[`specifications/`](specifications/):** One folder per specification, `specifications/<ULID>/`, holding `specification.yaml` (the rules) and `sources.json` (the transcript list: every transcript the specification considers, with its repository path, the git commit that holds it, and the catalog details for its manuscript), made by `bun run spec:freeze`. Each transcript is read as it is in its commit, so later changes to `archives/` do not change a specification. Older specifications are single files (`specifications/<ULID>.yaml`) whose `sources` list names source sets in `archives/sets/`; they stay as committed and are still read that way.
 - **[`archives/sets/`](archives/sets/):** Immutable, content-hashed ULID snapshots (`archives/sets/<ULID>.json`) for every book and institution. When new material is added to `archives/`, running `bun run sets` mints a new ULID while preserving all previous snapshots untouched.
 - **[`archives/<institution>/`](archives/):** The primary XML manuscript corpus across institutional directories, each with its own `index.json` catalog mapping source identifiers to metadata, licenses, and XML file paths.
 - **[`transcripts/`](transcripts/):** Compiled TEI P5 XML transcripts organized as `transcripts/<specification-id>/<compilation-id>/`, containing one TEI P5 XML file per target book (`<book-id>.xml`), `manifest.json`, and a structured Markdown compilation report (`REPORT.md`).
 - **[`scripts/`](scripts/):** Source-set compiler (`scripts/sets.ts`), programmatic source resolver (`scripts/sources.ts`), per-archive import scripts (`scripts/archives/`), compilation, and verification utilities.
-- **[`site/`](site/):** Static Astro website resolving `specifications/*.yaml`, `archives/sets/*.json`, `archives/<institution>/index.json`, and every compilation under `transcripts/<specification-id>/<compilation-id>/`.
+- **[`site/`](site/):** Static Astro website resolving specification folders (`specifications/<ULID>/`), older single-file specifications with `archives/sets/*.json` and `archives/<institution>/index.json`, and every compilation under `transcripts/<specification-id>/<compilation-id>/`.
 
 ## Commands (Bun)
 
 | Command | Description |
 |---|---|
 | `bun run sets` | Compile/update immutable ULID source sets in `archives/sets/` from `archives/<institution>/index.json` |
+| `bun run spec:freeze <ULID> (--from <spec-id> \| <set-ULID\|archive:id> ...)` | Write `specifications/<ULID>/sources.json`, the transcript list of a new specification folder, from a selection |
 | `bun run sources summary` | Show specification summary, pinned set count, and institution breakdown |
 | `bun run sources targets` | List resolved target books with primary source counts and pinned ULIDs |
 | `bun run sources list [--target Gen] [--institution intf] [--json]` | Filter permitted sources for a specification |
 | `bun run sources get <id\|institution:id>` | Resolve full metadata and XML paths for one permitted source |
-| `bun run compile [spec-id] [all \| <book>]` | Compile target books into `transcripts/<spec-id>/<ulid>/` (with `REPORT.md` & `manifest.json`) and rebuild the Astro site |
-| `bun run check` | Validate all TEI P5 XML compilations, manifests, and `REPORT.md` frontmatter in `transcripts/` |
+| `bun run compile [spec-id] [all \| <book>]` | Compile target books (default: the newest specification, 01M8B15AA3PRA5XYS94RDTVTBV) into `transcripts/<spec-id>/<ulid>/` (with `REPORT.md` & `manifest.json`) and rebuild the Astro site |
+| `bun run check` | Validate specification folders (only `specification.yaml` and `sources.json`; every listed transcript exists at its commit) and all TEI P5 XML compilations, manifests, and `REPORT.md` frontmatter in `transcripts/` |
 | `bun run site` / `bun run site:build` | Build the static website into `site/www` |
 | `bun run site:dev` | Start the Astro development server with live reload |
 | `bun run site:preview` | Preview the built website (`site/www`) locally |

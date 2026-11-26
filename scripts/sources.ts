@@ -7,6 +7,12 @@
  *
  * Derives target books directly from the resolved sources (single source of truth).
  *
+ * Two kinds of specification:
+ *   - Folder specification: `specifications/<ULID>/specification.yaml` with `sources: sources.json`. Everything it uses is in
+ *     that folder; `sources.json` (made by `bun run spec:freeze`) lists every transcript with the git commit that holds it.
+ *   - Older single-file specification: `specifications/<ULID>.yaml`, whose `sources` name source sets and catalogs elsewhere
+ *     in the repository (read as before so existing compilations keep displaying).
+ *
  * Usage:
  *   bun run sources summary [--spec <id>] [--json]
  *   bun run sources targets [--spec <id>] [--json]
@@ -78,19 +84,79 @@ export interface ResolvedSource {
     lines?: number;
     words?: number;
     provenance: { id: string; name: string; url: string };
+    /** Folder specifications only: each transcript's identifier, repository path, and the git commit to read it from. */
+    transcripts?: PinnedTranscript[];
   }[];
 }
 
-export function findSpecPath(specId?: string): string {
+export interface PinnedTranscript {
+  id: string;
+  path: string;
+  commit: string;
+}
+
+/** The shape of `specifications/<ULID>/sources.json`. */
+export interface FrozenSources {
+  specification: string;
+  description: string;
+  createdAt: string;
+  selection: string[];
+  books: TargetBook[];
+  archives: Record<string, { id: string; name: string; url: string }>;
+  manuscripts: (Omit<ResolvedSource, "files"> & {
+    files: {
+      archive: string;
+      format: string;
+      license: string;
+      sourceUrl: string;
+      member?: string;
+      lines?: number;
+      words?: number;
+      transcripts: PinnedTranscript[];
+    }[];
+  })[];
+}
+
+/** A folder specification's YAML path, `specifications/<ULID>/specification.yaml`. */
+export const folderSpecFile = (id: string) => `${ROOT}specifications/${id}/specification.yaml`;
+export const isFolderSpec = (specPath: string) => specPath.endsWith("/specification.yaml");
+
+/** Every specification in the repository (folder and single-file), oldest first, as `{ id, path }`. */
+export function listSpecs(): { id: string; path: string }[] {
   const dir = `${ROOT}specifications`;
-  const files = readdirSync(dir)
-    .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
-    .sort();
-  if (!files.length) throw new Error("No specification YAML files found in specifications/");
-  if (!specId) return `${dir}/${files[0]}`;
-  const match = files.find((f) => f === specId || f === `${specId}.yaml` || f.startsWith(specId));
+  const out: { id: string; path: string }[] = [];
+  for (const f of readdirSync(dir, { withFileTypes: true })) {
+    if (f.isDirectory() && ULID_RE.test(f.name) && existsSync(folderSpecFile(f.name))) out.push({ id: f.name, path: folderSpecFile(f.name) });
+    else if (f.isFile() && /\.ya?ml$/.test(f.name)) out.push({ id: f.name.replace(/\.ya?ml$/, ""), path: `${dir}/${f.name}` });
+  }
+  return out.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+}
+
+/** With no ID, the newest specification. */
+export function findSpecPath(specId?: string): string {
+  const specs = listSpecs();
+  if (!specs.length) throw new Error("No specifications found in specifications/");
+  if (!specId) return specs[specs.length - 1].path;
+  const match = specs.find((s) => s.id === specId) ?? specs.find((s) => s.id.startsWith(specId));
   if (!match) throw new Error(`Specification "${specId}" not found in specifications/`);
-  return `${dir}/${match}`;
+  return match.path;
+}
+
+/** Reads a folder specification's `sources.json` into the same shape the older specifications resolve to. */
+export function loadFrozenSources(specPath: string): { frozen: FrozenSources; targets: TargetBook[]; sources: ResolvedSource[] } {
+  const jsonPath = specPath.replace(/specification\.yaml$/, "sources.json");
+  if (!existsSync(jsonPath)) throw new Error(`Missing ${jsonPath.slice(ROOT.length)} (run bun run spec:freeze)`);
+  const frozen = JSON.parse(readFileSync(jsonPath, "utf8")) as FrozenSources;
+  const sources: ResolvedSource[] = frozen.manuscripts.map(({ files, ...m }) => ({
+    ...m,
+    files: files.map(({ archive, transcripts, ...f }) => ({
+      ...f,
+      paths: transcripts.map((t) => t.path),
+      provenance: frozen.archives[archive],
+      transcripts,
+    })),
+  }));
+  return { frozen, targets: frozen.books, sources };
 }
 
 export function loadSpecWithSources(specId?: string) {
@@ -98,8 +164,21 @@ export function loadSpecWithSources(specId?: string) {
   const spec = Bun.YAML.parse(readFileSync(specPath, "utf8")) as {
     id: string;
     title: string;
-    sources: string[] | Record<string, string[]>;
+    sources: string | string[] | Record<string, string[]>;
   };
+  if (isFolderSpec(specPath)) {
+    if (spec.sources !== "sources.json") throw new Error(`${specPath.slice(ROOT.length)}: sources must be "sources.json"`);
+    const { frozen, targets, sources } = loadFrozenSources(specPath);
+    if (frozen.specification !== spec.id) throw new Error(`sources.json is for ${frozen.specification}, not ${spec.id}`);
+    return { spec, specPath, targets, sources, resolvedSets: [] as SourceSet[] };
+  }
+  return { spec, specPath, ...resolveSelection(spec.sources as string[] | Record<string, string[]>) };
+}
+
+/** Resolves an older specification's `sources` (source set ULIDs and `<archive>:<id>` items) through archives/sets and the
+ * archive catalogs. Also used by `bun run spec:freeze` to turn a selection into a frozen list. */
+export function resolveSelection(selection: string[] | Record<string, string[]>) {
+  const spec = { sources: selection };
 
   // Expand ULID sets and direct `institution:id` refs into explicit inst -> Set<id>
   const allowedByInst = new Map<string, Set<string>>();
@@ -208,7 +287,7 @@ export function loadSpecWithSources(specId?: string) {
     .sort((a, b) => (BOOK_META.get(a.id)?.order ?? 999) - (BOOK_META.get(b.id)?.order ?? 999));
 
   const sources = [...merged.values()].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
-  return { spec, specPath, targets, sources, resolvedSets };
+  return { targets, sources, resolvedSets };
 }
 
 if (import.meta.main) {

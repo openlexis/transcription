@@ -1,6 +1,6 @@
 # Open Lexis Transcription: Agent & Model Guide
 
-This repository contains primary ancient biblical manuscript archives (`archives/`), immutable specification files (`specifications/*.yaml`), compiled critical-text transcripts (`transcripts/<spec-id>/<compilation-id>/`), and a static Astro viewer (`site/`).
+This repository contains primary ancient biblical manuscript archives (`archives/`), immutable specifications (`specifications/<ULID>/`, and older single files `specifications/<ULID>.yaml`), compiled critical-text transcripts (`transcripts/<spec-id>/<compilation-id>/`), and a static Astro viewer (`site/`).
 
 Use this guide whenever asked to **implement a specification and produce a new compilation**.
 
@@ -8,9 +8,9 @@ Use this guide whenever asked to **implement a specification and produce a new c
 
 ## 1. Non-Negotiable Rules
 
-1. **Strict allowlist:** Read **only** the specification YAML you were assigned (`specifications/<SPEC_ID>.yaml`), the immutable ULID set files (`archives/sets/<ULID>.json`) and institutional catalogs (`archives/<institution>/index.json`) it references, and the XML files named by those catalog entries. Never roam `archives/` or ingest unreferenced files.
+1. **Strict allowlist:** Read **only** the specification you were assigned and the transcripts it lists. For a specification folder, that is `specifications/<SPEC_ID>/specification.yaml`, `specifications/<SPEC_ID>/sources.json`, and each transcript in `sources.json` read at its recorded commit (`git show <commit>:<path>`). For an older single-file specification (`specifications/<SPEC_ID>.yaml`), it is the ULID set files (`archives/sets/<ULID>.json`) and catalogs (`archives/<archive>/index.json`) it references and the XML files those catalog entries name. Never roam `archives/` or ingest unreferenced files.
 2. **Total exclusion of outside material:** Never consult or import printed/critical editions, translations, modern reconstructions, facsimiles, external scholarly commentary, or anything under `site/` (including UI-only word glosses in `site/src/data/`).
-3. **Never fabricate metadata:** If a metadata field (e.g., provenance, scientific dating) is absent from `archives/<institution>/index.json`, record it explicitly as unknown and let it widen uncertainty rather than imputing it.
+3. **Never fabricate metadata:** If a metadata field (e.g., provenance, scientific dating) is absent from the specification's `sources.json` (or, for an older specification, from `archives/<archive>/index.json`), record it explicitly as unknown and let it widen uncertainty rather than imputing it.
 4. **Never modify existing specs, source sets, or previous compilations:** Always write your compilation to a **brand-new** directory `transcripts/<SPEC_ID>/<NEW_COMPILATION_ULID>/` using a freshly generated 26-character Crockford Base32 ULID.
 5. **Own your modeling decisions:** You are free to design your own statistical model, alignment strategy, and disagreement taxonomy; do not blindly copy an earlier model's parameters if you believe a better approach furthers recovery of the original text. You may reuse deterministic I/O helpers (`scripts/sources.ts`, `scripts/lib/readers.ts`, `scripts/lib/tei.ts`) to parse input files without rewriting boilerplate.
 6. **Honest attribution:** Record your exact provider, model family, model name, exact model ID, effort/reasoning tier, and harness in both `manifest.json` and `REPORT.md`.
@@ -39,6 +39,31 @@ bun run check
 # 5. Rebuild the static Astro site so your compilation appears in the viewer
 bun run site
 ```
+
+### Specification folders
+
+Words used here:
+
+- **Specification folder:** `specifications/<ULID>/`, holding exactly two files: `specification.yaml` (the rules, with `sources: sources.json`) and `sources.json` (the transcript list).
+- **Transcript list (`sources.json`):** every transcript the specification considers. Each transcript has an identifier (`<archive>:<file name without .xml>`), its repository path, and the git commit that holds it. The list also copies the details the compiler and site use: the books (name, section, number, language) and, for each manuscript, its dates, date basis and source, language, type, format, license and source link.
+- **Pinned transcript:** a transcript read as it is in its recorded commit (`git show <commit>:<path>`), so later edits, moves or deletions under `archives/` do not change what a specification uses.
+
+A specification folder needs nothing else in the repository except the transcripts, which are read at their commits. To make a new specification:
+
+```bash
+# 1. Mint a ULID and write specifications/<ULID>/specification.yaml with `sources: sources.json`
+bun -e 'import { ulid } from "./scripts/sets.ts"; console.log(ulid());'
+
+# 2. Write its transcript list from a selection (an older specification's selection, or set ULIDs and <archive>:<id> items).
+#    Every selected transcript must be committed first.
+bun run spec:freeze <ULID> --from <OLDER_SPEC_ID>
+bun run spec:freeze <ULID> <SET_ULID | archive:id> ...
+
+# 3. Check it, then commit both files together
+bun run check
+```
+
+`bun run check` confirms each specification folder holds only those two files, that the IDs match the folder name, and that every transcript in `sources.json` exists at its recorded commit. Older single-file specifications stay exactly as committed and are still read the old way.
 
 ---
 
@@ -92,7 +117,7 @@ Required structural elements parsed by `scripts/check.ts` and `site/src/lib/corp
 {
   "specification": {
     "id": "<SPEC_ID>",
-    "file": "specifications/<SPEC_ID>.yaml",
+    "file": "specifications/<SPEC_ID>/specification.yaml",
     "sha256": "<sha256 of spec YAML>",
     "statement": "This compilation was produced under Open Lexis Transcription Specification <SPEC_ID>."
   },

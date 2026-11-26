@@ -3,7 +3,8 @@
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { parseXml } from "./lib/tei";
-import { loadSpecWithSources } from "./sources";
+import { spawnSync } from "node:child_process";
+import { listSpecs, loadSpecWithSources, type FrozenSources } from "./sources";
 
 const t0 = performance.now();
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -15,12 +16,37 @@ if (!existsSync(`${ROOT}transcripts`)) {
   process.exit(1);
 }
 
+// Folder specifications (specifications/<ULID>/) must hold only specification.yaml and sources.json, and every transcript
+// sources.json lists must exist at its recorded commit.
+let specFolders = 0, pinnedChecked = 0;
+for (const { id, path } of listSpecs()) {
+  if (!path.endsWith("/specification.yaml")) continue;
+  specFolders++;
+  const at = `specifications/${id}`;
+  const extra = readdirSync(`${ROOT}${at}`).filter((f) => f !== "specification.yaml" && f !== "sources.json");
+  if (extra.length) fails.push(`${at}: unexpected files ${extra.join(", ")} (a specification folder holds specification.yaml and sources.json)`);
+  if (!existsSync(`${ROOT}${at}/sources.json`)) { fails.push(`${at}: missing sources.json (run bun run spec:freeze ${id})`); continue; }
+  let spec: { id: string; sources: unknown };
+  try { spec = Bun.YAML.parse(readFileSync(path, "utf8")) as { id: string; sources: unknown }; } catch (e) { fails.push(`${at}/specification.yaml: ${e}`); continue; }
+  if (spec.id !== id) fails.push(`${at}/specification.yaml: id ${spec.id} does not match its folder`);
+  if (spec.sources !== "sources.json") fails.push(`${at}/specification.yaml: sources must be "sources.json"`);
+  const frozen = JSON.parse(readFileSync(`${ROOT}${at}/sources.json`, "utf8")) as FrozenSources;
+  if (frozen.specification !== id) fails.push(`${at}/sources.json: specification ${frozen.specification} does not match its folder`);
+  const pins = frozen.manuscripts.flatMap((m) => m.files.flatMap((f) => {
+    if (!frozen.archives[f.archive]) fails.push(`${at}/sources.json: archive ${f.archive} not described`);
+    return f.transcripts;
+  }));
+  const r = spawnSync("git", ["cat-file", "--batch-check"], { cwd: ROOT, input: pins.map((t) => `${t.commit}:${t.path}`).join("\n") + "\n", encoding: "utf8", maxBuffer: 1 << 28 });
+  const lines = r.stdout.trim().split("\n");
+  pins.forEach((t, i) => { if (!lines[i] || lines[i].endsWith("missing")) fails.push(`${at}/sources.json: ${t.path} not found at commit ${t.commit}`); });
+  pinnedChecked += pins.length;
+}
+
 let compilations = 0, booksChecked = 0, appsChecked = 0, certChecked = 0, witsChecked = 0;
 
 for (const specId of readdirSync(`${ROOT}transcripts`).sort()) {
-  const specPath = `${ROOT}specifications/${specId}.yaml`;
-  if (!existsSync(specPath)) {
-    fails.push(`transcripts/${specId}: no matching specifications/${specId}.yaml`);
+  if (!listSpecs().some((s) => s.id === specId)) {
+    fails.push(`transcripts/${specId}: no matching specification in specifications/`);
     continue;
   }
   const { targets: specTargets } = loadSpecWithSources(specId);
@@ -151,5 +177,5 @@ if (fails.length) {
   process.exit(1);
 }
 console.log(
-  `OK: ${compilations} compilation(s), ${booksChecked} books, ${witsChecked} witness records, ${appsChecked} <app> elements, ${certChecked} <certainty> elements verified in ${s} s`,
+  `OK: ${specFolders} specification folder(s) with ${pinnedChecked} pinned transcripts, ${compilations} compilation(s), ${booksChecked} books, ${witsChecked} witness records, ${appsChecked} <app> elements, ${certChecked} <certainty> elements verified in ${s} s`,
 );
