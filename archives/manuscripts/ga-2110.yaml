@@ -33,3 +33,24 @@ holdings:
       - path: archives/igntp-romans/2110.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: "France Paris Bibliothèque Nationale Gr. 702, fol. 252-434"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: X
+    notBefore: 900
+    notAfter: 999
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":999,\"gaNum\":2110,\"orig\":\"X\",\"docID\":32110,\"groupID\":\"\",\"primaryName\":2110,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":999,\"gaNum\":2110,\"orig\":\"X\",\"docID\":32110,\"groupID\":\"\",\"primaryName\":2110,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"

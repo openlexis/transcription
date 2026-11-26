@@ -39,3 +39,24 @@ holdings:
       - path: archives/igntp-romans/455.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Italy Florence Biblioteca Medicea Laurenziana Pluteo IV. 5
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XIII/XIV
+    notBefore: 1200
+    notAfter: 1399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1399,\"gaNum\":455,\"orig\":\"XIII/XIV\",\"docID\":30455,\"groupID\":\"\",\"primaryName\":455,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1399,\"gaNum\":455,\"orig\":\"XIII/XIV\",\"docID\":30455,\"groupID\":\"\",\"primaryName\":455,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1200}"

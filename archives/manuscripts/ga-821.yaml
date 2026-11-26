@@ -14,3 +14,24 @@ identifiers:
       - path: archives/igntp-john/821.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
         quote: "<altIdentifier type=\"Liste\"> <idno>30821</idno> </altIdentifier>"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XVI
+    notBefore: 1500
+    notAfter: 1599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1599,\"gaNum\":821,\"orig\":\"XVI\",\"docID\":30821,\"groupID\":\"\",\"primaryName\":821,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1599,\"gaNum\":821,\"orig\":\"XVI\",\"docID\":30821,\"groupID\":\"\",\"primaryName\":821,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1500}"

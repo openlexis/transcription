@@ -14,3 +14,24 @@ identifiers:
       - path: archives/igntp-john/L17.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
         quote: "<altIdentifier type=\"Liste\"> <idno>40017</idno> </altIdentifier>"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IX
+    notBefore: 800
+    notAfter: 899
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":899,\"gaNum\":\"L17\",\"orig\":\"IX\",\"docID\":40017,\"groupID\":\"\",\"primaryName\":\"L17\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":899,\"gaNum\":\"L17\",\"orig\":\"IX\",\"docID\":40017,\"groupID\":\"\",\"primaryName\":\"L17\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"

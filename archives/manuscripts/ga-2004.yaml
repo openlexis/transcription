@@ -39,3 +39,24 @@ holdings:
       - path: archives/igntp-galatians/2004.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: "Spain Escorial Real Biblioteca del Monasterio de El Escorial T. III. 17, f. 1-158"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "XII       "
+    notBefore: 1100
+    notAfter: 1199
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1199,\"gaNum\":2004,\"orig\":\"XII \",\"docID\":32004,\"groupID\":\"\",\"primaryName\":2004,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1199,\"gaNum\":2004,\"orig\":\"XII \",\"docID\":32004,\"groupID\":\"\",\"primaryName\":2004,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"

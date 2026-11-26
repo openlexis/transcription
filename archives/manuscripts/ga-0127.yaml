@@ -43,3 +43,24 @@ holdings:
       - path: archives/igntp-john/0127.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: "France Paris Bibliothèque nationale Copt. 129, 10, fol. 207"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VIII
+    notBefore: 700
+    notAfter: 799
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":799,\"gaNum\":127,\"orig\":\"VIII\",\"docID\":20127,\"groupID\":\"\",\"primaryName\":127,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":700}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":799,\"gaNum\":127,\"orig\":\"VIII\",\"docID\":20127,\"groupID\":\"\",\"primaryName\":127,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":700}"

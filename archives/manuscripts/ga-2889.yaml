@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-galatians/2889.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Germany München Bayerische Staatsbibliothek (BSB) Cod. graec. 455
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XIV
+    notBefore: 1300
+    notAfter: 1399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1399,\"gaNum\":2889,\"orig\":\"XIV\",\"docID\":32889,\"groupID\":\"\",\"primaryName\":2889,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1399,\"gaNum\":2889,\"orig\":\"XIV\",\"docID\":32889,\"groupID\":\"\",\"primaryName\":2889,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1300}"

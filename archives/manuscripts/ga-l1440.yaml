@@ -42,3 +42,24 @@ holdings:
       - path: archives/igntp-romans/L1440.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: "Egypt Sinai Saint Catherine's Monastery Gr. 290"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1251"
+    notBefore: 1251
+    notAfter: 1251
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1251,\"gaNum\":\"L1440\",\"orig\":1251,\"docID\":41440,\"groupID\":\"\",\"primaryName\":\"L1440\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1251}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1251,\"gaNum\":\"L1440\",\"orig\":1251,\"docID\":41440,\"groupID\":\"\",\"primaryName\":\"L1440\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1251}"

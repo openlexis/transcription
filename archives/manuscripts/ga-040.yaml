@@ -62,6 +62,26 @@ holdings:
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: United Kingdom Cambridge University Library Add. MS 10062
 dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VIII
+    notBefore: 700
+    notAfter: 799
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":799,\"gaNum\":40,\"orig\":\"VIII\",\"docID\":20040,\"groupID\":\"\",\"primaryName\":40,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":700}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":799,\"gaNum\":40,\"orig\":\"VIII\",\"docID\":20040,\"groupID\":\"\",\"primaryName\":40,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":700}"
   - text: Around 700CE?
     of: writing
     sources:

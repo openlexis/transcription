@@ -51,3 +51,24 @@ holdings:
       - path: archives/itsee-ga655/655.John.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Germany Berlin Staatsbibliothek Graec. 4º 39
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XI/XII
+    notBefore: 1000
+    notAfter: 1199
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1199,\"gaNum\":655,\"orig\":\"XI/XII\",\"docID\":30655,\"groupID\":\"\",\"primaryName\":655,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1199,\"gaNum\":655,\"orig\":\"XI/XII\",\"docID\":30655,\"groupID\":\"\",\"primaryName\":655,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"

@@ -48,3 +48,24 @@ holdings:
       - path: archives/igntp-romans/1962.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Austria Wien Österreichische Nationalbibliothek Theol. gr. 157
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XI/XII
+    notBefore: 1000
+    notAfter: 1199
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1199,\"gaNum\":1962,\"orig\":\"XI/XII\",\"docID\":31962,\"groupID\":\"\",\"primaryName\":1962,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1199,\"gaNum\":1962,\"orig\":\"XI/XII\",\"docID\":31962,\"groupID\":\"\",\"primaryName\":1962,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"

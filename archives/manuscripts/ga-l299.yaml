@@ -56,6 +56,26 @@ holdings:
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: United Kingdom Cambridge University Library Add. MS 10062
 dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: ca. 1180
+    notBefore: 1170
+    notAfter: 1190
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1190,\"gaNum\":\"L299\",\"orig\":\"ca. 1180\",\"docID\":40299,\"groupID\":\"\",\"primaryName\":\"L299\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1170}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1190,\"gaNum\":\"L299\",\"orig\":\"ca. 1180\",\"docID\":40299,\"groupID\":\"\",\"primaryName\":\"L299\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1170}"
   - text: Around the year 1180
     notBefore: 1175
     notAfter: 1200

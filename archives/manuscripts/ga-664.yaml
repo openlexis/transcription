@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-ephesians/664.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Germany Zittau Christian-Weise-Bibliothek A 1
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XV
+    notBefore: 1400
+    notAfter: 1499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1499,\"gaNum\":664,\"orig\":\"XV\",\"docID\":30664,\"groupID\":\"\",\"primaryName\":664,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1499,\"gaNum\":664,\"orig\":\"XV\",\"docID\":30664,\"groupID\":\"\",\"primaryName\":664,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1400}"

@@ -61,3 +61,24 @@ holdings:
       - path: archives/igntp-john/070.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: "France Paris Bibliothèque nationale Copt. 132.2 fol. 92v; 129.9 fol. 87v; 132.2 fol. 75v; 129.10 fols. 42v, 119v-124v, 164v; 133.1, fol. 120"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VI
+    notBefore: 500
+    notAfter: 599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":599,\"gaNum\":70,\"orig\":\"VI\",\"docID\":20070,\"groupID\":\"\",\"primaryName\":70,\"lang\":\"g-k\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":599,\"gaNum\":70,\"orig\":\"VI\",\"docID\":20070,\"groupID\":\"\",\"primaryName\":70,\"lang\":\"g-k\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"

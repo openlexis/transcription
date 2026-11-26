@@ -14,3 +14,24 @@ identifiers:
       - path: archives/igntp-john/1230.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
         quote: "<altIdentifier type=\"Liste\"> <idno>31230</idno> </altIdentifier>"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1124"
+    notBefore: 1124
+    notAfter: 1124
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1124,\"gaNum\":1230,\"orig\":1124,\"docID\":31230,\"groupID\":\"\",\"primaryName\":1230,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1124}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1124,\"gaNum\":1230,\"orig\":1124,\"docID\":31230,\"groupID\":\"\",\"primaryName\":1230,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1124}"

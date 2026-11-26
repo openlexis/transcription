@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-galatians/0158.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: "Location unknown Location unknown Zuletzt: Damascus (früher: Damascus, Qubbat al-Khazna)"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: V/VI
+    notBefore: 400
+    notAfter: 599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":599,\"gaNum\":158,\"orig\":\"V/VI\",\"docID\":20158,\"groupID\":\"\",\"primaryName\":158,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":599,\"gaNum\":158,\"orig\":\"V/VI\",\"docID\":20158,\"groupID\":\"\",\"primaryName\":158,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"

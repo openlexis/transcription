@@ -14,3 +14,24 @@ identifiers:
       - path: archives/family-pi-mark/702.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
         quote: "<altIdentifier type=\"Liste\"> <idno>30702</idno> </altIdentifier>"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XII
+    notBefore: 1100
+    notAfter: 1199
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1199,\"gaNum\":702,\"orig\":\"XII\",\"docID\":30702,\"groupID\":\"\",\"primaryName\":702,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1199,\"gaNum\":702,\"orig\":\"XII\",\"docID\":30702,\"groupID\":\"\",\"primaryName\":702,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1100}"

@@ -11,3 +11,24 @@ holdings:
       - path: archives/igntp-catena/1982.ephesians.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Italy Milan Biblioteca Ambrosiana D.541 inf
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XI
+    notBefore: 1000
+    notAfter: 1099
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1099,\"gaNum\":1982,\"orig\":\"XI\",\"docID\":31982,\"groupID\":\"\",\"primaryName\":1982,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1099,\"gaNum\":1982,\"orig\":\"XI\",\"docID\":31982,\"groupID\":\"\",\"primaryName\":1982,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"

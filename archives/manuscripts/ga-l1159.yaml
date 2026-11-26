@@ -42,3 +42,24 @@ holdings:
       - path: archives/igntp-romans/L1159.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Greece Athos Great Lavra Γ 123
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1331"
+    notBefore: 1331
+    notAfter: 1331
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1331,\"gaNum\":\"L1159\",\"orig\":1331,\"docID\":41159,\"groupID\":\"\",\"primaryName\":\"L1159\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1331}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1331,\"gaNum\":\"L1159\",\"orig\":1331,\"docID\":41159,\"groupID\":\"\",\"primaryName\":\"L1159\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1331}"

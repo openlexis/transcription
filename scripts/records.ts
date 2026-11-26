@@ -323,7 +323,7 @@ let liste: string | undefined;
 if (EVIDENCE) {
   const dir = `${EVIDENCE}/sources/intf-ntvmr`;
   const snap = existsSync(dir) ? readdirSync(dir).filter((d) => /^\d{4}-\d\d-\d\d$/.test(d)).sort().pop() : undefined;
-  if (snap && existsSync(`${dir}/${snap}/liste.json`)) liste = readFileSync(`${dir}/${snap}/liste.json`, "utf8");
+  if (snap && existsSync(`${dir}/${snap}/catalogue.json`)) liste = readFileSync(`${dir}/${snap}/catalogue.json`, "utf8"); // the whole list, docID 10000 to 49999
 }
 const docOf = (s: string) => (s.startsWith("P") ? 10000 + +s.slice(1) : s.startsWith("L") ? 40000 + +s.slice(1) : s.startsWith("0") ? 20000 + +s : /^\d+$/.test(s) ? 30000 + +s : 0);
 function listeEntry(doc: number): string | undefined {

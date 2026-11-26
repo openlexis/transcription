@@ -39,3 +39,24 @@ holdings:
       - path: archives/igntp-romans/2102.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: "United Kingdom Oxford Bodleian Library Ms. Barocci 146, fol. 1-401"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1451"
+    notBefore: 1451
+    notAfter: 1451
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1451,\"gaNum\":2102,\"orig\":1451,\"docID\":32102,\"groupID\":\"\",\"primaryName\":2102,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1451}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1451,\"gaNum\":2102,\"orig\":1451,\"docID\":32102,\"groupID\":\"\",\"primaryName\":2102,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1451}"

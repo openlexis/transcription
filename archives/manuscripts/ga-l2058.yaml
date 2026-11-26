@@ -42,3 +42,24 @@ holdings:
       - path: archives/igntp-romans/L2058.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Greece Meteora Varlaam Monastery 7
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1619"
+    notBefore: 1619
+    notAfter: 1619
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1619,\"gaNum\":\"L2058\",\"orig\":1619,\"docID\":42058,\"groupID\":\"\",\"primaryName\":\"L2058\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1619}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1619,\"gaNum\":\"L2058\",\"orig\":1619,\"docID\":42058,\"groupID\":\"\",\"primaryName\":\"L2058\",\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1619}"

@@ -48,3 +48,24 @@ holdings:
       - path: archives/igntp-romans/1908.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: United Kingdom Oxford Bodleian Library Ms. Roe 16
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: X
+    notBefore: 900
+    notAfter: 999
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":999,\"gaNum\":1908,\"orig\":\"X\",\"docID\":31908,\"groupID\":\"\",\"primaryName\":1908,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":999,\"gaNum\":1908,\"orig\":\"X\",\"docID\":31908,\"groupID\":\"\",\"primaryName\":1908,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"

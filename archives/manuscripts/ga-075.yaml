@@ -48,3 +48,24 @@ holdings:
       - path: archives/igntp-galatians/075.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: "Greece Athens National Library EBE 100, fol. 46-378"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: X
+    notBefore: 900
+    notAfter: 999
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":999,\"gaNum\":75,\"orig\":\"X\",\"docID\":20075,\"groupID\":\"\",\"primaryName\":75,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":999,\"gaNum\":75,\"orig\":\"X\",\"docID\":20075,\"groupID\":\"\",\"primaryName\":75,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"

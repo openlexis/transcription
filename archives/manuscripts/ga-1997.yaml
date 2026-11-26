@@ -20,3 +20,24 @@ holdings:
       - path: archives/igntp-catena/1997.ephesians.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Vatican City Vatican City Bibliotheca Apostolica Vaticana Palatinus graecus 10
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: X
+    notBefore: 900
+    notAfter: 999
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":999,\"gaNum\":1997,\"orig\":\"X\",\"docID\":31997,\"groupID\":\"\",\"primaryName\":1997,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":999,\"gaNum\":1997,\"orig\":\"X\",\"docID\":31997,\"groupID\":\"\",\"primaryName\":1997,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"

@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-galatians/1992.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Vat. gr. 648
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1232"
+    notBefore: 1232
+    notAfter: 1232
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1232,\"gaNum\":1992,\"orig\":1232,\"docID\":31992,\"groupID\":\"\",\"primaryName\":1992,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1232}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1232,\"gaNum\":1992,\"orig\":1232,\"docID\":31992,\"groupID\":\"\",\"primaryName\":1992,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1232}"

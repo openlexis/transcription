@@ -14,3 +14,24 @@ identifiers:
       - path: archives/igntp-2thessalonians/1977.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/altIdentifier
         quote: "<altIdentifier type=\"Liste\"> <idno>31977</idno> </altIdentifier>"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XIV
+    notBefore: 1300
+    notAfter: 1399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1399,\"gaNum\":1977,\"orig\":\"XIV\",\"docID\":31977,\"groupID\":\"\",\"primaryName\":1977,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1399,\"gaNum\":1977,\"orig\":\"XIV\",\"docID\":31977,\"groupID\":\"\",\"primaryName\":1977,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1300}"

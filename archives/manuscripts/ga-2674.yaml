@@ -30,3 +30,24 @@ holdings:
       - path: archives/igntp-galatians/2674.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Greece Elassona Panagia Olympiotissa Monastery 7
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1651"
+    notBefore: 1651
+    notAfter: 1651
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1651,\"gaNum\":2674,\"orig\":1651,\"docID\":32674,\"groupID\":\"\",\"primaryName\":2674,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1651}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1651,\"gaNum\":2674,\"orig\":1651,\"docID\":32674,\"groupID\":\"\",\"primaryName\":2674,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1651}"

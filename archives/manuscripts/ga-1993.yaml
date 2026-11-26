@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-galatians/1993.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Vat. gr. 692
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XI
+    notBefore: 1000
+    notAfter: 1099
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1099,\"gaNum\":1993,\"orig\":\"XI\",\"docID\":31993,\"groupID\":\"\",\"primaryName\":1993,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1099,\"gaNum\":1993,\"orig\":\"XI\",\"docID\":31993,\"groupID\":\"\",\"primaryName\":1993,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"

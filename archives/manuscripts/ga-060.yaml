@@ -43,3 +43,24 @@ holdings:
       - path: archives/igntp-john/060.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Germany Berlin Staatliche Museen P. 5877
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VI
+    notBefore: 500
+    notAfter: 599
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":599,\"gaNum\":60,\"orig\":\"VI\",\"docID\":20060,\"groupID\":\"\",\"primaryName\":60,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":599,\"gaNum\":60,\"orig\":\"VI\",\"docID\":20060,\"groupID\":\"\",\"primaryName\":60,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":500}"

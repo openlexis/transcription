@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-galatians/P135.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Egypt Cairo Coptic Museum s.n.
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IV/V
+    notBefore: 301
+    notAfter: 499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":499,\"gaNum\":\"P135\",\"orig\":\"IV/V\",\"docID\":10135,\"groupID\":\"\",\"primaryName\":\"P135\",\"lang\":\"grc\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":301}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":499,\"gaNum\":\"P135\",\"orig\":\"IV/V\",\"docID\":10135,\"groupID\":\"\",\"primaryName\":\"P135\",\"lang\":\"grc\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":301}"

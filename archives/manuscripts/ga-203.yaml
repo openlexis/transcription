@@ -39,3 +39,24 @@ holdings:
       - path: archives/igntp-galatians/203.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: United Kingdom London British Library Add. 28816
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1111"
+    notBefore: 1111
+    notAfter: 1111
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1111,\"gaNum\":203,\"orig\":1111,\"docID\":30203,\"groupID\":\"\",\"primaryName\":203,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1111}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1111,\"gaNum\":203,\"orig\":1111,\"docID\":30203,\"groupID\":\"\",\"primaryName\":203,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1111}"

@@ -29,3 +29,24 @@ holdings:
       - path: archives/igntp-romans/2936.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Athens EBE 122
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: 1227/28
+    notBefore: 1227
+    notAfter: 1228
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1228,\"gaNum\":2936,\"orig\":\"1227/28\",\"docID\":32936,\"groupID\":\"\",\"primaryName\":2936,\"lang\":\"grc\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1227}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1228,\"gaNum\":2936,\"orig\":\"1227/28\",\"docID\":32936,\"groupID\":\"\",\"primaryName\":2936,\"lang\":\"grc\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1227}"

@@ -39,3 +39,24 @@ holdings:
       - path: archives/igntp-romans/1950.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Vatican City Città del Vaticano Biblioteca Apostolica Vaticana Chig. R V 32
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1394"
+    notBefore: 1394
+    notAfter: 1394
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1394,\"gaNum\":1950,\"orig\":1394,\"docID\":31950,\"groupID\":\"\",\"primaryName\":1950,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1394}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1394,\"gaNum\":1950,\"orig\":1394,\"docID\":31950,\"groupID\":\"\",\"primaryName\":1950,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1394}"

@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-romans/0311.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: United Kingdom Cambridge De Hamel Collection de Hamel MS 390
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: VIII-IX
+    notBefore: 700
+    notAfter: 899
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":899,\"gaNum\":311,\"orig\":\"VIII-IX\",\"docID\":20311,\"groupID\":\"\",\"primaryName\":311,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":700}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":899,\"gaNum\":311,\"orig\":\"VIII-IX\",\"docID\":20311,\"groupID\":\"\",\"primaryName\":311,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":700}"

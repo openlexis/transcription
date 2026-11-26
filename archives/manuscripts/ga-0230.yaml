@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-ephesians/0230.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Egypt Cairo The Egyptian Museum SR 3796 25/1/55/2 (21)
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IV
+    notBefore: 300
+    notAfter: 399
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":399,\"gaNum\":230,\"orig\":\"IV\",\"docID\":20230,\"groupID\":\"\",\"primaryName\":230,\"lang\":\"g-l\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":399,\"gaNum\":230,\"orig\":\"IV\",\"docID\":20230,\"groupID\":\"\",\"primaryName\":230,\"lang\":\"g-l\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":300}"

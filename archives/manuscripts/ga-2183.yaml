@@ -11,3 +11,24 @@ holdings:
       - path: archives/igntp-catena/2183.ephesians.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Greece Athos Μονη Βατοπεδιου 239
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XI-XII
+    notBefore: 1000
+    notAfter: 1199
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1199,\"gaNum\":2183,\"orig\":\"XI-XII\",\"docID\":32183,\"groupID\":\"\",\"primaryName\":2183,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1199,\"gaNum\":2183,\"orig\":\"XI-XII\",\"docID\":32183,\"groupID\":\"\",\"primaryName\":2183,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1000}"

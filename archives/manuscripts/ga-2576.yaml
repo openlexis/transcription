@@ -48,3 +48,24 @@ holdings:
       - path: archives/igntp-romans/2576.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Italy Milan Biblioteca Ambrosiana F. 104 sup.
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1286"
+    notBefore: 1286
+    notAfter: 1286
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1286,\"gaNum\":2576,\"orig\":1286,\"docID\":32576,\"groupID\":\"\",\"primaryName\":2576,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1286}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1286,\"gaNum\":2576,\"orig\":1286,\"docID\":32576,\"groupID\":\"\",\"primaryName\":2576,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1286}"

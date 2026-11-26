@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-galatians/1736.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: "Greece Athos Great Lavra B' 45"
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: XIII
+    notBefore: 1200
+    notAfter: 1299
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1299,\"gaNum\":1736,\"orig\":\"XIII\",\"docID\":31736,\"groupID\":\"\",\"primaryName\":1736,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1200}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1299,\"gaNum\":1736,\"orig\":\"XIII\",\"docID\":31736,\"groupID\":\"\",\"primaryName\":1736,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1200}"

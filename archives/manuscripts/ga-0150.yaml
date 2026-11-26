@@ -48,3 +48,24 @@ holdings:
       - path: archives/igntp-romans/0150.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Greece Patmos St. John the Theologian Monastery 61
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: IX
+    notBefore: 800
+    notAfter: 899
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":899,\"gaNum\":150,\"orig\":\"IX\",\"docID\":20150,\"groupID\":\"\",\"primaryName\":150,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":899,\"gaNum\":150,\"orig\":\"IX\",\"docID\":20150,\"groupID\":\"\",\"primaryName\":150,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":800}"

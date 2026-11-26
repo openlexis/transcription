@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-galatians/2733.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Greece Zavorda Nikanoros Monastery 99
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1227"
+    notBefore: 1227
+    notAfter: 1227
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1227,\"gaNum\":2733,\"orig\":1227,\"docID\":32733,\"groupID\":\"\",\"primaryName\":2733,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1227}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1227,\"gaNum\":2733,\"orig\":1227,\"docID\":32733,\"groupID\":\"\",\"primaryName\":2733,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1227}"

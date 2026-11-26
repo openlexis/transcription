@@ -42,3 +42,24 @@ holdings:
       - path: archives/igntp-romans/1069.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Greece Athos Koutloumousiou 80
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1262"
+    notBefore: 1262
+    notAfter: 1262
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1262,\"gaNum\":1069,\"orig\":1262,\"docID\":31069,\"groupID\":\"\",\"primaryName\":1069,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1262}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1262,\"gaNum\":1069,\"orig\":1262,\"docID\":31069,\"groupID\":\"\",\"primaryName\":1069,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1262}"

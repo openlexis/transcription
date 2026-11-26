@@ -48,3 +48,24 @@ holdings:
       - path: archives/igntp-romans/2523.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Greece Athens National Library EBE 2720
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1453"
+    notBefore: 1453
+    notAfter: 1453
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1453,\"gaNum\":2523,\"orig\":1453,\"docID\":32523,\"groupID\":\"\",\"primaryName\":2523,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1453}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1453,\"gaNum\":2523,\"orig\":1453,\"docID\":32523,\"groupID\":\"\",\"primaryName\":2523,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1453}"

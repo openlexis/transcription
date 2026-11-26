@@ -37,3 +37,24 @@ holdings:
       - path: archives/igntp-john/028.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Vatican Vatican City Bibliotheca Apostolica Vaticana Vat. gr. 354
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: X
+    notBefore: 949
+    notAfter: 949
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":949,\"gaNum\":28,\"orig\":\"X\",\"docID\":20028,\"groupID\":\"\",\"primaryName\":28,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":949}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":949,\"gaNum\":28,\"orig\":\"X\",\"docID\":20028,\"groupID\":\"\",\"primaryName\":28,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":949}"

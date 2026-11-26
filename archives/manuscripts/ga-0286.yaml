@@ -31,3 +31,24 @@ holdings:
       - path: archives/igntp-john/0286.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Egypt Sinai Monastery of St. Catherine N.E. MG 72
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: X/XI
+    notBefore: 900
+    notAfter: 1099
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1099,\"gaNum\":286,\"orig\":\"X/XI\",\"docID\":20286,\"groupID\":\"\",\"primaryName\":286,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1099,\"gaNum\":286,\"orig\":\"X/XI\",\"docID\":20286,\"groupID\":\"\",\"primaryName\":286,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":900}"

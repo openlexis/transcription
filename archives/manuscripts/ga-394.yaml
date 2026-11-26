@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-galatians/394.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Italy Rome Biblioteca Vallicelliana F. 17
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1330"
+    notBefore: 1330
+    notAfter: 1330
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1330,\"gaNum\":394,\"orig\":1330,\"docID\":30394,\"groupID\":\"\",\"primaryName\":394,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1330}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1330,\"gaNum\":394,\"orig\":1330,\"docID\":30394,\"groupID\":\"\",\"primaryName\":394,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1330}"

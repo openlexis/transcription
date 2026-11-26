@@ -43,3 +43,24 @@ holdings:
       - path: archives/igntp-john/0216.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Austria Vienna Österreichische Nationalbibliothek Pap. G. 3081
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: V
+    notBefore: 400
+    notAfter: 499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":499,\"gaNum\":216,\"orig\":\"V\",\"docID\":20216,\"groupID\":\"\",\"primaryName\":216,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":499,\"gaNum\":216,\"orig\":\"V\",\"docID\":20216,\"groupID\":\"\",\"primaryName\":216,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"

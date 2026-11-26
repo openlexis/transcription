@@ -43,3 +43,24 @@ holdings:
       - path: archives/igntp-john/026.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Germany Wolfenbüttel Herzog August Bibliothek Codices Weissenburgenses 64 fols. 197-8 (lower script)
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: V
+    notBefore: 400
+    notAfter: 499
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":499,\"gaNum\":26,\"orig\":\"V\",\"docID\":20026,\"groupID\":\"\",\"primaryName\":26,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":499,\"gaNum\":26,\"orig\":\"V\",\"docID\":20026,\"groupID\":\"\",\"primaryName\":26,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":400}"

@@ -30,3 +30,24 @@ holdings:
       - path: archives/igntp-ephesians/1311.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Germany Berlin Staatsbibliothek zu Berlin Preußischer Kulturbesitz Ham. 625
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1090"
+    notBefore: 1090
+    notAfter: 1090
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1090,\"gaNum\":1311,\"orig\":1090,\"docID\":31311,\"groupID\":\"\",\"primaryName\":1311,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1090}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1090,\"gaNum\":1311,\"orig\":1090,\"docID\":31311,\"groupID\":\"\",\"primaryName\":1311,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1090}"

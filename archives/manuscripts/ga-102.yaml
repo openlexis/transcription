@@ -24,3 +24,24 @@ holdings:
       - path: archives/igntp-ephesians/102.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Russia Moscow State Historical Museum Sinod. gr. 5 (Vlad. 412) fol. 1-111
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: 1444/5
+    notBefore: 1444
+    notAfter: 1445
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1445,\"gaNum\":102,\"orig\":\"1444/5\",\"docID\":30102,\"groupID\":\"\",\"primaryName\":102,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1444}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1445,\"gaNum\":102,\"orig\":\"1444/5\",\"docID\":30102,\"groupID\":\"\",\"primaryName\":102,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1444}"

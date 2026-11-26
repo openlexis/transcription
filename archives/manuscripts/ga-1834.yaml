@@ -42,3 +42,24 @@ holdings:
       - path: archives/igntp-romans/1834.xml
         locator: teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier
         quote: Russia St. Petersburg National Library of Russia Ф. № 906 / Gr. 225
+dates:
+  - method:
+      - name: catalogue
+        category: reported
+    text: "1301"
+    notBefore: 1301
+    notAfter: 1301
+    of: writing
+    statedBy:
+      - name: Institut für neutestamentliche Textforschung (INTF)
+        kind: organisation
+        sources:
+          - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+            url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+            accessed: 2026-11-23
+            quote: "{\"origLate\":1301,\"gaNum\":1834,\"orig\":1301,\"docID\":31834,\"groupID\":\"\",\"primaryName\":1834,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1301}"
+    sources:
+      - title: "INTF New Testament Virtual Manuscript Room, manuscript list"
+        url: https://ntvmr.uni-muenster.de/community/api/metadata/liste/search/?docID=10000-49999&limit=&detail=document&format=json
+        accessed: 2026-11-23
+        quote: "{\"origLate\":1301,\"gaNum\":1834,\"orig\":1301,\"docID\":31834,\"groupID\":\"\",\"primaryName\":1834,\"lang\":\"g\",\"userID\":\"\",\"v11n\":\"\",\"origEarly\":1301}"
