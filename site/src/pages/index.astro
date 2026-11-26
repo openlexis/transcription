@@ -2743,10 +2743,16 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
 
     function getScrollYToFitExpanded(): number | null {
       if (!showcase) return null;
-      const expandedH = measureExpandedShowcaseHeight();
       const headerOffset = getStickyHeaderOffset();
       const viewportH = window.innerHeight;
       const pageTop = showcase.getBoundingClientRect().top + window.scrollY;
+      const board = showcase.querySelector(".story-board");
+      // Read the storyboard position before measuring, so a temporary inspect
+      // layout (and any transition it would start) cannot throw the target off.
+      const boardTop = board
+        ? board.getBoundingClientRect().top + window.scrollY
+        : pageTop;
+      const expandedH = measureExpandedShowcaseHeight();
       const available = viewportH - headerOffset;
       let targetY: number;
       const maxScroll = pageTop - headerOffset;
@@ -2759,12 +2765,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         else targetY = maxScroll;
       } else {
         // The expanded card is taller than the viewport. Line the storyboard up
-        // under the header so the disagreement opens on screen, rather than
-        // pinning the top (chart hidden below) or the bottom (caption hidden above).
-        const board = showcase.querySelector(".story-board");
-        const boardTop = board
-          ? board.getBoundingClientRect().top + window.scrollY
-          : pageTop;
+        // under the header so the disagreement opens on screen.
         targetY = Math.max(0, boardTop - headerOffset);
         if (Math.abs(window.scrollY - targetY) <= 4) return null;
       }
@@ -2788,13 +2789,15 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
       lastTick = performance.now();
       // The disputed word is already found, so skip the opening sweep and
       // start at the disagreement. A later click restarts from the same point.
+      showcase?.classList.add("is-measuring");
       applyCaseAndStep(currentCaseIdx, 1, false);
       syncIntroLoopAttr();
       syncPlayButton();
       updateProgressBar();
-      // Measure after the disagreement has opened, so a folded verse on a
-      // narrow screen does not leave the storyboard above the header.
+      // Measure with transitions off so a folding verse is already in its
+      // final place before we choose a scroll target.
       const targetY = getScrollYToFitExpanded();
+      showcase?.classList.remove("is-measuring");
       if (targetY != null) {
         window.scrollTo({ top: targetY, behavior: reducedMotion ? "auto" : "smooth" });
       }
