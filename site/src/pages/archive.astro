@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import "../styles/cite.css";
+import "../styles/archive.css";
 import {
   REPO,
   buildClientSourceIndex,
@@ -32,7 +33,7 @@ const meta = {
       <div class="eyebrow">Historical Archive</div>
       <h1>Archive</h1>
       <p class="lead">
-        Search and inspect all {formatNum(stats.sourceCount)} primary ancient manuscripts ({formatNum(stats.totalXmlFiles)} XML files across {stats.provenanceCount} archival institutions), spanning 3rd-century BC Dead Sea Scrolls, early Greek papyri, and medieval codices. Click any manuscript to view its dating, XML files, license, and facsimile links.
+        Search and inspect all {formatNum(stats.sourceCount)} primary ancient manuscripts ({formatNum(stats.totalXmlFiles)} XML files across {stats.provenanceCount} archival institutions), spanning 3rd-century BC Dead Sea Scrolls, early Greek papyri, and medieval codices. Click any manuscript to see its date, the transcription files each source provides, their licenses, and links to images of the pages.
       </p>
       <div class="actions">
         <a href="/transcriptions/" class="btn btn-secondary">Browse transcriptions →</a>
@@ -100,11 +101,14 @@ const meta = {
 
   <script id="src-data" type="application/json" set:html={JSON.stringify(index)}></script>
   <script id="src-meta" type="application/json" set:html={JSON.stringify(meta)}></script>
+  <script id="src-books" type="application/json" set:html={JSON.stringify(spec.targets.map((t) => [t.id, t.name]))}></script>
   <script>
     import "../lib/cite-ui";
     import { adaptedNote, citeBoxHtml, parseLicense } from "../lib/cite";
+    import { archiveIcon } from "../lib/archive-icons";
     const META = JSON.parse(document.getElementById("src-meta")?.textContent || "{}");
     const REPO = META.repo;
+    const BOOKS = JSON.parse(document.getElementById("src-books")?.textContent || "[]");
     const dataEl = document.getElementById("src-data");
     const ALL = dataEl ? JSON.parse(dataEl.textContent || "[]") : [];
     const listEl = document.getElementById("src-list");
@@ -128,13 +132,6 @@ const meta = {
         .replace(/"/g, "&quot;");
     const blob = (f) => `${REPO}/blob/main/${f.split("/").map(encodeURIComponent).join("/")}`;
     const num = (n) => Number(n).toLocaleString("en-US");
-    const typeBadge = (t) =>
-      t === "scroll" ? "badge badge-amber" : t === "catena" ? "badge badge-violet" : t === "lectionary" ? "badge badge-emerald" : "badge badge-indigo";
-
-    function licenseHtml(f) {
-      const l = parseLicense(f.lic, f.url);
-      return `<div class="license-line"><span class="license-label">License:</span><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)} ↗</a>${l.where ? ` <span class="ms-sub">· terms found in ${esc(l.where)}</span>` : ""}</div>`;
-    }
 
     function adaptedHtml(f) {
       const a = adaptedNote(f.ps[0] || "", f.fmt);
@@ -179,30 +176,137 @@ const meta = {
       );
     }
 
+    const TYPE_INFO = {
+      continuous: ["Continuous text", "the text runs on in order, like a normal Bible"],
+      scroll: ["Scroll", "the text is on a scroll"],
+      lectionary: ["Lectionary", "Bible readings arranged in the order of church services through the year"],
+      catena: ["Catena", "Bible text set among a chain of quotations from commentators"],
+    };
+    const typeInfo = (t) => TYPE_INFO[t] || [t, ""];
+    const BOOK_ORDER = new Map(BOOKS.map(([id], i) => [id, i]));
+    const bookName = (id) => (BOOKS.find(([b]) => b === id) || [id, id])[1];
+    const byBook = (a, b) => (BOOK_ORDER.get(a) ?? 999) - (BOOK_ORDER.get(b) ?? 999);
+    const plural = (n, one, many) => `${num(n)} ${n === 1 ? one : many}`;
+    const hostOf = (u) => {
+      try {
+        return new URL(u).host;
+      } catch {
+        return "";
+      }
+    };
+
+    function field(icon, label, hint, valueHtml) {
+      return `<div class="ar-field">${archiveIcon(icon)}<div class="ar-label">${label}${hint ? `<span class="ar-hint">${hint}</span>` : ""}</div><div class="ar-value">${valueHtml}</div></div>`;
+    }
+
+    function fieldsHtml(s) {
+      const [typeName, typeHint] = typeInfo(s.ty);
+      const greek = s.lg === "Greek";
+      const rows = [];
+      rows.push(
+        field(
+          "id",
+          "Manuscript ID",
+          greek ? "the Gregory-Aland number, the standard number for Greek New Testament manuscripts" : "the short code scholars use to cite it",
+          `<span style="font-family: var(--font-mono); font-weight: 600;">${esc(s.id)}</span>`,
+        ),
+      );
+      const dateLines = [
+        s.dr ? `Range: ${esc(s.dr)}` : "",
+        s.db ? `How it was dated: ${esc(s.db)}` : "",
+        s.dsrc ? `Source: ${esc(s.dsrc)}` : "",
+      ].filter(Boolean);
+      rows.push(field("date", "Date", "when it was written, as estimated", `${esc(s.ds)}${dateLines.map((l) => `<div class="ms-sub">${l}</div>`).join("")}`));
+      if (s.sh) {
+        const m = s.sh.match(/^(.*?)\s*\(with (.*)\)\s*$/);
+        rows.push(
+          field(
+            "shelfmark",
+            "Shelfmark",
+            "the library's catalogue number",
+            m ? `${esc(m[1])}<div class="ms-sub">Other parts: ${esc(m[2])}</div>` : esc(s.sh),
+          ),
+        );
+      }
+      rows.push(field("language", "Language", "", esc(s.ld)));
+      rows.push(field(s.ty in TYPE_INFO ? s.ty : "continuous", "Layout", "how the text is arranged", `${esc(typeName)}${typeHint ? `<div class="ms-sub">${esc(typeHint)}</div>` : ""}`));
+      const images = s.vw.length
+        ? `<div class="ar-links">${s.vw
+            .map((v) => `<div><a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.name)} ↗</a><div class="ms-sub">opens on ${esc(hostOf(v.url))}</div></div>`)
+            .join("")}</div>`
+        : `<span class="ms-sub">No online images are linked yet.</span>`;
+      rows.push(field("image", "Images", "photographs of the pages (a facsimile); separate from the transcriptions below", images));
+      return `<div class="ar-fields">${rows.join("")}</div>`;
+    }
+
+    function coversText(f, union) {
+      const bk = [...f.bk].sort(byBook);
+      if (!bk.length) return "";
+      if (bk.length <= 6) return bk.map(bookName).join(", ");
+      if (bk.length === union.length) return `all ${num(union.length)}`;
+      const missing = union.filter((b) => !bk.includes(b));
+      if (missing.length && missing.length <= 3) return `all but ${missing.map(bookName).join(", ")}`;
+      return `${bookName(bk[0])} to ${bookName(bk[bk.length - 1])}`;
+    }
+
+    function overlapHtml(s, union) {
+      if (s.fl.length < 2 || !union.length) return "";
+      const counts = new Map();
+      s.fl.forEach((f) => new Set(f.bk).forEach((b) => counts.set(b, (counts.get(b) || 0) + 1)));
+      const maxN = Math.max(...counts.values());
+      if (maxN === 1) {
+        return `<p>No two files cover the same book, so these files are different parts of the same manuscript.</p>`;
+      }
+      const groups = new Map();
+      for (const [b, n] of counts) (groups.get(n) || groups.set(n, []).get(n)).push(b);
+      const parts = [...groups.entries()]
+        .sort((a, b) => b[0] - a[0])
+        .map(([n, bs]) => {
+          bs.sort(byBook);
+          return bs.length <= 6 && groups.size > 1 ? `${bs.map(bookName).join(", ")} ${bs.length === 1 ? "is" : "are"} in ${n} files` : `${plural(bs.length, "book is", "books are")} in ${n} files`;
+        });
+      return `<p>Together these files cover ${plural(union.length, "book", "books")}. ${esc(parts.join("; "))}.</p><p>Where files overlap, they are separate transcriptions of the same pages. They are not copies of each other and can differ in places.</p>`;
+    }
+
+    function fileHtml(f, union) {
+      const links = f.ps.map((p) => `<a href="${blob(p)}" target="_blank" rel="noopener"><code>${esc(p)}</code></a>`).join(" ");
+      const covers = coversText(f, union);
+      const pills = [
+        f.bk.length ? `<span class="badge">${plural(f.bk.length, "book", "books")}</span>` : "",
+        f.ln ? `<span class="badge">${plural(f.ln, "line", "lines")}</span>` : "",
+        f.wd ? `<span class="badge">${plural(f.wd, "word", "words")}</span>` : "",
+      ].join("");
+      const row = (icon, k, v) => `<div class="ar-file-row">${archiveIcon(icon, 14)}<span class="ar-k">${k}</span><span class="ar-v">${v}</span></div>`;
+      return `
+        <div class="ar-file">
+          <div class="ar-file-head">${archiveIcon("provider")}<a href="${esc(f.pu)}" target="_blank" rel="noopener">${esc(f.pn)} ↗</a></div>
+          <div class="ar-file-rows">
+            ${pills ? row("books", "Contains", `<span class="ar-pills">${pills}</span>${covers ? `<div class="ms-sub">Books: ${esc(covers)}</div>` : ""}`) : ""}
+            ${row("file", "File", links)}
+            ${row("format", "Format", `${esc(f.fmt)}${/^TEI/.test(f.fmt) ? `<div class="ms-sub">TEI is the standard file format for scholarly texts.</div>` : ""}`)}
+            ${row("link", "Original", `<a href="${esc(f.url)}" target="_blank" rel="noopener">Original source ↗</a>${hostOf(f.url) ? ` <span class="ms-sub">on ${esc(hostOf(f.url))}</span>` : ""}`)}
+            ${row("license", "License", licenseInline(f))}
+          </div>
+          ${adaptedHtml(f)}
+        </div>`;
+    }
+
+    function licenseInline(f) {
+      const l = parseLicense(f.lic, f.url);
+      return `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)} ↗</a>${l.where ? ` <span class="ms-sub">· terms found in ${esc(l.where)}</span>` : ""}`;
+    }
+
     function renderItem(s, openByDefault = false) {
-      const filesHtml = s.fl
-        .map((f) => {
-          const links = f.ps
-            .map((p) => `<a href="${blob(p)}" target="_blank" rel="noopener"><code>${esc(p)}</code></a>`)
-            .join(" ");
-          const statsTxt = f.ln ? ` · ${num(f.ln)} lines, ${num(f.wd)} words` : "";
-          return `
-            <div class="tr-item">
-              <div><a href="${esc(f.pu)}" target="_blank" rel="noopener" style="font-weight: 600;">${esc(f.pn)} ↗</a></div>
-              <div class="tr-links">${links}</div>
-              <div class="ms-sub">${esc(f.fmt)}${statsTxt} · <a href="${esc(f.url)}" target="_blank" rel="noopener">original source ↗</a></div>
-              ${licenseHtml(f)}
-              ${adaptedHtml(f)}
-            </div>
-          `;
-        })
-        .join("");
-
-      const viewersHtml = s.vw.length
-        ? `<div><span class="source-meta-label">Facsimiles:</span> ${s.vw.map((v) => `<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.name)} ↗</a>`).join(" · ")}</div>`
-        : "";
-
       const fileCount = s.fl.reduce((n, f) => n + f.ps.length, 0);
+      const union = [...new Set(s.fl.flatMap((f) => f.bk))].sort(byBook);
+      const files = [...s.fl].sort((a, b) => b.bk.length - a.bk.length || byBook(a.bk[0] || "", b.bk[0] || ""));
+      const shared = new Set();
+      let sameName = false;
+      for (const f of files) for (const p of f.ps) { const n = p.split("/").pop(); if (shared.has(n)) sameName = true; shared.add(n); }
+      const [typeName, typeHint] = typeInfo(s.ty);
+      const typeTip = `${typeName}${typeHint ? `: ${typeHint}` : ""}`;
+
+      const intro = `<div class="ar-section-intro"><p>Each block is a transcription (the manuscript's text typed out) published by one institution.${sameName ? ` Files are named by the manuscript ID (${esc(s.id)}), not by book, so the same file name repeats under different institutions.` : ""}</p>${overlapHtml(s, union)}</div>`;
 
       return `
         <details class="source-item"${openByDefault ? " open" : ""}>
@@ -210,20 +314,20 @@ const meta = {
             <span class="ms-siglum">${esc(s.id)}</span>
             <div>
               <span style="font-weight: 600; color: var(--ink);">${esc(s.name || s.id)}</span>
-              <span style="color: var(--ink-muted); font-size: 0.82rem; margin-left: 8px;">${esc(s.ds)} · ${fileCount} XML ${fileCount === 1 ? "file" : "files"}</span>
+              <span style="color: var(--ink-muted); font-size: 0.82rem; margin-left: 8px;">${esc(s.ds)} · ${plural(fileCount, "transcription file", "transcription files")}</span>
             </div>
-            <div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;">
-              <span class="${typeBadge(s.ty)}">${esc(s.ty)}</span>
-              <span class="badge">${esc(s.ld)}</span>
+            <div class="ar-sum-right">
+              <span class="ar-lang">${esc(s.ld)}</span>
+              <span class="ar-type" role="img" title="${esc(typeTip)}" aria-label="${esc(typeTip)}">${archiveIcon(s.ty in TYPE_INFO ? s.ty : "continuous", 16)}</span>
             </div>
           </summary>
           <div class="source-detail">
-            <div class="source-meta-grid">
-              <div><div class="source-meta-label">Date</div><div class="source-meta-val">${esc(s.ds)}<div class="ms-sub">${esc(s.dd)}</div></div></div>
-              ${s.sh ? `<div><div class="source-meta-label">Shelfmark</div><div class="source-meta-val">${esc(s.sh)}</div></div>` : ""}
+            ${fieldsHtml(s)}
+            <div>
+              <div class="ar-section-head">${archiveIcon("file")}Transcriptions</div>
+              ${intro}
+              ${files.map((f) => fileHtml(f, union)).join("")}
             </div>
-            <div><div class="source-meta-label" style="margin-bottom: 4px;">XML Files &amp; Provenance</div>${filesHtml}</div>
-            ${viewersHtml}
             ${citeHtml(s)}
           </div>
         </details>

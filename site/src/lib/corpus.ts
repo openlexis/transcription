@@ -501,6 +501,16 @@ export function getCorpusStats(spec: SpecFile = getPrimarySpec()) {
   };
 }
 
+// Which books each archive XML file contains, written by `bun run archive:coverage`. Presentation only.
+let _coverage: Record<string, string[]> | undefined;
+function fileBooks(path: string): string[] {
+  if (!_coverage) {
+    const f = `${ROOT}site/src/data/archive-coverage.json`;
+    _coverage = existsSync(f) ? (JSON.parse(readFileSync(f, "utf8")) as Record<string, string[]>) : {};
+  }
+  return _coverage[path] ?? [];
+}
+
 /** Compact client-side index for interactive expandable source explorers. */
 export function buildClientSourceIndex(spec: SpecFile) {
   return spec.sources.map((s) => {
@@ -514,10 +524,14 @@ export function buildClientSourceIndex(spec: SpecFile) {
       ld: displayLanguage(s.language),
       ds: d.short,
       dd: d.detail + (s.dateSource ? ` · ${s.dateSource}` : ""),
+      dr: s.yearFrom !== undefined && s.yearTo !== undefined ? (s.yearFrom === s.yearTo ? formatEra(s.yearFrom) : `${formatEra(s.yearFrom)} to ${formatEra(s.yearTo)}`) : "",
+      db: s.dateBasis ?? "",
+      dsrc: s.dateSource ?? "",
       vw: s.viewers ?? [],
       tg: s.targets ?? [],
       fl: s.files.map((f) => ({
         ps: f.paths,
+        bk: [...new Set(f.paths.flatMap(fileBooks))],
         fmt: f.format,
         lic: f.license,
         url: f.sourceUrl,

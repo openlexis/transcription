@@ -1,0 +1,47 @@
+/* Archive record pages: labeled fields, transcription files grouped by provider, images */
+.ar-ico { flex: none; color: var(--ink-muted); }
+.ar-type { display: inline-flex; align-items: center; color: var(--ink-muted); cursor: help; }
+.ar-lang { font-size: 0.82rem; color: var(--ink-muted); }
+.ar-sum-right { display: flex; align-items: center; gap: 10px; justify-content: flex-end; }
+
+.ar-fields { display: grid; margin: 0; padding-bottom: 6px; border-bottom: 1px dashed var(--border); }
+.ar-field {
+  display: grid;
+  grid-template-columns: 18px minmax(120px, 190px) minmax(0, 1fr);
+  gap: 0 12px;
+  align-items: start;
+  padding: 8px 0;
+}
+.ar-field + .ar-field { border-top: 1px solid var(--surface-subtle); }
+.ar-field > .ar-ico { margin-top: 2px; }
+.ar-label { font-weight: 600; color: var(--ink); font-size: 0.84rem; line-height: 1.35; }
+.ar-hint { display: block; font-weight: 400; font-size: 0.76rem; color: var(--ink-muted); margin-top: 1px; }
+.ar-value { color: var(--ink); min-width: 0; overflow-wrap: anywhere; }
+.ar-value .ms-sub { margin-top: 2px; }
+.ar-links { display: grid; gap: 4px; }
+
+.ar-section-head { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.9rem; color: var(--ink); margin-bottom: 2px; }
+.ar-section-intro { color: var(--ink-secondary); font-size: 0.82rem; margin: 2px 0 8px; }
+.ar-section-intro p { margin: 0 0 4px; }
+
+.ar-file { padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }
+.ar-file + .ar-file { margin-top: 8px; }
+.ar-file-head { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.ar-file-head a { overflow-wrap: anywhere; }
+.ar-file-rows { display: grid; gap: 5px; margin-top: 8px; }
+.ar-file-row { display: grid; grid-template-columns: 18px 74px minmax(0, 1fr); gap: 0 8px; align-items: start; font-size: 0.82rem; color: var(--ink-secondary); }
+.ar-file-row > .ar-ico { margin-top: 2px; }
+.ar-file-row .ar-k { font-weight: 600; color: var(--ink-muted); }
+.ar-file-row .ar-v { min-width: 0; overflow-wrap: anywhere; }
+.ar-file-row code { font-size: 0.78rem; }
+.ar-pills { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ar-file .license-line { margin-top: 0; }
+.ar-file .adapted-note { margin-left: 26px; }
+
+@media (max-width: 640px) {
+  .ar-field { grid-template-columns: 18px minmax(0, 1fr); }
+  .ar-field > .ar-value { grid-column: 2; }
+  .ar-file-row { grid-template-columns: 18px minmax(0, 1fr); }
+  .ar-file-row .ar-v { grid-column: 2; }
+  .ar-file .adapted-note { margin-left: 0; }
+}

@@ -9,6 +9,7 @@
     "spec:contract": "bun scripts/spec-contract.ts",
     "contract": "bun scripts/contract.ts",
     "import": "bun scripts/import.ts",
+    "archive:coverage": "bun scripts/archive-coverage.ts",
     "compile": "bun --smol scripts/compile.ts",
     "check": "bun scripts/check.ts",
     "site": "cd site && bun run build",
