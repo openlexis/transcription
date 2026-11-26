@@ -238,7 +238,7 @@ const CROSS_CHECKS: Record<string, (c: Ctx) => string[]> = {
   "attribution-match": (c) => {
     const f: string[] = [], M = c.manifest.modelAttribution ?? {}, R = c.report.model_attribution ?? {};
     const pairs: [string, string][] = [["provider", "provider"], ["modelFamily", "model_family"], ["modelName", "model_name"], ["modelId", "model_id"], ["effortLevel", "effort_level"], ["harness", "harness"]];
-    for (const [m, r] of pairs) if (M[m] !== R[r]) f.push(`REPORT.md model_attribution.${r} is "${R[r]}", but manifest.json modelAttribution.${m} is "${M[m]}"`);
+    for (const [m, r] of pairs) if (M[m] !== R[r]) f.push(`REPORT.md model_attribution.${r} is ${R[r] === undefined ? "missing" : `"${R[r]}"`}, but manifest.json modelAttribution.${m} is ${M[m] === undefined ? "missing" : `"${M[m]}"`}`);
     const created = c.report.created_at instanceof Date ? c.report.created_at.toISOString() : String(c.report.created_at);
     if (c.manifest.compilation?.createdAt !== created) f.push(`REPORT.md created_at is ${created}, but manifest.json compilation.createdAt is ${c.manifest.compilation?.createdAt}`);
     return f;
