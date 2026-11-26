@@ -13,13 +13,13 @@ const { modelName, effort, lab, harness } = Astro.props;
 ---
 <div class="model-credit" aria-label="Model">
   <span class="model-credit-main">
-    <a class="model-credit-model" href={facetUrl("model", modelName)} title="All transcriptions using this model">
-      <Icon name="model" size={15} />
+    <a class="model-credit-part" href={facetUrl("model", modelName)} title="All transcriptions using this model">
+      <Icon name="model" size={14} />
       {modelName}
     </a>
     {effort && (
-      <span class="model-credit-effort" title="Effort">
-        <Icon name="effort" size={15} />
+      <span class="model-credit-part" title="Effort">
+        <Icon name="effort" size={14} />
         {effort}
       </span>
     )}
@@ -28,13 +28,21 @@ const { modelName, effort, lab, harness } = Astro.props;
     <span class="model-credit-by">
       {lab && (
         <>
-          by <a href={facetUrl("lab", lab)} title="All transcriptions from this lab">{lab}</a>
+          <span class="model-credit-label">by</span>
+          <a class="model-credit-part" href={facetUrl("lab", lab)} title="All transcriptions from this lab">
+            <Icon name="provider" size={14} />
+            {lab}
+          </a>
         </>
       )}
       {lab && harness && <span class="model-credit-dot" aria-hidden="true"> · </span>}
       {harness && (
         <>
-          via <a href={facetUrl("harness", harness)} title="All transcriptions using this harness">{harness}</a>
+          <span class="model-credit-label">via</span>
+          <a class="model-credit-part" href={facetUrl("harness", harness)} title="All transcriptions using this harness">
+            <Icon name="harness" size={14} />
+            {harness}
+          </a>
         </>
       )}
     </span>
