@@ -4114,10 +4114,10 @@ tr:last-child td {
 }
 
 .chapter-pills-label {
+  flex: 1 0 100%;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--ink-muted);
-  margin-right: 4px;
 }
 
 .chapter-pill {

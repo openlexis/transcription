@@ -20,7 +20,13 @@ const items = Astro.props.items.filter(Boolean) as Item[];
     {items.map((it) => (
       <span class="byline-item" title={it.title}>
         <Icon name={it.icon} size={14} />
-        {it.href ? <a href={it.href} target="_blank" rel="noopener">{it.text}</a> : <span>{it.text}</span>}
+        {it.href ? (
+          it.href.startsWith("http://") || it.href.startsWith("https://") ? (
+            <a href={it.href} target="_blank" rel="noopener">{it.text}</a>
+          ) : (
+            <a href={it.href}>{it.text}</a>
+          )
+        ) : <span>{it.text}</span>}
       </span>
     ))}
   </div>

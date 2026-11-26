@@ -3,7 +3,6 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import Layout from "../../../layouts/Layout.astro";
 import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
-import Icon from "../../../components/Icon.astro";
 import Pill from "../../../components/Pill.astro";
 import Byline from "../../../components/Byline.astro";
 import {
@@ -18,7 +17,6 @@ import {
   normalizeSeverityBucket,
   parseCompiledBookTei,
   shortUlid,
-  specUrl,
   withTrademark,
   type CompilationRecord,
   type CompiledBookEntry,
@@ -324,17 +322,26 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         {bookLangCodes.map((code) => (
           <Pill icon="language" title={LANGUAGE_META[code].note}>{LANGUAGE_META[code].label}</Pill>
         ))}
-        {showBookNav && (
-          <nav class="book-title-nav" aria-label="Previous and next book">
-            <a href={bookUrl(c.compilationId, prevBook.id)}>← {prevBook.name}</a>
-            <span class="book-title-nav-sep" aria-hidden="true"> · </span>
-            <a href={bookUrl(c.compilationId, nextBook.id)}>{nextBook.name} →</a>
-          </nav>
-        )}
+        <nav class="book-title-nav" aria-label="Book navigation">
+          {showBookNav && (
+            <>
+              <a href={bookUrl(c.compilationId, prevBook.id)}>← {prevBook.name}</a>
+              <span class="book-title-nav-sep" aria-hidden="true"> · </span>
+            </>
+          )}
+          <a href={compUrl(c.compilationId)}>All books</a>
+          {showBookNav && (
+            <>
+              <span class="book-title-nav-sep" aria-hidden="true"> · </span>
+              <a href={bookUrl(c.compilationId, nextBook.id)}>{nextBook.name} →</a>
+            </>
+          )}
+        </nav>
       </div>
       <h1>{b.name}</h1>
       <Byline
         items={[
+          compTitle && { icon: "transcriptions", text: compTitle, title: "Transcription", href: compUrl(c.compilationId) },
           compAuthor && { icon: "author", text: compAuthor, title: "Author" },
           compDate && { icon: "date", text: compDate, title: "Date compiled" },
           license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
@@ -351,14 +358,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           context={b.name}
         />
       </div>
-      <div class="ulid-bar">
-        <a href={compUrl(c.compilationId)} class="btn btn-secondary">← All books</a>
-        <a href={compUrl(c.compilationId)} class="btn btn-secondary" title={`Transcription ID: ${c.compilationId}`}>{compTitle}</a>
-        <a href={specUrl(c.specId)} class="btn btn-secondary" title={`Specification ID: ${c.specId}`}>
-          Specification <Icon name="arrow-up" size={14} />
-        </a>
-        <a href={`${compUrl(c.compilationId)}#method`} class="btn btn-secondary">Method &amp; scenarios →</a>
-      </div>
     </div>
   </section>
 
@@ -366,7 +365,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
     <div class="container">
       {renderedChapters.length > 1 && (
         <div class="chapter-pills" aria-label="Jump to chapter">
-          <span class="chapter-pills-label">Chapters:</span>
+          <span class="chapter-pills-label">Chapters</span>
           {renderedChapters.map((ch) => (
             <a
               href={`#ch-${ch.chapter}`}
@@ -389,7 +388,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       <div class="reader-toolbar">
         <div class="reader-hint" style="margin-bottom: 0; flex: 1 1 320px;">
           <div class="reader-legend-row">
-            <strong>Every word is clickable.</strong>
             <span class="legend-group">
               <span class="legend-label">Severity:</span>
               <span class="legend-item"><span class="legend-dot" data-sev="0"></span>Unanimous</span>
@@ -400,7 +398,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
               <span class="legend-item"><span class="legend-dot" data-sev="5"></span>Major</span>
             </span>
             <span class="legend-group">
-              <span class="legend-label">Width = uncertainty:</span>
+              <span class="legend-label">Uncertainty width:</span>
               <span class="legend-item"><span class="legend-bar legend-bar-dot"></span>Low (≥99% likely)</span>
               <span class="legend-item"><span class="legend-bar legend-bar-mid"></span>Moderate (~75%)</span>
               <span class="legend-item"><span class="legend-bar legend-bar-full"></span>High (≤51%)</span>
@@ -408,16 +406,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             <span class="legend-group">
               <span class="legend-item"><span class="legend-bar legend-bar-full" style="background:linear-gradient(90deg,rgba(148,163,184,0.40) 0%,rgba(148,163,184,0.40) 74%,rgba(249,115,22,0.96) 82%,rgba(249,115,22,0.96) 100%);"></span>Mixed severities = weighted gradient</span>
             </span>
-            {hasAramaic && (
-              <span class="legend-group">
-                <span class="legend-label">Language:</span>
-                <span class="legend-item">
-                  <span class="legend-lang-swatch legend-lang-arc" aria-hidden="true"></span>
-                  <Fragment set:html={languageIconSvg("arc", 12)} />
-                  Biblical Aramaic (same square script as Hebrew)
-                </span>
-              </span>
-            )}
           </div>
         </div>
       </div>
@@ -482,15 +470,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                   <Fragment set:html={renderLanguageBadgeHtml("arc", 11)} />
                 )}
               </div>
-              {isHebrew && (
-                <span class="chapter-dir-cue" data-rtl-cue>
-                  {ch.hasArc && !ch.hasHbo
-                    ? "← Aramaic reads right to left"
-                    : ch.hasArc
-                      ? "← Hebrew & Aramaic read right to left"
-                      : "← Hebrew reads right to left"}
-                </span>
-              )}
             </div>
             <div class="verses-list">
               {ch.verses.map((v) => (
