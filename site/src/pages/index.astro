@@ -2782,7 +2782,6 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
     }
 
     function startFullAnimationFromClick() {
-      const targetY = getScrollYToFitExpanded();
       introLooping = false;
       userPaused = false;
       holdUntil = 0;
@@ -2793,6 +2792,9 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
       syncIntroLoopAttr();
       syncPlayButton();
       updateProgressBar();
+      // Measure after the disagreement has opened, so a folded verse on a
+      // narrow screen does not leave the storyboard above the header.
+      const targetY = getScrollYToFitExpanded();
       if (targetY != null) {
         window.scrollTo({ top: targetY, behavior: reducedMotion ? "auto" : "smooth" });
       }
