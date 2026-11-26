@@ -40,25 +40,17 @@
   overflow: auto;
 }
 .cite-pre[hidden] { display: none; }
-.byline-with-cite {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 18px;
-  margin-top: 12px;
-  max-width: 100%;
-  font-size: 0.86rem;
-  color: var(--ink-secondary);
-}
-.byline-with-cite > .byline { display: contents; }
 .cite-byline-slot { display: contents; }
 button.cite-toggle {
   border: 0;
   background: none;
   padding: 0;
+  margin: 0;
   font: inherit;
   color: var(--accent);
   cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s ease;
 }
 button.cite-toggle:hover {
   color: var(--accent-hover);
@@ -99,3 +91,25 @@ button.cite-toggle:hover {
 }
 .adapted-note strong { color: var(--ink); }
 .adapted-note p { margin: 2px 0; }
+
+.spec-transcriptions {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.spec-transcriptions > summary {
+  cursor: pointer;
+  padding: 8px 12px;
+  font: 600 0.84rem var(--font-sans);
+  color: var(--ink-secondary);
+}
+.spec-transcriptions[open] > summary { border-bottom: 1px solid var(--border); }
+.spec-transcriptions-list {
+  margin: 0;
+  padding: 8px 12px 12px 28px;
+  display: grid;
+  gap: 6px;
+  font-size: 0.86rem;
+}
+.spec-transcriptions-date { color: var(--ink-muted); }

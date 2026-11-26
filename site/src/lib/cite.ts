@@ -91,7 +91,10 @@ export function formatAccessed(d: Date): { long: string; iso: string } {
   };
 }
 
-export function ourText(c: OurCredit, origin: string, accessed?: { long: string }): string {
+export function ourText(c: OurCredit, origin: string, accessed?: { long: string }, style: "full" | "short" = "full"): string {
+  if (style === "short") {
+    return `Open Lexis™. "${tm(c.title)}." ${origin}${c.path}` + (accessed ? `. Accessed ${accessed.long}.` : ".");
+  }
   const ids = c.ids.map(([k, v], i) => `${i ? k.toLowerCase() : k} ${v}`).join(", ");
   return (
     `Open Lexis™. "${tm(c.title)}." ${ids}. ${tm(c.copyright)}. ${c.licenseName}, ${c.licenseUrl}. ${origin}${c.path}` +
@@ -99,16 +102,16 @@ export function ourText(c: OurCredit, origin: string, accessed?: { long: string 
   );
 }
 
-export function ourBibtex(c: OurCredit, origin: string, accessed?: { iso: string }): string {
+export function ourBibtex(c: OurCredit, origin: string, accessed?: { iso: string }, style: "full" | "short" = "full"): string {
   const lines = [
     `@misc{${c.key},`,
     `  author = {{Open Lexis}},`,
     `  title = {{${bib(c.title)}}},`,
-    `  howpublished = {${bib(c.ids.map(([k, v], i) => `${i ? k.toLowerCase() : k} ${v}`).join(", "))}},`,
+    style === "full" ? `  howpublished = {${bib(c.ids.map(([k, v], i) => `${i ? k.toLowerCase() : k} ${v}`).join(", "))}},` : "",
     yearOf(c.copyright) ? `  year = {${yearOf(c.copyright)}},` : "",
     `  url = {${origin}${c.path}},`,
     accessed ? `  urldate = {${accessed.iso}},` : "",
-    `  note = {${bib(c.copyright)}. ${bib(c.licenseName)}, \\url{${c.licenseUrl}}}`,
+    style === "full" ? `  note = {${bib(c.copyright)}. ${bib(c.licenseName)}, \\url{${c.licenseUrl}}}` : "",
     `}`,
   ];
   return lines.filter(Boolean).join("\n");
@@ -272,11 +275,14 @@ export interface CiteBoxData {
   sources: SourceCredit[];
   /** Heading for the source block. */
   sourcesHeading?: string;
+  /** "short" is title, URL, and accessed date only, for an archive record. */
+  oursStyle?: "full" | "short";
 }
 
 /** Inner markup of a cite box (both formats; the browser script toggles which one shows and copies it). */
 export function citeBodyHtml(d: CiteBoxData, origin: string, accessedAt?: Date): string {
   const acc = accessedAt ? formatAccessed(accessedAt) : undefined;
+  const style = d.oursStyle ?? "full";
   const srcText = d.sources.map(sourceText).join("\n\n");
   const srcBib = d.sources.map(sourceBibtex).join("\n\n");
   const block = (label: string, text: string, bibtex: string) => `
@@ -285,12 +291,13 @@ export function citeBodyHtml(d: CiteBoxData, origin: string, accessedAt?: Date):
       <pre class="cite-pre" data-fmt="text">${escHtml(text)}</pre>
       <pre class="cite-pre" data-fmt="bibtex" hidden>${escHtml(bibtex)}</pre>
     </div>`;
+  const oursLabel = style === "short" ? "Citation" : "How to credit Open Lexis™";
   return `
     <div class="cite-formats" role="group" aria-label="Citation format">
       <button type="button" class="cite-fmt active" data-cite-fmt="text" aria-pressed="true">Plain text</button>
       <button type="button" class="cite-fmt" data-cite-fmt="bibtex" aria-pressed="false">BibTeX</button>
     </div>
-    ${block("How to credit Open Lexis™", ourText(d.ours, origin, acc), ourBibtex(d.ours, origin, acc))}
+    ${block(oursLabel, ourText(d.ours, origin, acc, style), ourBibtex(d.ours, origin, acc, style))}
     ${
       d.sources.length
         ? block(d.sourcesHeading ?? "How to credit each source (its own credit, license and link)", srcText, srcBib)

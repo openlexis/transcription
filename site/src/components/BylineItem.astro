@@ -1,0 +1,26 @@
+---
+// One byline item: an icon, a value, and an optional link. A default slot replaces the value (for a cite button).
+import Icon from "./Icon.astro";
+import type { IconName } from "../lib/icons";
+
+interface Props {
+  icon: IconName;
+  text?: string;
+  title?: string;
+  href?: string;
+}
+
+const { icon, text = "", title, href } = Astro.props;
+const slotted = Astro.slots.has("default");
+const external = !!href && (href.startsWith("http://") || href.startsWith("https://"));
+---
+<span class="byline-item" title={title}>
+  <Icon name={icon} size={14} />
+  {slotted ? (
+    <slot />
+  ) : href ? (
+    <a href={href} target={external ? "_blank" : undefined} rel={external ? "noopener" : undefined}>{text}</a>
+  ) : (
+    <span>{text}</span>
+  )}
+</span>

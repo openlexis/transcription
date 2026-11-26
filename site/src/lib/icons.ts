@@ -17,4 +17,6 @@ export type IconName =
   | "language"
   | "section"
   | "lines"
-  | "download";
+  | "download"
+  | "specification"
+  | "cite";

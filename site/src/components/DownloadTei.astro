@@ -1,0 +1,35 @@
+---
+// The TEI download control: a pill for one file, or a pill that opens a list when there are several.
+import Icon from "./Icon.astro";
+import Pill from "./Pill.astro";
+import { formatBytes } from "../lib/corpus";
+import type { Download } from "../lib/downloads";
+
+interface Props {
+  files: Download[];
+  title?: string;
+}
+
+const { files, title } = Astro.props;
+const total = files.reduce((n, d) => n + d.bytes, 0);
+---
+{files.length === 1 ? (
+  <Pill icon="download" href={files[0].href} download={files[0].name} title={title}>
+    Download TEI · {formatBytes(files[0].bytes)}
+  </Pill>
+) : files.length > 1 ? (
+  <details class="download-menu">
+    <summary class="pill">
+      <Icon name="download" />
+      Download TEI · {formatBytes(total)}
+    </summary>
+    <div class="download-list">
+      {files.map((d, i) => (
+        <>
+          {i > 0 && " · "}
+          <a href={d.href} download={d.name}>{d.label} · {formatBytes(d.bytes)}</a>
+        </>
+      ))}
+    </div>
+  </details>
+) : null}

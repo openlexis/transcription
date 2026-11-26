@@ -1,8 +1,8 @@
 ---
-import Icon from "./Icon.astro";
+import BylineItem from "./BylineItem.astro";
 import type { IconName } from "../lib/icons";
 
-interface Item {
+export interface BylineItemData {
   icon: IconName;
   text: string;
   title?: string;
@@ -10,24 +10,17 @@ interface Item {
 }
 
 interface Props {
-  items: (Item | false | null | undefined | "")[];
+  items: (BylineItemData | false | null | undefined | "")[];
 }
 
-const items = Astro.props.items.filter(Boolean) as Item[];
+const items = Astro.props.items.filter(Boolean) as BylineItemData[];
+const hasSlot = Astro.slots.has("default");
 ---
-{items.length > 0 && (
+{(items.length > 0 || hasSlot) && (
   <div class="byline">
     {items.map((it) => (
-      <span class="byline-item" title={it.title}>
-        <Icon name={it.icon} size={14} />
-        {it.href ? (
-          it.href.startsWith("http://") || it.href.startsWith("https://") ? (
-            <a href={it.href} target="_blank" rel="noopener">{it.text}</a>
-          ) : (
-            <a href={it.href}>{it.text}</a>
-          )
-        ) : <span>{it.text}</span>}
-      </span>
+      <BylineItem icon={it.icon} text={it.text} title={it.title} href={it.href} />
     ))}
+    <slot />
   </div>
 )}

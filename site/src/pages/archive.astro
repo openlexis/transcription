@@ -110,8 +110,9 @@ const meta = {
   <script id="src-books" type="application/json" set:html={JSON.stringify(spec.targets.map((t) => [t.id, t.name]))}></script>
   <script>
     import "../lib/cite-ui";
-    import { adaptedNote, citeBoxHtml, parseLicense, sourceTitle } from "../lib/cite";
+    import { adaptedNote, citeBoxHtml, parseLicense } from "../lib/cite";
     import { archiveIcon } from "../lib/archive-icons";
+    import { msAnchor } from "../lib/archive-list-sidebar";
     const META = JSON.parse(document.getElementById("src-meta")?.textContent || "{}");
     const REPO = META.repo;
     const BOOKS = JSON.parse(document.getElementById("src-books")?.textContent || "[]");
@@ -146,23 +147,6 @@ const meta = {
 
     function citeHtml(s) {
       const title = s.name && s.name !== s.id ? `Archive record: ${s.name} (${s.id})` : `Archive record: ${s.id}`;
-      const groups = new Map();
-      for (const f of s.fl) {
-        const lic = parseLicense(f.lic, f.url);
-        const k = `${f.pn}|${lic.name}|${lic.where}`;
-        const cur = groups.get(k);
-        const paths = f.ps || [];
-        if (cur) {
-          for (const p of paths) if (!cur.paths.includes(p)) cur.paths.push(p);
-        } else groups.set(k, { f, lic, paths: [...paths] });
-      }
-      const sources = [...groups.values()].map(({ f, lic, paths }) => ({
-        project: f.pn,
-        projectUrl: f.pu,
-        title: sourceTitle({ project: f.pn, paths, id: s.id, name: s.name, language: s.lg, targets: s.tg }),
-        link: f.url,
-        license: lic,
-      }));
       return citeBoxHtml(
         {
           heading: "Cite this record",
@@ -175,7 +159,8 @@ const meta = {
             licenseName: META.licenseName,
             licenseUrl: META.licenseUrl,
           },
-          sources,
+          sources: [],
+          oursStyle: "short",
         },
         location.origin,
         new Date(),
@@ -346,7 +331,7 @@ const meta = {
       const intro = `<div class="ar-section-intro"><p>Each block is a transcription (the manuscript's text typed out) published by one institution.${sameName ? ` Files are named by the manuscript ID (${esc(s.id)}), not by book, so the same file name repeats under different institutions.` : ""}</p>${overlapHtml(s, union)}</div>`;
 
       return `
-        <details class="source-item"${openByDefault ? " open" : ""}>
+        <details class="source-item" id="${msAnchor(s.id)}" data-archive-id="${esc(s.id)}"${openByDefault ? " open" : ""}>
           <summary>
             <span class="ms-siglum">${esc(s.id)}</span>
             <div>
@@ -407,6 +392,7 @@ const meta = {
       if (resetBtn) {
         resetBtn.hidden = !(state.q || state.exactId || state.lang || state.type || state.prov || state.target);
       }
+      window.dispatchEvent(new CustomEvent("archive-list-updated"));
     }
 
     // Apply URL params (?id=, ?q=, ?type=, ?language=, ?provenance=, ?target=)
@@ -485,6 +471,35 @@ const meta = {
       langBtns.forEach((x, i) => x.classList.toggle("active", i === 0));
       typeBtns.forEach((x, i) => x.classList.toggle("active", i === 0));
       applyFilters();
+    });
+
+    window.addEventListener("archive-reveal", (e) => {
+      const id = e.detail?.id;
+      if (!id) return;
+      if (state.exactId) {
+        state.exactId = "";
+        if (searchInput) searchInput.value = "";
+        if (location.search) history.replaceState(null, "", location.pathname);
+      }
+      let idx = filtered.findIndex((s) => s.id === id);
+      if (idx < 0) {
+        idx = ALL.findIndex((s) => s.id === id);
+        if (idx < 0) return;
+        state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "", limit: Math.max(60, idx + 1) };
+        if (searchInput) searchInput.value = "";
+        if (targetSelect) targetSelect.value = "";
+        if (provSelect) provSelect.value = "";
+        langBtns.forEach((x, i) => x.classList.toggle("active", i === 0));
+        typeBtns.forEach((x, i) => x.classList.toggle("active", i === 0));
+        applyFilters();
+        idx = filtered.findIndex((s) => s.id === id);
+      } else if (idx >= state.limit) {
+        state.limit = idx + 1;
+        render();
+      }
+      requestAnimationFrame(() => {
+        document.getElementById(msAnchor(id))?.scrollIntoView({ block: "start" });
+      });
     });
 
     applyFilters();

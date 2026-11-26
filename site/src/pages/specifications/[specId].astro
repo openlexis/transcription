@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Byline from "../../components/Byline.astro";
 import CiteBox from "../../components/CiteBox.astro";
 import { allSpecFiles, perManuscript, specCredit } from "../../lib/credits";
 import { groupCredits } from "../../lib/cite";
@@ -78,28 +79,13 @@ const toc = [
     <div class="container">
       <div class="eyebrow">Specification</div>
       <h1>{withTrademark(single.title)}</h1>
-      {(specAuthor || specDate) && (
-        <div class="meta-strip">
-          {specAuthor && (
-            <span class="meta-chip" title="Author">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <span><strong>Author:</strong> {specAuthor}</span>
-            </span>
-          )}
-          {specDate && (
-            <span class="meta-chip" title="Date created">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-              <span><strong>Date:</strong> {specDate}</span>
-            </span>
-          )}
-          {single.license && (
-            <span class="meta-chip" title={withTrademark(single.license.copyright)}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-              <span><strong>License:</strong> {withTrademark(single.license.copyright)}. <a href={single.license.url} target="_blank" rel="noopener">{single.license.name}</a></span>
-            </span>
-          )}
-        </div>
-      )}
+      <Byline
+        items={[
+          specAuthor && { icon: "author", text: specAuthor, title: "Author" },
+          specDate && { icon: "date", text: specDate, title: "Date created" },
+          single.license && { icon: "license", text: single.license.name, title: withTrademark(single.license.copyright), href: single.license.url },
+        ]}
+      />
       <p class="lead">{single.summary}</p>
       <div class="ulid-bar">
         {allSpecs.length > 1 && (
@@ -116,6 +102,33 @@ const toc = [
           </a>
         )}
       </div>
+      {specCompilations.length > 0 && (
+        <details class="spec-transcriptions">
+          <summary>
+            {specCompilations.length === 1
+              ? "1 transcription made from this specification"
+              : `${specCompilations.length} transcriptions made from this specification`}
+          </summary>
+          <ul class="spec-transcriptions-list">
+            {specCompilations.map((c) => {
+              const title = c.manifest.compilation.title || c.manifest.modelAttribution.modelName;
+              const date = c.manifest.compilation.createdAt
+                ? new Date(c.manifest.compilation.createdAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })
+                : "";
+              return (
+                <li>
+                  <a href={compUrl(c.compilationId)}>{title}</a>
+                  {date && <span class="spec-transcriptions-date"> · {date}</span>}
+                </li>
+              );
+            })}
+          </ul>
+        </details>
+      )}
       <CiteBox data={citeData} />
     </div>
   </section>

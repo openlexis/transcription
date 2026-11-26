@@ -4,6 +4,7 @@ import { join } from "node:path";
 import Layout from "../../../layouts/Layout.astro";
 import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
 import Pill from "../../../components/Pill.astro";
+import DownloadTei from "../../../components/DownloadTei.astro";
 import Byline from "../../../components/Byline.astro";
 import CiteBox from "../../../components/CiteBox.astro";
 import PageSidebar from "../../../components/PageSidebar.astro";
@@ -14,7 +15,6 @@ import {
   bookUrl,
   compUrl,
   formatAuthor,
-  formatBytes,
   formatNum,
   getCompilations,
   getSpecifications,
@@ -349,17 +349,16 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         )}
       </div>
       <h1>{b.name}</h1>
-      <div class="byline-with-cite">
-        <Byline
-          items={[
-            compAuthor && { icon: "author", text: compAuthor, title: "Author" },
-            compDate && { icon: "date", text: compDate, title: "Date compiled" },
-            compTitle && { icon: "transcriptions", text: compTitle, title: "Transcription", href: compUrl(c.compilationId) },
-            license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
-          ]}
-        />
+      <Byline
+        items={[
+          compAuthor && { icon: "author", text: compAuthor, title: "Author" },
+          compDate && { icon: "date", text: compDate, title: "Date compiled" },
+          compTitle && { icon: "transcriptions", text: compTitle, title: "Transcription", href: compUrl(c.compilationId) },
+          license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
+        ]}
+      >
         <CiteBox data={citeData} placement="byline" />
-      </div>
+      </Byline>
       <div class="pill-row book-stats-lead" style="margin-top: 14px;">
         <Pill icon="manuscripts">{formatNum(b.stats.manuscripts)} manuscripts</Pill>
         <Pill icon="lines">{formatNum(b.stats.lines)} lines</Pill>
@@ -371,14 +370,10 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           context={b.name}
         />
         {download && (
-          <Pill
-            icon="download"
-            href={download.href}
-            download={download.name}
+          <DownloadTei
+            files={[download]}
             title={`TEI of ${b.name}, with this page's address, our license, and each source project's credit, license and link.`}
-          >
-            Download TEI ({formatBytes(download.bytes)})
-          </Pill>
+          />
         )}
       </div>
     </div>

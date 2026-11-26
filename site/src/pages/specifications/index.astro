@@ -54,8 +54,8 @@ const specs = [...getSpecifications()].sort(
               <Byline
                 items={[
                   authorStr && { icon: "author", text: authorStr, title: "Author" },
-                  s.license && { icon: "license", text: s.license.name, title: `${withTrademark(s.license.copyright)}. ${s.license.name}` },
                   dateStr && { icon: "date", text: dateStr, title: "Date created" },
+                  s.license && { icon: "license", text: s.license.name, title: withTrademark(s.license.copyright) },
                 ]}
               />
               <div class="spec-card-meta">

@@ -1,8 +1,8 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
 import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
-import Icon from "../../../components/Icon.astro";
 import Pill from "../../../components/Pill.astro";
+import DownloadTei from "../../../components/DownloadTei.astro";
 import Byline from "../../../components/Byline.astro";
 import ModelCredit from "../../../components/ModelCredit.astro";
 import CiteBox from "../../../components/CiteBox.astro";
@@ -128,16 +128,16 @@ const citeData = {
       <p style="margin: 6px 0 0; font-size: 1.02rem; font-weight: 500; color: var(--ink-secondary);">
         {compSubtitle}
       </p>
-      <div class="byline-with-cite">
-        <Byline
-          items={[
-            compAuthor && { icon: "author", text: compAuthor, title: "Author" },
-            createdDate && { icon: "date", text: createdDate, title: "Date compiled" },
-            license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
-          ]}
-        />
+      <Byline
+        items={[
+          compAuthor && { icon: "author", text: compAuthor, title: "Author" },
+          createdDate && { icon: "date", text: createdDate, title: "Date compiled" },
+          spec && { icon: "specification", text: withTrademark(spec.title), title: "Specification", href: specUrl(c.specId) },
+          license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
+        ]}
+      >
         <CiteBox data={citeData} placement="byline" />
-      </div>
+      </Byline>
       <ModelCredit
         modelName={attr.modelName}
         effort={attr.effortLevel}
@@ -148,32 +148,11 @@ const citeData = {
         <Pill icon="books">{formatNum(m.books.length)} books</Pill>
         <Pill icon="words">{formatNum(m.totals.words)} words</Pill>
         <Pill icon="disagreements">{formatNum(m.totals.variantPlaces)} disagreements</Pill>
-        {downloads.length > 0 && (
-          <details class="download-menu">
-            <summary class="pill">
-              <Icon name="download" />
-              Download TEI
-            </summary>
-            <div class="download-list">
-              {downloads.map((d, i) => (
-                <>
-                  {i > 0 && " · "}
-                  <a href={d.href} download={d.name}>{d.label} ({formatBytes(d.bytes)})</a>
-                </>
-              ))}
-            </div>
-          </details>
-        )}
+        <DownloadTei files={downloads} />
       </div>
       <p class="lead" style="margin-top: 12px;">
         {compSummary}
       </p>
-      <div class="ulid-bar">
-        <a href="/transcriptions/" class="btn btn-secondary">← All transcriptions</a>
-        <a href={specUrl(c.specId)} class="btn btn-secondary" title={`Specification ID: ${c.specId}`}>
-          Specification <Icon name="arrow-up" size={14} />
-        </a>
-      </div>
     </div>
   </section>
 

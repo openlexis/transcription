@@ -20,7 +20,7 @@ if (!(window as unknown as { __citeUi?: boolean }).__citeUi) {
     const t = e.target as HTMLElement | null;
     const toggle = t?.closest<HTMLButtonElement>("[data-cite-toggle]");
     if (toggle) {
-      const panel = toggle.closest(".cite-byline-slot, .byline-with-cite")?.querySelector<HTMLElement>(".cite-panel")
+      const panel = toggle.closest(".cite-byline-slot, .byline, .byline-with-cite")?.querySelector<HTMLElement>(".cite-panel")
         ?? document.getElementById(toggle.getAttribute("aria-controls") || "");
       if (panel) {
         const open = panel.hidden;
