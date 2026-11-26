@@ -2720,16 +2720,25 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
       const pageTop = showcase.getBoundingClientRect().top + window.scrollY;
       const available = viewportH - headerOffset;
       let targetY: number;
+      const maxScroll = pageTop - headerOffset;
+      const minScroll = pageTop + expandedH - viewportH;
       if (expandedH <= available) {
-        const maxScroll = pageTop - headerOffset;
-        const minScroll = pageTop + expandedH - viewportH;
         if (window.scrollY <= maxScroll + 4 && window.scrollY >= minScroll - 4) {
           return null;
         }
         if (window.scrollY < minScroll) targetY = minScroll;
         else targetY = maxScroll;
       } else {
-        targetY = pageTop - headerOffset;
+        // The expanded card is taller than the viewport. Pinning the top would
+        // leave the part that grows below the fold, so keep the storyboard in view.
+        const board = showcase.querySelector(".story-board");
+        const boardTop = board
+          ? board.getBoundingClientRect().top + window.scrollY
+          : pageTop;
+        targetY = boardTop - headerOffset;
+        const lo = Math.min(minScroll, maxScroll);
+        const hi = Math.max(minScroll, maxScroll);
+        targetY = Math.min(hi, Math.max(lo, targetY));
         if (Math.abs(window.scrollY - targetY) <= 4) return null;
       }
       return Math.max(0, targetY);
