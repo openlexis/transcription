@@ -6,12 +6,24 @@ import { parseXml } from "./lib/tei";
 import { spawnSync } from "node:child_process";
 import { isPinnedList, listSpecs, loadSpecWithSources, type FrozenSources, type PinnedTranscript } from "./sources";
 import { readSpecLicense, type SpecLicense } from "./lib/spec";
+import { contractPins, loadPinnedContract, validateCompilation, type Contract } from "./lib/contract";
+
+// bun run check                              every specification and every compilation in transcripts/
+// bun run check --spec <ULID> --dir <folder> [--books Obad,Jonah]
+//   one compilation folder (for example a trial compile) against that specification's pinned contract; --books limits the
+//   target books required to those named, for a trial that compiled only some books
+const argv = process.argv.slice(2);
+const argOf = (k: string) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
+const onlySpec = argOf("--spec"), onlyDir = argOf("--dir"), onlyBooks = argOf("--books")?.split(",").filter(Boolean);
+if (!!onlySpec !== !!onlyDir) { console.error("Usage: bun run check [--spec <ULID> --dir <compilation folder>]"); process.exit(1); }
 
 const t0 = performance.now();
 const ROOT = new URL("..", import.meta.url).pathname;
 const sha = (x: string | Buffer) => createHash("sha256").update(x).digest("hex");
 const fails: string[] = [];
 const specLicenses = new Map<string, SpecLicense>();
+/** Specifications that pin a contract (contract/): their compilations are validated against it. Others keep the earlier checks below. */
+const specContracts = new Map<string, { contract: Contract; path: string; text: string }>();
 
 if (!existsSync(`${ROOT}transcripts`)) {
   console.error("FAILED: no transcripts/ directory found");
@@ -37,6 +49,15 @@ for (const { id, path } of listSpecs()) {
   } catch (e) {
     fails.push(String(e));
   }
+  const cPins = contractPins(spec as unknown as Record<string, unknown>);
+  if (cPins) {
+    checkPins(`${at} contract`, cPins);
+    try {
+      specContracts.set(id, { contract: loadPinnedContract(cPins, at), path, text: readFileSync(path, "utf8") });
+    } catch (e) {
+      fails.push(String(e instanceof Error ? e.message : e));
+    }
+  }
   if (isPinnedList(spec.sources)) {
     pinnedSpecs++;
     checkPins(at, spec.sources);
@@ -57,9 +78,34 @@ for (const { id, path } of listSpecs()) {
   checkPins(`${folder}/sources.json`, pins);
 }
 
-let compilations = 0, booksChecked = 0, appsChecked = 0, certChecked = 0, witsChecked = 0;
+let compilations = 0, booksChecked = 0, appsChecked = 0, certChecked = 0, witsChecked = 0, contractChecked = 0;
 
-for (const specId of readdirSync(`${ROOT}transcripts`).sort()) {
+/** Validates one compilation folder against its specification's pinned contract. */
+async function checkWithContract(specId: string, dir: string, at: string) {
+  const c = specContracts.get(specId)!;
+  const all = loadSpecWithSources(specId).targets;
+  const targets = onlyBooks ? all.filter((t) => onlyBooks.includes(t.id)) : all;
+  if (onlyBooks) for (const b of onlyBooks) if (!all.some((t) => t.id === b)) fails.push(`--books ${b}: not a target book of ${specId}`);
+  const r = await validateCompilation(c.contract, { specId, specPath: c.path, specText: c.text, license: specLicenses.get(specId)!, targets, dir, at });
+  fails.push(...r.fails);
+  compilations++;
+  contractChecked++;
+  booksChecked += r.books;
+}
+
+if (onlyDir) {
+  const dir = onlyDir.replace(/\/+$/, "");
+  if (!specContracts.has(onlySpec!)) fails.push(`${onlySpec}: no such specification, or it has no contract list (only specifications with a contract can check a folder)`);
+  else if (!existsSync(dir)) fails.push(`${dir}: no such folder`);
+  else await checkWithContract(onlySpec!, dir, dir);
+}
+
+for (const specId of onlyDir ? [] : readdirSync(`${ROOT}transcripts`).sort()) {
+  if (specContracts.has(specId)) {
+    for (const compId of readdirSync(`${ROOT}transcripts/${specId}`).sort()) await checkWithContract(specId, `${ROOT}transcripts/${specId}/${compId}`, `transcripts/${specId}/${compId}`);
+    continue;
+  }
+
   if (!listSpecs().some((s) => s.id === specId)) {
     fails.push(`transcripts/${specId}: no matching specification in specifications/`);
     continue;
@@ -204,5 +250,5 @@ if (fails.length) {
   process.exit(1);
 }
 console.log(
-  `OK: ${pinnedSpecs} specification(s) with an embedded transcript list, ${specFolders} specification folder(s), ${pinnedChecked} pinned transcripts, ${compilations} compilation(s), ${booksChecked} books, ${witsChecked} witness records, ${appsChecked} <app> elements, ${certChecked} <certainty> elements verified in ${s} s`,
+  `OK: ${pinnedSpecs} specification(s) with an embedded transcript list, ${specFolders} specification folder(s), ${pinnedChecked} pinned transcripts, ${compilations} compilation(s) (${contractChecked} against a pinned contract), ${booksChecked} books, ${witsChecked} witness records, ${appsChecked} <app> elements, ${certChecked} <certainty> elements verified in ${s} s`,
 );

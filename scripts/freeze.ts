@@ -20,6 +20,7 @@
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { findSpecPath, folderSpecFile, isFolderSpec, isPinnedList, resolveSelection } from "./sources";
+import { setTopLevelBlock } from "./lib/spec";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const git = (...args: string[]) => {
@@ -91,6 +92,5 @@ const transcripts = [...paths].sort().map((path) => ({ path, commit: commitOf.ge
 const list =
   "sources:\n" +
   transcripts.map((t) => `  - {path: ${t.path}, commit: ${t.commit}}\n`).join("");
-const stripped = yamlText.replace(/(?:\r?\n)*^sources:[\s\S]*$/m, "\n");
-writeFileSync(yamlPath, stripped.replace(/\s*$/, "\n") + list);
+writeFileSync(yamlPath, setTopLevelBlock(yamlText, "sources", list));
 console.log(`Wrote ${transcripts.length} transcripts into ${yamlPath.slice(ROOT.length)}.`);

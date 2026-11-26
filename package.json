@@ -6,6 +6,8 @@
     "sets": "bun scripts/sets.ts",
     "sources": "bun scripts/sources.ts",
     "spec:freeze": "bun scripts/freeze.ts",
+    "spec:contract": "bun scripts/spec-contract.ts",
+    "contract": "bun scripts/contract.ts",
     "import": "bun scripts/import.ts",
     "compile": "bun --smol scripts/compile.ts",
     "check": "bun scripts/check.ts",
@@ -14,5 +16,10 @@
     "site:dev": "cd site && bun run dev",
     "site:build": "cd site && bun run build",
     "site:preview": "cd site && bun run preview"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "xmllint-wasm": "^5.3.0"
   }
 }

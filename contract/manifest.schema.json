@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlexis-transcription.pages.dev/contract/manifest.schema.json",
+  "title": "manifest.json",
+  "description": "The record file of one compilation: which specification it was made under, who and what made it, how, and one entry per book file.",
+  "type": "object",
+  "required": ["specification", "compilation", "modelAttribution", "method", "totals", "books"],
+  "properties": {
+    "specification": {
+      "description": "The specification this compilation was produced under.",
+      "type": "object",
+      "required": ["id", "file", "sha256", "statement", "license"],
+      "properties": {
+        "id": { "$ref": "#/$defs/ulid", "description": "The specification's ULID (26 characters)." },
+        "file": { "type": "string", "pattern": "^specifications/[0-9A-HJKMNP-TV-Z]{26}\\.yaml$", "description": "The specification file's path in the repository, for example specifications/<ULID>.yaml." },
+        "sha256": { "$ref": "#/$defs/sha256", "description": "SHA-256 fingerprint of the specification file, as 64 lowercase hexadecimal characters." },
+        "statement": { "$ref": "#/$defs/text", "description": "Exactly: This compilation was produced under Open Lexis Transcription Specification <ULID>." },
+        "license": { "$ref": "#/$defs/license", "description": "The specification's license, copied unchanged from its license field." }
+      },
+      "additionalProperties": false
+    },
+    "compilation": {
+      "description": "This compilation.",
+      "type": "object",
+      "required": ["id", "title", "subtitle", "summary", "author", "createdAt", "outputDirectory", "outputFormat", "reportFile"],
+      "properties": {
+        "id": { "$ref": "#/$defs/ulid", "description": "The compilation's ULID; it is also the name of its folder." },
+        "title": { "$ref": "#/$defs/text", "description": "A short title a reader can relate to." },
+        "subtitle": { "$ref": "#/$defs/text", "description": "A short subtitle summarizing the model or approach." },
+        "summary": { "$ref": "#/$defs/text", "description": "One or two plain sentences summarizing the compilation." },
+        "author": { "$ref": "#/$defs/text", "description": "The publisher of the compilation, for example Open Lexis." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the compilation was made, as an ISO 8601 date and time, for example 2026-11-25T00:00:00.000Z." },
+        "outputDirectory": { "$ref": "#/$defs/text", "description": "Where the compilation was written, normally transcripts/<specification ULID>/<compilation ULID>/." },
+        "outputFormat": { "const": "TEI P5 XML", "description": "Exactly: TEI P5 XML." },
+        "reportFile": { "const": "REPORT.md", "description": "Exactly: REPORT.md." }
+      },
+      "additionalProperties": false
+    },
+    "modelAttribution": {
+      "description": "The system or model that made the judgments (selecting readings and estimating probabilities). Write unknown for anything the model could not observe about itself; never guess.",
+      "type": "object",
+      "required": ["provider", "modelFamily", "modelName", "modelId", "effortLevel", "harness", "role"],
+      "properties": {
+        "provider": { "$ref": "#/$defs/text", "description": "The lab or company that made the model." },
+        "modelFamily": { "$ref": "#/$defs/text", "description": "The model family." },
+        "modelName": { "$ref": "#/$defs/text", "description": "The model's human-readable name." },
+        "modelId": { "$ref": "#/$defs/text", "description": "The exact model identifier." },
+        "versionSnapshot": { "$ref": "#/$defs/text", "description": "The exact version or release snapshot, if known." },
+        "variant": { "$ref": "#/$defs/text", "description": "The variant or tier, if any." },
+        "effortLevel": { "$ref": "#/$defs/text", "description": "The reasoning or effort setting the model ran at, exactly as the harness names it (for example: medium)." },
+        "temperature": { "$ref": "#/$defs/text", "description": "The sampling temperature, if known." },
+        "thinkingBudget": { "$ref": "#/$defs/text", "description": "The thinking budget, if known." },
+        "harness": { "$ref": "#/$defs/text", "description": "The harness or runtime the model ran in." },
+        "role": { "$ref": "#/$defs/text", "description": "What the model designed and decided." },
+        "note": { "$ref": "#/$defs/text", "description": "Any other relevant note about the attribution." },
+        "deterministicEngine": {
+          "description": "The deterministic program that copied, parsed and formatted the data, if one was used.",
+          "type": "object",
+          "required": ["program", "runtime"],
+          "properties": {
+            "program": { "$ref": "#/$defs/text", "description": "The program's path, for example scripts/compile.ts." },
+            "runtime": { "$ref": "#/$defs/text", "description": "The runtime and its version." },
+            "repository": { "type": "string", "description": "The repository address." },
+            "commit": { "type": "string", "description": "The git commit the program ran at." },
+            "codeSha256": { "type": "string", "description": "SHA-256 fingerprint of the program's code." }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "method": {
+      "description": "How the compilation was made.",
+      "type": "object",
+      "required": ["summary", "description"],
+      "properties": {
+        "summary": { "$ref": "#/$defs/text", "description": "One or two sentences summarizing the method." },
+        "description": { "$ref": "#/$defs/text", "description": "The full method description." },
+        "steps": { "type": "array", "description": "Optional steps of the method.", "items": { "type": "object", "required": ["title", "body"], "properties": { "title": { "$ref": "#/$defs/text" }, "body": { "$ref": "#/$defs/text" } }, "additionalProperties": false } },
+        "scenarios": { "type": "array", "description": "Optional scenarios and how each was treated.", "items": { "type": "object", "required": ["scenario", "treatment"], "properties": { "scenario": { "$ref": "#/$defs/text" }, "treatment": { "$ref": "#/$defs/text" } }, "additionalProperties": false } },
+        "differenceCategories": { "type": "array", "description": "Optional kinds of difference and what each means.", "items": { "type": "object", "required": ["label", "meaning"], "properties": { "label": { "$ref": "#/$defs/text" }, "meaning": { "$ref": "#/$defs/text" } }, "additionalProperties": false } },
+        "unknownsAndLimitations": { "type": "array", "description": "Optional list of unknowns and limitations.", "items": { "$ref": "#/$defs/text" } }
+      },
+      "additionalProperties": false
+    },
+    "disagreementCategories": {
+      "type": "array",
+      "description": "Optional: the categories of mechanical difference the model used, with counts. The model chooses its own categories.",
+      "items": { "type": "object", "required": ["id", "label", "description", "count"], "properties": { "id": { "$ref": "#/$defs/slug" }, "label": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" }, "count": { "$ref": "#/$defs/count" } }, "additionalProperties": false }
+    },
+    "totals": {
+      "description": "Totals across all books; each must equal the sum over books.",
+      "type": "object",
+      "required": ["books", "lines", "words", "variantPlaces", "totalBytes"],
+      "properties": {
+        "books": { "$ref": "#/$defs/count", "description": "Number of book files." },
+        "lines": { "$ref": "#/$defs/count", "description": "Number of numbered lines." },
+        "words": { "$ref": "#/$defs/count", "description": "Number of compiled words." },
+        "variantPlaces": { "$ref": "#/$defs/count", "description": "Number of points of disagreement (<app> elements)." },
+        "totalBytes": { "$ref": "#/$defs/count", "description": "Total size of the book files in bytes." }
+      },
+      "additionalProperties": false
+    },
+    "books": {
+      "description": "One entry per target book of the specification, in the specification's order.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "section", "number", "language", "file", "format", "sha256", "bytes", "stats"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[1-3]?[A-Z][A-Za-z]+$", "description": "The book's short id, for example Gen." },
+          "name": { "$ref": "#/$defs/text", "description": "The book's name, for example Genesis." },
+          "section": { "enum": ["Old Testament", "New Testament"], "description": "Old Testament or New Testament." },
+          "number": { "type": "integer", "minimum": 1, "description": "The book's position in the canon order, starting at 1." },
+          "language": { "$ref": "#/$defs/text", "description": "The book's original language, for example Hebrew and Aramaic." },
+          "file": { "type": "string", "pattern": "^[1-3]?[A-Z][A-Za-z]+\\.xml$", "description": "The book's TEI file name: <book id>.xml." },
+          "format": { "const": "TEI P5 XML", "description": "Exactly: TEI P5 XML." },
+          "sha256": { "$ref": "#/$defs/sha256", "description": "SHA-256 fingerprint of the book's TEI file." },
+          "bytes": { "$ref": "#/$defs/count", "description": "Size of the book's TEI file in bytes." },
+          "stats": {
+            "description": "Counts for this book.",
+            "type": "object",
+            "required": ["manuscripts", "early", "lines", "uncoveredLines", "words", "places", "meanPlaceConfidence", "meanWordConfidence", "meanManuscriptsPerLine"],
+            "properties": {
+              "manuscripts": { "$ref": "#/$defs/count", "description": "Manuscripts used for this book." },
+              "early": { "$ref": "#/$defs/count", "description": "How many of those are early." },
+              "lines": { "$ref": "#/$defs/count", "description": "Numbered lines." },
+              "uncoveredLines": { "$ref": "#/$defs/count", "description": "Lines no manuscript covers." },
+              "words": { "$ref": "#/$defs/count", "description": "Compiled words." },
+              "places": { "$ref": "#/$defs/count", "description": "Points of disagreement." },
+              "meanPlaceConfidence": { "$ref": "#/$defs/probability", "description": "Average probability of the selected reading at points of disagreement, 0 to 1." },
+              "meanWordConfidence": { "$ref": "#/$defs/probability", "description": "Average probability per compiled word, 0 to 1." },
+              "meanManuscriptsPerLine": { "type": "number", "minimum": 0, "description": "Average number of manuscripts covering a line." }
+            },
+            "additionalProperties": false
+          },
+          "categoryCounts": { "type": "object", "description": "Optional: count per disagreement category id.", "additionalProperties": { "$ref": "#/$defs/count" } },
+          "severityCounts": { "type": "object", "description": "Optional: count per disagreement subcategory id.", "additionalProperties": { "$ref": "#/$defs/count" } }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "ulid": { "type": "string", "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "text": { "type": "string", "minLength": 1 },
+    "slug": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$" },
+    "count": { "type": "integer", "minimum": 0 },
+    "probability": { "type": "number", "minimum": 0, "maximum": 1 },
+    "license": {
+      "type": "object",
+      "required": ["copyright", "name", "url"],
+      "properties": {
+        "copyright": { "$ref": "#/$defs/text", "description": "The copyright line, for example Copyright 2026 Open Lexis." },
+        "name": { "$ref": "#/$defs/text", "description": "The license name, for example CC BY-NC 4.0." },
+        "url": { "type": "string", "format": "uri", "description": "The license's web address." }
+      },
+      "additionalProperties": false
+    }
+  }
+}

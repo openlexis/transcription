@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The shape every book file of a compilation must have, in RELAX NG (a standard schema language for XML).
+     A book file must also be valid against the official TEI P5 schema (tei_all.rng); this file narrows it to Open Lexis's layout.
+     Each a:documentation is the plain-language rule that `bun run contract show` prints. -->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+         ns="http://www.tei-c.org/ns/1.0"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <start>
+    <element name="TEI">
+      <a:documentation>One TEI P5 file per book, named &lt;book id&gt;.xml, in the TEI namespace http://www.tei-c.org/ns/1.0.</a:documentation>
+      <ref name="teiHeader"/>
+      <ref name="text"/>
+    </element>
+  </start>
+
+  <!-- ===== Header ===== -->
+  <define name="teiHeader">
+    <element name="teiHeader">
+      <a:documentation>The header: who made the file, under which specification, its license, the manuscripts, and the method.</a:documentation>
+      <element name="fileDesc">
+        <element name="titleStmt">
+          <element name="title"><a:documentation>The book name and id, for example: Genesis (Gen): Compiled Original-Language Text.</a:documentation><ref name="nonEmpty"/></element>
+          <oneOrMore>
+            <element name="respStmt">
+              <a:documentation>One per party responsible: the model that made the judgments (with its full attribution) and any deterministic program.</a:documentation>
+              <element name="resp"><ref name="nonEmpty"/></element>
+              <element name="name"><ref name="nonEmpty"/></element>
+            </element>
+          </oneOrMore>
+        </element>
+        <element name="editionStmt">
+          <element name="p"><a:documentation>Exactly: This compilation was produced under Open Lexis Transcription Specification &lt;specification ULID&gt;.</a:documentation><ref name="nonEmpty"/></element>
+        </element>
+        <element name="publicationStmt">
+          <element name="publisher"><a:documentation>The publisher, the specification's author (Open Lexis).</a:documentation><ref name="nonEmpty"/></element>
+          <element name="idno"><a:documentation>The specification ULID.</a:documentation><attribute name="type"><value>specification-id</value></attribute><ref name="ulid"/></element>
+          <element name="idno"><a:documentation>The compilation ULID.</a:documentation><attribute name="type"><value>compilation-id</value></attribute><ref name="ulid"/></element>
+          <element name="date"><a:documentation>When the compilation was made; when holds the ISO 8601 date and time.</a:documentation><attribute name="when"><data type="dateTime"/></attribute><ref name="nonEmpty"/></element>
+          <element name="availability">
+            <zeroOrMore><element name="p"><ref name="nonEmpty"/></element></zeroOrMore>
+            <element name="licence">
+              <a:documentation>The specification's license: target is its url, and the text is "&lt;copyright&gt;. Licensed under &lt;name&gt;."</a:documentation>
+              <attribute name="target"><data type="anyURI"/></attribute>
+              <ref name="nonEmpty"/>
+            </element>
+          </element>
+        </element>
+        <element name="sourceDesc">
+          <element name="listWit">
+            <a:documentation>Every manuscript used in this book, declared once.</a:documentation>
+            <optional><element name="head"><ref name="nonEmpty"/></element></optional>
+            <oneOrMore><ref name="witness"/></oneOrMore>
+          </element>
+        </element>
+      </element>
+      <element name="encodingDesc">
+        <element name="projectDesc">
+          <a:documentation>The specification id, compilation id, full model attribution and the model's role.</a:documentation>
+          <oneOrMore><element name="p"><ref name="nonEmpty"/></element></oneOrMore>
+        </element>
+        <element name="editorialDecl">
+          <a:documentation>The full method description, one paragraph per p.</a:documentation>
+          <oneOrMore><element name="p"><ref name="nonEmpty"/></element></oneOrMore>
+        </element>
+        <element name="variantEncoding">
+          <attribute name="method"><value>parallel-segmentation</value></attribute>
+          <attribute name="location"><value>internal</value></attribute>
+          <empty/>
+        </element>
+      </element>
+    </element>
+  </define>
+
+  <define name="witness">
+    <element name="witness">
+      <a:documentation>One manuscript; xml:id is wit-&lt;siglum&gt;. Fields that are not documented are written as unknown, never guessed.</a:documentation>
+      <attribute name="xml:id"><data type="ID"><param name="pattern">wit-[A-Za-z0-9._\-]+</param></data></attribute>
+      <element name="abbr"><attribute name="type"><value>siglum</value></attribute><ref name="nonEmpty"/></element>
+      <element name="desc"><a:documentation>The manuscript's name and shelfmark.</a:documentation><ref name="nonEmpty"/></element>
+      <ref name="noteDating"/>
+      <element name="note"><a:documentation>Place of origin, or unknown.</a:documentation><attribute name="type"><value>provenance</value></attribute><ref name="nonEmpty"/></element>
+      <element name="note"><a:documentation>Scientific dating, or unknown.</a:documentation><attribute name="type"><value>scientific-analysis</value></attribute><ref name="nonEmpty"/></element>
+      <element name="note"><a:documentation>Physical and scribal evidence: manuscript type, corrections, damage.</a:documentation><attribute name="type"><value>physical-scribal</value></attribute><ref name="nonEmpty"/></element>
+      <optional>
+        <element name="note"><a:documentation>How many lines and words of this book are filled-in text (not the manuscript's own), and the stated source.</a:documentation><attribute name="type"><value>filled-in</value></attribute><ref name="nonEmpty"/></element>
+      </optional>
+      <element name="note"><a:documentation>Agreement with the other manuscripts, including Posterior reliability: &lt;0..1&gt;, lines compared: &lt;N&gt;, agreement share: &lt;0..1&gt;, prior mean: &lt;0..1&gt;.</a:documentation><attribute name="type"><value>textual-agreement</value></attribute><ref name="nonEmpty"/></element>
+      <element name="note"><a:documentation>The transcript files read for this manuscript.</a:documentation><attribute name="type"><value>source-files</value></attribute><ref name="nonEmpty"/></element>
+    </element>
+  </define>
+
+  <define name="noteDating">
+    <element name="note">
+      <a:documentation>The date, with "Range: &lt;first year&gt; to &lt;last year&gt;" when known (negative years are BC), and the dating method and source.</a:documentation>
+      <attribute name="type"><value>dating</value></attribute>
+      <ref name="nonEmpty"/>
+    </element>
+  </define>
+
+  <!-- ===== Text ===== -->
+  <define name="text">
+    <element name="text">
+      <a:documentation>xml:lang is hbo (Biblical Hebrew) or grc (Koine Greek).</a:documentation>
+      <attribute name="xml:lang"><choice><value>hbo</value><value>grc</value></choice></attribute>
+      <element name="body">
+        <element name="div">
+          <a:documentation>The book; n is the book id.</a:documentation>
+          <attribute name="type"><value>book</value></attribute>
+          <attribute name="n"><data type="token"/></attribute>
+          <oneOrMore>
+            <element name="div">
+              <a:documentation>One chapter; n is the chapter number.</a:documentation>
+              <attribute name="type"><value>chapter</value></attribute>
+              <attribute name="n"><data type="token"/></attribute>
+              <oneOrMore><ref name="ab"/></oneOrMore>
+            </element>
+          </oneOrMore>
+        </element>
+      </element>
+    </element>
+  </define>
+
+  <define name="ab">
+    <element name="ab">
+      <a:documentation>One numbered line; n is chapter:line, for example 3:16.</a:documentation>
+      <attribute name="n"><data type="string"><param name="pattern">[0-9]+:[0-9]+</param></data></attribute>
+      <choice>
+        <group>
+          <a:documentation>A line no manuscript covers: type="uncovered", a gap and a coverage note.</a:documentation>
+          <attribute name="type"><value>uncovered</value></attribute>
+          <element name="gap"><attribute name="reason"><value>lost</value></attribute><empty/></element>
+          <element name="note"><attribute name="type"><value>coverage</value></attribute><ref name="nonEmpty"/></element>
+          <zeroOrMore><ref name="filledInLine"/></zeroOrMore>
+        </group>
+        <oneOrMore>
+          <choice>
+            <ref name="w"/>
+            <ref name="app"/>
+            <ref name="spanGrp"/>
+            <ref name="filledInLine"/>
+          </choice>
+        </oneOrMore>
+      </choice>
+    </element>
+  </define>
+
+  <define name="w">
+    <element name="w">
+      <a:documentation>One compiled word. xml:lang="arc" marks Biblical Aramaic.</a:documentation>
+      <attribute name="xml:id"><data type="ID"/></attribute>
+      <optional><attribute name="xml:lang"><value>arc</value></attribute></optional>
+      <text/>
+    </element>
+  </define>
+
+  <define name="spanGrp">
+    <element name="spanGrp">
+      <a:documentation>Coverage of words every covering manuscript agrees on (words outside any app).</a:documentation>
+      <attribute name="type"><value>word-coverage</value></attribute>
+      <oneOrMore>
+        <element name="span">
+          <a:documentation>target lists the words (#w-...) that share the same coverage.</a:documentation>
+          <attribute name="target"><ref name="pointers"/></attribute>
+          <element name="note"><a:documentation>The manuscripts that have these words.</a:documentation><attribute name="type"><value>attested</value></attribute><ref name="pointers"/></element>
+          <optional><element name="note"><a:documentation>The manuscripts that are lost (lacunose) here.</a:documentation><attribute name="type"><value>lacuna</value></attribute><ref name="pointers"/></element></optional>
+          <ref name="certainty"/>
+          <ref name="uncertainty"/>
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="app">
+    <element name="app">
+      <a:documentation>One point of disagreement: a lem, then every reading.</a:documentation>
+      <attribute name="xml:id"><data type="ID"/></attribute>
+      <element name="lem">
+        <a:documentation>The selected reading's words; empty when the selected reading is an omission. wit lists its manuscripts.</a:documentation>
+        <optional><attribute name="wit"><ref name="pointers"/></attribute></optional>
+        <zeroOrMore><ref name="w"/></zeroOrMore>
+      </element>
+      <oneOrMore>
+        <choice>
+          <ref name="rdgAttested"/>
+          <ref name="rdgLacuna"/>
+          <ref name="rdgUnseen"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="rdgAttested">
+    <element name="rdg">
+      <a:documentation>An attested reading. type="selected" for the chosen one, "variant" for each other. wit lists its manuscripts.</a:documentation>
+      <attribute name="xml:id"><data type="ID"/></attribute>
+      <attribute name="wit"><ref name="pointers"/></attribute>
+      <choice>
+        <group>
+          <attribute name="type"><value>selected</value></attribute>
+          <mixed><ref name="certainty"/><ref name="uncertainty"/></mixed>
+        </group>
+        <group>
+          <attribute name="type"><value>variant</value></attribute>
+          <mixed>
+            <ref name="certainty"/>
+            <ref name="uncertainty"/>
+            <element name="note"><a:documentation>How this reading mechanically differs from the selected one, for example substitution, omission, addition / insertion, word-order / transposition.</a:documentation><attribute name="type"><value>difference</value></attribute><ref name="nonEmpty"/></element>
+            <element name="note">
+              <a:documentation>How much the difference matters to meaning, judged apart from the edit type and the probability: n is a whole number on the disagreement_scale in REPORT.md, and subtype is one of its disagreement_subcategories ids.</a:documentation>
+              <attribute name="type"><value>severity</value></attribute>
+              <attribute name="n"><data type="integer"/></attribute>
+              <attribute name="subtype"><data type="token"/></attribute>
+              <ref name="nonEmpty"/>
+            </element>
+          </mixed>
+        </group>
+      </choice>
+    </element>
+  </define>
+
+  <define name="rdgLacuna">
+    <element name="rdg">
+      <a:documentation>Manuscripts lost (lacunose) at this point.</a:documentation>
+      <attribute name="type"><value>lacuna</value></attribute>
+      <attribute name="wit"><ref name="pointers"/></attribute>
+      <element name="gap"><attribute name="reason"><value>lost</value></attribute><empty/></element>
+    </element>
+  </define>
+
+  <define name="rdgUnseen">
+    <element name="rdg">
+      <a:documentation>The probability that the original wording is in no surviving manuscript.</a:documentation>
+      <attribute name="xml:id"><data type="ID"/></attribute>
+      <attribute name="type"><value>unseen</value></attribute>
+      <ref name="certainty"/>
+      <ref name="uncertainty"/>
+    </element>
+  </define>
+
+  <define name="certainty">
+    <element name="certainty">
+      <a:documentation>The estimated probability of originality: degree from 0 to 1; target points at the reading or words it is about; locus="value".</a:documentation>
+      <attribute name="target"><ref name="pointers"/></attribute>
+      <attribute name="locus"><value>value</value></attribute>
+      <attribute name="degree"><data type="decimal"><param name="minInclusive">0</param><param name="maxInclusive">1</param></data></attribute>
+      <empty/>
+    </element>
+  </define>
+
+  <define name="uncertainty">
+    <element name="note">
+      <a:documentation>The uncertainty interval, starting "90% interval: [low, high]".</a:documentation>
+      <attribute name="type"><value>uncertainty</value></attribute>
+      <data type="string"><param name="pattern">90% interval: \[[01]\.[0-9]+, [01]\.[0-9]+\].*</param></data>
+    </element>
+  </define>
+
+  <define name="filledInLine">
+    <element name="note">
+      <a:documentation>Filled-in text at this line (an edition's text for a lost part, not the manuscript's own; it carries no weight): corresp names the manuscript and source the edition's stated source.</a:documentation>
+      <attribute name="type"><value>filled-in</value></attribute>
+      <attribute name="corresp"><ref name="pointer"/></attribute>
+      <attribute name="source"><ref name="nonEmpty"/></attribute>
+      <ref name="nonEmpty"/>
+    </element>
+  </define>
+
+  <!-- ===== Values ===== -->
+  <define name="ulid"><data type="string"><param name="pattern">[0-9A-HJKMNP-TV-Z]{26}</param></data></define>
+  <define name="pointer"><data type="string"><param name="pattern">#[A-Za-z_][A-Za-z0-9._\-]*</param></data></define>
+  <define name="pointers"><data type="string"><param name="pattern">#[A-Za-z_][A-Za-z0-9._\-]*( #[A-Za-z_][A-Za-z0-9._\-]*)*</param></data></define>
+  <define name="nonEmpty"><data type="string"><param name="minLength">1</param></data></define>
+</grammar>

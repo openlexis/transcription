@@ -11,6 +11,7 @@ import { readTranscriptionFile, readTranscriptionText, type ParsedUnit } from ".
 import { classifyReadingSeverity, formatSeverityNote, SEVERITY_SCALE, SEVERITY_TAXONOMY, type SeverityDef } from "./lib/severity";
 import { gitShow, loadSpecWithSources } from "./sources";
 import { readSpecLicense, type SpecLicense } from "./lib/spec";
+import { contractPins } from "./lib/contract";
 import { aramaic, greekKey, hebrewSpell, showGreek } from "./lib/text";
 
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -948,6 +949,9 @@ function renderTeiXml(
   target: TargetBook,
   compiled: ReturnType<typeof compileBook>,
   license: SpecLicense,
+  /** A specification with a pinned contract (contract/) gets a header that is valid TEI P5; older specifications keep the earlier layout. */
+  contractHeader = false,
+  publisher = "Open Lexis",
 ): string {
   const { witnesses, lines, places, stats } = compiled;
   const langCode = target.language.startsWith("Hebrew") ? "hbo" : "grc";
@@ -975,16 +979,19 @@ function renderTeiXml(
   out.push(`          <name>${escXml(`${MODEL_ATTRIBUTION.deterministicEngine.program} (${MODEL_ATTRIBUTION.deterministicEngine.runtime}, commit ${git.commit ?? "unknown"}, code SHA-256 ${git.codeSha256.slice(0, 16)})`)}</name>`);
   out.push("        </respStmt>");
   out.push("      </titleStmt>");
+  const statement = `This compilation was produced under Open Lexis Transcription Specification ${escXml(specId)}.`;
+  if (contractHeader) out.push(`      <editionStmt><p>${statement}</p></editionStmt>`);
   out.push("      <publicationStmt>");
-  out.push(`        <p>This compilation was produced under Open Lexis Transcription Specification ${escXml(specId)}.</p>`);
+  out.push(contractHeader ? `        <publisher>${escXml(publisher)}</publisher>` : `        <p>${statement}</p>`);
   out.push(`        <idno type="specification-id">${escXml(specId)}</idno>`);
   out.push(`        <idno type="compilation-id">${escXml(compilationId)}</idno>`);
   out.push(`        <date when="${escXml(timestampIso)}">${escXml(timestampIso)}</date>`);
   out.push(`        <availability><p>The ancient texts are in the public domain. Source transcriptions retain their respective licenses as documented in the specification.</p><licence target="${escXml(license.url)}">${escXml(license.copyright)}. Licensed under ${escXml(license.name)}.</licence></availability>`);
   out.push("      </publicationStmt>");
   out.push("      <sourceDesc>");
-  out.push(`        <p>Primary manuscript witnesses allowlisted in specification ${escXml(specId)} for ${escXml(target.name)} (${stats.manuscripts} manuscripts, ${stats.early} early).</p>`);
-  out.push("        <listWit>");
+  const witnessesLine = `Primary manuscript witnesses allowlisted in specification ${escXml(specId)} for ${escXml(target.name)} (${stats.manuscripts} manuscripts, ${stats.early} early).`;
+  if (contractHeader) out.push(`        <listWit>\n          <head>${witnessesLine}</head>`);
+  else out.push(`        <p>${witnessesLine}</p>`, "        <listWit>");
   for (const w of witnesses) {
     const s = w.source;
     const dateDesc =
@@ -1216,7 +1223,10 @@ if (import.meta.main) {
   const resolved = loadSpecWithSources(specId);
   const specPath = resolved.specPath;
   const specRaw = readFileSync(specPath, "utf8");
-  const license = readSpecLicense(Bun.YAML.parse(specRaw) as Record<string, unknown>, specPath.slice(ROOT.length));
+  const specYaml = Bun.YAML.parse(specRaw) as Record<string, unknown>;
+  const license = readSpecLicense(specYaml, specPath.slice(ROOT.length));
+  const contractHeader = !!contractPins(specYaml);
+  const publisher = typeof specYaml.author === "string" && specYaml.author.trim() ? specYaml.author.trim() : "Open Lexis";
   const raw = resolved.spec as unknown as { id: string; title: string; summary?: string };
   const spec: Spec = { id: raw.id, title: raw.title, summary: raw.summary ?? "", targets: resolved.targets, sources: resolved.sources };
   if (spec.id !== specId) throw new Error(`Specification ID mismatch: ${spec.id} !== ${specId}`);
@@ -1297,7 +1307,7 @@ if (import.meta.main) {
       const tBook = performance.now();
       const entries = byBook.get(target.id)!;
       const compiled = compileBook(target, entries, sourceMap, scribalStats);
-      const xml = renderTeiXml(specId, compilationId, timestampIso, git, target, compiled, license);
+      const xml = renderTeiXml(specId, compilationId, timestampIso, git, target, compiled, license, contractHeader, publisher);
       const fileName = `${target.id}.xml`;
       writeFileSync(`${outDir}/${fileName}`, xml);
       bookManifestMap.set(target.id, {

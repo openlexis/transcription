@@ -1,0 +1,27 @@
+{
+  "description": "The output contract for a compilation: the files a compilation must contain, the schema each must satisfy, and the checks across files that no schema language can express. A specification pins every file in this folder by git commit in its contract list, so later edits here do not change what a published specification requires.",
+  "files": [
+    { "file": "manifest.json", "schema": "manifest.schema.json", "standard": "JSON Schema 2020-12" },
+    { "file": "REPORT.md", "schema": "report.schema.json", "standard": "JSON Schema 2020-12", "part": "YAML front matter between the first two --- lines, then a non-empty Markdown body" },
+    { "file": "<book id>.xml", "schema": ["tei_all.rng", "tei-shape.rng"], "standard": "RELAX NG", "each": "one per target book of the specification" }
+  ],
+  "teiAll": {
+    "file": "tei_all.rng",
+    "standard": "TEI P5",
+    "version": "4.12.0",
+    "sha256": "b0f115095ead2ccc6933aa3365c6f4a82cba3b2ec7eee7f76bb616d7a63b7e48",
+    "source": "https://github.com/TEIC/TEI/releases/download/P5_Release_4.12.0/tei-4.12.0.zip (xml/tei/custom/schema/relaxng/tei_all.rng)"
+  },
+  "crossChecks": [
+    { "id": "ids-match", "rule": "manifest.json, REPORT.md and every book file name the same specification ULID and compilation ULID, and those match the compilation's folder." },
+    { "id": "statement", "rule": "The statement in manifest.json and in each book's editionStmt is exactly: This compilation was produced under Open Lexis Transcription Specification <specification ULID>." },
+    { "id": "specification-file", "rule": "manifest.json specification.file is the specification's path and specification.sha256 is the SHA-256 of that file." },
+    { "id": "license-match", "rule": "manifest.json specification.license equals the specification's license field, and each book's licence has target = its url and text \"<copyright>. Licensed under <name>.\"" },
+    { "id": "books-complete", "rule": "manifest.json lists every target book of the specification and nothing else, each book's file exists, and its sha256 and bytes match the file." },
+    { "id": "totals-match", "rule": "manifest.json totals equal the sums over books, and REPORT.md totals equal manifest.json totals." },
+    { "id": "attribution-match", "rule": "The model attribution (provider, model family, model name, model id, effort level, harness) and the creation time are the same in manifest.json and REPORT.md." },
+    { "id": "references-resolve", "rule": "Every #pointer in a wit, corresp, target, attested or lacuna note points at an xml:id in the same file; witness pointers point at a witness in listWit." },
+    { "id": "severity-scale", "rule": "In REPORT.md, disagreement_scale max is greater than min and every subcategory level is between them; in each book, every severity note's n is between min and max and its subtype is a declared subcategory id." },
+    { "id": "no-em-dash", "rule": "No em dash (U+2014) appears in manifest.json, REPORT.md or any book file." }
+  ]
+}

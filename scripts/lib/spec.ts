@@ -40,3 +40,16 @@ export function loadSpec(root: string, id: string): Spec {
   for (const s of sources) { if (ids.has(s.id)) throw new Error(`${file}: source ${s.id} is listed twice`); ids.add(s.id); }
   return { id, title: raw.title, file, text, sha256: createHash("sha256").update(text).digest("hex"), targets: raw.targets as Target[], sources, raw };
 }
+
+/** Removes a top-level YAML key and its indented lines (`key:` up to the next unindented line), then appends `block` at the end. */
+export function setTopLevelBlock(yamlText: string, key: string, block: string): string {
+  const lines = yamlText.split(/\r?\n/), out: string[] = [];
+  let skipping = false;
+  for (const line of lines) {
+    if (line.startsWith(`${key}:`)) { skipping = true; continue; }
+    if (skipping && (line === "" || /^[\s-]/.test(line) || line.startsWith("#"))) continue;
+    skipping = false;
+    out.push(line);
+  }
+  return out.join("\n").replace(/\s*$/, "\n") + block;
+}

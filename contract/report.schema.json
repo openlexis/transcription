@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openlexis-transcription.pages.dev/contract/report.schema.json",
+  "title": "REPORT.md front matter",
+  "description": "REPORT.md starts with a YAML block between two lines of three dashes (---), described here, followed by a plain-language Markdown report of what was performed. The model chooses its own disagreement categories, subcategories and numeric severity scale; this describes only their structure.",
+  "type": "object",
+  "required": ["specification_id", "compilation_id", "created_at", "model_attribution", "method_summary", "disagreement_scale", "disagreement_categories", "disagreement_subcategories", "authenticity_signal", "evidence_usage", "totals"],
+  "properties": {
+    "specification_id": { "$ref": "#/$defs/ulid", "description": "The specification's ULID." },
+    "compilation_id": { "$ref": "#/$defs/ulid", "description": "The compilation's ULID." },
+    "created_at": { "type": "string", "format": "date-time", "description": "When the compilation was made (ISO 8601); the same value as createdAt in manifest.json." },
+    "model_attribution": {
+      "description": "The same model attribution as in manifest.json, with these names.",
+      "type": "object",
+      "required": ["provider", "model_family", "model_name", "model_id", "effort_level", "harness"],
+      "properties": {
+        "provider": { "$ref": "#/$defs/text", "description": "The lab or company that made the model." },
+        "model_family": { "$ref": "#/$defs/text", "description": "The model family." },
+        "model_name": { "$ref": "#/$defs/text", "description": "The model's human-readable name." },
+        "model_id": { "$ref": "#/$defs/text", "description": "The exact model identifier." },
+        "effort_level": { "$ref": "#/$defs/text", "description": "The reasoning or effort setting." },
+        "harness": { "$ref": "#/$defs/text", "description": "The harness or runtime." },
+        "engine": { "$ref": "#/$defs/text", "description": "Optional: the deterministic program and runtime." },
+        "commit": { "$ref": "#/$defs/text", "description": "Optional: the git commit the program ran at." }
+      },
+      "additionalProperties": false
+    },
+    "method_summary": { "$ref": "#/$defs/text", "description": "One or two sentences summarizing the method." },
+    "disagreement_scale": {
+      "description": "The model's own numeric scale for how much a difference matters to meaning (substantive severity).",
+      "type": "object",
+      "required": ["min", "max", "description"],
+      "properties": {
+        "min": { "type": "integer", "description": "The lowest level." },
+        "max": { "type": "integer", "description": "The highest level; must be greater than min." },
+        "description": { "$ref": "#/$defs/text", "description": "What the levels mean." }
+      },
+      "additionalProperties": false
+    },
+    "disagreement_categories": {
+      "description": "The model's categories of mechanical difference (how readings differ, for example substitution or omission).",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "description", "count"],
+        "properties": {
+          "id": { "$ref": "#/$defs/slug", "description": "A short id with no spaces, for example lexical_substitution." },
+          "label": { "$ref": "#/$defs/text", "description": "Human-readable label." },
+          "description": { "$ref": "#/$defs/text", "description": "What kind of difference this covers." },
+          "count": { "$ref": "#/$defs/count", "description": "How many readings fall in it." }
+        },
+        "additionalProperties": false
+      }
+    },
+    "disagreement_subcategories": {
+      "description": "The model's subcategories of substantive severity. Every <note type=\"severity\"> in the TEI names one of these ids in its subtype.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "level", "level_label", "description", "local_confidence_effect", "corpus_authenticity_effect", "count"],
+        "properties": {
+          "id": { "$ref": "#/$defs/slug", "description": "A short id with no spaces, for example lexical_substitution." },
+          "label": { "$ref": "#/$defs/text", "description": "Human-readable label." },
+          "level": { "type": "integer", "description": "Its level on disagreement_scale, from min to max." },
+          "level_label": { "$ref": "#/$defs/text", "description": "A short badge, for example Minor (1/5)." },
+          "description": { "$ref": "#/$defs/text", "description": "What it covers." },
+          "local_confidence_effect": { "$ref": "#/$defs/text", "description": "Its effect on confidence in the local reading." },
+          "corpus_authenticity_effect": { "$ref": "#/$defs/text", "description": "Its effect on the authenticity of the manuscript or corpus overall." },
+          "count": { "$ref": "#/$defs/count", "description": "How many readings fall in it." }
+        },
+        "additionalProperties": false
+      }
+    },
+    "authenticity_signal": { "$ref": "#/$defs/text", "description": "What the observed error patterns imply about authenticity." },
+    "evidence_usage": {
+      "description": "How each kind of manuscript evidence was used. Say unknown where it was not documented.",
+      "type": "object",
+      "required": ["dating", "provenance", "scientific_analysis", "physical_and_scribal", "textual_agreement"],
+      "properties": {
+        "dating": { "$ref": "#/$defs/text", "description": "How dating was used." },
+        "provenance": { "$ref": "#/$defs/text", "description": "How place of origin was handled." },
+        "scientific_analysis": { "$ref": "#/$defs/text", "description": "How scientific dating was handled." },
+        "physical_and_scribal": { "$ref": "#/$defs/text", "description": "How scribal corrections and physical damage were handled." },
+        "textual_agreement": { "$ref": "#/$defs/text", "description": "How agreement between manuscripts was modeled." }
+      },
+      "additionalProperties": false
+    },
+    "totals": {
+      "description": "The same totals as in manifest.json.",
+      "type": "object",
+      "required": ["books", "lines", "words", "variant_places"],
+      "properties": {
+        "books": { "$ref": "#/$defs/count", "description": "Number of book files." },
+        "lines": { "$ref": "#/$defs/count", "description": "Number of numbered lines." },
+        "words": { "$ref": "#/$defs/count", "description": "Number of compiled words." },
+        "variant_places": { "$ref": "#/$defs/count", "description": "Number of points of disagreement." }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "ulid": { "type": "string", "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$" },
+    "text": { "type": "string", "minLength": 1 },
+    "slug": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$" },
+    "count": { "type": "integer", "minimum": 0 }
+  }
+}
