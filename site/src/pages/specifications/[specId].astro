@@ -3,12 +3,12 @@ import Layout from "../../layouts/Layout.astro";
 import Byline from "../../components/Byline.astro";
 import CiteBox from "../../components/CiteBox.astro";
 import ItemTitle from "../../components/ItemTitle.astro";
+import SpecTranscriptions from "../../components/SpecTranscriptions.astro";
 import { allSpecFiles, perManuscript, specCredit } from "../../lib/credits";
 import { groupCredits } from "../../lib/cite";
 import {
   REPO,
   buildClientSourceIndex,
-  compShortTitle,
   compUrl,
   displayLanguage,
   formatAuthor,
@@ -104,33 +104,7 @@ const toc = [
           </a>
         )}
       </div>
-      {specCompilations.length > 0 && (
-        <details class="spec-transcriptions">
-          <summary>
-            {specCompilations.length === 1
-              ? "1 transcription made from this specification"
-              : `${specCompilations.length} transcriptions made from this specification`}
-          </summary>
-          <ul class="spec-transcriptions-list">
-            {specCompilations.map((c) => {
-              const title = compShortTitle(c);
-              const date = c.manifest.compilation.createdAt
-                ? new Date(c.manifest.compilation.createdAt).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })
-                : "";
-              return (
-                <li>
-                  <a href={compUrl(c.compilationId)}>{title}</a>
-                  {date && <span class="spec-transcriptions-date"> · {date}</span>}
-                </li>
-              );
-            })}
-          </ul>
-        </details>
-      )}
+      <SpecTranscriptions compilations={specCompilations} />
       <CiteBox data={citeData} />
     </div>
   </section>

@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Pill from "../../components/Pill.astro";
 import Byline from "../../components/Byline.astro";
 import ItemTitle from "../../components/ItemTitle.astro";
+import SpecTranscriptions from "../../components/SpecTranscriptions.astro";
 import {
   formatAuthor,
   formatNum,
@@ -41,36 +42,34 @@ const specs = [...getSpecifications()].sort(
           const dateStr = formatUlidDate(s.id);
           const authorStr = formatAuthor(s.author);
           return (
-            <a href={specUrl(s.id)} class="spec-card">
-              <div class="spec-card-top">
-                <div class="spec-card-title-row">
-                  <ItemTitle class="spec-card-title" short={s.shortTitle} full={withTrademark(s.title)} />
-                  {idx === 0 && specs.length > 1 && (
-                    <Pill tone="accent">Latest</Pill>
-                  )}
+            <article class="spec-card">
+              <a href={specUrl(s.id)} class="spec-card-hit">
+                <div class="spec-card-top">
+                  <div class="spec-card-title-row">
+                    <ItemTitle class="spec-card-title" short={s.shortTitle} full={withTrademark(s.title)} />
+                    {idx === 0 && specs.length > 1 && (
+                      <Pill tone="accent">Latest</Pill>
+                    )}
+                  </div>
+                  <span class="spec-card-cta">Read specification →</span>
                 </div>
-                <span class="spec-card-cta">Read specification →</span>
-              </div>
-              <p class="spec-card-summary">{s.summary}</p>
-              <Byline
-                items={[
-                  authorStr && { icon: "author", text: authorStr, title: "Author" },
-                  dateStr && { icon: "date", text: dateStr, title: "Date created" },
-                  s.license && { icon: "license", text: s.license.name, title: withTrademark(s.license.copyright) },
-                ]}
-              />
-              <div class="spec-card-meta">
-                <Pill icon="manuscripts">{formatNum(s.sources.length)} manuscripts</Pill>
-                <Pill icon="transcriptions" tone={comps.length > 0 ? "sky" : "default"}>
-                  {comps.length === 0
-                    ? "No transcriptions yet"
-                    : `${comps.length} ${comps.length === 1 ? "transcription" : "transcriptions"}`}
-                </Pill>
-                <span class="spec-card-id" title={`Specification ID: ${s.id}`}>
-                  <code>{shortUlid(s.id)}</code>
-                </span>
-              </div>
-            </a>
+                <p class="spec-card-summary">{s.summary}</p>
+                <Byline
+                  items={[
+                    authorStr && { icon: "author", text: authorStr, title: "Author" },
+                    dateStr && { icon: "date", text: dateStr, title: "Date created" },
+                    s.license && { icon: "license", text: s.license.name, title: withTrademark(s.license.copyright) },
+                  ]}
+                />
+                <div class="spec-card-meta">
+                  <Pill icon="manuscripts">{formatNum(s.sources.length)} manuscripts</Pill>
+                  <span class="spec-card-id" title={`Specification ID: ${s.id}`}>
+                    <code>{shortUlid(s.id)}</code>
+                  </span>
+                </div>
+              </a>
+              <SpecTranscriptions compilations={comps} />
+            </article>
           );
         })}
       </div>

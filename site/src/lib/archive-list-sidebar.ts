@@ -118,23 +118,52 @@ export function initArchiveListSidebar(): void {
   const sidebar = list.closest<HTMLElement>(".page-sidebar");
   if (!sidebar) return;
 
-  const items = JSON.parse(dataEl.textContent || "[]") as ArchiveNavItem[];
-  if (!items.length) {
-    sidebar.hidden = true;
-    body.classList.remove("page-layout");
-    return;
-  }
+  const allItems = JSON.parse(dataEl.textContent || "[]") as ArchiveNavItem[];
+  // Keep the sidebar visible even when filters match nothing: the filters live in it.
+  sidebar.hidden = false;
+  body.classList.add("page-layout");
+  if (!allItems.length) return;
 
+  let items = allItems;
   let current = 0;
-  const total = items.length;
+
+  const visibleItems = (): ArchiveNavItem[] => {
+    const nodes = [...document.querySelectorAll<HTMLElement>(".source-item[data-archive-id]")];
+    if (!nodes.length) {
+      const src = document.getElementById("src-list");
+      if (src && src.querySelector(".source-item") == null && (src.textContent || "").includes("No manuscripts")) {
+        return [];
+      }
+      return allItems;
+    }
+    const byId = new Map(allItems.map((it) => [it.id, it]));
+    const out: ArchiveNavItem[] = [];
+    for (const el of nodes) {
+      const it = byId.get(el.getAttribute("data-archive-id") || "");
+      if (it) out.push(it);
+    }
+    return out;
+  };
 
   const paint = (index: number) => {
+    const total = items.length;
+    const currentLabel = sidebar.querySelector<HTMLElement>("[data-sidebar-current]");
+    if (total === 0) {
+      current = 0;
+      list.innerHTML = "";
+      if (pos) pos.textContent = "0 of 0";
+      if (currentLabel) {
+        currentLabel.textContent = "";
+        currentLabel.hidden = true;
+      }
+      if (track) placeThumb(track, 0, 0);
+      return;
+    }
     current = Math.max(0, Math.min(index, total - 1));
     list.innerHTML = listHtml(items, current);
     if (pos) {
       pos.textContent = `${(current + 1).toLocaleString("en-US")} of ${total.toLocaleString("en-US")}`;
     }
-    const currentLabel = sidebar.querySelector<HTMLElement>("[data-sidebar-current]");
     if (currentLabel) {
       currentLabel.textContent = items[current].id;
       currentLabel.hidden = false;
@@ -145,21 +174,25 @@ export function initArchiveListSidebar(): void {
   const syncFromScroll = () => {
     const index = visibleIndex(items);
     if (index !== current) paint(index);
-    else if (track) placeThumb(track, current, total);
+    else if (track) placeThumb(track, current, items.length);
   };
 
-  sidebar.hidden = false;
-  body.classList.add("page-layout");
+  const refreshFromList = () => {
+    items = visibleItems();
+    paint(visibleIndex(items));
+    if (track) placeThumb(track, current, items.length);
+  };
+
   paint(visibleIndex(items));
   requestAnimationFrame(() => {
     if (track) {
       thumbObservers.get(track)?.disconnect();
-      const obs = new ResizeObserver(() => placeThumb(track, current, total));
+      const obs = new ResizeObserver(() => placeThumb(track, current, items.length));
       thumbObservers.set(track, obs);
       obs.observe(track);
-      placeThumb(track, current, total);
+      placeThumb(track, current, items.length);
     }
-    syncFromScroll();
+    refreshFromList();
   });
 
   let ticking = false;
@@ -173,9 +206,10 @@ export function initArchiveListSidebar(): void {
   };
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  window.addEventListener("archive-list-updated", refreshFromList);
   const srcList = document.getElementById("src-list");
   if (srcList) {
-    new MutationObserver(() => syncFromScroll()).observe(srcList, { childList: true });
+    new MutationObserver(() => refreshFromList()).observe(srcList, { childList: true });
   }
 
   sidebar.addEventListener("click", (e) => {

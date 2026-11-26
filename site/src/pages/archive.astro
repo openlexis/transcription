@@ -10,7 +10,6 @@ import {
   getCorpusStats,
   getLatestSpec,
   githubBlob,
-  specUrl,
 } from "../lib/corpus";
 
 const spec = getLatestSpec();
@@ -36,10 +35,6 @@ const meta = {
       <p class="lead">
         Search and inspect all {formatNum(stats.sourceCount)} primary ancient manuscripts ({formatNum(stats.totalXmlFiles)} XML files across {stats.provenanceCount} archival institutions), spanning 3rd-century BC Dead Sea Scrolls, early Greek papyri, and medieval codices. Click any manuscript to see its date, the transcription files each source provides, their licenses, and links to images of the pages.
       </p>
-      <div class="actions">
-        <a href="/transcriptions/" class="btn btn-secondary">Browse transcriptions →</a>
-        <a href={specUrl(spec.id)} class="btn btn-secondary">View specification</a>
-      </div>
     </div>
   </section>
 
@@ -69,17 +64,17 @@ const meta = {
             </select>
             <div class="pill-group" role="group" aria-label="Filter by ancient language">
               <span class="pill-label">Language</span>
-              <button type="button" class="filter-pill active" data-lang="">All</button>
-              <button type="button" class="filter-pill" data-lang="Greek">Koine Greek</button>
-              <button type="button" class="filter-pill" data-lang="Hebrew">Biblical Hebrew and Aramaic</button>
+              <button type="button" class="filter-pill active" data-lang="" aria-pressed="true">All</button>
+              <button type="button" class="filter-pill" data-lang="Greek" aria-pressed="false">Koine Greek</button>
+              <button type="button" class="filter-pill" data-lang="Hebrew" aria-pressed="false">Biblical Hebrew and Aramaic</button>
             </div>
             <div class="pill-group" role="group" aria-label="Filter by manuscript type">
               <span class="pill-label">Type</span>
-              <button type="button" class="filter-pill active" data-type="">All</button>
-              <button type="button" class="filter-pill" data-type="continuous">Continuous</button>
-              <button type="button" class="filter-pill" data-type="scroll">Scroll</button>
-              <button type="button" class="filter-pill" data-type="lectionary">Lectionary</button>
-              <button type="button" class="filter-pill" data-type="catena">Catena</button>
+              <button type="button" class="filter-pill active" data-type="" aria-pressed="true">All</button>
+              <button type="button" class="filter-pill" data-type="continuous" aria-pressed="false">Continuous</button>
+              <button type="button" class="filter-pill" data-type="scroll" aria-pressed="false">Scroll</button>
+              <button type="button" class="filter-pill" data-type="lectionary" aria-pressed="false">Lectionary</button>
+              <button type="button" class="filter-pill" data-type="catena" aria-pressed="false">Catena</button>
             </div>
           </div>
         </ArchiveListSidebar>
@@ -116,10 +111,38 @@ const meta = {
     const searchInput = document.getElementById("src-search");
     const targetSelect = document.getElementById("src-target");
     const provSelect = document.getElementById("src-prov");
-    const langBtns = [...document.querySelectorAll("[data-lang]")];
-    const typeBtns = [...document.querySelectorAll("[data-type]")];
+    const langBtns = [...document.querySelectorAll(".ar-filters [data-lang]")];
+    const typeBtns = [...document.querySelectorAll(".ar-filters [data-type]")];
 
-    let state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "" };
+    let state = { q: "", exactId: "", lang: [], type: [], prov: "", target: "" };
+
+    function pillValues(params, key) {
+      return [...new Set(params.getAll(key).flatMap((v) => v.split(",")).map((v) => v.trim()).filter(Boolean))];
+    }
+    function syncPills(btns, attr, selected) {
+      const isAll = selected.length === 0;
+      btns.forEach((b) => {
+        const val = b.getAttribute(attr) || "";
+        const on = val ? selected.includes(val) : isAll;
+        b.classList.toggle("active", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    }
+    function onPillGroup(btns, attr, getSelected, setSelected) {
+      btns.forEach((b) => {
+        b.addEventListener("click", () => {
+          state.exactId = "";
+          const val = b.getAttribute(attr) || "";
+          if (!val) setSelected([]);
+          else {
+            const cur = getSelected();
+            setSelected(cur.includes(val) ? cur.filter((x) => x !== val) : [...cur, val]);
+          }
+          syncPills(btns, attr, getSelected());
+          applyFilters();
+        });
+      });
+    }
     let filtered = ALL;
 
     const esc = (s: unknown) =>
@@ -416,8 +439,8 @@ const meta = {
       const exactId = state.exactId.trim().toLowerCase();
       filtered = ALL.filter((s) => {
         if (exactId) return s.id.toLowerCase() === exactId;
-        if (state.lang && s.lg !== state.lang) return false;
-        if (state.type && s.ty !== state.type) return false;
+        if (state.lang.length && !state.lang.includes(s.lg)) return false;
+        if (state.type.length && !state.type.includes(s.ty)) return false;
         if (state.target && !(s.tg || []).includes(state.target)) return false;
         if (state.prov && !s.fl.some((f) => f.pid === state.prov)) return false;
         if (q) {
@@ -442,7 +465,7 @@ const meta = {
           : `Showing ${num(filtered.length)} matching manuscripts (${num(ALL.length)} total)`;
       }
       if (resetBtn) {
-        resetBtn.hidden = !(state.q || state.exactId || state.lang || state.type || state.prov || state.target);
+        resetBtn.hidden = !(state.q || state.exactId || state.lang.length || state.type.length || state.prov || state.target);
       }
       listEl?.querySelectorAll("details.source-item[open]").forEach((d) => fillRecords(d));
       window.dispatchEvent(new CustomEvent("archive-list-updated"));
@@ -461,13 +484,13 @@ const meta = {
       state.target = params.get("target");
       targetSelect.value = state.target;
     }
-    if (params.get("type")) {
-      state.type = params.get("type");
-      typeBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-type") === state.type));
+    if (params.has("type")) {
+      state.type = pillValues(params, "type");
+      syncPills(typeBtns, "data-type", state.type);
     }
-    if (params.get("language")) {
-      state.lang = params.get("language");
-      langBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-lang") === state.lang));
+    if (params.has("language")) {
+      state.lang = pillValues(params, "language");
+      syncPills(langBtns, "data-lang", state.lang);
     }
     if (params.get("provenance") && provSelect) {
       state.prov = params.get("provenance");
@@ -489,31 +512,15 @@ const meta = {
       state.prov = provSelect.value;
       applyFilters();
     });
-    langBtns.forEach((b) =>
-      b.addEventListener("click", () => {
-        state.exactId = "";
-        langBtns.forEach((x) => x.classList.remove("active"));
-        b.classList.add("active");
-        state.lang = b.getAttribute("data-lang") || "";
-        applyFilters();
-      })
-    );
-    typeBtns.forEach((b) =>
-      b.addEventListener("click", () => {
-        state.exactId = "";
-        typeBtns.forEach((x) => x.classList.remove("active"));
-        b.classList.add("active");
-        state.type = b.getAttribute("data-type") || "";
-        applyFilters();
-      })
-    );
+    onPillGroup(langBtns, "data-lang", () => state.lang, (v) => { state.lang = v; });
+    onPillGroup(typeBtns, "data-type", () => state.type, (v) => { state.type = v; });
     resetBtn?.addEventListener("click", () => {
-      state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "" };
+      state = { q: "", exactId: "", lang: [], type: [], prov: "", target: "" };
       if (searchInput) searchInput.value = "";
       if (targetSelect) targetSelect.value = "";
       if (provSelect) provSelect.value = "";
-      langBtns.forEach((x, i) => x.classList.toggle("active", i === 0));
-      typeBtns.forEach((x, i) => x.classList.toggle("active", i === 0));
+      syncPills(langBtns, "data-lang", state.lang);
+      syncPills(typeBtns, "data-type", state.type);
       applyFilters();
     });
 
@@ -529,12 +536,12 @@ const meta = {
       if (idx < 0) {
         idx = ALL.findIndex((s) => s.id === id);
         if (idx < 0) return;
-        state = { q: "", exactId: "", lang: "", type: "", prov: "", target: "" };
+        state = { q: "", exactId: "", lang: [], type: [], prov: "", target: "" };
         if (searchInput) searchInput.value = "";
         if (targetSelect) targetSelect.value = "";
         if (provSelect) provSelect.value = "";
-        langBtns.forEach((x, i) => x.classList.toggle("active", i === 0));
-        typeBtns.forEach((x, i) => x.classList.toggle("active", i === 0));
+        syncPills(langBtns, "data-lang", state.lang);
+        syncPills(typeBtns, "data-type", state.type);
         applyFilters();
         idx = filtered.findIndex((s) => s.id === id);
       }
