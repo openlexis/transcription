@@ -72,6 +72,29 @@ function listHtml(items: ArchiveNavItem[], current: number): string {
     .join("");
 }
 
+
+const thumbObservers = new WeakMap<HTMLElement, ResizeObserver>();
+
+function placeThumb(track: HTMLElement, index: number, total: number): void {
+  const thumb = track.querySelector<HTMLElement>(".ar-nav-thumb");
+  if (!thumb) return;
+  const trackH = track.clientHeight;
+  if (trackH <= 0) return;
+  const thumbH = Math.max(24, trackH / Math.max(total, 1));
+  const maxTop = Math.max(0, trackH - thumbH);
+  const top = total <= 1 ? 0 : (index / (total - 1)) * maxTop;
+  thumb.style.height = `${thumbH}px`;
+  thumb.style.top = `${top}px`;
+}
+
+function watchThumb(track: HTMLElement, index: number, total: number): void {
+  thumbObservers.get(track)?.disconnect();
+  const obs = new ResizeObserver(() => placeThumb(track, index, total));
+  thumbObservers.set(track, obs);
+  obs.observe(track);
+  placeThumb(track, index, total);
+}
+
 export function initArchiveListSidebar(): void {
   const body = document.querySelector<HTMLElement>("[data-archive-body]");
   const list = document.querySelector<HTMLElement>("[data-archive-nav-list]");
@@ -100,10 +123,6 @@ export function initArchiveListSidebar(): void {
   if (pos) {
     pos.textContent = `${(current + 1).toLocaleString("en-US")} of ${total.toLocaleString("en-US")}`;
   }
-  if (track) {
-    track.style.setProperty("--ar-nav-i", String(current));
-    track.style.setProperty("--ar-nav-n", String(total));
-  }
 
   const currentLabel = sidebar.querySelector<HTMLElement>("[data-sidebar-current]");
   if (currentLabel) {
@@ -113,4 +132,8 @@ export function initArchiveListSidebar(): void {
 
   sidebar.hidden = false;
   body.classList.add("page-layout");
+
+  if (track) {
+    requestAnimationFrame(() => watchThumb(track, current, total));
+  }
 }
