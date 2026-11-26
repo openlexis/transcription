@@ -1,13 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Pill from "../../components/Pill.astro";
-import {
-  compUrl,
-  formatNum,
-  getCompilations,
-  getSpecifications,
-  shortUlid,
-} from "../../lib/corpus";
+import TranscriptionCard from "../../components/TranscriptionCard.astro";
+import { getCompilations, getSpecifications } from "../../lib/corpus";
 
 const compilations = getCompilations();
 const specsById = new Map(getSpecifications().map((s) => [s.id, s]));
@@ -40,49 +34,9 @@ const specsById = new Map(getSpecifications().map((s) => [s.id, s]));
         </div>
       ) : (
         <div class="spec-cards">
-          {compilations.map((c) => {
-            const m = c.manifest;
-            const dateStr = m.compilation.createdAt
-              ? new Date(m.compilation.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })
-              : "";
-            const title = m.compilation.title || (dateStr ? `${m.modelAttribution.modelName} · ${dateStr}` : m.modelAttribution.modelName);
-            const summary = m.compilation.summary || m.method.summary;
-            const license = specsById.get(c.specId)?.license;
-            const modelName = m.modelAttribution.modelName;
-            return (
-              <a href={compUrl(c.compilationId)} class="spec-card">
-                <div class="spec-card-top">
-                  <div class="spec-card-title-row">
-                    <h2 class="spec-card-title">{title}</h2>
-                  </div>
-                  <span class="spec-card-cta">Read transcription →</span>
-                </div>
-                <p class="spec-card-summary">{summary}</p>
-                <div class="spec-card-meta">
-                  {dateStr && (
-                    <Pill icon="date" title="Date compiled">{dateStr}</Pill>
-                  )}
-                  {license && (
-                    <Pill icon="license" title={`${license.copyright}. ${license.name}`}>
-                      {license.name}
-                    </Pill>
-                  )}
-                  {modelName && (
-                    <Pill icon="model" title="Model">{modelName}</Pill>
-                  )}
-                  <Pill icon="words">{formatNum(m.totals.words)} words</Pill>
-                  <Pill icon="disagreements">{formatNum(m.totals.variantPlaces)} disagreements</Pill>
-                  <span class="spec-card-id" title={`Transcription ID: ${c.compilationId}`}>
-                    <code>{shortUlid(c.compilationId)}</code>
-                  </span>
-                </div>
-              </a>
-            );
-          })}
+          {compilations.map((c) => (
+            <TranscriptionCard compilation={c} license={specsById.get(c.specId)?.license} />
+          ))}
         </div>
       )}
     </div>

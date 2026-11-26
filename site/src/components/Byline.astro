@@ -1,0 +1,27 @@
+---
+import Icon from "./Icon.astro";
+import type { IconName } from "../lib/icons";
+
+interface Item {
+  icon: IconName;
+  text: string;
+  title?: string;
+  href?: string;
+}
+
+interface Props {
+  items: (Item | false | null | undefined | "")[];
+}
+
+const items = Astro.props.items.filter(Boolean) as Item[];
+---
+{items.length > 0 && (
+  <div class="byline">
+    {items.map((it) => (
+      <span class="byline-item" title={it.title}>
+        <Icon name={it.icon} size={14} />
+        {it.href ? <a href={it.href} target="_blank" rel="noopener">{it.text}</a> : <span>{it.text}</span>}
+      </span>
+    ))}
+  </div>
+)}

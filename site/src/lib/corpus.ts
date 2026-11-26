@@ -1023,3 +1023,45 @@ export function parseCompiledBookTei(xmlPath: string): { witnesses: ParsedWitnes
 
   return { witnesses, chapters };
 }
+
+/* ---- Model / lab / harness groupings (generated at build time from each manifest) ---- */
+
+export type FacetKind = "model" | "lab" | "harness";
+
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function facetValue(c: CompilationRecord, kind: FacetKind): string | undefined {
+  const a = c.manifest.modelAttribution;
+  const v = kind === "model" ? a.modelName : kind === "lab" ? a.provider : a.harness;
+  return v?.trim() || undefined;
+}
+
+export const facetUrl = (kind: FacetKind, label: string) =>
+  `/${kind === "model" ? "models" : kind === "lab" ? "labs" : "harnesses"}/${slugify(label)}/`;
+
+export interface FacetGroup {
+  kind: FacetKind;
+  slug: string;
+  label: string;
+  compilations: CompilationRecord[];
+}
+
+export function getFacetGroups(kind: FacetKind): FacetGroup[] {
+  const groups = new Map<string, FacetGroup>();
+  for (const c of getCompilations()) {
+    const label = facetValue(c, kind);
+    if (!label) continue;
+    const slug = slugify(label);
+    if (!slug) continue;
+    const g = groups.get(slug) ?? { kind, slug, label, compilations: [] };
+    g.compilations.push(c);
+    groups.set(slug, g);
+  }
+  return [...groups.values()];
+}

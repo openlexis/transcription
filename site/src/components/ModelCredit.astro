@@ -1,0 +1,42 @@
+---
+import Icon from "./Icon.astro";
+import { facetUrl } from "../lib/corpus";
+
+interface Props {
+  modelName: string;
+  effort?: string;
+  lab?: string;
+  harness?: string;
+}
+
+const { modelName, effort, lab, harness } = Astro.props;
+---
+<div class="model-credit" aria-label="Model">
+  <span class="model-credit-main">
+    <a class="model-credit-model" href={facetUrl("model", modelName)} title="All transcriptions using this model">
+      <Icon name="model" size={15} />
+      {modelName}
+    </a>
+    {effort && (
+      <span class="model-credit-effort" title="Effort">
+        <Icon name="effort" size={15} />
+        {effort}
+      </span>
+    )}
+  </span>
+  {(lab || harness) && (
+    <span class="model-credit-by">
+      {lab && (
+        <>
+          by <a href={facetUrl("lab", lab)} title="All transcriptions from this lab">{lab}</a>
+        </>
+      )}
+      {lab && harness && <span class="model-credit-dot" aria-hidden="true"> · </span>}
+      {harness && (
+        <>
+          via <a href={facetUrl("harness", harness)} title="All transcriptions using this harness">{harness}</a>
+        </>
+      )}
+    </span>
+  )}
+</div>

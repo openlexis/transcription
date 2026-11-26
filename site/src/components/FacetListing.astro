@@ -1,0 +1,46 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TranscriptionCard from "./TranscriptionCard.astro";
+import { getSpecifications, type FacetGroup } from "../lib/corpus";
+
+interface Props {
+  group: FacetGroup;
+}
+
+const { group } = Astro.props;
+const specsById = new Map(getSpecifications().map((s) => [s.id, s]));
+const eyebrow = group.kind === "model" ? "Model" : group.kind === "lab" ? "Lab" : "Harness";
+const n = group.compilations.length;
+const lead =
+  group.kind === "model"
+    ? `Every transcription compiled with ${group.label}.`
+    : group.kind === "lab"
+      ? `Every transcription compiled with a model from ${group.label}.`
+      : `Every transcription compiled through the ${group.label} harness.`;
+---
+<Layout
+  title={`${group.label} · ${eyebrow}`}
+  active="transcriptions"
+  description={`${n} ${n === 1 ? "transcription" : "transcriptions"}: ${lead}`}
+>
+  <section class="page-header">
+    <div class="container">
+      <div class="eyebrow">{eyebrow}</div>
+      <h1>{group.label}</h1>
+      <p class="lead">{lead}</p>
+      <div class="ulid-bar">
+        <a href="/transcriptions/" class="btn btn-secondary">← All transcriptions</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="spec-cards">
+        {group.compilations.map((c) => (
+          <TranscriptionCard compilation={c} license={specsById.get(c.specId)?.license} />
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

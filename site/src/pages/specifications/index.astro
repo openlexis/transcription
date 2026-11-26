@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Pill from "../../components/Pill.astro";
+import Byline from "../../components/Byline.astro";
 import {
   formatAuthor,
   formatNum,
@@ -50,18 +51,14 @@ const specs = [...getSpecifications()].sort(
                 <span class="spec-card-cta">Read specification →</span>
               </div>
               <p class="spec-card-summary">{s.summary}</p>
+              <Byline
+                items={[
+                  authorStr && { icon: "author", text: authorStr, title: "Author" },
+                  s.license && { icon: "license", text: s.license.name, title: `${withTrademark(s.license.copyright)}. ${s.license.name}` },
+                  dateStr && { icon: "date", text: dateStr, title: "Date created" },
+                ]}
+              />
               <div class="spec-card-meta">
-                {authorStr && (
-                  <Pill icon="author" title="Author">{authorStr}</Pill>
-                )}
-                {s.license && (
-                  <Pill icon="license" title={`${withTrademark(s.license.copyright)}. ${s.license.name}`}>
-                    {s.license.name}
-                  </Pill>
-                )}
-                {dateStr && (
-                  <Pill icon="date" title="Date created">{dateStr}</Pill>
-                )}
                 <Pill icon="manuscripts">{formatNum(s.sources.length)} manuscripts</Pill>
                 <Pill icon="transcriptions" tone={comps.length > 0 ? "sky" : "default"}>
                   {comps.length === 0

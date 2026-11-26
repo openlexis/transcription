@@ -1,0 +1,15 @@
+---
+import FacetListing from "../../components/FacetListing.astro";
+import { getFacetGroups, type FacetGroup } from "../../lib/corpus";
+
+export function getStaticPaths() {
+  return getFacetGroups("model").map((group) => ({ params: { slug: group.slug }, props: { group } }));
+}
+
+interface Props {
+  group: FacetGroup;
+}
+
+const { group } = Astro.props;
+---
+<FacetListing group={group} />

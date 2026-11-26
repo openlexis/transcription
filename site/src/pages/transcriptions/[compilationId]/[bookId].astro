@@ -5,6 +5,7 @@ import Layout from "../../../layouts/Layout.astro";
 import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
 import Icon from "../../../components/Icon.astro";
 import Pill from "../../../components/Pill.astro";
+import Byline from "../../../components/Byline.astro";
 import {
   bookUrl,
   compUrl,
@@ -323,9 +324,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         {bookLangCodes.map((code) => (
           <Pill icon="language" title={LANGUAGE_META[code].note}>{LANGUAGE_META[code].label}</Pill>
         ))}
-      </div>
-      <div class="book-title-row">
-        <h1>{b.name}</h1>
         {showBookNav && (
           <nav class="book-title-nav" aria-label="Previous and next book">
             <a href={bookUrl(c.compilationId, prevBook.id)}>← {prevBook.name}</a>
@@ -334,26 +332,19 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           </nav>
         )}
       </div>
-      <div class="pill-row">
-        {compAuthor && (
-          <Pill icon="author" title="Author">{compAuthor}</Pill>
-        )}
-        {compDate && (
-          <Pill icon="date" title="Date compiled">{compDate}</Pill>
-        )}
-        {license && (
-          <Pill icon="license" href={license.url} title={withTrademark(license.copyright)} target="_blank" rel="noopener">
-            {license.name}
-          </Pill>
-        )}
-      </div>
+      <h1>{b.name}</h1>
+      <Byline
+        items={[
+          compAuthor && { icon: "author", text: compAuthor, title: "Author" },
+          compDate && { icon: "date", text: compDate, title: "Date compiled" },
+          license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
+        ]}
+      />
       <div class="pill-row book-stats-lead" style="margin-top: 14px;">
-        <Pill icon="manuscripts">
-          {formatNum(b.stats.manuscripts)} manuscripts ({formatNum(b.stats.early)} early)
-        </Pill>
+        <Pill icon="manuscripts">{formatNum(b.stats.manuscripts)} manuscripts</Pill>
         <Pill icon="lines">{formatNum(b.stats.lines)} lines</Pill>
         <Pill icon="words">{formatNum(b.stats.words)} words</Pill>
-        <Pill icon="disagreements">{formatNum(b.stats.places)} points of disagreement</Pill>
+        <Pill icon="disagreements">{formatNum(b.stats.places)} disagreements</Pill>
         <ConfidenceBadge
           value={b.stats.meanWordConfidence}
           kind="book-mean"

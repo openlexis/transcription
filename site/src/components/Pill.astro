@@ -1,26 +1,9 @@
 ---
 import Icon from "./Icon.astro";
+import type { IconName } from "../lib/icons";
 
 interface Props {
-  icon?:
-    | "author"
-    | "date"
-    | "license"
-    | "manuscripts"
-    | "transcriptions"
-    | "model"
-    | "provider"
-    | "words"
-    | "disagreements"
-    | "arrow-up"
-    | "arrow-left"
-    | "arrow-right"
-    | "effort"
-    | "harness"
-    | "books"
-    | "language"
-    | "section"
-    | "lines";
+  icon?: IconName;
   title?: string;
   href?: string;
   tone?: "default" | "accent" | "sky";

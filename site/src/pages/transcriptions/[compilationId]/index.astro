@@ -3,6 +3,8 @@ import Layout from "../../../layouts/Layout.astro";
 import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
 import Icon from "../../../components/Icon.astro";
 import Pill from "../../../components/Pill.astro";
+import Byline from "../../../components/Byline.astro";
+import ModelCredit from "../../../components/ModelCredit.astro";
 import {
   bookUrl,
   formatAuthor,
@@ -103,33 +105,23 @@ const license = getSpecifications().find((s) => s.id === c.specId)?.license;
       <p style="margin: 6px 0 0; font-size: 1.02rem; font-weight: 500; color: var(--ink-secondary);">
         {compSubtitle}
       </p>
-      <div class="pill-row" style="margin-top: 12px;">
-        {compAuthor && (
-          <Pill icon="author" title="Author">{compAuthor}</Pill>
-        )}
-        {createdDate && (
-          <Pill icon="date" title="Date compiled">{createdDate}</Pill>
-        )}
-      </div>
+      <Byline
+        items={[
+          compAuthor && { icon: "author", text: compAuthor, title: "Author" },
+          createdDate && { icon: "date", text: createdDate, title: "Date compiled" },
+          license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
+        ]}
+      />
+      <ModelCredit
+        modelName={attr.modelName}
+        effort={attr.effortLevel}
+        lab={attr.provider}
+        harness={attr.harness}
+      />
       <div class="pill-row" style="margin-top: 14px;">
-        {license && (
-          <Pill icon="license" href={license.url} title={withTrademark(license.copyright)} target="_blank" rel="noopener">
-            {license.name}
-          </Pill>
-        )}
-        <Pill icon="model" title="Model">{attr.modelName}</Pill>
-        {attr.provider && (
-          <Pill icon="provider" title="Provider">{attr.provider}</Pill>
-        )}
-        {attr.harness && (
-          <Pill icon="harness" title="Harness">{attr.harness}</Pill>
-        )}
-        {attr.effortLevel && (
-          <Pill icon="effort" title="Effort">{attr.effortLevel} effort</Pill>
-        )}
         <Pill icon="books">{formatNum(m.books.length)} books</Pill>
         <Pill icon="words">{formatNum(m.totals.words)} words</Pill>
-        <Pill icon="disagreements">{formatNum(m.totals.variantPlaces)} points of disagreement</Pill>
+        <Pill icon="disagreements">{formatNum(m.totals.variantPlaces)} disagreements</Pill>
       </div>
       <p class="lead" style="margin-top: 12px;">
         {compSummary}
@@ -304,7 +296,7 @@ const license = getSpecifications().find((s) => s.id === c.specId)?.license;
                   <div class="source-meta-val">{formatNum(m.totals.words)}</div>
                 </div>
                 <div>
-                  <div class="source-meta-label">Points of Disagreement</div>
+                  <div class="source-meta-label">Disagreements</div>
                   <div class="source-meta-val">{formatNum(m.totals.variantPlaces)}</div>
                 </div>
                 <div>
@@ -420,7 +412,7 @@ const license = getSpecifications().find((s) => s.id === c.specId)?.license;
               <div>
                 <h3 style="margin-bottom: 8px;">Disagreement Categories</h3>
                 <p class="section-sub" style="margin-bottom: 14px;">
-                  Categories classifying all {formatNum(totalCategorized)} points of disagreement across this transcription.
+                  Categories classifying all {formatNum(totalCategorized)} disagreements across this transcription.
                 </p>
                 <div class="table-wrap">
                   <table>
