@@ -2667,12 +2667,12 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         return;
       }
       const wr = wrap.getBoundingClientRect();
-      const br = word.getBoundingClientRect();
-      const pad = 4;
-      const cursorSize = 56;
-      const left = Math.min(br.right - wr.left + pad, Math.max(0, wr.width - cursorSize));
-      cursor.style.left = `${left}px`;
-      cursor.style.top = `${br.bottom - wr.top + pad}px`;
+      const box = word.getBoundingClientRect();
+      // Tip / click point sits a few pixels inside the hover box's bottom-right corner.
+      const insetX = 6;
+      const insetY = 5;
+      cursor.style.left = `${box.right - wr.left - insetX}px`;
+      cursor.style.top = `${box.bottom - wr.top - insetY}px`;
       if (!cursor.classList.contains("is-active")) {
         cursor.classList.add("is-active");
       }
