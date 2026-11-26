@@ -6,6 +6,7 @@ import ConfidenceBadge from "../../../components/ConfidenceBadge.astro";
 import Pill from "../../../components/Pill.astro";
 import Byline from "../../../components/Byline.astro";
 import CiteBox from "../../../components/CiteBox.astro";
+import PageSidebar from "../../../components/PageSidebar.astro";
 import { bookCredit, creditOf, perManuscript, witnessFiles } from "../../../lib/credits";
 import { bookDownload } from "../../../lib/downloads";
 import { groupCredits } from "../../../lib/cite";
@@ -378,31 +379,37 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
   </section>
 
   <section class="section">
-    <div class="container">
-      {renderedChapters.length > 1 && (
-        <div class="chapter-pills" aria-label="Jump to chapter">
-          <span class="chapter-pills-label">Chapters</span>
-          {renderedChapters.map((ch) => (
-            <a
-              href={`#ch-${ch.chapter}`}
-              class={`chapter-pill${ch.hasArc ? " chapter-pill-arc" : ""}`}
-              data-ch-pill={ch.chapter}
-              title={
-                ch.hasArc
-                  ? ch.hasHbo
-                    ? `Chapter ${ch.chapter} (includes Biblical Aramaic)`
-                    : `Chapter ${ch.chapter} (Biblical Aramaic)`
-                  : `Chapter ${ch.chapter}`
-              }
-            >
-              {ch.chapter}
-            </a>
-          ))}
-        </div>
-      )}
+    <div class="container page-layout">
+      <PageSidebar
+        label="Chapters, key, and filters"
+        toggleLabel={renderedChapters.length > 1 ? "Chapters and filters" : "Key and filters"}
+      >
+        {renderedChapters.length > 1 && (
+          <nav class="book-sidebar-chapters" aria-label="Jump to chapter">
+            <div class="page-sidebar-title">Chapters</div>
+            <div class="book-chapter-list">
+              {renderedChapters.map((ch) => (
+                <a
+                  href={`#ch-${ch.chapter}`}
+                  class={`chapter-pill${ch.hasArc ? " chapter-pill-arc" : ""}`}
+                  data-ch-pill={ch.chapter}
+                  data-current-label={`Chapter ${ch.chapter}`}
+                  title={
+                    ch.hasArc
+                      ? ch.hasHbo
+                        ? `Chapter ${ch.chapter} (includes Biblical Aramaic)`
+                        : `Chapter ${ch.chapter} (Biblical Aramaic)`
+                      : `Chapter ${ch.chapter}`
+                  }
+                >
+                  {ch.chapter}
+                </a>
+              ))}
+            </div>
+          </nav>
+        )}
 
-      <div class="reader-toolbar">
-        <div class="reader-hint" style="margin-bottom: 0; flex: 1 1 320px;">
+        <div class="reader-hint book-sidebar-legend">
           <div class="reader-legend-row">
             <span class="legend-group">
               <span class="legend-label">Severity:</span>
@@ -424,9 +431,8 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             </span>
           </div>
         </div>
-      </div>
 
-      <div class="reader-filter-bar" role="region" aria-label="Filter text by severity, confidence, and language">
+        <div class="reader-filter-bar" role="region" aria-label="Filter text by severity, confidence, and language">
         {hasAramaic && (
           <label class="reader-filter-field">
             <span class="pill-label">Language</span>
@@ -464,7 +470,9 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         <span id="filter-status" class="reader-filter-status"></span>
         <button type="button" id="filter-reset" class="copy-btn" hidden>Reset</button>
       </div>
+      </PageSidebar>
 
+      <div class="book-reader">
       <div id="filter-empty" class="reader-empty" hidden>
         <p>No lines in {b.name} match the current filters.</p>
         <button type="button" id="filter-empty-reset" class="btn btn-secondary">Reset filters</button>
@@ -492,6 +500,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                 <div class="verse-block" id={`v-${v.ref.replace(":", "-")}`}>
                   <div class="verse-line">
                     <span class="verse-num" dir="ltr">{v.verseNum}</span>
+                    <div class="verse-text">
                     {v.uncovered ? (
                       <span class="verse-uncovered" dir="ltr">[uncovered in surviving witnesses]</span>
                     ) : (
@@ -609,6 +618,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
                         return switchChip ? [switchChip, btn] : [btn];
                       })
                     )}
+                    </div>
                   </div>
                   {v.filledIn && v.filledIn.length > 0 && (
                     <details class="verse-filled">
@@ -630,6 +640,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             </div>
           </section>
         ))}
+      </div>
       </div>
     </div>
   </section>

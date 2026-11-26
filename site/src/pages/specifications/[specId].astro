@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import CiteBox from "../../components/CiteBox.astro";
+import PageSidebar from "../../components/PageSidebar.astro";
 import { allSpecFiles, perManuscript, specCredit } from "../../lib/credits";
 import { groupCredits } from "../../lib/cite";
 import {
@@ -121,21 +122,20 @@ const toc = [
   </section>
 
   <div class="container spec-layout">
-    <aside class="toc" aria-label="On this page">
-      <div class="toc-title">On this page</div>
-      <ul>
+    <PageSidebar label="On this page" toggleLabel="On this page" title="On this page">
+      <ul class="page-sidebar-toc">
         {toc.map((h) => (
           <li><a href={`#${h.id}`}>{h.text}</a></li>
         ))}
       </ul>
-      <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--ink-muted);">
+      <div class="page-sidebar-note">
         {isFolder ? (
           <>Everything on this page (rules, target books, and all {formatNum(stats.sourceCount)} sources) comes from this specification's folder: <code>{single.file}</code> and <code>{sourcesFile}</code>.</>
         ) : (
           <>Everything on this page (rules, target books, and all {formatNum(stats.sourceCount)} sources) comes from the single file <code>{single.file}</code>.</>
         )}
       </div>
-    </aside>
+    </PageSidebar>
 
     <article class="prose">
       <h2 id="objective" style="margin-top: 0; padding-top: 0; border-top: 0;">1. Objective</h2>

@@ -1,0 +1,26 @@
+---
+interface Props {
+  label: string;
+  toggleLabel: string;
+  title?: string;
+}
+
+const { label, toggleLabel, title } = Astro.props;
+---
+<aside class="page-sidebar" aria-label={label} data-page-sidebar>
+  <details class="page-sidebar-panel">
+    <summary class="page-sidebar-toggle">
+      <span class="page-sidebar-toggle-label">{toggleLabel}</span>
+      <span class="page-sidebar-current" data-sidebar-current hidden></span>
+    </summary>
+    <div class="page-sidebar-body">
+      {title && <div class="page-sidebar-title page-sidebar-title-desktop">{title}</div>}
+      <slot />
+    </div>
+  </details>
+</aside>
+
+<script>
+  import { initSidebarSpy } from "../lib/sidebar-spy";
+  initSidebarSpy();
+</script>

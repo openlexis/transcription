@@ -5618,3 +5618,250 @@ tr:last-child td {
     border-top: 1px solid rgba(55, 48, 163, 0.16);
   }
 }
+
+
+/* Shared page sidebar (book chapters/key/filters, specification "On this page") */
+.page-layout {
+  display: grid;
+  grid-template-columns: 16.5rem minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.page-sidebar,
+.book-reader,
+.compiled-text,
+.chapter-block,
+.verse-block,
+.verse-text {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.page-sidebar {
+  position: sticky;
+  top: 86px;
+  max-height: calc(100vh - 102px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.page-sidebar-panel {
+  margin: 0;
+}
+
+.page-sidebar-toggle {
+  display: none;
+}
+
+/* Keep the panel body visible on desktop even when the mobile details is closed. */
+@media (min-width: 921px) {
+  .page-sidebar-panel > .page-sidebar-body {
+    display: block;
+  }
+}
+
+.page-sidebar-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  margin: 0 0 10px;
+}
+
+.page-sidebar-title + .page-sidebar-title,
+.book-sidebar-chapters + .reader-hint,
+.book-sidebar-legend + .reader-filter-bar,
+.page-sidebar-toc + .page-sidebar-note {
+  margin-top: 18px;
+}
+
+.page-sidebar-toc {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--border);
+}
+
+.page-sidebar-toc a {
+  display: block;
+  padding: 5px 0 5px 14px;
+  font-size: 0.85rem;
+  color: var(--ink-secondary);
+  border-left: 2px solid transparent;
+  margin-left: -1px;
+}
+
+.page-sidebar-toc a:hover {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  text-decoration: none;
+}
+
+.page-sidebar-toc a.is-active,
+.page-sidebar-toc a[aria-current="location"] {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  font-weight: 600;
+  background: var(--accent-soft);
+}
+
+.page-sidebar-note {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+.book-chapter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chapter-pill.is-active,
+.chapter-pill[aria-current="location"] {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 700;
+}
+
+.page-sidebar .reader-hint {
+  margin-bottom: 0;
+  padding: 10px 12px;
+}
+
+.page-sidebar .reader-filter-bar {
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 0;
+  padding: 10px 12px;
+}
+
+.page-sidebar .reader-filter-field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.page-sidebar .reader-filter-bar .select-sm {
+  width: 100%;
+  max-width: 100%;
+}
+
+.page-sidebar .reader-filter-status {
+  margin-left: 0;
+}
+
+.chapter-block {
+  scroll-margin-top: 88px;
+}
+
+/* Line numbers in their own column, with a hanging indent on wrapped text.
+   Direction is inherited, so Hebrew (rtl) is mirrored: number on the right,
+   wrapped lines indent further inward (away from the number). */
+.verse-line {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.55em;
+  align-items: start;
+  margin: 0;
+}
+
+.verse-num {
+  display: block;
+  min-width: 3ch;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin: 0;
+  padding-top: 2px;
+  text-align: end;
+  line-height: 1.2;
+  user-select: none;
+}
+
+.compiled-text.mode-interlinear .verse-num {
+  padding-top: 11px;
+  margin-top: 0;
+  vertical-align: top;
+}
+
+.verse-text {
+  min-width: 0;
+  padding-inline-start: 1.5em;
+  text-indent: -1.5em;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 920px) {
+  .page-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .page-sidebar {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .page-sidebar-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+
+  .page-sidebar-toggle {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 12px;
+    cursor: pointer;
+    list-style: none;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .page-sidebar-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .page-sidebar-toggle::before {
+    content: "▸";
+    color: var(--ink-muted);
+    font-weight: 500;
+  }
+
+  .page-sidebar-panel[open] .page-sidebar-toggle::before {
+    content: "▾";
+  }
+
+  .page-sidebar-current:not([hidden]) {
+    font-weight: 500;
+    color: var(--ink-muted);
+  }
+
+  .page-sidebar-current:not([hidden])::before {
+    content: "· ";
+    color: var(--ink-muted);
+  }
+
+  .page-sidebar-title-desktop {
+    display: none;
+  }
+
+  .page-sidebar-body {
+    padding: 0 16px 16px;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
