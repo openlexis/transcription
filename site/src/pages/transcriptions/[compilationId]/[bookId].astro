@@ -302,6 +302,7 @@ function romanOfWord(w: string): string {
 
 const clientData = {
   bookId: b.id,
+  bookName: b.name,
   isHebrew,
   compUrl: compUrl(c.compilationId),
   scale: reportScale ?? { min: 1, max: 5 },
@@ -676,7 +677,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
 
   <script>
     import { transliterateText } from "../../../lib/transliterate";
-    import { renderLanguageBadgeHtml, type LangCode } from "../../../lib/languages";
+    import { renderLanguageBylineHtml, type LangCode } from "../../../lib/languages";
     import {
       formatCredibleInterval,
       formatProbabilityPct,
@@ -897,15 +898,22 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       return formatCredibleInterval(raw);
     }
 
-    function renderConfBadge(deg: string, unc: string, isUnseen = false, context = ""): string {
+    function renderConfBadge(deg: string, unc: string, isUnseen = false, context = "", unanimous = false): string {
       const rangeStr = unc ? fmtInterval(unc) : "";
       const badgeHtml = renderConfidenceBadgeHtml({
         value: deg,
         kind: isUnseen ? "unseen" : "reading",
         interval: unc,
         context,
+        showBandLabel: !isUnseen,
+        unanimous,
       });
       return `${badgeHtml}${rangeStr ? `<span class="ms-sub">${esc(rangeStr)}</span>` : ""}`;
+    }
+
+    function lineRefHtml(ref: string, extra = ""): string {
+      const text = [DATA.bookName, ref].filter(Boolean).join(" ");
+      return `<div class="inspector-line-ref">${esc(text)}${extra ? ` <span class="inspector-line-ref-extra">${extra}</span>` : ""}</div>`;
     }
 
     function siglumOf(ref: number | string): string {
@@ -1425,7 +1433,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         : item.ar || btn.dataset.lang === "arc"
           ? "arc"
           : "hbo";
-      const langBadgeHtml = renderLanguageBadgeHtml(wordLang, 12);
+      const langBylineHtml = renderLanguageBylineHtml(wordLang, 14);
       const arcScriptNote =
         wordLang === "arc"
           ? `<div class="inspector-lang-note">Written in Imperial Aramaic, which shares the same square script as Hebrew.</div>`
@@ -1439,21 +1447,20 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         panel.innerHTML = `
           <div class="inspector-head">
             <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
-              <span class="badge badge-emerald">✓ Unanimous reading</span>
-              <span class="ms-sub">${esc(item.ref)}</span>
-              ${langBadgeHtml}
+              ${langBylineHtml}
             </div>
             <div style="display:flex; align-items:center; gap:6px;">
               <button type="button" class="copy-btn" data-copy-word-link>Copy link</button>
               <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
             </div>
           </div>
+          ${lineRefHtml(item.ref)}
           ${arcScriptNote}
           <div class="inspector-reading-hero">
             ${heroHtml}
           </div>
           <div class="inspector-prob-row">
-            ${renderConfBadge(item.d, item.u, false, `Unanimous across ${item.at.length.toLocaleString()} surviving ${item.at.length === 1 ? "manuscript" : "manuscripts"}.`)}
+            ${renderConfBadge(item.d, item.u, false, `Unanimous across ${item.at.length.toLocaleString()} surviving ${item.at.length === 1 ? "manuscript" : "manuscripts"}.`, true)}
           </div>
           <div style="margin-top: 8px;">
             <span class="source-meta-label">Attested by ${item.at.length} ${item.at.length === 1 ? "witness" : "witnesses"} (click any siglum for details):</span>
@@ -1578,22 +1585,22 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
 
         const groupNote =
           item.t && item.t.trim().includes(" ")
-            ? `<span class="ms-sub">Grouped phrase (these words vary together across manuscripts)</span>`
+            ? `<div class="ms-sub inspector-group-note">Grouped phrase (these words vary together across manuscripts)</div>`
             : "";
 
         panel.innerHTML = `
           <div class="inspector-head">
             <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
               <strong>Manuscript Differences</strong>
-              <span class="ms-sub">${esc(item.ref)} · ${realRdgs.length} ${realRdgs.length === 1 ? "reading" : "readings"}</span>
-              ${langBadgeHtml}
-              ${groupNote}
+              ${langBylineHtml}
             </div>
             <div style="display:flex; align-items:center; gap:6px;">
               <button type="button" class="copy-btn" data-copy-word-link>Copy link</button>
               <button type="button" class="copy-btn" data-close-inspector>Close ✕</button>
             </div>
           </div>
+          ${lineRefHtml(item.ref, `· ${realRdgs.length} ${realRdgs.length === 1 ? "reading" : "readings"}`)}
+          ${groupNote}
           ${arcScriptNote}
           <ul class="app-rdg-list">${rdgsHtml}</ul>
           ${unseenHtml}

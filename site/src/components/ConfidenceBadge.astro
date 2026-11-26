@@ -35,7 +35,9 @@ const wrapClass = [
       </span>
     )}
     <span class="ol-conf-val">{m.displayPct}</span>
-    {props.showLabel && <span class="ol-conf-inline-label">{m.shortLabel}</span>}
+    {(props.showBandLabel ? m.bandLabel : props.showLabel ? m.shortLabel : "") && (
+      <span class="ol-conf-inline-label">{props.showBandLabel ? m.bandLabel : m.shortLabel}</span>
+    )}
   </span>
 
   <span class="ol-conf-card" role="tooltip">

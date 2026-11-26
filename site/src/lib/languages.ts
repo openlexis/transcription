@@ -115,3 +115,9 @@ export function renderLanguageBadgeHtml(code: LangCode, size = 13): string {
   const m = LANGUAGE_META[code];
   return `<span class="badge ${m.badgeClass} lang-badge" title="${m.note}">${languageIconSvg(code, size)}<span>${m.label}</span></span>`;
 }
+
+/** Language as plain icon-plus-value text, matching the site byline, with no colored pill. */
+export function renderLanguageBylineHtml(code: LangCode, size = 14): string {
+  const m = LANGUAGE_META[code];
+  return `<span class="byline-item" title="${escAttr(m.note)}">${languageIconSvg(code, size)}<span>${escAttr(m.label)}</span></span>`;
+}

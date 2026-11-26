@@ -4818,6 +4818,22 @@ tr:last-child td {
   margin-bottom: 10px;
 }
 
+.inspector-line-ref {
+  margin: -2px 0 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.inspector-line-ref-extra {
+  font-weight: 500;
+  color: var(--ink-secondary);
+}
+
+.inspector-group-note {
+  margin: -6px 0 10px;
+}
+
 .conf-badge {
   display: inline-flex;
   align-items: center;

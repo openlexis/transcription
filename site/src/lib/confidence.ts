@@ -15,6 +15,10 @@ export interface ConfidenceBadgeOptions {
   context?: string;
   /** Show a concise inline label beside the percentage (e.g. "likely original"). */
   showLabel?: boolean;
+  /** In the word-click popup, show the uncertainty band name beside the percentage. */
+  showBandLabel?: boolean;
+  /** True when every surviving manuscript agrees on this wording. */
+  unanimous?: boolean;
   /** Compact variant for dense UI like witness chips. */
   compact?: boolean;
   /** Render integer percent (e.g. "54%") instead of 1 decimal place. */
@@ -38,6 +42,8 @@ export interface ConfidenceModel {
   contextNote: string;
   ariaLabel: string;
   iconSvg: string;
+  /** Set when showBandLabel is on: "Unanimous reading", "Little uncertainty", "Moderate uncertainty", or "High uncertainty". */
+  bandLabel: string;
 }
 
 const escHtml = (s: unknown): string =>
@@ -67,6 +73,20 @@ export function formatCredibleInterval(raw?: string): string {
   const m = raw.match(/\[([0-9.]+),\s*([0-9.]+)\]/);
   if (!m) return raw;
   return `90% credible range: ${formatProbabilityPct(m[1])} – ${formatProbabilityPct(m[2])}`;
+}
+
+/**
+ * Uncertainty band name used beside the likelihood pill in the word-click popup.
+ * Thresholds and wording match the homepage walkthrough: at least 99% is little
+ * uncertainty (or "Unanimous reading" when every surviving manuscript agrees),
+ * at least 85% is moderate uncertainty, and below that is high uncertainty.
+ */
+export function uncertaintyBandLabel(prob: number, unanimous = false): string {
+  const pct = prob * 100;
+  if (unanimous && pct >= 99) return "Unanimous reading";
+  if (pct >= 99) return "Little uncertainty";
+  if (pct >= 85) return "Moderate uncertainty";
+  return "High uncertainty";
 }
 
 export function confidenceIconSvg(kind: ConfidenceMetricKind, size = 13): string {
@@ -127,7 +147,8 @@ export function buildConfidenceModel(opts: ConfidenceBadgeOptions): ConfidenceMo
     contextNote = opts.context ?? "";
   }
 
-  const ariaParts = [`${displayPct} ${title.toLowerCase()}`, description, intervalText, contextNote].filter(Boolean);
+  const bandLabel = opts.showBandLabel ? uncertaintyBandLabel(prob, opts.unanimous === true) : "";
+  const ariaParts = [`${displayPct} ${bandLabel || title.toLowerCase()}`, description, intervalText, contextNote].filter(Boolean);
 
   return {
     prob,
@@ -142,6 +163,7 @@ export function buildConfidenceModel(opts: ConfidenceBadgeOptions): ConfidenceMo
     contextNote,
     ariaLabel: ariaParts.join(". "),
     iconSvg: confidenceIconSvg(kind, opts.compact ? 11 : 13),
+    bandLabel,
   };
 }
 
@@ -166,8 +188,9 @@ export function renderConfidenceBadgeHtml(opts: ConfidenceBadgeOptions): string 
     ? `<span class="ol-conf-dot" aria-hidden="true"></span>`
     : `<span class="ol-conf-meter" aria-hidden="true"><span class="ol-conf-meter-fill" style="width:${fillWidth}%"></span></span>`;
 
-  const inlineLabel = opts.showLabel
-    ? `<span class="ol-conf-inline-label">${escHtml(m.shortLabel)}</span>`
+  const labelText = opts.showBandLabel ? m.bandLabel : opts.showLabel ? m.shortLabel : "";
+  const inlineLabel = labelText
+    ? `<span class="ol-conf-inline-label">${escHtml(labelText)}</span>`
     : "";
 
   return `<span class="${escHtml(wrapClasses)}"${focusable ? ' tabindex="0"' : ""} aria-label="${escHtml(m.ariaLabel)}"><span class="ol-conf-pill ol-conf-${m.tier}">${m.iconSvg}${meterHtml}<span class="ol-conf-val">${escHtml(m.displayPct)}</span>${inlineLabel}</span><span class="ol-conf-card" role="tooltip"><span class="ol-conf-card-head"><span class="ol-conf-card-title">${confidenceIconSvg(m.kind, 13)}<span>${escHtml(m.title)}</span></span><span class="ol-conf-card-pct ol-conf-text-${m.tier}">${escHtml(m.displayPct)}</span></span><span class="ol-conf-card-track" aria-hidden="true"><span class="ol-conf-card-fill ol-conf-fill-${m.tier}" style="width:${Math.max(m.fillPct, 2).toFixed(1)}%"></span></span><span class="ol-conf-card-desc">${escHtml(m.description)}</span>${metaHtml}</span></span>`;
