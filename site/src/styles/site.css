@@ -5550,9 +5550,12 @@ tr:last-child td {
     flex: 1 1 100%;
     justify-content: flex-end;
   }
+  .model-credit-main,
+  .model-credit-by {
+    flex: 1 1 100%;
+  }
   .model-credit-by {
     border-left: 0;
     border-top: 1px solid rgba(55, 48, 163, 0.16);
-    flex: 1 1 100%;
   }
 }
