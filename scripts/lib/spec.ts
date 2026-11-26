@@ -3,6 +3,24 @@
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 
+
+export type SpecLicense = { copyright: string; name: string; url: string };
+
+/** Every specification must declare a copyright and license. `bun run check` fails if this is missing. */
+export function readSpecLicense(raw: Record<string, unknown>, at: string): SpecLicense {
+  const license = raw.license;
+  if (!license || typeof license !== "object" || Array.isArray(license)) {
+    throw new Error(`${at}: missing required field license`);
+  }
+  const o = license as Record<string, unknown>;
+  const field = (key: "copyright" | "name" | "url") => {
+    const v = o[key];
+    if (typeof v !== "string" || !v.trim()) throw new Error(`${at}: license.${key} is required`);
+    return v.trim();
+  };
+  return { copyright: field("copyright"), name: field("name"), url: field("url") };
+}
+
 export type Target = { id: string; name: string; section: string; number: number; language: string };
 export type SourceFile = { paths: string[]; format: string; license: string; sourceUrl: string; provenance: { id: string; name: string; url: string }; member?: string; lines: number; words: number };
 export type Source = {

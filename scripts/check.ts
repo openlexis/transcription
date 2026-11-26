@@ -5,11 +5,13 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { parseXml } from "./lib/tei";
 import { spawnSync } from "node:child_process";
 import { isPinnedList, listSpecs, loadSpecWithSources, type FrozenSources, type PinnedTranscript } from "./sources";
+import { readSpecLicense, type SpecLicense } from "./lib/spec";
 
 const t0 = performance.now();
 const ROOT = new URL("..", import.meta.url).pathname;
 const sha = (x: string | Buffer) => createHash("sha256").update(x).digest("hex");
 const fails: string[] = [];
+const specLicenses = new Map<string, SpecLicense>();
 
 if (!existsSync(`${ROOT}transcripts`)) {
   console.error("FAILED: no transcripts/ directory found");
@@ -30,6 +32,11 @@ for (const { id, path } of listSpecs()) {
   let spec: { id: string; sources: unknown };
   try { spec = Bun.YAML.parse(readFileSync(path, "utf8")) as { id: string; sources: unknown }; } catch (e) { fails.push(`${at}: ${e}`); continue; }
   if (spec.id !== id) fails.push(`${at}: id ${spec.id} does not match ${id}`);
+  try {
+    specLicenses.set(id, readSpecLicense(spec as unknown as Record<string, unknown>, at));
+  } catch (e) {
+    fails.push(String(e));
+  }
   if (isPinnedList(spec.sources)) {
     pinnedSpecs++;
     checkPins(at, spec.sources);
@@ -69,6 +76,13 @@ for (const specId of readdirSync(`${ROOT}transcripts`).sort()) {
     const M = JSON.parse(readFileSync(mfPath, "utf8"));
     if (M.specification?.id !== specId) fails.push(`${at}: manifest specification.id mismatch`);
     if (M.compilation?.id !== compId) fails.push(`${at}: manifest compilation.id mismatch`);
+    const license = specLicenses.get(specId);
+    if (license) {
+      const lic = M.specification?.license;
+      if (!lic || lic.copyright !== license.copyright || lic.name !== license.name || lic.url !== license.url) {
+        fails.push(`${at}: manifest specification.license does not match the specification`);
+      }
+    }
     if (!M.modelAttribution?.modelName) fails.push(`${at}: missing modelAttribution`);
     if (!M.method?.description) fails.push(`${at}: missing method description`);
 
@@ -137,6 +151,11 @@ for (const specId of readdirSync(`${ROOT}transcripts`).sort()) {
       if (!xml.includes('xmlns="http://www.tei-c.org/ns/1.0"')) fails.push(`${at}/${b.file}: missing TEI P5 namespace`);
       if (!xml.includes(specId)) fails.push(`${at}/${b.file}: missing specification ID ${specId}`);
       if (!xml.includes(compId)) fails.push(`${at}/${b.file}: missing compilation ID ${compId}`);
+      if (license) {
+        if (!xml.includes(`<licence target="${license.url}">`) || !xml.includes(license.copyright) || !xml.includes(license.name)) {
+          fails.push(`${at}/${b.file}: missing specification license in TEI availability/licence`);
+        }
+      }
 
       // Parse XML to verify well-formedness & structural invariants
       const root = parseXml(xml);

@@ -59,11 +59,21 @@ export interface SourceItem {
 
 export type AuthorInfo = string | { name: string; organization?: string };
 
+/** Mark the project name with the trademark symbol in visible text. Idempotent. */
+export function withTrademark(text: string): string {
+  return text.replaceAll("Open Lexis™", "Open Lexis").replaceAll("Open Lexis", "Open Lexis™");
+}
+
 export function formatAuthor(a?: AuthorInfo): string {
   if (!a) return "";
-  if (typeof a === "string") return a.trim();
-  if (!a.name) return a.organization ?? "";
-  return a.organization && a.organization !== a.name ? `${a.name} · ${a.organization}` : a.name;
+  const name = typeof a === "string" ? a.trim() : !a.name ? (a.organization ?? "") : a.organization && a.organization !== a.name ? `${a.name} · ${a.organization}` : a.name;
+  return withTrademark(name);
+}
+
+export interface SpecLicense {
+  copyright: string;
+  name: string;
+  url: string;
 }
 
 export interface SpecFile {
@@ -71,6 +81,7 @@ export interface SpecFile {
   id: string;
   title: string;
   author?: AuthorInfo;
+  license: SpecLicense;
   summary: string;
   objective: {
     mission: string;
@@ -571,6 +582,7 @@ export interface CompilationManifest {
     file: string;
     sha256: string;
     statement: string;
+    license?: SpecLicense;
   };
   compilation: {
     id: string;

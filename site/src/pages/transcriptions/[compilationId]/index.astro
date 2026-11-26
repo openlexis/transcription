@@ -8,11 +8,13 @@ import {
   formatNum,
   getBookAttributes,
   getCompilations,
+  getSpecifications,
   githubBlob,
   githubTree,
   normalizeSeverityBucket,
   shortUlid,
   specUrl,
+  withTrademark,
   type CompilationRecord,
 } from "../../../lib/corpus";
 
@@ -85,6 +87,7 @@ const compTitle = m.compilation.title || (createdDate ? `${attr.modelName} · ${
 const compSubtitle = m.compilation.subtitle || `${attr.modelName} (${attr.provider})`;
 const compSummary = m.compilation.summary || m.method.summary;
 const compAuthor = formatAuthor(m.compilation.author);
+const license = getSpecifications().find((s) => s.id === c.specId)?.license;
 ---
 <Layout
   title={compTitle}
@@ -115,6 +118,12 @@ const compAuthor = formatAuthor(m.compilation.author);
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
           <span><strong>Specification:</strong> <a href={specUrl(c.specId)}><code>{shortUlid(c.specId)}</code></a></span>
         </span>
+        {license && (
+          <span class="meta-chip" title={withTrademark(license.copyright)}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+            <span><strong>License:</strong> {withTrademark(license.copyright)}. <a href={license.url} target="_blank" rel="noopener">{license.name}</a></span>
+          </span>
+        )}
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;">
         <span class="badge badge-indigo">{attr.modelName} · {attr.provider}</span>

@@ -4,7 +4,7 @@ Primary ancient manuscript transcriptions for the Old Testament (Biblical Hebrew
 
 ## Repository Structure
 
-- **[`specifications/`](specifications/):** Each new specification is one file, `specifications/<ULID>.yaml`, holding the rules and, at the end, the transcript list (every transcript the specification considers, one line each, with its repository path and the git commit that holds it), written by `bun run spec:freeze`. Book, language, date, license and archive details are read from the transcript and its catalog at that same commit, so later changes to `archives/` do not change a specification. Older folder specifications (`specifications/<ULID>/` with `sources.json`) and older single-file specifications whose `sources` list names source sets in `archives/sets/` stay as committed and are still read those ways.
+- **[`specifications/`](specifications/):** Each new specification is one file, `specifications/<ULID>.yaml`, holding the rules and, at the end, the transcript list (every transcript the specification considers, one line each, with its repository path and the git commit that holds it), written by `bun run spec:freeze`. Every specification must include a required `license` field (`copyright`, `name`, and `url`); `bun run check` fails if it is missing. Book, language, date, license and archive details are read from the transcript and its catalog at that same commit, so later changes to `archives/` do not change a specification. Older folder specifications (`specifications/<ULID>/` with `sources.json`) and older single-file specifications whose `sources` list names source sets in `archives/sets/` stay as committed and are still read those ways.
 - **[`archives/sets/`](archives/sets/):** Immutable, content-hashed ULID snapshots (`archives/sets/<ULID>.json`) for every book and institution. When new material is added to `archives/`, running `bun run sets` mints a new ULID while preserving all previous snapshots untouched.
 - **[`archives/<institution>/`](archives/):** The primary XML manuscript corpus across institutional directories, each with its own `index.json` catalog mapping source identifiers to metadata, licenses, and XML file paths.
 - **[`transcripts/`](transcripts/):** Compiled TEI P5 XML transcripts organized as `transcripts/<specification-id>/<compilation-id>/`, containing one TEI P5 XML file per target book (`<book-id>.xml`), `manifest.json`, and a structured Markdown compilation report (`REPORT.md`).
@@ -85,4 +85,15 @@ After producing a compilation, run `bun run check && bun run site` to verify all
 
 ## Licenses
 
-The ancient texts themselves are in the public domain. Each transcription retains the license stated by its source institution in `archives/<institution>/index.json` (primarily CC BY 4.0, with CC BY-SA 4.0 for CNTR, CC BY-NC-SA 3.0 for the Codex Sinaiticus Project, unrestricted copying for UXLC, and CC BY-NC 4.0 for the Samaritan Pentateuch and Dead Sea Scrolls datasets).
+Each specification is released under the license declared in its required `license` field. The current specifications use:
+
+```yaml
+license:
+  copyright: Copyright 2026 Open Lexis
+  name: CC BY-NC 4.0
+  url: https://creativecommons.org/licenses/by-nc/4.0/
+```
+
+That is Creative Commons Attribution-NonCommercial 4.0 International. Compilations record this license in each book's TEI `<licence>` element and in `manifest.json`.
+
+The ancient texts themselves are in the public domain. Each source transcription retains the license stated by its source institution in `archives/<institution>/index.json` (primarily CC BY 4.0, with CC BY-SA 4.0 for CNTR, CC BY-NC-SA 3.0 for the Codex Sinaiticus Project, unrestricted copying for UXLC, and CC BY-NC 4.0 for the Samaritan Pentateuch and Dead Sea Scrolls datasets).

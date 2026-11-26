@@ -47,6 +47,16 @@ Words used here:
 - **Specification file:** `specifications/<ULID>.yaml`, a single file holding the rules and, at the end, the transcript list.
 - **Transcript list:** the `sources` field at the end of that file. Each transcript is one line, `{path: ..., commit: ...}`. Book, language, date, license and archive details are read from the transcript and its catalog (`archives/<archive>/index.json`) at that same commit.
 - **Pinned transcript:** a transcript (and its catalog) read as they are in the recorded commit (`git show <commit>:<path>`), so later edits, moves or deletions under `archives/` do not change what a specification uses.
+- **License:** every specification file must include a required `license` field. `bun run check` fails if it is missing.
+
+```yaml
+license:
+  copyright: Copyright 2026 Open Lexis
+  name: CC BY-NC 4.0
+  url: https://creativecommons.org/licenses/by-nc/4.0/
+```
+
+A compilation writes this license into each book's TEI header (`<licence>` inside `<availability>`) and into `manifest.json`.
 
 A specification file needs nothing else in the repository except the transcripts and their catalogs, which are read at their commits. Older folder specifications (`specifications/<ULID>/specification.yaml` and `sources.json`) and older single-file specifications whose `sources` name set ULIDs stay as committed and are still read those ways. To make a new specification:
 
@@ -81,7 +91,7 @@ transcripts/<SPEC_ID>/<COMPILATION_ULID>/
 
 ### A. TEI P5 XML (`<BookId>.xml`)
 
-Must use namespace `xmlns="http://www.tei-c.org/ns/1.0"` and include `<SPEC_ID>` and `<COMPILATION_ULID>` in `<teiHeader>`.
+Must use namespace `xmlns="http://www.tei-c.org/ns/1.0"` and include `<SPEC_ID>` and `<COMPILATION_ULID>` in `<teiHeader>`. The `<publicationStmt>` must include an `<availability>` with a `<licence>` taken from the specification's `license` field (not hard-coded).
 
 Required structural elements parsed by `scripts/check.ts` and `site/src/lib/corpus.ts`:
 
@@ -119,7 +129,12 @@ Required structural elements parsed by `scripts/check.ts` and `site/src/lib/corp
     "id": "<SPEC_ID>",
     "file": "specifications/<SPEC_ID>/specification.yaml",
     "sha256": "<sha256 of spec YAML>",
-    "statement": "This compilation was produced under Open Lexis Transcription Specification <SPEC_ID>."
+    "statement": "This compilation was produced under Open Lexis Transcription Specification <SPEC_ID>.",
+    "license": {
+      "copyright": "Copyright 2026 Open Lexis",
+      "name": "CC BY-NC 4.0",
+      "url": "https://creativecommons.org/licenses/by-nc/4.0/"
+    }
   },
   "compilation": {
     "id": "<COMPILATION_ULID>",

@@ -10,12 +10,14 @@ import {
   formatBytes,
   formatNum,
   getCompilations,
+  getSpecifications,
   getWitnessViewersMap,
   githubBlob,
   normalizeSeverityBucket,
   parseCompiledBookTei,
   shortUlid,
   specUrl,
+  withTrademark,
   type CompilationRecord,
   type CompiledBookEntry,
 } from "../../../lib/corpus";
@@ -59,6 +61,7 @@ const compDate = c.manifest.compilation.createdAt
   : "";
 const compTitle = c.manifest.compilation.title || c.manifest.modelAttribution.modelName;
 const compAuthor = formatAuthor(c.manifest.compilation.author);
+const license = getSpecifications().find((s) => s.id === c.specId)?.license;
 const modelLabel = [
   c.manifest.modelAttribution.modelName,
   c.manifest.modelAttribution.effortLevel,
@@ -333,6 +336,15 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           <span class="prov-label">Specification</span>
           <a href={specUrl(c.specId)} class="prov-value" title={`Specification ID: ${c.specId}`}><code>{shortUlid(c.specId)}</code></a>
         </span>
+        {license && (
+          <>
+            <span class="prov-sep" aria-hidden="true">·</span>
+            <span class="prov-item">
+              <span class="prov-label">License</span>
+              <a href={license.url} class="prov-value" target="_blank" rel="noopener">{withTrademark(license.copyright)}. {license.name}</a>
+            </span>
+          </>
+        )}
       </div>
       <p class="lead book-stats-lead">
         <span>{formatNum(b.stats.manuscripts)} manuscripts ({formatNum(b.stats.early)} early) · {formatNum(b.stats.lines)} lines · {formatNum(b.stats.words)} words · {formatNum(b.stats.places)} points of disagreement · mean word likelihood</span>

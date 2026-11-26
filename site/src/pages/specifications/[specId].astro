@@ -14,6 +14,7 @@ import {
   getSpecifications,
   githubBlob,
   shortUlid,
+  withTrademark,
   type SpecFile,
 } from "../../lib/corpus";
 
@@ -66,7 +67,7 @@ const toc = [
   <section class="page-header">
     <div class="container">
       <div class="eyebrow">Specification</div>
-      <h1>{single.title}</h1>
+      <h1>{withTrademark(single.title)}</h1>
       {(specAuthor || specDate) && (
         <div class="meta-strip">
           {specAuthor && (
@@ -79,6 +80,12 @@ const toc = [
             <span class="meta-chip" title="Date created">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
               <span><strong>Date:</strong> {specDate}</span>
+            </span>
+          )}
+          {single.license && (
+            <span class="meta-chip" title={withTrademark(single.license.copyright)}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+              <span><strong>License:</strong> {withTrademark(single.license.copyright)}. <a href={single.license.url} target="_blank" rel="noopener">{single.license.name}</a></span>
             </span>
           )}
         </div>

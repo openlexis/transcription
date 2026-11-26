@@ -9,6 +9,7 @@ import {
   shortUlid,
   specUrl,
   ulidTimestamp,
+  withTrademark,
 } from "../../lib/corpus";
 
 const specs = [...getSpecifications()].sort(
@@ -41,7 +42,7 @@ const specs = [...getSpecifications()].sort(
             <a href={specUrl(s.id)} class="spec-card">
               <div class="spec-card-top">
                 <div class="spec-card-title-row">
-                  <h2 class="spec-card-title">{s.title}</h2>
+                  <h2 class="spec-card-title">{withTrademark(s.title)}</h2>
                   {idx === 0 && specs.length > 1 && (
                     <span class="badge badge-indigo">Latest</span>
                   )}
@@ -54,6 +55,11 @@ const specs = [...getSpecifications()].sort(
                   <span class="badge" title="Author">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     {authorStr}
+                  </span>
+                )}
+                {s.license && (
+                  <span class="badge" title={`${withTrademark(s.license.copyright)}. ${s.license.name}`}>
+                    {s.license.name}
                   </span>
                 )}
                 {dateStr && (

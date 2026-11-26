@@ -10,6 +10,7 @@ import { betaDraw, loglik, posterior, prior, quantile, rng, type Unit, weights }
 import { readTranscriptionFile, readTranscriptionText, type ParsedUnit } from "./lib/readers";
 import { classifyReadingSeverity, formatSeverityNote, SEVERITY_SCALE, SEVERITY_TAXONOMY, type SeverityDef } from "./lib/severity";
 import { gitShow, loadSpecWithSources } from "./sources";
+import { readSpecLicense, type SpecLicense } from "./lib/spec";
 import { aramaic, greekKey, hebrewSpell, showGreek } from "./lib/text";
 
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -946,6 +947,7 @@ function renderTeiXml(
   git: ReturnType<typeof gitInfo>,
   target: TargetBook,
   compiled: ReturnType<typeof compileBook>,
+  license: SpecLicense,
 ): string {
   const { witnesses, lines, places, stats } = compiled;
   const langCode = target.language.startsWith("Hebrew") ? "hbo" : "grc";
@@ -978,7 +980,7 @@ function renderTeiXml(
   out.push(`        <idno type="specification-id">${escXml(specId)}</idno>`);
   out.push(`        <idno type="compilation-id">${escXml(compilationId)}</idno>`);
   out.push(`        <date when="${escXml(timestampIso)}">${escXml(timestampIso)}</date>`);
-  out.push("        <availability><p>The ancient texts are in the public domain. Source transcriptions retain their respective licenses as documented in the specification.</p></availability>");
+  out.push(`        <availability><p>The ancient texts are in the public domain. Source transcriptions retain their respective licenses as documented in the specification.</p><licence target="${escXml(license.url)}">${escXml(license.copyright)}. Licensed under ${escXml(license.name)}.</licence></availability>`);
   out.push("      </publicationStmt>");
   out.push("      <sourceDesc>");
   out.push(`        <p>Primary manuscript witnesses allowlisted in specification ${escXml(specId)} for ${escXml(target.name)} (${stats.manuscripts} manuscripts, ${stats.early} early).</p>`);
@@ -1214,6 +1216,7 @@ if (import.meta.main) {
   const resolved = loadSpecWithSources(specId);
   const specPath = resolved.specPath;
   const specRaw = readFileSync(specPath, "utf8");
+  const license = readSpecLicense(Bun.YAML.parse(specRaw) as Record<string, unknown>, specPath.slice(ROOT.length));
   const raw = resolved.spec as unknown as { id: string; title: string; summary?: string };
   const spec: Spec = { id: raw.id, title: raw.title, summary: raw.summary ?? "", targets: resolved.targets, sources: resolved.sources };
   if (spec.id !== specId) throw new Error(`Specification ID mismatch: ${spec.id} !== ${specId}`);
@@ -1294,7 +1297,7 @@ if (import.meta.main) {
       const tBook = performance.now();
       const entries = byBook.get(target.id)!;
       const compiled = compileBook(target, entries, sourceMap, scribalStats);
-      const xml = renderTeiXml(specId, compilationId, timestampIso, git, target, compiled);
+      const xml = renderTeiXml(specId, compilationId, timestampIso, git, target, compiled, license);
       const fileName = `${target.id}.xml`;
       writeFileSync(`${outDir}/${fileName}`, xml);
       bookManifestMap.set(target.id, {
@@ -1344,6 +1347,7 @@ if (import.meta.main) {
       file: specPath.slice(ROOT.length),
       sha256: sha(specRaw),
       statement: `This compilation was produced under Open Lexis Transcription Specification ${specId}.`,
+      license,
     },
     compilation: {
       id: compilationId,

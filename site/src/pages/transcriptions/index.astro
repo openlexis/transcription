@@ -6,11 +6,14 @@ import {
   formatBytes,
   formatNum,
   getCompilations,
+  getSpecifications,
   shortUlid,
   specUrl,
+  withTrademark,
 } from "../../lib/corpus";
 
 const compilations = getCompilations();
+const specsById = new Map(getSpecifications().map((s) => [s.id, s]));
 ---
 <Layout
   title="Transcriptions"
@@ -54,6 +57,7 @@ const compilations = getCompilations();
             const subtitle = m.compilation.subtitle || `${m.modelAttribution.modelName} (${m.modelAttribution.provider})`;
             const summary = m.compilation.summary || m.method.summary;
             const authorStr = formatAuthor(m.compilation.author);
+            const license = specsById.get(c.specId)?.license;
             return (
               <div class="panel">
                 <div class="panel-head">
@@ -69,7 +73,7 @@ const compilations = getCompilations();
                       )}
                     </div>
                     <p class="panel-sub" style="margin-top: 2px;">
-                      {subtitle}{authorStr ? ` · ${authorStr}` : ""}{dateStr ? ` · ${dateStr}` : ""} · <a href={specUrl(c.specId)}>Specification <code title={c.specId}>{shortUlid(c.specId)}</code></a>
+                      {subtitle}{authorStr ? ` · ${authorStr}` : ""}{dateStr ? ` · ${dateStr}` : ""} · <a href={specUrl(c.specId)}>Specification <code title={c.specId}>{shortUlid(c.specId)}</code></a>{license && (<> · <a href={license.url} target="_blank" rel="noopener">{withTrademark(license.copyright)}. {license.name}</a></>)}
                     </p>
                   </div>
                   <div style="display: flex; gap: 8px; flex-wrap: wrap;">

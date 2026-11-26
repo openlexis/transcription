@@ -1,6 +1,6 @@
 ---
 import "../styles/site.css";
-import { REPO } from "../lib/corpus";
+import { REPO, withTrademark } from "../lib/corpus";
 
 interface Props {
   title: string;
@@ -13,7 +13,7 @@ const {
   description = "Open-source transcriptions assembled directly from primary ancient manuscripts, word by word, with immutable specifications, statistical probabilities, and full auditability.",
   active,
 } = Astro.props;
-const pageTitle = title === "Open Lexis" ? "Open Lexis · Transcriptions Assembled from Ancient Manuscripts" : `${title} · Open Lexis`;
+const pageTitle = withTrademark(title === "Open Lexis" ? "Open Lexis · Transcriptions Assembled from Ancient Manuscripts" : `${title} · Open Lexis`);
 ---
 <!doctype html>
 <html lang="en">
@@ -23,7 +23,7 @@ const pageTitle = title === "Open Lexis" ? "Open Lexis · Transcriptions Assembl
   <title>{pageTitle}</title>
   <meta name="description" content={description} />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Open Lexis" />
+  <meta property="og:site_name" content="Open Lexis™" />
   <meta property="og:title" content={pageTitle} />
   <meta property="og:description" content={description} />
   <meta name="twitter:card" content="summary_large_image" />
@@ -45,7 +45,7 @@ const pageTitle = title === "Open Lexis" ? "Open Lexis · Transcriptions Assembl
             <path d="M12 7.5v13"/>
           </svg>
         </span>
-        <span>Open Lexis <span class="brand-sub">Transcriptions</span></span>
+        <span>Open Lexis™ <span class="brand-sub">Transcriptions</span></span>
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="/" class={active === "home" ? "active" : ""}>Overview</a>
@@ -63,7 +63,7 @@ const pageTitle = title === "Open Lexis" ? "Open Lexis · Transcriptions Assembl
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <strong style="color: var(--ink);">Open Lexis</strong> · Open-Source Manuscript Reconstruction
+        <strong style="color: var(--ink);">Open Lexis™</strong> · Open-Source Manuscript Reconstruction
         <div style="margin-top: 4px;">
           Assembling ancient texts word by word from immutable primary manuscripts.
         </div>
