@@ -80,14 +80,24 @@ function escAttr(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 }
 
-/** Compact language code badge (for example "grc") with the full name as the accessible label. */
+/** One letter from the language's own script. ISO 639-3 codes are keys only, never shown. */
+const LANGUAGE_MARK: Record<LangCode, string> = {
+  grc: "Α",
+  hbo: "א",
+  arc: "א",
+  syc: "ܐ",
+  lat: "A",
+  cop: "Ⲁ",
+};
+
+/** Compact language icon: a script letter in a neutral mark, with the full name as the accessible label. */
 export function languageCodeBadgeHtml(language: string): string {
   const code = languageCodeFor(language);
   const label = code ? LANGUAGE_META[code].label : language.trim();
-  const shown = code ?? language.trim();
-  if (!shown) return "";
+  const mark = (code && LANGUAGE_MARK[code]) || "";
+  if (!label || !mark) return "";
   const attr = escAttr(label);
-  return `<span class="lang-code-badge" title="${attr}" aria-label="${attr}">${escAttr(shown)}</span>`;
+  return `<span class="lang-code-badge" title="${attr}" aria-label="${attr}"><span aria-hidden="true">${escAttr(mark)}</span></span>`;
 }
 
 /** Exact language icons shared between the homepage language breakdown and the transcription reader. */
