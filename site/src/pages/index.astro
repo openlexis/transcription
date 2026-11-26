@@ -469,7 +469,7 @@ function buildShowcaseCase(opts: {
     { t: `“${focalWordGloss}”`, b: true },
     { t: " in " },
     { t: opts.refLabel, b: true },
-    { t: ": manuscripts split right here." },
+    { t: ": manuscripts split here." },
   ];
 
   const fallbackSummary = opts.stepScripts[2]
@@ -546,7 +546,7 @@ const showcaseCases: ShowcaseCase[] = [
           actionMs: 1650,
         },
         {
-          runs: [{ t: " By raw majority count, “Son” dominates." }],
+          runs: [{ t: " By raw majority, “Son” dominates." }],
           holdMs: 2900,
         },
       ],
@@ -558,13 +558,13 @@ const showcaseCases: ShowcaseCase[] = [
           actionMs: 2450,
         },
         {
-          runs: [{ t: " the earliest surviving manuscripts (AD 200–450) write “God,”" }],
+          runs: [{ t: " the earliest manuscripts (AD 200–450) write “God,”" }],
           cueTone: "accent",
           action: "spot-early",
           actionMs: 1700,
         },
         {
-          runs: [{ t: " while the 153 “Son” copies arrive centuries later across medieval traditions." }],
+          runs: [{ t: " while the 153 “Son” copies arrive centuries later." }],
           cueTone: "accent",
           action: "spot-late",
           actionMs: 1700,
@@ -573,7 +573,7 @@ const showcaseCases: ShowcaseCase[] = [
       ],
       [
         {
-          runs: [{ t: "Under the published specification, this model prioritizes early independent witnesses and discounts late dependent clusters," }],
+          runs: [{ t: "Under the specification, this model prioritizes early independent witnesses and discounts late clusters," }],
           cueTone: "emerald",
           action: "decide",
           actionMs: 2300,
@@ -629,7 +629,7 @@ const showcaseCases: ShowcaseCase[] = [
           actionMs: 1500,
         },
         {
-          runs: [{ t: " The ancient Dead Sea Scroll (4Q10) is torn right at this spot." }],
+          runs: [{ t: " The ancient Dead Sea Scroll (4Q10) is torn at this spot." }],
           cueTone: "lane-2",
           action: "reveal-lane-2",
           actionMs: 1800,
@@ -644,7 +644,7 @@ const showcaseCases: ShowcaseCase[] = [
           actionMs: 2400,
         },
         {
-          runs: [{ t: " leaving a millennium-wide gap where timeline alone cannot break the tie." }],
+          runs: [{ t: " leaving a millennium-wide gap where the timeline cannot break the tie." }],
           cueTone: "lane-2",
           action: "spot-lacuna",
           actionMs: 1750,
@@ -701,7 +701,7 @@ const showcaseCases: ShowcaseCase[] = [
           actionMs: 1700,
         },
         {
-          runs: [{ t: " while " }, { t: "1", b: true }, { t: " (the medieval Leningrad Codex behind older translations) omits it." }],
+          runs: [{ t: " while " }, { t: "1", b: true }, { t: " (the medieval Leningrad Codex) omits it." }],
           cueTone: "lane-1",
           action: "reveal-lane-1",
           actionMs: 1600,
@@ -731,7 +731,7 @@ const showcaseCases: ShowcaseCase[] = [
       ],
       [
         {
-          runs: [{ t: "Under the published specification, this model weights three ancient scrolls over a single copy written a millennium later," }],
+          runs: [{ t: "Under the specification, this model weights three ancient scrolls over a single copy a millennium later," }],
           cueTone: "emerald",
           action: "decide",
           actionMs: 2250,
@@ -776,7 +776,7 @@ const showcaseCases: ShowcaseCase[] = [
     discountLateInBeat3: false,
     stepScripts: [
       [
-        { runs: [{ t: "In Koine Greek, “let us have” (εχωμεν) and “we have” (εχομεν) sounded identical and differ by a single vowel (ω vs ο). Surviving witnesses split evenly: " }] },
+        { runs: [{ t: "“Let us have” (εχωμεν) and “we have” (εχομεν) sounded identical and differ by a single vowel (ω vs ο). Witnesses split evenly: " }] },
         {
           runs: [{ t: "3", b: true }, { t: " write “let us have”" }],
           cueTone: "lane-0",
@@ -800,7 +800,7 @@ const showcaseCases: ShowcaseCase[] = [
           actionMs: 2350,
         },
         {
-          runs: [{ t: " the two oldest copies (P46, c. AD 213 & 01, c. AD 350) actually read “we have,”" }],
+          runs: [{ t: " the two oldest copies (P46, c. AD 213 & 01, c. AD 350) read “we have,”" }],
           cueTone: "accent",
           action: "spot-early-b",
           actionMs: 1750,
@@ -812,7 +812,7 @@ const showcaseCases: ShowcaseCase[] = [
           actionMs: 1700,
         },
         {
-          runs: [{ t: " Neither headcount nor date alone settles a sound-alike slip." }],
+          runs: [{ t: " Neither headcount nor date settles a sound-alike slip." }],
           holdMs: 2900,
         },
       ],
@@ -996,11 +996,6 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
                             </span>
                             <span class="sw-orig">{w.text}</span>
                             <span class="sw-gloss" dir="ltr">{w.gloss || w.rom}</span>
-                            <span class="showcase-prompt-arrow" aria-hidden="true">
-                              <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" focusable="false">
-                                <path d="M7 11.25 1.75 4.75h10.5L7 11.25z" />
-                              </svg>
-                            </span>
                           </a>
                         ) : (
                           <span
@@ -1022,6 +1017,17 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
                     </div>
                   </div>
                 </div>
+                <span class="showcase-prompt-cursor" aria-hidden="true">
+                  <span class="prompt-cursor-ripple"></span>
+                  <svg class="prompt-cursor-icon prompt-cursor-arrow" width="56" height="56" viewBox="0 0 24 24" focusable="false">
+                    <path fill="#ffffff" d="M1 1.1 1 19.6 6.3 14.6 9.9 23.2 13.2 21.8 9.6 13.3 17.2 13.3Z"/>
+                    <path fill="#171717" d="M2.2 2.6 2.2 16.9 6.6 12.7 10 21.1 11.8 20.3 8.4 11.9 14.8 11.9Z"/>
+                  </svg>
+                  <svg class="prompt-cursor-icon prompt-cursor-hand" width="56" height="56" viewBox="0 0 24 24" focusable="false">
+                    <path fill="#ffffff" d="M9.2 1.1c1.15 0 2.08.93 2.08 2.08V8.2c.28-.18.62-.28.98-.28.9 0 1.66.54 1.95 1.31.32-.22.71-.35 1.13-.35 1.15 0 2.08.93 2.08 2.08 0 .2-.03.4-.08.58.4-.2.86-.32 1.35-.32 1.28 0 2.32 1.03 2.32 2.36 0 1.12-.22 2.32-.68 3.52C19.6 19.7 17.4 22.2 13.15 22.2H9.4c-4.2 0-7.15-3.15-7.15-7.2v-3.9c0-1.2.98-2.18 2.18-2.18.42 0 .82.12 1.15.33V7.35c0-1.15.93-2.08 2.08-2.08.28 0 .54.05.78.15V3.18c0-1.15.93-2.08 2.08-2.08Z"/>
+                    <path fill="#171717" d="M9.2 2.2c.54 0 .98.44.98.98v8.15h1.1V9.1c0-.54.44-.98.98-.98s.98.44.98.98v2.35h1.1v-1.15c0-.54.44-.98.98-.98s.98.44.98.98v1.7h1.15v-.4c0-.62.5-1.12 1.12-1.12.7 0 1.22.55 1.22 1.26 0 1.02-.2 2.12-.62 3.22C18.7 19.1 16.9 21.1 13.15 21.1H9.4c-3.55 0-6.05-2.6-6.05-6.1v-3.9c0-.6.48-1.08 1.08-1.08.22 0 .42.06.6.18v3.15h1.1V7.35c0-.54.44-.98.98-.98s.98.44.98.98v4.05h1.1V3.18c0-.54.44-.98.98-.98Z"/>
+                  </svg>
+                </span>
               </div>
 
               <!-- 3-Beat Animated Evidence Storyboard -->
@@ -2121,7 +2127,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
 
     const WORD_SCAN_MS = 680;
     const DISPUTED_PULSE_MS = 950;
-    const INTRO_ARROW_HOLD_MS = reducedMotion ? 900 : 2400;
+    const INTRO_CURSOR_HOLD_MS = reducedMotion ? 900 : 3000;
     const CHAR_MS = reducedMotion ? 0 : 32;
     const DISPUTED_READ_HOLD_MS = 2100;
     const DRAWER_OPEN_MS = reducedMotion ? 120 : 580;
@@ -2423,10 +2429,12 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
             tw.render(chars, showCaret, -1);
           }
         }
+        syncPromptCursor(pane, introLooping && hitDisputed);
         return;
       }
 
       // Steps 1, 2, 3
+      syncPromptCursor(pane, false);
       words.forEach((w, i) => {
         w.classList.toggle("word-checked", i < focalIdx);
         w.classList.toggle("word-disputed-hit", i === focalIdx);
@@ -2626,7 +2634,26 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
 
     function getIntroLoopDuration(caseIdx: number): number {
       const t0 = getStep0Timing(caseIdx);
-      return t0.hitPulseEndMs + INTRO_ARROW_HOLD_MS;
+      return t0.hitPulseEndMs + INTRO_CURSOR_HOLD_MS;
+    }
+
+    function syncPromptCursor(pane: HTMLElement, show: boolean) {
+      const cursor = pane.querySelector<HTMLElement>(".showcase-prompt-cursor");
+      const wrap = pane.querySelector<HTMLElement>(".showcase-verse-wrap");
+      const word = pane.querySelector<HTMLElement>(".showcase-word-focal");
+      const orig = word?.querySelector<HTMLElement>(".sw-orig") ?? word;
+      if (!cursor) return;
+      if (!show || !wrap || !orig) {
+        cursor.classList.remove("is-active");
+        return;
+      }
+      const wr = wrap.getBoundingClientRect();
+      const or = orig.getBoundingClientRect();
+      cursor.style.left = `${or.left - wr.left + or.width * 0.4}px`;
+      cursor.style.top = `${or.top - wr.top + or.height * 0.28}px`;
+      if (!cursor.classList.contains("is-active")) {
+        cursor.classList.add("is-active");
+      }
     }
 
     function syncIntroLoopAttr() {
@@ -2756,14 +2783,13 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
 
     function startFullAnimationFromClick() {
       const targetY = getScrollYToFitExpanded();
-      const wasIntro = introLooping;
       introLooping = false;
       userPaused = false;
       holdUntil = 0;
       lastTick = performance.now();
-      if (wasIntro) {
-        applyCaseAndStep(currentCaseIdx, 0, false);
-      }
+      // The disputed word is already found, so skip the opening sweep and
+      // start at the disagreement. A later click restarts from the same point.
+      applyCaseAndStep(currentCaseIdx, 1, false);
       syncIntroLoopAttr();
       syncPlayButton();
       updateProgressBar();
