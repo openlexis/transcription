@@ -104,7 +104,7 @@ const meta = {
   <script id="src-books" type="application/json" set:html={JSON.stringify(spec.targets.map((t) => [t.id, t.name]))}></script>
   <script>
     import "../lib/cite-ui";
-    import { adaptedNote, citeBoxHtml, parseLicense } from "../lib/cite";
+    import { adaptedNote, citeBoxHtml, parseLicense, sourceTitle } from "../lib/cite";
     import { archiveIcon } from "../lib/archive-icons";
     const META = JSON.parse(document.getElementById("src-meta")?.textContent || "{}");
     const REPO = META.repo;
@@ -133,30 +133,32 @@ const meta = {
     const blob = (f) => `${REPO}/blob/main/${f.split("/").map(encodeURIComponent).join("/")}`;
     const num = (n) => Number(n).toLocaleString("en-US");
 
-    function adaptedHtml(f) {
+    function adaptedValue(f) {
       const a = adaptedNote(f.ps[0] || "", f.fmt);
       if (!a) return "";
-      const l = parseLicense(f.lic, f.url);
-      return `<div class="adapted-note"><strong>Adapted by Open Lexis™.</strong><p>What changed: ${esc(a.changed)}</p><p>What did not change: ${esc(a.kept)}</p><p>License: this file keeps the source's license, <a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)}</a>.</p></div>`;
+      const kept = /[.!?]$/.test(a.kept) ? a.kept : `${a.kept}.`;
+      return `This file was adapted by Open Lexis™. ${esc(a.changed)} ${esc(kept)}`;
     }
 
     function citeHtml(s) {
       const title = s.name && s.name !== s.id ? `Archive record: ${s.name} (${s.id})` : `Archive record: ${s.id}`;
-      const seen = new Set();
-      const sources = s.fl
-        .filter((f) => {
-          const k = `${f.pn}|${f.url}|${f.lic}`;
-          if (seen.has(k)) return false;
-          seen.add(k);
-          return true;
-        })
-        .map((f) => ({
-          project: f.pn,
-          projectUrl: f.pu,
-          title: s.name && s.name !== s.id ? `${s.name} (${s.id})` : s.id,
-          link: f.url,
-          license: parseLicense(f.lic, f.url),
-        }));
+      const groups = new Map();
+      for (const f of s.fl) {
+        const lic = parseLicense(f.lic, f.url);
+        const k = `${f.pn}|${lic.name}|${lic.where}`;
+        const cur = groups.get(k);
+        const paths = f.ps || [];
+        if (cur) {
+          for (const p of paths) if (!cur.paths.includes(p)) cur.paths.push(p);
+        } else groups.set(k, { f, lic, paths: [...paths] });
+      }
+      const sources = [...groups.values()].map(({ f, lic, paths }) => ({
+        project: f.pn,
+        projectUrl: f.pu,
+        title: sourceTitle({ project: f.pn, paths, id: s.id, name: s.name, language: s.lg, targets: s.tg }),
+        link: f.url,
+        license: lic,
+      }));
       return citeBoxHtml(
         {
           heading: "Cite this record",
@@ -277,6 +279,7 @@ const meta = {
         f.wd ? `<span class="badge">${plural(f.wd, "word", "words")}</span>` : "",
       ].join("");
       const row = (icon, k, v) => `<div class="ar-file-row">${archiveIcon(icon, 14)}<span class="ar-k">${k}</span><span class="ar-v">${v}</span></div>`;
+      const adapted = adaptedValue(f);
       return `
         <div class="ar-file">
           <div class="ar-file-head">${archiveIcon("provider")}<a href="${esc(f.pu)}" target="_blank" rel="noopener">${esc(f.pn)} ↗</a></div>
@@ -286,8 +289,8 @@ const meta = {
             ${row("format", "Format", `${esc(f.fmt)}${/^TEI/.test(f.fmt) ? `<div class="ms-sub">TEI is the standard file format for scholarly texts.</div>` : ""}`)}
             ${row("link", "Original", `<a href="${esc(f.url)}" target="_blank" rel="noopener">Original source ↗</a>${hostOf(f.url) ? ` <span class="ms-sub">on ${esc(hostOf(f.url))}</span>` : ""}`)}
             ${row("license", "License", licenseInline(f))}
+            ${adapted ? row("adapted", "Adapted by", adapted) : ""}
           </div>
-          ${adaptedHtml(f)}
         </div>`;
     }
 

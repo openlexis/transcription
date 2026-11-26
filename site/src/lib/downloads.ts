@@ -10,8 +10,8 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { CompilationRecord, CompiledBookEntry, SpecFile } from "./corpus";
 import { bookUrl, getSpecifications, shortUlid } from "./corpus";
-import { SITE_ORIGIN, parseLicense, type LicenseInfo } from "./cite";
-import { witnessFiles } from "./credits";
+import { SITE_ORIGIN } from "./cite";
+import { perManuscript, witnessFiles } from "./credits";
 
 /** Cloudflare Pages serves files up to 25 MiB. */
 const MAX_BYTES = 25 * 1024 * 1024;
@@ -35,37 +35,20 @@ function headerWitnesses(xml: string): { siglum: string; files: string }[] {
   return out;
 }
 
-/** One bibl per source project, with every distinct license that project uses in this book. */
-function projectBibls(xml: string, spec: SpecFile | undefined): string {
+/** One bibl per source transcription used in this book, naming the institution, books, and manuscript. */
+function sourceBibls(xml: string, spec: SpecFile | undefined): string {
   if (!spec) return "";
-  const by = new Map<string, { name: string; url: string; licenses: LicenseInfo[] }>();
-  for (const w of headerWitnesses(xml)) {
-    for (const u of witnessFiles(spec, w.siglum, w.files)) {
-      const lic = parseLicense(u.file.license, u.file.sourceUrl);
-      const k = `${u.file.provenance.name}\u0000${u.file.provenance.url}`;
-      let cur = by.get(k);
-      if (!cur) {
-        cur = { name: u.file.provenance.name, url: u.file.provenance.url, licenses: [] };
-        by.set(k, cur);
-      }
-      if (!cur.licenses.some((l) => l.name === lic.name && l.url === lic.url && l.where === lic.where)) cur.licenses.push(lic);
-    }
-  }
-  return [...by.values()]
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .map((p) => {
-      const licences = p.licenses
-        .map((l) => {
-          const deed = `              <licence target="${x(l.url)}">${x(l.name)}</licence>`;
-          return l.where ? `${deed}\n              <p>Terms found in: ${x(l.where)}.</p>` : deed;
-        })
-        .join("\n");
+  const used = headerWitnesses(xml).flatMap((w) => witnessFiles(spec, w.siglum, w.files));
+  return perManuscript(used)
+    .map((c) => {
+      const lic = c.license;
+      const where = lic.where ? `\n              <p>Terms found in: ${x(lic.where)}.</p>` : "";
       return [
         `          <bibl>`,
-        `            <publisher>${x(p.name)}</publisher>`,
-        `            <ptr target="${x(p.url)}"/>`,
+        `            <title>${x(c.title)}</title>`,
+        `            <ptr target="${x(c.link ?? c.projectUrl)}"/>`,
         `            <availability>`,
-        licences,
+        `              <licence target="${x(lic.url)}">${x(lic.name)}</licence>${where}`,
         `            </availability>`,
         `          </bibl>`,
       ].join("\n");
@@ -84,7 +67,7 @@ function withCredits(xml: string, uri: string, bibls: string): string {
   if (bibls && !head.includes("<listBibl>")) {
     head = head.replace(
       "</sourceDesc>",
-      `        <listBibl>\n          <head>Source projects</head>\n${bibls}\n        </listBibl>\n      </sourceDesc>`,
+      `        <listBibl>\n          <head>Source transcriptions</head>\n${bibls}\n        </listBibl>\n      </sourceDesc>`,
     );
   }
   return head + xml.slice(end);
@@ -124,7 +107,7 @@ export function bookDownload(c: CompilationRecord, b: CompiledBookEntry): Downlo
   if (written.has(rel)) return written.get(rel)!;
   const spec = getSpecifications().find((s) => s.id === c.specId);
   const published = readFileSync(`${c.dir}/${b.file}`, "utf8");
-  const xml = withCredits(published, SITE_ORIGIN + bookUrl(c.compilationId, b.id), projectBibls(published, spec));
+  const xml = withCredits(published, SITE_ORIGIN + bookUrl(c.compilationId, b.id), sourceBibls(published, spec));
   return writeDownload(rel, name, b.name, xml);
 }
 

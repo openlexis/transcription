@@ -1,7 +1,7 @@
 // Which source transcriptions a compiled book used, and their credits (server side).
 import type { CompilationRecord, CompiledBookEntry, SourceFileEntry, SourceItem, SpecFile } from "./corpus";
 import { bookUrl, compUrl, shortUlid, specUrl } from "./corpus";
-import { parseLicense, type OurCredit, type SourceCredit } from "./cite";
+import { parseLicense, sourceTitle, type OurCredit, type SourceCredit } from "./cite";
 
 /** "archives/uxlc/L.Obadiah.xml" and "src/uxlc/L.Obadiah.xml" both give "uxlc/L.Obadiah.xml". */
 const tail = (p: string) => p.trim().split("/").slice(1).join("/");
@@ -36,33 +36,44 @@ export function witnessFiles(spec: SpecFile, siglum: string, filesNote: string):
   return item ? item.files.map((file) => ({ item, file, path: file.paths[0] })) : [];
 }
 
-export function creditOf(u: { item: SourceItem; file: SourceFileEntry }): SourceCredit {
-  const name = u.item.name && u.item.name !== u.item.id ? `${u.item.name} (${u.item.id})` : u.item.id;
+export function creditOf(u: UsedFile, paths?: string[]): SourceCredit {
+  const allPaths = paths ?? [u.path];
   return {
     project: u.file.provenance.name,
     projectUrl: u.file.provenance.url,
-    title: name,
+    title: sourceTitle({
+      project: u.file.provenance.name,
+      paths: allPaths,
+      id: u.item.id,
+      name: u.item.name,
+      language: u.item.language,
+      targets: u.item.targets,
+    }),
     link: u.file.sourceUrl,
     license: parseLicense(u.file.license, u.file.sourceUrl),
   };
 }
 
-/** One credit per manuscript and source project (files of the same manuscript from one project count once). */
+/** One credit per manuscript and source project, naming the books those files cover. */
 export function perManuscript(used: UsedFile[]): SourceCredit[] {
-  const seen = new Set<string>();
-  const out: SourceCredit[] = [];
+  const groups = new Map<string, { first: UsedFile; paths: string[] }>();
   for (const u of used) {
-    const c = creditOf(u);
-    const k = `${u.item.id}\u0000${c.project}\u0000${c.license.name}\u0000${c.license.where}`;
-    if (seen.has(k)) continue;
-    seen.add(k);
-    out.push(c);
+    const lic = parseLicense(u.file.license, u.file.sourceUrl);
+    const k = `${u.item.id}\u0000${u.file.provenance.name}\u0000${lic.name}\u0000${lic.where}`;
+    const cur = groups.get(k);
+    if (cur) {
+      if (!cur.paths.includes(u.path)) cur.paths.push(u.path);
+    } else groups.set(k, { first: u, paths: [u.path] });
   }
-  return out;
+  return [...groups.values()]
+    .map((g) => creditOf(g.first, g.paths))
+    .sort((a, b) => (a.title ?? "").localeCompare(b.title ?? ""));
 }
 
 export function allSpecFiles(spec: SpecFile): UsedFile[] {
-  return spec.sources.flatMap((item) => item.files.map((file) => ({ item, file, path: file.paths[0] })));
+  return spec.sources.flatMap((item) =>
+    item.files.flatMap((file) => file.paths.map((path) => ({ item, file, path }))),
+  );
 }
 
 const license = (spec: SpecFile | undefined) => ({

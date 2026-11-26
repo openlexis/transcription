@@ -7,7 +7,7 @@ import Pill from "../../../components/Pill.astro";
 import Byline from "../../../components/Byline.astro";
 import CiteBox from "../../../components/CiteBox.astro";
 import PageSidebar from "../../../components/PageSidebar.astro";
-import { bookCredit, creditOf, perManuscript, witnessFiles } from "../../../lib/credits";
+import { bookCredit, perManuscript, witnessFiles } from "../../../lib/credits";
 import { bookDownload } from "../../../lib/downloads";
 import { groupCredits } from "../../../lib/cite";
 import {
@@ -316,7 +316,7 @@ const clientData = {
     w.scientific,
     viewersMap.get(w.siglum)?.viewers ?? [],
     w.filledIn,
-    witnessUsed[wi].map((u) => creditOf(u)),
+    perManuscript(witnessUsed[wi]),
   ]),
   g: glossMap,
   t: tokenPayloads,
@@ -660,7 +660,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       renderConfidenceBadgeHtml,
     } from "../../../lib/confidence";
     import "../../../lib/cite-ui";
-    import { citeBoxHtml, tm, type SourceCredit } from "../../../lib/cite";
+    import { citeBoxHtml, manuscriptRef, tm, type SourceCredit } from "../../../lib/cite";
 
     const reader = document.getElementById("compiled-reader");
     const inspectorUrl =
@@ -871,17 +871,10 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         string, string, string, string, string, string, string, { name: string; url: string }[], string, SourceCredit[] | undefined,
       ];
       const srcCredits = Array.isArray(credits) ? credits : [];
-      const seenLic = new Set<string>();
       const srcLicenses = srcCredits
-        .filter((cr) => {
-          const k = `${cr.project}|${cr.license.name}|${cr.license.url}`;
-          if (seenLic.has(k)) return false;
-          seenLic.add(k);
-          return true;
-        })
         .map(
           (cr) =>
-            `<div><a href="${esc(cr.license.url)}" target="_blank" rel="noopener">${esc(cr.license.name)}</a> <span class="ms-sub">(${esc(cr.project)}${cr.license.where ? `; terms found in ${esc(cr.license.where)}` : ""})</span></div>`,
+            `<div>${esc(cr.title ?? cr.project)}. License: <a href="${esc(cr.license.url)}" target="_blank" rel="noopener">${esc(cr.license.name)}</a>${cr.license.where ? ` <span class="ms-sub">(terms found in ${esc(cr.license.where)})</span>` : ""}.</div>`,
         )
         .join("");
       const ours = DATA.cite;
@@ -896,7 +889,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         ? citeBoxHtml(
             {
               heading: "Cite this manuscript in this book",
-              ours: { ...ours, key: `${ours.key}-${String(sig).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`, title: `${ours.title}, manuscript ${sig}` },
+              ours: { ...ours, key: `${ours.key}-${String(sig).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`, title: `${ours.title}, ${manuscriptRef(sig, (desc.split(";")[0].match(/\(([^()]+)\)\s*$/) || [])[1], DATA.isHebrew ? "Hebrew" : "Greek")}` },
               sources: srcCredits,
             },
             location.origin,

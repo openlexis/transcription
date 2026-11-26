@@ -82,7 +82,7 @@ export interface OurCredit {
   licenseUrl: string;
 }
 
-/** One source's own credit, license and link. Grouped credits carry a count instead of a manuscript title. */
+/** One source's own credit, license and link. title is the full citation (institution, books, manuscript). */
 export interface SourceCredit {
   project: string;
   projectUrl: string;
@@ -128,18 +128,132 @@ export function ourBibtex(c: OurCredit, origin: string, accessed?: { iso: string
   return lines.filter(Boolean).join("\n");
 }
 
+
+/** Book id and the English name used in citations, in biblical order. */
+const BOOKS: [string, string][] = [
+  ["Gen", "Genesis"], ["Exod", "Exodus"], ["Lev", "Leviticus"], ["Num", "Numbers"], ["Deut", "Deuteronomy"],
+  ["Josh", "Joshua"], ["Judg", "Judges"], ["1Sam", "1 Samuel"], ["2Sam", "2 Samuel"], ["1Kgs", "1 Kings"], ["2Kgs", "2 Kings"],
+  ["Isa", "Isaiah"], ["Jer", "Jeremiah"], ["Ezek", "Ezekiel"], ["Hos", "Hosea"], ["Joel", "Joel"], ["Amos", "Amos"],
+  ["Obad", "Obadiah"], ["Jonah", "Jonah"], ["Mic", "Micah"], ["Nah", "Nahum"], ["Hab", "Habakkuk"], ["Zeph", "Zephaniah"],
+  ["Hag", "Haggai"], ["Zech", "Zechariah"], ["Mal", "Malachi"], ["1Chr", "1 Chronicles"], ["2Chr", "2 Chronicles"],
+  ["Ps", "Psalms"], ["Job", "Job"], ["Prov", "Proverbs"], ["Ruth", "Ruth"], ["Song", "Song of Songs"], ["Eccl", "Ecclesiastes"],
+  ["Lam", "Lamentations"], ["Esth", "Esther"], ["Dan", "Daniel"], ["Ezra", "Ezra"], ["Neh", "Nehemiah"],
+  ["Matt", "Matthew"], ["Mark", "Mark"], ["Luke", "Luke"], ["John", "John"], ["Acts", "Acts"], ["Rom", "Romans"],
+  ["1Cor", "1 Corinthians"], ["2Cor", "2 Corinthians"], ["Gal", "Galatians"], ["Eph", "Ephesians"], ["Phil", "Philippians"],
+  ["Col", "Colossians"], ["1Thess", "1 Thessalonians"], ["2Thess", "2 Thessalonians"], ["1Tim", "1 Timothy"], ["2Tim", "2 Timothy"],
+  ["Titus", "Titus"], ["Phlm", "Philemon"], ["Heb", "Hebrews"], ["Jas", "James"], ["1Pet", "1 Peter"], ["2Pet", "2 Peter"],
+  ["1John", "1 John"], ["2John", "2 John"], ["3John", "3 John"], ["Jude", "Jude"], ["Rev", "Revelation"],
+];
+const BOOK_NAME = new Map(BOOKS);
+const BOOK_ORDER = new Map(BOOKS.map(([id], i) => [id, i]));
+const NT = new Set(BOOKS.slice(BOOKS.findIndex(([id]) => id === "Matt")).map(([id]) => id));
+const OT = new Set(BOOKS.slice(0, BOOKS.findIndex(([id]) => id === "Matt")).map(([id]) => id));
+/** UXLC and Aleppo file names, and other file-part spellings, to a book id. */
+const FILE_PART: Record<string, string> = {
+  Genesis: "Gen", Exodus: "Exod", Leviticus: "Lev", Numbers: "Num", Deuteronomy: "Deut",
+  Joshua: "Josh", Judges: "Judg", Samuel_1: "1Sam", Samuel_2: "2Sam", Kings_1: "1Kgs", Kings_2: "2Kgs",
+  Isaiah: "Isa", Jeremiah: "Jer", Ezekiel: "Ezek", Hosea: "Hos", Joel: "Joel", Amos: "Amos",
+  Obadiah: "Obad", Jonah: "Jonah", Micah: "Mic", Nahum: "Nah", Habakkuk: "Hab", Zephaniah: "Zeph",
+  Haggai: "Hag", Zechariah: "Zech", Malachi: "Mal", Chronicles_1: "1Chr", Chronicles_2: "2Chr",
+  Psalms: "Ps", Job: "Job", Proverbs: "Prov", Ruth: "Ruth", Song_of_Songs: "Song", Ecclesiastes: "Eccl",
+  Lamentations: "Lam", Esther: "Esth", Daniel: "Dan", Ezra: "Ezra", Nehemiah: "Neh",
+};
+function bookFromPart(part: string): string | undefined {
+  if (BOOK_NAME.has(part)) return part;
+  if (FILE_PART[part]) return FILE_PART[part];
+  const lower = part.toLowerCase();
+  for (const [id, name] of BOOKS) if (name.toLowerCase() === lower) return id;
+  return undefined;
+}
+function uniqueBooks(ids: string[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const id of ids) {
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    out.push(id);
+  }
+  return out.sort((a, b) => (BOOK_ORDER.get(a) ?? 999) - (BOOK_ORDER.get(b) ?? 999));
+}
+function andList(names: string[]): string {
+  if (names.length === 1) return names[0];
+  if (names.length === 2) return `${names[0]} and ${names[1]}`;
+  return `${names.slice(0, -1).join(", ")}, and ${names[names.length - 1]}`;
+}
+function formatBooks(ids: string[]): string {
+  if (!ids.length) return "";
+  const set = new Set(ids);
+  const same = (canon: Set<string>) => set.size === canon.size && [...set].every((id) => canon.has(id));
+  if (same(NT)) return "the New Testament";
+  if (same(OT)) return "the Old Testament";
+  return andList(ids.map((id) => BOOK_NAME.get(id) ?? id));
+}
+
+/** If the project name ends with the book or work it transcribes, return the institution and those books. */
+export function projectOrgAndBooks(project: string): { org: string; books: string[] } {
+  if (/Family Π in Mark\s*$/.test(project)) {
+    return { org: project.replace(/,?\s*Family Π in Mark\s*$/, "").trim(), books: ["Mark"] };
+  }
+  if (/catenae on Romans and Ephesians\s*$/.test(project)) {
+    return { org: project.replace(/,?\s*catenae on Romans and Ephesians\s*$/, "").trim(), books: ["Rom", "Eph"] };
+  }
+  const named = [...BOOKS].sort((a, b) => b[1].length - a[1].length);
+  for (const [id, name] of named) {
+    const suffix = `, ${name}`;
+    if (project.endsWith(suffix)) return { org: project.slice(0, -suffix.length).trim(), books: [id] };
+  }
+  return { org: project, books: [] };
+}
+
+/** Books a source transcription covers, from its file names, or the project's stated book, or the catalog's targets. */
+export function booksCovered(paths: string[], project: string, fallbackTargets?: string[]): string[] {
+  const fromPath: string[] = [];
+  for (const p of paths) {
+    const file = p.split("/").pop() ?? "";
+    const m = file.match(/^[^.]+[.](.+)\.xml$/i);
+    const id = m ? bookFromPart(m[1]) : undefined;
+    if (id) fromPath.push(id);
+  }
+  if (fromPath.length) return uniqueBooks(fromPath);
+  const named = projectOrgAndBooks(project).books;
+  if (named.length) return uniqueBooks(named);
+  return uniqueBooks(fallbackTargets ?? []);
+}
+
+/** "GA 01 (Codex Sinaiticus)", or "L (Leningrad Codex)" when the id is not a Gregory-Aland number. Never a bare "01". */
+export function manuscriptRef(id: string, name: string | undefined, language: string): string {
+  const num = /^Greek$/i.test(language) ? `GA ${id}` : id;
+  const label = name && name !== id ? name : "";
+  return label ? `${num} (${label})` : num;
+}
+
+/** "ITSEE transcription of 2 Thessalonians in GA 01 (Codex Sinaiticus)". */
+export function sourceTitle(input: {
+  project: string;
+  paths: string[];
+  id: string;
+  name?: string;
+  language: string;
+  targets?: string[];
+}): string {
+  const org = projectOrgAndBooks(input.project).org;
+  const books = formatBooks(booksCovered(input.paths, input.project, input.targets));
+  const ms = manuscriptRef(input.id, input.name, input.language);
+  return books ? `${org} transcription of ${books} in ${ms}` : `${org} transcription in ${ms}`;
+}
+
 export function sourceText(s: SourceCredit): string {
-  const parts = [`${s.project} (${s.projectUrl}).`];
-  if (s.title) parts.push(`${s.title}.`);
-  if (s.count) parts.push(`Transcriptions of ${s.count.toLocaleString("en-US")} ${s.count === 1 ? "manuscript" : "manuscripts"}.`);
+  const lead = s.title || s.project;
+  const parts = [`${lead}.`];
   if (s.link && s.link !== s.projectUrl) parts.push(`Source: ${s.link}.`);
+  else if (s.projectUrl) parts.push(`Source: ${s.projectUrl}.`);
   parts.push(`License: ${s.license.name}, ${s.license.url}.`);
   if (s.license.where) parts.push(`Terms found in: ${s.license.where}.`);
   return parts.join(" ");
 }
 
 export function sourceBibtex(s: SourceCredit): string {
-  const title = s.title ?? `Transcriptions of ${s.count ?? 0} ${s.count === 1 ? "manuscript" : "manuscripts"}`;
+  const title = s.title ?? s.project;
   const note = `License: ${bib(s.license.name)}, \\url{${s.license.url}}${s.license.where ? `. Terms found in: ${bib(s.license.where)}` : ""}`;
   return [
     `@misc{${keyOf(`${s.project} ${s.title ?? s.license.name}`)},`,
@@ -155,12 +269,12 @@ export function sourceBibtex(s: SourceCredit): string {
 export function groupCredits(items: SourceCredit[]): SourceCredit[] {
   const by = new Map<string, SourceCredit>();
   for (const s of items) {
-    const k = `${s.project}\u0000${s.projectUrl}\u0000${s.license.name}\u0000${s.license.url}\u0000${s.license.where}`;
+    const k = `${s.title ?? ""}\u0000${s.project}\u0000${s.projectUrl}\u0000${s.license.name}\u0000${s.license.url}\u0000${s.license.where}`;
     const cur = by.get(k);
     if (cur) cur.count = (cur.count ?? 0) + (s.count ?? 1);
-    else by.set(k, { project: s.project, projectUrl: s.projectUrl, count: s.count ?? 1, license: s.license });
+    else by.set(k, { ...s, count: s.count ?? 1 });
   }
-  return [...by.values()].sort((a, b) => a.project.localeCompare(b.project) || a.license.name.localeCompare(b.license.name));
+  return [...by.values()].sort((a, b) => (a.title ?? a.project).localeCompare(b.title ?? b.project) || a.project.localeCompare(b.project));
 }
 
 const escHtml = (s: unknown) =>
