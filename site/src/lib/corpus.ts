@@ -111,6 +111,19 @@ export interface SpecFile {
     uncertainty_guidance: string[];
     source_assessment?: NamedItem[];
     model_freedom: string;
+    information_to_consider?: {
+      framing: string;
+      sections: {
+        title: string;
+        text?: string;
+        items?: {
+          name: string;
+          text: string;
+          items?: { name: string; text: string }[];
+        }[];
+        table?: { columns: string[]; rows: string[][] };
+      }[];
+    };
   };
   output_requirements: NamedItem[];
   output_format: {
