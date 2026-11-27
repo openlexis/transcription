@@ -2132,9 +2132,10 @@ h3 {
 
 .book-stats-lead {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 14px;
   max-width: none;
 }
 
@@ -3133,6 +3134,12 @@ a.pill:hover {
 .badge-violet { background: var(--violet-soft); color: var(--violet); border-color: rgba(109, 40, 217, 0.16); }
 .pill-sky,
 .badge-sky { background: var(--sky-soft); color: var(--sky); border-color: rgba(3, 105, 161, 0.16); }
+.pill-subdued {
+  background: transparent;
+  color: var(--ink-muted);
+  border-color: var(--border);
+  font-weight: 500;
+}
 
 /* Callout */
 .callout {
@@ -4700,14 +4707,6 @@ tr:last-child td {
 .tok-omit:focus-visible,
 .tok-omit.tok-active {
   color: var(--ink);
-}
-
-.book-eyebrow-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
 }
 
 .lang-badge {

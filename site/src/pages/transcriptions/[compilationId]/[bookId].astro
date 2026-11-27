@@ -341,14 +341,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
 >
   <section class="page-header">
     <div class="container">
-      <div class="book-eyebrow-row">
-        {b.section && (
-          <Pill icon="section">{b.section}</Pill>
-        )}
-        {bookLangCodes.map((code) => (
-          <LanguageCodeBadge language={code} />
-        ))}
-      </div>
       <h1>{b.name}</h1>
       <Byline
         items={[
@@ -360,22 +352,32 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       >
         <CiteBox data={citeData} placement="byline" />
       </Byline>
-      <div class="pill-row book-stats-lead" style="margin-top: 14px;">
-        <Pill icon="manuscripts">{formatNum(b.stats.manuscripts)} manuscripts</Pill>
-        <Pill icon="lines">{formatNum(b.stats.lines)} lines</Pill>
-        <Pill icon="words">{formatNum(b.stats.words)} words</Pill>
-        <Pill icon="disagreements">{formatNum(b.stats.places)} disagreements</Pill>
-        <ConfidenceBadge
-          value={b.stats.meanWordConfidence}
-          kind="book-mean"
-          context={b.name}
-        />
-        {download && (
-          <DownloadTei
-            files={[download]}
-            title={`TEI of ${b.name}, with this page's address, our license, and each source project's credit, license and link.`}
+      <div class="book-stats-lead">
+        <div class="pill-row">
+          {b.section && (
+            <Pill icon="section">{b.section}</Pill>
+          )}
+          {bookLangCodes.map((code) => (
+            <LanguageCodeBadge language={code} />
+          ))}
+          <ConfidenceBadge
+            value={b.stats.meanWordConfidence}
+            kind="book-mean"
+            context={b.name}
           />
-        )}
+          {download && (
+            <DownloadTei
+              files={[download]}
+              title={`TEI of ${b.name}, with this page's address, our license, and each source project's credit, license and link.`}
+            />
+          )}
+        </div>
+        <div class="pill-row">
+          <Pill tone="subdued" icon="manuscripts">{formatNum(b.stats.manuscripts)} manuscripts</Pill>
+          <Pill tone="subdued" icon="lines">{formatNum(b.stats.lines)} lines</Pill>
+          <Pill tone="subdued" icon="words">{formatNum(b.stats.words)} words</Pill>
+          <Pill tone="subdued" icon="disagreements">{formatNum(b.stats.places)} disagreements</Pill>
+        </div>
       </div>
     </div>
   </section>
