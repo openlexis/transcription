@@ -1,7 +1,7 @@
 // Transcription compiler for Open Lexis YAML specifications (TEI P5 XML output).
 // Usage:
 //   bun --smol scripts/compile.ts [spec-id] [all | <book-id>] [--compilation-id <ulid>]
-// Defaults: spec-id = 01M8FGK1GFBFTW3W26S0Q8M5G1, book = all. --out-dir <folder> writes a trial compilation outside transcripts/.
+// Defaults: spec-id = 01M8FHBCM1W1N3Z3HDX4HDYE4P, book = all. --out-dir <folder> writes a trial compilation outside transcripts/.
 import { createHash, randomBytes } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
@@ -1195,7 +1195,7 @@ function renderTeiXml(
 // ---------- main CLI ----------
 if (import.meta.main) {
   const args = process.argv.slice(2);
-  let specId = "01M8FGK1GFBFTW3W26S0Q8M5G1";
+  let specId = "01M8FHBCM1W1N3Z3HDX4HDYE4P";
   let bookArg = "all";
   let compilationId = "";
   let skipSite = false;

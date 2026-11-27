@@ -1,4 +1,4 @@
-id: 01M8FGK1GFBFTW3W26S0Q8M5G1
+id: 01M8FHBCM1W1N3Z3HDX4HDYE4P
 title: "Open Lexis Transcription Specification: Decoupled Severity & Granular Alignment"
 author: Open Lexis
 license:
@@ -131,6 +131,10 @@ statistical_modeling:
       - Is a word or phrase quoted, translated, or transliterated from another language
         or another text, and which wording would that source have used?
       - Does a reading match the author's usual style elsewhere?
+    note: >-
+      The Septuagint should be considered when interpreting disagreements. It may
+      help resolve likelihood or uncertainty, and it may help settle a certain
+      number of disagreements.
 output_requirements:
   - name: Compiled text
     description: The selected original-language text for every book represented by `sources`, organized
@@ -174,7 +178,7 @@ output_requirements:
       parse, or format data are not required to identify themselves.
   - name: Specification reference
     description: An explicit statement that the compilation was produced under this specification,
-      citing its ID (`01M8FGK1GFBFTW3W26S0Q8M5G1`).
+      citing its ID (`01M8FHBCM1W1N3Z3HDX4HDYE4P`).
 output_format:
   standard: TEI P5 XML
   references:
@@ -196,7 +200,7 @@ output_format:
     - One TEI P5 XML file per compiled book.
     - A single manifest (record) file (`manifest.json`) conforming to the schema in `AGENTS.md`,
       listing all book files, full model attribution, the compilation ID, and a statement citing
-      this specification's ID (`01M8FGK1GFBFTW3W26S0Q8M5G1`).
+      this specification's ID (`01M8FHBCM1W1N3Z3HDX4HDYE4P`).
     - A structured Markdown compilation report (`REPORT.md`) with YAML frontmatter conforming to
       `AGENTS.md`, followed by a plain-language Markdown narrative of what was performed.
 sources:
