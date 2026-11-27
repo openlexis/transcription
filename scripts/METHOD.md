@@ -1,6 +1,6 @@
 # Method of this compiler
 
-This is the statistical method implemented in `scripts/compile.ts` for specifications under `specifications/<specification-id>/` (such as `specifications/01M8FHKWKP03JVXS8ZGY47F9YW.yaml`; older ones are single files such as `specifications/01M88AX3YW2HWVPGHTREFJS181.yaml`). The specification does not prescribe a single model; another compiler may choose differently. Each compilation records its full method description in `manifest.json` and every book's `<teiHeader>`.
+This is the statistical method implemented in `scripts/compile.ts` for specifications under `specifications/<specification-id>/` (such as `specifications/01M8FM1MR0Z3S8VPKKVAP2V1WJ.yaml`; older ones are single files such as `specifications/01M88AX3YW2HWVPGHTREFJS181.yaml`). The specification does not prescribe a single model; another compiler may choose differently. Each compilation records its full method description in `manifest.json` and every book's `<teiHeader>`.
 
 ## Words used here
 

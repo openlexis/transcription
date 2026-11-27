@@ -1,7 +1,7 @@
 // Transcription compiler for Open Lexis YAML specifications (TEI P5 XML output).
 // Usage:
 //   bun --smol scripts/compile.ts [spec-id] [all | <book-id>] [--compilation-id <ulid>]
-// Defaults: spec-id = 01M8FHKWKP03JVXS8ZGY47F9YW, book = all. --out-dir <folder> writes a trial compilation outside transcripts/.
+// Defaults: spec-id = 01M8FM1MR0Z3S8VPKKVAP2V1WJ, book = all. --out-dir <folder> writes a trial compilation outside transcripts/.
 import { createHash, randomBytes } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
@@ -1195,7 +1195,7 @@ function renderTeiXml(
 // ---------- main CLI ----------
 if (import.meta.main) {
   const args = process.argv.slice(2);
-  let specId = "01M8FHKWKP03JVXS8ZGY47F9YW";
+  let specId = "01M8FM1MR0Z3S8VPKKVAP2V1WJ";
   let bookArg = "all";
   let compilationId = "";
   let skipSite = false;
@@ -1260,7 +1260,6 @@ if (import.meta.main) {
   for (const section of sections) {
     const secTargets = selectedTargets.filter((t) => t.section === section);
     const secTargetIds = new Set(secTargets.map((t) => t.id));
-    const secLanguage = new Map(secTargets.map((t) => [t.id, t.language]));
     const byBook = new Map<string, BookIndexEntry[]>();
     for (const t of secTargets) byBook.set(t.id, []);
     const scribalStats = new Map<string, SourceScribalStats>();
@@ -1291,8 +1290,6 @@ if (import.meta.main) {
           const grouped = new Map<string, ParsedUnit[]>();
           for (const u of units) {
             if (!secTargetIds.has(u.book)) continue;
-            // This compiler aligns words in one language only: a Septuagint (Greek) witness to a Hebrew or Aramaic book is not aligned.
-            if (s.language === "Greek" && !secLanguage.get(u.book)?.includes("Greek")) continue;
             const arr = grouped.get(u.book) ?? [];
             arr.push(u);
             grouped.set(u.book, arr);

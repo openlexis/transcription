@@ -114,7 +114,6 @@ export interface SpecFile {
     information_to_consider?: {
       framing: string;
       questions: string[];
-      note?: string;
     };
   };
   output_requirements: NamedItem[];

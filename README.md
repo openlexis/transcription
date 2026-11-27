@@ -24,7 +24,7 @@ Primary ancient manuscript transcriptions for the Old Testament (Biblical Hebrew
 | `bun run sources targets` | List resolved target books with primary source counts and pinned ULIDs |
 | `bun run sources list [--target Gen] [--institution intf] [--json]` | Filter permitted sources for a specification |
 | `bun run sources get <id\|institution:id>` | Resolve full metadata and XML paths for one permitted source |
-| `bun run compile [spec-id] [all \| <book>]` | Compile target books (default: the newest specification, 01M8FHKWKP03JVXS8ZGY47F9YW) into `transcripts/<spec-id>/<ulid>/` (with `REPORT.md` & `manifest.json`) and rebuild the Astro site |
+| `bun run compile [spec-id] [all \| <book>]` | Compile target books (default: the newest specification, 01M8FM1MR0Z3S8VPKKVAP2V1WJ) into `transcripts/<spec-id>/<ulid>/` (with `REPORT.md` & `manifest.json`) and rebuild the Astro site |
 | `bun run check [--spec <ULID> --dir <folder> [--books Obad]]` | Validate pinned transcripts and contract files, and every compilation in `transcripts/` (or one folder): against its specification's pinned contract when it has one, otherwise with the earlier built-in checks |
 | `bun run site` / `bun run site:build` | Build the static website into `site/www` |
 | `bun run site:dev` | Start the Astro development server with live reload |
