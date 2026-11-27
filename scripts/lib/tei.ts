@@ -12,7 +12,7 @@
 //  - a page that starts a fresh unit after a page break is read as if a lacuna stood between the pages, because a page that
 //    was not transcribed would otherwise look like text the manuscript does not have; titles and subscriptions (line 0) are left out.
 export type TeiWord = { w: string; gap: boolean };
-/** book: the New Testament book (1 Matthew to 27 Revelation), or 0 for a Septuagint (Greek Old Testament) book, whose Codex Sinaiticus Project book code is `lxx` (for example GEN). */
+/** book: the New Testament book (1 Matthew to 27 Revelation), or 0 for a book of the Greek translation of the Old Testament, whose First1KGreek work number is `lxx`. */
 export type TeiUnit = { book: number; lxx?: string; ref: string; words: TeiWord[]; gapEnd: boolean };
 const OSIS = ["Matt", "Mark", "Luke", "John", "Acts", "Rom", "1Cor", "2Cor", "Gal", "Eph", "Phil", "Col", "1Thess", "2Thess", "1Tim", "2Tim", "Titus", "Phlm", "Heb", "Jas", "1Pet", "2Pet", "1John", "2John", "3John", "Jude", "Rev"];
 type Node = { t: string; a: Record<string, string>; c: (Node | string)[] };
@@ -37,15 +37,15 @@ export function parseXml(xml: string): Node {
   return root;
 }
 const skel = (w: string) => w.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().replace(/[ςϲ]/g, "σ").replace(/[^α-ωϛϟ]/g, "");
-/** The Septuagint (Greek Old Testament) books of Codex Sinaiticus, by the Codex Sinaiticus Project's book code in its unit names. */
-const CSP_LXX = new Set(["GEN", "LEV", "NUM", "DEUT", "JOSH", "JUDG", "1CHR", "2ESD", "EST", "TOB", "JDT", "1MACC", "4MACC", "ISA", "JER", "LAM", "JOEL", "OBAD", "JONAH", "NAH", "HAB", "ZEPH", "HAG", "ZECH", "MAL", "PS", "PROV", "ECCL", "CANT", "WIS", "SIR", "JOB"]);
+/** The Septuagint books of Codex Sinaiticus, by the project's name, as the keys of scripts/ot.ts (First1KGreek work numbers). */
+const CSP_LXX: Record<string, string> = { GEN: "001", LEV: "003", NUM: "004", DEUT: "005", JOSH: "006", JUDG: "008", "1CHR": "015", "2ESD": "018", EST: "019", TOB: "021", JDT: "020", "1MACC": "023", "4MACC": "026", ISA: "048", JER: "049", LAM: "051", JOEL: "039", OBAD: "040", JONAH: "041", NAH: "042", HAB: "043", ZEPH: "044", HAG: "045", ZECH: "046", MAL: "047", PS: "027", PROV: "029", ECCL: "030", CANT: "031", WIS: "033", SIR: "034", JOB: "032" };
 const CSP: Record<string, string> = { MATT: "Matt", MARK: "Mark", LUKE: "Luke", JOHN: "John", ACTS: "Acts", ROM: "Rom", "1COR": "1Cor", "2COR": "2Cor", GAL: "Gal", EPH: "Eph", PHIL: "Phil", COL: "Col", "1THESS": "1Thess", "2THESS": "2Thess", "1TIM": "1Tim", "2TIM": "2Tim", TITUS: "Titus", PHLM: "Phlm", HEB: "Heb", JAS: "Jas", "1PET": "1Pet", "2PET": "2Pet", "1JOHN": "1John", "2JOHN": "2John", "3JOHN": "3John", JUDE: "Jude", REV: "Rev" };
 /** Book number (1 to 27) and chapter:line of a unit name, or undefined for a title, subscription or unknown name. */
 export function unitRef(n: string): { book: number; lxx?: string; ref: string } | undefined {
   let m = n.match(/^V-B\d+K(\d+)V(\d+)-\d+-([0-9A-Z]+)$/);
   if (m) {
     if (!+m[1] || !+m[2]) return undefined;
-    if (CSP_LXX.has(m[3])) return { book: 0, lxx: m[3], ref: `${+m[1]}:${+m[2]}` };
+    if (CSP_LXX[m[3]]) return { book: 0, lxx: CSP_LXX[m[3]], ref: `${+m[1]}:${+m[2]}` };
     const b = OSIS.indexOf(CSP[m[3]] ?? "") + 1; return b ? { book: b, ref: `${+m[1]}:${+m[2]}` } : undefined;
   }
   m = n.match(/^B(\d+)K(\d+)V(\d+)/);
