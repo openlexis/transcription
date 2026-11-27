@@ -1,4 +1,4 @@
-id: 01M8FFNQR7EFXPE9T897SEYWXC
+id: 01M8FGK1GFBFTW3W26S0Q8M5G1
 title: "Open Lexis Transcription Specification: Decoupled Severity & Granular Alignment"
 author: Open Lexis
 license:
@@ -117,142 +117,20 @@ statistical_modeling:
     contract in `AGENTS.md`.
   information_to_consider:
     framing: >-
-      This is information models should consider when they interpret differences
-      between manuscripts and when they resolve disagreements. Models may agree or
-      disagree with this assessment. For example, a word may be out of place for the
-      context, or an author may use more basic Greek or show Aramaic-influenced style.
-      Resolving a disagreement might favor the variant that best matches the author's
-      style or the context.
-    sections:
-      - title: The Three Languages and the Scriptures
-        items:
-          - name: Ancient Hebrew
-            text: >-
-              The primary language of the Jewish Bible, called the Tanakh. The Torah is
-              the first section of the Tanakh, covering Genesis through Deuteronomy,
-              followed by the Prophets and the Writings. By the first century CE, Hebrew
-              functioned mainly as a liturgical and scholarly language in synagogues
-              rather than an everyday spoken tongue.
-          - name: Aramaic
-            text: >-
-              The everyday spoken language of Judea and Galilee. Aramaic was also a
-              written language, and small portions of the Tanakh, specifically parts of
-              Daniel and Ezra, were written in Aramaic.
-          - name: Koine Greek
-            text: >-
-              The international language of trade, government, and education across the
-              regions covered in the New Testament. Following Alexander the Great's
-              conquests, Greek became the common tongue throughout Judea, Galilee, Syria,
-              Asia Minor, Greece, and Rome, including major early Christian centers such
-              as Antioch, Ephesus, Corinth, and Thessalonica.
-          - name: The Septuagint
-            text: >-
-              The Koine Greek translation of the Tanakh, produced by Jewish scholars in
-              Alexandria between the third and first centuries BCE and abbreviated LXX.
-              New Testament authors usually quoted the Septuagint rather than the Hebrew
-              text, even when recording Jesus's words. For example, Matthew 1:23 quotes
-              Isaiah 7:14 using the Greek word parthenos, meaning virgin, from the
-              Septuagint, whereas the Hebrew text uses almah, meaning young woman.
-              Similarly, Luke 4:18 quotes Isaiah 61:1 with the phrase "recovery of sight
-              to the blind," which appears in the Septuagint but not in the Hebrew text.
-      - title: Languages Spoken by Jesus
-        items:
-          - name: Aramaic
-            text: >-
-              Jesus's primary spoken language. The Gospel authors wrote in Greek, but
-              occasionally spelled out Jesus's spoken Aramaic words phonetically using
-              Greek letters, a process called transliteration, and then translated them.
-              It works the same way an English book might write, "He said c'est la vie,
-              which means that is life." In Mark 5:41, Mark spells out the Aramaic as
-              Talitha koum, then adds, "which means, Little girl, I say to you, get up."
-              Mark uses this same method in Mark 7:34, Mark 14:36, and Mark 15:34.
-          - name: Hebrew
-            text: >-
-              Jesus likely read Hebrew for religious use. Luke 4:16 to 20 depicts him
-              reading from the scroll of Isaiah in the Nazareth synagogue. While Jews
-              living outside Judea and Galilee used Greek Septuagint scrolls, synagogues
-              inside Judea and Galilee used Hebrew scrolls, as confirmed by the Dead Sea
-              Scrolls. A reader would recite the Hebrew aloud and give an oral Aramaic
-              paraphrase, called a Targum, for the crowd. Nazareth was a rural Galilean
-              village, so its scroll would have been Hebrew, and Luke later substituted
-              the Septuagint wording when writing in Greek.
-          - name: Greek
-            text: >-
-              Evidence that Jesus spoke Greek is indirect and weaker than the evidence
-              for Aramaic.
-            items:
-              - name: Geography and trade
-                text: >-
-                  Nazareth was four miles from Sepphoris, a Hellenized administrative
-                  center where Greek was spoken, and Jesus traveled through the
-                  Greek-speaking Decapolis. Working as a builder, he would have had
-                  commercial contact with Greek-speaking markets.
-              - name: Jewish fluency in Greek
-                text: >-
-                  Fluency depended on location and class. Most rural villagers in Galilee
-                  and Judea were not fluently bilingual, though many knew basic trade
-                  Greek for commerce and taxes. Full fluency was mostly limited to the
-                  urban elite, wealthy merchants, tax collectors, and educated leaders.
-              - name: Roman officials and interpreters
-                text: >-
-                  The Gospels record Jesus speaking with non-Aramaic speakers, including
-                  Pontius Pilate, a Roman centurion, and a Syrophoenician woman, without
-                  mentioning an interpreter. Roman governors conducted business in Greek
-                  and employed official court interpreters, called hermeneutes, to handle
-                  Aramaic-speaking subjects. Ancient authors rarely mentioned interpreters
-                  unless a translation issue affected the story, so omitting an interpreter
-                  does not prove Jesus spoke fluent Greek with Pilate.
-      - title: The New Testament Authors and Greek Styles
-        text: >-
-          All 27 books of the New Testament survive in Koine Greek and were composed in
-          it so they could circulate across the Roman Empire.
-        items:
-          - name: Author backgrounds
-            text: >-
-              Backgrounds varied by region. Luke was a Greek-educated Gentile, and Paul
-              was a Greek-speaking Jew from Tarsus who also knew Aramaic and Hebrew.
-              Galilean figures such as Peter, James, and John grew up speaking Aramaic.
-              Ancient authors also dictated to professional Greek-speaking scribes, such
-              as Tertius for Paul's letter to the Romans.
-          - name: The Matthew claim
-            text: >-
-              The second-century writer Papias asserted that Matthew first compiled
-              sayings in Hebrew or Aramaic. No such manuscript has been found, and the
-              surviving Gospel of Matthew reads as an original Greek composition.
-        table:
-          columns:
-            - Book or Author
-            - Level of Greek
-            - Concrete Examples
-          rows:
-            - - Luke and Acts
-              - High literary Greek
-              - >-
-                Luke 1:1 to 4 opens with a single, formal 42-word sentence modeled on
-                classical Greek historians. Luke also edits Mark's simpler grammar into
-                smoother Greek.
-            - - Hebrews
-              - Polished rhetorical Greek
-              - >-
-                Uses complex sentence rhythms, balanced clauses, and rare literary
-                vocabulary found nowhere else in the New Testament.
-            - - Paul's Letters
-              - Educated conversational Greek
-              - >-
-                Dictated orally to scribes. Paul frequently breaks off mid-sentence,
-                shifts direction, and uses rapid rhetorical questions, as in Romans 6:1
-                to 2.
-            - - Gospel of Mark
-              - Simple, colloquial Greek
-              - >-
-                Relies on short sentences linked repeatedly with "and" and overuses the
-                word "immediately," euthys, which appears over 40 times in a short book.
-            - - Revelation
-              - Rough, Semitic Greek
-              - >-
-                Contains frequent grammatical errors shaped by Hebrew and Aramaic syntax.
-                In Revelation 1:4, the author places a nominative phrase directly after
-                the preposition apo, which in standard Greek requires the genitive case.
+      When interpreting differences between manuscripts and resolving disagreements,
+      consider the questions below. This specification does not assert answers to them.
+      The model decides each one from the evidence.
+    questions:
+      - Did the speaker speak the language that was written?
+      - Is the speaker familiar with the language that was written?
+      - Is the author a native speaker of the language?
+      - Is the author a native writer of the language?
+      - Is the author well trained in the language they are writing in?
+      - Does a disputed word match the author's level of skill in the language?
+      - Does a disputed word fit the context?
+      - Is a word or phrase quoted, translated, or transliterated from another language
+        or another text, and which wording would that source have used?
+      - Does a reading match the author's usual style elsewhere?
 output_requirements:
   - name: Compiled text
     description: The selected original-language text for every book represented by `sources`, organized
@@ -296,7 +174,7 @@ output_requirements:
       parse, or format data are not required to identify themselves.
   - name: Specification reference
     description: An explicit statement that the compilation was produced under this specification,
-      citing its ID (`01M8FFNQR7EFXPE9T897SEYWXC`).
+      citing its ID (`01M8FGK1GFBFTW3W26S0Q8M5G1`).
 output_format:
   standard: TEI P5 XML
   references:
@@ -318,7 +196,7 @@ output_format:
     - One TEI P5 XML file per compiled book.
     - A single manifest (record) file (`manifest.json`) conforming to the schema in `AGENTS.md`,
       listing all book files, full model attribution, the compilation ID, and a statement citing
-      this specification's ID (`01M8FFNQR7EFXPE9T897SEYWXC`).
+      this specification's ID (`01M8FGK1GFBFTW3W26S0Q8M5G1`).
     - A structured Markdown compilation report (`REPORT.md`) with YAML frontmatter conforming to
       `AGENTS.md`, followed by a plain-language Markdown narrative of what was performed.
 sources:

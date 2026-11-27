@@ -199,53 +199,11 @@ const toc = [
       {single.statistical_modeling.information_to_consider ? (
         <>
           <p set:html={formatSpecText(single.statistical_modeling.information_to_consider.framing, true)} />
-          {single.statistical_modeling.information_to_consider.sections.map((sec) => (
-            <>
-              <h3>{sec.title}</h3>
-              {sec.text ? <p set:html={formatSpecText(sec.text, true)} /> : null}
-              {sec.items?.length ? (
-                <ul>
-                  {sec.items.map((item) => (
-                    <li>
-                      <strong>{item.name}:</strong> <span set:html={formatSpecText(item.text, true)} />
-                      {item.items?.length ? (
-                        <ul>
-                          {item.items.map((sub) => (
-                            <li>
-                              <strong>{sub.name}:</strong>{" "}
-                              <span set:html={formatSpecText(sub.text, true)} />
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-              {sec.table ? (
-                <div class="table-wrap">
-                  <table>
-                    <thead>
-                      <tr>
-                        {sec.table.columns.map((col) => (
-                          <th>{col}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {sec.table.rows.map((row) => (
-                        <tr>
-                          {row.map((cell) => (
-                            <td set:html={formatSpecText(cell, true)} />
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              ) : null}
-            </>
-          ))}
+          <ul>
+            {single.statistical_modeling.information_to_consider.questions.map((q) => (
+              <li set:html={formatSpecText(q, true)} />
+            ))}
+          </ul>
         </>
       ) : null}
 
