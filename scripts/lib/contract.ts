@@ -93,6 +93,19 @@ export function currentContractPins(): ContractPin[] {
 
 // ---------- JSON Schema ----------
 const ajvCache = new Map<string, (x: unknown) => string[]>();
+/** Drop shortTitle from a manifest schema so already-pinned contracts stay valid after those fields were removed. */
+function manifestSchemaWithoutShortTitle(schemaText: string): string {
+  try {
+    const schema = JSON.parse(schemaText);
+    const comp = schema?.properties?.compilation;
+    if (Array.isArray(comp?.required)) comp.required = comp.required.filter((k: string) => k !== "shortTitle");
+    if (comp?.properties?.shortTitle) delete comp.properties.shortTitle;
+    return JSON.stringify(schema);
+  } catch {
+    return schemaText;
+  }
+}
+
 function jsonValidator(schemaText: string, origin: string) {
   const hit = ajvCache.get(schemaText);
   if (hit) return hit;
@@ -306,7 +319,7 @@ export async function validateCompilation(contract: Contract, input: Compilation
   if (manifestRaw === undefined) say("manifest.json: missing");
   else {
     try { manifest = JSON.parse(manifestRaw); } catch (e) { say(`manifest.json: not valid JSON (${e})`); }
-    for (const m of jsonValidator(contract.text["manifest.schema.json"], contract.origin["manifest.schema.json"])(manifest)) say(`manifest.json: ${m}`);
+    for (const m of jsonValidator(manifestSchemaWithoutShortTitle(contract.text["manifest.schema.json"]), contract.origin["manifest.schema.json"])(manifest)) say(`manifest.json: ${m}`);
   }
 
   const reportRaw = read("REPORT.md");

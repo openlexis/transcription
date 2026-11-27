@@ -65,8 +65,8 @@ const meta = {
             <div class="pill-group" role="group" aria-label="Filter by ancient language">
               <span class="pill-label">Language</span>
               <button type="button" class="filter-pill active" data-lang="" aria-pressed="true">All</button>
-              <button type="button" class="filter-pill" data-lang="Greek" aria-pressed="false">Koine Greek</button>
-              <button type="button" class="filter-pill" data-lang="Hebrew" aria-pressed="false">Biblical Hebrew and Aramaic</button>
+              <button type="button" class="filter-pill" data-lang="Greek" aria-pressed="false">Ancient Greek</button>
+              <button type="button" class="filter-pill" data-lang="Hebrew" aria-pressed="false">Ancient Hebrew and Aramaic</button>
             </div>
             <div class="pill-group" role="group" aria-label="Filter by manuscript type">
               <span class="pill-label">Type</span>
@@ -248,7 +248,7 @@ const meta = {
       if (others.length) whoHtml += `<div class="ms-sub">Support: ${others.map((it) => `${esc(it.t)}${it.sub ? ` (${esc(it.sub.join(", "))})` : ""}`).join("; ")}</div>`;
       if (usual.length) whoHtml += `<div class="ms-sub">The project's usual practice: ${usual.map((it) => esc(it.t)).join("; ")}${srcLinks(usual.flatMap((it) => it.s))}</div>`;
       const list = (k) => { const items = all(k), seen = new Set(); const u = items.filter((it) => !seen.has(it.t) && seen.add(it.t)); return u.length ? u.map(itemHtml).join("") : NOT_STATED; };
-      return [row("who", "Who", whoHtml), row("clock", "When", list("when")), row("camera", "Made from", list("from")), row("check", "How checked", list("checked")), row("branch", "Based on", list("based"))].join("");
+      return [row("who", "Who", whoHtml), row("clock", "When", list("when")), row("madeFrom", "Made from", list("from")), row("check", "How it was made and checked", list("checked")), row("branch", "Based on", list("based"))].join("");
     }
     async function fillRecords(det) {
       if (!det || det.dataset.recFilled) return;
@@ -298,7 +298,7 @@ const meta = {
           ),
         );
       }
-      rows.push(field("language", "Language", "", esc(s.ld)));
+      rows.push(field("language", "Language", "", languageCodeBadgeHtml(s.lg || s.ld) || esc(s.ld)));
       rows.push(field(s.ty in TYPE_INFO ? s.ty : "continuous", "Layout", "how the text is arranged", `${esc(typeName)}${typeHint ? `<div class="ms-sub">${esc(typeHint)}</div>` : ""}`));
       const images = s.vw.length
         ? `<div class="ar-links">${s.vw
@@ -388,7 +388,7 @@ const meta = {
             ${row("format", "Format", `${esc(f.fmt)}${/^TEI/.test(f.fmt) ? `<div class="ms-sub">TEI is the standard file format for scholarly texts.</div>` : ""}`)}
             ${row("link", "Original", `<a href="${esc(f.url)}" target="_blank" rel="noopener">Original source ↗</a>${hostOf(f.url) ? ` <span class="ms-sub">on ${esc(hostOf(f.url))}</span>` : ""}`)}
             ${row("license", "License", licenseInline(f))}
-            ${adapted ? row("adapted", "Adapted by", adapted) : ""}
+            ${adapted ? row("adapted", "Process", adapted) : ""}
           </div>
         </div>`;
     }

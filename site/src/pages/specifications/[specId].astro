@@ -3,14 +3,14 @@ import Layout from "../../layouts/Layout.astro";
 import Byline from "../../components/Byline.astro";
 import CiteBox from "../../components/CiteBox.astro";
 import ItemTitle from "../../components/ItemTitle.astro";
+import LanguageCodeBadge from "../../components/LanguageCodeBadge.astro";
 import SpecTranscriptions from "../../components/SpecTranscriptions.astro";
-import { allSpecFiles, perManuscript, specCredit } from "../../lib/credits";
-import { groupCredits } from "../../lib/cite";
+import { specCredit } from "../../lib/credits";
 import {
   REPO,
   buildClientSourceIndex,
   compUrl,
-  displayLanguage,
+  specificationDetails,
   formatAuthor,
   formatNum,
   formatSpecText,
@@ -57,9 +57,8 @@ const isEmbedded = !isFolder && Array.isArray(single.sourceRefs) && single.sourc
 
 const citeData = {
   heading: "Cite this specification",
-  ours: specCredit(single),
-  sources: groupCredits(perManuscript(allSpecFiles(single))),
-  sourcesHeading: "How to credit each source (its own credit, license and link), grouped by source and license",
+  ours: { ...specCredit(single), title: specificationDetails(single, specCompilations.length) },
+  sources: [],
 };
 
 const toc = [
@@ -73,14 +72,14 @@ const toc = [
 ];
 ---
 <Layout
-  title={single.shortTitle}
+  title={specificationDetails(single, specCompilations.length)}
   active="specs"
   description={single.summary}
 >
   <section class="page-header">
     <div class="container">
       <div class="eyebrow">Specification</div>
-      <ItemTitle as="h1" short={single.shortTitle} full={withTrademark(single.title)} />
+      <ItemTitle as="h1" spec={single} transcriptionCount={specCompilations.length} />
       <Byline
         items={[
           specAuthor && { icon: "author", text: specAuthor, title: "Author" },
@@ -248,7 +247,7 @@ const toc = [
           <span class="embed-chevron" aria-hidden="true"></span>
         </summary>
         <div class="embed-body">
-          <h3 style="margin-top: 0;">Old Testament ({otTargets.length} books · Biblical Hebrew &amp; Biblical Aramaic)</h3>
+          <h3 style="margin-top: 0;">Old Testament ({otTargets.length} books · <LanguageCodeBadge language="Hebrew and Aramaic" />)</h3>
           <div class="books-grid" style="margin-top: 12px;">
             {otTargets.map((b) => {
               const n = stats.targetSourceCounts[b.id] ?? 0;
@@ -260,16 +259,14 @@ const toc = [
                   </div>
                   <div class="book-meta">
                     <span class="book-sources">{formatNum(n)} {n === 1 ? "manuscript" : "manuscripts"}</span>
-                    <span class={b.language.includes("Aramaic") ? "badge badge-violet" : "badge badge-amber"}>
-                      {displayLanguage(b.language)}
-                    </span>
+                    <LanguageCodeBadge language={b.language} />
                   </div>
                 </a>
               );
             })}
           </div>
 
-          <h3 style="margin-top: 24px;">New Testament ({ntTargets.length} books · Koine Greek)</h3>
+          <h3 style="margin-top: 24px;">New Testament ({ntTargets.length} books · <LanguageCodeBadge language="Greek" />)</h3>
           <div class="books-grid" style="margin-top: 12px;">
             {ntTargets.map((b) => {
               const n = stats.targetSourceCounts[b.id] ?? 0;
@@ -281,7 +278,7 @@ const toc = [
                   </div>
                   <div class="book-meta">
                     <span class="book-sources">{formatNum(n)} {n === 1 ? "manuscript" : "manuscripts"}</span>
-                    <span class="badge badge-sky">{displayLanguage(b.language)}</span>
+                    <LanguageCodeBadge language={b.language} />
                   </div>
                 </a>
               );

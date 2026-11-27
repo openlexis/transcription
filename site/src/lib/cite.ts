@@ -48,7 +48,7 @@ const ADAPTED: Record<string, string> = {
     "The source publishes this transcription as JSON, not XML: the edition's Hebrew running text, which the CACCHT project extracted from the edition's PDF. Open Lexis™ converted it to TEI XML (the standard text-encoding format used by the other transcriptions) by adding tags that mark each book, chapter, line and word. Genesis 1:1 to 3:24, which the edition takes from other manuscripts, is marked as supplied, and that mark names the source. The edition says it filled a few small gaps from Cambridge Add 714 and the Abisha scroll without marking them; those cannot be marked here. The words are as the JSON gives them.",
 };
 
-/** The "Adapted by" note for a converted source file, or null when the file is the source's own file, unchanged. */
+/** The Process note for a converted source file, or null when the file is the source's own file, unchanged. */
 export function adaptedNote(path: string, format: string): string | null {
   if (!/^TEI P5 \(the source archive publishes no XML/.test(format)) return null;
   return ADAPTED[archiveOf(path)] ?? null;
@@ -283,8 +283,6 @@ export interface CiteBoxData {
 export function citeBodyHtml(d: CiteBoxData, origin: string, accessedAt?: Date): string {
   const acc = accessedAt ? formatAccessed(accessedAt) : undefined;
   const style = d.oursStyle ?? "full";
-  const srcText = d.sources.map(sourceText).join("\n\n");
-  const srcBib = d.sources.map(sourceBibtex).join("\n\n");
   const block = (label: string, text: string, bibtex: string) => `
     <div class="cite-block">
       <div class="cite-block-head"><span class="cite-label">${escHtml(label)}</span><button type="button" class="copy-btn" data-cite-copy>Copy</button></div>
@@ -297,12 +295,7 @@ export function citeBodyHtml(d: CiteBoxData, origin: string, accessedAt?: Date):
       <button type="button" class="cite-fmt active" data-cite-fmt="text" aria-pressed="true">Plain text</button>
       <button type="button" class="cite-fmt" data-cite-fmt="bibtex" aria-pressed="false">BibTeX</button>
     </div>
-    ${block(oursLabel, ourText(d.ours, origin, acc, style), ourBibtex(d.ours, origin, acc, style))}
-    ${
-      d.sources.length
-        ? block(d.sourcesHeading ?? "How to credit each source (its own credit, license and link)", srcText, srcBib)
-        : ""
-    }`;
+    ${block(oursLabel, ourText(d.ours, origin, acc, style), ourBibtex(d.ours, origin, acc, style))}`;
 }
 
 /** A whole cite box, for pages that render it in the browser. */

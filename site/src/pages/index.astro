@@ -2,10 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import ConfidenceBadge from "../components/ConfidenceBadge.astro";
 import ItemTitle from "../components/ItemTitle.astro";
+import LanguageCodeBadge from "../components/LanguageCodeBadge.astro";
 import {
   bookUrl,
   buildClientSourceIndex,
-  compShortTitle,
+  compilationDetails,
   compUrl,
   formatAuthor,
   formatEra,
@@ -929,6 +930,9 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
         <p class="hero-sub">
           The Bible survives across hundreds of ancient hand-copied manuscripts that do not always agree. Open Lexis™ applies statistical modeling directly to those primary manuscripts under published specifications, assembling the complete text word by word while keeping every witness, probability, and decision transparent.
         </p>
+        <p class="hero-sub">
+          One of the most important ways to honor the knowledge passed down to us is to study it. When errors and changes are allowed to creep in over time, they wear away the honor and guardianship we owe to wisdom.
+        </p>
       </div>
 
       {showcaseCases.length > 0 && latest && (
@@ -1242,7 +1246,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
                 <span>
                   Computed by{" "}
                   <a href={compUrl(latest.compilationId)}>
-                    {compShortTitle(latest)}
+                    {compilationDetails(latest)}
                   </a>
                 </span>
                 <a href={sc.focalHref} class="showcase-footer-action">
@@ -1646,11 +1650,11 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           <div class="featured-comp-head">
             <div>
               <div class="meta-line">
-                Latest transcription · {latest.manifest.totals.books} books · {latest.manifest.modelAttribution.modelName} · <a href={specUrl(latest.specId)}>{specs.find((s) => s.id === latest.specId)?.shortTitle ?? "Specification"}</a>
+                Latest transcription · <a href={specUrl(latest.specId)}>Specification</a>
               </div>
               <h3>
                 <a href={compUrl(latest.compilationId)} style="color: var(--ink);">
-                  {compShortTitle(latest)}
+                  <ItemTitle as="span" compilation={latest} />
                 </a>
               </h3>
               <p class="featured-comp-sub">
@@ -1684,14 +1688,12 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           {compilations.slice(1, 4).map((c) => (
             <a href={compUrl(c.compilationId)} class="other-comp-card">
               <div class="other-comp-top">
-                <strong>{compShortTitle(c)}</strong>
+                <strong><ItemTitle as="span" compilation={c} /></strong>
                 <span class="other-comp-arrow">Read →</span>
               </div>
               <span class="other-comp-meta">
-                {c.manifest.modelAttribution.modelName}
-                {c.manifest.compilation.subtitle ? ` · ${c.manifest.compilation.subtitle}` : ""}
-                {formatAuthor(c.manifest.compilation.author) ? ` · ${formatAuthor(c.manifest.compilation.author)}` : ""}
-                {` · ${formatNum(c.manifest.totals.variantPlaces)} places manuscripts differ`}
+                {formatAuthor(c.manifest.compilation.author) ? `${formatAuthor(c.manifest.compilation.author)} · ` : ""}
+                {formatNum(c.manifest.totals.variantPlaces)} disagreements
               </span>
             </a>
           ))}
@@ -1721,7 +1723,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
           return (
             <a href={specUrl(s.id)} class="spec-card">
               <div class="spec-card-top">
-                <ItemTitle as="h3" class="spec-card-title" short={s.shortTitle} full={withTrademark(s.title)} />
+                <ItemTitle as="h3" class="spec-card-title" spec={s} transcriptionCount={comps.length} />
                 <span class="spec-card-cta">Read rulebook →</span>
               </div>
               <p class="spec-card-summary">{s.summary}</p>
@@ -1839,7 +1841,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
               </div>
               <div>
                 <div class="item-top">
-                  <a href="/archive/?language=Greek" class="item-title">Koine Greek</a>
+                  <a href="/archive/?language=Greek" class="item-title"><LanguageCodeBadge language="Greek" /></a>
                   <span class="item-count">{formatNum(greekCount)} manuscripts <span>· {stats.ntCount} NT books</span></span>
                 </div>
                 <p class="item-desc">
@@ -1857,7 +1859,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
               </div>
               <div>
                 <div class="item-top">
-                  <a href="/archive/?language=Hebrew" class="item-title">Biblical Hebrew</a>
+                  <a href="/archive/?language=Hebrew" class="item-title"><LanguageCodeBadge language="Hebrew" /></a>
                   <span class="item-count">{formatNum(hebrewCount)} manuscripts <span>· {stats.otCount} OT books</span></span>
                 </div>
                 <p class="item-desc">
@@ -1875,7 +1877,7 @@ const hebrewCount = stats.languages.Hebrew ?? 0;
               </div>
               <div>
                 <div class="item-top">
-                  <a href={`${specUrl(spec.id)}#embedded-targets`} class="item-title">Biblical Aramaic</a>
+                  <a href={`${specUrl(spec.id)}#embedded-targets`} class="item-title"><LanguageCodeBadge language="Aramaic" /></a>
                   <span class="item-count">{stats.aramaicTargetCount} books <span>(OT sections)</span></span>
                 </div>
                 <p class="item-desc">

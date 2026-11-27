@@ -5706,8 +5706,8 @@ tr:last-child td {
   margin-top: 18px;
 }
 
-/* Previous book, a link up to the transcription, and next book: one line (previous left, up arrow in the
-   middle, next right) when they fit; a stacked list, with the up link reading "↑ Transcription", when they do not. */
+/* Previous book, a link up to the transcription, and next book: "↑ Transcription" in both layouts when it
+   fits; a bare ↑ only when previous and next sit on one line and the word does not fit. */
 .book-sidebar-nav {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
@@ -5755,7 +5755,7 @@ tr:last-child td {
   justify-content: space-between;
 }
 
-.book-sidebar-nav:not(.is-stacked) .book-sidebar-nav-up-word {
+.book-sidebar-nav.is-bare-up .book-sidebar-nav-up-word {
   display: none;
 }
 
@@ -5778,7 +5778,7 @@ tr:last-child td {
   overflow-wrap: normal;
 }
 
-.book-sidebar-nav.is-measuring .book-sidebar-nav-up-word {
+.book-sidebar-nav.is-measuring.is-bare-up .book-sidebar-nav-up-word {
   display: none;
 }
 

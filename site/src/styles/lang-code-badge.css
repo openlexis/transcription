@@ -1,19 +1,21 @@
+/* Small neutral ISO 639-3 language tag (grc, hbo, arc): no color and no script letter. */
 .lang-code-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.4em;
-  height: 1.4em;
-  padding: 0;
+  padding: 0.12em 0.38em;
   border: 1px solid var(--border);
-  border-radius: 50%;
+  border-radius: 4px;
   background: var(--surface);
   color: var(--ink);
-  font: 600 0.8rem/1 var(--font-sans);
-  letter-spacing: 0;
+  font: 600 0.68rem/1.2 var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  letter-spacing: 0.02em;
   text-transform: none;
   white-space: nowrap;
   vertical-align: middle;
+}
+.lang-code-badge + .lang-code-badge {
+  margin-left: 0.25em;
 }
 .lang-code-badge > [aria-hidden] {
   display: block;

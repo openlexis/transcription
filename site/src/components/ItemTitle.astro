@@ -1,20 +1,25 @@
 ---
-// The title of a specification or transcription: its required short title as the heading, and its longer title below
-// it, cut off with an ellipsis past 80 characters (the whole title is in the tooltip). The longer title is left out
-// when it says the same thing as the short title.
-import { clampTitle, FULL_TITLE_MAX } from "../lib/corpus";
+// A readable heading for a specification or transcription, built from real details in the data (no invented title).
+import {
+  compilationDetails,
+  specificationDetails,
+  type CompilationRecord,
+  type SpecFile,
+} from "../lib/corpus";
 
 interface Props {
-  short: string;
-  full?: string;
-  as?: "h1" | "h2" | "h3";
+  as?: "h1" | "h2" | "h3" | "span" | "p";
   class?: string;
+  compilation?: CompilationRecord;
+  spec?: SpecFile;
+  transcriptionCount?: number;
+  /** Already-built details, when the caller has a ready string. */
+  text?: string;
 }
 
-const { short, full, as: Tag = "h2", class: cls } = Astro.props;
-const norm = (s: string) => s.replace(/\u2122/g, "").trim().toLowerCase();
-const longer = full && norm(full) !== norm(short) ? full : undefined;
-const shown = longer ? clampTitle(longer, FULL_TITLE_MAX) : undefined;
+const { as: Tag = "h2", class: cls, compilation, spec, transcriptionCount, text } = Astro.props;
+const shown =
+  text ??
+  (compilation ? compilationDetails(compilation) : spec ? specificationDetails(spec, transcriptionCount) : "");
 ---
-<Tag class={cls}>{short}</Tag>
-{shown && <p class="item-full-title" title={shown !== longer ? longer : undefined}>{shown}</p>}
+<Tag class={cls}>{shown}</Tag>

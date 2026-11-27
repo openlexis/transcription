@@ -12,11 +12,16 @@ export type TranscriptionView = { id: string; who: Item[]; others: Item[]; usual
 const ROLE: Record<string, string> = { cre: "made it", trc: "transcribed", pfr: "proofread", rev: "reconciled or revised", edt: "edited", mrk: "converted it to XML", fnd: "funded", spn: "sponsored", pbl: "published", pdr: "directed the project", pht: "photographed", ctb: "contributed corrections", dtc: "contributed data", prg: "wrote software" };
 const SUPPORT = new Set(["fnd", "spn", "pbl", "pdr"]);
 const KIND: Record<string, string> = {
-  "independent-double-transcription": "Two independent transcriptions", "automatic-comparison": "Compared automatically by software",
-  reconciliation: "Differences reconciled", proofreading: "Proofread", "verification-against-original": "Checked against the manuscript itself",
-  "checked-against-images": "Checked against images", "compared-with-edition": "Compared with a printed edition",
-  "compared-with-other-transcriptions": "Compared with other transcriptions", "base-text-adaptation": "Started from a printed base text and changed to match the manuscript",
-  "conversion-to-xml": "Converted to XML",
+  "independent-double-transcription": "Two people each made their own transcription of the same manuscript, working independently.",
+  "automatic-comparison": "The transcriptions were compared automatically by software.",
+  reconciliation: "Differences between transcriptions were reconciled.",
+  proofreading: "The transcription was proofread.",
+  "verification-against-original": "The transcription was checked against the manuscript itself.",
+  "checked-against-images": "The transcription was checked against images.",
+  "compared-with-edition": "The transcription was compared with a printed edition.",
+  "compared-with-other-transcriptions": "The transcription was compared with other transcriptions.",
+  "base-text-adaptation": "The work started from a printed base text and was changed to match the manuscript.",
+  "conversion-to-xml": "The transcription was converted to XML (a structured markup format).",
 };
 const FROM: Record<string, string> = { images: "Images", original: "The manuscript itself", edition: "A printed edition", microfilm: "Microfilm", typescript: "A typed transcription", facsimile: "A printed facsimile", "no-images": "No images were available", other: "Other" };
 const REPRO: Record<string, string> = { "digital-colour": "colour digital images", "digital-raking-light": "digital images in raking light", multispectral: "multispectral images (taken under different wavelengths of light)", infrared: "infrared images", ultraviolet: "ultraviolet images", "black-and-white-photograph": "black and white photographs", facsimile: "printed facsimile", microfilm: "microfilm", edition: "printed edition" };
@@ -113,7 +118,11 @@ export function transcriptionView(r: any, m: any): TranscriptionView {
     const sub = [f.description, rep ? `Image set: ${rep.description ?? rep.id}${rep.when ? ` (${rep.when.text ?? range(rep.when)})` : ""}` : "", f.generalPractice ? "The project's usual practice" : ""].filter(Boolean);
     put(v.from, { t: FROM[f.kind] ?? f.kind, sub, s: src(f.sources) });
   }
-  for (const p of r.method?.practices ?? []) put(v.checked, { t: `${KIND[p.kind] ?? p.kind}${p.generalPractice ? " (the project's usual practice)" : ""}`, sub: [p.text], s: src(p.sources) });
+  for (const p of r.method?.practices ?? []) {
+    const text = typeof p.text === "string" && p.text.trim() ? p.text.trim() : (KIND[p.kind] ?? String(p.kind ?? ""));
+    const usual = p.generalPractice ? "The project's usual practice" : "";
+    put(v.checked, { t: text, ...(usual ? { sub: [usual] } : {}), s: src(p.sources) });
+  }
   for (const b of r.basedOn ?? []) put(v.based, { t: b.transcription ? `${b.name ?? "transcription"} (${b.transcription})` : b.name, ...(b.description ? { sub: [b.description] } : {}), s: src(b.sources), ...(b.url ? { link: b.url } : {}) });
   for (const b of r.baseText ?? []) put(v.based, { t: b.text, s: src(b.sources) });
   return v;

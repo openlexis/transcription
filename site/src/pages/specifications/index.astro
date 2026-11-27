@@ -7,7 +7,6 @@ import SpecTranscriptions from "../../components/SpecTranscriptions.astro";
 import {
   formatAuthor,
   formatNum,
-  formatUlidDate,
   getCompilationsForSpec,
   getSpecifications,
   shortUlid,
@@ -39,14 +38,13 @@ const specs = [...getSpecifications()].sort(
       <div class="spec-cards">
         {specs.map((s, idx) => {
           const comps = getCompilationsForSpec(s.id);
-          const dateStr = formatUlidDate(s.id);
           const authorStr = formatAuthor(s.author);
           return (
             <article class="spec-card">
               <a href={specUrl(s.id)} class="spec-card-hit">
                 <div class="spec-card-top">
                   <div class="spec-card-title-row">
-                    <ItemTitle class="spec-card-title" short={s.shortTitle} full={withTrademark(s.title)} />
+                    <ItemTitle class="spec-card-title" spec={s} transcriptionCount={comps.length} />
                     {idx === 0 && specs.length > 1 && (
                       <Pill tone="accent">Latest</Pill>
                     )}
@@ -57,7 +55,6 @@ const specs = [...getSpecifications()].sort(
                 <Byline
                   items={[
                     authorStr && { icon: "author", text: authorStr, title: "Author" },
-                    dateStr && { icon: "date", text: dateStr, title: "Date created" },
                     s.license && { icon: "license", text: s.license.name, title: withTrademark(s.license.copyright) },
                   ]}
                 />

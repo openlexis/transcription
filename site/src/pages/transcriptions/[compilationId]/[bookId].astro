@@ -9,16 +9,16 @@ import Byline from "../../../components/Byline.astro";
 import CiteBox from "../../../components/CiteBox.astro";
 import PageSidebar from "../../../components/PageSidebar.astro";
 import Icon from "../../../components/Icon.astro";
+import LanguageCodeBadge from "../../../components/LanguageCodeBadge.astro";
 import { bookCredit, perManuscript, witnessFiles } from "../../../lib/credits";
 import { bookDownload } from "../../../lib/downloads";
-import { groupCredits } from "../../../lib/cite";
 import {
   bookUrl,
   compUrl,
   formatAuthor,
   formatNum,
   getCompilations,
-  compShortTitle,
+  compilationDetails,
   getSpecifications,
   getWitnessViewersMap,
   githubBlob,
@@ -30,7 +30,7 @@ import {
   type CompiledBookEntry,
 } from "../../../lib/corpus";
 import { buildBookGlossMap } from "../../../lib/gloss";
-import { LANGUAGE_META, type LangCode } from "../../../lib/languages";
+import { type LangCode } from "../../../lib/languages";
 import { transliterateText } from "../../../lib/transliterate";
 
 export function getStaticPaths() {
@@ -67,7 +67,7 @@ const compDate = c.manifest.compilation.createdAt
       day: "numeric",
     })
   : "";
-const compTitle = compShortTitle(c);
+const compTitle = compilationDetails(c);
 const compAuthor = formatAuthor(c.manifest.compilation.author);
 const spec = getSpecifications().find((s) => s.id === c.specId);
 const license = spec?.license;
@@ -78,8 +78,7 @@ const ourBookCredit = bookCredit(c, b, compTitle, spec);
 const citeData = {
   heading: "Cite this book",
   ours: ourBookCredit,
-  sources: groupCredits(perManuscript(witnessUsed.flat())),
-  sourcesHeading: "How to credit each source (its own credit, license and link), grouped by source and license",
+  sources: [],
 };
 const viewersMap = getWitnessViewersMap(c.specId);
 const reportScale = c.report?.frontmatter?.disagreement_scale;
@@ -347,7 +346,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           <Pill icon="section">{b.section}</Pill>
         )}
         {bookLangCodes.map((code) => (
-          <Pill icon="language" title={LANGUAGE_META[code].note}>{LANGUAGE_META[code].label}</Pill>
+          <LanguageCodeBadge language={code} />
         ))}
       </div>
       <h1>{b.name}</h1>
@@ -355,7 +354,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
         items={[
           compAuthor && { icon: "author", text: compAuthor, title: "Author" },
           compDate && { icon: "date", text: compDate, title: "Date compiled" },
-          compTitle && { icon: "transcriptions", text: compTitle, title: "Transcription", href: compUrl(c.compilationId) },
+          { icon: "transcriptions", text: "Transcription", title: "Transcription", href: compUrl(c.compilationId) },
           license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
         ]}
       >
@@ -711,7 +710,7 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
       renderConfidenceBadgeHtml,
     } from "../../../lib/confidence";
     import "../../../lib/cite-ui";
-    import { citeBoxHtml, manuscriptRef, tm, type SourceCredit } from "../../../lib/cite";
+    import { tm, type SourceCredit } from "../../../lib/cite";
 
     const reader = document.getElementById("compiled-reader");
     const inspectorUrl =
@@ -1025,17 +1024,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
           ? `<div class="ms-sub" style="margin:6px 0 2px;">This transcription:</div><div><a href="${esc(ours.licenseUrl)}" target="_blank" rel="noopener">${esc(ours.licenseName)}</a> <span class="ms-sub">(${esc(tm(ours.copyright))})</span></div>`
           : ""
       }</div></div>`;
-      const citeHtml = ours
-        ? citeBoxHtml(
-            {
-              heading: "Cite this manuscript in this book",
-              ours: { ...ours, key: `${ours.key}-${String(sig).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`, title: `${ours.title}, ${manuscriptRef(sig, (desc.split(";")[0].match(/\(([^()]+)\)\s*$/) || [])[1], DATA.isHebrew ? "Hebrew" : "Greek")}` },
-              sources: srcCredits,
-            },
-            location.origin,
-            new Date(),
-          )
-        : "";
       const viewerLinks = Array.isArray(viewers) && viewers.length
         ? viewers
             .map((v) => {
@@ -1084,7 +1072,6 @@ writeFileSync(join(process.cwd(), "www", inspectorRel), JSON.stringify(clientDat
             ${filledIn ? `<div><div class="source-meta-label">Filled-in text (not counted)</div><div class="source-meta-val">${esc(filledIn)}</div></div>` : ""}
             ${licenseHtml}
           </div>
-          ${citeHtml}
         </div>
       `;
     }

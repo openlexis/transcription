@@ -1,8 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { parse } from "yaml";
 import { isPinnedList, loadFrozenSources, sourcesFromPinned } from "../../../scripts/sources.ts";
-import { clampTitle, FULL_TITLE_MAX, SHORT_TITLE_MAX, specShortTitle } from "../../../scripts/lib/titles.ts";
-export { clampTitle, FULL_TITLE_MAX, SHORT_TITLE_MAX };
 
 export const ROOT = new URL("../../../", import.meta.url).pathname;
 export const REPO = "https://github.com/openlexis/transcription";
@@ -82,8 +80,6 @@ export interface SpecFile {
   file: string;
   id: string;
   title: string;
-  /** Required short title of at most 40 characters, from the specification's own `shortTitle` field. */
-  shortTitle: string;
   author?: AuthorInfo;
   license: SpecLicense;
   summary: string;
@@ -306,9 +302,9 @@ export function getSpecifications(): SpecFile[] {
   _specs = files.map((file) => {
     const parsed = parse(readFileSync(`${ROOT}${file}`, "utf8")) as Omit<
       SpecFile,
-      "file" | "sources" | "sourceRefs" | "targets" | "shortTitle"
-    > & { shortTitle?: string; targets?: TargetBook[]; sources: string | string[] | Record<string, string[]> };
-    const raw = { ...parsed, shortTitle: specShortTitle(parsed) ?? "" };
+      "file" | "sources" | "sourceRefs" | "targets"
+    > & { targets?: TargetBook[]; sources: string | string[] | Record<string, string[]> };
+    const raw = { ...parsed };
     if (isPinnedList(raw.sources)) {
       const { targets, sources } = sourcesFromPinned(raw.sources);
       return { ...raw, file, targets, sourceRefs: [file], sources };
@@ -358,14 +354,28 @@ export function ulidTimestamp(id: string): number | null {
   return ms;
 }
 
+const DAY_FMT: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+  timeZone: "America/New_York",
+};
+
+/** A calendar day in the user's time (America/New_York). */
+export function formatDay(d: Date): string {
+  return d.toLocaleDateString("en-US", DAY_FMT);
+}
+
+export function formatIsoDate(iso?: string): string {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? "" : formatDay(d);
+}
+
 export function formatUlidDate(id: string): string {
   const ms = ulidTimestamp(id);
   if (ms === null) return "";
-  return new Date(ms).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  return formatDay(new Date(ms));
 }
 
 /** Escapes HTML, formats `code`, and makes mentions of `targets` / `sources` clickable links to their expandable sections. */
@@ -386,9 +396,9 @@ export function formatSpecText(s: string, linkEmbeds = false): string {
 }
 
 export function displayLanguage(lang: string): string {
-  if (lang === "Greek") return "Koine Greek";
-  if (lang === "Hebrew") return "Biblical Hebrew";
-  if (lang === "Hebrew and Aramaic") return "Biblical Hebrew & Aramaic";
+  if (lang === "Greek") return "Ancient Greek";
+  if (lang === "Hebrew") return "Ancient Hebrew";
+  if (lang === "Hebrew and Aramaic") return "Ancient Hebrew and Aramaic";
   return lang;
 }
 
@@ -623,8 +633,6 @@ export interface CompilationManifest {
   compilation: {
     id: string;
     title?: string;
-    /** Required short title (at most 40 characters) for links, navigation, cards, lists and page titles. */
-    shortTitle?: string;
     subtitle?: string;
     summary?: string;
     author?: AuthorInfo;
@@ -801,14 +809,42 @@ export function getCompilations(): CompilationRecord[] {
   return _compilations;
 }
 
-/** A transcription's short title, for links, navigation, cards, lists and page titles. Never ULID characters. */
-export function compShortTitle(c: CompilationRecord): string {
-  const m = c.manifest.compilation;
-  return m.shortTitle?.trim() || clampTitle(m.title?.trim() || c.manifest.modelAttribution.modelName, SHORT_TITLE_MAX);
-}
-
 export function getCompilationsForSpec(specId: string): CompilationRecord[] {
   return getCompilations().filter((c) => c.specId === specId);
+}
+
+/** Real details that identify a transcription: book count, word count, model, and date. */
+export function compilationParts(c: CompilationRecord): string[] {
+  const m = c.manifest;
+  const books = m.totals.books;
+  const words = m.totals.words;
+  return [
+    Number.isFinite(books) ? `${formatNum(books)} ${books === 1 ? "book" : "books"}` : "",
+    Number.isFinite(words) ? `${formatNum(words)} ${words === 1 ? "word" : "words"}` : "",
+    m.modelAttribution.modelName?.trim() || "",
+    formatIsoDate(m.compilation.createdAt),
+  ].filter(Boolean);
+}
+
+export function compilationDetails(c: CompilationRecord): string {
+  return compilationParts(c).join(" · ");
+}
+
+/** Real details that identify a specification: publication date, book and manuscript counts, and how many transcriptions were made from it. */
+export function specificationParts(s: SpecFile, transcriptionCount?: number): string[] {
+  const n = transcriptionCount ?? getCompilationsForSpec(s.id).length;
+  const books = s.targets.length;
+  const manuscripts = s.sources.length;
+  return [
+    formatUlidDate(s.id),
+    `${formatNum(books)} ${books === 1 ? "book" : "books"}`,
+    `${formatNum(manuscripts)} ${manuscripts === 1 ? "manuscript" : "manuscripts"}`,
+    n === 1 ? "1 transcription" : `${formatNum(n)} transcriptions`,
+  ].filter(Boolean);
+}
+
+export function specificationDetails(s: SpecFile, transcriptionCount?: number): string {
+  return specificationParts(s, transcriptionCount).join(" · ");
 }
 
 export function formatBytes(bytes: number): string {

@@ -7,20 +7,17 @@ import Byline from "../../../components/Byline.astro";
 import ModelCredit from "../../../components/ModelCredit.astro";
 import CiteBox from "../../../components/CiteBox.astro";
 import ItemTitle from "../../../components/ItemTitle.astro";
-import { compilationCredit, perManuscript, witnessFiles } from "../../../lib/credits";
+import { compilationCredit } from "../../../lib/credits";
 import { bookDownloads } from "../../../lib/downloads";
-import { groupCredits } from "../../../lib/cite";
-import { readFileSync } from "node:fs";
 import {
   bookUrl,
-  compShortTitle,
+  compilationDetails,
   formatAuthor,
   formatBytes,
   formatNum,
   getBookAttributes,
   getCompilations,
   getSpecifications,
-  githubBlob,
   githubTree,
   normalizeSeverityBucket,
   shortUlid,
@@ -94,28 +91,16 @@ const createdDate = m.compilation.createdAt
       day: "numeric",
     })
   : "";
-const compTitle = compShortTitle(c);
-const compSubtitle = m.compilation.subtitle || `${attr.modelName} (${attr.provider})`;
+const compTitle = compilationDetails(c);
 const compSummary = m.compilation.summary || m.method.summary;
 const compAuthor = formatAuthor(m.compilation.author);
 const spec = getSpecifications().find((s) => s.id === c.specId);
 const license = spec?.license;
 const downloads = bookDownloads(c);
-// Sources used by any book: each witness names its source files in the book's header.
-const usedFiles = spec
-  ? m.books.flatMap((b) => {
-      const xml = readFileSync(`${c.dir}/${b.file}`, "utf8");
-      const head = xml.slice(0, Math.max(0, xml.indexOf("</listWit>")));
-      return [...head.matchAll(/<witness xml:id="[^"]+">([\s\S]*?)<\/witness>/g)].flatMap((w) =>
-        witnessFiles(spec, w[1].match(/<abbr type="siglum">([^<]*)/)?.[1] ?? "", w[1].match(/<note type="source-files">([^<]*)/)?.[1] ?? ""),
-      );
-    })
-  : [];
 const citeData = {
   heading: "Cite this transcription",
   ours: compilationCredit(c, compTitle, spec),
-  sources: groupCredits(perManuscript(usedFiles)),
-  sourcesHeading: "How to credit each source (its own credit, license and link), grouped by source and license",
+  sources: [],
 };
 ---
 <Layout
@@ -126,15 +111,12 @@ const citeData = {
   <section class="page-header">
     <div class="container">
       <div class="eyebrow">Transcription</div>
-      <ItemTitle as="h1" short={compTitle} full={m.compilation.title} />
-      <p style="margin: 6px 0 0; font-size: 1.02rem; font-weight: 500; color: var(--ink-secondary);">
-        {compSubtitle}
-      </p>
+      <ItemTitle as="h1" compilation={c} />
       <Byline
         items={[
           compAuthor && { icon: "author", text: compAuthor, title: "Author" },
           createdDate && { icon: "date", text: createdDate, title: "Date compiled" },
-          spec && { icon: "specification", text: spec.shortTitle, title: `Specification: ${withTrademark(spec.title)}`, href: specUrl(c.specId) },
+          spec && { icon: "specification", text: "Specification", title: "Specification", href: specUrl(c.specId) },
           license && { icon: "license", text: license.name, title: withTrademark(license.copyright), href: license.url },
         ]}
       >

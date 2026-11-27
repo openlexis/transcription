@@ -22,11 +22,10 @@
     "compilation": {
       "description": "This compilation.",
       "type": "object",
-      "required": ["id", "title", "shortTitle", "subtitle", "summary", "author", "createdAt", "outputDirectory", "outputFormat", "reportFile"],
+      "required": ["id", "title", "subtitle", "summary", "author", "createdAt", "outputDirectory", "outputFormat", "reportFile"],
       "properties": {
         "id": { "$ref": "#/$defs/ulid", "description": "The compilation's ULID; it is also the name of its folder." },
-        "title": { "$ref": "#/$defs/text", "description": "A title a reader can relate to. Shown in full where there is room, cut off with an ellipsis past 80 characters." },
-        "shortTitle": { "type": "string", "minLength": 1, "maxLength": 40, "pattern": "^\\S(.*\\S)?$", "description": "Required. A short title of at most 40 characters, used in links, navigation, cards, lists and page titles. It must tell this compilation apart from every other one, and must not be ULID characters." },
+        "title": { "$ref": "#/$defs/text", "description": "A title a reader can relate to." },
         "subtitle": { "$ref": "#/$defs/text", "description": "A short subtitle summarizing the model or approach." },
         "summary": { "$ref": "#/$defs/text", "description": "One or two plain sentences summarizing the compilation." },
         "author": { "$ref": "#/$defs/text", "description": "The publisher of the compilation, for example Open Lexis." },

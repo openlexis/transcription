@@ -6,7 +6,6 @@ import { parseXml } from "./lib/tei";
 import { spawnSync } from "node:child_process";
 import { isPinnedList, listSpecs, loadSpecWithSources, type FrozenSources, type PinnedTranscript } from "./sources";
 import { readSpecLicense, type SpecLicense } from "./lib/spec";
-import { checkShortTitles } from "./lib/titles";
 import { contractPins, loadPinnedContract, validateCompilation, type Contract } from "./lib/contract";
 import { checkRecords } from "./lib/records-check";
 
@@ -248,21 +247,6 @@ for (const specId of onlyDir ? [] : readdirSync(`${ROOT}transcripts`).sort()) {
       if (!hasListWit || !declaredWits.size) fails.push(`${at}/${b.file}: missing or empty <listWit>`);
     }
   }
-}
-
-// Short titles: every specification and every transcription needs one, at most 40 characters (scripts/lib/titles.ts).
-if (!onlyDir) {
-  const specs = listSpecs().flatMap(({ id, path }) => {
-    try { return [{ id, at: path.slice(ROOT.length), raw: Bun.YAML.parse(readFileSync(path, "utf8")) as Record<string, unknown> }]; } catch { return []; }
-  });
-  const comps = readdirSync(`${ROOT}transcripts`).sort().flatMap((specId) =>
-    readdirSync(`${ROOT}transcripts/${specId}`).sort().flatMap((compId) => {
-      const at = `transcripts/${specId}/${compId}`, mf = `${ROOT}${at}/manifest.json`;
-      if (!existsSync(mf)) return [];
-      try { return [{ at, shortTitle: JSON.parse(readFileSync(mf, "utf8")).compilation?.shortTitle }]; } catch { return []; }
-    }),
-  );
-  fails.push(...checkShortTitles(specs, comps));
 }
 
 // The archive records: one YAML file per manuscript and per transcription file (docs/archive-records.md).

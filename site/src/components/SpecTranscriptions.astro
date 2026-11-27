@@ -1,6 +1,7 @@
 ---
 import "../styles/spec-transcriptions.css";
-import { compShortTitle, compUrl, type CompilationRecord } from "../lib/corpus";
+import ItemTitle from "./ItemTitle.astro";
+import { compUrl, type CompilationRecord } from "../lib/corpus";
 
 interface Props {
   compilations: CompilationRecord[];
@@ -15,14 +16,6 @@ const heading =
     ? "1 transcription made from this specification"
     : `${compilations.length} transcriptions made from this specification`;
 const empty = "No transcriptions have been made from this specification yet.";
-
-function compiledOn(c: CompilationRecord): string {
-  const raw = c.manifest.compilation.createdAt;
-  if (!raw) return "";
-  const d = new Date(raw);
-  if (Number.isNaN(d.getTime())) return "";
-  return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
-}
 ---
 
 {compilations.length === 0 ? (
@@ -31,32 +24,22 @@ function compiledOn(c: CompilationRecord): string {
   <details class="spec-transcriptions" open>
     <summary>{heading}</summary>
     <ul class="spec-transcriptions-list">
-      {compilations.map((c) => {
-        const title = compShortTitle(c);
-        const date = compiledOn(c);
-        return (
-          <li>
-            <a href={compUrl(c.compilationId)}>{title}</a>
-            {date && <span class="spec-transcriptions-date"> · {date}</span>}
-          </li>
-        );
-      })}
+      {compilations.map((c) => (
+        <li>
+          <a href={compUrl(c.compilationId)}><ItemTitle as="span" compilation={c} /></a>
+        </li>
+      ))}
     </ul>
   </details>
 ) : (
   <div class="spec-transcriptions">
     <div class="spec-transcriptions-heading">{heading}</div>
     <ul class="spec-transcriptions-list">
-      {compilations.map((c) => {
-        const title = compShortTitle(c);
-        const date = compiledOn(c);
-        return (
-          <li>
-            <a href={compUrl(c.compilationId)}>{title}</a>
-            {date && <span class="spec-transcriptions-date"> · {date}</span>}
-          </li>
-        );
-      })}
+      {compilations.map((c) => (
+        <li>
+          <a href={compUrl(c.compilationId)}><ItemTitle as="span" compilation={c} /></a>
+        </li>
+      ))}
     </ul>
   </div>
 )}

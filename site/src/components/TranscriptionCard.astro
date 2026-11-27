@@ -2,7 +2,7 @@
 import Pill from "./Pill.astro";
 import Byline from "./Byline.astro";
 import ItemTitle from "./ItemTitle.astro";
-import { compShortTitle, compUrl, formatNum, shortUlid, type CompilationRecord, type SpecLicense } from "../lib/corpus";
+import { compUrl, formatNum, shortUlid, type CompilationRecord, type SpecLicense } from "../lib/corpus";
 
 interface Props {
   compilation: CompilationRecord;
@@ -11,33 +11,22 @@ interface Props {
 
 const { compilation: c, license } = Astro.props;
 const m = c.manifest;
-const dateStr = m.compilation.createdAt
-  ? new Date(m.compilation.createdAt).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    })
-  : "";
-const title = compShortTitle(c);
 const summary = m.compilation.summary || m.method.summary;
 ---
 <a href={compUrl(c.compilationId)} class="spec-card">
   <div class="spec-card-top">
     <div class="spec-card-title-row">
-      <ItemTitle class="spec-card-title" short={title} full={m.compilation.title} />
+      <ItemTitle class="spec-card-title" compilation={c} />
     </div>
     <span class="spec-card-cta">Read transcription →</span>
   </div>
   <p class="spec-card-summary">{summary}</p>
   <Byline
     items={[
-      dateStr && { icon: "date", text: dateStr, title: "Date compiled" },
       license && { icon: "license", text: license.name, title: `${license.copyright}. ${license.name}` },
-      m.modelAttribution.modelName && { icon: "model", text: m.modelAttribution.modelName, title: "Model" },
     ]}
   />
   <div class="spec-card-meta">
-    <Pill icon="words">{formatNum(m.totals.words)} words</Pill>
     <Pill icon="disagreements">{formatNum(m.totals.variantPlaces)} disagreements</Pill>
     <span class="spec-card-id" title={`Transcription ID: ${c.compilationId}`}>
       <code>{shortUlid(c.compilationId)}</code>
