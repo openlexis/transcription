@@ -1,10 +1,12 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import TranscriptionCard from "../../components/TranscriptionCard.astro";
+import TranscriptionsSpecFilter from "../../components/TranscriptionsSpecFilter.astro";
 import { getCompilations, getSpecifications } from "../../lib/corpus";
 
 const compilations = getCompilations();
-const specsById = new Map(getSpecifications().map((s) => [s.id, s]));
+const specs = getSpecifications();
+const specsById = new Map(specs.map((s) => [s.id, s]));
 ---
 <Layout
   title="Transcriptions"
@@ -33,11 +35,14 @@ const specsById = new Map(getSpecifications().map((s) => [s.id, s]));
           <a href="/specifications/" class="btn btn-secondary">Read specification →</a>
         </div>
       ) : (
-        <div class="spec-cards">
-          {compilations.map((c) => (
-            <TranscriptionCard compilation={c} license={specsById.get(c.specId)?.license} />
-          ))}
-        </div>
+        <>
+          <TranscriptionsSpecFilter specs={specs} />
+          <div class="spec-cards" data-transcription-list>
+            {compilations.map((c) => (
+              <TranscriptionCard compilation={c} license={specsById.get(c.specId)?.license} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   </section>

@@ -100,12 +100,12 @@ const toc = [
           <button type="button" class="copy-btn" id="copy-id">Copy</button>
         </div>
         {specCompilations.length > 0 && (
-          <a href={specCompilations.length === 1 ? compUrl(specCompilations[0].compilationId) : "/transcriptions/"} class="btn btn-primary">
+          <a href={specCompilations.length === 1 ? compUrl(specCompilations[0].compilationId) : `/transcriptions/?specification=${encodeURIComponent(single.id)}`} class="btn btn-primary">
             {specCompilations.length === 1 ? "Read transcription" : "Read transcriptions"} →
           </a>
         )}
       </div>
-      <SpecTranscriptions compilations={specCompilations} license={single.license} />
+      <SpecTranscriptions compilations={specCompilations} license={single.license} specId={single.id} />
     </div>
   </section>
 

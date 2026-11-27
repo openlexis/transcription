@@ -1,0 +1,36 @@
+---
+import { shortUlid, specificationDetails, type SpecFile } from "../lib/corpus";
+
+interface Props {
+  specs: SpecFile[];
+}
+
+const { specs } = Astro.props;
+const catalog: Record<string, string> = {};
+for (const s of specs) {
+  const title = specificationDetails(s);
+  catalog[s.id] = title;
+  catalog[shortUlid(s.id)] = title;
+}
+---
+
+<div class="spec-filter-bar" data-spec-filter hidden>
+  <span class="pill" data-spec-filter-pill>
+    <span data-spec-filter-title></span>
+    <button
+      type="button"
+      class="spec-filter-clear"
+      data-spec-filter-clear
+      title="Show all transcriptions"
+      aria-label="Show all transcriptions"
+    >×</button>
+  </span>
+</div>
+<p class="spec-transcriptions-empty" data-spec-filter-empty hidden>
+  No transcriptions have been made from this specification yet.
+</p>
+<script type="application/json" id="spec-filter-catalog" set:html={JSON.stringify(catalog)} />
+<script>
+  import { initTranscriptionsSpecFilter } from "../lib/transcriptions-spec-filter";
+  initTranscriptionsSpecFilter();
+</script>

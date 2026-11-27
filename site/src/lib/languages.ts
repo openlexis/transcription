@@ -2,10 +2,12 @@ export type LangCode = "grc" | "hbo" | "arc" | "syc" | "lat" | "cop";
 
 export interface LanguageMeta {
   code: LangCode;
-  /** English name, used in the hover together with `native`. */
+  /** English name, used in the hover together with the ISO 639-3 code. */
   label: string;
-  /** Native name in the language's own script, shown in the hover after the English name. */
+  /** Native name in the language's own script, shown on the language pill. */
   native?: string;
+  /** HTML dir for the native name. */
+  dir: "ltr" | "rtl";
   shortLabel: string;
   badgeClass: string;
   note: string;
@@ -16,6 +18,7 @@ export const LANGUAGE_META: Record<LangCode, LanguageMeta> = {
     code: "grc",
     label: "Ancient Greek",
     native: "Ἑλληνική",
+    dir: "ltr",
     shortLabel: "Greek",
     badgeClass: "badge-sky",
     note: "Ancient Greek, including the Hellenistic and Roman Mediterranean Greek of the New Testament.",
@@ -24,6 +27,7 @@ export const LANGUAGE_META: Record<LangCode, LanguageMeta> = {
     code: "hbo",
     label: "Ancient Hebrew",
     native: "עברית",
+    dir: "rtl",
     shortLabel: "Hebrew",
     badgeClass: "badge-amber",
     note: "Ancient Hebrew, written right to left.",
@@ -32,6 +36,7 @@ export const LANGUAGE_META: Record<LangCode, LanguageMeta> = {
     code: "arc",
     label: "Aramaic",
     native: "ܐܪܡܝܐ",
+    dir: "rtl",
     shortLabel: "Aramaic",
     badgeClass: "badge-violet",
     note: "Imperial Aramaic, written right to left.",
@@ -39,6 +44,7 @@ export const LANGUAGE_META: Record<LangCode, LanguageMeta> = {
   syc: {
     code: "syc",
     label: "Classical Syriac",
+    dir: "rtl",
     shortLabel: "Syriac",
     badgeClass: "badge-rose",
     note: "Classical Syriac, written right to left.",
@@ -46,6 +52,7 @@ export const LANGUAGE_META: Record<LangCode, LanguageMeta> = {
   lat: {
     code: "lat",
     label: "Latin",
+    dir: "ltr",
     shortLabel: "Latin",
     badgeClass: "badge-slate",
     note: "Latin.",
@@ -53,6 +60,7 @@ export const LANGUAGE_META: Record<LangCode, LanguageMeta> = {
   cop: {
     code: "cop",
     label: "Coptic",
+    dir: "ltr",
     shortLabel: "Coptic",
     badgeClass: "badge-emerald",
     note: "Coptic.",
@@ -108,20 +116,28 @@ function escAttr(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 }
 
-/** English name plus native name, for the hover and accessible label: "Ancient Greek (Ἑλληνική)". */
+/** English name plus the ISO 639-3 code, for the hover and accessible label: "Ancient Greek (grc)". */
 export function languageHoverLabel(code: LangCode): string {
   const m = LANGUAGE_META[code];
-  return m.native ? `${m.label} (${m.native})` : m.label;
+  return `${m.label} (${m.code})`;
+}
+
+/** Visible pill label: the native name when we have one, otherwise the ISO 639-3 code. */
+export function languageVisibleName(code: LangCode): string {
+  const m = LANGUAGE_META[code];
+  return m.native || m.code;
 }
 
 /** The site's shared language/translate icon, matching Icon.astro at the pill's default size. */
 const LANGUAGE_ICON_SVG =
   '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>';
 
-/** One language as the shared pill: the language icon plus the ISO 639-3 code, with English and native names in the hover. */
+/** One language as the shared pill: the language icon plus the native name, with English and the ISO code in the hover. */
 export function languageCodeTagHtml(code: LangCode): string {
+  const m = LANGUAGE_META[code];
   const hover = escAttr(languageHoverLabel(code));
-  return `<span class="pill" title="${hover}" aria-label="${hover}">${LANGUAGE_ICON_SVG}${escAttr(code)}</span>`;
+  const name = escAttr(languageVisibleName(code));
+  return `<span class="pill" title="${hover}" aria-label="${hover}">${LANGUAGE_ICON_SVG}<span dir="${m.dir}" lang="${m.code}">${name}</span></span>`;
 }
 
 /** Language pills for a language name or code. */

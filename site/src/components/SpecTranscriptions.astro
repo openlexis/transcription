@@ -5,10 +5,13 @@ import { type CompilationRecord, type SpecLicense } from "../lib/corpus";
 interface Props {
   compilations: CompilationRecord[];
   license?: SpecLicense;
+  /** When set, a link to the transcriptions index filtered to this specification. */
+  specId?: string;
 }
 
-const { compilations, license } = Astro.props;
+const { compilations, license, specId } = Astro.props;
 const empty = "No transcriptions have been made from this specification yet.";
+const indexHref = specId ? `/transcriptions/?specification=${encodeURIComponent(specId)}` : undefined;
 ---
 
 {compilations.length === 0 ? (
@@ -19,4 +22,9 @@ const empty = "No transcriptions have been made from this specification yet.";
       <TranscriptionCard compilation={c} license={license} />
     ))}
   </div>
+)}
+{indexHref && (
+  <p class="spec-transcriptions-index-link">
+    <a href={indexHref}>All transcriptions of this specification →</a>
+  </p>
 )}

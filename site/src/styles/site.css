@@ -3141,6 +3141,45 @@ a.pill:hover {
   font-weight: 500;
 }
 
+.pill [dir] {
+  unicode-bidi: isolate;
+}
+
+.spec-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.spec-filter-bar[hidden] {
+  display: none;
+}
+
+.spec-filter-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: 2px;
+  padding: 0 1px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.spec-filter-clear:hover {
+  color: var(--ink);
+}
+
+.spec-transcriptions-index-link {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+}
+
 /* Callout */
 .callout {
   background: var(--surface);
@@ -4220,13 +4259,14 @@ tr:last-child td {
 }
 
 .chapter-block {
-  --line-num-gutter: 2.5rem;
+  --line-num-width: 1.52rem;
+  --line-num-gap: 0.5rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 24px 28px;
-  padding-inline-start: calc(28px + var(--line-num-gutter));
   margin-bottom: 24px;
+  overflow: visible;
 }
 
 .chapter-heading {
@@ -5494,7 +5534,9 @@ tr:last-child td {
   }
   .chapter-block {
     padding: 16px 12px;
-    padding-inline-start: calc(12px + var(--line-num-gutter));
+    /* No spare page margin: reserve only the number width plus the gap,
+       so the heading, underline, and text share one edge. */
+    padding-inline-start: calc(var(--line-num-width) + var(--line-num-gap));
     margin-bottom: 16px;
   }
   .inspector-panel {
@@ -5669,6 +5711,11 @@ tr:last-child td {
 .verse-text {
   min-width: 0;
   max-width: 100%;
+}
+
+.book-reader,
+.compiled-text {
+  overflow: visible;
 }
 
 .page-sidebar {
@@ -5886,30 +5933,45 @@ tr:last-child td {
   scroll-margin-top: 88px;
 }
 
-/* Line numbers hang in a reserved gutter outside the text column, so the
-   text starts on the same edge as the chapter heading and its underline.
-   Direction is inherited, so Hebrew (rtl) is mirrored: number on the right. */
+/* Line numbers hang outside the text column in the page's existing margin,
+   so the transcription keeps its full width. The text starts on the same
+   edge as the chapter heading and its underline. Logical offsets mirror
+   this for Hebrew (rtl): number on the right. */
 .verse-line {
   position: relative;
   display: block;
   margin: 0;
+  overflow: visible;
 }
 
 .verse-num {
   position: absolute;
-  inset-inline-end: 100%;
   box-sizing: content-box;
-  width: 3ch;
+  width: var(--line-num-width);
   margin: 0;
-  margin-inline-end: 0.45em;
   padding-top: 2px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 600;
+  font-variant-numeric: tabular-nums;
   color: var(--ink-muted);
-  text-align: end;
   line-height: 1.2;
   user-select: none;
+}
+
+/* Numbers stay dir=ltr so digits keep their order, so the offset is physical
+   and follows the surrounding text direction, not the number's own dir. */
+.compiled-text[dir="ltr"] .verse-num,
+.compiled-text:not([dir="rtl"]) .verse-num {
+  left: calc(-1 * (var(--line-num-width) + var(--line-num-gap)));
+  right: auto;
+  text-align: right;
+}
+
+.compiled-text[dir="rtl"] .verse-num {
+  right: calc(-1 * (var(--line-num-width) + var(--line-num-gap)));
+  left: auto;
+  text-align: left;
 }
 
 .compiled-text.mode-interlinear .verse-num {

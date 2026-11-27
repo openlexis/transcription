@@ -13,7 +13,7 @@ const { compilation: c, license } = Astro.props;
 const m = c.manifest;
 const summary = m.compilation.summary || m.method.summary;
 ---
-<a href={compUrl(c.compilationId)} class="spec-card">
+<a href={compUrl(c.compilationId)} class="spec-card" data-spec-id={c.specId} data-spec-short={shortUlid(c.specId)}>
   <div class="spec-card-top">
     <div class="spec-card-title-row">
       <ItemTitle class="spec-card-title" compilation={c} />

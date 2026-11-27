@@ -1,6 +1,6 @@
 ---
 import Pill from "./Pill.astro";
-import { languageCodesFor, languageHoverLabel } from "../lib/languages";
+import { LANGUAGE_META, languageCodesFor, languageHoverLabel, languageVisibleName } from "../lib/languages";
 
 interface Props {
   /** A language name or internal ISO 639-3 code such as "Greek" or "grc". */
@@ -13,11 +13,15 @@ const codes = languageCodesFor(language);
 {codes.length > 1 ? (
   <span class="pill-row">
     {codes.map((code) => (
-      <Pill icon="language" title={languageHoverLabel(code)} ariaLabel={languageHoverLabel(code)}>{code}</Pill>
+      <Pill icon="language" title={languageHoverLabel(code)} ariaLabel={languageHoverLabel(code)}>
+        <span dir={LANGUAGE_META[code].dir} lang={code}>{languageVisibleName(code)}</span>
+      </Pill>
     ))}
   </span>
 ) : (
   codes.map((code) => (
-    <Pill icon="language" title={languageHoverLabel(code)} ariaLabel={languageHoverLabel(code)}>{code}</Pill>
+    <Pill icon="language" title={languageHoverLabel(code)} ariaLabel={languageHoverLabel(code)}>
+      <span dir={LANGUAGE_META[code].dir} lang={code}>{languageVisibleName(code)}</span>
+    </Pill>
   ))
 )}
