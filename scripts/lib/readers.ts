@@ -20,6 +20,24 @@ export type ReadResult = {
 };
 
 const SP = { sacred, numeral };
+/** The Old Testament target book for a Septuagint book of Codex Sinaiticus (its project book code), with the line reference
+ * as the transcription numbers it. Lines keep the transcription's own chapter:line numbers, which can differ from the Hebrew
+ * numbering (for example in Psalms and Jeremiah). The one exception is 2 Esdras, a single book in the transcription that
+ * holds Ezra (chapters 1 to 10) and Nehemiah (chapters 11 to 23): chapters 11 to 23 are listed under Nehemiah as chapters
+ * 1 to 13. Books with no Old Testament target (Tobit, Judith, 1 and 4 Maccabees, Wisdom, Sirach) are left out. */
+const LXX_TARGET: Record<string, string> = {
+  GEN: "Gen", LEV: "Lev", NUM: "Num", DEUT: "Deut", JOSH: "Josh", JUDG: "Judg", "1CHR": "1Chr", EST: "Esth", ISA: "Isa",
+  JER: "Jer", LAM: "Lam", JOEL: "Joel", OBAD: "Obad", JONAH: "Jonah", NAH: "Nah", HAB: "Hab", ZEPH: "Zeph", HAG: "Hag",
+  ZECH: "Zech", MAL: "Mal", PS: "Ps", PROV: "Prov", ECCL: "Eccl", CANT: "Song", JOB: "Job",
+};
+export function lxxTarget(code: string, ref: string): { book: string; ref: string } | undefined {
+  if (code === "2ESD") {
+    const [c, l] = ref.split(":").map(Number);
+    return c > 10 ? { book: "Neh", ref: `${c - 10}:${l}` } : { book: "Ezra", ref };
+  }
+  const book = LXX_TARGET[code];
+  return book ? { book, ref } : undefined;
+}
 const UXLC_BY_NAME = new Map(HEB_BOOKS.map((b) => [b.uxlc, b.id]));
 const hebWords = (raw: string) =>
   raw
@@ -239,12 +257,15 @@ export function readTranscriptionText(xml: string, absPath: string, provenanceId
     default: {
       // Standard IGNTP / INTF / Sinaiticus / Zacynthius / Family Π TEI XML
       const { units, stats } = teiUnitsWithStats(xml, SP);
-      return {
-        units: units
-          .filter((u) => u.book >= 1)
-          .map((u) => ({ book: OSIS_BOOKS[u.book - 1], ref: u.ref, words: u.words, gapEnd: u.gapEnd })),
-        stats,
-      };
+      const out: ParsedUnit[] = [];
+      for (const u of units) {
+        if (u.book >= 1) out.push({ book: OSIS_BOOKS[u.book - 1], ref: u.ref, words: u.words, gapEnd: u.gapEnd });
+        else if (u.lxx) {
+          const t = lxxTarget(u.lxx, u.ref);
+          if (t) out.push({ book: t.book, ref: t.ref, words: u.words, gapEnd: u.gapEnd });
+        }
+      }
+      return { units: out, stats };
     }
   }
 }

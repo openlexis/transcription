@@ -10,6 +10,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync
 import { spawnSync } from "node:child_process";
 import { parseXml, teiUnits, type TeiUnit } from "./lib/tei";
 import { HEB_BOOKS, NT_BOOKS, numeral, sacred, skel } from "./lib/text";
+import { lxxTarget } from "./lib/readers";
 
 const SRC = process.argv[2];
 if (!SRC || !existsSync(SRC)) throw new Error("usage: bun scripts/import.ts <folder with the source archives' files>");
@@ -152,6 +153,12 @@ function save(siglum: string, archive: string, source: string, license: string, 
   m.transcriptions.push({ archive, ...(file ? { file } : {}), ...(files ? { files } : {}), source, ...(o.member ? { member: o.member } : {}), format: o.format ?? "TEI XML", license, lines: text.length, words });
 }
 const fromTei = (us: TeiUnit[]) => us.filter((u) => u.book >= 1).map((u) => ({ book: OSIS[u.book - 1], ref: u.ref, words: u.words, gapEnd: u.gapEnd }));
+/** Like fromTei, and also the Septuagint (Greek Old Testament) books of Codex Sinaiticus, under their Old Testament target books (lib/readers.ts lxxTarget). */
+const fromTeiWithLxx = (us: TeiUnit[]) => us.flatMap((u) => {
+  if (u.book >= 1) return [{ book: OSIS[u.book - 1], ref: u.ref, words: u.words, gapEnd: u.gapEnd }];
+  const t = u.lxx ? lxxTarget(u.lxx, u.ref) : undefined;
+  return t ? [{ book: t.book, ref: t.ref, words: u.words, gapEnd: u.gapEnd }] : [];
+});
 const SP = { sacred, numeral };
 
 // ---------- CNTR: one line per text line, "BBCCCLLL text" ----------
@@ -202,10 +209,10 @@ for (const f of readdirSync(cm).filter((f) => f.endsWith(".txt")).sort()) {
 for (const n of ["01", "02", "03", "04"]) cntr(`${snap(`cntr-${n}`)}/class 1/${n}.txt`, n, `cntr-${n}`, `${ARCHIVES.cntr.web}/class%201/${n}.txt`);
 console.log(`cntr: ${MSS.size} manuscripts`);
 
-{ // Codex Sinaiticus Project (its New Testament books)
+{ // Codex Sinaiticus Project (its Septuagint and New Testament books)
   const A = ARCHIVES["sinaiticus-project"], zip = `${snap("sinaiticus-project")}/FINAL_TRANSCRIPTION_version105.xml.zip`;
   const sina = memberBuf(zip, "FINAL_TRANSCRIPTION_version105.xml");
-  save("01", A.id, "https://epapers.bham.ac.uk/id/eprint/3306/1/FINAL_TRANSCRIPTION_version105.xml.zip", A.license, fromTei(teiUnits(sina.toString("utf8"), SP)), "sinaiticus-project", { member: "FINAL_TRANSCRIPTION_version105.xml", format: "TEI XML (the source archive's file, unchanged)", xml: sina });
+  save("01", A.id, "https://epapers.bham.ac.uk/id/eprint/3306/1/FINAL_TRANSCRIPTION_version105.xml.zip", A.license, fromTeiWithLxx(teiUnits(sina.toString("utf8"), SP)), "sinaiticus-project", { member: "FINAL_TRANSCRIPTION_version105.xml", format: "TEI XML (the source archive's file, unchanged)", xml: sina, order: [...HEB_BOOKS.map((b) => b.id), ...NT_ORDER] });
 }
 { const A = ARCHIVES.zacynthius; const zac = readFileSync(`${snap("zacynthius")}/Zacynthius-gospel_2-0.xml`); save("040", A.id, "https://edata.bham.ac.uk/496/", A.license, fromTei(teiUnits(zac.toString("utf8"), SP)), "zacynthius", { member: "Zacynthius-gospel_2-0.xml", format: "TEI XML (the source archive's file, unchanged)", xml: zac }); }
 
