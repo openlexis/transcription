@@ -1,6 +1,6 @@
 ---
-import "../styles/lang-code-badge.css";
-import { languageCodeBadgeHtml } from "../lib/languages";
+import Pill from "./Pill.astro";
+import { languageCodesFor, languageHoverLabel } from "../lib/languages";
 
 interface Props {
   /** A language name or internal ISO 639-3 code such as "Greek" or "grc". */
@@ -8,5 +8,16 @@ interface Props {
 }
 
 const { language } = Astro.props;
+const codes = languageCodesFor(language);
 ---
-<Fragment set:html={languageCodeBadgeHtml(language)} />
+{codes.length > 1 ? (
+  <span class="pill-row">
+    {codes.map((code) => (
+      <Pill icon="language" title={languageHoverLabel(code)} ariaLabel={languageHoverLabel(code)}>{code}</Pill>
+    ))}
+  </span>
+) : (
+  codes.map((code) => (
+    <Pill icon="language" title={languageHoverLabel(code)} ariaLabel={languageHoverLabel(code)}>{code}</Pill>
+  ))
+)}

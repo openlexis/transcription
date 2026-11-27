@@ -86,7 +86,9 @@ const toc = [
           specDate && { icon: "date", text: specDate, title: "Date created" },
           single.license && { icon: "license", text: single.license.name, title: withTrademark(single.license.copyright), href: single.license.url },
         ]}
-      />
+      >
+        <CiteBox data={citeData} placement="byline" />
+      </Byline>
       <p class="lead">{single.summary}</p>
       <div class="ulid-bar">
         {allSpecs.length > 1 && (
@@ -103,8 +105,7 @@ const toc = [
           </a>
         )}
       </div>
-      <SpecTranscriptions compilations={specCompilations} />
-      <CiteBox data={citeData} />
+      <SpecTranscriptions compilations={specCompilations} license={single.license} />
     </div>
   </section>
 

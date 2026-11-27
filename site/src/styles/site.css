@@ -4213,10 +4213,12 @@ tr:last-child td {
 }
 
 .chapter-block {
+  --line-num-gutter: 2.5rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 24px 28px;
+  padding-inline-start: calc(28px + var(--line-num-gutter));
   margin-bottom: 24px;
 }
 
@@ -5493,6 +5495,7 @@ tr:last-child td {
   }
   .chapter-block {
     padding: 16px 12px;
+    padding-inline-start: calc(12px + var(--line-num-gutter));
     margin-bottom: 16px;
   }
   .inspector-panel {
@@ -5884,26 +5887,27 @@ tr:last-child td {
   scroll-margin-top: 88px;
 }
 
-/* Line numbers in their own column. Wrapped rows of the same line start at
-   the same edge as the first row. Direction is inherited, so Hebrew (rtl)
-   is mirrored: number on the right, text at a fixed edge beside it. */
+/* Line numbers hang in a reserved gutter outside the text column, so the
+   text starts on the same edge as the chapter heading and its underline.
+   Direction is inherited, so Hebrew (rtl) is mirrored: number on the right. */
 .verse-line {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: 0.55em;
-  align-items: start;
+  position: relative;
+  display: block;
   margin: 0;
 }
 
 .verse-num {
-  display: block;
-  min-width: 3ch;
+  position: absolute;
+  inset-inline-end: 100%;
+  box-sizing: content-box;
+  width: 3ch;
+  margin: 0;
+  margin-inline-end: 0.45em;
+  padding-top: 2px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 600;
   color: var(--ink-muted);
-  margin: 0;
-  padding-top: 2px;
   text-align: end;
   line-height: 1.2;
   user-select: none;

@@ -114,23 +114,29 @@ export function languageHoverLabel(code: LangCode): string {
   return m.native ? `${m.label} (${m.native})` : m.label;
 }
 
-/** One ISO 639-3 code as a small neutral tag, with the English and native names in the hover. */
+/** The site's shared language/translate icon, matching Icon.astro at the pill's default size. */
+const LANGUAGE_ICON_SVG =
+  '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>';
+
+/** One language as the shared pill: the language icon plus the ISO 639-3 code, with English and native names in the hover. */
 export function languageCodeTagHtml(code: LangCode): string {
   const hover = escAttr(languageHoverLabel(code));
-  return `<span class="lang-code-badge" title="${hover}" aria-label="${hover}"><span aria-hidden="true">${escAttr(code)}</span></span>`;
+  return `<span class="pill" title="${hover}" aria-label="${hover}">${LANGUAGE_ICON_SVG}${escAttr(code)}</span>`;
 }
 
-/** Compact language tags for a language name or code. ISO 639-3 codes are the visible mark. */
+/** Language pills for a language name or code. */
 export function languageCodeBadgeHtml(language: string): string {
-  return languageCodesFor(language).map(languageCodeTagHtml).join("");
+  const tags = languageCodesFor(language).map(languageCodeTagHtml);
+  if (tags.length <= 1) return tags[0] ?? "";
+  return `<span class="pill-row">${tags.join("")}</span>`;
 }
 
-/** Language as the shared ISO 639-3 tag, used in bylines and the word popup. */
+/** Language as the shared pill, used in the word popup. */
 export function renderLanguageBylineHtml(code: LangCode, _size = 14): string {
   return languageCodeTagHtml(code);
 }
 
-/** Language as the shared ISO 639-3 tag. */
+/** Language as the shared pill. */
 export function renderLanguageBadgeHtml(code: LangCode, _size = 13): string {
   return languageCodeTagHtml(code);
 }

@@ -5,6 +5,7 @@ import type { IconName } from "../lib/icons";
 interface Props {
   icon?: IconName;
   title?: string;
+  ariaLabel?: string;
   href?: string;
   tone?: "default" | "accent" | "sky";
   target?: string;
@@ -12,16 +13,16 @@ interface Props {
   download?: boolean | string;
 }
 
-const { icon, title, href, tone = "default", target, rel, download } = Astro.props;
+const { icon, title, ariaLabel, href, tone = "default", target, rel, download } = Astro.props;
 const classes = ["pill", tone !== "default" ? `pill-${tone}` : ""].filter(Boolean).join(" ");
 ---
 {href ? (
-  <a class={classes} href={href} title={title} target={target} rel={rel} download={download === true ? true : download || undefined}>
+  <a class={classes} href={href} title={title} aria-label={ariaLabel} target={target} rel={rel} download={download === true ? true : download || undefined}>
     {icon && <Icon name={icon} />}
     <slot />
   </a>
 ) : (
-  <span class={classes} title={title}>
+  <span class={classes} title={title} aria-label={ariaLabel}>
     {icon && <Icon name={icon} />}
     <slot />
   </span>

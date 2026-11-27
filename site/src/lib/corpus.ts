@@ -813,33 +813,44 @@ export function getCompilationsForSpec(specId: string): CompilationRecord[] {
   return getCompilations().filter((c) => c.specId === specId);
 }
 
-/** Real details that identify a transcription: book count, word count, model, and date. */
+/** A transcription's title: its date and model, plus #1, #2, and so on when two share both. */
+function compilationPeerKey(c: CompilationRecord): string {
+  return `${formatIsoDate(c.manifest.compilation.createdAt)}\u0000${c.manifest.modelAttribution.modelName?.trim() || ""}`;
+}
+
+function compilationNumberAmongPeers(c: CompilationRecord): number | undefined {
+  const key = compilationPeerKey(c);
+  const peers = getCompilations()
+    .filter((x) => compilationPeerKey(x) === key)
+    .sort(
+      (a, b) =>
+        (a.manifest.compilation?.createdAt ?? "").localeCompare(b.manifest.compilation?.createdAt ?? "") ||
+        a.compilationId.localeCompare(b.compilationId),
+    );
+  if (peers.length < 2) return undefined;
+  const i = peers.findIndex((x) => x.compilationId === c.compilationId);
+  return i >= 0 ? i + 1 : undefined;
+}
+
 export function compilationParts(c: CompilationRecord): string[] {
-  const m = c.manifest;
-  const books = m.totals.books;
-  const words = m.totals.words;
-  return [
-    Number.isFinite(books) ? `${formatNum(books)} ${books === 1 ? "book" : "books"}` : "",
-    Number.isFinite(words) ? `${formatNum(words)} ${words === 1 ? "word" : "words"}` : "",
-    m.modelAttribution.modelName?.trim() || "",
-    formatIsoDate(m.compilation.createdAt),
-  ].filter(Boolean);
+  const date = formatIsoDate(c.manifest.compilation.createdAt);
+  const model = c.manifest.modelAttribution.modelName?.trim() || "";
+  const parts = [date, model].filter(Boolean);
+  const n = compilationNumberAmongPeers(c);
+  if (n !== undefined) parts.push(`#${n}`);
+  return parts;
 }
 
 export function compilationDetails(c: CompilationRecord): string {
   return compilationParts(c).join(" · ");
 }
 
-/** Real details that identify a specification: publication date, book and manuscript counts, and how many transcriptions were made from it. */
-export function specificationParts(s: SpecFile, transcriptionCount?: number): string[] {
-  const n = transcriptionCount ?? getCompilationsForSpec(s.id).length;
-  const books = s.targets.length;
+/** A specification's title: its date and manuscript count. */
+export function specificationParts(s: SpecFile, _transcriptionCount?: number): string[] {
   const manuscripts = s.sources.length;
   return [
     formatUlidDate(s.id),
-    `${formatNum(books)} ${books === 1 ? "book" : "books"}`,
     `${formatNum(manuscripts)} ${manuscripts === 1 ? "manuscript" : "manuscripts"}`,
-    n === 1 ? "1 transcription" : `${formatNum(n)} transcriptions`,
   ].filter(Boolean);
 }
 

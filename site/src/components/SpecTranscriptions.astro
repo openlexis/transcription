@@ -1,45 +1,22 @@
 ---
-import "../styles/spec-transcriptions.css";
-import ItemTitle from "./ItemTitle.astro";
-import { compUrl, type CompilationRecord } from "../lib/corpus";
+import TranscriptionCard from "./TranscriptionCard.astro";
+import { type CompilationRecord, type SpecLicense } from "../lib/corpus";
 
 interface Props {
   compilations: CompilationRecord[];
-  /** Expand only when there are many; fewer are shown open without a disclosure. */
-  manyAt?: number;
+  license?: SpecLicense;
 }
 
-const { compilations, manyAt = 8 } = Astro.props;
-const many = compilations.length >= manyAt;
-const heading =
-  compilations.length === 1
-    ? "1 transcription made from this specification"
-    : `${compilations.length} transcriptions made from this specification`;
+const { compilations, license } = Astro.props;
 const empty = "No transcriptions have been made from this specification yet.";
 ---
 
 {compilations.length === 0 ? (
   <p class="spec-transcriptions-empty">{empty}</p>
-) : many ? (
-  <details class="spec-transcriptions" open>
-    <summary>{heading}</summary>
-    <ul class="spec-transcriptions-list">
-      {compilations.map((c) => (
-        <li>
-          <a href={compUrl(c.compilationId)}><ItemTitle as="span" compilation={c} /></a>
-        </li>
-      ))}
-    </ul>
-  </details>
 ) : (
-  <div class="spec-transcriptions">
-    <div class="spec-transcriptions-heading">{heading}</div>
-    <ul class="spec-transcriptions-list">
-      {compilations.map((c) => (
-        <li>
-          <a href={compUrl(c.compilationId)}><ItemTitle as="span" compilation={c} /></a>
-        </li>
-      ))}
-    </ul>
+  <div class="spec-cards">
+    {compilations.map((c) => (
+      <TranscriptionCard compilation={c} license={license} />
+    ))}
   </div>
 )}
