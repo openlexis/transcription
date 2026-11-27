@@ -1,4 +1,4 @@
-id: 01M8FHBCM1W1N3Z3HDX4HDYE4P
+id: 01M8FHKWKP03JVXS8ZGY47F9YW
 title: "Open Lexis Transcription Specification: Decoupled Severity & Granular Alignment"
 author: Open Lexis
 license:
@@ -20,7 +20,9 @@ evidence:
   allowlist_rule: A compilation under this specification operates on a strict allowlist. It may read
     only this file and the XML transcripts listed under `sources` at the end of this file, each read
     at the git commit recorded for it. A compiler must not roam `archives/` or ingest any unreferenced
-    file.
+    file. For the Old Testament, the listed transcripts include Greek manuscripts of the Septuagint,
+    the Greek translation of the Hebrew and Aramaic books, alongside the Hebrew and Aramaic manuscripts.
+    Each is listed under the Old Testament book it translates.
   metadata_fields:
     - name: Dating
       description: Date range, margin of error, and dating method (e.g., radiocarbon dating, paleography,
@@ -37,7 +39,8 @@ evidence:
     remain unknown. Unknown facts must never be invented, guessed, or backfilled.
   exclusion_rule: Everything not explicitly included in this specification is excluded and must be
     ignored. This total exclusion covers all outside material, including, without limitation, printed
-    or critical editions, translations into other languages, modern textual reconstructions,
+    or critical editions, translations into other languages (other than the Septuagint manuscripts
+    listed under `sources`), modern textual reconstructions,
     manuscript images (facsimiles), external scholarly commentary, and any unreferenced files.
 corpus_layout:
   root: archives
@@ -135,6 +138,14 @@ statistical_modeling:
       The Septuagint should be considered when interpreting disagreements. It may
       help resolve likelihood or uncertainty, and it may help settle a certain
       number of disagreements.
+      The Septuagint manuscripts listed under `sources` are Codex Sinaiticus
+      (`archives/sinaiticus-project/01.xml`), each Septuagint book listed under the Old
+      Testament book it translates. Their text is Greek, while each Old Testament book is
+      compiled in its original Hebrew or Aramaic, so a model uses them as evidence when
+      weighing Old Testament disagreements and decides for itself how much each one tells
+      it. Their lines keep the transcription's own chapter:line numbers, which can differ
+      from the Hebrew numbering (for example in Psalms and Jeremiah); 2 Esdras chapters 11
+      to 23 are listed under Nehemiah as chapters 1 to 13.
 output_requirements:
   - name: Compiled text
     description: The selected original-language text for every book represented by `sources`, organized
@@ -178,7 +189,7 @@ output_requirements:
       parse, or format data are not required to identify themselves.
   - name: Specification reference
     description: An explicit statement that the compilation was produced under this specification,
-      citing its ID (`01M8FHBCM1W1N3Z3HDX4HDYE4P`).
+      citing its ID (`01M8FHKWKP03JVXS8ZGY47F9YW`).
 output_format:
   standard: TEI P5 XML
   references:
@@ -200,7 +211,7 @@ output_format:
     - One TEI P5 XML file per compiled book.
     - A single manifest (record) file (`manifest.json`) conforming to the schema in `AGENTS.md`,
       listing all book files, full model attribution, the compilation ID, and a statement citing
-      this specification's ID (`01M8FHBCM1W1N3Z3HDX4HDYE4P`).
+      this specification's ID (`01M8FHKWKP03JVXS8ZGY47F9YW`).
     - A structured Markdown compilation report (`REPORT.md`) with YAML frontmatter conforming to
       `AGENTS.md`, followed by a plain-language Markdown narrative of what was performed.
 sources:
@@ -2274,7 +2285,7 @@ sources:
   - {path: archives/itsee-ga655/655.Luke.xml, commit: 967f1d1efbef2e5acbc9a4bc10104e41f67713f1}
   - {path: archives/itsee-ga655/655.Mark.xml, commit: 967f1d1efbef2e5acbc9a4bc10104e41f67713f1}
   - {path: archives/itsee-ga655/655.Matt.xml, commit: 967f1d1efbef2e5acbc9a4bc10104e41f67713f1}
-  - {path: archives/sinaiticus-project/01.xml, commit: 967f1d1efbef2e5acbc9a4bc10104e41f67713f1}
+  - {path: archives/sinaiticus-project/01.xml, commit: 5c5bc790ba4f7b99221e88ae172a8b63dd7c61b0}
   - {path: archives/tal-florentin-sp/Nablus6.xml, commit: 967f1d1efbef2e5acbc9a4bc10104e41f67713f1}
   - {path: archives/uxlc/L.Amos.xml, commit: 967f1d1efbef2e5acbc9a4bc10104e41f67713f1}
   - {path: archives/uxlc/L.Chronicles_1.xml, commit: 967f1d1efbef2e5acbc9a4bc10104e41f67713f1}
