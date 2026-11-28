@@ -204,6 +204,9 @@ const toc = [
               <li set:html={formatSpecText(q, true)} />
             ))}
           </ul>
+          {single.statistical_modeling.information_to_consider.principle ? (
+            <p set:html={formatSpecText(single.statistical_modeling.information_to_consider.principle, true)} />
+          ) : null}
         </>
       ) : null}
 

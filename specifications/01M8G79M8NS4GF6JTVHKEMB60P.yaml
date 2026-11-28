@@ -1,13 +1,14 @@
-id: 01M8FM1MR0Z3S8VPKKVAP2V1WJ
+id: 01M8G79M8NS4GF6JTVHKEMB60P
 title: "Open Lexis Transcription Specification: Decoupled Severity & Granular Alignment"
 author: Open Lexis
 license:
   copyright: Copyright 2026 Open Lexis
   name: CC BY-NC 4.0
   url: https://creativecommons.org/licenses/by-nc/4.0/
-summary: Recover the original text of all 66 target books from the pinned primary manuscript
-  transcriptions, evaluating mechanical edit type, substantive meaning impact, and statistical
-  originality probability as three independent axes with granular word-level alignment.
+summary: Obtain transcriptions of the 66 books of the Bible by recovering the original text of
+  each from the pinned primary manuscript transcriptions, evaluating mechanical edit type,
+  substantive meaning impact, and statistical originality probability as three independent axes
+  with granular word-level alignment.
 objective:
   mission: Recover the original text of each biblical book as originally written, in its original
     language, by its original author.
@@ -131,6 +132,12 @@ statistical_modeling:
       - Is a word or phrase quoted, translated, or transliterated from another language
         or another text, and which wording would that source have used?
       - Does a reading match the author's usual style elsewhere?
+    principle: >-
+      A reading is more credible when it fits the author's own way of writing. A more
+      practiced writer may write with more polish, and a less practiced one may write
+      more simply or with distinctive habits. The model judges that way of writing from
+      the evidence, and should treat a reading that stays in character as more credible
+      than one that does not.
 output_requirements:
   - name: Compiled text
     description: The selected original-language text for every book represented by `sources`, organized
@@ -174,7 +181,7 @@ output_requirements:
       parse, or format data are not required to identify themselves.
   - name: Specification reference
     description: An explicit statement that the compilation was produced under this specification,
-      citing its ID (`01M8FM1MR0Z3S8VPKKVAP2V1WJ`).
+      citing its ID (`01M8G79M8NS4GF6JTVHKEMB60P`).
 output_format:
   standard: TEI P5 XML
   references:
@@ -196,7 +203,7 @@ output_format:
     - One TEI P5 XML file per compiled book.
     - A single manifest (record) file (`manifest.json`) conforming to the schema in `AGENTS.md`,
       listing all book files, full model attribution, the compilation ID, and a statement citing
-      this specification's ID (`01M8FM1MR0Z3S8VPKKVAP2V1WJ`).
+      this specification's ID (`01M8G79M8NS4GF6JTVHKEMB60P`).
     - A structured Markdown compilation report (`REPORT.md`) with YAML frontmatter conforming to
       `AGENTS.md`, followed by a plain-language Markdown narrative of what was performed.
 sources:
